@@ -4,11 +4,12 @@ permalink:           pretty
 
 # Setup
 title:               Phylogenetic Comparative Methods
-tagline:             'A book about pcms'
+tagline:             'learning from trees'
 description:         'An introduction to phylogenetic comparative methods.'
 url:                 http://lanyon.getpoole.com
 baseurl:             '/pcm'
 paginate:            5
+github.repo:         https://github.com/lukejharmon/pcm/
 
 # About/contact
 author:
@@ -23,3 +24,7 @@ version:             1.0.0
 gems: [jekyll-paginate]
 paginate: 5
 paginate_path: "page:num"
+
+# github settings
+github:
+  repo:             https://github.com/lukejharmon/pcm
