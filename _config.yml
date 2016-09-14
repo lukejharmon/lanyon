@@ -7,7 +7,7 @@ title:               Phylogenetic Comparative Methods
 tagline:             'A book about pcms'
 description:         'An introduction to phylogenetic comparative methods.'
 url:                 http://lanyon.getpoole.com
-baseurl:             ''
+baseurl:             '/pcm'
 paginate:            5
 
 # About/contact
