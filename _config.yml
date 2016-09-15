@@ -39,7 +39,6 @@ pandoc:
   flags: '--smart'
   site_flags:
   outputs:
-    pdf: '--latex-engine=pdflatex --toc --include-in-header=./_includes/latex_header.tex
-	 -V geometry:margin=1in -V header'
+    pdf: '--latex-engine=pdflatex --toc'
     epub:
-    markdown: 
+    markdown:
