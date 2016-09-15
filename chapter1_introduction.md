@@ -1,19 +1,16 @@
 ---
 layout: chapter
-title: Introduction
+title: Chapter 1 - A Macroevolutionary Research Program
 ---
-
-CHAPTER 1: A MACROEVOLUTIONARY RESEARCH PROGRAM
 
 Evolution is happening all around us. In many cases – lately, due to technological advances in molecular biology – scientists can now describe the evolutionary process in exquisite detail. For example, we know exactly which genes change in frequency from one generation to the next as mice and lizards evolve a white color to match the pale sands of their novel habitats (Rosenblum et al. 2010). We understand the genetics, development, and biomechanics processes that link changes in a Galapagos finches’ diet to the shape of their bill (Abzhanov et al. 2004). And, in some cases, we can watch as one species splits to become two (for example, Rolshausen et al. 2009).
 
 Detailed studies of evolution over short time-scales have been incredibly fruitful and important for our understanding of biology. But evolutionary biologists have always wanted more than this. Evolution strikes a chord in society because it aims to tell us how we, along with all the other living things that we know about, came to be. This story stretches back some 4 billion years in time. It includes all of the drama that one could possibly want – sex, death, great blooms of life and global catastrophes. It has had “winners” and “losers,” groups that wildly diversified, others that expanded then crashed to extinction, as well as species that have hung on in basically the same form for hundreds of millions of years.
 
+![Tree of Life]({{ site.baseurl }}/images/onezoom_tol.png)
+Figure 1.1. A small section of the tree of life showing the relationships among tetrapods, from [onezoom](www.onezoom.org). Arrows lead to you.
+
 There is, perhaps, no more evocative symbol of this grand view of evolution over deep time than the tree of life (Figure 1.1). This branching phylogenetic tree connects all living things through a series of splitting branches to a single common ancestor. Recent research has dramatically increased our knowledge of the shape and form of this tree. The tree of life is a rich treasure-trove of information, telling us how species are related to one another, which groups are exceptionally diverse or depauperate, and how life has evolved, formed new species, and spread over the globe. Our understanding of the tree of life, still incomplete but advancing every day, promises to transform our understand of evolution at the grandest scale.
-
-
-
-Figure 1.1. A small section of the tree of life showing the relationships among tetrapods, from www.onezoom.org. Arrows lead to you.
 
 Knowing the evolutionary processes that operate over the course of a few generations, even in great detail, does not automatically give insight into why the tree of life is shaped the way that it is. At the same time, it seems reasonable to hypothesize that the same processes that we can observe now - natural selection, genetic drift, migration, sexual selection, and so on - have been occurring for the last four billion years or so along the branches of the tree. A major challenge for evolutionary biology, then, comes in connecting our knowledge of the mechanisms of evolution with broad-scale patterns seen in the tree of life. This “tree thinking” is what we will explore.
 
@@ -21,7 +18,7 @@ In this book, I describe methods to connect evolutionary processes to broad-scal
 
 This introductory chapter has three sections. First, I lay out the background and context for this book, highlighting the role that I hope it will play for readers. Second, I include some background material on phylogenies - both what they are, and how they are constructed. This is necessary information that leads into the methods presented in the remainder of the chapters of the book; interested readers can also read Felsenstein (2005), which includes much more detail. Finally, I briefly outline the book’s remaining chapters.
 
-The roots of comparative methods
+## The roots of comparative methods
 
 The comparative approaches in this book stem from and bring together three main fields: population and quantitative genetics, paleontology, and phylogenetics. I will provide a very brief discussion of how these three fields motivate the models and hypotheses in this book (see Pennell and Harmon 2014 for a more comprehensive review).
 
@@ -35,7 +32,7 @@ Finally, comparative methods has deep roots in phylogenetics. In fact, many mode
 
 My goals in writing this book, then, are three-fold. First, to provide a general introduction to the mathematical models and statistical approaches that form the core of comparative methods; second, to give just enough detail on statistical machinery to help biologists understand how to tailor comparative methods to their particular questions of interest, and to help biologists get started in developing their own new methods; and finally, to suggest some ideas for how comparative methods might progress over the next few years.
 
-A brief introduction to phylogenetic trees
+## A brief introduction to phylogenetic trees
 
 It is hard work to reconstruct a phylogenetic tree. This point has been made many times (for example, see Felsenstein 2005), but bears repeating here. There are an enormous number of ways to connect a set of species by a phylogenetic tree – and the number of possible trees grows extremely quickly with the number of species. For example, there are about 5 x 1038 ways to build a phylogenetic tree* of 30 species, which is many times larger than the number of stars in the universe. Additionally, the mathematical problem of reconstructing trees in an optimal way from species’ traits is an example of a problem that is “NP-complete,” a class of problems that include some of the most computationally difficult in the world. Building phylogenies is difficult.
 
@@ -51,7 +48,7 @@ For many current comparative methods, we take a phylogenetic tree for a group of
 
 How do we make sense of the massive amounts of information contained in large phylogenetic trees? The definition of “large” can vary, but we already have trees with tens of thousands of tips, and I think we can anticipate trees with millions of tips in the very near future. These trees are too large to comfortably fit into a human brain. Current tricks for dealing with trees – like banks of computer monitors or long, taped-together printouts – are inefficient and will not work for the huge phylogenetic trees of the future. We need techniques that will allow us to take large phylogenetic trees and extract useful information from them. This information includes, but is not limited to, estimating rates of speciation, extinction, and trait evolution; testing hypotheses about the mode of evolution in a group; identifying adaptive radiations, key innovations, and other macroevolutionary explanations for diversity; and many other things.
 
-What we can (and can’t) learn about evolutionary history from living species
+## What we can (and can’t) learn about evolutionary history from living species
 
 Traditionally, scientists have used fossils to quantify rates and patterns of evolution through long periods of time (sometimes called “macroevolution”). These approaches have been tremendously informative. We now have a detailed picture of the evolutionary dynamics of many groups, from hominids to crocodilians. In some cases, very detailed fossil records of some types of organisms – for example, marine invertebrates – have allowed quantitative tests of particular evolutionary models.
 
@@ -64,7 +61,7 @@ Phylogenetic trees represent a rich source of complementary information about th
 
 Perhaps the best approach would combine fossil and phylogenetic data directly. Paleontologists studying fossils and neontologists studying phylogenetic trees share a common set of mathematical models. This means that, at some point, the two fields can merge, and both types of information can be combined to study evolutionary patterns in a cohesive and integrative way. However, surprisingly little work has so far been done in this area (but see Slater et al. 2012 Evolution).
 
-Overview of the book
+## Overview of the book
 
 In this book, I outline statistical procedures for analyzing comparative data. Some methods – such as those for estimating patterns of speciation and extinction through time – require an ultrametric phylogenetic tree. Other approaches model trait evolution, and thus require data on the traits of species that are included in the phylogenetic tree. The methods also differ as to whether or not they require the phylogenetic tree to be complete – that is, to include every living species descended from a certain ancestor – or can accommodate a smaller sample of the living species.
 

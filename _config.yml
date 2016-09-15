@@ -24,7 +24,7 @@ version:             1.0.0
 gems: [jekyll-paginate]
 paginate: 5
 paginate_path: "page:num"
-gems: [ 'jekyll-pandoc-multiple-formats' ]
+#gems: [ 'jekyll-pandoc-multiple-formats' ]
 
 # github settings
 github:
@@ -32,13 +32,13 @@ github:
 
 # pandoc - to make multiple versions including pdf
 
-pandoc:
-  skip: false
-  impose: false
-  output: ./tmp
-  flags: '--smart'
-  site_flags:
-  outputs:
-    pdf: '--latex-engine=pdflatex --toc'
-    epub:
-    markdown:
+#pandoc:
+  # skip: false
+  # impose: false
+  # output: ./tmp
+  # flags: '--smart'
+  # site_flags:
+  # outputs:
+  #   pdf: '--latex-engine=pdflatex --toc'
+  #   epub:
+  #   markdown:
