@@ -3,4 +3,4 @@ layout: page
 title: About
 ---
 
-Phylogenetic Comparative Methods, by Luke J. Harmon
+This is a book about Phylogenetic Comparative Methods by Luke J. Harmon.
