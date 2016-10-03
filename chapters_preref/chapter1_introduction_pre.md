@@ -73,12 +73,3 @@ There are a number of computer software tools that can be used to carry out the 
 Statistical comparative methods represent a promising future for evolutionary studies, especially as our knowledge of the tree of life expands. I hope that the methods described in this book can serve as a Rosetta stone that will help us read the tree of life as it is being built.
 
 # References
-
-{: id="abzhanov2004"}
-Abzhanov, A., M. Protas, B. R. Grant, P. R. Grant, and C. J. Tabin. 2004. Bmp4 and morphological variation of beaks in Darwin’s finches. Science 305:1462–1465.
-
-{: id="rolshausen2009"}
-Rolshausen, G., G. Segelbacher, and K. A. Hobson. 2009. A recent migratory divide facilitates the contemporary evolution of reproductive isolation and phenotypic divergence in sympatry. Current biology: CB.
-
-{: id="rosenblum2010"}
-Rosenblum, E. B., H. Römpler, T. Schöneberg, and H. E. Hoekstra. 2010. Molecular and functional basis of phenotypic convergence in white lizards at White Sands. Proceedings of the National Academy of Sciences of the United States of America 107:2113–2117.
