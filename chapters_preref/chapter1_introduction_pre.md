@@ -1,11 +1,6 @@
----
-layout: chapter
-title: Introduction
----
-
 # Chapter 1: A Macroevolutionary Research Program
 
-Evolution is happening all around us. In many cases – lately, due to technological advances in molecular biology – scientists can now describe the evolutionary process in exquisite detail. For example, we know exactly which genes change in frequency from one generation to the next as mice and lizards evolve a white color to match the pale sands of their novel habitats ([Rosenblum et al. 2010](#rosenblum2010)). We understand the genetics, development, and biomechanics processes that link changes in a Galapagos finches’ diet to the shape of their bill ([Abzhanov et al. 2004](#abzhanov2004)). And, in some cases, we can watch as one species splits to become two (for example, [Rolshausen et al. 2009](#rolshausen2009)).
+Evolution is happening all around us. In many cases – lately, due to technological advances in molecular biology – scientists can now describe the evolutionary process in exquisite detail. For example, we know exactly which genes change in frequency from one generation to the next as mice and lizards evolve a white color to match the pale sands of their novel habitats [@Rosenblum2010-ix]. We understand the genetics, development, and biomechanics processes that link changes in a Galapagos finches’ diet to the shape of their bill ([Abzhanov et al. 2004](#abzhanov2004)). And, in some cases, we can watch as one species splits to become two [for example, @Rolshausen2009-yk].
 
 Detailed studies of evolution over short time-scales have been incredibly fruitful and important for our understanding of biology. But evolutionary biologists have always wanted more than this. Evolution strikes a chord in society because it aims to tell us how we, along with all the other living things that we know about, came to be. This story stretches back some 4 billion years in time. It includes all of the drama that one could possibly want – sex, death, great blooms of life and global catastrophes. It has had “winners” and “losers,” groups that wildly diversified, others that expanded then crashed to extinction, as well as species that have hung on in basically the same form for hundreds of millions of years.
 
