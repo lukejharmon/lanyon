@@ -7,7 +7,7 @@ Detailed studies of evolution over short time-scales have been incredibly fruitf
 There is, perhaps, no more evocative symbol of this grand view of evolution over deep time than the tree of life (Figure 1.1). This branching phylogenetic tree connects all living things through a series of splitting branches to a single common ancestor. Recent research has dramatically increased our knowledge of the shape and form of this tree. The tree of life is a rich treasure-trove of information, telling us how species are related to one another, which groups are exceptionally diverse or depauperate, and how life has evolved, formed new species, and spread over the globe. Our understanding of the tree of life, still incomplete but advancing every day, promises to transform our understand of evolution at the grandest scale.
 
 
-![onezoom tree]({{ site.baseurl }}/images/onezoom_tol.png)
+![]({{ site.baseurl }}/images/onezoom_tol.png)
 
 Figure 1.1. A small section of the tree of life showing the relationships among tetrapods, from [onezoom](www.onezoom.org) [@Rosindell2012-bo]. Arrows lead to you.
 
