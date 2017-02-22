@@ -58,7 +58,7 @@ For the example above, we need to calculate the likelihood as the probability of
 (eq. 2.2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <div>
 $$
-L(H|D)=P(D|p)= {n \choose k} p^k (1-p)^{n-k}
+L(H|D)=P(D|p)= {n  k} p^k (1-p)^{n-k}
 $$
 </div>
 
