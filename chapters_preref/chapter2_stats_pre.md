@@ -46,8 +46,10 @@ In summary, frequentist statistical methods are common in comparative statistics
 
 Since all of the approaches described below involve calculating likelihoods, I will first briefly describe this concept. A good general review of likelihood is Edwards [@Edwards1992-wh]. Likelihood is defined as the probability, given a model and a set of parameter values, of obtaining a particular set of data. To calculate a likelihood, we have to consider a particular specific model that may have generated the data. That model might have parameter values that need to be specified. We can refer to this specified model as a hypothesis, H. The likelihood is then:
 
-(eq. 2.1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-$L(H|D) = Pr(D|H)$
+(eq. 2.1)
+\\[
+L(H|D) = Pr(D|H)
+\\]
 
 Here, L and Pr stand for likelihood and probability, D for the data, and H for the hypothesis, which again includes both the model being considered and a set of parameter values. The | symbol stands for “given,” so equation 2.1 can be read as “the likelihood of the hypothesis given the data is equal to the probability of the data given the hypothesis.” In other words, the likelihood represents the probability under a given model and parameter values that we would obtain the data that we actually see.
 
@@ -55,23 +57,21 @@ For any given model, different parameter values will generally affect the likeli
 
 For the example above, we need to calculate the likelihood as the probability of obtaining heads 63 out of 100 lizard flips, given some model of lizard flipping. In general, we can write the likelihood for any combination of k “successes” (flips that give heads) out of n trials. We will also have one parameter, p, which will represent the probability of “success,” that is, the probability that any one flip comes up heads. We can calculate the likelihood of our data using the binomial theorem:
 
-(eq. 2.2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(eq. 2.2)
 <div>
-$$
+\\[
 L(H|D)=P(D|p)= {n  k} p^k (1-p)^{n-k}
-$$
+\\]
 </div>
 
 In the example given, n = 100 and k = 63, so:
 
-(eq. 2.3)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-{% raw %}{::nomarkdown}
+(eq. 2.3)
 <div>
 $$
 L(H|D)= {100 \choose 63} p^{63} (1-p)^{37}
 $$
 </div>	 
-{:/}{% endraw %}
 
 ![]({{ site.baseurl }}/images/flip_likelihood_surface.png)
 Figure 2.2. Likelihood surface for the parameter p, given a coin that has been flipped as heads 63 times out of 100.
@@ -80,7 +80,7 @@ We can make a plot of the likelihood, L, as a function of p (Figure 2.2). When w
 
 We could also have obtained the maximum likelihood estimate for p through differentiation. This problem is much easier if we work with the log-likelihood rather than the likelihood itself (note that whatever value of   maximizes the likelihood will also maximize the log-likelihood, because the log function is strictly increasing). So:
 
-(eq. 2.4)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(eq. 2.4)
 <div>
 $$
 \ln{L} = \ln{n \choose k} + k \ln{p}+ (n-k)\ln{(1-p)}
@@ -89,7 +89,7 @@ $$
 
 Note that the natural log (ln) transformation changes our equation from a power function to a linear function that is easy to solve. We can differentiate:
 
-(eq. 2.5)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(eq. 2.5)
 <div>
 $$
 \frac{d \ln{L}}{dp} = \frac{k}{p} - \frac{(n-k)}{(1-p)}
@@ -98,7 +98,7 @@ $$
 
 The maximum of the likelihood represents a peak, which we can find by setting the derivative $\frac{d \ln{L}}{dp}$ to zero. We then find the value of p that solves that equation, which will be our estimate $\hat{p}$. So we have:
 
-(eq. 2.6)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+(eq. 2.6)
 <div>
 $$
 \begin{array}{lcr}
@@ -125,26 +125,49 @@ For example, consider again our example of flipping a lizard. One model is that 
 
 For such nested models, one can calculate the likelihood ratio test statistic as
 
-(eq. 2.7)	 
+(eq. 2.7)
+<div>
+$$
+\Delta = 2 \cdot \ln{\frac{L_1}{L_2}} = 2 \cdot (\ln{L_1}-\ln{L_2})
+$$
+</div>
 
-Here, Δ is the likelihood ratio test statistic, L2 the likelihood of the more complex (parameter rich) model, and L1 the likelihood of the simpler model. Since the models are nested, the likelihood of the complex model will always be greater than or equal to the likelihood of the simple model; this means that the test statistic Δ will never be negative. In fact, if you ever obtain a negative likelihood ratio test statistic, something has gone wrong – either your calculations are wrong, or you have not actually found ML solutions, or the models are not actually nested.
+Here, $\Delta$ is the likelihood ratio test statistic, $L_2$ the likelihood of the more complex (parameter rich) model, and $L_1$ the likelihood of the simpler model. Since the models are nested, the likelihood of the complex model will always be greater than or equal to the likelihood of the simple model; this means that the test statistic Δ will never be negative. In fact, if you ever obtain a negative likelihood ratio test statistic, something has gone wrong – either your calculations are wrong, or you have not actually found ML solutions, or the models are not actually nested.
 
-To carry out a statistical test comparing the two models, we compare the test statistic Δ to its expectation under the null hypothesis. For likelihood ratio tests, the null hypothesis is always the simpler of the two models. When sample sizes are large, the null distribution of the likelihood ratio test statistic follows a chi-squared distribution with degrees of freedom equal to the difference in the number of parameters between the two models (Figure 2.4). This means that if the simpler hypothesis were true, and one carried out this test many times on large independent datasets, the test statistic would approximately follow this χ2 distribution. To reject the simpler model, then, one compares the test statistic with a critical value derived from the appropriate chi-squared distribution. If the test statistic is larger than the critical value, one rejects the null hypothesis. Otherwise, we fail to reject the null hypothesis. In this case, we only need to consider one tail of the chi-squared test, as every deviation from the null model will push us towards higher Δ values and towards the right tail of the distribution.
+To carry out a statistical test comparing the two models, we compare the test statistic Δ to its expectation under the null hypothesis. For likelihood ratio tests, the null hypothesis is always the simpler of the two models. When sample sizes are large, the null distribution of the likelihood ratio test statistic follows a chi-squared distribution with degrees of freedom equal to the difference in the number of parameters between the two models (Figure 2.4). This means that if the simpler hypothesis were true, and one carried out this test many times on large independent datasets, the test statistic would approximately follow this $\chi^2$ distribution. To reject the simpler model, then, one compares the test statistic with a critical value derived from the appropriate chi-squared distribution. If the test statistic is larger than the critical value, one rejects the null hypothesis. Otherwise, we fail to reject the null hypothesis. In this case, we only need to consider one tail of the chi-squared test, as every deviation from the null model will push us towards higher $Delta$ values and towards the right tail of the distribution.
 
 For the lizard flip example above, we can calculate the ln-likelihood under a hypothesis of p = 0.5 as:
 
-(eq. 2.8) 	 	
+(eq. 2.8)
+<div>
+$$\begin{eqnarray}
+\ln{L} &=& \ln{\left(\frac{100}{63}\right)} + 63 \cdot \ln{0.5} + (100-63) \cdot \ln{(1-0.5)} \nonumber \\
+\ln{L} &=& -5.92\nonumber
+\end{eqnarray}$$ 	 	
+</div>
 
 We can compare this to the likelihood of our maximum-likelihood estimate  :
 
-(eq. 2.9) 	 	
-
+(eq. 2.9)
+<div>
+$$\begin{eqnarray}
+\ln{L} &=& \ln{\left(\frac{100}{63}\right)} + 63 \cdot \ln{0.63} + (100-63) \cdot \ln{(1-0.63)} \nonumber \\
+\ln{L} &=& -2.50\nonumber
+\end{eqnarray}$$ 	 	
+</div>
 
 We then calculate the likelihood ratio test statistic:
 
-(eq. 2.10)	 
+(eq. 2.10)
+<div>
+$$\begin{eqnarray}
+\Delta &=& 2 \cdot (\ln{L_2}-\ln{L_1}) \nonumber \\
+\Delta &=& 2 \cdot (-2.50 - -5.92) \nonumber \\
+\Delta &=& 6.84\nonumber
+\end{eqnarray}$$ 	 	
+</div>
 
-If we compare this to a chi-squared distribution with one d.f., we find that P = 0.009. Because this P-value is less than the threshold of 0.05, we reject the null hypothesis, and support the alternative. We conclude that this is not a fair lizard.
+If we compare this to a $\chi^2$ distribution with one d.f., we find that P = 0.009. Because this P-value is less than the threshold of 0.05, we reject the null hypothesis, and support the alternative. We conclude that this is not a fair lizard.
 
 Although described above in terms of two competing hypotheses, likelihood ratio tests can be applied to more complex situations with more than two competing models. For example, if all of the models form a sequence of increasing complexity, with each model a special case of the next more complex model, one can compare each pair of hypotheses in sequence, stopping the first time the test statistic is non-significant (Figure 2.4). Alternatively, in some cases, hypotheses can be placed in a bifurcating choice tree, and one can proceed from simple to complex models down a particular path of paired comparisons of nested models (Figure 2.4). This approach is commonly used to select models of DNA sequence evolution.
 
@@ -154,50 +177,121 @@ You might have noticed that the likelihood ratio test described above has some l
 
 The AIC value for a particular model is a simple function of the likelihood L and the number of parameters k:
 
-(eq. 2.11)	 
+(eq. 2.11)
+<div>
+\\[
+AIC = 2k - 2 ln{L}
+\\]
+</div>
 
 This function that balances the likelihood of the model and the number of parameters estimated in the process of fitting the model to the data. One can think of the AIC criterion as identifying the model that provides the most efficient way to describe patterns in the data with few parameters. However, this shorthand description of AIC does not capture the actual mathematical and philosophical justification for equation (2.11). In fact, this equation is not arbitrary; instead, it comes from information theory (for more information, see Burnam and Anderson 2002).
 
 The AIC equation (2.11) above is only valid for quite large sample sizes relative to the number of parameters being estimated (for n samples and k parameters, n/k > 40). Most empirical data sets include fewer than 40 independent data points per parameter, so a small sample size correction should be employed:
 
-(eq. 2.12)	 
+(eq. 2.12)
+<div>
+$$
+AIC_C = AIC + \frac{2k(k+1)}{n-k-1}
+$$
+</div>
 
 This correction penalizes models that have small sample sizes relative to the number of values that are too close; that is, models where there are nearly as many parameters as data points. As noted by Burnham and Anderson (2002), this correction has little effect if sample sizes are large, and so provides a robust way to correct for possible bias in data sets of any size. I recommend always using the small sample size correction when calculating AIC values.
 
-To select among models, one can then compare their AICc values, and choose the model with the smallest value. It is easier to make comparisons in AICc scores between models by calculating the difference, ΔAICc. For example, if you are comparing a set of models, you can calculate ΔAICc for model i as:
+To select among models, one can then compare their $AIC_c$ values, and choose the model with the smallest value. It is easier to make comparisons in AICc scores between models by calculating the difference, $\Delta AIC_c$. For example, if you are comparing a set of models, you can calculate $\Delta AIC_c$ for model i as:
 
-(eq. 2.13)	 
+(eq. 2.13)
+<div>
+\\[
+\Delta AIC_{c_i} = AIC_{c_i} - AIC_{c_{min}}
+\\]
+</div>	 
 
-where AICci is the AICc score for model i and AICc min is the minimum AICc score across all of the models.
+where $AIC_{c_i}$ is the $AIC_c$ score for model i and $AIC_{c_{min}} is the minimum $AIC_c$ score across all of the models.
 
-As a broad rule of thumb for comparing AIC values, any model with a ΔAICci of less than four is roughly equivalent to the model with the lowest AICc value. Models with ΔAICci between 4 and 8 have little support in the data, while any model with a ΔAICci greater than 10 can safely be ignored.
+As a broad rule of thumb for comparing $AIC$ values, any model with a $\Delta AIC_{c_i}$ of less than four is roughly equivalent to the model with the lowest $AIC_c$ value. Models with $\Delta AIC_{c_i}$ between 4 and 8 have little support in the data, while any model with a $\Delta AIC_{c_i}$ greater than 10 can safely be ignored.
 
 Additionally, one can calculate the relative likelihood for each model using Akaike weights. The weight for model i compared to a set of competing models is calculated as:
 
 (eq. 2.14)	 
+<div>
+$$
+w_i = \frac{e^{-\Delta AIC_{c_i}/2}}{\sum_i{e^{-\Delta AIC_{c_i}/2}}}
+$$
+</div>
 
-The weights for all models under consideration sum to 1, so the wi for each model can be viewed as an estimate of the level of support for that model in the data compared to the other models being considered.
+The weights for all models under consideration sum to 1, so the $w_i$ for each model can be viewed as an estimate of the level of support for that model in the data compared to the other models being considered.
 
-Returning to our example of lizard flipping, we can calculate AICc scores for our two models as follows:
+Returning to our example of lizard flipping, we can calculate $AIC_c$ scores for our two models as follows:
 
 (eq. 2.15)	 
+<div>
+$$\begin{eqnarray}
+AIC_1 &=& 2 k_1 - 2 ln{L_1} = 2 \cdot 0 - 2 \cdot -5.92 \\\
+AIC_1 &=& 11.8 \\\
+AIC_2 &=& 2 k_2 - 2 ln{L_2} = 2 \cdot 1 - 2 \cdot -2.50 \\\
+AIC_2 &=& 7.0 \\\
+\end{eqnarray}$$
+</div>
 
-Our example is a bit unusual in that model one has no estimated parameters; this happens sometimes but is not typical for biological applications. We can correct these values for our sample size, which in this case is n = 100 lizard flips:
+Our example is a bit unusual in that model one has no estimated parameters; this happens sometimes but is not typical for biological applications. We can correct these values for our sample size, which in this case is $n = 100$ lizard flips:
 
 (eq. 2.16)	 
+<div>
+$$\begin{eqnarray}
+AIC_{c_1} &=& AIC_1 + \frac{2 k_1 (k_1 + 1)}{n - k_1 - 1} \\\
+AIC_{c_1} &=& 11.8 + \frac{2 \cdot 0 (0 + 1)}{100-0-1} \\\
+AIC_{c_1} &=& 11.8 \\\
+AIC_{c_2} &=& AIC_2 + \frac{2 k_2 (k_2 + 1)}{n - k_2 - 1} \\\
+AIC_{c_1} &=& 7.0 + \frac{2 \cdot 1 (1 + 1)}{100-1-1} \\\
+AIC_{c_1} &=& 7.0 \\\
+\end{eqnarray}$$
+</div>
 
-
-
-
-
-
-Notice that, in this particular case, the correction did not affect our AIC values, at least to one decimal place. This is because the sample size is large relative to the number of parameters. Note that model 2 has the smallest AICc score and is thus the model that is best supported by the data. Noting this, we can now convert these AICc scores to a relative scale:
+Notice that, in this particular case, the correction did not affect our $AIC$ values, at least to one decimal place. This is because the sample size is large relative to the number of parameters. Note that model 2 has the smallest $AIC_c$ score and is thus the model that is best supported by the data. Noting this, we can now convert these $AIC_c$ scores to a relative scale:
 
 (eq. 2.17)	 
+<div>
+$$\begin{eqnarray}
+\Delta AIC_{c_1} &=& AIC_{c_1}-AIC{c_{min}} \\\
+&=& 11.8-7.0 \\\
+&=& 4.8 \\\
+\end{eqnarray}$$
+</div>
+
+<div>
+$$\begin{eqnarray}
+\Delta AIC_{c_2} &=& AIC_{c_2}-AIC{c_{min}} \\\
+&=& 7.0-7.0 \\\
+&=& 0 \\\
+\end{eqnarray}$$
+</div>
 
 Note that the ΔAICci for model 1 is greater than four, suggesting that this model (the “fair” lizard) has little support in the data. Finally, we can use the relative AICc scores to calculate Akaike weights:
 
 (eq. 2.18)	 
+<div>
+$$\begin{eqnarray}
+\sum_i{e^{-\Delta_i/2}} &=& e^{-\Delta_1/2} + e^{-\Delta_2/2} \\\
+&=& e^{-4.8/2} + e^{-0/2} \\\
+&=& 1.09 \\\
+\end{eqnarray}$$
+</div>
+
+<div>
+$$\begin{eqnarray}
+w_1 &=& \frac{e^{-\Delta AIC_{c_1}/2}}{\sum_i{e^{-\Delta AIC_{c_i}/2}}} \\\
+&=& \frac{0.09}{1.09} \\\
+&=& 0.08
+\end{eqnarray}$$
+</div>
+
+<div>
+$$\begin{eqnarray}
+w_2 &=& \frac{e^{-\Delta AIC_{c_2}/2}}{\sum_i{e^{-\Delta AIC_{c_i}/2}}} \\\
+&=& \frac{1.00}{1.09} \\\
+&=& 0.92
+\end{eqnarray}$$
+</div>
 
 Our results are again consistent with the results of the likelihood ratio test. The relative likelihood of an unfair lizard is 0.92, and we can be quite confident that our lizard is not a fair flipper.
 

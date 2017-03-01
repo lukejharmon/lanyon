@@ -41,40 +41,39 @@ title: Introduction
 <h2 id="maximum-likelihood">Maximum likelihood</h2>
 <h3 id="what-is-a-likelihood">What is a likelihood?</h3>
 <p>Since all of the approaches described below involve calculating likelihoods, I will first briefly describe this concept. A good general review of likelihood is Edwards <span class="citation">(Edwards <a href="#ref-Edwards1992-wh">1992</a>)</span>. Likelihood is defined as the probability, given a model and a set of parameter values, of obtaining a particular set of data. To calculate a likelihood, we have to consider a particular specific model that may have generated the data. That model might have parameter values that need to be specified. We can refer to this specified model as a hypothesis, H. The likelihood is then:</p>
-<p>(eq. 2.1)       <span class="math inline"><em>L</em>(<em>H</em>|<em>D</em>)=<em>P</em><em>r</em>(<em>D</em>|<em>H</em>)</span></p>
+<p>(eq. 2.1) \[ L(H|D) = Pr(D|H) \]</p>
 <p>Here, L and Pr stand for likelihood and probability, D for the data, and H for the hypothesis, which again includes both the model being considered and a set of parameter values. The | symbol stands for “given,” so equation 2.1 can be read as “the likelihood of the hypothesis given the data is equal to the probability of the data given the hypothesis.” In other words, the likelihood represents the probability under a given model and parameter values that we would obtain the data that we actually see.</p>
 <p>For any given model, different parameter values will generally affect the likelihood. As you might guess, we favor parameter values that give us the highest probability of obtaining the data that we see. One way to estimate parameters from data, then, is by finding the parameter values that maximize the likelihood; that is, the parameter values that give the highest likelihood, and the highest probability of obtaining the data. These estimates are then referred to as maximum likelihood (ML) estimates. In an ML framework, we suppose that the hypothesis that has the best fit to the data is the one that has the highest probability of having generated that data.</p>
 <p>For the example above, we need to calculate the likelihood as the probability of obtaining heads 63 out of 100 lizard flips, given some model of lizard flipping. In general, we can write the likelihood for any combination of k “successes” (flips that give heads) out of n trials. We will also have one parameter, p, which will represent the probability of “success,” that is, the probability that any one flip comes up heads. We can calculate the likelihood of our data using the binomial theorem:</p>
-(eq. 2.2)      
+(eq. 2.2)
 <div>
-<p><br /><span class="math display"><em>L</em>(<em>H</em>|<em>D</em>)=<em>P</em>(<em>D</em>|<em>p</em>)=<em>n</em><em>k</em><em>p</em><sup><em>k</em></sup>(1 − <em>p</em>)<sup><em>n</em> − <em>k</em></sup></span><br /></p>
+<p>\[ L(H|D)=P(D|p)= {n k} p^k (1-p)^{n-k} \]</p>
 </div>
 <p>In the example given, n = 100 and k = 63, so:</p>
-(eq. 2.3)       {% raw %}{::nomarkdown}
+(eq. 2.3)
 <div>
 <p><br /><span class="math display">$$
 L(H|D)= {100 \choose 63} p^{63} (1-p)^{37}
 $$</span><br /></p>
 </div>
-<p>{:/}{% endraw %}</p>
 <p><img src="{{site.baseurl}}/images/flip_likelihood_surface.png" /> Figure 2.2. Likelihood surface for the parameter p, given a coin that has been flipped as heads 63 times out of 100.</p>
 <p>We can make a plot of the likelihood, L, as a function of p (Figure 2.2). When we do this, we see that the maximum likelihood value of p, which we can call <span class="math inline">$\hat{p}$</span>, is at p = 0.63. This is the “brute force” approach to finding the maximum likelihood: try many different values of the parameters and pick the one with the highest likelihood. We can do this much more efficiently using numerical methods as described in later chapters in this book.</p>
 <p>We could also have obtained the maximum likelihood estimate for p through differentiation. This problem is much easier if we work with the log-likelihood rather than the likelihood itself (note that whatever value of maximizes the likelihood will also maximize the log-likelihood, because the log function is strictly increasing). So:</p>
-(eq. 2.4)      
+(eq. 2.4)
 <div>
 <p><br /><span class="math display">$$
 \ln{L} = \ln{n \choose k} + k \ln{p}+ (n-k)\ln{(1-p)}
 $$</span><br /></p>
 </div>
 <p>Note that the natural log (ln) transformation changes our equation from a power function to a linear function that is easy to solve. We can differentiate:</p>
-(eq. 2.5)      
+(eq. 2.5)
 <div>
 <p><br /><span class="math display">$$
 \frac{d \ln{L}}{dp} = \frac{k}{p} - \frac{(n-k)}{(1-p)}
 $$</span><br /></p>
 </div>
 <p>The maximum of the likelihood represents a peak, which we can find by setting the derivative <span class="math inline">$\frac{d \ln{L}}{dp}$</span> to zero. We then find the value of p that solves that equation, which will be our estimate <span class="math inline">$\hat{p}$</span>. So we have:</p>
-(eq. 2.6)      
+(eq. 2.6)
 <div>
 <p><br /><span class="math display">$$
 \begin{array}{lcr}
@@ -94,40 +93,138 @@ $$</span><br /></p>
 <p>Model selection involves comparing a set of potential models and using some criterion to select the one that provides the “best” explanation of the data. Different approaches define “best” in different ways. I will first discuss the simplest, but also the most limited, of these techniques, the likelihood ratio test. Likelihood ratio tests can only be used in one particular situation: to compare two models where one of the models is a special case of the other. This means that model A (the simpler model with fewer parameters) is exactly equivalent to the more complex model B with parameters restricted to certain values. For example, perhaps model B has parameters x, y, and z that can take on any values. Model A is the same as model B but with parameter z fixed at 0. That is, A is the special case of B when parameter z = 0. This is sometimes described as model A is nested within model B, since every possible version of model A is equal to a certain case of model B, but model B also includes more possibilities.</p>
 <p>For example, consider again our example of flipping a lizard. One model is that the lizard is “fair:” that is, that the probability of heads is equal to 1/2. A different model might be that the probability of heads is some other value p, which could be 1/2, 1/3, or any other value between 0 and 1. Here, the latter (complex) model has one additional parameter, p, compared to the former (simple) model; the simple model is a special case of the complex model when p = ½.</p>
 <p>For such nested models, one can calculate the likelihood ratio test statistic as</p>
-<p>(eq. 2.7)</p>
-<p>Here, Δ is the likelihood ratio test statistic, L2 the likelihood of the more complex (parameter rich) model, and L1 the likelihood of the simpler model. Since the models are nested, the likelihood of the complex model will always be greater than or equal to the likelihood of the simple model; this means that the test statistic Δ will never be negative. In fact, if you ever obtain a negative likelihood ratio test statistic, something has gone wrong – either your calculations are wrong, or you have not actually found ML solutions, or the models are not actually nested.</p>
-<p>To carry out a statistical test comparing the two models, we compare the test statistic Δ to its expectation under the null hypothesis. For likelihood ratio tests, the null hypothesis is always the simpler of the two models. When sample sizes are large, the null distribution of the likelihood ratio test statistic follows a chi-squared distribution with degrees of freedom equal to the difference in the number of parameters between the two models (Figure 2.4). This means that if the simpler hypothesis were true, and one carried out this test many times on large independent datasets, the test statistic would approximately follow this χ2 distribution. To reject the simpler model, then, one compares the test statistic with a critical value derived from the appropriate chi-squared distribution. If the test statistic is larger than the critical value, one rejects the null hypothesis. Otherwise, we fail to reject the null hypothesis. In this case, we only need to consider one tail of the chi-squared test, as every deviation from the null model will push us towards higher Δ values and towards the right tail of the distribution.</p>
+(eq. 2.7)
+<div>
+<p><br /><span class="math display">$$
+\Delta = 2 \cdot \ln{\frac{L_1}{L_2}} = 2 \cdot (\ln{L_1}-\ln{L_2})
+$$</span><br /></p>
+</div>
+<p>Here, <span class="math inline"><em>Δ</em></span> is the likelihood ratio test statistic, <span class="math inline"><em>L</em><sub>2</sub></span> the likelihood of the more complex (parameter rich) model, and <span class="math inline"><em>L</em><sub>1</sub></span> the likelihood of the simpler model. Since the models are nested, the likelihood of the complex model will always be greater than or equal to the likelihood of the simple model; this means that the test statistic Δ will never be negative. In fact, if you ever obtain a negative likelihood ratio test statistic, something has gone wrong – either your calculations are wrong, or you have not actually found ML solutions, or the models are not actually nested.</p>
+<p>To carry out a statistical test comparing the two models, we compare the test statistic Δ to its expectation under the null hypothesis. For likelihood ratio tests, the null hypothesis is always the simpler of the two models. When sample sizes are large, the null distribution of the likelihood ratio test statistic follows a chi-squared distribution with degrees of freedom equal to the difference in the number of parameters between the two models (Figure 2.4). This means that if the simpler hypothesis were true, and one carried out this test many times on large independent datasets, the test statistic would approximately follow this <span class="math inline"><em>χ</em><sup>2</sup></span> distribution. To reject the simpler model, then, one compares the test statistic with a critical value derived from the appropriate chi-squared distribution. If the test statistic is larger than the critical value, one rejects the null hypothesis. Otherwise, we fail to reject the null hypothesis. In this case, we only need to consider one tail of the chi-squared test, as every deviation from the null model will push us towards higher <span class="math inline"><em>D</em><em>e</em><em>l</em><em>t</em><em>a</em></span> values and towards the right tail of the distribution.</p>
 <p>For the lizard flip example above, we can calculate the ln-likelihood under a hypothesis of p = 0.5 as:</p>
-<p>(eq. 2.8)</p>
+(eq. 2.8)
+<div>
+<p><br /><span class="math display">$$\begin{eqnarray}
+\ln{L} &amp;=&amp; \ln{\left(\frac{100}{63}\right)} + 63 \cdot \ln{0.5} + (100-63) \cdot \ln{(1-0.5)} \nonumber \\
+\ln{L} &amp;=&amp; -5.92\nonumber
+\end{eqnarray}$$</span><br /></p>
+</div>
 <p>We can compare this to the likelihood of our maximum-likelihood estimate :</p>
-<p>(eq. 2.9)</p>
+(eq. 2.9)
+<div>
+<p><br /><span class="math display">$$\begin{eqnarray}
+\ln{L} &amp;=&amp; \ln{\left(\frac{100}{63}\right)} + 63 \cdot \ln{0.63} + (100-63) \cdot \ln{(1-0.63)} \nonumber \\
+\ln{L} &amp;=&amp; -2.50\nonumber
+\end{eqnarray}$$</span><br /></p>
+</div>
 <p>We then calculate the likelihood ratio test statistic:</p>
-<p>(eq. 2.10)</p>
-<p>If we compare this to a chi-squared distribution with one d.f., we find that P = 0.009. Because this P-value is less than the threshold of 0.05, we reject the null hypothesis, and support the alternative. We conclude that this is not a fair lizard.</p>
+(eq. 2.10)
+<div>
+<p><br /><span class="math display">$$\begin{eqnarray}
+\Delta &amp;=&amp; 2 \cdot (\ln{L_2}-\ln{L_1}) \nonumber \\
+\Delta &amp;=&amp; 2 \cdot (-2.50 - -5.92) \nonumber \\
+\Delta &amp;=&amp; 6.84\nonumber
+\end{eqnarray}$$</span><br /></p>
+</div>
+<p>If we compare this to a <span class="math inline"><em>χ</em><sup>2</sup></span> distribution with one d.f., we find that P = 0.009. Because this P-value is less than the threshold of 0.05, we reject the null hypothesis, and support the alternative. We conclude that this is not a fair lizard.</p>
 <p>Although described above in terms of two competing hypotheses, likelihood ratio tests can be applied to more complex situations with more than two competing models. For example, if all of the models form a sequence of increasing complexity, with each model a special case of the next more complex model, one can compare each pair of hypotheses in sequence, stopping the first time the test statistic is non-significant (Figure 2.4). Alternatively, in some cases, hypotheses can be placed in a bifurcating choice tree, and one can proceed from simple to complex models down a particular path of paired comparisons of nested models (Figure 2.4). This approach is commonly used to select models of DNA sequence evolution.</p>
 <h3 id="the-akaike-information-criterion-aic">The Akaike information criterion (AIC)</h3>
 <p>You might have noticed that the likelihood ratio test described above has some limitations. Especially for models involving more than one parameter, approaches based on likelihood ratio tests can only do so much. For example, one can compare a series of models, some of which are nested within others, using an ordered series of likelihood ratio tests. However, results will often depend strongly on the order in which tests are carried out. Furthermore, often we want to compare models that are not nested, as required by likelihood ratio tests. For these reasons, another approach, based on the Akaike Information Criterion (AIC), can be useful.</p>
 <p>The AIC value for a particular model is a simple function of the likelihood L and the number of parameters k:</p>
-<p>(eq. 2.11)</p>
+(eq. 2.11)
+<div>
+<p>\[ AIC = 2k - 2 ln{L} \]</p>
+</div>
 <p>This function that balances the likelihood of the model and the number of parameters estimated in the process of fitting the model to the data. One can think of the AIC criterion as identifying the model that provides the most efficient way to describe patterns in the data with few parameters. However, this shorthand description of AIC does not capture the actual mathematical and philosophical justification for equation (2.11). In fact, this equation is not arbitrary; instead, it comes from information theory (for more information, see Burnam and Anderson 2002).</p>
 <p>The AIC equation (2.11) above is only valid for quite large sample sizes relative to the number of parameters being estimated (for n samples and k parameters, n/k &gt; 40). Most empirical data sets include fewer than 40 independent data points per parameter, so a small sample size correction should be employed:</p>
-<p>(eq. 2.12)</p>
+(eq. 2.12)
+<div>
+<p><br /><span class="math display">$$
+AIC_C = AIC + \frac{2k(k+1)}{n-k-1}
+$$</span><br /></p>
+</div>
 <p>This correction penalizes models that have small sample sizes relative to the number of values that are too close; that is, models where there are nearly as many parameters as data points. As noted by Burnham and Anderson (2002), this correction has little effect if sample sizes are large, and so provides a robust way to correct for possible bias in data sets of any size. I recommend always using the small sample size correction when calculating AIC values.</p>
-<p>To select among models, one can then compare their AICc values, and choose the model with the smallest value. It is easier to make comparisons in AICc scores between models by calculating the difference, ΔAICc. For example, if you are comparing a set of models, you can calculate ΔAICc for model i as:</p>
-<p>(eq. 2.13)</p>
-<p>where AICci is the AICc score for model i and AICc min is the minimum AICc score across all of the models.</p>
-<p>As a broad rule of thumb for comparing AIC values, any model with a ΔAICci of less than four is roughly equivalent to the model with the lowest AICc value. Models with ΔAICci between 4 and 8 have little support in the data, while any model with a ΔAICci greater than 10 can safely be ignored.</p>
+<p>To select among models, one can then compare their <span class="math inline"><em>A</em><em>I</em><em>C</em><sub><em>c</em></sub></span> values, and choose the model with the smallest value. It is easier to make comparisons in AICc scores between models by calculating the difference, <span class="math inline"><em>Δ</em><em>A</em><em>I</em><em>C</em><sub><em>c</em></sub></span>. For example, if you are comparing a set of models, you can calculate <span class="math inline"><em>Δ</em><em>A</em><em>I</em><em>C</em><sub><em>c</em></sub></span> for model i as:</p>
+(eq. 2.13)
+<div>
+<p>\[ AIC_{c_i} = AIC_{c_i} - AIC_{c_{min}} \]</p>
+</div>
+<p>where <span class="math inline"><em>A</em><em>I</em><em>C</em><sub><em>c</em><sub><em>i</em></sub></sub></span> is the <span class="math inline"><em>A</em><em>I</em><em>C</em><sub><em>c</em></sub></span> score for model i and $AIC_{c_{min}} is the minimum <span class="math inline"><em>A</em><em>I</em><em>C</em><sub><em>c</em></sub></span> score across all of the models.</p>
+<p>As a broad rule of thumb for comparing <span class="math inline"><em>A</em><em>I</em><em>C</em></span> values, any model with a <span class="math inline"><em>Δ</em><em>A</em><em>I</em><em>C</em><sub><em>c</em><sub><em>i</em></sub></sub></span> of less than four is roughly equivalent to the model with the lowest <span class="math inline"><em>A</em><em>I</em><em>C</em><sub><em>c</em></sub></span> value. Models with <span class="math inline"><em>Δ</em><em>A</em><em>I</em><em>C</em><sub><em>c</em><sub><em>i</em></sub></sub></span> between 4 and 8 have little support in the data, while any model with a <span class="math inline"><em>Δ</em><em>A</em><em>I</em><em>C</em><sub><em>c</em><sub><em>i</em></sub></sub></span> greater than 10 can safely be ignored.</p>
 <p>Additionally, one can calculate the relative likelihood for each model using Akaike weights. The weight for model i compared to a set of competing models is calculated as:</p>
-<p>(eq. 2.14)</p>
-<p>The weights for all models under consideration sum to 1, so the wi for each model can be viewed as an estimate of the level of support for that model in the data compared to the other models being considered.</p>
-<p>Returning to our example of lizard flipping, we can calculate AICc scores for our two models as follows:</p>
-<p>(eq. 2.15)</p>
-<p>Our example is a bit unusual in that model one has no estimated parameters; this happens sometimes but is not typical for biological applications. We can correct these values for our sample size, which in this case is n = 100 lizard flips:</p>
-<p>(eq. 2.16)</p>
-<p>Notice that, in this particular case, the correction did not affect our AIC values, at least to one decimal place. This is because the sample size is large relative to the number of parameters. Note that model 2 has the smallest AICc score and is thus the model that is best supported by the data. Noting this, we can now convert these AICc scores to a relative scale:</p>
-<p>(eq. 2.17)</p>
+(eq. 2.14)<br />
+
+<div>
+<p><br /><span class="math display">$$
+w_i = \frac{e^{-\Delta AIC_{c_i}/2}}{\sum_i{e^{-\Delta AIC_{c_i}/2}}}
+$$</span><br /></p>
+</div>
+<p>The weights for all models under consideration sum to 1, so the <span class="math inline"><em>w</em><sub><em>i</em></sub></span> for each model can be viewed as an estimate of the level of support for that model in the data compared to the other models being considered.</p>
+<p>Returning to our example of lizard flipping, we can calculate <span class="math inline"><em>A</em><em>I</em><em>C</em><sub><em>c</em></sub></span> scores for our two models as follows:</p>
+(eq. 2.15)<br />
+
+<div>
+<p><br /><span class="math display">$$\begin{eqnarray}
+AIC_1 &amp;=&amp; 2 k_1 - 2 ln{L_1} = 2 \cdot 0 - 2 \cdot -5.92 \\\
+AIC_1 &amp;=&amp; 11.8 \\\
+AIC_2 &amp;=&amp; 2 k_2 - 2 ln{L_2} = 2 \cdot 1 - 2 \cdot -2.50 \\\
+AIC_2 &amp;=&amp; 7.0 \\\
+\end{eqnarray}$$</span><br /></p>
+</div>
+<p>Our example is a bit unusual in that model one has no estimated parameters; this happens sometimes but is not typical for biological applications. We can correct these values for our sample size, which in this case is <span class="math inline"><em>n</em> = 100</span> lizard flips:</p>
+(eq. 2.16)<br />
+
+<div>
+<p><br /><span class="math display">$$\begin{eqnarray}
+AIC_{c_1} &amp;=&amp; AIC_1 + \frac{2 k_1 (k_1 + 1)}{n - k_1 - 1} \\\
+AIC_{c_1} &amp;=&amp; 11.8 + \frac{2 \cdot 0 (0 + 1)}{100-0-1} \\\
+AIC_{c_1} &amp;=&amp; 11.8 \\\
+AIC_{c_2} &amp;=&amp; AIC_2 + \frac{2 k_2 (k_2 + 1)}{n - k_2 - 1} \\\
+AIC_{c_1} &amp;=&amp; 7.0 + \frac{2 \cdot 1 (1 + 1)}{100-1-1} \\\
+AIC_{c_1} &amp;=&amp; 7.0 \\\
+\end{eqnarray}$$</span><br /></p>
+</div>
+<p>Notice that, in this particular case, the correction did not affect our <span class="math inline"><em>A</em><em>I</em><em>C</em></span> values, at least to one decimal place. This is because the sample size is large relative to the number of parameters. Note that model 2 has the smallest <span class="math inline"><em>A</em><em>I</em><em>C</em><sub><em>c</em></sub></span> score and is thus the model that is best supported by the data. Noting this, we can now convert these <span class="math inline"><em>A</em><em>I</em><em>C</em><sub><em>c</em></sub></span> scores to a relative scale:</p>
+(eq. 2.17)<br />
+
+<div>
+<p><br /><span class="math display">$$\begin{eqnarray}
+\Delta AIC_{c_1} &amp;=&amp; AIC_{c_1}-AIC{c_{min}} \\\
+&amp;=&amp; 11.8-7.0 \\\
+&amp;=&amp; 4.8 \\\
+\end{eqnarray}$$</span><br /></p>
+</div>
+<div>
+<p><br /><span class="math display">$$\begin{eqnarray}
+\Delta AIC_{c_2} &amp;=&amp; AIC_{c_2}-AIC{c_{min}} \\\
+&amp;=&amp; 7.0-7.0 \\\
+&amp;=&amp; 0 \\\
+\end{eqnarray}$$</span><br /></p>
+</div>
 <p>Note that the ΔAICci for model 1 is greater than four, suggesting that this model (the “fair” lizard) has little support in the data. Finally, we can use the relative AICc scores to calculate Akaike weights:</p>
-<p>(eq. 2.18)</p>
+(eq. 2.18)<br />
+
+<div>
+<p><br /><span class="math display">$$\begin{eqnarray}
+\sum_i{e^{-\Delta_i/2}} &amp;=&amp; e^{-\Delta_1/2} + e^{-\Delta_2/2} \\\
+&amp;=&amp; e^{-4.8/2} + e^{-0/2} \\\
+&amp;=&amp; 1.09 \\\
+\end{eqnarray}$$</span><br /></p>
+</div>
+<div>
+<p><br /><span class="math display">$$\begin{eqnarray}
+w_1 &amp;=&amp; \frac{e^{-\Delta AIC_{c_1}/2}}{\sum_i{e^{-\Delta AIC_{c_i}/2}}} \\\
+&amp;=&amp; \frac{0.09}{1.09} \\\
+&amp;=&amp; 0.08
+\end{eqnarray}$$</span><br /></p>
+</div>
+<div>
+<p><br /><span class="math display">$$\begin{eqnarray}
+w_2 &amp;=&amp; \frac{e^{-\Delta AIC_{c_2}/2}}{\sum_i{e^{-\Delta AIC_{c_i}/2}}} \\\
+&amp;=&amp; \frac{1.00}{1.09} \\\
+&amp;=&amp; 0.92
+\end{eqnarray}$$</span><br /></p>
+</div>
 <p>Our results are again consistent with the results of the likelihood ratio test. The relative likelihood of an unfair lizard is 0.92, and we can be quite confident that our lizard is not a fair flipper.</p>
 <p>AIC weights are also useful for another purpose: we can use them to get model-averaged parameter estimates. These are parameter estimates that are combined across different models proportional to the support for those models. As a thought example, imagine that we are considering two models, A and B, for a particular dataset. Both model A and model B have the same parameter p, and this is the parameter we are particularly interested in. In other words, we do not know which model is the best model for our data, but what we really need is a good estimate of p. We can do that using model averaging. If model A has a high AIC weight, then the model-averaged parameter estimate for p will be very close to our estimate of p under model A; however, if both models have about equal support then the parameter estimate will be close to the average of the two different estimates. Model averaging can be very useful in cases where there is a lot of uncertainty in model choice for models that share parameters of interest. Sometimes the models themselves are not of interest, but need to be considered as possibilities; in this case, model averaging lets us estimate parameters in a way that is not as strongly dependent on our choice of models.</p>
 <h2 id="bayesian-statistics">Bayesian statistics</h2>
