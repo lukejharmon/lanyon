@@ -65,13 +65,13 @@ $$
 In the example given, n = 100 and k = 63, so:
 
 (eq. 2.3)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-{% raw %}
+{% raw %}{::nomarkdown}
 <div>
 $$
 L(H|D)= {100 \choose 63} p^{63} (1-p)^{37}
 $$
 </div>	 
-{% endraw %}
+{:/}{% endraw %}
 
 ![]({{ site.baseurl }}/images/flip_likelihood_surface.png)
 Figure 2.2. Likelihood surface for the parameter p, given a coin that has been flipped as heads 63 times out of 100.
