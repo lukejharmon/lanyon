@@ -56,7 +56,7 @@ title: Introduction
 L(H|D)= {100 \choose 63} p^{63} (1-p)^{37}
 $$</span><br /></p>
 </div>
-<p>{% /endraw %}</p>
+<p>{% endraw %}</p>
 <p><img src="{{site.baseurl}}/images/flip_likelihood_surface.png" /> Figure 2.2. Likelihood surface for the parameter p, given a coin that has been flipped as heads 63 times out of 100.</p>
 <p>We can make a plot of the likelihood, L, as a function of p (Figure 2.2). When we do this, we see that the maximum likelihood value of p, which we can call <span class="math inline">$\hat{p}$</span>, is at p = 0.63. This is the “brute force” approach to finding the maximum likelihood: try many different values of the parameters and pick the one with the highest likelihood. We can do this much more efficiently using numerical methods as described in later chapters in this book.</p>
 <p>We could also have obtained the maximum likelihood estimate for p through differentiation. This problem is much easier if we work with the log-likelihood rather than the likelihood itself (note that whatever value of maximizes the likelihood will also maximize the log-likelihood, because the log function is strictly increasing). So:</p>
