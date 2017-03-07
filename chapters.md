@@ -6,3 +6,5 @@ title: Chapters
 [Chapter 1]({{ site.baseurl }}/chapter1_introduction/) - A Macroevolutionary Research Program
 
 [Chapter 2]({{ site.baseurl }}/chapter2_stats/) - Fitting Statistical Models to Data
+
+[Chapter 3]({{ site.baseurl }}/chapter3_bmintro/) - Introduction to Brownian Motion

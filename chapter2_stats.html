@@ -230,17 +230,45 @@ w_2 &amp;=&amp; \frac{e^{-\Delta AIC_{c_2}/2}}{\sum_i{e^{-\Delta AIC_{c_i}/2}}} 
 <h2 id="bayesian-statistics">Bayesian statistics</h2>
 <h3 id="bayes-theorem">Bayes Theorem</h3>
 <p>Recent years have seen tremendous growth of Bayesian approaches in reconstructing phylogenetic trees and estimating their branch lengths. Although there are currently only a few Bayesian comparative methods, their number will certainly grow as comparative biologists try to solve more complex problems. In a Bayesian framework, the quantity of interest is the posterior probability, calculated using Bayes' theorem:</p>
-<p>(eq. 2.19)</p>
-<p>The benefit of Bayesian approaches is that they allow us to estimate the probability that the hypothesis is true given the observed data, Pr(H | D). This is really the sort of probability that most people have in mind when they are thinking about the goals of their study. However, Bayes theorem also reveals a cost of this approach. Along with the likelihood, Pr(D | H), one must also incorporate prior knowledge about the probability that any given hypothesis is true - Pr(H). In Bayesian statistics one must quantify the prior belief that a hypothesis is true, even before consideration of the data at hand. In practice, scientists often seek to use “uninformative” priors that have little influence on the posterior distribution. The term Pr(D) is also an important part of Bayes theorem, and can be calculated as the probability of obtaining the data integrated over the prior distributions of the parameters:</p>
-<p>(eq. 2.20)</p>
-<p>However, Pr(D) is constant when comparing the fit of different models for a given data set and thus has no influence on Bayesian model selection under most circumstances (and all the examples in this book).</p>
-<p>In our example of lizard flipping, we can do an analysis in a Bayesian framework. For model 1, there are no free parameters. Because of this, P(H) = 1 and P(D|H) = P(D), so that P(H|D) = 1. This may seem strange but what the result means is that our data has no influence on the structure of the model. We do not learn anything about a model with no free parameters by collecting data!</p>
-<p>If we consider model 2 above, the parameter p must be estimated. We can set a uniform prior between 0 and 1 for p, so that f(p) = 1 for all p in the interval [0,1]. We can also write this as “our prior for p is U(0,1)”. Then:</p>
-<p>(eq. 2.21)</p>
-<p>Next we note that P(D|H) is the likelihood of our data given the model, which is already stated above as equation 2.2. Plugging this into our equation, we have:</p>
-<p>(eq. 2.22)</p>
+(eq. 2.19)<br />
+
+<div>
+<p><br /><span class="math display">$$
+Pr(H|D) = \frac{Pr(D|H) \cdot Pr(H)}{Pr(D)}
+$$</span><br /></p>
+</div>
+<p>The benefit of Bayesian approaches is that they allow us to estimate the probability that the hypothesis is true given the observed data, <span class="math inline"><em>P</em><em>r</em>(<em>H</em>|<em>D</em>)</span>. This is really the sort of probability that most people have in mind when they are thinking about the goals of their study. However, Bayes theorem also reveals a cost of this approach. Along with the likelihood, <span class="math inline"><em>P</em><em>r</em>(<em>D</em>|<em>H</em>)</span>, one must also incorporate prior knowledge about the probability that any given hypothesis is true - <span class="math inline"><em>P</em><em>r</em>(<em>H</em>)</span>. In Bayesian statistics one must quantify the prior belief that a hypothesis is true, even before consideration of the data at hand. In practice, scientists often seek to use “uninformative” priors that have little influence on the posterior distribution - although even the term &quot;uninformative&quot; can be confusing, because the prior is an integral part of a Bayesian analysis. The term <span class="math inline"><em>P</em><em>r</em>(<em>D</em>)</span> is also an important part of Bayes theorem, and can be calculated as the probability of obtaining the data integrated over the prior distributions of the parameters:</p>
+(eq. 2.20)<br />
+
+<div>
+<p>\[ Pr(D) = \int_H Pr(H|D) Pr(H) dH \]</p>
+</div>
+<p>However, <span class="math inline"><em>P</em><em>r</em>(<em>D</em>)</span> is constant when comparing the fit of different models for a given data set and thus has no influence on Bayesian model selection under most circumstances (and all the examples in this book).</p>
+<p>In our example of lizard flipping, we can do an analysis in a Bayesian framework. For model 1, there are no free parameters. Because of this, <span class="math inline"><em>P</em>(<em>H</em>)=1</span> and <span class="math inline"><em>P</em>(<em>D</em>|<em>H</em>)=<em>P</em>(<em>D</em>)</span>, so that <span class="math inline"><em>P</em>(<em>H</em>|<em>D</em>)=1</span>. This may seem strange but what the result means is that our data has no influence on the structure of the model. We do not learn anything about a model with no free parameters by collecting data!</p>
+<p>If we consider model 2 above, the parameter p must be estimated. We can set a uniform prior between 0 and 1 for p, so that <span class="math inline"><em>f</em>(<em>p</em>)=1</span> for all p in the interval [0,1]. We can also write this as “our prior for p is U(0,1)”. Then:</p>
+(eq. 2.21)<br />
+
+<div>
+<p><br /><span class="math display">$$
+Pr(H|D) = \frac{Pr(D|H) \cdot Pr(H)}{Pr(D)} = \frac{P(k|p,N) f(p)}{\int_{0}^{1} P(k|p,N) f(p) dp}
+$$</span><br /></p>
+</div>
+<p>Next we note that <span class="math inline"><em>P</em>(<em>D</em>|<em>H</em>)</span> is the likelihood of our data given the model, which is already stated above as equation 2.2. Plugging this into our equation, we have:</p>
+(eq. 2.22)<br />
+
+<div>
+<p><br /><span class="math display">$$
+Pr(H|D) = \frac{\binom{N}{k} p^k (1-p)^{N-k}}{\int_{0}^{1} \binom{N}{k} p^k (1-p)^{N-k} dp}
+$$</span><br /></p>
+</div>
 <p>This ugly equation is actually a beta distribution, which can be expressed more simply as:</p>
-<p>(eq. 2.23)</p>
+(eq. 2.23)<br />
+
+<div>
+<p><br /><span class="math display">$$
+Pr(H|D) = \frac{(N+1)!}{k!(N-k)!} p^k (1-p)^{N-k}
+$$</span><br /></p>
+</div>
 <p>We can compare this posterior distribution of our parameter estimate, p, given the data, to our uniform prior (Figure 2.2). If you inspect this plot, you see that the posterior distribution is very different from the prior – that is, the data have changed our view of the values that parameters should take.</p>
 <p>As you can see from this example, Bayes theorem lets us combine our prior belief about parameter values with the information from the data in order to obtain a posterior. These posterior distributions are very easy to interpret, as they express the probability of the model parameters given our data. However, that clarity comes at a cost of requiring an explicit prior. Later in the book we will learn how to use this feature of Bayesian statistics to our advantage when we actually do have some prior knowledge about parameter values.</p>
 <p>Figure 2.2. Bayesian prior (dotted line) and posterior (solid line) distributions for lizard flipping.</p>
@@ -249,38 +277,106 @@ w_2 &amp;=&amp; \frac{e^{-\Delta AIC_{c_2}/2}}{\sum_i{e^{-\Delta AIC_{c_i}/2}}} 
 <p>An MCMC analysis requires that one constructs and samples from a Markov chain. A Markov chain is a random process that changes from one state to another with certain probabilities that depend only on the current state of the system, and not what has come before. A simple example of a Markov chain is the movement of a playing piece in the game Chutes and Ladders; the position of the piece moves from one square to another following probabilities given by the dice and the layout of the game board. The movement of the piece from any square on the board does not depend on how the piece got to that square.</p>
 <p>Some Markov chains have an equilibrium distribution, which is a stable probability distribution of the model’s states after the chain has run for a very long time. For Bayesian analysis, we use a technique called a Metropolis-Hasting algorithm to construct a special Markov chain that has an equilibrium distribution that is the same as the Bayesian posterior distribution of our statistical model. Then, using a random simulation on this chain (this is the Markov-chain Monte Carlo, MCMC), we can sample from the posterior distribution of our model.</p>
 <p>The following algorithm uses a Metropolis-Hastings algorithm to carry out a Bayesian MCMC analysis with one free parameter:</p>
-<pre><code>Sample a starting parameter value, p, from the prior distribution.
-Given the current parameter value, p, select a new proposed parameter value, p’, using the proposal density  .
-Calculate three ratios:
-The prior odds ratio. This is the ratio of the probability of drawing the parameter values p and p’ from the prior.</code></pre>
-<p>(eq. 2.24)<br />
-The proposal density ratio. This is the ratio of probability of proposals going from p to p’ and the reverse. Often, one can construct a proposal density that is symmetrical, so that = and . (eq. 2.25)<br />
-The likelihood ratio. This is the ratio of probabilities of the data given the two different parameter values.</p>
-<p>(eq. 2.26)</p>
-<pre><code>Find the product of the prior odds, proposal density ratio, and the likelihood ratio:</code></pre>
-<p>(eq. 2.27)</p>
-<pre><code>Draw a random number x from a uniform distribution between 0 and 1. If x&lt;a, accept the proposed value of p’; otherwise reject, and retain the current value p.
-Repeat steps 2-5 a large number of times.</code></pre>
-<p>Carrying out these steps, one obtains a set of parameter values, pi, where i is from 1 to the total number of generations in the MCMC. Typically, the chain has a “burn-in” period at the beginning. This is the time before the chain has reached a stationary distribution, and can be observed when parameter values show trends through time and the likelihood for models has yet to plateau. If you eliminate this “burn-in” period, then you can treat the rest of the chain as a sample from the posterior distribution, and summarize it in a variety of ways; for example, by calculating a mean, 95% confidence interval, or plotting a histogram.</p>
-<p>We can apply this algorithm to our coin-flipping example. We will consider the same prior distribution, U(0,1), for the parameter p. We will also define a proposal density, . That is, we will add or subtract a small number (less than 0.01) to generate proposed values of p’ given p.</p>
-<p>To start the algorithm, we draw a value of p from the prior. Let’s say for illustrative purposes that the value we draw is 0.60. This becomes our current parameter estimate. For step two, we propose a new value, p’, by drawing from our proposal distribution, which in this case is U(0.59, 0.61). Let’s suppose that our new proposed value p’ = 0.595. We then calculate our three ratios. Here things are simpler than you might have expected for two reasons. First, recall that our prior probability distribution is U(0,1). The density of this distribution is a constant (1.0) for all values of p and p’. Because of this, the prior odds ratio is always: (eq. 2.28)<br />
-Similarly, because our proposal distribution is symmetrical, = and . That means that we only need to calculate the likelihood ratio for p and p’. We can do this by plugging our values for p (or p’) into equation 2.2:</p>
-<p>(eq. 2.29)<br />
+<hr />
+<h3 id="get-a-starting-parameter-value.">1. Get a starting parameter value.</h3>
+<p>Sample a starting parameter value, <span class="math inline"><em>p</em></span>, from the prior distribution.</p>
+<h3 id="propose-a-new-parameter.">2. Propose a new parameter.</h3>
+<p>Given the current parameter value, <span class="math inline"><em>p</em></span>, select a new proposed parameter value, <span class="math inline"><em>p</em>’</span>, using the proposal density <span class="math inline"><em>Q</em>(<em>p</em>′|<em>p</em>)</span>.</p>
+<h3 id="calculate-three-ratios.">3. Calculate three ratios.</h3>
+<h4 id="a.-the-prior-odds-ratio.">a. The prior odds ratio.</h4>
+<p>This is the ratio of the probability of drawing the parameter values <span class="math inline"><em>p</em></span> and <span class="math inline"><em>p</em>’</span> from the prior.</p>
+(eq. 2.24)
+<div>
+<p><br /><span class="math display">$$
+a_1 = \frac{P(p')}{P(p)}
+$$</span><br /></p>
+</div>
+<h4 id="b.-the-proposal-density-ratio.">b. The proposal density ratio.</h4>
+<p>This is the ratio of probability of proposals going from <span class="math inline"><em>p</em></span> to <span class="math inline"><em>p</em>’</span> and the reverse. Often, one can construct a proposal density that is symmetrical, so that <span class="math inline"><em>Q</em>(<em>p</em>′|<em>p</em>)=<em>Q</em>(<em>p</em>|<em>p</em>′)</span> and <span class="math inline"><em>a</em><sub>2</sub> = 1</span>.</p>
+(eq. 2.25)<br />
+
+<div>
+<p><br /><span class="math display">$$
+a_2 = \frac{Q(p'|p)}{Q(p|p')}
+$$</span><br /></p>
+</div>
+<h4 id="c.-the-likelihood-ratio.">c. The likelihood ratio.</h4>
+<p>This is the ratio of probabilities of the data given the two different parameter values.</p>
+(eq. 2.26)<br />
+
+<div>
+<p><br /><span class="math display">$$
+a_3 = \frac{L(p'|D)}{L(p|D)} = \frac{P(D|p')}{P(D|p)}
+$$</span><br /></p>
+</div>
+<h3 id="multiply.">4. Multiply.</h3>
+<p>Find the product of the prior odds, proposal density ratio, and the likelihood ratio:</p>
+(eq. 2.27)
+<div>
+<p>\[ a = a_1 a_2 a_3 \]</p>
+</div>
+<h3 id="accept-or-reject.">5. Accept or reject.</h3>
+<p>Draw a random number <span class="math inline"><em>x</em></span> from a uniform distribution between 0 and 1. If <span class="math inline"><em>x</em> &lt; <em>a</em></span>, accept the proposed value of <span class="math inline"><em>p</em>’</span>; otherwise reject, and retain the current value <span class="math inline"><em>p</em></span>.</p>
+<h3 id="repeat.">6. Repeat.</h3>
+<p>Repeat steps 2-5 a large number of times.</p>
+<hr />
+<p>Carrying out these steps, one obtains a set of parameter values, <span class="math inline"><em>p</em><sub><em>i</em></sub></span>, where <span class="math inline"><em>i</em></span> is from 1 to the total number of generations in the MCMC. Typically, the chain has a “burn-in” period at the beginning. This is the time before the chain has reached a stationary distribution, and can be observed when parameter values show trends through time and the likelihood for models has yet to plateau. If you eliminate this “burn-in” period, then you can treat the rest of the chain as a sample from the posterior distribution, and summarize it in a variety of ways; for example, by calculating a mean, 95% confidence interval, or plotting a histogram.</p>
+<p>We can apply this algorithm to our coin-flipping example. We will consider the same prior distribution, <span class="math inline"><em>U</em>(0, 1)</span>, for the parameter <span class="math inline"><em>p</em></span>. We will also define a proposal density, <span class="math inline">$Q(p'|p) ~ U(p-\eps, p+\eps)$</span>. That is, we will add or subtract a small number (<span class="math inline">$\eps \leq 0.01$</span>) to generate proposed values of <span class="math inline"><em>p</em>’</span> given <span class="math inline"><em>p</em></span>.</p>
+<p>To start the algorithm, we draw a value of <span class="math inline"><em>p</em></span> from the prior. Let’s say for illustrative purposes that the value we draw is 0.60. This becomes our current parameter estimate. For step two, we propose a new value, <span class="math inline"><em>p</em>’</span>, by drawing from our proposal distribution. We can use <span class="math inline">$\eps = 0.01$</span> so the proposal distribution becomes <span class="math inline"><em>U</em>(0.59, 0.61)</span>. Let’s suppose that our new proposed value <span class="math inline"><em>p</em>’=0.595</span>.</p>
+<p>We then calculate our three ratios. Here things are simpler than you might have expected for two reasons. First, recall that our prior probability distribution is <span class="math inline"><em>U</em>(0, 1)</span>. The density of this distribution is a constant (1.0) for all values of <span class="math inline"><em>p</em></span> and <span class="math inline"><em>p</em>’</span>. Because of this, the prior odds ratio is always:</p>
+(eq. 2.28)
+<div>
+<p><br /><span class="math display">$$
+a_1 = \frac{P(p')}{P(p)} = \frac{1}{1} = 1
+$$</span><br /></p>
+</div>
+<p>Similarly, because our proposal distribution is symmetrical, <span class="math inline"><em>Q</em>(<em>p</em>′|<em>p</em>)=<em>Q</em>(<em>p</em>|<em>p</em>′)</span> and <span class="math inline"><em>a</em><sub>2</sub> = 1</span>. That means that we only need to calculate the likelihood ratio for <span class="math inline"><em>p</em></span> and <span class="math inline"><em>p</em>’</span>. We can do this by plugging our values for <span class="math inline"><em>p</em></span> (or <span class="math inline"><em>p</em>’</span>) into equation 2.2:</p>
+(eq. 2.29)
+<div>
+<p>\[ P(D|p) = {N k} p^k (1-p)^{N-k} = {100 63} 0.6^63 (1-0.6)^{100-63} = 0.068 \]</p>
+</div>
 Likewise, (eq. 2.30)<br />
-The likelihood ratio is then:</p>
-<p>(eq. 2.31)</p>
-<p>We can now calculate . We next choose a random number between 0 and 1 – say that we draw x = 0.34. We then notice that our random number x is less than a, so we accept the proposed value of p’. If the random number that we drew were greater than 0.94, we would reject the proposed value, and keep our original parameter value p = 0.60 going into the next generation.</p>
-<p>If we repeat this procedure a large number of times, we will obtain a long chain of values of p. You can see the results of such a run in figure 2.3. In panel A, I have plotted the likelihoods for each successive value of p. You can see that the likelihoods increase for the first ~1000 or so generations, then reach a plateau around lnL = -3. Panel B shows a plot of the values of p, which rapidly converge to a stable distribution around p = 0.63. We can also plot a histogram of these posterior estimates of p. In panel C, I have done that – but with a twist. Because the MCMC algorithm creates a series of parameter estimates, these numbers show autocorrelation – that is, each estimate is similar to estimates that come just before and just after. This autocorrelation can cause problems for data analysis. The simplest solution is to subsample these values, picking only, say, one value every 100 generations. That is what I have done in the histogram in panel C. This panel also includes the analytic posterior distribution that we calculated above – notice how well our Metropolis-Hastings algorithm did in reconstructing this distribution!</p>
+
+<div>
+<p>\[ P(D|p') = {N k} p'^k (1-p')^{N-k} = {100 63} 0.595^63 (1-0.595)^{100-63} = 0.064 \]</p>
+</div>
+<p>The likelihood ratio is then:</p>
+(eq. 2.31)<br />
+
+<div>
+<p><br /><span class="math display">$$
+a_3 = \frac{P(D|p')}{P(D|p)} = \frac{0.064}{0.068} = 0.94
+$$</span><br /></p>
+</div>
+<p>We can now calculate <span class="math inline"><em>a</em> = <em>a</em><sub>1</sub> ⋅ <em>a</em><sub>2</sub> ⋅ <em>a</em><sub>3</sub> = 1 ⋅ 1 ⋅ 0.94 = 0.94</span>. We next choose a random number between 0 and 1 – say that we draw <span class="math inline"><em>x</em> = 0.34</span>. We then notice that our random number <span class="math inline"><em>x</em></span> is less than or equal to <span class="math inline"><em>a</em></span>, so we accept the proposed value of <span class="math inline"><em>p</em>’</span>. If the random number that we drew were greater than 0.94, we would reject the proposed value, and keep our original parameter value <span class="math inline"><em>p</em> = 0.60</span> going into the next generation.</p>
+<p>If we repeat this procedure a large number of times, we will obtain a long chain of values of <span class="math inline"><em>p</em></span>. You can see the results of such a run in figure 2.3. In panel A, I have plotted the likelihoods for each successive value of p. You can see that the likelihoods increase for the first ~1000 or so generations, then reach a plateau around <span class="math inline"><em>l</em><em>n</em><em>L</em> = −3</span>. Panel B shows a plot of the values of <span class="math inline"><em>p</em></span>, which rapidly converge to a stable distribution around <span class="math inline"><em>p</em> = 0.63</span>. We can also plot a histogram of these posterior estimates of <span class="math inline"><em>p</em></span>. In panel C, I have done that – but with a twist. Because the MCMC algorithm creates a series of parameter estimates, these numbers show autocorrelation – that is, each estimate is similar to estimates that come just before and just after. This autocorrelation can cause problems for data analysis. The simplest solution is to subsample these values, picking only, say, one value every 100 generations. That is what I have done in the histogram in panel C. This panel also includes the analytic posterior distribution that we calculated above – notice how well our Metropolis-Hastings algorithm did in reconstructing this distribution!</p>
 <p>Figure 2.3. Bayesian MCMC from lizard flipping example.</p>
 <p>This simple example glosses over some of the details of MCMC algorithms, but we will get into those details later, and there are many other books that treat this topic in great depth (e.g. Christensen et al. 2010). The point is that we can solve some of the challenges involved in Bayesian statistics using numerical “tricks” like MCMC, that exploit the power of modern computers to fit models and estimate model parameters.</p>
 <h3 id="bayes-factors">Bayes factors</h3>
 <p>Now that we know how to use data and a prior to calculate a posterior distribution, we can move to the topic of model selection. We already learned one general method for model selection using AIC. We can also do model selection in a Bayesian framework. The simplest way is to calculate and then compare the posterior probabilities for a set of models under consideration. One can do this by calculating Bayes factors:</p>
-<p>(eq. 2.32)</p>
-<p>Bayes factors are ratios of the marginal likelihoods P(D | H) of two competing models. They represent the probability of the data averaged over the posterior distribution of parameter estimates. It is important to note that these marginal likelihoods are different from the likelihoods used above for AIC model comparison in an important way. With AIC and other related tests, we calculate the likelihoods for a given model and a particular set of parameter values – in the coin flipping example, the likelihood for model 2 when P = 0.63. By contrast, Bayes factors’ marginal likelihoods give the probability of the data averaged over all possible parameter values for a model, weighted by their prior probability.</p>
+(eq. 2.32)
+<div>
+<p><br /><span class="math display">$$
+B_{12} = \frac{Pr(D|H_1)}{Pr(D|H_2)}
+$$</span><br /></p>
+</div>
+<p>Bayes factors are ratios of the marginal likelihoods <span class="math inline"><em>P</em>(<em>D</em>|<em>H</em>)</span> of two competing models. They represent the probability of the data averaged over the posterior distribution of parameter estimates. It is important to note that these marginal likelihoods are different from the likelihoods used above for AIC model comparison in an important way. With AIC and other related tests, we calculate the likelihoods for a given model and a particular set of parameter values – in the coin flipping example, the likelihood for model 2 when <span class="math inline"><em>p</em> = 0.63</span>. By contrast, Bayes factors’ marginal likelihoods give the probability of the data averaged over all possible parameter values for a model, weighted by their prior probability.</p>
 <p>Because of the use of marginal likelihoods, Bayes factor allow us to do model selection in a way that accounts for uncertainty in our parameter estimates – again, though, at the cost of requiring explicit prior probabilities for all model parameters. Such comparisons can be quite different from likelihood ratio tests or comparisons of AICc scores. Bayes factors represent model comparisons that integrate over all possible parameter values rather than comparing the fit of models only at the parameter values that best fit the data. In other words, AICc scores compare the fit of two models given particular estimated values for all of the parameters in each of the models. By contrast, Bayes factors make a comparison between two models that accounts for uncertainty in their parameter estimates. This will make the biggest difference when some parameters of one or both models have relatively wide uncertainty. If all parameters can be estimated with precision, results from both approaches should be similar.</p>
-<p>Calculation of Bayes factors can be quite complicated, requiring integration across probability distributions. In the case of our coin-flipping problem, we have already done that to obtain the beta distribution in equation 2.22. We can then calculate Bayes factors to compare the fit of two competing models. Let’s compare the two models for coin flipping considered above: model 1, where p = 0.5, and model 2, where p = 0.63. Then:</p>
-<p>(eq. 2.33)</p>
-<p>In the above example, B(x,y) is the Beta function. Here, the Bayes factor is 3.67 in favor of model 2 compared to model 1. This is typically interpreted as substantial (but not decisive) evidence in favor of model 2. Again, we can be reasonably confident that our lizard is not a fair flipper.</p>
+<p>Calculation of Bayes factors can be quite complicated, requiring integration across probability distributions. In the case of our coin-flipping problem, we have already done that to obtain the beta distribution in equation 2.22. We can then calculate Bayes factors to compare the fit of two competing models. Let’s compare the two models for coin flipping considered above: model 1, where <span class="math inline"><em>p</em> = 0.5</span>, and model 2, where <span class="math inline"><em>p</em> = 0.63</span>. Then:</p>
+(eq. 2.33)<br />
+
+<div>
+<p><br /><span class="math display">$$\begin{eqnarray}
+Pr(D|H_1) &amp;=&amp; \binom{100}{63} 0.5^0.63 (1-0.5)^{100-63} \\\
+&amp;=&amp; 0.00270 \\\
+Pr(D|H_2) &amp;=&amp; \int_{p=0}^{1} \binom{100}{63} p^63 (1-p)^{100-63} \\\
+&amp;=&amp; \binom{100}{63} \beta (38,64) \\\
+&amp;=&amp; 0.0099 \\\
+B_{12} &amp;=&amp; \frac{0.0099}{0.00270} \\\
+&amp;=&amp; 3.67 \\\
+\end{eqnarray}$$</span><br /></p>
+</div>
+<p>In the above example, <span class="math inline"><em>β</em>(<em>x</em>, <em>y</em>)</span> is the Beta function. Here, the Bayes factor is 3.67 in favor of model 2 compared to model 1. This is typically interpreted as substantial (but not decisive) evidence in favor of model 2. Again, we can be reasonably confident that our lizard is not a fair flipper.</p>
 <p>In the lizard flipping example we can calculate Bayes factors exactly because we know the solution to the integral in equation 2.33. However, if we don’t know how to solve this equation (a typical situation in comparative methods), we can still approximate Bayes factors from our MCMC runs. Methods to do this, including arrogance sampling and stepping stone models, are complex and beyond the scope of this book. However, one common method for approximating Bayes Factors involves calculating the harmonic mean of the likelihoods over the MCMC chain for each model. The ratio of these two likelihoods is then used as an approximation of the Bayes factor (Newton and Raftery 1994). Unfortunately, this method is extremely unreliable, and probably should never be used (see https://radfordneal.wordpress.com/2008/08/17/the-harmonic-mean-of-the-likelihood-worst-monte-carlo-method-ever/ for more details).</p>
 <h2 id="aic-versus-bayes">AIC versus Bayes</h2>
 <p>Before I conclude this section, I want to highlight another difference in the way that AIC and Bayes approaches deal with model complexity. This relates to a subtle philosophical distinction that is controversial among statisticians themselves so I will only sketch out the main point; see a real statistics book like Burnham and Anderson (2002) or Christensen et al. (2010) for further details. When you compare Bayes factors, you assume that one of the models you are considering is actually the true model that generated your data, and calculate posterior probabilities based on that assumption. By contrast, AIC assumes that reality is more complex than any of your models, and you are trying to identify the model that most efficiently captures the information in your data. That is, even though both techniques are carrying out model selection, the basic philosophy of how these models are being considered is very different: choosing the best of several simplified models of reality, or choosing the correct model from a set of alternatives.</p>
