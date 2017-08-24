@@ -210,7 +210,7 @@ This matrix V is n⋅m x n⋅m, and describes the variances and covariances of a
 
 We can return to our example of evolution along a single branch (Figure 3.4a). Imagine that we have two characters that are evolving under a multivariate Brownian motion model. We state the parameters of the model as:
 
-(eq. 3.23)	a=[■(z ̅_1 (0)@z ̅_2 (0))];R=[■(σ_1^2&σ_12@σ_12&σ_2^2 )]
+(eq. 3.23)	
 
 For a single branch, C = [t1], so:
 
