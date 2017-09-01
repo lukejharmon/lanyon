@@ -59,9 +59,9 @@ For the example above, we need to calculate the likelihood as the probability of
 
 (eq. 2.2)
 <div>
-\\[
-L(H|D)=P(D|p)= {n  k} p^k (1-p)^{n-k}
-\\]
+$$
+L(H|D)=P(D|p)= {n \choose k} p^k (1-p)^{n-k}
+$$
 </div>
 
 In the example given, n = 100 and k = 63, so:
@@ -225,72 +225,72 @@ Returning to our example of lizard flipping, we can calculate $AIC_c$ scores for
 
 (eq. 2.15)	 
 <div>
-$$\begin{eqnarray}
+$$\begin{eqnarray*}
 AIC_1 &=& 2 k_1 - 2 ln{L_1} = 2 \cdot 0 - 2 \cdot -5.92 \\\
 AIC_1 &=& 11.8 \\\
 AIC_2 &=& 2 k_2 - 2 ln{L_2} = 2 \cdot 1 - 2 \cdot -2.50 \\\
 AIC_2 &=& 7.0 \\\
-\end{eqnarray}$$
+\end{eqnarray*}$$
 </div>
 
 Our example is a bit unusual in that model one has no estimated parameters; this happens sometimes but is not typical for biological applications. We can correct these values for our sample size, which in this case is $n = 100$ lizard flips:
 
 (eq. 2.16)	 
 <div>
-$$\begin{eqnarray}
+$$\begin{eqnarray*}
 AIC_{c_1} &=& AIC_1 + \frac{2 k_1 (k_1 + 1)}{n - k_1 - 1} \\\
 AIC_{c_1} &=& 11.8 + \frac{2 \cdot 0 (0 + 1)}{100-0-1} \\\
 AIC_{c_1} &=& 11.8 \\\
 AIC_{c_2} &=& AIC_2 + \frac{2 k_2 (k_2 + 1)}{n - k_2 - 1} \\\
 AIC_{c_1} &=& 7.0 + \frac{2 \cdot 1 (1 + 1)}{100-1-1} \\\
 AIC_{c_1} &=& 7.0 \\\
-\end{eqnarray}$$
+\end{eqnarray*}$$
 </div>
 
 Notice that, in this particular case, the correction did not affect our $AIC$ values, at least to one decimal place. This is because the sample size is large relative to the number of parameters. Note that model 2 has the smallest $AIC_c$ score and is thus the model that is best supported by the data. Noting this, we can now convert these $AIC_c$ scores to a relative scale:
 
 (eq. 2.17)	 
 <div>
-$$\begin{eqnarray}
+$$\begin{eqnarray*}
 \Delta AIC_{c_1} &=& AIC_{c_1}-AIC{c_{min}} \\\
 &=& 11.8-7.0 \\\
 &=& 4.8 \\\
-\end{eqnarray}$$
+\end{eqnarray*}$$
 </div>
 
 <div>
-$$\begin{eqnarray}
+$$\begin{eqnarray*}
 \Delta AIC_{c_2} &=& AIC_{c_2}-AIC{c_{min}} \\\
 &=& 7.0-7.0 \\\
 &=& 0 \\\
-\end{eqnarray}$$
+\end{eqnarray*}$$
 </div>
 
 Note that the ΔAICci for model 1 is greater than four, suggesting that this model (the “fair” lizard) has little support in the data. Finally, we can use the relative AICc scores to calculate Akaike weights:
 
 (eq. 2.18)	 
 <div>
-$$\begin{eqnarray}
+$$\begin{eqnarray*}
 \sum_i{e^{-\Delta_i/2}} &=& e^{-\Delta_1/2} + e^{-\Delta_2/2} \\\
 &=& e^{-4.8/2} + e^{-0/2} \\\
 &=& 1.09 \\\
-\end{eqnarray}$$
+\end{eqnarray*}$$
 </div>
 
 <div>
-$$\begin{eqnarray}
+$$\begin{eqnarray*}
 w_1 &=& \frac{e^{-\Delta AIC_{c_1}/2}}{\sum_i{e^{-\Delta AIC_{c_i}/2}}} \\\
 &=& \frac{0.09}{1.09} \\\
 &=& 0.08
-\end{eqnarray}$$
+\end{eqnarray*}$$
 </div>
 
 <div>
-$$\begin{eqnarray}
+$$\begin{eqnarray*}
 w_2 &=& \frac{e^{-\Delta AIC_{c_2}/2}}{\sum_i{e^{-\Delta AIC_{c_i}/2}}} \\\
 &=& \frac{1.00}{1.09} \\\
 &=& 0.92
-\end{eqnarray}$$
+\end{eqnarray*}$$
 </div>
 
 Our results are again consistent with the results of the likelihood ratio test. The relative likelihood of an unfair lizard is 0.92, and we can be quite confident that our lizard is not a fair flipper.
@@ -455,17 +455,17 @@ Similarly, because our proposal distribution is symmetrical, $Q(p'|p) = Q(p|p')$
 
 (eq. 2.29)
 <div>
-\\[
-P(D|p) = {N  k} p^k (1-p)^{N-k} = {100  63} 0.6^63 (1-0.6)^{100-63} = 0.068
-\\]
+$$
+P(D|p) = {N \choose k} p^k (1-p)^{N-k} = {100 \choose 63} 0.6^63 (1-0.6)^{100-63} = 0.068
+$$
 </div>
 
 Likewise,
 (eq. 2.30)	 
 <div>
-\\[
-P(D|p') = {N  k} p'^k (1-p')^{N-k} = {100  63} 0.595^63 (1-0.595)^{100-63} = 0.064
-\\]
+$$
+P(D|p') = {N \choose k} p'^k (1-p')^{N-k} = {100 \choose 63} 0.595^63 (1-0.595)^{100-63} = 0.064
+$$
 </div>
 
 The likelihood ratio is then:

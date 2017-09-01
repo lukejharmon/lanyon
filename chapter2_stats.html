@@ -47,7 +47,9 @@ title: Statistics
 <p>For the example above, we need to calculate the likelihood as the probability of obtaining heads 63 out of 100 lizard flips, given some model of lizard flipping. In general, we can write the likelihood for any combination of k “successes” (flips that give heads) out of n trials. We will also have one parameter, p, which will represent the probability of “success,” that is, the probability that any one flip comes up heads. We can calculate the likelihood of our data using the binomial theorem:</p>
 (eq. 2.2)
 <div>
-<p>\[ L(H|D)=P(D|p)= {n k} p^k (1-p)^{n-k} \]</p>
+<p><br /><span class="math display">$$
+L(H|D)=P(D|p)= {n \choose k} p^k (1-p)^{n-k}
+$$</span><br /></p>
 </div>
 <p>In the example given, n = 100 and k = 63, so:</p>
 (eq. 2.3)
@@ -164,66 +166,66 @@ $$</span><br /></p>
 (eq. 2.15)<br />
 
 <div>
-<p><br /><span class="math display">$$\begin{eqnarray}
+<p><br /><span class="math display">$$\begin{eqnarray*}
 AIC_1 &amp;=&amp; 2 k_1 - 2 ln{L_1} = 2 \cdot 0 - 2 \cdot -5.92 \\\
 AIC_1 &amp;=&amp; 11.8 \\\
 AIC_2 &amp;=&amp; 2 k_2 - 2 ln{L_2} = 2 \cdot 1 - 2 \cdot -2.50 \\\
 AIC_2 &amp;=&amp; 7.0 \\\
-\end{eqnarray}$$</span><br /></p>
+\end{eqnarray*}$$</span><br /></p>
 </div>
 <p>Our example is a bit unusual in that model one has no estimated parameters; this happens sometimes but is not typical for biological applications. We can correct these values for our sample size, which in this case is <span class="math inline"><em>n</em> = 100</span> lizard flips:</p>
 (eq. 2.16)<br />
 
 <div>
-<p><br /><span class="math display">$$\begin{eqnarray}
+<p><br /><span class="math display">$$\begin{eqnarray*}
 AIC_{c_1} &amp;=&amp; AIC_1 + \frac{2 k_1 (k_1 + 1)}{n - k_1 - 1} \\\
 AIC_{c_1} &amp;=&amp; 11.8 + \frac{2 \cdot 0 (0 + 1)}{100-0-1} \\\
 AIC_{c_1} &amp;=&amp; 11.8 \\\
 AIC_{c_2} &amp;=&amp; AIC_2 + \frac{2 k_2 (k_2 + 1)}{n - k_2 - 1} \\\
 AIC_{c_1} &amp;=&amp; 7.0 + \frac{2 \cdot 1 (1 + 1)}{100-1-1} \\\
 AIC_{c_1} &amp;=&amp; 7.0 \\\
-\end{eqnarray}$$</span><br /></p>
+\end{eqnarray*}$$</span><br /></p>
 </div>
 <p>Notice that, in this particular case, the correction did not affect our <span class="math inline"><em>A</em><em>I</em><em>C</em></span> values, at least to one decimal place. This is because the sample size is large relative to the number of parameters. Note that model 2 has the smallest <span class="math inline"><em>A</em><em>I</em><em>C</em><sub><em>c</em></sub></span> score and is thus the model that is best supported by the data. Noting this, we can now convert these <span class="math inline"><em>A</em><em>I</em><em>C</em><sub><em>c</em></sub></span> scores to a relative scale:</p>
 (eq. 2.17)<br />
 
 <div>
-<p><br /><span class="math display">$$\begin{eqnarray}
+<p><br /><span class="math display">$$\begin{eqnarray*}
 \Delta AIC_{c_1} &amp;=&amp; AIC_{c_1}-AIC{c_{min}} \\\
 &amp;=&amp; 11.8-7.0 \\\
 &amp;=&amp; 4.8 \\\
-\end{eqnarray}$$</span><br /></p>
+\end{eqnarray*}$$</span><br /></p>
 </div>
 <div>
-<p><br /><span class="math display">$$\begin{eqnarray}
+<p><br /><span class="math display">$$\begin{eqnarray*}
 \Delta AIC_{c_2} &amp;=&amp; AIC_{c_2}-AIC{c_{min}} \\\
 &amp;=&amp; 7.0-7.0 \\\
 &amp;=&amp; 0 \\\
-\end{eqnarray}$$</span><br /></p>
+\end{eqnarray*}$$</span><br /></p>
 </div>
 <p>Note that the ΔAICci for model 1 is greater than four, suggesting that this model (the “fair” lizard) has little support in the data. Finally, we can use the relative AICc scores to calculate Akaike weights:</p>
 (eq. 2.18)<br />
 
 <div>
-<p><br /><span class="math display">$$\begin{eqnarray}
+<p><br /><span class="math display">$$\begin{eqnarray*}
 \sum_i{e^{-\Delta_i/2}} &amp;=&amp; e^{-\Delta_1/2} + e^{-\Delta_2/2} \\\
 &amp;=&amp; e^{-4.8/2} + e^{-0/2} \\\
 &amp;=&amp; 1.09 \\\
-\end{eqnarray}$$</span><br /></p>
+\end{eqnarray*}$$</span><br /></p>
 </div>
 <div>
-<p><br /><span class="math display">$$\begin{eqnarray}
+<p><br /><span class="math display">$$\begin{eqnarray*}
 w_1 &amp;=&amp; \frac{e^{-\Delta AIC_{c_1}/2}}{\sum_i{e^{-\Delta AIC_{c_i}/2}}} \\\
 &amp;=&amp; \frac{0.09}{1.09} \\\
 &amp;=&amp; 0.08
-\end{eqnarray}$$</span><br /></p>
+\end{eqnarray*}$$</span><br /></p>
 </div>
 <div>
-<p><br /><span class="math display">$$\begin{eqnarray}
+<p><br /><span class="math display">$$\begin{eqnarray*}
 w_2 &amp;=&amp; \frac{e^{-\Delta AIC_{c_2}/2}}{\sum_i{e^{-\Delta AIC_{c_i}/2}}} \\\
 &amp;=&amp; \frac{1.00}{1.09} \\\
 &amp;=&amp; 0.92
-\end{eqnarray}$$</span><br /></p>
+\end{eqnarray*}$$</span><br /></p>
 </div>
 <p>Our results are again consistent with the results of the likelihood ratio test. The relative likelihood of an unfair lizard is 0.92, and we can be quite confident that our lizard is not a fair flipper.</p>
 <p>AIC weights are also useful for another purpose: we can use them to get model-averaged parameter estimates. These are parameter estimates that are combined across different models proportional to the support for those models. As a thought example, imagine that we are considering two models, A and B, for a particular dataset. Both model A and model B have the same parameter p, and this is the parameter we are particularly interested in. In other words, we do not know which model is the best model for our data, but what we really need is a good estimate of p. We can do that using model averaging. If model A has a high AIC weight, then the model-averaged parameter estimate for p will be very close to our estimate of p under model A; however, if both models have about equal support then the parameter estimate will be close to the average of the two different estimates. Model averaging can be very useful in cases where there is a lot of uncertainty in model choice for models that share parameters of interest. Sometimes the models themselves are not of interest, but need to be considered as possibilities; in this case, model averaging lets us estimate parameters in a way that is not as strongly dependent on our choice of models.</p>
@@ -337,12 +339,16 @@ $$</span><br /></p>
 <p>Similarly, because our proposal distribution is symmetrical, <span class="math inline"><em>Q</em>(<em>p</em>′|<em>p</em>)=<em>Q</em>(<em>p</em>|<em>p</em>′)</span> and <span class="math inline"><em>a</em><sub>2</sub> = 1</span>. That means that we only need to calculate the likelihood ratio for <span class="math inline"><em>p</em></span> and <span class="math inline"><em>p</em>’</span>. We can do this by plugging our values for <span class="math inline"><em>p</em></span> (or <span class="math inline"><em>p</em>’</span>) into equation 2.2:</p>
 (eq. 2.29)
 <div>
-<p>\[ P(D|p) = {N k} p^k (1-p)^{N-k} = {100 63} 0.6^63 (1-0.6)^{100-63} = 0.068 \]</p>
+<p><br /><span class="math display">$$
+P(D|p) = {N \choose k} p^k (1-p)^{N-k} = {100 \choose 63} 0.6^63 (1-0.6)^{100-63} = 0.068
+$$</span><br /></p>
 </div>
 Likewise, (eq. 2.30)<br />
 
 <div>
-<p>\[ P(D|p') = {N k} p'^k (1-p')^{N-k} = {100 63} 0.595^63 (1-0.595)^{100-63} = 0.064 \]</p>
+<p><br /><span class="math display">$$
+P(D|p') = {N \choose k} p'^k (1-p')^{N-k} = {100 \choose 63} 0.595^63 (1-0.595)^{100-63} = 0.064
+$$</span><br /></p>
 </div>
 <p>The likelihood ratio is then:</p>
 (eq. 2.31)<br />
