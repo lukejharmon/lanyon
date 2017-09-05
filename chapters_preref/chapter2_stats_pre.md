@@ -1,5 +1,7 @@
 # Chapter 2: Fitting Statistical Models to Data
 
+## Section 2.1: Introduction
+
 Evolution is the product of a thousand stories. Individual organisms are born, reproduce, and die. The net result of these individual life stories over broad spans of time is evolution. At first glance, it might seem impossible to model this process over more than one or two generations. And yet scientific progress relies on creating simple models and confronting them with data. How can we evaluate models that consider evolution over millions of generations?
 
 There is a solution: we can rely on the properties of large numbers to create simple models that represent, in broad brushstrokes, the types of changes that take place over evolutionary time. We can then compare these models to data in ways that will allow us to gain insights into evolution.
@@ -12,7 +14,7 @@ All of the basic statistical approaches presented here will be applied to evolut
 
 > A common simple example in statistics involves flipping coins. To fit with the theme of this book, however, I will change this to flipping a lizard (needless to say, do not try this at home!). Suppose you have a lizard with two sides, “heads” and “tails.” You want to flip the lizard to help make decisions in your life. However, you do not know if this is a fair lizard, where the probability of obtaining heads is 0.5, or not. As an experiment, you flip the lizard 100 times, and obtain heads 63 of those times. Thus, 63 heads out of 100 lizard flips is your data; we will use model comparisons to try to see what these data tell us about models of lizard flipping.
 
-## Standard statistical hypothesis testing
+## Section 2.2: Standard statistical hypothesis testing
 
 Standard hypothesis testing approaches focus almost entirely on rejecting null hypotheses. In the framework (usually referred to as the frequentist approach to statistics) one first defines a null hypothesis that represents your expectation if some process of interest were not occurring. For example, perhaps you are interested in comparing the mean body size of two species of lizards, an anole and a gecko. One null hypothesis would be that the two species do not differ in body size. The alternative, which one can conclude by rejecting that null hypothesis, is that one species is larger than the other. Another example might involve investigating two variables, like body size and leg length, across a set of lizard species (I assume here that you have little interest in organisms other than lizards). Here the null hypothesis would be that there is no relationship between body size and leg length. The alternative hypothesis, which again represents the situation where the phenomenon of interest is actually occurring, is that there is a relationship with body size and leg length. For frequentist approaches, the alternative hypothesis is always the converse of the null hypothesis; as you will see below, other approaches allow one to compare the fit of a set of models without this restriction and choose the best amongst them.
 
@@ -40,9 +42,9 @@ However, there are two good reasons to look for better ways to do comparative st
 
 In summary, frequentist statistical methods are common in comparative statistics but can be limiting. I will discuss these methods often in this book, mainly due to their prevalent use in the field. At the same time, we will look for alternatives whenever possible.
 
-## Maximum likelihood
+## Section 2.3: Maximum likelihood
 
-### What is a likelihood?
+### Section 2.3a: What is a likelihood?
 
 Since all of the approaches described below involve calculating likelihoods, I will first briefly describe this concept. A good general review of likelihood is Edwards [@Edwards1992-wh]. Likelihood is defined as the probability, given a model and a set of parameter values, of obtaining a particular set of data. To calculate a likelihood, we have to consider a particular specific model that may have generated the data. That model might have parameter values that need to be specified. We can refer to this specified model as a hypothesis, H. The likelihood is then:
 
@@ -113,11 +115,11 @@ $$
 </div>
 Notice that, for our simple example, k / n = 63 / 100 = 0.63, which is exactly equal to the maximum likelihood from figure 2.2.
 
-Maximum likelihood estimates have many desirable statistical properties. It is worth noting, however, that they will not always return accurate parameter estimates, even when the data is generated under the actual model we are considering. In fact, ML parameters can sometimes be biased. To understand what this means, we need to introduce two new concepts: bias and precision. Imagine that we were to simulate datasets under some model A with parameter a. For each simulation, we then used ML to estimate the parameter $\hat{a}$ for the simulated data. The precision of our ML estimate tells us how different, on average, each of our estimated parameters $\hat{a_i}$ are from one another. Precise estimates are estimated with less uncertainty. Bias, on the other hand, measures how close our estimates $\hat{a_i}$ are to the true value $a$. If our ML parameter estimate is biased, then the average of the $\hat{a_i}  will differ from the true value $a$. It is not uncommon for ML estimates to be biased in a way that depends on sample size, so that the estimates get closer to the truth as sample size increases, but can be quite far off when the number of data points is small compared to the number of parameters being estimated.
+Maximum likelihood estimates have many desirable statistical properties. It is worth noting, however, that they will not always return accurate parameter estimates, even when the data is generated under the actual model we are considering. In fact, ML parameters can sometimes be biased. To understand what this means, we need to introduce two new concepts: bias and precision. Imagine that we were to simulate datasets under some model A with parameter a. For each simulation, we then used ML to estimate the parameter $\hat{a}$ for the simulated data. The precision of our ML estimate tells us how different, on average, each of our estimated parameters $\hat{a_i}$ are from one another. Precise estimates are estimated with less uncertainty. Bias, on the other hand, measures how close our estimates $\hat{a_i}$ are to the true value $a$. If our ML parameter estimate is biased, then the average of the $\hat{a_i}$  will differ from the true value $a$. It is not uncommon for ML estimates to be biased in a way that depends on sample size, so that the estimates get closer to the truth as sample size increases, but can be quite far off when the number of data points is small compared to the number of parameters being estimated.
 
 In our example of lizard flipping, we estimated a parameter value of $\hat{p} = 0.63$. This is different from 0.5 – which was our expectation under the null hypothesis. So is this lizard fair? Or, alternatively, can we reject the null hypothesis that $p=0.5$? To evaluate this, we need to use model selection.
 
-### The likelihood ratio test
+### Section 2.3b: The likelihood ratio test
 
 Model selection involves comparing a set of potential models and using some criterion to select the one that provides the “best” explanation of the data. Different approaches define “best” in different ways. I will first discuss the simplest, but also the most limited, of these techniques, the likelihood ratio test. Likelihood ratio tests can only be used in one particular situation: to compare two models where one of the models is a special case of the other. This means that model A (the simpler model with fewer parameters) is exactly equivalent to the more complex model B with parameters restricted to certain values. For example, perhaps model B has parameters x, y, and z that can take on any values. Model A is the same as model B but with parameter z fixed at 0. That is, A is the special case of B when parameter z = 0. This is sometimes described as model A is nested within model B, since every possible version of model A is equal to a certain case of model B, but model B also includes more possibilities.
 
@@ -171,7 +173,7 @@ If we compare this to a $\chi^2$ distribution with one d.f., we find that P = 0.
 
 Although described above in terms of two competing hypotheses, likelihood ratio tests can be applied to more complex situations with more than two competing models. For example, if all of the models form a sequence of increasing complexity, with each model a special case of the next more complex model, one can compare each pair of hypotheses in sequence, stopping the first time the test statistic is non-significant. Alternatively, in some cases, hypotheses can be placed in a bifurcating choice tree, and one can proceed from simple to complex models down a particular path of paired comparisons of nested models. This approach is commonly used to select models of DNA sequence evolution.
 
-### The Akaike information criterion (AIC)
+### Section 2.3c: The Akaike information criterion (AIC)
 
 You might have noticed that the likelihood ratio test described above has some limitations. Especially for models involving more than one parameter, approaches based on likelihood ratio tests can only do so much. For example, one can compare a series of models, some of which are nested within others, using an ordered series of likelihood ratio tests. However, results will often depend strongly on the order in which tests are carried out. Furthermore, often we want to compare models that are not nested, as required by likelihood ratio tests. For these reasons, another approach, based on the Akaike Information Criterion (AIC), can be useful.
 
@@ -206,7 +208,7 @@ To select among models, one can then compare their $AIC_c$ values, and choose th
 \\]
 </div>	 
 
-where $AIC_{c_i}$ is the $AIC_c$ score for model i and $AIC_{c_{min}} is the minimum $AIC_c$ score across all of the models.
+where $AIC_{c_i}$ is the $AIC_c$ score for model i and $AIC_{c_{min}}$ is the minimum $AIC_c$ score across all of the models.
 
 As a broad rule of thumb for comparing $AIC$ values, any model with a $\Delta AIC_{c_i}$ of less than four is roughly equivalent to the model with the lowest $AIC_c$ value. Models with $\Delta AIC_{c_i}$ between 4 and 8 have little support in the data, while any model with a $\Delta AIC_{c_i}$ greater than 10 can safely be ignored.
 
@@ -297,9 +299,9 @@ Our results are again consistent with the results of the likelihood ratio test. 
 
 AIC weights are also useful for another purpose: we can use them to get model-averaged parameter estimates. These are parameter estimates that are combined across different models proportional to the support for those models. As a thought example, imagine that we are considering two models, A and B, for a particular dataset. Both model A and model B have the same parameter p, and this is the parameter we are particularly interested in. In other words, we do not know which model is the best model for our data, but what we really need is a good estimate of p. We can do that using model averaging. If model A has a high AIC weight, then the model-averaged parameter estimate for p will be very close to our estimate of p under model A; however, if both models have about equal support then the parameter estimate will be close to the average of the two different estimates. Model averaging can be very useful in cases where there is a lot of uncertainty in model choice for models that share parameters of interest. Sometimes the models themselves are not of interest, but need to be considered as possibilities; in this case, model averaging lets us estimate parameters in a way that is not as strongly dependent on our choice of models.
 
-## Bayesian statistics
+## Section 2.4: Bayesian statistics
 
-### Bayes Theorem
+### Section 2.4a: Bayes Theorem
 
 Recent years have seen tremendous growth of Bayesian approaches in reconstructing phylogenetic trees and estimating their branch lengths. Although there are currently only a few Bayesian comparative methods, their number will certainly grow as comparative biologists try to solve more complex problems. In a Bayesian framework, the quantity of interest is the posterior probability, calculated using Bayes' theorem:
 
@@ -359,7 +361,7 @@ As you can see from this example, Bayes theorem lets us combine our prior belief
 
 Figure 2.3. Bayesian prior (dotted line) and posterior (solid line) distributions for lizard flipping.
 
-### Bayesian MCMC
+### Section 2.4b: Bayesian MCMC
 
 The other main tool in the toolbox of Bayesian comparative methods is the use of Markov-chain Monte Carlo (MCMC) tools to calculate posterior probabilities. MCMC techniques use an algorithm that uses a “chain” of calculations to sample the posterior distribution. MCMC requires calculation of likelihoods but not complicated mathematics (e.g. integration of probability distributions), and so represents a more flexible approach to Bayesian computation. Frequently, the integrals in equation 2.21 are intractable, so that the most efficient way to fit Bayesian models is by using MCMC. Also, setting up an MCMC is, in my experience, easier than people expect!
 
@@ -487,7 +489,7 @@ Figure 2.4. Bayesian MCMC from lizard flipping example.
 
 This simple example glosses over some of the details of MCMC algorithms, but we will get into those details later, and there are many other books that treat this topic in great depth (e.g. Christensen et al. 2010). The point is that we can solve some of the challenges involved in Bayesian statistics using numerical “tricks” like MCMC, that exploit the power of modern computers to fit models and estimate model parameters.
 
-### Bayes factors
+### Section 2.4c: Bayes factors
 
 Now that we know how to use data and a prior to calculate a posterior distribution, we can move to the topic of model selection. We already learned one general method for model selection using AIC. We can also do model selection in a Bayesian framework. The simplest way is to calculate and then compare the posterior probabilities for a set of models under consideration. One can do this by calculating Bayes factors:
 
@@ -524,7 +526,7 @@ In the above example, $\beta (x,y)$ is the Beta function. Here, the Bayes factor
 
 In the lizard flipping example we can calculate Bayes factors exactly because we know the solution to the integral in equation 2.33. However, if we don’t know how to solve this equation (a typical situation in comparative methods), we can still approximate Bayes factors from our MCMC runs. Methods to do this, including arrogance sampling and stepping stone models, are complex and beyond the scope of this book. However, one common method for approximating Bayes Factors involves calculating the harmonic mean of the likelihoods over the MCMC chain for each model. The ratio of these two likelihoods is then used as an approximation of the Bayes factor [@Newton1994-cs]. Unfortunately, this method is extremely unreliable, and probably should never be used (see [this blog post](https://radfordneal.wordpress.com/2008/08/17/the-harmonic-mean-of-the-likelihood-worst-monte-carlo-method-ever/) for more details).
 
-## AIC versus Bayes
+## Section 2.5: AIC versus Bayes
 
 Before I conclude this section, I want to highlight another difference in the way that AIC and Bayes approaches deal with model complexity. This relates to a subtle philosophical distinction that is controversial among statisticians themselves so I will only sketch out the main point; see a real statistics book like Burnham and Anderson [-@Burnham2003-mt] or Gelman et al. [-@Gelman2013-ms] for further details. When you compare Bayes factors, you assume that one of the models you are considering is actually the true model that generated your data, and calculate posterior probabilities based on that assumption. By contrast, AIC assumes that reality is more complex than any of your models, and you are trying to identify the model that most efficiently captures the information in your data. That is, even though both techniques are carrying out model selection, the basic philosophy of how these models are being considered is very different: choosing the best of several simplified models of reality, or choosing the correct model from a set of alternatives.
 
@@ -532,10 +534,10 @@ The debate between Bayesian and likelihood-based approaches often centers around
 
 In summary, Bayesian approaches are useful tools for comparative biology, especially when combined with MCMC computational techniques. They require specification of a prior distribution and assume that the “true” model is among those being considered, both of which can be drawbacks in some situations. A Bayesian framework also allows us to much more easily account for phylogenetic uncertainty in comparative analysis. Many comparative biologists are pragmatic, and use whatever methods are available to analyze their data. This is a reasonable approach but one should remember the assumptions that underlie any statistical result.
 
-## Models and comparative methods
+## Section 2.6: Models and comparative methods
 
 For the rest of this book I will introduce several models that can be applied to evolutionary data. I will discuss how to simulate evolutionary processes under these models, how to compare data to these models, and how to use model selection to discriminate amongst them. In each section, I will describe standard statistical tests (when available) along with ML and Bayesian approaches.
 
 One theme in the book is that I emphasize fitting models to data and estimating parameters. I think that this approach is very useful for the future of the field of comparative statistics for three main reasons. First, it is flexible; one can easily compare a wide range of competing models to your data. Second, it is extendable; one can create new models and automatically fit them into a preexisting framework for data analysis. Finally, it is powerful; a model fitting approach allows us to construct comparative tests that relate directly to particular biological hypotheses.
 
-## References
+## Chapter 2 References

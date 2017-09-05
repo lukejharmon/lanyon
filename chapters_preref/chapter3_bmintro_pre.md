@@ -1,12 +1,14 @@
 # Chapter 3: Introduction to Brownian Motion
 
+## Section 3.1: Introduction
+
 Squamates, the group that includes snakes and lizards, is exceptionally diverse. This clade, which is between 150 and 210 million years old [@Hedges2009-lj], includes species that are very large and very small; herbivores and carnivores; species with legs and species that are legless. How did that diversity of species’ traits come to be? How did these characters first come to be, and how often did they change to explain the diversity that we see on earth today? In this chapter, we will begin to discuss models for the evolution of species’ traits.
 
 Imagine that you want to use statistical approaches to understand how traits change through time. To do that, you need to have an exact mathematical specification of how evolution takes place. Obviously there are a wide variety of models of trait evolution, from simple to complex. For example, you might create a model where a trait starts with a certain value and has some constant probability of changing in any unit of time. Alternatively, you might make a model that is more explicit, and considers a large set of individuals in a population. You could assign genotypes to each individual and allow the population to change through reproduction and natural selection. In this chapter – and in comparative methods as a whole – the models we will consider will be much closer to the first of these two models. However, there are still important connections between these simple models and more realistic models of trait evolution. (see chapter 5).
 
 In the next six chapters, I will discuss models for two different types of characters. In chapters three, four, and five, I will consider traits that follow continuous distributions – that is, traits that can have real-numbered values. For example, body mass in kilograms is a continuous character. I will discuss the most commonly used model for these continuous characters, Brownian motion, in this chapter and the next, and go beyond Brownian motion in chapter five. In chapters six, seven, and eight, I will cover discrete characters, characters that can occupy one of a number of distinct character states (for example, species of squamates can either be legless or have legs).
 
-## Properties of Brownian Motion
+## Section 3.2: Properties of Brownian Motion
 
 We can use Brownian motion to model the evolution of a continuously valued trait through time. Brownian motion is an example of a “random walk” model because the trait value changes randomly, in both direction and distance, over any time interval.
 
@@ -52,9 +54,9 @@ is a process in continuous time, and so time does not have discrete “steps.”
 
 Finally, z ̅(t) ~ N(z ̅(0),σ^2 t).That is, the value of z ̅(t) is drawn from a normal distribution with mean z ̅(0) and variance σ2t. As we noted above, the parameter σ2 is important for Brownian motion models, as it describes the rate at which the process wanders through trait space. The overall variance of the process is that rate times the amount of time that has elapsed.
 
-## Deriving Brownian Motion using Quantitative Genetics
+## Section 3.3: Deriving Brownian Motion using Quantitative Genetics
 
-### Brownian motion under genetic drift
+### Section 3.3a: Brownian motion under genetic drift
 
 The simplest way to obtain Brownian evolution of characters is when evolutionary change is neutral, with traits changing only due to genetic drift. [e.g. @Lande1976-ol]. To show this, we will create a simple model. We will assume that a character is influenced by many genes, each of small effect, and that the value of the character does not affect fitness. Finally, we assume that mutations are random and have small effects on the character, as specified below. These assumptions probably seem unrealistic, especially if you are thinking of a trait like the body size of a lizard! But we will see later that we can also derive Brownian motion under other models, some of which involve selection.
 
@@ -112,7 +114,7 @@ To derive this result, we had to make particular assumptions about normality of 
 
 Note, finally, that this quantitative genetics model predicts that traits will evolve under a Brownian motion model. Thus, our quantitative genetics model has the same statistical properties of Brownian motion. We only need to match the parameters:  , and  . In some cases in the literature, the magnitude of trait change is expressed in within-population phenotypic standard deviations,  , per generation [e.g. @Harmon2010-wg; @Estes2007-mi]. In that case, since dividing a random normal deviate by x is equivalent to dividing its variance by x2, we have  .
 
-### Brownian motion under selection
+### Section 3.3b: Brownian motion under selection
 
 We have shown that it is possible to relate a Brownian motion model directly to a quantitative genetics model of drift. In fact, some authors equate the two. However, it is important to remember that the two are not the same thing. More specifically, an observation that a trait is evolving as expected under Brownian motion is not equivalent to saying that that trait is not under selection. This is because characters can also evolve as a Brownian walk even if there is strong selection – as long as selection acts in particular ways that maintain the properties of the Brownian motion model. For example, if the direction and magnitude of selection is random from one generation to the next, then evolution of the character will still follow a Brownian motion model.
 
@@ -155,7 +157,7 @@ Note that the variance of this process is exactly identical to the variance amon
 
 In summary, we can describe three very different ways that traits might evolve under Brownian motion – pure drift, randomly varying selection, and varying stabilizing selection  – and one model, constant directional selection, which creates patterns among extant species that are indistinguishable from Brownian motion. There are certainly more such models, with a variety of assumptions. You might notice that none of these “Brownian” models are particularly detailed, especially for modeling evolution over long time scales. It is hard to imagine a case where a trait might be influenced only by random mutations of small effect over many alleles, or where selection would act in a truly random way from one generation to the next for millions of years. However, there are tremendous statistical benefits to using Brownian models for comparative analyses. Many of the results derived in this book, for example, are simple under Brownian motion but much more complex and different under other models.
 
-## Brownian motion on a phylogenetic tree
+## Section 3.4: Brownian motion on a phylogenetic tree
 
 We can use the basic properties of Brownian motion model to figure out what will happen when characters evolve under this model on the branches of a phylogenetic tree. First, consider evolution along a single branch with length t1 (Figure 3.4A). In this case, we can model simple Brownian motion over time t1 and denote the starting value as z ̅(0). If we evolve with some rate parameter σ2, then:
 
@@ -194,7 +196,7 @@ The matrix on the right side of equation 3.21 is commonly encountered in compara
 
 Figure 3.5. Example of a phylogenetic tree (left) and its associated phylogenetic variance-covariance matrix C (right).
 
-## Multivariate Brownian motion
+## Section 3.5: Multivariate Brownian motion
 
 The Brownian motion model we described above was for a single character. However, we often want to consider more than one character at once. This requires the use of multivariate models. The situation is more complex than the univariate case – but not much! In this section I will derive the expectation for a set of (potentially correlated) traits evolving together under a multivariate Brownian motion model.
 
@@ -227,7 +229,7 @@ Thus, the four trait values (two traits for two species) are drawn from a multiv
 
 Both univariate and multivariate Brownian motion models result in traits that follow multivariate normal distributions. This is statistically convenient, and in part explains the popularity of Brownian models in comparative biology.
 
-## Simulating Brownian motion on trees
+## Section 3.6: Simulating Brownian motion on trees
 
 To simulate Brownian motion evolution on trees, we use the three properties of the model described above. For each branch on the tree, we can draw from a normal distribution (for a single trait) or a multivariate normal distribution (for more than one trait) to determine the evolution that occurs on that branch. We can then add these evolutionary changes together to obtain character states at every node and tip of the tree.
 
@@ -241,4 +243,4 @@ There is a general feature of models that evolve in a Brownian way: they involve
 
 In summary, Brownian motion is mathematically tractable, and has convenient statistical properties. There are also some circumstances under which one would expect traits to evolve under a Brownian model. However, as we will see later in the book, one should view Brownian motion as an assumption that might not hold for real data sets.
 
-## References
+## Chapter 3 References
