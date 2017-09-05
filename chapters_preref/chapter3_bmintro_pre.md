@@ -18,41 +18,41 @@ The core idea of this example is that the motion of the object is due to the sum
 
 Brownian motion is a popular model in comparative biology because it captures the way traits might evolve under a reasonably wide range of scenarios. However, perhaps the main reason for the dominance of Brownian motion as a model is that it has some very convenient statistical properties that allow relatively simple analyses and calculations on trees. I will use some simple simulations to show how the Brownian motion model behaves. I will then list the three critical statistical properties of Brownian motion, and explain how we can use these properties to apply Brownian motion models to phylogenetic comparative trees.
 
-When we model evolution using Brownian motion, we are typically discussing the dynamics of the mean character value, which we will denote as z ̅, in a population. That is, we imagine that you can measure a sample of the individuals in a population and estimate the mean average trait value. We will denote the mean trait value at some time t as z ̅(t). We can then model the mean trait value through time with a Brownian motion process.
+When we model evolution using Brownian motion, we are typically discussing the dynamics of the mean character value, which we will denote as $\bar{z}$, in a population. That is, we imagine that you can measure a sample of the individuals in a population and estimate the mean average trait value. We will denote the mean trait value at some time $t$ as $\bar{z}(t)$. We can then model the mean trait value through time with a Brownian motion process.
 
-Brownian motion models can be completely described by two parameters. The first is the starting value of the population mean trait, z ̅(0). This is the mean trait value that is seen in the ancestral population at the start of the simulation, before any trait change occurs. The second parameter of Brownian motion is the evolutionary rate parameter, σ2. This parameter determines how fast traits will randomly walk through time.
+Brownian motion models can be completely described by two parameters. The first is the starting value of the population mean trait, $\bar{z}(0)$. This is the mean trait value that is seen in the ancestral population at the start of the simulation, before any trait change occurs. The second parameter of Brownian motion is the evolutionary rate parameter, $\sigma ^ 2$. This parameter determines how fast traits will randomly walk through time.
 
-At the core of Brownian motion is the normal distribution. You might know that a normal distribution can be described by two parameters, the mean and variance. We can simulate change under Brownian motion model by drawing from normal distributions. In particular, changes in trait values over any interval of time are always drawn from a normal distribution with mean 0 and variance proportional to the product of the rate of evolution and the length of time (variance = σ2t). Another way to say this is that the expected change under a Brownian motion model follows a normal distribution with mean 0 and variance proportional to the elapsed time.
+At the core of Brownian motion is the normal distribution. You might know that a normal distribution can be described by two parameters, the mean and variance. We can simulate change under Brownian motion model by drawing from normal distributions. In particular, changes in trait values over any interval of time are always drawn from a normal distribution with mean 0 and variance proportional to the product of the rate of evolution and the length of time (variance = $\sigma^2 t$). Another way to say this is that the expected change under a Brownian motion model follows a normal distribution with mean 0 and variance proportional to the elapsed time.
 
-A few plots will illustrate the behavior of Brownian motion. Figure 3.1 shows sets of Brownian motion run over three different time periods (t = 100, 500, and 1000) with the same starting value z ̅(0) = 0 and rate parameter σ2 = 1. Each panel of the figure shows 100 simulations of the process over that time period. You can see that the tip values look like normal distributions. Furthermore, the variance among separate runs of the process increases linearly with time. This among-run variance is greatest over the longest time intervals. It is this variance – the variation among many independent runs of the same evolutionary process – that we will consider throughout the next section.
-
-
-
-Figure 3.1. Examples of Brownian motion. Each plot shows 100 replicates of simulated Brownian motion with a common starting value and the same rate parameter σ2 = 1. Simulations were run for three different times: (A) 10, (B) 50, and (C) 100 time units. The right-hand column shows a histogram of the distribution of ending values for each set of 100 simulations.
-
-Imagine that we run a Brownian motion process over a given time interval many times, and save the trait values at the end of each of these simulations. We can then create a statistical distribution of these character states. It might not be obvious from figure 3.1, but the distributions of possible character states at any time point in a Brownian walk is normal. This is illustrated in figure 3.2, which shows the distribution of traits from 100,000 simulations with σ2 = 1 and t = 100. The tip characters from all of these simulations follow a normal distribution with mean equal to the starting value, z ̅(0) = 0, and a variance of σ2t = 100.
-
-
-Figure 3.2. Ending character values from of 100,000 Brownian motion simulations with θ = 0, t = 100, and σ2 = 1. Panel (A) shows a histogram of the outcome of these simulations, while panel (B) shows a normal Q-Q plot for these data. If the data follow a normal distribution, the points in the Q-Q plot should form a straight line.
-
-Figure 3.3 shows how rate parameter σ2 affects the rate of spread of Brownian walks. The panels show sets of 100 Brownian motion simulations run over 1000 time units for σ2 = 1 (Panel A), σ2 = 5 (Panel B), and σ2 = 25 (Panel C). You can see that simulations with a higher rate parameter create a larger spread of trait values per unit time.
+A few plots will illustrate the behavior of Brownian motion. Figure 3.1 shows sets of Brownian motion run over three different time periods (t = 100, 500, and 1000) with the same starting value $\bar{z}(0) = 0$ and rate parameter $\sigma^2 = 1$. Each panel of the figure shows 100 simulations of the process over that time period. You can see that the tip values look like normal distributions. Furthermore, the variance among separate runs of the process increases linearly with time. This among-run variance is greatest over the longest time intervals. It is this variance, the variation among many independent runs of the same evolutionary process, that we will consider throughout the next section.
 
 
 
-Figure 3.3. Examples of Brownian motion. Each plot shows 100 replicates of simulated Brownian motion with a common starting value and the same time interval t = 100. The rate parameter σ2 varies across the panels: (A) σ2 = 1 (B) σ2 = 10, and (C) σ2 = 25. The right-hand column shows a histogram of the distribution of ending values for each set of 100 simulations.
+Figure 3.1. Examples of Brownian motion. Each plot shows 100 replicates of simulated Brownian motion with a common starting value and the same rate parameter $\sigma^2 = 1$. Simulations were run for three different times: (A) 10, (B) 50, and (C) 100 time units. The right-hand column shows a histogram of the distribution of ending values for each set of 100 simulations.
 
-If we let z ̅(t) be the value of our character at time t, then we can derive three main properties of Brownian motion. I will list all three, then explain each in turn.
+Imagine that we run a Brownian motion process over a given time interval many times, and save the trait values at the end of each of these simulations. We can then create a statistical distribution of these character states. It might not be obvious from figure 3.1, but the distributions of possible character states at any time point in a Brownian walk is normal. This is illustrated in figure 3.2, which shows the distribution of traits from 100,000 simulations with $\sigma^2 = 1$ and $t = 100$. The tip characters from all of these simulations follow a normal distribution with mean equal to the starting value, $\bar{z}(0) = 0$, and a variance of $\sigma^2 t = 100$.
 
-	1.E[z ̅(t)]=z ̅(0)
-	2. Each successive interval of the “walk” is independent
-	3.z ̅(t) ~ N(z ̅(0),σ^2 t)
 
-First, E[z ̅(t)]=z ̅(0). This means that the expected value of the character at any time t is equal to the value of the character at time zero. Here the expected value refers to the mean of z ̅(t) over many replicates. The intuitive meaning of this equation is that Brownian motion has no “trends,” and wanders equally in both positive and negative directions. If you take the mean of a large number of simulations of Brownian motion over any time interval, you will likely get a value close to z ̅(0); as you increase the sample size, this mean will tend to get closer and closer to z ̅(0).
+Figure 3.2. Ending character values from of 100,000 Brownian motion simulations with $\Theta = 0$, $t = 100$, and $\sigma^2 = 1$. Panel (A) shows a histogram of the outcome of these simulations, while panel (B) shows a normal Q-Q plot for these data. If the data follow a normal distribution, the points in the Q-Q plot should form a straight line.
+
+Figure 3.3 shows how rate parameter $\sigma^2$ affects the rate of spread of Brownian walks. The panels show sets of 100 Brownian motion simulations run over 1000 time units for $\sigma^2 = 1$ (Panel A), $\sigma^2 = 5$ (Panel B), and $\sigma^2 = 25$ (Panel C). You can see that simulations with a higher rate parameter create a larger spread of trait values per unit time.
+
+
+
+Figure 3.3. Examples of Brownian motion. Each plot shows 100 replicates of simulated Brownian motion with a common starting value and the same time interval $t = 100$. The rate parameter $\sigma^2$ varies across the panels: (A) $\sigma^2 = 1$ (B) $\sigma^2 = 10$, and (C) $\sigma^2 = 25$. The right-hand column shows a histogram of the distribution of ending values for each set of 100 simulations.
+
+If we let $\bar{z}(t)$ be the value of our character at time t, then we can derive three main properties of Brownian motion. I will list all three, then explain each in turn.
+
+1. $E[\bar{z}(t)] = \bar{z}(0)$
+2. Each successive interval of the “walk” is independent
+3. $\bar{z}(t) \sim N(\bar{z}(0),\sigma^2 t)$
+
+First, $E[\bar{z}(t)] = \bar{z}(0)$. This means that the expected value of the character at any time $t$ is equal to the value of the character at time zero. Here the expected value refers to the mean of $\bar{z}(t)$ over many replicates. The intuitive meaning of this equation is that Brownian motion has no “trends,” and wanders equally in both positive and negative directions. If you take the mean of a large number of simulations of Brownian motion over any time interval, you will likely get a value close to $\bar{z}(0)$; as you increase the sample size, this mean will tend to get closer and closer to $\bar{z}(0)$.
 
 Second, each successive interval of the “walk” is independent. Brownian motion
-is a process in continuous time, and so time does not have discrete “steps.” However, if you sample the process at time t, and then again at time t+Δt, the change that occurs over these two intervals will be independent of one another. This is true of any two non-overlapping intervals sampled from a Brownian walk. It is worth noting that only the changes are independent, and that the value of the walk at time t+Δt – which we can write as z ̅(t+Δt) - is not independent of the value of the walk at time t, z ̅(t). But the differences between successive steps [e.g. z ̅(t)-z ̅(0) and z ̅(t+Δt)-z ̅(t)] are independent of each other and of z ̅(0).
+is a process in continuous time, and so time does not have discrete “steps.” However, if you sample the process at time $t$, and then again at time $t+\Delta t$, the change that occurs over these two intervals will be independent of one another. This is true of any two non-overlapping intervals sampled from a Brownian walk. It is worth noting that only the changes are independent, and that the value of the walk at time $t+\Delta t$ – which we can write as $\bar{z}(t+\Delta t)$ - is not independent of the value of the walk at time $t$, $\bar{z}(t)$. But the differences between successive steps [e.g. $\bar{z}(t)-\bar{z}(0)$ and $\bar{z}(t+\Delta t) - \bar{z}(t)$] are independent of each other and of $\bar{z}(0)$.
 
-Finally, z ̅(t) ~ N(z ̅(0),σ^2 t).That is, the value of z ̅(t) is drawn from a normal distribution with mean z ̅(0) and variance σ2t. As we noted above, the parameter σ2 is important for Brownian motion models, as it describes the rate at which the process wanders through trait space. The overall variance of the process is that rate times the amount of time that has elapsed.
+Finally, $\bar{z}(t) \sim N(\bar{z}(0),\sigma^2 t)$.That is, the value of $\bar{z}(t)$ is drawn from a normal distribution with mean $\bar{z}(0)$ and variance $\sigma ^ 2 t$. As we noted above, the parameter $\sigma ^ 2$ is important for Brownian motion models, as it describes the rate at which the process wanders through trait space. The overall variance of the process is that rate times the amount of time that has elapsed.
 
 ## Section 3.3: Deriving Brownian Motion using Quantitative Genetics
 
@@ -60,27 +60,41 @@ Finally, z ̅(t) ~ N(z ̅(0),σ^2 t).That is, the value of z ̅(t) is drawn from
 
 The simplest way to obtain Brownian evolution of characters is when evolutionary change is neutral, with traits changing only due to genetic drift. [e.g. @Lande1976-ol]. To show this, we will create a simple model. We will assume that a character is influenced by many genes, each of small effect, and that the value of the character does not affect fitness. Finally, we assume that mutations are random and have small effects on the character, as specified below. These assumptions probably seem unrealistic, especially if you are thinking of a trait like the body size of a lizard! But we will see later that we can also derive Brownian motion under other models, some of which involve selection.
 
-We again consider the mean value of this trait, z ̅, in a population with a variance effective population size of Ne. Variance effective population size is the effective population size of a model population with random mating, no substructure, and constant population size that would have quantitative genetic properties equal to our actual population. All of this is a bit beyond the scope of this book [but see @Templeton2006-ra]. But writing Ne instead of N allows us to develop the model without worrying about all of the extra assumptions we would have to make about how individuals mate and how populations are distributed over time and space.
+We again consider the mean value of this trait, $\bar{z}$, in a population with a variance effective population size of $N_e$. Variance effective population size is the effective population size of a model population with random mating, no substructure, and constant population size that would have quantitative genetic properties equal to our actual population. All of this is a bit beyond the scope of this book [but see @Templeton2006-ra]. But writing $N_e$ instead of $N$ allows us to develop the model without worrying about all of the extra assumptions we would have to make about how individuals mate and how populations are distributed over time and space.
 
-Under this model, since there is no selection, the phenotypic character will change due only to mutations and genetic drift. We can model this process in a number of ways, but the simplest uses an infinite alleles model. Under this model, mutations occur randomly and have random phenotypic effects – we can say that mutations are drawn at random from a distribution with mean 0 and mutational variance  . This model assumes that the number of alleles is so large that there is effectively no chance of mutations happening to the same allele more than once. The alleles in the population then change in frequency through time due to genetic drift. Drift and mutation together, then, determine the dynamics of the mean trait through time.
+Under this model, since there is no selection, the phenotypic character will change due only to mutations and genetic drift. We can model this process in a number of ways, but the simplest uses an infinite alleles model. Under this model, mutations occur randomly and have random phenotypic effects – we can say that mutations are drawn at random from a distribution with mean $0$ and mutational variance ${\sigma_m}^2$. This model assumes that the number of alleles is so large that there is effectively no chance of mutations happening to the same allele more than once. The alleles in the population then change in frequency through time due to genetic drift. Drift and mutation together, then, determine the dynamics of the mean trait through time.
 
 If we were to simulate this infinite alleles model many times, we would have a set of evolved populations. These populations would, on average, have the same mean trait value, but would differ from each other. Let’s try to derive how, exactly, these populations will differ.
 
 If we consider a population evolving under this model, it is not difficult to show that the expected population phenotype after any amount of time is equal to the starting phenotype. This is because the phenotypes don’t matter for survival or reproduction, and mutations are assumed to be symmetrical. Thus,
 
 (eq. 3.1)
+<div>
+$$
+E[\bar{z}(t)] = \bar{z}(0)
+$$
+</div>
 
 Note that this equation already matches the first property of Brownian motion.
 
-Next, we need to also consider the variance of these mean phenotypes, which we will call the between-population phenotypic variance ( ). Importantly, this is the same quantity we earlier described as the “variance” of traits over time – that is, the variance of mean trait values across many independent “runs” of evolutionary change over a certain time period. To calculate this quantity, we need to consider variation within our model populations. Because of our simplifying assumptions, we only need focus on additive genetic variance within each population at some time t, which we can denote as   [see @Lynch1998-em]. Additive genetic variation in a population will change over time due to genetic drift (which tends to decrease  ) and mutational input (which tends to increase  ). We can model the expected value of   from one generation to the next as [@Clayton1955-vd; @Lande1980-yn; @Lande1979-em].
+Next, we need to also consider the variance of these mean phenotypes, which we will call the between-population phenotypic variance (${\sigma_B}^2$). Importantly, this is the same quantity we earlier described as the “variance” of traits over time – that is, the variance of mean trait values across many independent “runs” of evolutionary change over a certain time period. To calculate this quantity, we need to consider variation within our model populations. Because of our simplifying assumptions, we only need focus on additive genetic variance within each population at some time $t$, which we can denote as ${\sigma_A}^2$ [see @Lynch1998-em]. Additive genetic variation in a population will change over time due to genetic drift (which tends to decrease ${\sigma_A}^2$) and mutational input (which tends to increase ${\sigma_A}^2$). We can model the expected value of ${\sigma_A}^2$ from one generation to the next as [@Clayton1955-vd; @Lande1980-yn; @Lande1979-em].
 
-(eq. 3.2)	E[σ_A^2 (t+1)]=(1-1/(2N_e ))E[σ_A^2 (t)]+σ_m^2
+(eq. 3.2)
+<div>
+$$
+E[{\sigma_A}^2 (t+1)]=(1-\frac{1}{2 N_e})E[{\sigma_A}^2 (t)]+{\sigma_m}^2
+$$
+</div>
 
-where t is the elapsed time in generations, Ne is the effective population size, and   is the mutational variance. You can see from this equation that additive genetic variance at time t+t depends on inheritance (  in generation t+1 depends on   in generation t), genetic drift (  decreases each generation by a factor that depends on effective population size, Ne), and mutation ( increases by σ_m^2 each generation).
+where t is the elapsed time in generations, $N_e$ is the effective population size, and ${\sigma_m}^2$ is the mutational variance. You can see from this equation that additive genetic variance at time $t+1$ depends on inheritance (${\sigma_A}^2$ in generation $t+1$ depends on ${\sigma_A}^2$ in generation $t$), genetic drift (${\sigma_A}^2$ decreases each generation by a factor that depends on effective population size, $N_e$), and mutation (${\sigma_A}^2$ increases by ${\sigma_m}^2$ each generation).
 
-If we assume that we know the starting value at time 0,  , we can calculate the expected additive genetic variance at any time t as:
+If we assume that we know the starting value at time 0, ${\sigma_A}^2(0)$, we can calculate the expected additive genetic variance at any time $t$ as:
 
-(eq. 3.3)	E[σ_A^2 (t)]=(1-1/(2N_e ))^t [σ_A^2 (0)-2N_e σ_m^2 ]+2N_e σ_m^2
+(eq. 3.3)<div>
+$$
+E[{\sigma_A}^2 (t)]={(1-\frac{1}{2 N_e})}^t [{\sigma_A}^2 (0) - 2 N_e {\sigma_m}^2 ]+ 2 N_e {\sigma_m}^2
+$$
+</div>
 
 Note that the first term in the above equation, (1-1/(2N_e ))^t, goes to zero as t becomes large. This means that additive genetic variation in the evolving populations will eventually reach an equilibrium between genetic drift and new mutations, so that additive genetic variation stops changing from one generation to the next. We can find this equilibrium by taking the limit of eq. 3.3 as t becomes large.
 
