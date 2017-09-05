@@ -58,7 +58,7 @@ $$</span><br /></p>
 (eq. 3.2)
 <div>
 <p><br /><span class="math display">$$
-E[{\sigma_A}^2 (t+1)]=(1-\frac{1}{2 N_e})E[{\sigma_A}^2 (t)]+{\sigma_m}^2
+E[\sigma_A^2 (t+1)]=(1-\frac{1}{2 N_e})E[\sigma_A^2 (t)]+\sigma_m^2
 $$</span><br /></p>
 </div>
 <p>where t is the elapsed time in generations, <span class="math inline"><em>N</em><sub><em>e</em></sub></span> is the effective population size, and <span class="math inline"><em>σ</em><sub><em>m</em></sub><sup>2</sup></span> is the mutational variance. You can see from this equation that additive genetic variance at time <span class="math inline"><em>t</em> + 1</span> depends on inheritance (<span class="math inline"><em>σ</em><sub><em>A</em></sub><sup>2</sup></span> in generation <span class="math inline"><em>t</em> + 1</span> depends on <span class="math inline"><em>σ</em><sub><em>A</em></sub><sup>2</sup></span> in generation <span class="math inline"><em>t</em></span>), genetic drift (<span class="math inline"><em>σ</em><sub><em>A</em></sub><sup>2</sup></span> decreases each generation by a factor that depends on effective population size, <span class="math inline"><em>N</em><sub><em>e</em></sub></span>), and mutation (<span class="math inline"><em>σ</em><sub><em>A</em></sub><sup>2</sup></span> increases by <span class="math inline"><em>σ</em><sub><em>m</em></sub><sup>2</sup></span> each generation).</p>
@@ -66,14 +66,22 @@ $$</span><br /></p>
 (eq. 3.3)
 <div>
 <p><br /><span class="math display">$$
-E[{\sigma_A}^2 (t)]={(1-\frac{1}{2 N_e})}^t [{\sigma_A}^2 (0) - 2 N_e {\sigma_m}^2 ]+ 2 N_e {\sigma_m}^2
+E[\sigma_A^2 (t)]={(1-\frac{1}{2 N_e})}^t [\sigma_A^2 (0) - 2 N_e \sigma_m^2 ]+ 2 N_e \sigma_m^2
 $$</span><br /></p>
 </div>
-<p>Note that the first term in the above equation, (1-1/(2N_e ))^t, goes to zero as t becomes large. This means that additive genetic variation in the evolving populations will eventually reach an equilibrium between genetic drift and new mutations, so that additive genetic variation stops changing from one generation to the next. We can find this equilibrium by taking the limit of eq. 3.3 as t becomes large.</p>
-<p>(eq. 3.4)</p>
+<p>Note that the first term in the above equation, <span class="math inline">${(1-\frac{1}{2 N_e})}^t$</span>, goes to zero as <span class="math inline"><em>t</em></span> becomes large. This means that additive genetic variation in the evolving populations will eventually reach an equilibrium between genetic drift and new mutations, so that additive genetic variation stops changing from one generation to the next. We can find this equilibrium by taking the limit of eq. 3.3 as <span class="math inline"><em>t</em></span> becomes large.</p>
+(eq. 3.4)
+<div>
+<p><br /><span class="math display">lim<sub><em>t</em> → ∞</sub><em>E</em>[<em>σ</em><sub><em>A</em></sub><sup>2</sup>(<em>t</em>)] = 2<em>N</em><sub><em>e</em></sub><em>σ</em><sub><em>m</em></sub><sup>2</sup></span><br /></p>
+</div>
 <p>Thus the equilibrium genetic variance depends on both population size and mutational input.</p>
-<p>We can now derive the between-population phenotypic variance at time t, . We will assume that is at equilibrium and thus constant (equation 3.4). Mean trait values in independently evolving populations will diverge from one another. After some time period t has elapsed, that the expected among-population variance will be <span class="citation">(from Lande <a href="#ref-Lande1976-ol">1976</a>)</span>:</p>
-<p>(eq. 3.5) σ_B^2 (t)=(tσ_A^2)/N_e</p>
+<p>We can now derive the between-population phenotypic variance at time <span class="math inline"><em>t</em></span>, <span class="math inline"><em>σ</em><sub><em>B</em></sub><sup>2</sup>(<em>t</em>)</span>. We will assume that <span class="math inline"><em>σ</em><sub><em>A</em></sub><sup>2</sup></span> is at equilibrium and thus constant (equation 3.4). Mean trait values in independently evolving populations will diverge from one another. After some time period <span class="math inline"><em>t</em></span> has elapsed, that the expected among-population variance will be <span class="citation">(from Lande <a href="#ref-Lande1976-ol">1976</a>)</span>:</p>
+(eq. 3.5)
+<div>
+<p><br /><span class="math display">$$
+\sigma_B^2 (t)=\frac{t \sigma_A^2}{N_e}
+$$</span><br /></p>
+</div>
 <p>Substituting the equilibrium value of from equation 3.4 into equation 3.5 gives <span class="citation">(Lande <a href="#ref-Lande1979-em">1979</a>, <a href="#ref-Lande1980-yn">1980</a>)</span>:</p>
 <p>(eq. 3.6) σ_B^2 (t)=(tσ_A^2)/N_e =(t2N_e σ_m^2)/N_e =2tσ_m^2</p>
 <p>Notice that for this model, the amount of variation among populations depends only on the rate of mutational input, and is independent of both the starting state of the populations and their effective population size. This model predicts, then, that long-term rates of evolution are dominated by the supply of new mutations to a population.</p>

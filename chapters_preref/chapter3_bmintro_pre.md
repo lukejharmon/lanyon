@@ -62,7 +62,7 @@ The simplest way to obtain Brownian evolution of characters is when evolutionary
 
 We again consider the mean value of this trait, $\bar{z}$, in a population with a variance effective population size of $N_e$. Variance effective population size is the effective population size of a model population with random mating, no substructure, and constant population size that would have quantitative genetic properties equal to our actual population. All of this is a bit beyond the scope of this book [but see @Templeton2006-ra]. But writing $N_e$ instead of $N$ allows us to develop the model without worrying about all of the extra assumptions we would have to make about how individuals mate and how populations are distributed over time and space.
 
-Under this model, since there is no selection, the phenotypic character will change due only to mutations and genetic drift. We can model this process in a number of ways, but the simplest uses an infinite alleles model. Under this model, mutations occur randomly and have random phenotypic effects – we can say that mutations are drawn at random from a distribution with mean $0$ and mutational variance ${\sigma_m}^2$. This model assumes that the number of alleles is so large that there is effectively no chance of mutations happening to the same allele more than once. The alleles in the population then change in frequency through time due to genetic drift. Drift and mutation together, then, determine the dynamics of the mean trait through time.
+Under this model, since there is no selection, the phenotypic character will change due only to mutations and genetic drift. We can model this process in a number of ways, but the simplest uses an infinite alleles model. Under this model, mutations occur randomly and have random phenotypic effects – we can say that mutations are drawn at random from a distribution with mean $0$ and mutational variance $\sigma_m^2$. This model assumes that the number of alleles is so large that there is effectively no chance of mutations happening to the same allele more than once. The alleles in the population then change in frequency through time due to genetic drift. Drift and mutation together, then, determine the dynamics of the mean trait through time.
 
 If we were to simulate this infinite alleles model many times, we would have a set of evolved populations. These populations would, on average, have the same mean trait value, but would differ from each other. Let’s try to derive how, exactly, these populations will differ.
 
@@ -77,34 +77,46 @@ $$
 
 Note that this equation already matches the first property of Brownian motion.
 
-Next, we need to also consider the variance of these mean phenotypes, which we will call the between-population phenotypic variance (${\sigma_B}^2$). Importantly, this is the same quantity we earlier described as the “variance” of traits over time – that is, the variance of mean trait values across many independent “runs” of evolutionary change over a certain time period. To calculate this quantity, we need to consider variation within our model populations. Because of our simplifying assumptions, we only need focus on additive genetic variance within each population at some time $t$, which we can denote as ${\sigma_A}^2$ [see @Lynch1998-em]. Additive genetic variation in a population will change over time due to genetic drift (which tends to decrease ${\sigma_A}^2$) and mutational input (which tends to increase ${\sigma_A}^2$). We can model the expected value of ${\sigma_A}^2$ from one generation to the next as [@Clayton1955-vd; @Lande1980-yn; @Lande1979-em].
+Next, we need to also consider the variance of these mean phenotypes, which we will call the between-population phenotypic variance ($\sigma_B^2$). Importantly, this is the same quantity we earlier described as the “variance” of traits over time – that is, the variance of mean trait values across many independent “runs” of evolutionary change over a certain time period. To calculate this quantity, we need to consider variation within our model populations. Because of our simplifying assumptions, we only need focus on additive genetic variance within each population at some time $t$, which we can denote as $\sigma_A^2$ [see @Lynch1998-em]. Additive genetic variation in a population will change over time due to genetic drift (which tends to decrease $\sigma_A^2$) and mutational input (which tends to increase $\sigma_A^2$). We can model the expected value of $\sigma_A^2$ from one generation to the next as [@Clayton1955-vd; @Lande1980-yn; @Lande1979-em].
 
 (eq. 3.2)
 <div>
 $$
-E[{\sigma_A}^2 (t+1)]=(1-\frac{1}{2 N_e})E[{\sigma_A}^2 (t)]+{\sigma_m}^2
+E[\sigma_A^2 (t+1)]=(1-\frac{1}{2 N_e})E[\sigma_A^2 (t)]+\sigma_m^2
 $$
 </div>
 
-where t is the elapsed time in generations, $N_e$ is the effective population size, and ${\sigma_m}^2$ is the mutational variance. You can see from this equation that additive genetic variance at time $t+1$ depends on inheritance (${\sigma_A}^2$ in generation $t+1$ depends on ${\sigma_A}^2$ in generation $t$), genetic drift (${\sigma_A}^2$ decreases each generation by a factor that depends on effective population size, $N_e$), and mutation (${\sigma_A}^2$ increases by ${\sigma_m}^2$ each generation).
+where t is the elapsed time in generations, $N_e$ is the effective population size, and $\sigma_m^2$ is the mutational variance. You can see from this equation that additive genetic variance at time $t+1$ depends on inheritance ($\sigma_A^2$ in generation $t+1$ depends on $\sigma_A^2$ in generation $t$), genetic drift ($\sigma_A^2$ decreases each generation by a factor that depends on effective population size, $N_e$), and mutation ($\sigma_A^2$ increases by $\sigma_m^2$ each generation).
 
-If we assume that we know the starting value at time 0, ${\sigma_A}^2(0)$, we can calculate the expected additive genetic variance at any time $t$ as:
+If we assume that we know the starting value at time 0, $\sigma_A^2(0)$, we can calculate the expected additive genetic variance at any time $t$ as:
 
-(eq. 3.3)<div>
+(eq. 3.3)
+<div>
 $$
-E[{\sigma_A}^2 (t)]={(1-\frac{1}{2 N_e})}^t [{\sigma_A}^2 (0) - 2 N_e {\sigma_m}^2 ]+ 2 N_e {\sigma_m}^2
+E[\sigma_A^2 (t)]={(1-\frac{1}{2 N_e})}^t [\sigma_A^2 (0) - 2 N_e \sigma_m^2 ]+ 2 N_e \sigma_m^2
 $$
 </div>
 
-Note that the first term in the above equation, (1-1/(2N_e ))^t, goes to zero as t becomes large. This means that additive genetic variation in the evolving populations will eventually reach an equilibrium between genetic drift and new mutations, so that additive genetic variation stops changing from one generation to the next. We can find this equilibrium by taking the limit of eq. 3.3 as t becomes large.
+Note that the first term in the above equation, ${(1-\frac{1}{2 N_e})}^t$, goes to zero as $t$ becomes large. This means that additive genetic variation in the evolving populations will eventually reach an equilibrium between genetic drift and new mutations, so that additive genetic variation stops changing from one generation to the next. We can find this equilibrium by taking the limit of eq. 3.3 as $t$ becomes large.
 
 (eq. 3.4)
+<div>
+$$
+\lim_{t\to\infty} E[\sigma_A^2 (t)] = 2 N_e \sigma_m ^2
+$$
+</div>
 
 Thus the equilibrium genetic variance depends on both population size and mutational input.
 
-We can now derive the between-population phenotypic variance at time t,  . We will assume that   is at equilibrium and thus constant (equation 3.4). Mean trait values in independently evolving populations will diverge from one another. After some time period t has elapsed, that the expected among-population variance will be [from @Lande1976-ol]:
+We can now derive the between-population phenotypic variance at time $t$, $\sigma_B^2 (t)$. We will assume that $\sigma_A^2$ is at equilibrium and thus constant (equation 3.4). Mean trait values in independently evolving populations will diverge from one another. After some time period $t$ has elapsed, that the expected among-population variance will be [from @Lande1976-ol]:
 
-(eq. 3.5)	σ_B^2 (t)=(tσ_A^2)/N_e
+(eq. 3.5)
+<div>
+$$
+\sigma_B^2 (t)=\frac{t \sigma_A^2}{N_e}
+$$
+</div>
+
 
 
 Substituting the equilibrium value of   from equation 3.4 into equation 3.5 gives [@Lande1980-yn; @Lande1979-em]:
