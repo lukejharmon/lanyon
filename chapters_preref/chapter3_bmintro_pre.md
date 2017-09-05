@@ -1,6 +1,6 @@
 # Chapter 3: Introduction to Brownian Motion
 
-Squamates, the group that includes snakes and lizards, is exceptionally diverse. This clade, which is between 150 and 210 million years old (Hedges and Kumar 2009), includes species that are very large and very small; herbivores and carnivores; species with legs and species that are legless. How did that diversity of species’ traits come to be? How did these characters first come to be, and how often did they change to explain the diversity that we see on earth today? In this chapter, we will begin to discuss models for the evolution of species’ traits.
+Squamates, the group that includes snakes and lizards, is exceptionally diverse. This clade, which is between 150 and 210 million years old [@Hedges2009-lj], includes species that are very large and very small; herbivores and carnivores; species with legs and species that are legless. How did that diversity of species’ traits come to be? How did these characters first come to be, and how often did they change to explain the diversity that we see on earth today? In this chapter, we will begin to discuss models for the evolution of species’ traits.
 
 Imagine that you want to use statistical approaches to understand how traits change through time. To do that, you need to have an exact mathematical specification of how evolution takes place. Obviously there are a wide variety of models of trait evolution, from simple to complex. For example, you might create a model where a trait starts with a certain value and has some constant probability of changing in any unit of time. Alternatively, you might make a model that is more explicit, and considers a large set of individuals in a population. You could assign genotypes to each individual and allow the population to change through reproduction and natural selection. In this chapter – and in comparative methods as a whole – the models we will consider will be much closer to the first of these two models. However, there are still important connections between these simple models and more realistic models of trait evolution. (see chapter 5).
 
@@ -56,9 +56,9 @@ Finally, z ̅(t) ~ N(z ̅(0),σ^2 t).That is, the value of z ̅(t) is drawn from
 
 ### Brownian motion under genetic drift
 
-The simplest way to obtain Brownian evolution of characters is when evolutionary change is neutral, with traits changing only due to genetic drift. (e.g. Lande 1976). To show this, we will create a simple model. We will assume that a character is influenced by many genes, each of small effect, and that the value of the character does not affect fitness. Finally, we assume that mutations are random and have small effects on the character, as specified below. These assumptions probably seem unrealistic, especially if you are thinking of a trait like the body size of a lizard! But we will see later that we can also derive Brownian motion under other models, some of which involve selection.
+The simplest way to obtain Brownian evolution of characters is when evolutionary change is neutral, with traits changing only due to genetic drift. [e.g. @Lande1976-ol]. To show this, we will create a simple model. We will assume that a character is influenced by many genes, each of small effect, and that the value of the character does not affect fitness. Finally, we assume that mutations are random and have small effects on the character, as specified below. These assumptions probably seem unrealistic, especially if you are thinking of a trait like the body size of a lizard! But we will see later that we can also derive Brownian motion under other models, some of which involve selection.
 
-We again consider the mean value of this trait, z ̅, in a population with a variance effective population size of Ne. Variance effective population size is the effective population size of a model population with random mating, no substructure, and constant population size that would have quantitative genetic properties equal to our actual population. All of this is a bit beyond the scope of this book (but see Templeton xxx). But writing Ne instead of N allows us to develop the model without worrying about all of the extra assumptions we would have to make about how individuals mate and how populations are distributed over time and space.
+We again consider the mean value of this trait, z ̅, in a population with a variance effective population size of Ne. Variance effective population size is the effective population size of a model population with random mating, no substructure, and constant population size that would have quantitative genetic properties equal to our actual population. All of this is a bit beyond the scope of this book [but see @Templeton2006-ra]. But writing Ne instead of N allows us to develop the model without worrying about all of the extra assumptions we would have to make about how individuals mate and how populations are distributed over time and space.
 
 Under this model, since there is no selection, the phenotypic character will change due only to mutations and genetic drift. We can model this process in a number of ways, but the simplest uses an infinite alleles model. Under this model, mutations occur randomly and have random phenotypic effects – we can say that mutations are drawn at random from a distribution with mean 0 and mutational variance  . This model assumes that the number of alleles is so large that there is effectively no chance of mutations happening to the same allele more than once. The alleles in the population then change in frequency through time due to genetic drift. Drift and mutation together, then, determine the dynamics of the mean trait through time.
 
@@ -70,7 +70,7 @@ If we consider a population evolving under this model, it is not difficult to sh
 
 Note that this equation already matches the first property of Brownian motion.
 
-Next, we need to also consider the variance of these mean phenotypes, which we will call the between-population phenotypic variance ( ). Importantly, this is the same quantity we earlier described as the “variance” of traits over time – that is, the variance of mean trait values across many independent “runs” of evolutionary change over a certain time period. To calculate this quantity, we need to consider variation within our model populations. Because of our simplifying assumptions, we only need focus on additive genetic variance within each population at some time t, which we can denote as   (see Lynch and Walsh 1998). Additive genetic variation in a population will change over time due to genetic drift (which tends to decrease  ) and mutational input (which tends to increase  ). We can model the expected value of   from one generation to the next as (Clayton and Robertson 1955, Lande 1979, 1980).
+Next, we need to also consider the variance of these mean phenotypes, which we will call the between-population phenotypic variance ( ). Importantly, this is the same quantity we earlier described as the “variance” of traits over time – that is, the variance of mean trait values across many independent “runs” of evolutionary change over a certain time period. To calculate this quantity, we need to consider variation within our model populations. Because of our simplifying assumptions, we only need focus on additive genetic variance within each population at some time t, which we can denote as   [see @Lynch1998-em]. Additive genetic variation in a population will change over time due to genetic drift (which tends to decrease  ) and mutational input (which tends to increase  ). We can model the expected value of   from one generation to the next as [@Clayton1955-vd; @Lande1980-yn; @Lande1979-em].
 
 (eq. 3.2)	E[σ_A^2 (t+1)]=(1-1/(2N_e ))E[σ_A^2 (t)]+σ_m^2
 
@@ -86,19 +86,19 @@ Note that the first term in the above equation, (1-1/(2N_e ))^t, goes to zero as
 
 Thus the equilibrium genetic variance depends on both population size and mutational input.
 
-We can now derive the between-population phenotypic variance at time t,  . We will assume that   is at equilibrium and thus constant (equation 3.4). Mean trait values in independently evolving populations will diverge from one another. After some time period t has elapsed, that the expected among-population variance will be (from Lande 1976):
+We can now derive the between-population phenotypic variance at time t,  . We will assume that   is at equilibrium and thus constant (equation 3.4). Mean trait values in independently evolving populations will diverge from one another. After some time period t has elapsed, that the expected among-population variance will be [from @Lande1976-ol]:
 
 (eq. 3.5)	σ_B^2 (t)=(tσ_A^2)/N_e
 
 
-Substituting the equilibrium value of   from equation 3.4 into equation 3.5 gives (Lande 1979, 1980):
+Substituting the equilibrium value of   from equation 3.4 into equation 3.5 gives [@Lande1980-yn; @Lande1979-em]:
 
 (eq. 3.6)	σ_B^2 (t)=(tσ_A^2)/N_e =(t2N_e σ_m^2)/N_e =2tσ_m^2
 
 
 Notice that for this model, the  amount of variation among populations depends only on the rate of mutational input, and is independent of both the starting state of the populations and their effective population size. This model predicts, then, that long-term rates of evolution are dominated by the supply of new mutations to a population.
 
-Lynch and Hill (1986) show that equation 3.6 is a general result that holds under a range of models, even those that include dominance, linkage, nonrandom mating, and other processes. Equation 3.6 is somewhat useful, but we cannot often measure the mutational variance   for any natural populations (but see Turrelli 1984). To address this, we can consider the expected heritability for the infinite alleles model at mutational equilibrium. Heritability describes the proportion of total genetic variation within a population ( ) that is due to additive genetic effects ( ): h^2=σ_A^2/σ_w^2. Substituting equation 3.4, we find that:
+Lynch and Hill [-@Lynch1986-xl] show that equation 3.6 is a general result that holds under a range of models, even those that include dominance, linkage, nonrandom mating, and other processes. Equation 3.6 is somewhat useful, but we cannot often measure the mutational variance   for any natural populations [but see @Turelli1984-ic]. To address this, we can consider the expected heritability for the infinite alleles model at mutational equilibrium. Heritability describes the proportion of total genetic variation within a population ( ) that is due to additive genetic effects ( ): h^2=σ_A^2/σ_w^2. Substituting equation 3.4, we find that:
 
 (eq. 3.7)	 , so that
 
@@ -110,13 +110,13 @@ So, after some time interval t, the mean phenotype of a population has an expect
 
 To derive this result, we had to make particular assumptions about normality of new mutations that might seem quite unrealistic. It is worth noting that if phenotypes are affected by enough mutations, the central limit theorem guarantees that the distribution of phenotypes within populations will be normal – no matter what the underlying distribution of those mutations might be. We also had to assume that traits are neutral, a more dubious assumption that we relax below.
 
-Note, finally, that this quantitative genetics model predicts that traits will evolve under a Brownian motion model. Thus, our quantitative genetics model has the same statistical properties of Brownian motion. We only need to match the parameters:  , and  . In some cases in the literature, the magnitude of trait change is expressed in within-population phenotypic standard deviations,  , per generation (e.g. Estes and Arnold 2007, Harmon et al. 2010). In that case, since dividing a random normal deviate by x is equivalent to dividing its variance by x2, we have  .
+Note, finally, that this quantitative genetics model predicts that traits will evolve under a Brownian motion model. Thus, our quantitative genetics model has the same statistical properties of Brownian motion. We only need to match the parameters:  , and  . In some cases in the literature, the magnitude of trait change is expressed in within-population phenotypic standard deviations,  , per generation [e.g. @Harmon2010-wg; @Estes2007-mi]. In that case, since dividing a random normal deviate by x is equivalent to dividing its variance by x2, we have  .
 
 ### Brownian motion under selection
 
 We have shown that it is possible to relate a Brownian motion model directly to a quantitative genetics model of drift. In fact, some authors equate the two. However, it is important to remember that the two are not the same thing. More specifically, an observation that a trait is evolving as expected under Brownian motion is not equivalent to saying that that trait is not under selection. This is because characters can also evolve as a Brownian walk even if there is strong selection – as long as selection acts in particular ways that maintain the properties of the Brownian motion model. For example, if the direction and magnitude of selection is random from one generation to the next, then evolution of the character will still follow a Brownian motion model.
 
-In general, the path followed by population mean trait values under mutation, selection, and drift depend on the particular way in which these processes occur. A variety of such models are considered by Hansen and Martins (1996). They identify three very different models that include selection where mean traits still evolve under an approximately Brownian model. Here I present univariate versions of the Hansen-Martins models, for simplicity; consult the original paper for multivariate versions. Note that all of these models require that the strength of selection is relatively weak, or else genetic variation of the character will be depleted by selection over time and the dynamics of trait evolution will change.
+In general, the path followed by population mean trait values under mutation, selection, and drift depend on the particular way in which these processes occur. A variety of such models are considered by Hansen and Martins [-@Martins1996-oi]. They identify three very different models that include selection where mean traits still evolve under an approximately Brownian model. Here I present univariate versions of the Hansen-Martins models, for simplicity; consult the original paper for multivariate versions. Note that all of these models require that the strength of selection is relatively weak, or else genetic variation of the character will be depleted by selection over time and the dynamics of trait evolution will change.
 
 One model assumes that populations evolve due to selection, but the strength and direction of selection varies randomly from one generation to the next. We model selection each generation as being drawn from a normal distribution with mean 0 and variance σ_s^2. Similar to our drift model, populations will again evolve under Brownian motion. However, in this case the Brownian motion parameters have a different interpretation:
 
@@ -128,13 +128,13 @@ In the particular case where variation in selection is much greater than variati
 
 That is, the drift rate when selection is (on average) much stronger than drift is completely dominated by the selection term. This is not that far fetched, as many studies have shown selection in the wild that is both stronger than drift and commonly changing in both direction and magnitude from one generation to the next.
 
-In a second model, Hansen and Martins consider a population subject to strong stabilizing selection for a particular optimal value, but where the position of the optimum itself changes randomly according to a Brownian motion process. In this case, population means can again be described by Brownian motion, but now the rate parameter reflects movement of the optimum rather than the action of mutation and drift. Specifically, if we describe movement of the optimum by a Brownian rate parameter  , then:
+In a second model, Hansen and Martins [-@Martins1996-oi] consider a population subject to strong stabilizing selection for a particular optimal value, but where the position of the optimum itself changes randomly according to a Brownian motion process. In this case, population means can again be described by Brownian motion, but now the rate parameter reflects movement of the optimum rather than the action of mutation and drift. Specifically, if we describe movement of the optimum by a Brownian rate parameter  , then:
 
 (eq. 3.11)	σ_B^2≈σ_E^2
 
 To obtain this result we must assume that the strength of stabilizing selection is not very weak (at least on the order of 1/t_ij  where t_ij is the number of generations separating pairs of populations; Hansen and Martins 1996). Again in this case, the rate of the random walk is totally determined by the action of selection rather than drift.
 
-Finally, Hansen and Martins (1996) consider the situation where populations evolve following a trend. In this case, we get evolution that is different from Brownian motion, but shares some key attributes. Consider a population under constant directional selection, s, so that:
+Finally, Hansen and Martins [-@Martins1996-oi] consider the situation where populations evolve following a trend. In this case, we get evolution that is different from Brownian motion, but shares some key attributes. Consider a population under constant directional selection, s, so that:
 
 (eq. 3.12)	E[z ̅(t+1)]=z ̅(t)h^2 s
 
@@ -210,7 +210,7 @@ This matrix V is n⋅m x n⋅m, and describes the variances and covariances of a
 
 We can return to our example of evolution along a single branch (Figure 3.4a). Imagine that we have two characters that are evolving under a multivariate Brownian motion model. We state the parameters of the model as:
 
-(eq. 3.23)	
+(eq. 3.23)
 
 For a single branch, C = [t1], so:
 
