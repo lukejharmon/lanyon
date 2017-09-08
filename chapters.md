@@ -8,3 +8,5 @@ title: Chapters
 [Chapter 2]({{ site.baseurl }}/chapter2_stats/) - Fitting Statistical Models to Data
 
 [Chapter 3]({{ site.baseurl }}/chapter3_bmintro/) - Introduction to Brownian Motion
+
+[Chapter 4]({{ site.baseurl }}/chapter4_fitbm/) - Fitting Brownian Motion
