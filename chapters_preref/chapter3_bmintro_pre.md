@@ -376,18 +376,40 @@ $$
 \begin{bmatrix}
  \sigma_1^2 t_1 & \sigma_{12} t_1 \\
  \sigma_{12} t_1 & \sigma_2^2 t_1 \\
-\end{bmatrix} 
+\end{bmatrix}
 $$
 </div>
 
-The two traits follow a multivariate normal distribution with mean a and variance-covariance matrix V.
+The two traits follow a multivariate normal distribution with mean a and variance-covariance matrix $\mathbf{V}.
 
 For the simple tree in figure 3.4b,
 
-(eq. 3.25) 	 
+(eq. 3.26) 	 
+<div>
+$$
+\begin{array}{lcr}
+\mathbf{V} = \mathbf{R} \otimes \mathbf{C} =
+\begin{bmatrix}
+	\sigma_1^2 & \sigma_{12} \\
+	\sigma_{12} & \sigma_2^2 \\
+\end{bmatrix}
+\otimes
+\begin{bmatrix}
+	t_1+t_2 & t_1 \\
+	t_1 & t_1+t_3 \\
+\end{bmatrix} \\
+=
+\begin{bmatrix}
+	\sigma_1^2 (t_1+t_2) & \sigma_{12} (t_1+t_2) & \sigma_1^2 t_1 & \sigma_{12} t_1 \\
+	\sigma_{12} (t_1+t_2) & \sigma_2^2 (t_1+t_2) & \sigma_{12} t_1 & \sigma_2^2 t_1 \\
+	\sigma_1^2 t_1 & \sigma_{12} t_1 & \sigma_1^2 (t_1+t_3) & \sigma_{12} (t_1+t_3) \\
+	\sigma_{12} t_1 & \sigma_2^2 t_1 & \sigma_{12} (t_1+t_3) & \sigma_2^2 (t_1+t_3) \\
+\end{bmatrix} \\
+\end{array}
+$$
+</div>
 
-
-Thus, the four trait values (two traits for two species) are drawn from a multivariate normal distribution with mean a=[z ̅_1 (0), z ̅_1 (0), z ̅_2 (0), z ̅_2 (0)] and the variance-covariance matrix shown above.
+Thus, the four trait values (two traits for two species) are drawn from a multivariate normal distribution with mean $a=[\bar{z_1}(0), \bar{z_1}(0), \bar{z_2}(0), \bar{z_2}(0)]$ and the variance-covariance matrix shown above.
 
 Both univariate and multivariate Brownian motion models result in traits that follow multivariate normal distributions. This is statistically convenient, and in part explains the popularity of Brownian models in comparative biology.
 
@@ -395,7 +417,7 @@ Both univariate and multivariate Brownian motion models result in traits that fo
 
 To simulate Brownian motion evolution on trees, we use the three properties of the model described above. For each branch on the tree, we can draw from a normal distribution (for a single trait) or a multivariate normal distribution (for more than one trait) to determine the evolution that occurs on that branch. We can then add these evolutionary changes together to obtain character states at every node and tip of the tree.
 
-I will illustrate one such simulation for the simple tree depicted in figure 3.4b. We first set the ancestral character state to be θ, which will then be the expected value for all the nodes and tips in the tree. This tree has three branches, so we draw three values from normal distributions. These normal distributions have variances that are given by the rate of evolution and the branch length of the tree, as stated in equation 3.1. Note that we are modeling changes on these branches, so even if z ̅_1 (0) ≠ 0 the values for changes on branches are drawn from a distribution with a mean of zero. In the case of the tree in Figure 3.1, x1 ~ N(0, σ2t1). Similarly, x2 ~ N(0, σ2t2) and x3 ~ N(0, σ2t3). If I set σ2 = 1 for the purposes of this example, I might obtain x1 = -1.6, x2 = 0.1, and x3 = -0.3. These values represent the evolutionary changes that occur along branches in the simulation. To calculate trait values for species, we add: xA = θ + x1 + x2 = 0 -1.6 + 0.1 = -1.5, and xB = θ + x1 + x3 = 0 -1.6 + -0.3 = -1.9.
+I will illustrate one such simulation for the simple tree depicted in figure 3.4b. We first set the ancestral character state to be θ, which will then be the expected value for all the nodes and tips in the tree. This tree has three branches, so we draw three values from normal distributions. These normal distributions have variances that are given by the rate of evolution and the branch length of the tree, as stated in equation 3.1. Note that we are modeling changes on these branches, so even if $\bar{z_1}(0) ≠ 0$ the values for changes on branches are drawn from a distribution with a mean of zero. In the case of the tree in Figure 3.1, $x1 \sim N(0, \sigma^2 t_1)$. Similarly, $x2 \sim N(0, \sigma^2 t_2)$ and $x3 \sim N(0, \sigma^2 t_3)$. If I set $\sigma^2 = 1$ for the purposes of this example, I might obtain $x_1 = -1.6$, $x_2 = 0.1$, and $x_3 = -0.3$. These values represent the evolutionary changes that occur along branches in the simulation. To calculate trait values for species, we add: $x_a = θ + x_1 + x_2 = 0 - 1.6 + 0.1 = -1.5$, and $x_b = θ + x_1 + x_3 = 0 -1.6 + -0.3 = -1.9$.
 
 This simulation algorithm works fine but is actually more complicated than it needs to be, especially for large trees. We already know that xA and xB come from a multivariate normal distribution with known mean vector and variance-covariance matrix. We can simply draw a vector from this distribution, and our tip values will have exactly the same statistical properties as if they were simulated on a phylogenetic tree. These two methods for simulating character evolution on trees are exactly equivalent to one another.
 
