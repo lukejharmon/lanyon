@@ -26,18 +26,19 @@ At the core of Brownian motion is the normal distribution. You might know that a
 
 A few plots will illustrate the behavior of Brownian motion. Figure 3.1 shows sets of Brownian motion run over three different time periods (t = 100, 500, and 1000) with the same starting value $\bar{z}(0) = 0$ and rate parameter $\sigma^2 = 1$. Each panel of the figure shows 100 simulations of the process over that time period. You can see that the tip values look like normal distributions. Furthermore, the variance among separate runs of the process increases linearly with time. This among-run variance is greatest over the longest time intervals. It is this variance, the variation among many independent runs of the same evolutionary process, that we will consider throughout the next section.
 
-
+![]({{ site.baseurl }}/images/figure3-1.png)
 
 Figure 3.1. Examples of Brownian motion. Each plot shows 100 replicates of simulated Brownian motion with a common starting value and the same rate parameter $\sigma^2 = 1$. Simulations were run for three different times: (A) 10, (B) 50, and (C) 100 time units. The right-hand column shows a histogram of the distribution of ending values for each set of 100 simulations.
 
 Imagine that we run a Brownian motion process over a given time interval many times, and save the trait values at the end of each of these simulations. We can then create a statistical distribution of these character states. It might not be obvious from figure 3.1, but the distributions of possible character states at any time point in a Brownian walk is normal. This is illustrated in figure 3.2, which shows the distribution of traits from 100,000 simulations with $\sigma^2 = 1$ and $t = 100$. The tip characters from all of these simulations follow a normal distribution with mean equal to the starting value, $\bar{z}(0) = 0$, and a variance of $\sigma^2 t = 100$.
 
+![]({{ site.baseurl }}/images/figure3-2.png)
 
 Figure 3.2. Ending character values from of 100,000 Brownian motion simulations with $\Theta = 0$, $t = 100$, and $\sigma^2 = 1$. Panel (A) shows a histogram of the outcome of these simulations, while panel (B) shows a normal Q-Q plot for these data. If the data follow a normal distribution, the points in the Q-Q plot should form a straight line.
 
 Figure 3.3 shows how rate parameter $\sigma^2$ affects the rate of spread of Brownian walks. The panels show sets of 100 Brownian motion simulations run over 1000 time units for $\sigma^2 = 1$ (Panel A), $\sigma^2 = 5$ (Panel B), and $\sigma^2 = 25$ (Panel C). You can see that simulations with a higher rate parameter create a larger spread of trait values per unit time.
 
-
+![]({{ site.baseurl }}/images/figure3-3.png)
 
 Figure 3.3. Examples of Brownian motion. Each plot shows 100 replicates of simulated Brownian motion with a common starting value and the same time interval $t = 100$. The rate parameter $\sigma^2$ varies across the panels: (A) $\sigma^2 = 1$ (B) $\sigma^2 = 10$, and (C) $\sigma^2 = 25$. The right-hand column shows a histogram of the distribution of ending values for each set of 100 simulations.
 
@@ -49,8 +50,7 @@ If we let $\bar{z}(t)$ be the value of our character at time t, then we can deri
 
 First, $E[\bar{z}(t)] = \bar{z}(0)$. This means that the expected value of the character at any time $t$ is equal to the value of the character at time zero. Here the expected value refers to the mean of $\bar{z}(t)$ over many replicates. The intuitive meaning of this equation is that Brownian motion has no “trends,” and wanders equally in both positive and negative directions. If you take the mean of a large number of simulations of Brownian motion over any time interval, you will likely get a value close to $\bar{z}(0)$; as you increase the sample size, this mean will tend to get closer and closer to $\bar{z}(0)$.
 
-Second, each successive interval of the “walk” is independent. Brownian motion
-is a process in continuous time, and so time does not have discrete “steps.” However, if you sample the process at time $t$, and then again at time $t+\Delta t$, the change that occurs over these two intervals will be independent of one another. This is true of any two non-overlapping intervals sampled from a Brownian walk. It is worth noting that only the changes are independent, and that the value of the walk at time $t+\Delta t$ – which we can write as $\bar{z}(t+\Delta t)$ - is not independent of the value of the walk at time $t$, $\bar{z}(t)$. But the differences between successive steps [e.g. $\bar{z}(t)-\bar{z}(0)$ and $\bar{z}(t+\Delta t) - \bar{z}(t)$] are independent of each other and of $\bar{z}(0)$.
+Second, each successive interval of the “walk” is independent. Brownian motion is a process in continuous time, and so time does not have discrete “steps.” However, if you sample the process at time $t$, and then again at time $t+\Delta t$, the change that occurs over these two intervals will be independent of one another. This is true of any two non-overlapping intervals sampled from a Brownian walk. It is worth noting that only the changes are independent, and that the value of the walk at time $t+\Delta t$ – which we can write as $\bar{z}(t+\Delta t)$ - is not independent of the value of the walk at time $t$, $\bar{z}(t)$. But the differences between successive steps [e.g. $\bar{z}(t)-\bar{z}(0)$ and $\bar{z}(t+\Delta t) - \bar{z}(t)$] are independent of each other and of $\bar{z}(0)$.
 
 Finally, $\bar{z}(t) \sim N(\bar{z}(0),\sigma^2 t)$.That is, the value of $\bar{z}(t)$ is drawn from a normal distribution with mean $\bar{z}(0)$ and variance $\sigma ^ 2 t$. As we noted above, the parameter $\sigma ^ 2$ is important for Brownian motion models, as it describes the rate at which the process wanders through trait space. The overall variance of the process is that rate times the amount of time that has elapsed.
 
@@ -255,6 +255,7 @@ E[\bar{z}(t)] \sim N(\bar{z}(0), \sigma^2 t_1)
 $$
 </div>
 
+![]({{ site.baseurl }}/images/figure3-4.png)
 
 Figure 3.4. Brownian motion on a simple tree. A. Evolution in a single lineage over time period $t_1$. B. Evolution on a phylogenetic tree relating species a and b, with branch lengths as given by $t_1$, $t_2$, and $t_3$.
 
@@ -318,7 +319,7 @@ $$
 
 The matrix on the right side of equation 3.22 is commonly encountered in comparative biology, and will come up again in this book. We will call this matrix the phylogenetic variance-covariance matrix, $\mathbf{C}$. This matrix has a special structure. For phylogenetic trees with $n$ species, this is an $n x n$ matrix, with each row and column corresponding to one of the $n$ taxa in the tree. Along the diagonal are the total distances of each taxon from the root of the tree, while the off-diagonal elements are the total branch lengths shared by particular pairs of taxa. For example, $\mathbf{C}(1,2)$ and $\mathbf{C}(2,1)$ – which are equal because the matrix $\mathbf{C}$ is always symmetric – is the shared phylogenetic path length between the species in the first row – here, species a - and the species in the second row – here, species b. Under Brownian motion, these shared path lengths are proportional to the phylogenetic covariances of trait values. A full example of a phylogenetic variance-covariance matrix for a small tree is shown in Figure 3.5. This multivariate normal distribution completely describes the expected statistical distribution of traits on the tips of a phylogenetic tree if the traits evolve according to a Brownian motion model.
 
-
+![]({{ site.baseurl }}/images/figure3-5.png)
 
 Figure 3.5. Example of a phylogenetic tree (left) and its associated phylogenetic variance-covariance matrix $\mathbf{C}$ (right).
 
