@@ -189,26 +189,39 @@ Finally, we can also use a Bayesian approach to fit Brownian motion models to da
 
 2.	Given the current parameter values, select new proposed parameter values using the proposal density $Q(p'|p)$. For both parameter values, we will use a uniform proposal density with width $w_p$, so that:
 
+$\qquad$(eq. 4.9)
+<div>
+$$
+Q(p'|p) \sim U(p-\frac{w_p}{2}, p+\frac{w_p}{2})
+$$
+</div>
 
 3.	Calculate three ratios:
-a.	The prior odds ratio. This is the ratio of the probability of drawing the parameter values p and p’ from the prior. Since our priors are uniform, this is always 1.
-b.	The proposal density ratio. This is the ratio of probability of proposals going from p to p’ and the reverse. We have already declared a symmetrical proposal density, so that  =  and .
+a.	The prior odds ratio. This is the ratio of the probability of drawing the parameter values $p$ and $p’$ from the prior. Since our priors are uniform, this is always 1.
+b.	The proposal density ratio. This is the ratio of probability of proposals going from $p$ to $p’$ and the reverse. We have already declared a symmetrical proposal density, so that $Q(p'|p) = Q(p|p')$ and $a_2 = 1$.
 c.	The likelihood ratio. This is the ratio of probabilities of the data given the two different parameter values. We can calculate these probabilities from equation 4.5 above.
 
+$\qquad$(eq. 4.10)
+<div>
+$$
+a_3 = \frac{L(p'|D)}{L(p|D)} = \frac{P(D|p')}{P(D|p)}
+$$
+</div>
+
+4.	Find the product of the prior odds, proposal density ratio, and the likelihood ratio. In this case, both the prior odds and proposal density ratios are 1, so $a = a_3$.
 
 
-4.	Find the product of the prior odds, proposal density ratio, and the likelihood ratio. In this case, both the prior odds and proposal density ratios are 1, so:
+5.	Draw a random number $x$ from a uniform distribution between 0 and 1. If $x < a$, accept the proposed value of both parameters; otherwise reject, and retain the current value of the two parameters.
 
-
-5.	Draw a random number x from a uniform distribution between 0 and 1. If x < a, accept the proposed value of both parameters; otherwise reject, and retain the current value of the two parameters.
 6.	Repeat steps 2-5 a large number of times.
 
-Using the mammal body size data, I ran the analysis with uniform priors from (0, 0.5) for  and from (0, 10) for . I used an MCMC with 10,000 generations, discarding the first 1000 as burn-in. Sampling every 10 generations, I obtain parameter estimates of   = 0.10 (95% credible interval: 0.066 – 0.15) and  = 3.5 (95% credible interval: 2.3 – 5.3; Figure 4.5).
+Using the mammal body size data, I ran the analysis with uniform priors from (0, 0.5) for $\sigma_2$ and from (0, 10) for $\bar{z}(0)$. I used an MCMC with 10,000 generations, discarding the first 1000 as burn-in. Sampling every 10 generations, I obtain parameter estimates of $\sigma_2  = 0.10$ (95% credible interval: $0.066 – 0.15$) and $\bar{z}(0) = 3.5$ (95% credible interval: $2.3 – 5.3$; Figure 4.5).
 
+![]({{ site.baseurl }}/images/figure4-5.png)
 
-Figure 4.5. Bayesian analysis of body size evolution in mammals. Figure shows the likelihood profile (A) and posterior distributions for model parameters  (B) and  (C).
+Figure 4.5. Bayesian analysis of body size evolution in mammals. Figure shows the likelihood profile (A) and posterior distributions for model parameters $\sigma_2$ (B) and $\bar{z}(0)$ (C).
 
-Note that the parameter estimates from all three approaches (REML, ML, and Bayesian) were similar. Even the confidence/credible intervals varied a little bit but were of about the same size in all three cases. All of the approaches above are mathematically related and should, in general, return similar results. One might place higher value on the Bayesian credible intervals over confidence intervals from the Hessian of the likelihood surface, for two reasons: the Hessian leads to an estimate of the CI under certain conditions that may or may not be true for your analysis; and second, Bayesian credible intervals reflect overall uncertainty better than ML confidence intervals (see chapter 2).
+Note that the parameter estimates from all three approaches (REML, ML, and Bayesian) were similar. Even the confidence/credible intervals varied a little bit but were of about the same size in all three cases. All of the approaches above are mathematically related and should, in general, return similar results. One might place higher value on the Bayesian credible intervals over confidence intervals from the Hessian of the likelihood surface, for two reasons: the Hessian leads to an estimate of the CI under certain conditions that may or may not be true for your analysis; and second, Bayesian credible intervals reflect overall uncertainty better than ML confidence intervals (see [chapter 2]({{ site.baseurl }}/chapter2_stats/)).
 
 ## Section 4.5: Summary
 
