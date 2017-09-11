@@ -4,13 +4,13 @@
 
 Mammals come in a wide variety of shapes and sizes. Some species are incredibly tiny. For example, the bumblebee bat, weighing in at 2 g, competes for the title of smallest mammal with the slightly lighter (but also slightly longer) Etruscan shrew. Other species are huge, as anyone who has encountered a blue whale knows. Body size is important as a biological variable because it predicts so many other aspect of an animal’s life, from the physiology of heat exchange to the biomechanics of locomotion. Thus, the evolutionary rate of body size evolution is of great interest among mammalian biologists. Throughout this chapter, I will discuss the evolution of body size (and, eventually, territory size) across different species of mammals. The data I will analyze is taken from Garland et al. (1992).
 
-Sometimes one might be interested in calculating the rate of evolution of a particular character like body size in a certain clade, say, mammals. You have a phylogenetic tree with branch lengths that are proportional to time, and data on the phenotypes of species on the tips of that tree. It is usually a good idea to log-transform your data if they involve a measurement from a living thing (see Box 4.1, below). If we assume that the character has been evolving under a Brownian motion model, we have two parameters to estimate: , the starting value for the Brownian motion model – equivalent to the ancestral state of the character at the root of the tree – and 2, the diffusion rate of the character. It is this latter parameter that is commonly considered as the rate of evolution for comparative approaches.
+Sometimes one might be interested in calculating the rate of evolution of a particular character like body size in a certain clade, say, mammals<sup><a name="footnote3.1_back">[1](#footnote3.1)</a></sup>. You have a phylogenetic tree with branch lengths that are proportional to time, and data on the phenotypes of species on the tips of that tree. It is usually a good idea to log-transform your data if they involve a measurement from a living thing (see Box 4.1, below). If we assume that the character has been evolving under a Brownian motion model, we have two parameters to estimate: $\bar{z}(0)$, the starting value for the Brownian motion model – equivalent to the ancestral state of the character at the root of the tree – and $\sigma^2$, the diffusion rate of the character. It is this latter parameter that is commonly considered as the rate of evolution for comparative approaches.
 
 ***
 
-Box 4.1: Biology under the log
+### Box 4.1: Biology under the log
 
-One general rule for continuous traits in biology is to carry out a log-transformation (usually natural log, base e) of your data before undergoing any analysis. This also applies to comparative data. There are two main reasons for this, one statistical and the other biological. The statistical reason is that many methods assume that variables follow normal distributions. One can observe that, in general, biological variables have a distribution that is skewed to the right. A log transformation will often result in trait distributions that are closer to normal. But why is this the case? The answer is related to the biological reason for log-transformation. When you log transform a variable, the new scale for that variable is a ratio scale, so that a certain differences between points reflects a constant ratio of the two numbers represented by the points. So, for example, if any two numbers are separated by 0.693 units on a natural log scale, one will be exactly two times the other. Ratio scales make sense for living things because it is usually percentage changes rather than absolute changes that matter. For example, a change in body size of 1 mm might matter a lot for a termite, but be irrelevant for an elephant; whereas a change in body size of 50% might be expected to matter for them both.
+One general rule for continuous traits in biology is to carry out a log-transformation (usually natural log, base $e$) of your data before undergoing any analysis. This also applies to comparative data. There are two main reasons for this, one statistical and the other biological. The statistical reason is that many methods assume that variables follow normal distributions. One can observe that, in general, biological variables have a distribution that is skewed to the right. A log-transformation will often result in trait distributions that are closer to normal. But why is this the case? The answer is related to the biological reason for log-transformation. When you log transform a variable, the new scale for that variable is a ratio scale, so that a certain differences between points reflects a constant ratio of the two numbers represented by the points. So, for example, if any two numbers are separated by 0.693 units on a natural log scale, one will be exactly two times the other. Ratio scales make sense for living things because it is usually percentage changes rather than absolute changes that matter. For example, a change in body size of 1 mm might matter a lot for a termite, but be irrelevant for an elephant; whereas a change in body size of 50% might be expected to matter for them both.
 
 ***
 
@@ -20,53 +20,75 @@ The information required to estimate evolutionary rates is efficiently summarize
 
 We can understand the basic idea behind independent contrasts if we think about the branches in the phylogenetic tree as the historical “pathways” of evolution. Each branch on the tree represents a lineage that was alive at some time in the history of the Earth, and during that time experienced some amount of evolutionary change. We can imagine trying to measure that change initially by comparing sister taxa. We can compare the trait values of the two sister taxa by finding the difference in their trait values, and then compare that to the total amount of time they have had to evolve that difference. By doing this for all sister taxa in the tree, we will get an estimate of the average rate of character evolution (Figure 4.1A). But what about deeper nodes in the tree? We could use other non-sister species pairs, but then we would be counting some branches in the tree of life more than once (Figure 4.1B). Instead, we use a “pruning algorithm,” chopping off pairs of sister taxa to create a smaller tree (Figure 4.1C). Eventually, all of the nodes in the tree will be trimmed off – and the algorithm will finish. Independent contrasts provides a way to generalize the approach of comparing sister taxa so that we can quantify the rate of evolution throughout the whole tree.
 
+![]({{ site.baseurl }}/images/figure4-1.png)
 
 Figure 4.1. Pruning algorithm that can be used to identify five independent contrasts for a tree with six species. The numbered order in this figure is only one of two possibilities that work; one can also prune the tree in the order 1, 2, 4, 3, 5 and get identical results.
 
-A more precise algorithm describing how phylogenetic independent contrasts are calculated is provided in Box 4.2, below. Each contrast can be described as an estimate of the direction and amount of evolutionary change across the nodes in the tree. PICs are calculated from the tips of the tree towards the root, as differences between trait values at the tips of the tree and/or calculated average values at internal nodes. The differences themselves are sometimes called “raw contrasts.” These raw contrasts will all be statistically independent of each other under a wide range of evolutionary models – in fact, as long as each lineage in a phylogenetic tree evolves independently of every other lineage, regardless of the evolutionary model, the raw contrasts will be independent of each other. However, people almost never use raw contrasts because they are not identically distributed; each raw contrast has a different expected distribution that depends on the model of evolution and the branch lengths of the tree. Felsenstein divided the raw contrasts by their expected standard deviation under a Brownian motion, resulting in standardized contrasts. These standardized contrasts are, under a BM model, both independent and identically distributed, and can be used in a variety of statistical tests.
+A more precise algorithm describing how phylogenetic independent contrasts are calculated is provided in Box 4.2, below. Each contrast can be described as an estimate of the direction and amount of evolutionary change across the nodes in the tree. PICs are calculated from the tips of the tree towards the root, as differences between trait values at the tips of the tree and/or calculated average values at internal nodes. The differences themselves are sometimes called “raw contrasts.” These raw contrasts will all be statistically independent of each other under a wide range of evolutionary models – in fact, as long as each lineage in a phylogenetic tree evolves independently of every other lineage, regardless of the evolutionary model, the raw contrasts will be independent of each other. However, people almost never use raw contrasts because they are not identically distributed; each raw contrast has a different expected distribution that depends on the model of evolution and the branch lengths of the tree. Felsenstein (xxx) divided the raw contrasts by their expected standard deviation under a Brownian motion, resulting in standardized contrasts. These standardized contrasts are, under a BM model, both independent and identically distributed, and can be used in a variety of statistical tests.
 
 ***
-Box 4.2: Algorithm for PICs
+### Box 4.2: Algorithm for PICs
 
-One can calculate PICs using the algorithm from Felsenstein (1985). I reproduce this algorithm below. Keep in mind that this is an iterative algorithm – you repeat the five steps below once for each contrast, or n - 1 times over the whole tree (see Figure 4.1C as an example).
+One can calculate PICs using the algorithm from Felsenstein (1985). I reproduce this algorithm below. Keep in mind that this is an iterative algorithm – you repeat the five steps below once for each contrast, or $n - 1$ times over the whole tree (see Figure 4.1C as an example).
 
-1. Find two tips on the phylogeny that are adjacent (say nodes i and j) and have a common ancestor, say node k. Note that the choice of which node is i and which is j is arbitrary. We will have to account for this “arbitrary direction” property of PICs in any analyses where we use them to do statistics!
+1. Find two tips on the phylogeny that are adjacent (say nodes $i$ and $j$) and have a common ancestor, say node k. Note that the choice of which node is $i$ and which is $j$ is arbitrary. We will have to account for this “arbitrary direction” property of PICs in any analyses where we use them to do statistics!
 
 2. Compute the contrast, the difference between their two tip values:
 
-(eq. 4.1)
+$\qquad$(eq. 4.1)
+<div>
+$$
+\qquad c_{ij} = x_i - x_j
+$$
+</div>
 
-Under a Brownian motion model, cij has expectation zero and variance proportional to vi + vj.
+
+Under a Brownian motion model, $c_{ij}$ has expectation zero and variance proportional to $v_i + v_j$.
 
 3. Calculate the standardized contrast by dividing the raw contrast by its variance
 
-(eq. 4.2)
+$\qquad$(eq. 4.2)
+<div>
+$$
+s_{ij} = \frac{c_{ij}}{v_i + v_j} = \frac{x_i - x_j}{v_i + v_j}
+$$
+</div>
 
-Under a Brownian motion model, this contrast has mean zero and variance equal to the Brownian motion rate parameter.
+Under a Brownian motion model, this contrast has mean zero and variance equal to the Brownian motion rate parameter $\sigma^2$.
 
 4. Remove the two tips from the tree, leaving behind only the ancestor k, which now becomes a tip. Assign it the character value:
 
-(eq. 4.3)
+$\qquad$(eq. 4.3)
+<div>
+$$
+x_k = \frac{(1/v_i)x_i+(1/v_j)x_j}{1/v_1+1/v_j}
+$$
+</div>
 
-It is worth noting that xk is a weighted average of xi and xj, but does not represent an ancestral state reconstruction, since the value is only influenced by species that descend directly from that node and not other relatives.
+It is worth noting that $x_k$ is a weighted average of $x_i$ and $x_j$, but does not represent an ancestral state reconstruction, since the value is only influenced by species that descend directly from that node and not other relatives.
 
-5. Lengthen the branch below node k by increasing its length from vk to vk + vivj / (vi + vj). This accounts for the error in assigning a value to xk.
+5. Lengthen the branch below node k by increasing its length from $v_k$ to $v_k + v_i v_j / (v_i + v_j)$. This accounts for the error in assigning a value to $x_k$.
 
 ***
 
-
 As mentioned above, we can apply the algorithm of independent contrasts to learn something about rates of body size evolution in mammals. We have a phylogenetic tree with branch lengths as well as body mass estimates for 49 species (Figure 4.2). If we ln-transform mass and then apply the method above to our data on mammal body size, we obtain a set of 48 standardized contrasts. A histogram of these contrasts is shown as Figure 4.2.
 
+![]({{ site.baseurl }}/images/figure4-2.png)
 
 Figure 4.2. Histogram of PICs for ln-transformed mammal body mass on a phylogenetic tree with branch lengths in millions of years (from Garland et al. 1992).
 
-Note that each contrast is an amount of change (xi - xj) divided by a branch length (vi + vj), which is a measure of time. Thus, PICs from a single trait can be used to estimate , the net rate of evolution under a Brownian model. The PIC estimate of the evolutionary rate is:
+Note that each contrast is an amount of change $x_i - x_j$ divided by a branch length $v_i + v_j$, which is a measure of time. Thus, PICs from a single trait can be used to estimate , the net rate of evolution under a Brownian model. The PIC estimate of the evolutionary rate is:
 
 (eq. 4.4)
+<div>
+$$
+\hat{\sigma}_{PIC}^2 = \frac{\sum{s_{ij}^2}}{n-1}
+$$
+</div>
 
-Here, sij is the standardized independent contrast across branches i and j in the phylogenetic tree. The sum is calculated for all (i,j) pairs that are in the tree (P) - for a tree with n tips, there are exactly n-1 such pairs. If you are statistically savvy, you might note that this formula looks a bit like a variance. In fact, if we state that the contrasts have a mean of 0 (which they must because Brownian motion has no overall trends), then this is a formula to estimate the variance of the contrasts.
+Here, the sum is taken over all $s_{ij}$, the standardized independent contrast across all $(i,j)$ pairs of sister branches in the phylogenetic tree. For a fully bifurcating tree with n tips, there are exactly $n-1$ such pairs. If you are statistically savvy, you might note that this formula looks a bit like a variance. In fact, if we state that the contrasts have a mean of 0 (which they must because Brownian motion has no overall trends), then this is a formula to estimate the variance of the contrasts.
 
-If we calculate the mean sum of squared contrasts for the mammal body mass data, we obtain a rate estimate of  = 0.90.
+If we calculate the mean sum of squared contrasts for the mammal body mass data, we obtain a rate estimate of $\hat{\sigma}_{PIC}^2$ = 0.90.
 
 ## Section 4.3: Estimating rates using maximum likelihood
 
@@ -150,3 +172,10 @@ Note that the parameter estimates from all three approaches (REML, ML, and Bayes
 ## Section 4.5: Summary
 
 By fitting a Brownian motion model to phylogenetic comparative data, one can estimate the rate of evolution of a single character. In this chapter, I demonstrated three approaches to estimating that rate: PICs, maximum likelihood, and Bayesian MCMC. In the next chapter, we will discuss other models of evolution that can be fit to continuous characters on trees.
+
+## Footnotes
+
+<a name="footnote3.1">1</a>: Throughout this chapter, when I say rate I will mean the Brownian motion rate parameter. This is a little different from “traditional” estimates of evolutionary rate, like those estimated by paleontologists. For example, one might have measurements of trait in a series of fossils representing an evolutionary lineage sampled at different time periods. By calculating the amount of change over a given time interval, one can estimate an evolutionary rate. These rates can be expressed as Darwins (defined as the log-difference in trait values divided by time in years) or Haldanes (defined as the difference in trait values scaled by their standard deviations divided by time in generations). Both types of rates have been calculated from both fossil data and contemporary time-series data on evolution from both islands and lab experiments. Such rates best capture evolutionary trends, where the mean value of a trait is changing in a consistent way through time (for more information see Harmon 2014). Rates estimated by Brownian motion are a different type of “rate”, and some care must be taken to compare the two (see, e.g., Gingrich xxx). At the end of this chapter I will discuss the relationship between evolutionary rates calculated in Darwins and Haldanes with rates calculated by fitting Brownian motion models. [*back to main text*](#footnote3.1_back)
+
+
+## References
