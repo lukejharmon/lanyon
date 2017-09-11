@@ -207,7 +207,7 @@ Finally, Hansen and Martins [-@Martins1996-oi] consider the situation where popu
 (eq. 3.13)
 <div>
 $$
-E[\bar{z}(t+1)]=\bar{z}(t) h^2 s
+E[\bar{z}(t+1)]=\bar{z}(t) + h^2 s
 $$
 </div>
 
@@ -225,7 +225,7 @@ Over some longer period of time, traits will evolve so that they have expected m
 (eq. 3.15)
 <div>
 $$
-E[\bar{z}(t)]=(h^2 s)^t
+E[\bar{z}(t)]=t \cdot (h^2 s)
 $$
 </div>
 
@@ -240,7 +240,7 @@ $$
 $$
 </div>
 
-Note that the variance of this process is exactly identical to the variance among populations in a pure drift model (equation 3.9). Selection only changes the expectation for the species mean (of course, we assume that variation within populations and heritability are constant, which will only be true if selection is quite weak). In fact, equations 3.14 and 3.16 are exactly the same as what we would expect under a pure-drift model in the same population, but starting with a trait value equal to $\Theta = (h^2 s)^t$ . That is, from the perspective of data only on living species, these two pure drift and linear selection models are statistically indistinguishable.  The implications of this are striking: we can never find evidence for trends in evolution studying only living species.
+Note that the variance of this process is exactly identical to the variance among populations in a pure drift model (equation 3.9). Selection only changes the expectation for the species mean (of course, we assume that variation within populations and heritability are constant, which will only be true if selection is quite weak). In fact, equations 3.14 and 3.16 are exactly the same as what we would expect under a pure-drift model in the same population, but starting with a trait value equal to $\Theta = t \cdot (h^2 s)$ . That is, from the perspective of data only on living species, these two pure drift and linear selection models are statistically indistinguishable.  The implications of this are striking: we can never find evidence for trends in evolution studying only living species.
 
 In summary, we can describe three very different ways that traits might evolve under Brownian motion – pure drift, randomly varying selection, and varying stabilizing selection  – and one model, constant directional selection, which creates patterns among extant species that are indistinguishable from Brownian motion. There are certainly more such models, with a variety of assumptions. You might notice that none of these “Brownian” models are particularly detailed, especially for modeling evolution over long time scales. It is hard to imagine a case where a trait might be influenced only by random mutations of small effect over many alleles, or where selection would act in a truly random way from one generation to the next for millions of years. However, there are tremendous statistical benefits to using Brownian models for comparative analyses. Many of the results derived in this book, for example, are simple under Brownian motion but much more complex and different under other models.
 
