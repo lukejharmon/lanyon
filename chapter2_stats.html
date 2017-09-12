@@ -1,6 +1,10 @@
 ---
 layout: chapter
 title: Statistics
+output:
+  html_document:
+    toc: true
+    toc_float: true
 ---
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -12,6 +16,33 @@ title: Statistics
   <style type="text/css">code{white-space: pre;}</style>
 </head>
 <body>
+<div id="TOC">
+<ul>
+<li><a href="#chapter-2-fitting-statistical-models-to-data">Chapter 2: Fitting Statistical Models to Data</a><ul>
+<li><a href="#section-2.1-introduction">Section 2.1: Introduction</a></li>
+<li><a href="#section-2.2-standard-statistical-hypothesis-testing">Section 2.2: Standard statistical hypothesis testing</a></li>
+<li><a href="#section-2.3-maximum-likelihood">Section 2.3: Maximum likelihood</a><ul>
+<li><a href="#section-2.3a-what-is-a-likelihood">Section 2.3a: What is a likelihood?</a></li>
+<li><a href="#section-2.3b-the-likelihood-ratio-test">Section 2.3b: The likelihood ratio test</a></li>
+<li><a href="#section-2.3c-the-akaike-information-criterion-aic">Section 2.3c: The Akaike information criterion (AIC)</a></li>
+</ul></li>
+<li><a href="#section-2.4-bayesian-statistics">Section 2.4: Bayesian statistics</a><ul>
+<li><a href="#section-2.4a-bayes-theorem">Section 2.4a: Bayes Theorem</a></li>
+<li><a href="#section-2.4b-bayesian-mcmc">Section 2.4b: Bayesian MCMC</a></li>
+<li><a href="#get-a-starting-parameter-value.">1. Get a starting parameter value.</a></li>
+<li><a href="#propose-a-new-parameter.">2. Propose a new parameter.</a></li>
+<li><a href="#calculate-three-ratios.">3. Calculate three ratios.</a></li>
+<li><a href="#multiply.">4. Multiply.</a></li>
+<li><a href="#accept-or-reject.">5. Accept or reject.</a></li>
+<li><a href="#repeat.">6. Repeat.</a></li>
+<li><a href="#section-2.4c-bayes-factors">Section 2.4c: Bayes factors</a></li>
+</ul></li>
+<li><a href="#section-2.5-aic-versus-bayes">Section 2.5: AIC versus Bayes</a></li>
+<li><a href="#section-2.6-models-and-comparative-methods">Section 2.6: Models and comparative methods</a></li>
+<li><a href="#chapter-2-references">Chapter 2 References</a></li>
+</ul></li>
+</ul>
+</div>
 <h1 id="chapter-2-fitting-statistical-models-to-data">Chapter 2: Fitting Statistical Models to Data</h1>
 <h2 id="section-2.1-introduction">Section 2.1: Introduction</h2>
 <p>Evolution is the product of a thousand stories. Individual organisms are born, reproduce, and die. The net result of these individual life stories over broad spans of time is evolution. At first glance, it might seem impossible to model this process over more than one or two generations. And yet scientific progress relies on creating simple models and confronting them with data. How can we evaluate models that consider evolution over millions of generations?</p>
