@@ -143,7 +143,7 @@ The danger in optimization algorithms is that one can sometimes get stuck on loc
 
 In the particular case of fitting Brownian motion to trees, it turns out that even our fast algorithm for optimization was unnecessary. In this case, the maximum-likelihood estimate for each of these two parameters can be calculated analytically.
 
-(eq. 4.6)
+(eq. 4.7)
 <div>
 $$
 \hat{\bar{z}}(0) = (\mathbf{1} \mathbf{C}^{-1} \mathbf{1})^{-1} (\mathbf{1} \mathbf{C}^{-1} \mathbf{x})
@@ -152,7 +152,7 @@ $$
 
 and:
 
-(eq. 4.7)
+(eq. 4.8)
 <div>
 $$
 \hat{\sigma}_{ML}^2 = \frac
@@ -165,9 +165,9 @@ where $n$ is the number of taxa in the tree, $\mathbf{C} is the $n \times n$ var
 
 Applying this approach to mammal body size, we obtain estimates that are exactly the same as our results from numeric optimization: $\sigma^2 = 0.088$ and $\bar{z}(0) = 4.64$.
 
-Equation (4.7) is biased, and will consistently estimate rates of evolution that are a little too small; an unbiased version based on restricted maximum likelihood (REML) and used by Garland [-@Garland1992-kv] and others is:
+Equation (4.8) is biased, and will consistently estimate rates of evolution that are a little too small; an unbiased version based on restricted maximum likelihood (REML) and used by Garland [-@Garland1992-kv] and others is:
 
-(eq. 4.8)
+(eq. 4.9)
 $$
 \hat{\sigma}_{REML}^2 = \frac
 {(\mathbf{x} - \hat{\bar{z}}(0) \mathbf{1}) \mathbf{C}^{-1} (\mathbf{x} - \hat{\bar{z}}(0) \mathbf{1})}
@@ -189,7 +189,7 @@ Finally, we can also use a Bayesian approach to fit Brownian motion models to da
 
 2.	Given the current parameter values, select new proposed parameter values using the proposal density $Q(p'|p)$. For both parameter values, we will use a uniform proposal density with width $w_p$, so that:
 
-$\qquad$(eq. 4.9)
+$\qquad$(eq. 4.10)
 <div>
 $$
 Q(p'|p) \sim U(p-\frac{w_p}{2}, p+\frac{w_p}{2})
@@ -201,7 +201,7 @@ a.	The prior odds ratio. This is the ratio of the probability of drawing the par
 b.	The proposal density ratio. This is the ratio of probability of proposals going from $p$ to $p’$ and the reverse. We have already declared a symmetrical proposal density, so that $Q(p'|p) = Q(p|p')$ and $a_2 = 1$.
 c.	The likelihood ratio. This is the ratio of probabilities of the data given the two different parameter values. We can calculate these probabilities from equation 4.5 above.
 
-$\qquad$(eq. 4.10)
+$\qquad$(eq. 4.11)
 <div>
 $$
 a_3 = \frac{L(p'|D)}{L(p|D)} = \frac{P(D|p')}{P(D|p)}

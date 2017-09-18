@@ -6,53 +6,100 @@ As discussed in Chapter 4, body size is one of the most important traits of an a
 
 A wide variety of hypotheses can be framed as tests of correlations between continuously varying traits across species. For example, is the body size of a species related to its metabolic rate? How does the head length of a species relate to overall size, and do deviations from this relationship relate to an animal’s diet? These questions and others like them are of interest to evolutionary biologists because they allow us to test hypotheses about the factors in influencing character evolution over long time scales. These types of approaches allow us to answer some of the classic “why” questions in biology. Why are elephants so large? Why do some species of crocodilians have longer heads than others? If we find a correlation between two characters, we might suspect that there is a causal relationship between our two variables of interest - or perhaps that both of our measured variables share a common cause.
 
-In this chapter, I describe methods for using empiricial data to estimate the parameters of multivariate Brownian motion models. I will then describe a model-fitting approach to test for evolutionary correlations. This model fitting approach is simple but not commonly used. Finally, I will review two common statistical approaches to test for evolutionary correlations, phylogenetic independent contrasts and phylogenetic generalized least squares, and describe their relationship to model-fitting approaches.
+In this chapter, I describe methods for using empirical data to estimate the parameters of multivariate Brownian motion models. I will then describe a model-fitting approach to test for evolutionary correlations. This model fitting approach is simple but not commonly used. Finally, I will review two common statistical approaches to test for evolutionary correlations, phylogenetic independent contrasts and phylogenetic generalized least squares, and describe their relationship to model-fitting approaches.
 
 ## Section 5.2: What is evolutionary correlation?
 
 There is sometimes a bit of confusion among beginners as to what, exactly, we are doing when we carry out a comparative method, especially when testing for character correlations. Common language that comparative methods “control for phylogeny” or “remove the phylogeny from the data” is not necessarily enlightening. Another common explanation is that species are not statistically independent and that we must account for that with comparative methods, is accurate, I still don’t think this statement fully captures the tree-thinking perspective enabled by comparative methods. In this section, I will use the particular example of correlated evolution to try to illustrate the power of comparative methods and how they differ from standard statistical approaches that do not use phylogenies.
 
-In statistics, two variables can be correlated with one another. We might refer to this as a standard correlation. When two traits are correlated, it means that given the value of one trait – say, body size in mammals – one can predict the value of another – like home range area. Correlations can be positive (large values of x are associated with large values of y) or negative (large values of x are associated with small values of y). A surprisingly wide variety of hypotheses in biology can be tested by evaluating correlations between characters.
+In statistics, two variables can be correlated with one another. We might refer to this as a standard correlation. When two traits are correlated, it means that given the value of one trait – say, body size in mammals – one can predict the value of another – like home range area. Correlations can be positive (large values of $x$ are associated with large values of $y$) or negative (large values of $x$ are associated with small values of $y$). A surprisingly wide variety of hypotheses in biology can be tested by evaluating correlations between characters.
 
-In comparative biology, we are often interested more specifically in evolutionary correlations. Evolutionary correlations occur when two traits tend to evolve together due to processes like mutation, genetic drift, or natural selection. If there is an evolutionary correlation between two characters, it means that we can predict the magnitude and direction of changes in one character given knowledge of evolutionary changes in another. Just like standard correlations, evolutionary correlations can be positive (increases in trait x are associated with increases in y) or negative (decreases in x are associated with increases in y).
+In comparative biology, we are often interested more specifically in evolutionary correlations. Evolutionary correlations occur when two traits tend to evolve together due to processes like mutation, genetic drift, or natural selection. If there is an evolutionary correlation between two characters, it means that we can predict the magnitude and direction of changes in one character given knowledge of evolutionary changes in another. Just like standard correlations, evolutionary correlations can be positive (increases in trait $x$ are associated with increases in $y$) or negative (decreases in $x$ are associated with increases in $y$).
 
-We can now contrast standard correlations, testing the relationships between trait values across a set of species, with evolutionary correlations - where evolutionary changes in two traits are related to each other. This is a key distinction, because phylogenetic relatedness alone can lead to a relationship between two variables that are not, in fact, evolving together (Figure 5.1; also see Felsenstein 1985). In such cases, standard correlations will, correctly, tell us that one can predict the value of trait y by knowing the value of trait x, at least among extant species; but we would be misled if we tried to make any evolutionary causal inference from this pattern. In the example of Figure 5.1, we can only predict x from y because the value of trait x tells us which clade the species belongs to, which, in turn, allows reasonable prediction of y. In fact, this is a classical example of a case where correlation is not causation: the two variables are only correlated with one another because both are related to phylogeny.
+We can now contrast standard correlations, testing the relationships between trait values across a set of species, with evolutionary correlations - where evolutionary changes in two traits are related to each other. This is a key distinction, because phylogenetic relatedness alone can lead to a relationship between two variables that are not, in fact, evolving together (Figure 5.1; also see Felsenstein 1985). In such cases, standard correlations will, correctly, tell us that one can predict the value of trait $y$ by knowing the value of trait $x$, at least among extant species; but we would be misled if we tried to make any evolutionary causal inference from this pattern. In the example of Figure 5.1, we can only predict $x$ from $y$ because the value of trait $x$ tells us which clade the species belongs to, which, in turn, allows reasonable prediction of $y$. In fact, this is a classical example of a case where correlation is not causation: the two variables are only correlated with one another because both are related to phylogeny.
 
-If we want to test hypotheses about trait evolution, we should specifically test evolutionary correlations. If we find a relationship among the independent contrasts for two characters, for example, then we can infer that changes in each character are related to changes in the other – an inference that is much closer to most biological hypotheses about why characters might be related. In this case, then, we can think of statistical comparative methods as focused on disentangling patterns due to phylogenetic relatedness from patterns due to evolutionary correlations.
+If we want to test hypotheses about trait evolution, we should specifically test evolutionary correlations<sup><a name="footnote5.1_back">[1](#footnote5.1)</a></sup>. If we find a relationship among the independent contrasts for two characters, for example, then we can infer that changes in each character are related to changes in the other – an inference that is much closer to most biological hypotheses about why characters might be related. In this case, then, we can think of statistical comparative methods as focused on disentangling patterns due to phylogenetic relatedness from patterns due to evolutionary correlations.
 
 ![]({{ site.baseurl }}/images/figure5-1.png)
 
-Figure 5.1. Examples from simulations of pure birth trees (b = 1) with n = 100 species. Plotted points represent character values for extant species in each clade. In all three panels, .   varies from  (panel A),  (panel B), and   (panel C). Note the (apparent) negative correlation in panel A, which can be explained by phylogenetic relatedness of species within two clades. Only panels B and C show data with an evolutionary correlation. However, this would be difficult or impossible to conclude without using comparative methods.
+Figure 5.1. Examples from simulations of pure birth trees ($b = 1$) with $n = 100$ species. Plotted points represent character values for extant species in each clade. In all three panels, $\sigma_x^2 = \sigma_y^2 = 1$. $\sigma_{xy}^2$ varies with $\sigma_{xy}^2 = 0$ (panel A), $\sigma_{xy}^2 = 0.8$ (panel B), and  $\sigma_{xy}^2 = -0.8$ (panel C). Note the (apparent) negative correlation in panel A, which can be explained by phylogenetic relatedness of species within two clades. Only panels B and C show data with an evolutionary correlation. However, this would be difficult or impossible to conclude without using comparative methods.
 
 ## Section 5.3: Modeling the evolution of correlated characters
 
 We can model the evolution of multiple (potentially correlated) continuous characters using a multivariate Brownian motion model. This model is similar to univariate Brownian motion (see chapter 3), but can model the evolution of many characters at the same time. As with univariate Brownian motion, trait values change randomly in both direction and distance over any time interval. Here, though, these changes are drawn from multivariate normal distributions. Multivariate Brownian motion can encompass the situation where each character evolves independently of one another, but can also describe situations where characters evolve in a correlated way.
 
-We can describe multivariate Brownian motion with a set of parameters that are described by , a vector of phylogenetic means for all m characters (). This vector represents the starting point in m-dimensional space for our random walk. In the context of comparative methods, this is the character measurements for the lineage at the root of the tree. Additionally, we have an evolutionary rate matrix R:
+We can describe multivariate Brownian motion with a set of parameters that are described by $\mathbf{a}$, a vector of phylogenetic means for all $m$ characters:
 
 (eq. 5.1)
+<div>
+$$
+\mathbf{a} =
+\begin{bmatrix}
+\bar{z}_1 (0) & \bar{z}_2 (0) & \dots & \bar{z}_m (0)\\
+\end{bmatrix}
+$$
+</div>
 
-Here, the rate parameter for each axis () is along the matrix diagonal. Off-diagonal elements represent evolutionary covariances between pairs of axes (note that ). It is worth noting that each individual character evolves under a Brownian motion process. Covariances among characters, though, potentially make this model distinct from one where each character evolves independently of all the others (Figure 5.2).
+This vector represents the starting point in $m$-dimensional space for our random walk. In the context of comparative methods, this is the character measurements for the lineage at the root of the tree. Additionally, we have an evolutionary rate matrix $\mathbf{R}$:
+
+(eq. 5.2)
+<div>
+$$
+\mathbf{R} =
+\begin{bmatrix}
+    \sigma_1^2 & \sigma_{21} & \dots & \sigma_{n1}\\
+    \sigma_{21} & \sigma_2^2 & \dots & \vdots\\
+    \vdots & \vdots & \ddots & \vdots\\
+    \sigma_{1n} & \dots & \dots & \sigma_m^2\\
+\end{bmatrix}$$
+</div>
+
+Here, the rate parameter for each axis ($\sigma_i^2$) is along the matrix diagonal. Off-diagonal elements represent evolutionary covariances between pairs of axes (note that $\sigma_{ij} = \sigma_{ji}$). It is worth noting that each individual character evolves under a Brownian motion process. Covariances among characters, though, potentially make this model distinct from one where each character evolves independently of all the others (Figure 5.2).
 
 ![]({{ site.baseurl }}/images/figure5-2.png)
 
 Figure 5.2. Hypothetical pathways of evolution (arrows) for (A) two uncorrelated traits, (B) two traits evolving with a positive covariance, and (C) two traits evolving with a negative covariance. Note that in (B), when trait 1 gets larger trait 2 also gets larger, but in (C) positive changes in trait 1 are paired with negative changes in trait 2.
 
-When you have data for multiple continuous characters across many species along with a phylogenetic tree, you can fit a multivariate Brownian motion model to the data. The equations for estimating  (the estimated vector of phylogenetic means for all characters) and  (the estimated evolutionary rate matrix) are:
-
-(eq. 5.2)
+When you have data for multiple continuous characters across many species along with a phylogenetic tree, you can fit a multivariate Brownian motion model to the data, as discussed in Chapter 3. The equations for estimating $\hat{\mathbf{a}}$ (the estimated vector of phylogenetic means for all characters) and $\hat{\mathbf{R}}$ (the estimated evolutionary rate matrix) are (Revell and Harmon, Hohenlohe):
 
 (eq. 5.3)
+<div>
+$$
+\hat{\mathbf{a}} = [(\mathbf{1} \mathbf{C}^{-1} \mathbf{1})^{-1}(\mathbf{1} \mathbf{C}^{-1} \mathbf{X})]^\intercal
+$$
+</div>
 
-Note here that we use X to denote the n (species) x m (traits) matrix of all traits across all species. Note the similarity between these multivariate equations (5.2 and 5.3) and their univariate equivalents (equations 4.6 and 4.7).
 
-To calculate the likelihood, we can use the fact that, under our multivariate Brownian motion model, the joint distribution of all traits across all species has a multivariate normal distribution. We find the variance-covariance matrix that describes that model by combining the two matrices R and C into a single large matrix using the Kroeneker product:
+(eq. 5.4)
+<div>
+$$
+\hat{\mathbf{R}} = \frac{(\mathbf{X} - \mathbf{1} \mathbf{\hat{a}})^\intercal \mathbf{C}^{-1} (\mathbf{X} - \mathbf{1} \mathbf{\hat{a}})}{n}
+$$
+</div>
 
-(eq. 5.4) 	
 
-This matrix V is nm x nm. We can then substitute V for C in equation (4.5) to calculate the likelihood:
+Note here that we use $\mathbf{X}$ to denote the $n$ (species) $\times m$ (traits) matrix of all traits across all species. Note the similarity between these multivariate equations (5.3 and 5.4) and their univariate equivalents (equations 4.6 and 4.7).
 
-(eq. 5.5)
+To calculate the likelihood, we can use the fact that, under our multivariate Brownian motion model, the joint distribution of all traits across all species has a multivariate normal distribution. Again following Chapter 3, we find the variance-covariance matrix that describes that model by combining the two matrices $\mathbf{R}$ and $\mathbf{C}$ into a single large matrix using the Kroeneker product:
+
+(eq. 5.5) 	
+<div>
+$$
+\mathbf{V} = \mathbf{R} \otimes \mathbf{C}
+$$
+</div>
+
+This matrix $\mathbf{V}$ is $nm \times nm$. We can then substitute $\mathbf{V}$ for $\mathbf{C}$ in equation (4.5) to calculate the likelihood:
+
+(eq. 5.6)
+<div>
+$$
+L(\mathbf{x}_{nm} | \mathbf{a}, \mathbf{R}, \mathbf{C}) =
+\frac
+{e^{-1/2 (\mathbf{x}_{nm}- \mathbf{D} \cdot \mathbf{a})^\intercal (\mathbf{V})^{-1} (\mathbf{x}_nm-\mathbf{D} \cdot \mathbf{a})}}
+{\sqrt{(2 \pi)^{nm} det(\mathbf{V})}}
+$$
+</div>
 
 Here D is an nm x m design matrix where each element Dij is 1 if  and 0 otherwise.  is a single vector with all trait values for all species, listed so that the first n elements in the vector are trait 1, the next n are for trait 2, and so on:
 
@@ -164,3 +211,9 @@ PGLS analysis, as described above, assumes that characters are evolving under a 
 ## Section 5.6: Summary
 
 There are at least four methods for testing for an evolutionary correlation between continuous characters: likelihood ratio test, AIC model selection, PICs, and PGLS. These four methods as presented all make the same assumptions about the data and, therefore, have quite similar statistical properties (even simulating under a multivariate Brownian motion model, which deviates from the model assumptions, both PICs and PGLS have appropriate Type I error rates and very similar power). Any of these are good choices for testing for the presence of an evolutionary correlation in your data.
+
+## Section 5.7: Footnotes
+
+<a name="footnote5.1">1</a>: We might also want to carry out linear regression, which is related to correlation analysis but distinct. We will show examples of phylogenetic regression at the end of this chapter.
+
+## Section 5.8: References

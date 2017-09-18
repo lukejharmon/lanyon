@@ -381,7 +381,7 @@ $$
 $$
 </div>
 
-The two traits follow a multivariate normal distribution with mean a and variance-covariance matrix $\mathbf{V}.
+The two traits follow a multivariate normal distribution with mean a and variance-covariance matrix $\mathbf{V}$.
 
 For the simple tree in figure 3.4b,
 

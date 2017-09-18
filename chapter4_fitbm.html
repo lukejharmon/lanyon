@@ -138,14 +138,14 @@ $$</span><br /></p>
 <p>This gives standard errors of 0.13 (for <span class="math inline"><em>σ</em><sup>2</sup></span>) and 0.72 [for <span class="math inline">$\bar{z}(0)$</span>]. If we assume the error around these estimates is approximately normal, we can create confidence estimates by adding and subtracting twice the standard error. We then obtain 95% CIs of <span class="math inline">0.06–0.11</span> (for <span class="math inline"><em>σ</em><sup>2</sup></span>) and <span class="math inline">3.22 − 6.06</span> [for <span class="math inline">$\bar{z}(0)$</span>].</p>
 <p>The danger in optimization algorithms is that one can sometimes get stuck on local peaks. More elaborate algorithms repeated for multiple starting points can help solve this problem, but are not needed for simple Brownian motion on a tree as considered here. Numerical optimization is a pressing problem in phylogenetic comparative methods that I will return to later in the book.</p>
 <p>In the particular case of fitting Brownian motion to trees, it turns out that even our fast algorithm for optimization was unnecessary. In this case, the maximum-likelihood estimate for each of these two parameters can be calculated analytically.</p>
-(eq. 4.6)
+(eq. 4.7)
 <div>
 <p><br /><span class="math display">$$
 \hat{\bar{z}}(0) = (\mathbf{1} \mathbf{C}^{-1} \mathbf{1})^{-1} (\mathbf{1} \mathbf{C}^{-1} \mathbf{x})
 $$</span><br /></p>
 </div>
 <p>and:</p>
-(eq. 4.7)
+(eq. 4.8)
 <div>
 <p><br /><span class="math display">$$
 \hat{\sigma}_{ML}^2 = \frac
@@ -155,8 +155,8 @@ $$</span><br /></p>
 </div>
 <p>where <span class="math inline"><em>n</em></span> is the number of taxa in the tree, $ is the <span class="math inline"><em>n</em> × <em>n</em></span> variance-covariance matrix under Brownian motion for tip characters given the phylogenetic tree, <span class="math inline"><em>x</em></span> is an <span class="math inline"><em>n</em> × 1</span> vector of trait values for tip species in the tree, <span class="math inline"><strong>1</strong></span> is an <span class="math inline"><em>n</em> × 1</span> column vector of ones, <span class="math inline">$\hat{\bar{z}}(0)$</span> is the estimated root state for the character, and <span class="math inline">$\hat{\sigma}_{ML}^2$</span> is the estimated net rate of evolution.</p>
 <p>Applying this approach to mammal body size, we obtain estimates that are exactly the same as our results from numeric optimization: <span class="math inline"><em>σ</em><sup>2</sup> = 0.088</span> and <span class="math inline">$\bar{z}(0) = 4.64$</span>.</p>
-<p>Equation (4.7) is biased, and will consistently estimate rates of evolution that are a little too small; an unbiased version based on restricted maximum likelihood (REML) and used by Garland <span class="citation">(<a href="#ref-Garland1992-kv">1992</a>)</span> and others is:</p>
-(eq. 4.8) <br /><span class="math display">$$
+<p>Equation (4.8) is biased, and will consistently estimate rates of evolution that are a little too small; an unbiased version based on restricted maximum likelihood (REML) and used by Garland <span class="citation">(<a href="#ref-Garland1992-kv">1992</a>)</span> and others is:</p>
+(eq. 4.9) <br /><span class="math display">$$
 \hat{\sigma}_{REML}^2 = \frac
 {(\mathbf{x} - \hat{\bar{z}}(0) \mathbf{1}) \mathbf{C}^{-1} (\mathbf{x} - \hat{\bar{z}}(0) \mathbf{1})}
 {n-1}
@@ -171,7 +171,7 @@ $$</span><br />
 <li><p>Sample a set of starting parameter values, <span class="math inline"><em>σ</em><sup>2</sup></span> and <span class="math inline">$\bar{z}(0)$</span> from their prior distributions. For this example, we can set our prior distribution as uniform between 0 and 1 for <span class="math inline"><em>σ</em><sup>2</sup></span> and uniform from -1 to +1 for <span class="math inline">$\bar{z}(0)$</span>.</p></li>
 <li><p>Given the current parameter values, select new proposed parameter values using the proposal density <span class="math inline"><em>Q</em>(<em>p</em>′|<em>p</em>)</span>. For both parameter values, we will use a uniform proposal density with width <span class="math inline"><em>w</em><sub><em>p</em></sub></span>, so that:</p></li>
 </ol>
-<span class="math inline">  </span>(eq. 4.9)
+<span class="math inline">  </span>(eq. 4.10)
 <div>
 <p><br /><span class="math display">$$
 Q(p'|p) \sim U(p-\frac{w_p}{2}, p+\frac{w_p}{2})
@@ -185,7 +185,7 @@ $$</span><br /></p>
 <li>The proposal density ratio. This is the ratio of probability of proposals going from <span class="math inline"><em>p</em></span> to <span class="math inline"><em>p</em>’</span> and the reverse. We have already declared a symmetrical proposal density, so that <span class="math inline"><em>Q</em>(<em>p</em>′|<em>p</em>)=<em>Q</em>(<em>p</em>|<em>p</em>′)</span> and <span class="math inline"><em>a</em><sub>2</sub> = 1</span>.</li>
 <li>The likelihood ratio. This is the ratio of probabilities of the data given the two different parameter values. We can calculate these probabilities from equation 4.5 above.</li>
 </ol>
-<span class="math inline">  </span>(eq. 4.10)
+<span class="math inline">  </span>(eq. 4.11)
 <div>
 <p><br /><span class="math display">$$
 a_3 = \frac{L(p'|D)}{L(p|D)} = \frac{P(D|p')}{P(D|p)}
