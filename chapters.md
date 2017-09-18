@@ -10,3 +10,7 @@ title: Chapters
 [Chapter 3]({{ site.baseurl }}/chapter3_bmintro/) - Introduction to Brownian Motion
 
 [Chapter 4]({{ site.baseurl }}/chapter4_fitbm/) - Fitting Brownian Motion
+
+[Chapter 5]({{ site.baseurl }}/chapter5_mvbm/) - Multivariate Brownian Motion
+
+[Chapter 6]({{ site.baseurl }}/chapter6_beyondbm/) - Beyond Brownian Motion
