@@ -1,12 +1,14 @@
 # Chapter 5: Fitting Brownian Motion Models to Multiple Characters
 
+## Section 5.1: Introduction
+
 As discussed in Chapter 4, body size is one of the most important traits of an animal. In particular, scientists often argue that body size is important because of its close relationships to almost all of an animal’s ecological interactions, from whether it is a predator or prey to its metabolic rate. If that is true, we should be able to use body size to predict other traits that might be related through shared evolutionary processes. We need to understand how the evolution of body size is correlated with other species’ characteristics.In this chapter, we will use the example of home range size, which is the area where an animal carries out its day-to-day activities. We will again use data from Garland et al. (xxx) and test for a relationship between body size and the size of a mammal’s home range.
 
 A wide variety of hypotheses can be framed as tests of correlations between continuously varying traits across species. For example, is the body size of a species related to its metabolic rate? How does the head length of a species relate to overall size, and do deviations from this relationship relate to an animal’s diet? These questions and others like them are of interest to evolutionary biologists because they allow us to test hypotheses about the factors in influencing character evolution over long time scales. These types of approaches allow us to answer some of the classic “why” questions in biology. Why are elephants so large? Why do some species of crocodilians have longer heads than others? If we find a correlation between two characters, we might suspect that there is a causal relationship between our two variables of interest - or perhaps that both of our measured variables share a common cause.
 
 In this chapter, I describe methods for using empiricial data to estimate the parameters of multivariate Brownian motion models. I will then describe a model-fitting approach to test for evolutionary correlations. This model fitting approach is simple but not commonly used. Finally, I will review two common statistical approaches to test for evolutionary correlations, phylogenetic independent contrasts and phylogenetic generalized least squares, and describe their relationship to model-fitting approaches.
 
-What is evolutionary correlation?
+## Section 5.2: What is evolutionary correlation?
 
 There is sometimes a bit of confusion among beginners as to what, exactly, we are doing when we carry out a comparative method, especially when testing for character correlations. Common language that comparative methods “control for phylogeny” or “remove the phylogeny from the data” is not necessarily enlightening. Another common explanation is that species are not statistically independent and that we must account for that with comparative methods, is accurate, I still don’t think this statement fully captures the tree-thinking perspective enabled by comparative methods. In this section, I will use the particular example of correlated evolution to try to illustrate the power of comparative methods and how they differ from standard statistical approaches that do not use phylogenies.
 
@@ -18,12 +20,11 @@ We can now contrast standard correlations, testing the relationships between tra
 
 If we want to test hypotheses about trait evolution, we should specifically test evolutionary correlations. If we find a relationship among the independent contrasts for two characters, for example, then we can infer that changes in each character are related to changes in the other – an inference that is much closer to most biological hypotheses about why characters might be related. In this case, then, we can think of statistical comparative methods as focused on disentangling patterns due to phylogenetic relatedness from patterns due to evolutionary correlations.
 
-
-
+![]({{ site.baseurl }}/images/figure5-1.png)
 
 Figure 5.1. Examples from simulations of pure birth trees (b = 1) with n = 100 species. Plotted points represent character values for extant species in each clade. In all three panels, .   varies from  (panel A),  (panel B), and   (panel C). Note the (apparent) negative correlation in panel A, which can be explained by phylogenetic relatedness of species within two clades. Only panels B and C show data with an evolutionary correlation. However, this would be difficult or impossible to conclude without using comparative methods.
 
-Modeling the evolution of correlated characters
+## Section 5.3: Modeling the evolution of correlated characters
 
 We can model the evolution of multiple (potentially correlated) continuous characters using a multivariate Brownian motion model. This model is similar to univariate Brownian motion (see chapter 3), but can model the evolution of many characters at the same time. As with univariate Brownian motion, trait values change randomly in both direction and distance over any time interval. Here, though, these changes are drawn from multivariate normal distributions. Multivariate Brownian motion can encompass the situation where each character evolves independently of one another, but can also describe situations where characters evolve in a correlated way.
 
@@ -33,7 +34,7 @@ We can describe multivariate Brownian motion with a set of parameters that are d
 
 Here, the rate parameter for each axis () is along the matrix diagonal. Off-diagonal elements represent evolutionary covariances between pairs of axes (note that ). It is worth noting that each individual character evolves under a Brownian motion process. Covariances among characters, though, potentially make this model distinct from one where each character evolves independently of all the others (Figure 5.2).
 
-
+![]({{ site.baseurl }}/images/figure5-2.png)
 
 Figure 5.2. Hypothetical pathways of evolution (arrows) for (A) two uncorrelated traits, (B) two traits evolving with a positive covariance, and (C) two traits evolving with a negative covariance. Note that in (B), when trait 1 gets larger trait 2 also gets larger, but in (C) positive changes in trait 1 are paired with negative changes in trait 2.
 
@@ -59,11 +60,11 @@ Here D is an nm x m design matrix where each element Dij is 1 if  and 0 otherwis
 
 Again, we can find the value of the likelihood at its maximum by calculating  using eq. 5.5.
 
-Testing for evolutionary correlations
+## Section 5.4: Testing for evolutionary correlations
 
 There are many ways to test for evolutionary correlations between two characters. Traditional methods like PICs and PGLS work great for testing evolutionary regression, which is very similar to testing for evolutionary correlations. However, when using those methods the connection to actual models of character evolution can remain opaque. Thus, I will first present approaches to test for correlated evolution based on model selection using AIC and Bayesian analysis. I will then return to “standard” methods for evolutionary regression at the end of the chapter.
 
-Testing for character correlations using maximum likelihood and AIC
+### Section 5.4a: Testing for character correlations using maximum likelihood and AIC
 
 To test for an evolutionary correlation between two characters, we are really interested in the elements in the matrix R. For two characters, x and y, R can be written as:
 
@@ -77,6 +78,7 @@ We can calculate an ML estimate of the parameters in RH2 using equation 5.3. The
 
 To compare these two models, we calculate the likelihood of each using equation 5.5. We can then compare these two likelihoods using either a likelihood ratio test or by comparing AICc scores (see chapter 2).  
 
+![]({{ site.baseurl }}/images/figure5-3.png)
 
 Figure 5.3. The relationship between mammal body mass and home-range size. Solid line is a regression line from a standard analysis, dotted line from PGLS, which uses the phylogenetic tree (see below for a detailed description).
 
@@ -97,7 +99,7 @@ It is worth noting again that only the estimates of the evolutionary correlation
 
 A likelihood ratio test gives  = 33.0, and P << 0.001, rejecting the null hypothesis. The difference in AICc scores is 30.9, and the Akaike weight for model 2 is effectively 1.0. Both ways of comparing these two models give strong support for hypothesis 2. We can conclude that there is an evolutionary correlation between body mass and home range size in mammals. What this means in evolutionary terms is that, across mammals, evolutionary changes in body mass tend to covary with changes in home range.
 
-Testing for character correlations using Bayesian model selection
+### Section 5.4b: Testing for character correlations using Bayesian model selection
 
 We can also implement a Bayesian approach to testing for the correlated evolution of two characters. The simplest way to do this is just to use the standard algorithm for Bayesian MCMC to fit a correlated model to the two characters. We can modify the algorithm presented in chapter 2 as follows:
 
@@ -120,10 +122,11 @@ c.	The likelihood ratio. This is the ratio of probabilities of the data given th
 
 We can then inspect the posterior distribution for the parameter  is significantly greater than (or less than) zero. As an example, I ran this MCMC for 100,000 generations, discarding the first 10,000 generations as burn-in. I then sampled the posterior distribution every 100 generations, and obtained the following parameter estimates:  = 0.26 (95% CI: 0.18 - 0.38),  = 0.10 (95% CI: 0.06 -0.15), and = 0.11 (95% CI: 0.06 - 0.17; see Figure 5.4). These results are comparable to our ML estimates. Furthermore, the 95% CI for  does not overlap with 0; in fact, none of the 901 posterior estimates of  are less than zero.
 
+![]({{ site.baseurl }}/images/figure5-4.png)
 
 Figure 5.4. Bayesian analysis of evolutionary correlation. A. likelihood trace, B. posterior distribution of , C. posterior distribution of .
 
-Traditional approaches: PIC, PGLS
+### Section 5.5c: Testing for character correlations using traditional approaches (PIC, PGLS)
 
 The approach outlined above, which tests for an evolutionary correlation among characters using model selection, is not typically applied in the comparative biology literature. Instead, most tests of character correlation rely on phylogenetic regression using one of two methods: phylogenetic independent contrasts (PICs) and phylogenetic general least squares (PGLS). PGLS is actually mathematically identical to PIC in the simple case described here, and more flexible than PIC for other models and types of characters. Here I will review both PIC and PGLS and explain how they work and how they relate to the models described above.
 
@@ -132,8 +135,9 @@ Phylogenetic independent contrasts can be used to carry out a regression test fo
 
 For mammal homerange and body mass, a PIC regression test shows a significant correlation between the two traits (P << 0.0001).  
 
+![]({{ site.baseurl }}/images/figure5-5.png)
 
-Figure 5.4. Regression based on independent contrasts. The regression line is forced through the origin.
+Figure 5.5. Regression based on independent contrasts. The regression line is forced through the origin.
 
 There is one drawback to PIC regression analysis, though – one does not recover an estimate of the intercept of the regression of y on x – that is, the value of y one would expect when x = 0. The easiest way to get this parameter estimate is to instead use Phylogenetic Generalized Least Squares (PGLS). PGLS uses the common statistical machinery of generalized least squares, and applies it to phylogenetic comparative data. In normal generalized least squares, one constructs a model of the relationship between y and x, as:
 
@@ -157,6 +161,6 @@ Of course, another difference is that PICs and PGLS use regression, while the ap
 
 PGLS analysis, as described above, assumes that characters are evolving under a Brownian motion model. However, one can change the structure of the error variance-covariance matrix to reflect other models of evolution, such as OU. We return to this topic in a later chapter.
 
-Summary
+## Section 5.6: Summary
 
 There are at least four methods for testing for an evolutionary correlation between continuous characters: likelihood ratio test, AIC model selection, PICs, and PGLS. These four methods as presented all make the same assumptions about the data and, therefore, have quite similar statistical properties (even simulating under a multivariate Brownian motion model, which deviates from the model assumptions, both PICs and PGLS have appropriate Type I error rates and very similar power). Any of these are good choices for testing for the presence of an evolutionary correlation in your data.
