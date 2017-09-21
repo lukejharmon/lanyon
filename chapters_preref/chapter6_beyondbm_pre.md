@@ -1,4 +1,6 @@
-# Chapter 6: Beyond Brownian Motion 
+# Chapter 6: Beyond Brownian Motion
+
+## Section 6.1: Introduction
 
 Detailed studies of contemporary evolution have revealed a rich variety of processes that influence how traits evolve through time. Consider the famous studies of Darwin’s finches, Geospiza, in the Galapagos islands carried out by Peter and Rosemary Grant, among others. These studies have documented the action of natural selection on traits from one generation to the next. One can see very clearly how changes in climate – especially the amount of rainfall – affect the availability of different types of seeds. These changing resources in turn affect which individuals survive within the population. When natural selection acts on traits that can be inherited from parents to offspring, those traits evolve.
 
@@ -6,11 +8,11 @@ One can obtain a dataset of morphological traits, including measurements of body
 
 In this chapter, I will consider four ways that comparative methods can move beyond simple Brownian motion models: by transforming the variance-covariance matrix describing trait covariation among species, by incorporating variation in rates of evolution, by accounting for evolutionary constraints, and by modeling adaptive radiation, species interactions, and other biological processes. It should be apparent that the models listed here do not span the complete range of possibilities, and so my list is not meant to be comprehensive. Instead, I hope that readers will view these as examples, and that future researchers will add to this list and enrich the set of models that we can fit to data.
 
-Transforming the evolutionary variance-covariance matrix
+## Section 6.2: Transforming the evolutionary variance-covariance matrix
 
 In 1999, Mark Pagel introduced three statistical models that allow one to test whether data deviates from a constant-rate Mk process evolving on a phylogenetic tree. Each of these three models is a statistical transformation of the elements of the phylogenetic variance-covariance matrix, C, that we first encountered in chapter 3. All three can also be thought of as a transformation of the branch lengths of the tree, which adds a more intuitive understanding of the statistical properties of the tree transformations (Figure 6.1). We can transform the tree and then simulate characters under a Brownian motion model on the transformed tree, generating very different patterns than if they had been simulated on the starting tree.
 
-
+![]({{ site.baseurl }}/images/figure6-1.png)
 
 Figure 6.1. Branch length transformations effectively alter the relative rate of evolution on certain branches in the tree. If we make a branch longer, there is more “evolutionary time” for characters to change, and so we are effectively increasing the rate of evolution along that branch.
 
@@ -84,19 +86,19 @@ kappa: κ
 
 Note that Brownian motion is the preferred model with the lowest AICc score, but also that all four AICc scores are within 3 units – meaning that we cannot easily distinguish among them as models for our mammal data.
 
-Variation in rates of trait evolution across clades
+## Section 6.3: Variation in rates of trait evolution across clades
 
 One assumption of Brownian motion is that the rate of change is constant, both through time and across lineages. However, some of the most interesting hypotheses in evolution relate to differences in the rates of character change across clades. For example, key innovations are evolutionary events that open up new areas of niche space to evolving clades. This new niche space is an ecological opportunity that can then be filled by newly evolved species. If this were happening in a clade, we might expect that rates of trait evolution would be elevated following the acquisition of the key innovation.
 
 There are several methods that one can use to test for differences in the rate of evolution across clades. First, one can compare the magnitude of independent contrasts across clades; second, one can use model comparison approaches to compare the fit of single- and multiple-rate models to data on trees; and third, one can use a Bayesian approach combined with reversible-jump machinery to try to find the places on the tree where rate shifts have occurred. I will explain each of these methods in turn.
 
-Rate tests using phylogenetic independent contrasts
+### Section 6.3a: Rate tests using phylogenetic independent contrasts
 
 One of the earliest methods for comparing rates across clades is to compare the magnitude of independent contrasts calculated in each clade. To do this, one first calculates standardized independent contrasts, separating those contrasts that are calculated within each clade of interest. As we noted in chapter 5, these contrasts have arbitrary sign (positive or negative) but if they are squared, represent independent estimates of the Brownian motion rate parameter (2). Therefore, one can compare the magnitude of independent contrasts within the clade of interest to the contrasts in another clade (or in the rest of the tree) as a test for differences in the rate of evolution (Garland 1992).
 
 In his original description of this approach, Garland (1992) proposed using a statistical test to compare the absolute value of contrasts between clades (or between a single clade and the rest of the phylogenetic tree). In particular, Garland (1992) suggests using a t-test, as long as the absolute value of independent contrasts are approximately normally distributed. However, under a Brownian motion model, the contrasts themselves – but not the absolute values of the contrasts – should be approximately normal, so it is quite likely that absolute values of contrasts will strongly violate the assumptions of a t-test.
 
-
+![]({{ site.baseurl }}/images/figure6-2.png)
 
 Figure 6.2. Rate tests comparing carnivores (black) with other mammals (red; Panel A). Box-plots show only a slight difference in the absolute value of independent contrasts for the two clades, and the distribution of absolute values of contrasts is strongly skewed.
 
@@ -106,7 +108,7 @@ There are other simple options. For example, one could also compare the magnitud
 
 In the case of mammals, a Mann-Whitney U test also shows no significant differences in rates of evolution between carnivores and other mammals (W = 251, P = 0.70).
 
-Rate tests using maximum likelihood and AIC
+### Section 6.3b: Rate tests using maximum likelihood and AIC
 
 One can also carry out rate comparisons using a model-selection framework (O’Meara et al. 2006; Thomas et al. 2006). To do this, we can fit single- and multiple-rate Brownian motion models to a phylogenetic tree, then compare them using a model selection method like AICc. For example, in the example above, we tested whether or not one subclade in the mammal tree (carnivores) has a very different rate of body size evolution than the rest of the clade. We can use an ML-based model selection method to compare the fit of a single-rate model to a model where the evolutionary rate in carnivores is different from the rest of the clade, and use this test evaluate the support for that hypothesis.
 
@@ -126,7 +128,7 @@ There is one complication, which is how to deal with the actual branch along whi
 
 A similar approach was described by Thomas et al. (2006) but considers differences across clades to include changes in any of the two parameters of a Brownian motion model (2, , or both). Remember that  is the expected mean of species within a clade under a Brownian motion, but also represents the starting value of the trait at time zero [z(0)]. Allowing  to vary across clades effectively allows different clades to have different “starting points” in phenotype space (in the case of comparing a monophyletic subclade to the rest of a tree, Thomas et al.’s (2006) approach is equivalent to the “censored” test described above). However, one drawback to both the Thomas et al. (2006) approach and the “censored” test is that, because clades each have their own mean, we no longer can tie the model that we fit using likelihood to any particular evolutionary process. Mathematically, changing  in a subclade postulates that the trait value changed somehow along the branch leading to that clade, but we do not specify the way that the trait changed – the change could have been gradual or instantaneous, and no amount or pattern of change is more or less likely than anything else. Of course, one can describe evolutionary scenarios that might act like this process - but we lose any potential tie to quantitative genetic processes.
 
-Rate tests using Bayesian MCMC
+### Section 6.3c: Rate tests using Bayesian MCMC
 
 It is also possible to carry out this test in a Bayesian MCMC framework. The simplest way to do that would be to fit model H2 above, that traits on the tree evolved under a multi-rate Brownian motion model, in a Bayesian framework. We can then specify prior distributions and sample the three model parameters (,12, and 22) through our MCMC. At the end of our analysis, we will have posterior distributions for the three model parameters. We can test whether rates differ among clades by calculating a posterior distribution for the composite parameter . The proportion of the posterior distribution for  that is positive or negative gives the posterior probability that  is greater or less than , respectively.
 
@@ -134,9 +136,11 @@ Perhaps, though, researchers are unsure of where, exactly, the rate shift might 
 
 It is even possible to explore variation in Brownian rates without invoking particular a priori hypotheses about where the rates might change along branches in a tree. These methods rely on reversible-jump MCMC, a Bayesian statistical technique that allows one to consider a large number of models, all with different numbers of parameters, in a single Bayesian analysis. In this case, we consider models where each branch in the tree can potentially have its own Brownian rate parameter. By constraining sets of these rate parameters to be equal to one another, we can specify a huge number of models for rate variation across trees. The reversible-jump machinery, which is beyond the scope of this book, allows us to generate a posterior distribution that spans this large set of models (see Eastman et al. 2012 for details).
 
-Evolution under stabilizing selection
+## Section 6.4: Evolution under stabilizing selection
 
 We can also consider the case where a trait evolves under the influence of stabilizing selection. Assume that a trait has some optimal value, and that when the population mean differs from the optimum the population will experience selection towards the optimum. As I will show below, when traits evolve under stabilizing selection with a constant optimum, the pattern of traits through time can be described under an OU model. It is worth mentioning, though, that this is only one (of many!) models that follow an OU process over long time scales. In other words, even though this model can be described by OU, we cannot make inferences the other direction and claim that OU means that our population is under constant stabilizing selection. In fact, we will see later that we can almost always rule this model out over long time scales by looking at the actual parameter values of the model compared to what we know about species’ population sizes and trait heritabilities.
+
+![]({{ site.baseurl }}/images/figure6-3.png)
 
 Figure 6.3. Plot of species trait (x axis) versus fitness (y axis) showing stabilizing selection. (figure stolen from web, we need a better one!)
 
@@ -274,7 +278,7 @@ We can fit an OU model to data in a similar way to how we fit BM models in the p
 
 We can illustrate how this works by fitting an OU model to the mammal body size data that we have been discussing. Using ML, we obtain parameter estimates , , . This model has a lnL of -77.6, a little higher than BM, but an AICc score of 161.2, worse than BM. We still prefer Brownian motion for these data. Over many datasets, though, OU models fit better than Brownian motion (see Harmon et al. 2010, Pennell et al. 2015).
 
-Early burst models
+## Section 6.6: Early burst models
 
 Adaptive radiations are a slippery idea. Many definitions have been proposed, some of which contradict one another. Despite some core disagreement about the concept of adaptive radiations, many discussions of the phenomenon center around the idea of “ecological opportunity.” Perhaps adaptive radiations begin when lineages gain access to some previously unexploited area of niche space. These lineages begin diversifying rapidly, forming many and varied new species. At some point, though, one would expect that the ecological opportunity would be “used up,” so that species would go back to diversifying at their normal, background rates. These ideas connect to Simpson’s description of evolution in adaptive zones. According to Simpson, species enter new adaptive zones in one of three ways: dispersal to a new area, extinction of competitors, or the evolution of a new trait or set of traits that allow them to interact with the environment in a new way.
 
@@ -294,12 +298,14 @@ Again, we can generate a vector of means and a variance-covariance matrix for th
 
 For mammal body size, the early burst model does not explain patterns of body size evolution, at least for the data considered here (, , , lnL = -78.0, AICc = 162.6).
 
-Peak shift models
+## Section 6.7: Peak shift models
 
 A second model considered by Hansen and Martins (1996) describes the circumstance where traits change in a punctuated manner. One can imagine a scenario where species evolve on an adaptive landscape with many peaks; usually, populations stay on a single peak and phenotypes do not change, but occasionally a population will transition from one peak to another. We can either assume that these changes occur at random times, with an average interval between peak shifts of , or we can associate shifts with other traits that we map on the phylogenetic tree (for example, major geographic dispersal or vicariance events, or the evolution of certain traits.
 
 We have developed peak shift models by integrating OU models and reversible-jump MCMC (Uyeda et al. 2014). The mathematics of this model are beyond the scope of this book, but follow closely from the description of the multi-rate Brownian motion model described in the section “variation in rates of trait evolution across clades,” above. In this case, when we change model parameters, we move among OU regimes, and can alter any of the OU model parameters (or ). The approach can be used to either identify parts of the tree that are evolving in separate regimes or to test particular hypotheses about the drivers of evolution.
 
-Summary
+## Section 6.8: Summary
 
 In this chapter, I have described a few models that represent alternatives to Brownian motion, which is still the dominant model of trait evolution used in the literature. These examples really represent the beginnings of a whole set of models that one might fit to biological data. The best applications of this type of approach, I think, are in testing particular biologically motivated hypotheses using comparative data.
+
+## References
