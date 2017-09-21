@@ -108,17 +108,47 @@ b_{n,1}^k + b_{n,2}^k \dots + b_{n,d_{n}}^k \\
 \end{bmatrix}
 $$</span><br /></p>
 </div>
-<p>where bx,y is the branch length of the yth branch and dx is the total number of branches that one encounters traversing the path from the root to either tip taxon x or the most recent common ancestor of the species pair specified by x. Needless to say, this transformation is easier to understand as a transformation of the tree branches themselves rather than of the associated variance-covariance matrix.</p>
-<p>When the κ parameter is one, the tree is unchanged and one still has a constant-rate Brownian motion process; when kappa = 0, all branch lengths are one. Kappa values in between these two extremes represent intermediates (Figure 6.1). Kappa is often interpreted in terms of a model where character change is more or less concentrated at speciation events. For this interpretation to be valid, we have to assume that the phylogenetic tree, as given, includes all (or even most) of the speciation events in the history of the clade. The problem with this assumption is that speciation events are almost certainly missing due to sampling: perhaps some living species from the clade have not been sampled, or species that are part of the clade have gone extinct before the present day and are thus not sampled. There are much better ways of estimating speciational models that can account for these issues in sampling (e.g. Bokma 2008, Goldberg and Igić 2012); these newer methods should be preferred over Pagel’s κ for testing for a speciational pattern in trait data.</p>
-<p>There are two main ways to assess the fit of the three Pagel-style models to data. First, one can use ML to estimate parameters and likelihood ratio tests (or AICc scores) to compare the fit of various models. As mentioned above, simulation studies suggest that this can sometimes lead to overconfidence, at least for the lambda model. Sometimes researchers will compare the fit of a particular model (e.g. lambda) with models where that parameter is fixed at its two extreme values (0 or 1; this is not possible with delta). Second, one can use Bayesian methods to estimate posterior distributions of parameter values, then inspect those distributions to see if they overlap with values of interest (say, 0 or 1). This test is implemented in the program BayesTraits, although the source code for this software package is, as far as I know, unavailable.</p>
-<p>We can apply these three Pagel models to the mammal body size data discussed in chapter 5, comparing the AICc scores for Brownian motion to that from the three transformations. We obtain the following results:</p>
-<p>Model Parameter estimates ln-Likelihood AICc Brownian motion</p>
-<p>-78.0 160.4 lambda: λ</p>
-<p>-78.0 162.6</p>
-<p>delta: δ</p>
-<p>-77.7 162.0 kappa: κ</p>
-<p>-77.3 161.1</p>
-<p>Note that Brownian motion is the preferred model with the lowest AICc score, but also that all four AICc scores are within 3 units – meaning that we cannot easily distinguish among them as models for our mammal data.</p>
+<p>where <span class="math inline"><em>b</em><sub><em>x</em>, <em>y</em></sub></span> is the branch length of the branch that is the most recent common ancestor of taxa <span class="math inline"><em>x</em></span> and <span class="math inline"><em>y</em></span>, while <span class="math inline"><em>d</em><sub><em>x</em>, <em>y</em></sub></span> is the total number of branches that one encounters traversing the path from the root to the most recent common ancestor of the species pair specified by <span class="math inline"><em>x</em>, <em>y</em></span> (or to the tip <span class="math inline"><em>x</em></span> if just one taxon is specified). Needless to say, this transformation is easier to understand as a transformation of the tree branches themselves rather than of the associated variance-covariance matrix.</p>
+<p>When the <span class="math inline"><em>κ</em></span> parameter is one, the tree is unchanged and one still has a constant-rate Brownian motion process; when <span class="math inline"><em>κ</em> = 0</span>, all branch lengths are one. Kappa values in between these two extremes represent intermediates (Figure 6.1). Kappa is often interpreted in terms of a model where character change is more or less concentrated at speciation events. For this interpretation to be valid, we have to assume that the phylogenetic tree, as given, includes all (or even most) of the speciation events in the history of the clade. The problem with this assumption is that speciation events are almost certainly missing due to sampling: perhaps some living species from the clade have not been sampled, or species that are part of the clade have gone extinct before the present day and are thus not sampled. There are much better ways of estimating speciational models that can account for these issues in sampling <span class="citation">(e.g. <span class="citeproc-not-found" data-reference-id="Bokma2008-cm"><strong>???</strong></span>, <span class="citation">(<span class="citeproc-not-found" data-reference-id="Goldberg2012-gs"><strong>???</strong></span>)</span>)</span>; these newer methods should be preferred over Pagel’s <span class="math inline"><em>κ</em></span> for testing for a speciational pattern in trait data.</p>
+<p>There are two main ways to assess the fit of the three Pagel-style models to data. First, one can use ML to estimate parameters and likelihood ratio tests (or <span class="math inline"><em>A</em><em>I</em><em>C</em><sub><em>c</em></sub></span> scores) to compare the fit of various models. As mentioned above, simulation studies suggest that this can sometimes lead to overconfidence, at least for the <span class="math inline"><em>λ</em></span> model. Sometimes researchers will compare the fit of a particular model (e.g. <span class="math inline"><em>λ</em></span>) with models where that parameter is fixed at its two extreme values (0 or 1; this is not possible with <span class="math inline"><em>δ</em></span>). Second, one can use Bayesian methods to estimate posterior distributions of parameter values, then inspect those distributions to see if they overlap with values of interest (say, 0 or 1).</p>
+<p>We can apply these three Pagel models to the mammal body size data discussed in chapter 5, comparing the <span class="math inline"><em>A</em><em>I</em><em>C</em><sub><em>c</em></sub></span> scores for Brownian motion to that from the three transformations. We obtain the following results:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Model</th>
+<th>Parameter estimates</th>
+<th>ln-Likelihood</th>
+<th>AIC_c</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Brownian motion</td>
+<td><span class="math inline"><em>σ</em><sup>2</sup> = 0.088</span>, <span class="math inline"><em>θ</em> = 4.64</span></td>
+<td>-78.0</td>
+<td>160.4</td>
+</tr>
+<tr class="even">
+<td>lambda</td>
+<td><span class="math inline"><em>σ</em><sup>2</sup> = 0.085</span>, <span class="math inline"><em>θ</em> = 4.64</span>, <span class="math inline"><em>λ</em> = 1.0</span></td>
+<td>-78.0</td>
+<td>162.6</td>
+</tr>
+<tr class="odd">
+<td>delta</td>
+<td><span class="math inline"><em>σ</em><sup>2</sup> = 0.063</span>, <span class="math inline"><em>θ</em> = 4.60</span>, <span class="math inline"><em>δ</em> = 1.5</span></td>
+<td>-77.7</td>
+<td>162.0</td>
+</tr>
+<tr class="even">
+<td>kappa</td>
+<td><span class="math inline"><em>σ</em><sup>2</sup> = 0.17</span>, <span class="math inline"><em>θ</em> = 4.64</span>, <span class="math inline"><em>κ</em> = 0.66</span></td>
+<td>-77.3</td>
+<td>161.1</td>
+</tr>
+</tbody>
+</table>
+<p>Note that Brownian motion is the preferred model with the lowest <span class="math inline"><em>A</em><em>I</em><em>C</em><sub><em>c</em></sub></span> score, but also that all four <span class="math inline"><em>A</em><em>I</em><em>C</em><sub><em>c</em></sub></span> scores are within 3 units – meaning that we cannot easily distinguish among them as models for our mammal data.</p>
 <h2 id="section-6.3-variation-in-rates-of-trait-evolution-across-clades">Section 6.3: Variation in rates of trait evolution across clades</h2>
 <p>One assumption of Brownian motion is that the rate of change is constant, both through time and across lineages. However, some of the most interesting hypotheses in evolution relate to differences in the rates of character change across clades. For example, key innovations are evolutionary events that open up new areas of niche space to evolving clades. This new niche space is an ecological opportunity that can then be filled by newly evolved species. If this were happening in a clade, we might expect that rates of trait evolution would be elevated following the acquisition of the key innovation.</p>
 <p>There are several methods that one can use to test for differences in the rate of evolution across clades. First, one can compare the magnitude of independent contrasts across clades; second, one can use model comparison approaches to compare the fit of single- and multiple-rate models to data on trees; and third, one can use a Bayesian approach combined with reversible-jump machinery to try to find the places on the tree where rate shifts have occurred. I will explain each of these methods in turn.</p>

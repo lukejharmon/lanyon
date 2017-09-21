@@ -97,7 +97,7 @@ b_{n,1}^k + b_{n,2}^k \dots + b_{n,d_{n}}^k \\
 $$
 </div>
 
-where $b_{x,y} is the branch length of the branch that is the most recent common ancestor of taxa $x$ and $y$, while $d_{x,y}$ is the total number of branches that one encounters traversing the path from the root to the most recent common ancestor of the species pair specified by $x,y$ (or to the tip $x$ if just one taxon is specified). Needless to say, this transformation is easier to understand as a transformation of the tree branches themselves rather than of the associated variance-covariance matrix.
+where $b_{x,y}$ is the branch length of the branch that is the most recent common ancestor of taxa $x$ and $y$, while $d_{x,y}$ is the total number of branches that one encounters traversing the path from the root to the most recent common ancestor of the species pair specified by $x,y$ (or to the tip $x$ if just one taxon is specified). Needless to say, this transformation is easier to understand as a transformation of the tree branches themselves rather than of the associated variance-covariance matrix.
 
 When the $\kappa$ parameter is one, the tree is unchanged and one still has a constant-rate Brownian motion process; when $\kappa = 0$, all branch lengths are one. Kappa values in between these two extremes represent intermediates (Figure 6.1). Kappa is often interpreted in terms of a model where character change is more or less concentrated at speciation events. For this interpretation to be valid, we have to assume that the phylogenetic tree, as given, includes all (or even most) of the speciation events in the history of the clade. The problem with this assumption is that speciation events are almost certainly missing due to sampling: perhaps some living species from the clade have not been sampled, or species that are part of the clade have gone extinct before the present day and are thus not sampled. There are much better ways of estimating speciational models that can account for these issues in sampling [e.g. @Bokma2008-cm, @Goldberg2012-gs]; these newer methods should be preferred over Pagel’s $\kappa$ for testing for a speciational pattern in trait data.
 
@@ -105,49 +105,24 @@ There are two main ways to assess the fit of the three Pagel-style models to dat
 
 We can apply these three Pagel models to the mammal body size data discussed in chapter 5, comparing the $AIC_c$ scores for Brownian motion to that from the three transformations. We obtain the following results:
 
-Model
-Parameter estimates
-ln-Likelihood
-AICc
-Brownian motion
+| Model | Parameter estimates | ln-Likelihood | AIC_c |
+| --- | --- | --- | --- |
+| Brownian motion | $\sigma^2 = 0.088$, $\theta = 4.64$ | -78.0 | 160.4 |
+| lambda | $\sigma^2 = 0.085$, $\theta = 4.64$, $\lambda = 1.0$ | -78.0 | 162.6 |
+| delta | $\sigma^2 = 0.063$, $\theta = 4.60$, $\delta = 1.5$  | -77.7 | 162.0 |
+| kappa | $\sigma^2 = 0.170$, $\theta = 4.64$, $\kappa = 0.66$  | -77.3 | 161.1 |
 
-
--78.0
-160.4
-lambda: λ
-
-
-
--78.0
-162.6
-
-
-
-
-delta: δ
-
-
-
--77.7
-162.0
-kappa: κ
-
-
-
--77.3
-161.1
-
-Note that Brownian motion is the preferred model with the lowest AICc score, but also that all four AICc scores are within 3 units – meaning that we cannot easily distinguish among them as models for our mammal data.
+Note that Brownian motion is the preferred model with the lowest $AIC_c$ score, but also that all four $AIC_c$ scores are within 3 units – meaning that we cannot easily distinguish among them as models for our mammal data.
 
 ## Section 6.3: Variation in rates of trait evolution across clades
 
-One assumption of Brownian motion is that the rate of change is constant, both through time and across lineages. However, some of the most interesting hypotheses in evolution relate to differences in the rates of character change across clades. For example, key innovations are evolutionary events that open up new areas of niche space to evolving clades. This new niche space is an ecological opportunity that can then be filled by newly evolved species. If this were happening in a clade, we might expect that rates of trait evolution would be elevated following the acquisition of the key innovation.
+One assumption of Brownian motion is that the rate of change ($\sigma^2$) is constant, both through time and across lineages. However, some of the most interesting hypotheses in evolution relate to differences in the rates of character change across clades. For example, key innovations are evolutionary events that open up new areas of niche space to evolving clades (cite). This new niche space is an ecological opportunity that can then be filled by newly evolved species (xxx). If this were happening in a clade, we might expect that rates of trait evolution would be elevated following the acquisition of the key innovation (xxx).
 
 There are several methods that one can use to test for differences in the rate of evolution across clades. First, one can compare the magnitude of independent contrasts across clades; second, one can use model comparison approaches to compare the fit of single- and multiple-rate models to data on trees; and third, one can use a Bayesian approach combined with reversible-jump machinery to try to find the places on the tree where rate shifts have occurred. I will explain each of these methods in turn.
 
 ### Section 6.3a: Rate tests using phylogenetic independent contrasts
 
-One of the earliest methods for comparing rates across clades is to compare the magnitude of independent contrasts calculated in each clade. To do this, one first calculates standardized independent contrasts, separating those contrasts that are calculated within each clade of interest. As we noted in chapter 5, these contrasts have arbitrary sign (positive or negative) but if they are squared, represent independent estimates of the Brownian motion rate parameter (2). Therefore, one can compare the magnitude of independent contrasts within the clade of interest to the contrasts in another clade (or in the rest of the tree) as a test for differences in the rate of evolution (Garland 1992).
+One of the earliest methods for comparing rates across clades is to compare the magnitude of independent contrasts calculated in each clade (e.g. Garland). To do this, one first calculates standardized independent contrasts, separating those contrasts that are calculated within each clade of interest. As we noted in [Chapter 5]({{ site.baseurl }}/chapter5_mvbm/), these contrasts have arbitrary sign (positive or negative) but if they are squared, represent independent estimates of the Brownian motion rate parameter ($\sigma^2$). Therefore, one can compare the magnitude of independent contrasts within the clade of interest to the contrasts in another clade (or in the rest of the tree) as a test for differences in the rate of evolution (Garland 1992).
 
 In his original description of this approach, Garland (1992) proposed using a statistical test to compare the absolute value of contrasts between clades (or between a single clade and the rest of the phylogenetic tree). In particular, Garland (1992) suggests using a t-test, as long as the absolute value of independent contrasts are approximately normally distributed. However, under a Brownian motion model, the contrasts themselves – but not the absolute values of the contrasts – should be approximately normal, so it is quite likely that absolute values of contrasts will strongly violate the assumptions of a t-test.
 
@@ -155,15 +130,15 @@ In his original description of this approach, Garland (1992) proposed using a st
 
 Figure 6.2. Rate tests comparing carnivores (black) with other mammals (red; Panel A). Box-plots show only a slight difference in the absolute value of independent contrasts for the two clades, and the distribution of absolute values of contrasts is strongly skewed.
 
-In fact, if we try this test on mammal body size, contrasting the two major clades in the tree (carnivores versus non-carnivores, Figure 6.2A), there looks to be a small difference in the absolute value of contrasts (Figure 6.2B). A t-test is not significant (Welch two-sample t-test P = 0.42), but we also can see that the distribution of PIC absolute values is strongly skewed (Figure 6.2C).
+In fact, if we try this test on mammal body size, contrasting the two major clades in the tree (carnivores versus non-carnivores, Figure 6.2A), there looks to be a small difference in the absolute value of contrasts (Figure 6.2B). A t-test is not significant (Welch two-sample t-test $P = 0.42$), but we also can see that the distribution of PIC absolute values is strongly skewed (Figure 6.2C).
 
 There are other simple options. For example, one could also compare the magnitudes of the squared contrasts, although these are also not expected to follow a normal distribution. Alternatively, we can again follow Garland’s (1992) suggestion and use a Mann-Whitney U-test, the nonparametric equivalent of a t-test, on the absolute values of the contrasts. Since Mann-Whitney U tests use ranks instead of values, this approach will not be sensitive to the fact that the absolute values of contrasts are not normal. If the P-value is significant for this test then we have evidence that the rate of evolution is greater in one part of the tree than another.
 
-In the case of mammals, a Mann-Whitney U test also shows no significant differences in rates of evolution between carnivores and other mammals (W = 251, P = 0.70).
+In the case of mammals, a Mann-Whitney U test also shows no significant differences in rates of evolution between carnivores and other mammals ($W = 251$, $P = 0.70$).
 
 ### Section 6.3b: Rate tests using maximum likelihood and AIC
 
-One can also carry out rate comparisons using a model-selection framework (O’Meara et al. 2006; Thomas et al. 2006). To do this, we can fit single- and multiple-rate Brownian motion models to a phylogenetic tree, then compare them using a model selection method like AICc. For example, in the example above, we tested whether or not one subclade in the mammal tree (carnivores) has a very different rate of body size evolution than the rest of the clade. We can use an ML-based model selection method to compare the fit of a single-rate model to a model where the evolutionary rate in carnivores is different from the rest of the clade, and use this test evaluate the support for that hypothesis.
+One can also carry out rate comparisons using a model-selection framework [@OMeara2006-he, @Thomas2012-zs]. To do this, we can fit single- and multiple-rate Brownian motion models to a phylogenetic tree, then compare them using a model selection method like AICc. For example, in the example above, we tested whether or not one subclade in the mammal tree (carnivores) has a very different rate of body size evolution than the rest of the clade. We can use an ML-based model selection method to compare the fit of a single-rate model to a model where the evolutionary rate in carnivores is different from the rest of the clade, and use this test evaluate the support for that hypothesis.
 
 This test requires the likelihood for a multi-rate Brownian motion model on a phylogenetic tree. We can derive such an equation using equations that are closely related to the likelihood equations presented in Chapter 4. Recall that the likelihood equations for (constant-rate) Brownian motion use a phylogenetic variance-covariance matrix, C, that is based on the branch lengths and topology of the tree. For single-rate Brownian motion, the elements in C are derived from the branch lengths in the tree. Traits are drawn from a multivariate normal distribution with variance-covariance matrix:
 
