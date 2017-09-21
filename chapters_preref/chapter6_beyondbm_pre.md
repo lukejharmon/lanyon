@@ -2,55 +2,108 @@
 
 ## Section 6.1: Introduction
 
-Detailed studies of contemporary evolution have revealed a rich variety of processes that influence how traits evolve through time. Consider the famous studies of Darwin’s finches, Geospiza, in the Galapagos islands carried out by Peter and Rosemary Grant, among others. These studies have documented the action of natural selection on traits from one generation to the next. One can see very clearly how changes in climate – especially the amount of rainfall – affect the availability of different types of seeds. These changing resources in turn affect which individuals survive within the population. When natural selection acts on traits that can be inherited from parents to offspring, those traits evolve.
+Detailed studies of contemporary evolution have revealed a rich variety of processes that influence how traits evolve through time. Consider the famous studies of Darwin’s finches, *Geospiza*, in the Galapagos islands carried out by Peter and Rosemary Grant, among others [e.g. @Grant2011-vt]. These studies have documented the action of natural selection on traits from one generation to the next. One can see very clearly how changes in climate – especially the amount of rainfall – affect the availability of different types of seeds [@Grant2002-jx]. These changing resources in turn affect which individuals survive within the population. When natural selection acts on traits that can be inherited from parents to offspring, those traits evolve.
 
-One can obtain a dataset of morphological traits, including measurements of body and beak size and shape, along with a phylogenetic tree for several species of Darwin’s finches. Imagine that you have the goal of analyzing the tempo and mode of morphological evolution across these species of finch. We can start by fitting a Brownian motion model to these data. However, a Brownian model – which corresponds to a few simple scenarios of trait evolution – hardly seems realistic for a group of finches known to be under strong directional selection. Brownian motion is very commonly in comparative biology: in fact, a large number of comparative methods that researchers use for continuous traits assumes that those traits evolve under a Brownian motion model. The scope of other models besides Brownian motion that we can fit to continuous trait data on trees is somewhat limited. However, some methods have been developed that break free of this limitation, moving the field beyond Brownian motion. In this chapter I will discuss these new approaches and what they can tell us about evolution. I will also describe how moving beyond Brownian motion can point the way forward for statistical comparative methods.
+One can obtain a dataset of morphological traits, including measurements of body and beak size and shape, along with a phylogenetic tree for several species of Darwin’s finches. Imagine that you have the goal of analyzing the tempo and mode of morphological evolution across these species of finch. We can start by fitting a Brownian motion model to these data. However, a Brownian model (which, as we learned in [Chapter 3]({{ site.baseurl }}/chapter3_bmintro/), corresponds to a few simple scenarios of trait evolution) hardly seems realistic for a group of finches known to be under strong and predictable directional selection.
+
+Brownian motion is very commonly in comparative biology: in fact, a large number of comparative methods that researchers use for continuous traits assumes that those traits evolve under a Brownian motion model. The scope of other models beyond Brownian motion that we can use to model continuous trait data on trees is somewhat limited. However, some methods have been developed that break free of this limitation, moving the field beyond Brownian motion. In this chapter I will discuss these new approaches and what they can tell us about evolution. I will also describe how moving beyond Brownian motion can point the way forward for statistical comparative methods.
 
 In this chapter, I will consider four ways that comparative methods can move beyond simple Brownian motion models: by transforming the variance-covariance matrix describing trait covariation among species, by incorporating variation in rates of evolution, by accounting for evolutionary constraints, and by modeling adaptive radiation, species interactions, and other biological processes. It should be apparent that the models listed here do not span the complete range of possibilities, and so my list is not meant to be comprehensive. Instead, I hope that readers will view these as examples, and that future researchers will add to this list and enrich the set of models that we can fit to data.
 
 ## Section 6.2: Transforming the evolutionary variance-covariance matrix
 
-In 1999, Mark Pagel introduced three statistical models that allow one to test whether data deviates from a constant-rate Mk process evolving on a phylogenetic tree. Each of these three models is a statistical transformation of the elements of the phylogenetic variance-covariance matrix, C, that we first encountered in chapter 3. All three can also be thought of as a transformation of the branch lengths of the tree, which adds a more intuitive understanding of the statistical properties of the tree transformations (Figure 6.1). We can transform the tree and then simulate characters under a Brownian motion model on the transformed tree, generating very different patterns than if they had been simulated on the starting tree.
+In 1999, Mark Pagel introduced three statistical models that allow one to test whether data deviates from a constant-rate Mk process evolving on a phylogenetic tree [@Pagel1999-ic, @Pagel1999-fx]. Each of these three models is a statistical transformation of the elements of the phylogenetic variance-covariance matrix, $\mathbf{C}$, that we first encountered in [Chapter 3]({{ site.baseurl }}/chapter3_bmintro/). All three can also be thought of as a transformation of the branch lengths of the tree, which adds a more intuitive understanding of the statistical properties of the tree transformations (Figure 6.1). We can transform the tree and then simulate characters under a Brownian motion model on the transformed tree, generating very different patterns than if they had been simulated on the starting tree.
 
 ![]({{ site.baseurl }}/images/figure6-1.png)
 
 Figure 6.1. Branch length transformations effectively alter the relative rate of evolution on certain branches in the tree. If we make a branch longer, there is more “evolutionary time” for characters to change, and so we are effectively increasing the rate of evolution along that branch.
 
-There are three Pagel tree transformations (lambda: λ, delta: δ, and kappa: κ). I will describe each of them along with common methods for fitting Pagel models under ML, AIC, and Bayesian frameworks. Pagel’s three transformations can also be related to evolutionary processes, although those relationships are sometimes vague compared to approaches based on explicit evolutionary models rather than tree transformations (see below for more comments on this distinction).
+There are three Pagel tree transformations (lambda: $\lambda$, delta: $\delta$, and kappa: $\kappa$). I will describe each of them along with common methods for fitting Pagel models under ML, AIC, and Bayesian frameworks. Pagel’s three transformations can also be related to evolutionary processes, although those relationships are sometimes vague compared to approaches based on explicit evolutionary models rather than tree transformations (see below for more comments on this distinction).
 
-Perhaps the most commonly used Pagel tree transformation is λ. When using λ, one multiplies all off-diagonal elements in the phylogenetic variance-covariance matrix by lambda. The diagonal elements remain unchanged. So, if the original matrix is:
+Perhaps the most commonly used Pagel tree transformation is $\lambda$. When using $\lambda$, one multiplies all off-diagonal elements in the phylogenetic variance-covariance matrix by the value of $\lambda$. The diagonal elements remain unchanged. So, if the original matrix is:
 
-(6.1)
-
+(Equation 6.1)
+<div>
+$$
+\mathbf{C_o} =
+\begin{bmatrix}
+\sigma_1^2 & \sigma_{12} & \dots & \sigma_{1n}\\
+\sigma_{21} & \sigma_2^2 & \dots & \sigma_{2n}\\
+\vdots & \vdots & \ddots & \vdots\\
+\sigma_{n1} & \sigma_{n2} & \dots & \sigma_{n}^2\\
+\end{bmatrix}
+$$
+</div>
 
 Then the transformed matrix will be:
 
-(6.2)
+(Equation 6.2)
+<div>
+$$
+\mathbf{C_\lambda} =
+\begin{bmatrix}
+\sigma_1^2 & \lambda \cdot \sigma_{12} & \dots & \lambda \cdot \sigma_{1n}\\
+\lambda \cdot \sigma_{21} & \sigma_2^2 & \dots & \lambda \cdot \sigma_{2n}\\
+\vdots & \vdots & \ddots & \vdots\\
+\lambda \cdot \sigma_{n1} & \lambda \cdot \sigma_{n2} & \dots & \sigma_{n}^2\\
+\end{bmatrix}
+$$
+</div>
 
+In terms of branch length transformations, $\lambda$ compresses internal branches while leaving the tip branches of the tree unaffected (Figure 6.1). λ can range from 1 (no transformation) to 0 (which results in a complete star phylogeny, with all tip branches equal in length and all internal branches of length 0). One can use values of $\lambda$ greater than one on the variance-covariance matrix, although some values of $\lambda$ result in matrices that are not valid variance-covariance matrices and/or do not correspond with any phylogenetic tree transformation. For this reason I recommend that $\lambda$ be limited to values between 0 and 1.
 
-In terms of branch length transformations, λ compresses internal branches while leaving the tip branches of the tree unaffected (Figure 6.1). λ can range from 1 (no transformation) to 0 (which results in a complete star phylogeny, with all tip branches equal in length and all internal branches of length 0). One can use values of λ greater than one on the variance-covariance matrix, although some values of λ result in matrices that are not valid variance-covariance matrices and/or do not correspond with any phylogenetic tree transformation. For this reason I recommend that λ be limited to values between 0 and 1.
+$\lambda$ is often used to measure the “phylogenetic signal” in comparative data. This makes intuitive sense, as $\lambda$ scales the tree between a constant-rates model to one where every species is statistically independent of every other species in the tree. Statistically, this can be very useful information. However, there is some danger is in attributing a statistical result – either phylogenetic signal or not – to any particular biological process. For example, phylogenetic signal is sometimes called a “phylogenetic constraint.” But one way to obtain a high phylogenetic signal ($\lambda$ near 1) is to evolve traits under a Brownian motion model, which involves completely unconstrained character evolution. Likewise, a lack of phylogenetic signal – which might be called “low phylogenetic constraint” – results from an OU model with a high $\alpha$ parameter (see below), which is a model where trait evolution away from the optimal value is, in fact, highly constrained. Revell et al. [-@Revell2008-vu] show a broad range of circumstances that can lead to patterns of high or low phylogenetic signal, and caution against over-interpretation of results from analyses of phylogenetic signal, like Pagel’s $\lambda$. Also worth noting is that statistical estimates of $\lambda$ under a ML model tend to be clustered near 0 and 1 regardless of the true value, and AIC model selection can tend to prefer $\lambda$ models even when data is simulated under Brownian motion [@Boettiger2012-vg].
 
-λ is often used to measure the “phylogenetic signal” in comparative data. This makes intuitive sense, as λ scales the tree between a constant-rates model to one where every species is statistically independent of every other species in the tree. Statistically, this can be very useful information. However, there is some danger is in attributing a statistical result – either phylogenetic signal or not – to any particular biological process. For example, phylogenetic signal is sometimes called a “phylogenetic constraint.” But one way to obtain a high phylogenetic signal (λ near 1) is to evolve traits under a Brownian motion model, which involves completely unconstrained character evolution. Likewise, a lack of phylogenetic signal – which might be called “low phylogenetic constraint” – results from an OU model with a high alpha parameter (see below), which is a model where trait evolution away from the optimal value is, in fact, highly constrained. Revell et al. show a broad range of circumstances that can lead to patterns of high or low phylogenetic signal, and caution against over-interpretation of results from analyses of phylogenetic signal, like Pagel’s λ. Also worth noting is that statistical estimates of λ under a ML model tend to be clustered near 0 and 1 regardless of the true value, and AIC model selection can tend to prefer λ models even when data is simulated under Brownian motion (see Boettiger et al. xxx for more information).
-
-Pagel’s δ is designed to capture variation in rates of evolution through time. Under the delta transformation, all elements of the phylogenetic variance-covariance matrix are raised to the power δ. So, if our original C matrix is given above (equation 6.1), then the δ-transformed version will be:
+Pagel’s $\delta$ is designed to capture variation in rates of evolution through time. Under the delta transformation, all elements of the phylogenetic variance-covariance matrix are raised to the power $\delta$. So, if our original C matrix is given above (equation 6.1), then the δ-transformed version will be:
 
 (6.3)
+<div>
+$$
+\mathbf{C_\delta} =
+\begin{bmatrix}
+(\sigma_1^2)^\delta & (\sigma_{12})^\delta & \dots & (\sigma_{1n})^\delta\\
+(\sigma_{21})^\delta & (\sigma_2^2)^\delta & \dots & (\sigma_{2n})^\delta\\
+\vdots & \vdots & \ddots & \vdots\\
+(\sigma_{n1})^\delta & (\sigma_{n2})^\delta & \dots & (\sigma_{n}^2)^\delta\\
+\end{bmatrix}
+$$
+</div>
 
 
-Since these elements represent the heights of nodes in the phylogenetic tree, then delta can also be viewed as a transformation of phylogenetic node heights. When delta is one, the tree is unchanged and one still has a constant-rate Brownian motion process; when delta is less than 1, node heights are reduced, but deeper branches in the tree are reduced less than shallower branches (Figure 6.1). This effectively represents a model where the rate of evolution slows through time. By contrast, delta > 1 stretches the shallower branches in the tree more than the deep branches, mimicking a model where the rate of evolution speeds up through time. There is a close connection between the delta model, the ACDC model (Blomberg et al.), and Harmon et al.’s (2010) early burst model (see Uyeda et al. 2015, Appendix).
 
-Finally, the κ transformation is sometimes used to capture patterns of “speciational” change in trees. In the κ model, one raises all of the branch lengths in the tree by the power κ. This has a complicated effect on the phylogenetic variance-covariance matrix, as the effect that this transformation has on each covariance element depends on both the value of κ and the number of branches that extend from the root of the tree to the most recent common ancestor of each pair of species. So, if our original C matrix is given by equation 6.1, the transformed version will be:
+Since these elements represent the heights of nodes in the phylogenetic tree, then $\delta$ can also be viewed as a transformation of phylogenetic node heights. When $\delta$ is one, the tree is unchanged and one still has a constant-rate Brownian motion process; when $\delta$ is less than 1, node heights are reduced, but deeper branches in the tree are reduced less than shallower branches (Figure 6.1). This effectively represents a model where the rate of evolution slows through time. By contrast, $\delta$ > 1 stretches the shallower branches in the tree more than the deep branches, mimicking a model where the rate of evolution speeds up through time. There is a close connection between the delta model, the ACDC model [@Blomberg2003-as], and Harmon et al.’s [-@Harmon2010-wg] early burst model [see also @Uyeda2014-ng, especially the appendix).
+
+Finally, the $\kappa$ transformation is sometimes used to capture patterns of “speciational” change in trees. In the $\kappa$ model, one raises all of the branch lengths in the tree by the power $\kappa$. This has a complicated effect on the phylogenetic variance-covariance matrix, as the effect that this transformation has on each covariance element depends on both the value of $\kappa$ and the number of branches that extend from the root of the tree to the most recent common ancestor of each pair of species. So, if our original C matrix is given by equation 6.1, the transformed version will be:
 
 (6.4)
+<div>
+$$
+\mathbf{C_o} =
+\begin{bmatrix}
+b_{1,1}^k + b_{1,2}^k \dots + b_{1,d_1}^k &
+b_{1-2,1}^k + b_{1-2,2}^k \dots + b_{1-2,d_{1-2}}^k &
+\dots &
+b_{1-n,1}^k + b_{1-n,2}^k \dots + b_{1-n,d_{1-n}}^k \\
+b_{2-1,1}^k + b_{2-1,2}^k \dots + b_{2-1,d_{1-2}}^k &
+b_{2,1}^k + b_{2,2}^k \dots + b_{2,d_2}^k &
+\dots &
+b_{2-n,1}^k + b_{2-n,2}^k \dots + b_{2-n,d_{2-n}}^k \\
+\vdots & \vdots & \ddots & \vdots\\
+b_{n-1,1}^k + b_{n-1,2}^k \dots + b_{n-1,d_{1-n}}^k &
+b_{n-2,1}^k + b_{n-2,2}^k \dots + b_{n-2,d_{1-2}}^k &
+\dots &
+b_{n,1}^k + b_{n,2}^k \dots + b_{n,d_{n}}^k \\
+\end{bmatrix}
+$$
+</div>
 
+where $b_{x,y} is the branch length of the branch that is the most recent common ancestor of taxa $x$ and $y$, while $d_{x,y}$ is the total number of branches that one encounters traversing the path from the root to the most recent common ancestor of the species pair specified by $x,y$ (or to the tip $x$ if just one taxon is specified). Needless to say, this transformation is easier to understand as a transformation of the tree branches themselves rather than of the associated variance-covariance matrix.
 
-where bx,y is the branch length of the yth branch and dx is the total number of branches that one encounters traversing the path from the root to either tip taxon x or the most recent common ancestor of the species pair specified by x. Needless to say, this transformation is easier to understand as a transformation of the tree branches themselves rather than of the associated variance-covariance matrix.
+When the $\kappa$ parameter is one, the tree is unchanged and one still has a constant-rate Brownian motion process; when $\kappa = 0$, all branch lengths are one. Kappa values in between these two extremes represent intermediates (Figure 6.1). Kappa is often interpreted in terms of a model where character change is more or less concentrated at speciation events. For this interpretation to be valid, we have to assume that the phylogenetic tree, as given, includes all (or even most) of the speciation events in the history of the clade. The problem with this assumption is that speciation events are almost certainly missing due to sampling: perhaps some living species from the clade have not been sampled, or species that are part of the clade have gone extinct before the present day and are thus not sampled. There are much better ways of estimating speciational models that can account for these issues in sampling [e.g. @Bokma2008-cm, @Goldberg2012-gs]; these newer methods should be preferred over Pagel’s $\kappa$ for testing for a speciational pattern in trait data.
 
-When the κ parameter is one, the tree is unchanged and one still has a constant-rate Brownian motion process; when kappa = 0, all branch lengths are one. Kappa values in between these two extremes represent intermediates (Figure 6.1). Kappa is often interpreted in terms of a model where character change is more or less concentrated at speciation events. For this interpretation to be valid, we have to assume that the phylogenetic tree, as given, includes all (or even most) of the speciation events in the history of the clade. The problem with this assumption is that speciation events are almost certainly missing due to sampling: perhaps some living species from the clade have not been sampled, or species that are part of the clade have gone extinct before the present day and are thus not sampled. There are much better ways of estimating speciational models that can account for these issues in sampling (e.g. Bokma 2008, Goldberg and Igić 2012); these newer methods should be preferred over Pagel’s κ for testing for a speciational pattern in trait data.
+There are two main ways to assess the fit of the three Pagel-style models to data. First, one can use ML to estimate parameters and likelihood ratio tests (or $AIC_c$ scores) to compare the fit of various models. As mentioned above, simulation studies suggest that this can sometimes lead to overconfidence, at least for the $\lambda$ model. Sometimes researchers will compare the fit of a particular model (e.g. $\lambda$) with models where that parameter is fixed at its two extreme values (0 or 1; this is not possible with $\delta$). Second, one can use Bayesian methods to estimate posterior distributions of parameter values, then inspect those distributions to see if they overlap with values of interest (say, 0 or 1).
 
-There are two main ways to assess the fit of the three Pagel-style models to data. First, one can use ML to estimate parameters and likelihood ratio tests (or AICc scores) to compare the fit of various models. As mentioned above, simulation studies suggest that this can sometimes lead to overconfidence, at least for the lambda model. Sometimes researchers will compare the fit of a particular model (e.g. lambda) with models where that parameter is fixed at its two extreme values (0 or 1; this is not possible with delta). Second, one can use Bayesian methods to estimate posterior distributions of parameter values, then inspect those distributions to see if they overlap with values of interest (say, 0 or 1). This test is implemented in the program BayesTraits, although the source code for this software package is, as far as I know, unavailable.
-
-We can apply these three Pagel models to the mammal body size data discussed in chapter 5, comparing the AICc scores for Brownian motion to that from the three transformations. We obtain the following results:
+We can apply these three Pagel models to the mammal body size data discussed in chapter 5, comparing the $AIC_c$ scores for Brownian motion to that from the three transformations. We obtain the following results:
 
 Model
 Parameter estimates
