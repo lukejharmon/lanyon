@@ -13,17 +13,14 @@ github.repo:         https://github.com/lukejharmon/pcm/
 
 # About/contact
 author:
-  name:              Mark Otto
-  url:               https://twitter.com/mdo
-  email:             markdotto@gmail.com
+  name:              Luke Harmon
+  url:               http://lukejharmon.github.io/
+  email:             lukeh@uidaho.edu
 
 # Custom vars
 version:             1.0.0
 
 # Gems
-gems: [jekyll-paginate]
-paginate: 5
-paginate_path: "page:num"
 
 # github settings
 github:
