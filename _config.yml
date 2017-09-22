@@ -6,9 +6,8 @@ permalink:           pretty
 title:               Phylogenetic Comparative Methods
 tagline:             'learning from trees'
 description:         'An introduction to phylogenetic comparative methods.'
-url:                 http://lanyon.getpoole.com
+url:                 http://phylogeneticcomparativemethods.com
 baseurl:             '/pcm'
-paginate:            5
 github.repo:         https://github.com/lukejharmon/pcm/
 
 # About/contact
