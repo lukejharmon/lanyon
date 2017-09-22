@@ -172,7 +172,7 @@ It is also possible to carry out this test in a Bayesian MCMC framework. The sim
 
 Perhaps, though, researchers are unsure of where, exactly, the rate shift might have occurred, and want to incorporate some uncertainty in their analysis. In some cases, rate shifts are thought to be associated with some other discrete character, such as living on land (state 0) or in the water (1). In such cases, one way to proceed is to use stochastic character mapping (see [Chapter 9]()) to map state changes for the discrete character on the tree, and then run an analysis where rates of evolution of the continuous character of interest depend on the mapping of our discrete states. This protocol is described most fully by Revell [-@Revell2013-ie], who also points out that rate estimates are biased to be more similar when the discrete character evolves quickly.
 
-It is even possible to explore variation in Brownian rates without invoking particular a priori hypotheses about where the rates might change along branches in a tree. These methods rely on reversible-jump MCMC, a Bayesian statistical technique that allows one to consider a large number of models, all with different numbers of parameters, in a single Bayesian analysis. In this case, we consider models where each branch in the tree can potentially have its own Brownian rate parameter. By constraining sets of these rate parameters to be equal to one another, we can specify a huge number of models for rate variation across trees. The reversible-jump machinery, which is beyond the scope of this book, allows us to generate a posterior distribution that spans this large set of models [see @Eastman2011-qn for details].
+It is even possible to explore variation in Brownian rates without invoking particular a priori hypotheses about where the rates might change along branches in a tree. These methods rely on reversible-jump MCMC, a Bayesian statistical technique that allows one to consider a large number of models, all with different numbers of parameters, in a single Bayesian analysis. In this case, we consider models where each branch in the tree can potentially have its own Brownian rate parameter. By constraining sets of these rate parameters to be equal to one another, we can specify a huge number of models for rate variation across trees. The reversible-jump machinery, which is beyond the scope of this book, allows us to generate a posterior distribution that spans this large set of models [see @Eastman2011-uj for details].
 
 ## Section 6.4: Evolution under stabilizing selection
 
@@ -180,137 +180,294 @@ We can also consider the case where a trait evolves under the influence of stabi
 
 ![]({{ site.baseurl }}/images/figure6-3.png)
 
-Figure 6.3. Plot of species trait (x axis) versus fitness (y axis) showing stabilizing selection. (figure stolen from web, we need a better one!)
+Figure 6.3. Plot of species trait (x axis) versus fitness (y axis) showing a hypothetical landscape that would produce stabilizing selection. (figure stolen from web, need a better one!)
 
-We can follow the modeling approach from chapter 3 to derive the expected distribution of species’ traits on a tree under stabilizing selection. We can first consider the evolution of the trait on the “stem” branch, before the divergence of species A and B. We model stabilizing selection with a single optimal trait value, located at . An example of such a surface is plotted as Figure 6.3. We can describe fitness of an individual with phenotype z as:
+We can follow the modeling approach from chapter 3 to derive the expected distribution of species’ traits on a tree under stabilizing selection. We can first consider the evolution of the trait on the “stem” branch, before the divergence of species A and B. We model stabilizing selection with a single optimal trait value, located at $\theta$. An example of such a surface is plotted as Figure 6.3. We can describe fitness of an individual with phenotype $z$ as:
 
 (6.7)
+<div>
+$$
+W = e^{-\gamma (z - \theta)^2}
+$$
+</div>
 
 
 
-We have introduced a new variable, , which captures the curvature of the selection surface. To simplify the calculations, we will assume that stabilizing selection is weak, so that  is small. We can use a Taylor expansion of this function to approximate it using a polynomial:
+We have introduced a new variable, $\gamma$, which captures the curvature of the selection surface. To simplify the calculations, we will assume that stabilizing selection is weak, so that $\gamma$ is small.
+
+We can use a Taylor expansion of this function to approximate equation 6.7 using a polynomial. Our assumption that $\gamma$ is small means that we can ignore terms of order higher than $\gamma^2$:
 
 (6.8)
+<div>
+$$
+W = 1 - \gamma (z - \theta)^2
+$$
+</div>
 
-The mean fitness in the population is then:
+This makes good sense, since a quadratic equation is a good approximation of the shape of a normal distribution near its peak. The mean fitness in the population is then:
 
 (6.9)
+<div>
+$$
+\begin{array}{l}
+\bar{W} = E[W] = E[1 - \gamma (z - \theta)^2] \\
+= E[1 - \gamma (z^2 - 2 z \theta + \theta^2)] \\
+= 1 - \gamma (E[z^2] - E[2 z \theta] + E[\theta^2]) \\
+= 1 - \gamma (\bar{z}^2 - V_z - 2 \bar{z} \theta + \theta ^2) \\
+\end{array}
+$$
+</div>
 
-We can find the rate of change of fitness by taking the derivative of (6.9) with respect to :
+We can find the rate of change of fitness by taking the derivative of (6.9) with respect to $\bar{z}$:
 
 (6.10)
+<div>
+$$
+\frac{\partial \bar{W}}{\partial \bar{z}} = -2 \gamma \bar{z} + 2 \gamma \theta = 2 \gamma (\theta - \bar{z})
+$$
+</div>
 
-We can now use Lande’s equation for the dynamics of the population mean through time for a trait under selection:
+We can now use Lande’s [-@Lande1976-ol] equation for the dynamics of the population mean through time for a trait under selection:
 
 (6.11)
+<div>
+$$
+\Delta \bar{z} = \frac{G}{\bar{W}} \frac{\partial \bar{W}}{\partial \bar{z}}
+$$
+</div>
 
 Substituting equations 6.9 and 6.10 into equation 6.11, we have:
 
 (6.12)
+<div>
+$$
+\Delta \bar{z} = \frac{G}{\bar{W}} \frac{\partial \bar{W}}{\partial \bar{z}} = \frac{G}{1 - \gamma (\bar{z}^2 - V_z - 2 \bar{z} \theta + \theta ^2)} 2 \gamma (\theta - \bar{z})
+$$
+</div>
 
 Then, simplifying further:
 
 (6.13)
+<div>
+$$
+\bar{z}' = \bar{z} + 2 G \gamma (\theta - \bar{z}) + \delta
+$$
+</div>
 
 Here, z is the species’ trait value, G the additive genetic variance in the population,  the curvature of the selection surface,  the optimal trait value, and  a random component capturing the effect of genetic drift. We can find the expected mean of the trait over time by taking the expectation of this equation:
 
 (6.14)
+<div>
+$$
+
+$$
+</div>
 
 We can then solve this differential equations given the starting condition z(0)=z0. Doing so, we obtain:
 
 (6.15)
+<div>
+$$
+
+$$
+</div>
 
 We can take a similar approach to calculate the expected variance of trait values. We use a standard expression for variance:
 
 (6.16-18)
+<div>
+$$
+
+$$
+</div>
 
 If we assume that stabilizing selection is weak, we can simplify the above expression using a Taylor series expansion:
 
 (6.19)
+<div>
+$$
+
+$$
+</div>
 
 We can then solve this differential equation with starting point Vz(0)=0:
 
 (6.20)
+<div>
+$$
+
+$$
+</div>
 
 This is equivalent to a standard stochastic model for constrained random walks called an Ornstein-Uhlenbeck process. Typical Ornstein-Uhlenbeck processes have three parameters: the starting value (z0), the optimum (), the drift parameter (2), and a parameter describing the strength of constraints (). In our parameterization, z0 and  are as given,  = 2 G , and 2 = G / n.
 
 We now need to know how OU models behave when considered along the branches of a phylogenetic tree. In the simplest case, we can describe the joint distribution of two species, A and B, descended from a common ancestor, z. Expressions for trait values of species A and B are:
 
 (6.21-22)
+<div>
+$$
+
+$$
+</div>
 
 Expected values of these two equations give equations for the means:
 
 (6.23-24)
+<div>
+$$
+
+$$
+</div>
 
 We can solve this system of differential equations, given starting conditions a(0)=a0 and b(0)=b0:
 
 (6.25-26)
+<div>
+$$
+
+$$
+</div>
 
 However, we can also note that the starting value for both a and b is the same as the ending value for species z on the root branch of the tree. If we denote the length of that branch as t1 then:
 
 (6.27)
+<div>
+$$
+
+$$
+</div>
 
 Substituting this into equations (6.25-26):
 
 (6.28-29)
+<div>
+$$
+
+$$
+</div>
 
 We can calculate the expected variance across replicates of species A and B, as above:
 
 (6.30-32)
+<div>
+$$
+
+$$
+</div>
 
 Similarly,
 
 (6.33-34)
+<div>
+$$
+
+$$
+</div>
 
 Again we can assume that stabilizing selection is weak, and simplify these expressions using a Taylor series expansion:
 
 (6.35-36)
+<div>
+$$
+
+$$
+</div>
 
 We have a third term to consider, the covariance between species A and B due to their shared ancestry. We can use a standard expression for covariance to set up a third differential equation:
 
 (6.37-39)
+<div>
+$$
+
+$$
+</div>
 
 We again use a Taylor series expansion to simplify:
 
 (6.40)
+<div>
+$$
+
+$$
+</div>
 
 Note that under this model the covariance between A and B decreases through time following their divergence from a common ancestor.
 
 We now have a system of three differential equations. Setting initial conditions Va(0)=Va0, Vb(0)=Vb0, and Vab(0)=Vab0, we solve to obtain:
 
 (6.41-43)
+<div>
+$$
+
+$$
+</div>
 
 We can further specify the starting conditions by noting that both the variance and A and B and their covariance have an initial value given by the variance of z at time t1:
 
 (6.44)
+<div>
+$$
+
+$$
+</div>
 
 Substituting 6.44 into 6.41-43, we obtain:
 
 (6.45-47)
+<div>
+$$
+
+$$
+</div>
 
 Under this model, the trait values follow a multivariate normal distribution; one can calculate that all of the other moments of this distribution are zero. Thus, the set of means, variances, and covariances completely describes the distribution of A and B. Also, as  goes to zero, the selection surface becomes flatter and flatter. Thus at the limit as  -> 0, these equations are equal to those for Brownian motion (see chapter 4).
 
 This quantitative genetic formulation – which follows Lande (1976) – is different from the typical parameterization of the OU model for comparative methods. We can obtain the “normal” OU equations by substituting  = 2 G  and 2 = G / n:
 
 (6.48-50)
+<div>
+$$
+
+$$
+</div>
 
 These equations are mathematically equivalent to the equations in Butler et al. (2004) applied to a phylogenetic tree with two species.
 
 We can easily generalize this approach to a full phylogenetic tree with n taxa. In that case, the n species trait values will all be drawn from a multivariate normal distribution. The mean trait value for species i is then:
 
 (6.51)
+<div>
+$$
+
+$$
+</div>
 
 Here Ti represents the total branch length separating that species from the root of the tree. The variance of species i is:
 
 (6.52)
+<div>
+$$
+
+$$
+</div>
 
 Finally, the covariance between species i and j is:
 
 (6.53)
+<div>
+$$
+
+$$
+</div>
 
 Note that the above equation is only true when  – which is only true for all I and j if the tree is ultrametric. We can substitute the normal OU parameters,  and 2, into these equations:
 
 (6.54-56)
+<div>
+$$
+
+$$
+</div>
 
 We can fit an OU model to data in a similar way to how we fit BM models in the previous chapters. For any given parameters (z0, 2, , and ) and a phylogenetic tree with branch lengths, one can calculate an expected vector of species means and a species variance-covariance matrix. One then uses the likelihood equation for a multivariate normal distribution to calculate the likelihood of this model. This likelihood can then be used for parameter estimation in either a ML or a Bayesian framework.
 
@@ -325,12 +482,22 @@ One idea, then, is that we could detect the presence of adaptive radiations by l
 The simplest way to model an early burst of evolution in a continuous trait is to use a time-varying Brownian motion model. Imagine that species in a clade evolved under a Brownian motion model, but one where the Brownian rate parameter (2) slowed through time. In particular, we can follow Harmon et al. (2010) and define the rate parameter as a function of time, as:
 
 (6.57)
+<div>
+$$
+
+$$
+</div>
 
 We describe the rate of decay of the rate using the parameter r, which must be negative to fit our idea of adaptive radiations. The rate of evolution will slow through time, and will decay more quickly if the absolute value of r is large.
 
 This model also generates a multivariate normal distribution of tip values. Harmon et al. (2010) derived equations for the means and variances of tips on a tree under this model, which are:
 
 (6.58-60)
+<div>
+$$
+
+$$
+</div>
 
 Again, we can generate a vector of means and a variance-covariance matrix for this model given parameter values (z, 02, and r) and a phylogenetic tree. We can then use the multivariate normal probability distribution function to calculate a likelihood, which we can then use in a ML or Bayesian statistical framework.
 
