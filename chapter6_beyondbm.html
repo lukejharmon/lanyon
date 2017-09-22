@@ -241,17 +241,19 @@ $$</span><br /></p>
 \bar{z}' = \bar{z} + 2 G \gamma (\theta - \bar{z}) + \delta
 $$</span><br /></p>
 </div>
-<p>Here, z is the species’ trait value, G the additive genetic variance in the population, the curvature of the selection surface, the optimal trait value, and a random component capturing the effect of genetic drift. We can find the expected mean of the trait over time by taking the expectation of this equation:</p>
+<p>Here, <span class="math inline">$\bar{z}$</span> is the species’ trait value in the previous generation and <span class="math inline">$\bar{z}'$</span> in the next, while G is the additive genetic variance in the population, <span class="math inline"><em>γ</em></span> the curvature of the selection surface, <span class="math inline"><em>θ</em></span> the optimal trait value, and <span class="math inline"><em>δ</em></span> a random component capturing the effect of genetic drift. We can find the expected mean of the trait over time by taking the expectation of this equation:</p>
 (6.14)
 <div>
-<p>$$</p>
-<p>$$</p>
+<p><br /><span class="math display">$$
+E[\bar{z}'] = \mu_z' = \mu_z + 2 G \gamma (\theta - \mu_z)
+$$</span><br /></p>
 </div>
-<p>We can then solve this differential equations given the starting condition z(0)=z0. Doing so, we obtain:</p>
+<p>We can then solve this differential equations given the starting condition <span class="math inline">$\mu_z(0) = \bar{z}(0)$</span>. Doing so, we obtain:</p>
 (6.15)
 <div>
-<p>$$</p>
-<p>$$</p>
+<p><br /><span class="math display">$$
+\mu_z(t) = \theta + e^{-2 G t \gamma} (\bar{z}(0)-\theta)
+$$</span><br /></p>
 </div>
 <p>We can take a similar approach to calculate the expected variance of trait values. We use a standard expression for variance:</p>
 (6.16-18)

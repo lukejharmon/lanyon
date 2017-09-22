@@ -254,21 +254,21 @@ $$
 $$
 </div>
 
-Here, z is the species’ trait value, G the additive genetic variance in the population,  the curvature of the selection surface,  the optimal trait value, and  a random component capturing the effect of genetic drift. We can find the expected mean of the trait over time by taking the expectation of this equation:
+Here, $\bar{z}$ is the species’ trait value in the previous generation and $\bar{z}'$ in the next, while G is the additive genetic variance in the population, $\gamma$ the curvature of the selection surface, $\theta$ the optimal trait value, and $\delta$ a random component capturing the effect of genetic drift. We can find the expected mean of the trait over time by taking the expectation of this equation:
 
 (6.14)
 <div>
 $$
-
+E[\bar{z}'] = \mu_z' = \mu_z + 2 G \gamma (\theta - \mu_z)
 $$
 </div>
 
-We can then solve this differential equations given the starting condition z(0)=z0. Doing so, we obtain:
+We can then solve this differential equations given the starting condition $\mu_z(0) = \bar{z}(0)$. Doing so, we obtain:
 
 (6.15)
 <div>
 $$
-
+\mu_z(t) = \theta + e^{-2 G t \gamma} (\bar{z}(0)-\theta)
 $$
 </div>
 
