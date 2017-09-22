@@ -75,11 +75,11 @@ Since these elements represent the heights of nodes in the phylogenetic tree, th
 
 Finally, the $\kappa$ transformation is sometimes used to capture patterns of “speciational” change in trees. In the $\kappa$ model, one raises all of the branch lengths in the tree by the power $\kappa$. This has a complicated effect on the phylogenetic variance-covariance matrix, as the effect that this transformation has on each covariance element depends on both the value of $\kappa$ and the number of branches that extend from the root of the tree to the most recent common ancestor of each pair of species. So, if our original C matrix is given by equation 6.1, the transformed version will be:
 
-(6.4)
+(Equation 6.4)
 <div>
 $$
 \mathbf{C_o} =
-\begin{bmatrix}
+\left(\begin{smallmatrix}
 b_{1,1}^k + b_{1,2}^k \dots + b_{1,d_1}^k &
 b_{1-2,1}^k + b_{1-2,2}^k \dots + b_{1-2,d_{1-2}}^k &
 \dots &
@@ -93,7 +93,7 @@ b_{n-1,1}^k + b_{n-1,2}^k \dots + b_{n-1,d_{1-n}}^k &
 b_{n-2,1}^k + b_{n-2,2}^k \dots + b_{n-2,d_{1-2}}^k &
 \dots &
 b_{n,1}^k + b_{n,2}^k \dots + b_{n,d_{n}}^k \\
-\end{bmatrix}
+\end{smallmatrix}\right)
 $$
 </div>
 

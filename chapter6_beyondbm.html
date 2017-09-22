@@ -87,11 +87,11 @@ $$</span><br /></p>
 </div>
 <p>Since these elements represent the heights of nodes in the phylogenetic tree, then <span class="math inline"><em>δ</em></span> can also be viewed as a transformation of phylogenetic node heights. When <span class="math inline"><em>δ</em></span> is one, the tree is unchanged and one still has a constant-rate Brownian motion process; when <span class="math inline"><em>δ</em></span> is less than 1, node heights are reduced, but deeper branches in the tree are reduced less than shallower branches (Figure 6.1). This effectively represents a model where the rate of evolution slows through time. By contrast, <span class="math inline"><em>δ</em></span> &gt; 1 stretches the shallower branches in the tree more than the deep branches, mimicking a model where the rate of evolution speeds up through time. There is a close connection between the delta model, the ACDC model <span class="citation">(Blomberg et al. <a href="#ref-Blomberg2003-as">2003</a>)</span>, and Harmon et al.’s <span class="citation">(<a href="#ref-Harmon2010-wg">2010</a>)</span> early burst model [see also <span class="citation">Uyeda and Harmon (<a href="#ref-Uyeda2014-ng">2014</a>)</span>, especially the appendix).</p>
 <p>Finally, the <span class="math inline"><em>κ</em></span> transformation is sometimes used to capture patterns of “speciational” change in trees. In the <span class="math inline"><em>κ</em></span> model, one raises all of the branch lengths in the tree by the power <span class="math inline"><em>κ</em></span>. This has a complicated effect on the phylogenetic variance-covariance matrix, as the effect that this transformation has on each covariance element depends on both the value of <span class="math inline"><em>κ</em></span> and the number of branches that extend from the root of the tree to the most recent common ancestor of each pair of species. So, if our original C matrix is given by equation 6.1, the transformed version will be:</p>
-(6.4)
+(Equation 6.4)
 <div>
 <p><br /><span class="math display">$$
 \mathbf{C_o} =
-\begin{bmatrix}
+\left(\begin{smallmatrix}
 b_{1,1}^k + b_{1,2}^k \dots + b_{1,d_1}^k &amp;
 b_{1-2,1}^k + b_{1-2,2}^k \dots + b_{1-2,d_{1-2}}^k &amp;
 \dots &amp;
@@ -105,7 +105,7 @@ b_{n-1,1}^k + b_{n-1,2}^k \dots + b_{n-1,d_{1-n}}^k &amp;
 b_{n-2,1}^k + b_{n-2,2}^k \dots + b_{n-2,d_{1-2}}^k &amp;
 \dots &amp;
 b_{n,1}^k + b_{n,2}^k \dots + b_{n,d_{n}}^k \\
-\end{bmatrix}
+\end{smallmatrix}\right)
 $$</span><br /></p>
 </div>
 <p>where <span class="math inline"><em>b</em><sub><em>x</em>, <em>y</em></sub></span> is the branch length of the branch that is the most recent common ancestor of taxa <span class="math inline"><em>x</em></span> and <span class="math inline"><em>y</em></span>, while <span class="math inline"><em>d</em><sub><em>x</em>, <em>y</em></sub></span> is the total number of branches that one encounters traversing the path from the root to the most recent common ancestor of the species pair specified by <span class="math inline"><em>x</em>, <em>y</em></span> (or to the tip <span class="math inline"><em>x</em></span> if just one taxon is specified). Needless to say, this transformation is easier to understand as a transformation of the tree branches themselves rather than of the associated variance-covariance matrix.</p>
