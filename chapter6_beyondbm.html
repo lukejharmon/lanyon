@@ -286,64 +286,94 @@ $$</span><br /></p>
 <div>
 <p><br /><span class="math display">$$
 \begin{array}{l}
-\bar{a}' = a + 2 G \gamma (\theta - \bar{a}) + \delta \\
-\bar{b}' = b + 2 G \gamma (\theta - \bar{b}) + \delta \\
+\bar{a}' = \bar{a} + 2 G \gamma (\theta - \bar{a}) + \delta \\
+\bar{b}' = \bar{b} + 2 G \gamma (\theta - \bar{b}) + \delta \\
 \end{array}
 $$</span><br /></p>
 </div>
 <p>Expected values of these two equations give equations for the means:</p>
 (6.23-24)
 <div>
-<p>$$</p>
-<p>$$</p>
+<p><br /><span class="math display">$$
+\begin{array}{l}
+\mu_a' = \mu_a + 2 G \gamma (\theta - \mu_a) \\
+\mu_b' = \mu_b + 2 G \gamma (\theta - \mu_b) \\
+\end{array}
+$$</span><br /></p>
 </div>
-<p>We can solve this system of differential equations, given starting conditions a(0)=a0 and b(0)=b0:</p>
+<p>We can solve this system of differential equations, given starting conditions <span class="math inline">$\mu_a(0)=\bar{a}_0$</span> and <span class="math inline">$\mu_b(0)=\bar{b}_0$</span>:</p>
 (6.25-26)
 <div>
-<p>$$</p>
-<p>$$</p>
+<p><br /><span class="math display">$$
+\begin{array}{l}
+\mu_a'(t) = \theta + e^{-2 G t \gamma} (bar{a}_0 - \theta) \\
+\mu_b'(t) = \theta + e^{-2 G t \gamma} (bar{b}_0 - \theta) \\
+\end{array}
+$$</span><br /></p>
 </div>
-<p>However, we can also note that the starting value for both a and b is the same as the ending value for species z on the root branch of the tree. If we denote the length of that branch as t1 then:</p>
+<p>However, we can also note that the starting value for both <span class="math inline"><em>a</em></span> and <span class="math inline"><em>b</em></span> is the same as the ending value for species <span class="math inline"><em>z</em></span> on the root branch of the tree. If we denote the length of that branch as t_1 then:</p>
 (6.27)
 <div>
-<p>$$</p>
-<p>$$</p>
+<p><br /><span class="math display">$$
+E[\bar{a}_0] = E[\bar{b}_0] = E[\bar{z}(t_1)] = e^{-2 G t_1 \gamma} (bar{z}_0 - \theta)
+$$</span><br /></p>
 </div>
 <p>Substituting this into equations (6.25-26):</p>
 (6.28-29)
 <div>
-<p>$$</p>
-<p>$$</p>
+<p><br /><span class="math display">$$
+\begin{array}{l}
+\mu_a'(t) = \theta + e^{-2 G \gamma (t_1 + t)} (bar{z}_0 - \theta) \\
+\mu_b'(t) = \theta + e^{-2 G \gamma (t_1 + t)} (bar{z}_0 - \theta) \\
+\end{array}
+$$</span><br /></p>
 </div>
 <p>We can calculate the expected variance across replicates of species A and B, as above:</p>
 (6.30-32)
 <div>
-<p>$$</p>
-<p>$$</p>
+<p><br /><span class="math display">$$
+\begin{array}{l}
+V_a' = E[\bar{a}'^2] + E[\bar{a}']^2 \\
+V_a' = E[(\bar{a} + 2 G \gamma (\theta - \bar{a}) + \delta)^2] + E[\bar{a} + 2 G \gamma (\theta - \bar{a}) + \delta]^2 \\
+V_a' = G / n + (1 - 2 G \gamma)^2 V_a \\
+\end{array}
+$$</span><br /></p>
 </div>
 <p>Similarly,</p>
 (6.33-34)
 <div>
-<p>$$</p>
-<p>$$</p>
+<p><br /><span class="math display">$$
+\begin{array}{l}
+V_b' = E[\bar{b}'^2] + E[\bar{b}']^2 \\
+V_b' = G / n + (1 - 2 G \gamma)^2 V_b \\
+\end{array}
+$$</span><br /></p>
 </div>
 <p>Again we can assume that stabilizing selection is weak, and simplify these expressions using a Taylor series expansion:</p>
 (6.35-36)
 <div>
-<p>$$</p>
-<p>$$</p>
+<p><br /><span class="math display">$$
+\begin{array}{l}
+V_a' = G / n + (1 - 4 G \gamma) V_a \\
+V_b' = G / n + (1 - 4 G \gamma) V_b \\
+\end{array}
+$$</span><br /></p>
 </div>
 <p>We have a third term to consider, the covariance between species A and B due to their shared ancestry. We can use a standard expression for covariance to set up a third differential equation:</p>
 (6.37-39)
 <div>
-<p>$$</p>
-<p>$$</p>
+<p><br /><span class="math display">$$
+\begin{array}{l}
+V_{ab}' = E[\bar{a}' \bar{b}'] + E[\bar{a}'] E[\bar{b}'] \\
+V_{ab}' = E[(\bar{a} + 2 G \gamma (\theta - \bar{a}) + \delta)(\bar{b} + 2 G \gamma (\theta - \bar{b}) + \delta)] + E[\bar{a} + 2 G \gamma (\theta - \bar{a}) + \delta] E[\bar{a} + 2 G \gamma (\theta - \bar{a}) + \delta] \\
+V_{ab}' = V_{ab} (1 - 2 G \gamma)^2
+\end{array}
+$$</span><br /></p>
 </div>
 <p>We again use a Taylor series expansion to simplify:</p>
 (6.40)
 <div>
-<p>$$</p>
-<p>$$</p>
+<p><br /><span class="math display"><em>V</em><sub><em>a</em><em>b</em></sub>′= − 4<em>V</em><sub><em>a</em><em>b</em></sub><em>G</em><em>γ</em></span><br /></p>
 </div>
 <p>Note that under this model the covariance between A and B decreases through time following their divergence from a common ancestor.</p>
 <p>We now have a system of three differential equations. Setting initial conditions Va(0)=Va0, Vb(0)=Vb0, and Vab(0)=Vab0, we solve to obtain:</p>

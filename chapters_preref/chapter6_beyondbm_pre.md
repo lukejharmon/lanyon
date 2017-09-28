@@ -337,6 +337,7 @@ $$
 \begin{array}{l}
 \mu_a'(t) = \theta + e^{-2 G t \gamma} (bar{a}_0 - \theta) \\
 \mu_b'(t) = \theta + e^{-2 G t \gamma} (bar{b}_0 - \theta) \\
+\end{array}
 $$
 </div>
 
@@ -345,7 +346,7 @@ However, we can also note that the starting value for both $a$ and $b$ is the sa
 (6.27)
 <div>
 $$
-E[bar{a}_0] = E[bar{b}_0] = E[bar{z}(t_1)] = e^{-2 G t_1 \gamma} (bar{z}_0 - \theta)
+E[\bar{a}_0] = E[\bar{b}_0] = E[\bar{z}(t_1)] = e^{-2 G t_1 \gamma} (\bar{z}_0 - \theta)
 $$
 </div>
 
@@ -354,9 +355,11 @@ Substituting this into equations (6.25-26):
 (6.28-29)
 <div>
 $$
-\mu_a'(t) = \theta + e^{-2 G \gamma (t_1 + t)} (bar{z}_0 - \theta) \\
-\mu_b'(t) = \theta + e^{-2 G \gamma (t_1 + t)} (bar{z}_0 - \theta) \\
-$
+\begin{array}{l}
+\mu_a'(t) = \theta + e^{-2 G \gamma (t_1 + t)} (\bar{z}_0 - \theta) \\
+\mu_b'(t) = \theta + e^{-2 G \gamma (t_1 + t)} (\bar{z}_0 - \theta) \\
+\end{array}
+$$
 </div>
 
 We can calculate the expected variance across replicates of species A and B, as above:
@@ -364,7 +367,11 @@ We can calculate the expected variance across replicates of species A and B, as 
 (6.30-32)
 <div>
 $$
-
+\begin{array}{l}
+V_a' = E[\bar{a}'^2] + E[\bar{a}']^2 \\
+V_a' = E[(\bar{a} + 2 G \gamma (\theta - \bar{a}) + \delta)^2] + E[\bar{a} + 2 G \gamma (\theta - \bar{a}) + \delta]^2 \\
+V_a' = G / n + (1 - 2 G \gamma)^2 V_a \\
+\end{array}
 $$
 </div>
 
@@ -373,7 +380,10 @@ Similarly,
 (6.33-34)
 <div>
 $$
-
+\begin{array}{l}
+V_b' = E[\bar{b}'^2] + E[\bar{b}']^2 \\
+V_b' = G / n + (1 - 2 G \gamma)^2 V_b \\
+\end{array}
 $$
 </div>
 
@@ -382,7 +392,10 @@ Again we can assume that stabilizing selection is weak, and simplify these expre
 (6.35-36)
 <div>
 $$
-
+\begin{array}{l}
+V_a' = G / n + (1 - 4 G \gamma) V_a \\
+V_b' = G / n + (1 - 4 G \gamma) V_b \\
+\end{array}
 $$
 </div>
 
@@ -391,7 +404,11 @@ We have a third term to consider, the covariance between species A and B due to 
 (6.37-39)
 <div>
 $$
-
+\begin{array}{l}
+V_{ab}' = E[\bar{a}' \bar{b}'] + E[\bar{a}'] E[\bar{b}'] \\
+V_{ab}' = E[(\bar{a} + 2 G \gamma (\theta - \bar{a}) + \delta)(\bar{b} + 2 G \gamma (\theta - \bar{b}) + \delta)] + E[\bar{a} + 2 G \gamma (\theta - \bar{a}) + \delta] E[\bar{a} + 2 G \gamma (\theta - \bar{a}) + \delta] \\
+V_{ab}' = V_{ab} (1 - 2 G \gamma)^2
+\end{array}
 $$
 </div>
 
@@ -400,27 +417,31 @@ We again use a Taylor series expansion to simplify:
 (6.40)
 <div>
 $$
-
+V_{ab}' = -4 V_{ab} G \gamma
 $$
 </div>
 
 Note that under this model the covariance between A and B decreases through time following their divergence from a common ancestor.
 
-We now have a system of three differential equations. Setting initial conditions Va(0)=Va0, Vb(0)=Vb0, and Vab(0)=Vab0, we solve to obtain:
+We now have a system of three differential equations. Setting initial conditions $V_a(0) = V_{a0}, V_b(0)=V_{b0}, and V_{ab}(0)=V_{ab0}, we solve to obtain:
 
 (6.41-43)
 <div>
 $$
-
+\begin{array}{l}
+V_a(t) = \frac{1 - e^{-4 G \gamma t}}{4 n \gamma} + V_{a0} \\
+V_b(t) = \frac{1 - e^{-4 G \gamma t}}{4 n \gamma} + V_{b0} \\
+V_{ab}(t) = V_{ab0} e^{-4 G \gamma t} \\
+\end{array}
 $$
 </div>
 
-We can further specify the starting conditions by noting that both the variance and A and B and their covariance have an initial value given by the variance of z at time t1:
+We can further specify the starting conditions by noting that both the variance of A and B and their covariance have an initial value given by the variance of $z$ at time $t_1$:
 
 (6.44)
 <div>
 $$
-
+V_{a0} = V_{ab0} = V_{ab0} = V_z(t_1) = \frac{e^{-4 G \gamma t_1}-1}{4 n \gamma} \\
 $$
 </div>
 
@@ -429,62 +450,73 @@ Substituting 6.44 into 6.41-43, we obtain:
 (6.45-47)
 <div>
 $$
-
+\begin{array}{l}
+V_a(t) = \frac{e^{-4 G \gamma (t_1 + t)} -1}{4 n \gamma} \\
+V_b(t) = \frac{e^{-4 G \gamma (t_1 + t)} -1}{4 n \gamma} \\
+V_{ab}(t) = \frac{e^{-4 G \gamma t} -e^{-4 G \gamma (t_1 + t)}}{4 n \gamma} \\
+\end{array}
 $$
 </div>
 
-Under this model, the trait values follow a multivariate normal distribution; one can calculate that all of the other moments of this distribution are zero. Thus, the set of means, variances, and covariances completely describes the distribution of A and B. Also, as  goes to zero, the selection surface becomes flatter and flatter. Thus at the limit as  -> 0, these equations are equal to those for Brownian motion (see chapter 4).
+Under this model, the trait values follow a multivariate normal distribution; one can calculate that all of the other moments of this distribution are zero. Thus, the set of means, variances, and covariances completely describes the distribution of A and B. Also, as $\gamma$ goes to zero, the selection surface becomes flatter and flatter. Thus at the limit as $\gamma$ approaches 0, these equations are equal to those for Brownian motion (see chapter 4).
 
-This quantitative genetic formulation – which follows Lande (1976) – is different from the typical parameterization of the OU model for comparative methods. We can obtain the “normal” OU equations by substituting  = 2 G  and 2 = G / n:
+This quantitative genetic formulation – which follows Lande (1976) – is different from the typical parameterization of the OU model for comparative methods. We can obtain the “normal” OU equations by substituting $\alpha = 2 G \gamma$  and $\sigma^2 = G / n$:
 
 (6.48-50)
 <div>
 $$
-
+\begin{array}{l}
+V_a(t) = \frac{\sigma^2}{2 \alpha} (e^{-2 \alpha (t_1 + t)} - 1) \\
+V_b(t) = \frac{\sigma^2}{2 \alpha} (e^{-2 \alpha (t_1 + t)} - 1) \\
+V_ab(t) = \frac{\sigma^2}{2 \alpha} e^{-2 \alpha t} (1-e^{-2 \alpha t_1}) \\
 $$
 </div>
 
 These equations are mathematically equivalent to the equations in Butler et al. (2004) applied to a phylogenetic tree with two species.
 
-We can easily generalize this approach to a full phylogenetic tree with n taxa. In that case, the n species trait values will all be drawn from a multivariate normal distribution. The mean trait value for species i is then:
+We can easily generalize this approach to a full phylogenetic tree with n taxa. In that case, the n species trait values will all be drawn from a multivariate normal distribution. The mean trait value for species $i$ is then:
 
 (6.51)
 <div>
 $$
-
+\mu_i(t) = \theta + e^{-2 G \gamma T_i}(\bar{z}_0 - \theta)
 $$
 </div>
 
-Here Ti represents the total branch length separating that species from the root of the tree. The variance of species i is:
+Here $T_i$ represents the total branch length separating that species from the root of the tree. The variance of species $i$ is:
 
 (6.52)
 <div>
 $$
-
+V_i(t) = \frac{e^{-4 G \gamma T_i} - 1}{4 n \gamma}
 $$
 </div>
 
-Finally, the covariance between species i and j is:
+Finally, the covariance between species $i$ and $j$ is:
 
 (6.53)
 <div>
 $$
-
+V_{ij}(t) = \frac{e^{-4 G \gamma (T_i - s_{ij})}-e^{-4 G \gamma T_i}}{4 n \gamma}
 $$
 </div>
 
-Note that the above equation is only true when  – which is only true for all I and j if the tree is ultrametric. We can substitute the normal OU parameters,  and 2, into these equations:
+Note that the above equation is only true when $T_i = T_j$ – which is only true for all $i$ and $j$ if the tree is ultrametric. We can substitute the normal OU parameters, $\alpha$ and $\sigma^2$, into these equations:
 
 (6.54-56)
 <div>
 $$
-
+\begin{array}{l}
+\mu_i(t) = \theta + e^{- \alpha T_i}(\bar{z}_0 - \theta)
+V_i(t) = \frac{\sigma^2}{2 \alpha} e^{-2 \alpha T_i} - 1
+V_{ij}(t) = \frac{\sigma^2}{2 \alpha} (e^{-2 \alpha (T_i - s_{ij})}-e^{-2 \alpha T_i})
+\end{array}
 $$
 </div>
 
-We can fit an OU model to data in a similar way to how we fit BM models in the previous chapters. For any given parameters (z0, 2, , and ) and a phylogenetic tree with branch lengths, one can calculate an expected vector of species means and a species variance-covariance matrix. One then uses the likelihood equation for a multivariate normal distribution to calculate the likelihood of this model. This likelihood can then be used for parameter estimation in either a ML or a Bayesian framework.
+We can fit an OU model to data in a similar way to how we fit BM models in the previous chapters. For any given parameters ($\bar{z}_0$, $\sigma^2$, $\alpha$, and $\theta$) and a phylogenetic tree with branch lengths, one can calculate an expected vector of species means and a species variance-covariance matrix. One then uses the likelihood equation for a multivariate normal distribution to calculate the likelihood of this model. This likelihood can then be used for parameter estimation in either a ML or a Bayesian framework.
 
-We can illustrate how this works by fitting an OU model to the mammal body size data that we have been discussing. Using ML, we obtain parameter estimates , , . This model has a lnL of -77.6, a little higher than BM, but an AICc score of 161.2, worse than BM. We still prefer Brownian motion for these data. Over many datasets, though, OU models fit better than Brownian motion (see Harmon et al. 2010, Pennell et al. 2015).
+We can illustrate how this works by fitting an OU model to the mammal body size data that we have been discussing. Using ML, we obtain parameter estimates $\bar{z}_0 = 4.60$, $\sigma^2 = 0.10$, $\alpha = 0.0082$, and $\theta = 4.60$. This model has a lnL of -77.6, a little higher than BM, but an $AIC_c$ score of 161.2, worse than BM. We still prefer Brownian motion for these data. Over many datasets, though, OU models fit better than Brownian motion (see Harmon et al. 2010, Pennell et al. 2015).
 
 ## Section 6.6: Early burst models
 
@@ -492,29 +524,32 @@ Adaptive radiations are a slippery idea. Many definitions have been proposed, so
 
 One idea, then, is that we could detect the presence of adaptive radiations by looking for bursts of trait evolution deep in the tree. If we can identify clades, like Darwin’s finches, for example, that might be adaptive radiations, we should be able to uncover this “early burst” pattern of trait evolution.
 
-The simplest way to model an early burst of evolution in a continuous trait is to use a time-varying Brownian motion model. Imagine that species in a clade evolved under a Brownian motion model, but one where the Brownian rate parameter (2) slowed through time. In particular, we can follow Harmon et al. (2010) and define the rate parameter as a function of time, as:
+The simplest way to model an early burst of evolution in a continuous trait is to use a time-varying Brownian motion model. Imagine that species in a clade evolved under a Brownian motion model, but one where the Brownian rate parameter ($\sigma^2$) slowed through time. In particular, we can follow Harmon et al. (2010) and define the rate parameter as a function of time, as:
 
 (6.57)
 <div>
 $$
-
+\sigma^2(t) = \sigma_0^2 e^{r t}
 $$
 </div>
 
-We describe the rate of decay of the rate using the parameter r, which must be negative to fit our idea of adaptive radiations. The rate of evolution will slow through time, and will decay more quickly if the absolute value of r is large.
+We describe the rate of decay of the rate using the parameter $r$, which must be negative to fit our idea of adaptive radiations. The rate of evolution will slow through time, and will decay more quickly if the absolute value of $r$ is large.
 
-This model also generates a multivariate normal distribution of tip values. Harmon et al. (2010) derived equations for the means and variances of tips on a tree under this model, which are:
+This model also generates a multivariate normal distribution of tip values. Harmon et al. (2010) followed Blomberg's "ACDC" model to write equations for the means and variances of tips on a tree under this model, which are:
 
 (6.58-60)
 <div>
 $$
-
+\begin{array}{l}
+\mu_i(t) = \bar{z}_0 \\
+V_i(t) = \sigma_0^2 \frac{e^{r T_i}-1}{r}
+V_{ij}(t) = \sigma_0^2 \frac{e^{r s_{ij}}-1}{r}
 $$
 </div>
 
-Again, we can generate a vector of means and a variance-covariance matrix for this model given parameter values (z, 02, and r) and a phylogenetic tree. We can then use the multivariate normal probability distribution function to calculate a likelihood, which we can then use in a ML or Bayesian statistical framework.
+Again, we can generate a vector of means and a variance-covariance matrix for this model given parameter values ($\bar{z}_0$, $\sigma^2$, and $r$) and a phylogenetic tree. We can then use the multivariate normal probability distribution function to calculate a likelihood, which we can then use in a ML or Bayesian statistical framework.
 
-For mammal body size, the early burst model does not explain patterns of body size evolution, at least for the data considered here (, , , lnL = -78.0, AICc = 162.6).
+For mammal body size, the early burst model does not explain patterns of body size evolution, at least for the data considered here ($\bar{z}_0 = 4.64$, $\sigma^2 = 0.088$, $r = -0.000001$, $lnL = -78.0$, $AIC_c = 162.6$).
 
 ## Section 6.7: Peak shift models
 
