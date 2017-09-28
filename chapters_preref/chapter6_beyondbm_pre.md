@@ -245,7 +245,7 @@ $$
 $$
 </div>
 
-Then, simplifying further:
+Then, simplifying further with another Taylor expansion, we obtain:
 
 (6.13)
 <div>
@@ -277,7 +277,11 @@ We can take a similar approach to calculate the expected variance of trait value
 (6.16-18)
 <div>
 $$
-
+\begin{array}{l}
+V_z' = E[\bar{z}'^2] + E[\bar{z}']^2 \\
+V_z' = E[(\bar{z} + 2 G \gamma (\theta - \bar{z}) + \delta)^2] - E[\bar{z} + 2 G \gamma (\theta - \bar{z}) + \delta]^2 \\
+V_z' = G/n + (1 - 2 G \gamma)^2 V_z \\
+\end{array}
 $$
 </div>
 
@@ -286,27 +290,30 @@ If we assume that stabilizing selection is weak, we can simplify the above expre
 (6.19)
 <div>
 $$
-
+V_z' = G/n + (1 - 4 G \gamma) V_z \\
 $$
 </div>
 
-We can then solve this differential equation with starting point Vz(0)=0:
+We can then solve this differential equation with starting point $V_z(0)=0$:
 
 (6.20)
 <div>
 $$
-
+V_z(t) = \frac{e^{-4 G t \gamma}-1}{4 n \gamma}
 $$
 </div>
 
-This is equivalent to a standard stochastic model for constrained random walks called an Ornstein-Uhlenbeck process. Typical Ornstein-Uhlenbeck processes have three parameters: the starting value (z0), the optimum (), the drift parameter (2), and a parameter describing the strength of constraints (). In our parameterization, z0 and  are as given,  = 2 G , and 2 = G / n.
+This is equivalent to a standard stochastic model for constrained random walks called an Ornstein-Uhlenbeck process. Typical Ornstein-Uhlenbeck processes have three parameters: the starting value ($\bar{z}(0)$), the optimum ($\theta$), the drift parameter ($\sigma^2$), and a parameter describing the strength of constraints ($\alpha$). In our parameterization, $\bar{z}(0)$ and $\theta$ are as given,  $\alpha = 2 G$, and $\sigma^2 = G / n$.
 
 We now need to know how OU models behave when considered along the branches of a phylogenetic tree. In the simplest case, we can describe the joint distribution of two species, A and B, descended from a common ancestor, z. Expressions for trait values of species A and B are:
 
 (6.21-22)
 <div>
 $$
-
+\begin{array}{l}
+\bar{a}' = \bar{a} + 2 G \gamma (\theta - \bar{a}) + \delta \\
+\bar{b}' = \bar{b} + 2 G \gamma (\theta - \bar{b}) + \delta \\
+\end{array}
 $$
 </div>
 
@@ -315,25 +322,30 @@ Expected values of these two equations give equations for the means:
 (6.23-24)
 <div>
 $$
-
+\begin{array}{l}
+\mu_a' = \mu_a + 2 G \gamma (\theta - \mu_a) \\
+\mu_b' = \mu_b + 2 G \gamma (\theta - \mu_b) \\
+\end{array}
 $$
 </div>
 
-We can solve this system of differential equations, given starting conditions a(0)=a0 and b(0)=b0:
+We can solve this system of differential equations, given starting conditions $\mu_a(0)=\bar{a}_0$ and $\mu_b(0)=\bar{b}_0$:
 
 (6.25-26)
 <div>
 $$
-
+\begin{array}{l}
+\mu_a'(t) = \theta + e^{-2 G t \gamma} (bar{a}_0 - \theta) \\
+\mu_b'(t) = \theta + e^{-2 G t \gamma} (bar{b}_0 - \theta) \\
 $$
 </div>
 
-However, we can also note that the starting value for both a and b is the same as the ending value for species z on the root branch of the tree. If we denote the length of that branch as t1 then:
+However, we can also note that the starting value for both $a$ and $b$ is the same as the ending value for species $z$ on the root branch of the tree. If we denote the length of that branch as t_1 then:
 
 (6.27)
 <div>
 $$
-
+E[bar{a}_0] = E[bar{b}_0] = E[bar{z}(t_1)] = e^{-2 G t_1 \gamma} (bar{z}_0 - \theta)
 $$
 </div>
 
@@ -342,8 +354,9 @@ Substituting this into equations (6.25-26):
 (6.28-29)
 <div>
 $$
-
-$$
+\mu_a'(t) = \theta + e^{-2 G \gamma (t_1 + t)} (bar{z}_0 - \theta) \\
+\mu_b'(t) = \theta + e^{-2 G \gamma (t_1 + t)} (bar{z}_0 - \theta) \\
+$
 </div>
 
 We can calculate the expected variance across replicates of species A and B, as above:

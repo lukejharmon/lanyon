@@ -234,7 +234,7 @@ $$</span><br /></p>
 \Delta \bar{z} = \frac{G}{\bar{W}} \frac{\partial \bar{W}}{\partial \bar{z}} = \frac{G}{1 - \gamma (\bar{z}^2 - V_z - 2 \bar{z} \theta + \theta ^2)} 2 \gamma (\theta - \bar{z})
 $$</span><br /></p>
 </div>
-<p>Then, simplifying further:</p>
+<p>Then, simplifying further with another Taylor expansion, we obtain:</p>
 (6.13)
 <div>
 <p><br /><span class="math display">$$
@@ -258,27 +258,38 @@ $$</span><br /></p>
 <p>We can take a similar approach to calculate the expected variance of trait values. We use a standard expression for variance:</p>
 (6.16-18)
 <div>
-<p>$$</p>
-<p>$$</p>
+<p><br /><span class="math display">$$
+\begin{array}{l}
+V_z' = E[\bar{z}'^2] + E[\bar{z}']^2 \\
+V_z' = E[(\bar{z} + 2 G \gamma (\theta - \bar{z}) + \delta)^2] - E[\bar{z} + 2 G \gamma (\theta - \bar{z}) + \delta]^2 \\
+V_z' = G/n + (1 - 2 G \gamma)^2 V_z \\
+\end{array}
+$$</span><br /></p>
 </div>
 <p>If we assume that stabilizing selection is weak, we can simplify the above expression using a Taylor series expansion:</p>
 (6.19)
 <div>
-<p>$$</p>
-<p>$$</p>
+<p><br /><span class="math display">$$
+V_z' = G/n + (1 - 4 G \gamma) V_z \\
+$$</span><br /></p>
 </div>
-<p>We can then solve this differential equation with starting point Vz(0)=0:</p>
+<p>We can then solve this differential equation with starting point <span class="math inline"><em>V</em><sub><em>z</em></sub>(0)=0</span>:</p>
 (6.20)
 <div>
-<p>$$</p>
-<p>$$</p>
+<p><br /><span class="math display">$$
+V_z(t) = \frac{e^{-4 G t \gamma}-1}{4 n \gamma}
+$$</span><br /></p>
 </div>
-<p>This is equivalent to a standard stochastic model for constrained random walks called an Ornstein-Uhlenbeck process. Typical Ornstein-Uhlenbeck processes have three parameters: the starting value (z0), the optimum (), the drift parameter (2), and a parameter describing the strength of constraints (). In our parameterization, z0 and are as given, = 2 G , and 2 = G / n.</p>
+<p>This is equivalent to a standard stochastic model for constrained random walks called an Ornstein-Uhlenbeck process. Typical Ornstein-Uhlenbeck processes have three parameters: the starting value (<span class="math inline">$\bar{z}(0)$</span>), the optimum (<span class="math inline"><em>θ</em></span>), the drift parameter (<span class="math inline"><em>σ</em><sup>2</sup></span>), and a parameter describing the strength of constraints (<span class="math inline"><em>α</em></span>). In our parameterization, <span class="math inline">$\bar{z}(0)$</span> and <span class="math inline"><em>θ</em></span> are as given, <span class="math inline"><em>α</em> = 2<em>G</em></span>, and <span class="math inline"><em>σ</em><sup>2</sup> = <em>G</em>/<em>n</em></span>.</p>
 <p>We now need to know how OU models behave when considered along the branches of a phylogenetic tree. In the simplest case, we can describe the joint distribution of two species, A and B, descended from a common ancestor, z. Expressions for trait values of species A and B are:</p>
 (6.21-22)
 <div>
-<p>$$</p>
-<p>$$</p>
+<p><br /><span class="math display">$$
+\begin{array}{l}
+\bar{a}' = a + 2 G \gamma (\theta - \bar{a}) + \delta \\
+\bar{b}' = b + 2 G \gamma (\theta - \bar{b}) + \delta \\
+\end{array}
+$$</span><br /></p>
 </div>
 <p>Expected values of these two equations give equations for the means:</p>
 (6.23-24)
