@@ -423,7 +423,7 @@ $$
 
 Note that under this model the covariance between A and B decreases through time following their divergence from a common ancestor.
 
-We now have a system of three differential equations. Setting initial conditions $V_a(0) = V_{a0}, V_b(0)=V_{b0}, and V_{ab}(0)=V_{ab0}, we solve to obtain:
+We now have a system of three differential equations. Setting initial conditions $V_a(0) = V_{a0}$, $V_b(0)=V_{b0}$, and $V_{ab}(0)=V_{ab0}$, we solve to obtain:
 
 (6.41-43)
 <div>
@@ -469,6 +469,7 @@ $$
 V_a(t) = \frac{\sigma^2}{2 \alpha} (e^{-2 \alpha (t_1 + t)} - 1) \\
 V_b(t) = \frac{\sigma^2}{2 \alpha} (e^{-2 \alpha (t_1 + t)} - 1) \\
 V_ab(t) = \frac{\sigma^2}{2 \alpha} e^{-2 \alpha t} (1-e^{-2 \alpha t_1}) \\
+\end{array}
 $$
 </div>
 
@@ -507,9 +508,9 @@ Note that the above equation is only true when $T_i = T_j$ – which is only tru
 <div>
 $$
 \begin{array}{l}
-\mu_i(t) = \theta + e^{- \alpha T_i}(\bar{z}_0 - \theta)
-V_i(t) = \frac{\sigma^2}{2 \alpha} e^{-2 \alpha T_i} - 1
-V_{ij}(t) = \frac{\sigma^2}{2 \alpha} (e^{-2 \alpha (T_i - s_{ij})}-e^{-2 \alpha T_i})
+\mu_i(t) = \theta + e^{- \alpha T_i}(\bar{z}_0 - \theta) \\
+V_i(t) = \frac{\sigma^2}{2 \alpha} e^{-2 \alpha T_i} - 1 \\
+V_{ij}(t) = \frac{\sigma^2}{2 \alpha} (e^{-2 \alpha (T_i - s_{ij})}-e^{-2 \alpha T_i}) \\
 \end{array}
 $$
 </div>
@@ -544,6 +545,7 @@ $$
 \mu_i(t) = \bar{z}_0 \\
 V_i(t) = \sigma_0^2 \frac{e^{r T_i}-1}{r}
 V_{ij}(t) = \sigma_0^2 \frac{e^{r s_{ij}}-1}{r}
+\end{array}
 $$
 </div>
 
