@@ -26,8 +26,12 @@ title: Beyond Brownian motion
 </div>
 <h1 id="chapter-7-models-of-discrete-character-evolution">Chapter 7: Models of discrete character evolution</h1>
 <h2 id="biological-motivation-limblessness-as-a-discrete-trait">Biological motivation: Limblessness as a discrete trait</h2>
-<p>Squamates, the clade that includes all living species of lizards, are well known for their diversity. From the gigantic Komodo dragon of Indonesia (Figure 9.1 A,Varanus komodoensis) to tiny leaf chameleons (Figure 9.1 B, Brookesia) of Madagascar, squamates span an impressive range of form and ecological niche use. Even the snakes (Figure 9.1C and D), extraordinarily diverse in their own right (~3,500 species), are actually a clade that is nested within squamates. The squamate lineage that is ancestral to snakes became limbless about 170 million years ago (www.timetree.org) – and also underwent a suite of changes to their head shape, digestive tract, and other traits associated with their limbless lifestyle. In other words, snakes are lizards – highly modified lizards, but lizards nonetheless. And snakes are not the only limbless lineage of squamates. In fact, lineages within squamates have lost their limbs over and over again through their history (e.g. Figure 9.1E and F), with some estimates that squamates have lost their limbs at least 26 times in the past 240 million years.</p>
-<p>Figure 7.1. Squamates, legged and legless. A. Komodo dragon, B. Brookesia chameleon, C. and D. snakes, E. and F. legless lizards. These are all stand-ins, I “borrowed” pictures from the web.</p>
+<p>Squamates, the clade that includes all living species of lizards, are well known for their diversity. From the gigantic Komodo dragon of Indonesia (Figure 9.1A, <em>Varanus komodoensis</em>) to tiny leaf chameleons of Madagascar (Figure 9.1B, <em>Brookesia</em>), squamates span an impressive range of form and ecological niche use. Even the snakes (Figure 9.1C and D), extraordinarily diverse in their own right (~3,500 species), are actually a clade that is nested within squamates. The squamate lineage that is ancestral to snakes became limbless about 170 million years ago (see <a href="www.timetree.org">Timetree of Life</a> – and also underwent a suite of changes to their head shape, digestive tract, and other traits associated with their limbless lifestyle. In other words, snakes are lizards – highly modified lizards, but lizards nonetheless. And snakes are not the only limbless lineage of squamates. In fact, lineages within squamates have lost their limbs over and over again through their history (e.g. Figure 9.1E and F), with some estimates that squamates have lost their limbs at least 26 times in the past 240 million years.</p>
+<div class="figure">
+<img src="{{site.baseurl}}/images/figure7-1.png" />
+
+</div>
+<p>Figure 7.1. Squamates, legged and legless. A. Komodo dragon, B. Brookesia chameleon, C. and D. snakes, E. and F. legless lizards.</p>
 <p>Limblessness is an example of a discrete trait – a trait that can occupy one of a set of distinct character states. Analyzing the evolution of discrete traits requires a different modeling approach than what we used for continuous traits. In this chapter, I will introduce the Mk model, which is a general approach to modeling the evolution of discrete traits on trees. Fitting this model to comparative data will help us understand the evolution of traits like limblessness where species can be placed into one of a number of discrete character states.</p>
 <p>Key Questions</p>
 <ul>
@@ -38,23 +42,93 @@ title: Beyond Brownian motion
 <h2 id="modeling-the-evolution-of-discrete-states">Modeling the evolution of discrete states</h2>
 <p>So far, we have only dealt with continuously varying characters. However, many characters of interest to biologists can best be described by characters with a set number of fixed states. For limblessness in squamates, introduced above (snakes and lizards), each species is either legless (state 0) or not (state 1; actually, there are some species that might be considered “intermediate,” but we will ignore that here). We might have particular questions about the evolution of limblessness in squamates. For example, how many times this character has changed in the evolutionary history of squamates? How often does limblessness evolve? Do limbs ever re-evolve? Is the evolution of limblessness related to some other aspect of the lives of these reptiles?</p>
 <p>We will consider discrete characters where each species might exhibit one of k states. (In the limbless example above, k=2). For characters with more than two states, there is a key distinction between ordered and unordered characters. Ordered characters can be placed in an order so that transitions only occur between adjacent states. For example, I might include “intermediate” species that are somewhere in between limbed and limbless – for example, the “mermaid skinks” (Sirenoscincus) from Madagascar, so called because they lack hind limbs (Figure 7.2). An ordered model might only allow transitions between limbless and intermediate, and intermediate and limbed; it would be impossible under such a model to go directly from limbed to limbless without first becoming intermediate. For unordered characters, any state can change into any other state. In this chapter, I will focus mainly on unordered characters; we will return to ordered characters later in the book.</p>
-<p>Most work on the evolution of discrete characters on phylogenetic trees has focused on the evolution of gene or protein sequences. Gene sequences are made up of four character states (A, C, T, and G for DNA). Models of sequence evolution allow transitions among all of these states at certain rates, and may allow transition rates to vary across sites, among clades, or through time. There are a huge number of named models that have been applied to this problem, and a battery of statistical approaches are available to fit these models to data (e.g. Posada and Crandall 1998).</p>
+<div class="figure">
+<img src="{{site.baseurl}}/images/figure7-2.png" />
+
+</div>
+<p>Figure 7.2. Mermaid skink</p>
+<p>Most work on the evolution of discrete characters on phylogenetic trees has focused on the evolution of gene or protein sequences. Gene sequences are made up of four character states (A, C, T, and G for DNA). Models of sequence evolution allow transitions among all of these states at certain rates, and may allow transition rates to vary across sites, among clades, or through time. There are a huge number of named models that have been applied to this problem (e.g. Jukes-Cantor, JC; General Time-Reversible, GTR; and many more), and a battery of statistical approaches are available to fit these models to data (e.g. Posada and Crandall 1998).</p>
 <p>Any discrete character can be modeled in a similar way as gene sequences. When considering phenotypic characters, we should keep in mind two main differences from the analysis of DNA sequences. First, arbitrary discrete characters may have any number of states (beyond the four associated with DNA sequence data). Second, characters are typically analyzed independently rather than combining long sets of characters and assuming that they share the same model of change.</p>
 <h2 id="the-mk-model">The Mk Model</h2>
-<p>The most basic model for discrete character evolution is called the Mk model. First developed for trait data by Pagel (1994; although the name Mk comes from Lewis 2001), this model is a direct analogue of the Jukes-Cantor (JC) model for sequence evolution. The model applies to a discrete character having k unordered states. Such a character might have k = 2, k = 3, or even more states. Evolution involves changing between these k states (Figure 7.3).</p>
-<p>Figure 7.3. Examples of discrete characters with (A) k = 2, (B) k = 3, and (C) k = 4 states.</p>
+<p>The most basic model for discrete character evolution is called the Mk model. First developed for trait data by Pagel (1994; although the name Mk comes from Lewis 2001), this model is a direct analogue of the Jukes-Cantor (JC) model for sequence evolution. The model applies to a discrete character having k unordered states. Such a character might have <span class="math inline"><em>k</em> = 2</span>, <span class="math inline"><em>k</em> = 3</span>, or even more states. Evolution involves changing between these k states (Figure 7.3).</p>
+<div class="figure">
+<img src="{{site.baseurl}}/images/figure7-3.png" />
+
+</div>
+<p>Figure 7.3. Examples of discrete characters with (A) <span class="math inline"><em>k</em> = 2</span>, (B) <span class="math inline"><em>k</em> = 3</span>, and (C) <span class="math inline"><em>k</em> = 4</span> states.</p>
 <p>The basic version of the Mk model assumes that transitions among these states follow a Markov process. This means that the probability of changing from one state to another depends only on the current state, and not on what has come before. For example, it makes no difference if a lineage has just evolved the trait of “feathers,” or whether they have had feathers for millions of years – the probability of evolving a different character state is the same in both cases. The basic Mk model also assumes that every state is equally likely to change to any other states.</p>
-<p>For the basic Mk model, we can denote the instantaneous rate of change between states using the parameter q. In general, qij is called the instantaneous rate between character states i and j. It is defined as the limit of the rate measured over very short time intervals. Imagine that you calculate a rate of character change by counting the number of changes of state of a character over some time interval, t. The instantaneous rate is the value that this rate approaches as t gets smaller and smaller so that the time interval is nearly zero. Again, for the basic Mk model, instantaneous rates between all pairs of characters are equal; that is, qij = qmn for all i ≠ j and m ≠ n.</p>
+<p>For the basic Mk model, we can denote the instantaneous rate of change between states using the parameter <span class="math inline"><em>q</em></span>. In general, <span class="math inline"><em>q</em><sub><em>i</em><em>j</em></sub></span> is called the instantaneous rate between character states <span class="math inline"><em>i</em></span> and <span class="math inline"><em>j</em></span>. It is defined as the limit of the rate measured over very short time intervals. Imagine that you calculate a rate of character change by counting the number of changes of state of a character over some time interval, <span class="math inline"><em>t</em></span>. The instantaneous rate is the value that this rate approaches as <span class="math inline"><em>t</em></span> gets smaller and smaller so that the time interval is nearly zero. Again, for the basic Mk model, instantaneous rates between all pairs of characters are equal; that is, <span class="math inline"><em>q</em><sub><em>i</em><em>j</em></sub> = <em>q</em><sub><em>m</em><em>n</em></sub></span> for all <span class="math inline"><em>i</em> ≠ <em>j</em></span> and <span class="math inline"><em>m</em> ≠ <em>n</em></span>.</p>
 <p>We can summarize general Markov models for discrete characters using a transition rate matrix:</p>
-<p>(eq. 7.1)</p>
-<p>Note that the instantaneous rates are only entered into the off-diagonal parts of the matrix. Along the diagonal, these matrices always have a set of negative numbers. For any Q matrix, the sum of all the elements in each row is zero – a necessary condition for a transition rate matrix. Because of this, each negative number has a value, ri, equal to the sum of all of the other numbers in the row. For example,</p>
-<p>(eq. 7.2)</p>
-<p>For a two-state Mk model, k = 2 and rates are symmetric so that q12 = q21. In this case, we can write the transition rate matrix as:</p>
-<p>(eq. 7.3)</p>
-<p>Likewise, for k = 3,</p>
+(eq. 7.1)
+<div>
+<br /><span class="math display">$$
+\mathbf{Q} =
+\begin{bmatrix}
+-r_1 &amp; q_{12} &amp; \dots &amp; q_{1k} \\
+q_{21} &amp; -r_2 &amp; \dots &amp; q_{2k} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+q_{k1} &amp; q{k2} &amp; \dots &amp; -r_k \\
+\end{bmatrix}
+$$</span><br />
+<div>
+
+
+
+
+<p>Note that the instantaneous rates are only entered into the off-diagonal parts of the matrix. Along the diagonal, these matrices always have a set of negative numbers. For any <span class="math inline"><strong>Q</strong></span> matrix, the sum of all the elements in each row is zero – a necessary condition for a transition rate matrix. Because of this, each negative number has a value, <span class="math inline"><em>r</em><sub><em>i</em></sub></span>, equal to the sum of all of the other numbers in the row. For example,</p>
+(eq. 7.2)
+<div>
+<br /><span class="math display">$$
+r_1 = \sum_{i=2}^{k} q_{1i}
+$$</span><br />
+<div>
+
+
+
+
+
+
+<p>For a two-state Mk model, <span class="math inline"><em>k</em> = 2</span> and rates are symmetric so that <span class="math inline"><em>q</em><sub>12</sub> = <em>q</em><sub>21</sub></span>. In this case, we can write the transition rate matrix as:</p>
+(eq. 7.3)
+<div>
+<br /><span class="math display">$$
+\mathbf{Q} =
+\begin{bmatrix}
+-q &amp; q \\
+q &amp; -q \\
+\end{bmatrix}
+$$</span><br />
+<div>
+
+
+
+<p>Likewise, for <span class="math inline"><em>k</em> = 3</span>,</p>
 <p>(eq. 7.4)</p>
+<div>
+<br /><span class="math display">$$
+\mathbf{Q} =
+\begin{bmatrix}
+-2 q &amp; q &amp; q \\
+q &amp; -2 q &amp; q \\
+q &amp; q &amp; -2 q \\
+\end{bmatrix}
+$$</span><br />
+<div>
+
 <p>In general,</p>
 <p>(eq. 7.5)</p>
+<div>
+<br /><span class="math display">$$
+\mathbf{Q} = q
+\begin{bmatrix}
+1-k &amp; 1 &amp; \dots &amp; 1 \\
+1 &amp; 1-k &amp; \dots &amp; 1 \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
+1 &amp; 1 &amp; \dots &amp; 1\\
+\end{bmatrix}
+$$</span><br />
+<div>
+
 <p>Once we have this transition rate matrix, we can calculate the probability distribution of trait states after any time interval t using the equation:</p>
 <p>(eq. 7.6)</p>
 <p>This equation looks simple, but calculating P(t) involves matrix exponentiation – raising e to a power defined by a matrix. This calculation is substantially different from raising e to the power defined by each element of a matrix. I will not cover the details of matrix exponentiation here – interested readers should see Yang (2006) for details – but the calculations are not trivial. The result is a matrix, P, of transition probabilities. Each element in this matrix (pij) gives the probability that starting in state i you will end up in state j over that time interval t. For the standard Mk model, there is a general solution to this equation:</p>
