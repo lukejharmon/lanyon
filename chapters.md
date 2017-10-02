@@ -14,3 +14,5 @@ title: Chapters
 [Chapter 5]({{ site.baseurl }}/chapter5_mvbm/) - Multivariate Brownian Motion
 
 [Chapter 6]({{ site.baseurl }}/chapter6_beyondbm/) - Beyond Brownian Motion
+
+[Chapter 7]({{ site.baseurl }}/chapter7_introdiscrete/) - Models of discrete character evolution
