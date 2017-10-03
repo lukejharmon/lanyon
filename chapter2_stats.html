@@ -44,6 +44,7 @@ pdf: true
 </ul></li>
 </ul>
 </div>
+<p><a href="{{site.baseurl}}/pdf/chapter2_stats.pdf">pdf version</a></p>
 <h1 id="chapter-2-fitting-statistical-models-to-data">Chapter 2: Fitting Statistical Models to Data</h1>
 <h2 id="section-2.1-introduction">Section 2.1: Introduction</h2>
 <p>Evolution is the product of a thousand stories. Individual organisms are born, reproduce, and die. The net result of these individual life stories over broad spans of time is evolution. At first glance, it might seem impossible to model this process over more than one or two generations. And yet scientific progress relies on creating simple models and confronting them with data. How can we evaluate models that consider evolution over millions of generations?</p>
@@ -61,10 +62,9 @@ pdf: true
 <p>Getting back to our lizard-flipping example, we can use a frequentist approach and carry out a binomial test, which allows us to test whether a given event with two outcomes has a certain probability of success. In this case, we are interested in testing the null hypothesis that our lizard is a fair flipper; that is, that the probability of heads p<sub>H</sub> = 0.5. The binomial test uses the number of “successes” (we will use the number of heads, 63) as a test statistic. We then ask whether this test statistic is either much larger or much smaller than we might expect under our null hypothesis. So, our null hypothesis is that p<sub>H</sub> = 0.5; our alternative, then, is that p<sub>H</sub> takes some other value: p<sub>H</sub> ≠ 0.5.</p>
 <p>To carry out the test, we consider the distribution of our test statistic (the number of heads) under our null hypothesis (p<sub>H</sub> = 0.5; Figure 2.1).</p>
 <div class="figure">
-<img src="{{site.baseurl}}/images/binomial_null.jpg" />
-
+<img src="{{site.baseurl}}/images/binomial_null.jpg" alt="Figure 2.1. The unfair lizard. We use the null hypothesis to generate a null distribution for our test statistic, which in this case is a binomial distribution centered around 50. We then look at our test statistic and calculate the probability of obtaining a result at least as extreme as this value." />
+<p class="caption">Figure 2.1. The unfair lizard. We use the null hypothesis to generate a null distribution for our test statistic, which in this case is a binomial distribution centered around 50. We then look at our test statistic and calculate the probability of obtaining a result at least as extreme as this value.</p>
 </div>
-<p>Figure 2.1. The unfair lizard. We use the null hypothesis to generate a null distribution for our test statistic, which in this case is a binomial distribution centered around 50. We then look at our test statistic and calculate the probability of obtaining a result at least as extreme as this value.</p>
 <p>In this case, we can use the known probabilities of the binomial distribution to calculate our P-value. We want to know the probability of obtaining a result at least as extreme as our data when drawing from a binomial distribution with parameters p = 0.5 and n = 100. We calculate the area of this distribution that lies to the right of 63. This area, P = 0.003, can be obtained either from a table, from statistical software, or by using a relatively simple calculation. The value, 0.003, represents the probability of obtaining at least 63 heads out of 100 trials with p<sub>H</sub> = 0.5. This number is the P-value from our binomial test. Because we only calculated the area of our null distribution in one tail (in this case, the right, where values are greater than or equal to 63), then this is actually a one-tailed test, and we are only considering part of our null hypothesis where p<sub>H</sub> &gt; 0.5. Such an approach might be suitable in some cases, but more typically we need to multiply this number by 2 to get a two-tailed test. By doing so, our P-value of 0.006 includes the possibility of results as extreme as our test statistic in either direction, either too many or too few heads. Since P &lt; 0.05 we reject the null hypothesis, and conclude that we have an unfair lizard.</p>
 <p>In biology, null hypotheses play a critical role in many statistical analyses. So why not end this chapter now? One issue is that biological null hypotheses are almost always uninteresting. They often describe the situation where patterns in the data occur only by chance. However, if you are comparing living species to each other, there are almost always some differences between them. In fact, for biology, null hypotheses are quite often obviously false. For example, two different species living in different habitats are not identical, and if we measure them enough we will discover this fact. From this point of view, both outcomes of a standard hypothesis test are unenlightening. One either rejects a silly hypothesis that was probably known to be false from the start, or one “fails to reject” this null hypothesis. There is much more information to be gained by estimating parameter values and carrying out model selection in a likelihood or Bayesian framework, as we will see below. Still, frequentist statistical approaches are common, have their place in our toolbox, and will come up in several sections of this book.</p>
 <p>One key concept in standard hypothesis testing is the idea of statistical error. Statistical errors come in two flavors: type I and type II errors. Type I errors occur when the null hypothesis is true but the investigator mistakenly rejects it. Standard hypothesis testing controls type I errors using a parameter, α, which defines the accepted rate of type I errors. For example, if α = 0.05, one should expect to commit a type I error about 5% of the time. When multiple standard hypothesis tests are carried out, investigators often “correct” their P-values using Bonferroni correction. If you do this, then there is only a 5% chance of a single type I error across all of the tests being considered. This singular focus on type I errors, however, has a cost. One can also commit type II errors, when the null hypothesis is false but one fails to reject it. The rate of type II errors in statistical tests can be extremely high. While statisticians do take care to create approaches that have high power, traditional hypothesis testing usually fixes type I errors at 5% while type II error rates remain unknown. There are simple ways to calculate type II error rates (e.g. power analyses) but these are only rarely carried out. Furthermore, Bonferroni correction dramatically increases the type II error rate. This is important because – as stated by Perneger <span class="citation">(<a href="#ref-Perneger1998-qd">1998</a>)</span> – “… type II errors are no less false than type I errors.”</p>
@@ -74,7 +74,10 @@ pdf: true
 <h2 id="section-2.3-maximum-likelihood">Section 2.3: Maximum likelihood</h2>
 <h3 id="section-2.3a-what-is-a-likelihood">Section 2.3a: What is a likelihood?</h3>
 <p>Since all of the approaches described below involve calculating likelihoods, I will first briefly describe this concept. A good general review of likelihood is Edwards <span class="citation">(Edwards <a href="#ref-Edwards1992-wh">1992</a>)</span>. Likelihood is defined as the probability, given a model and a set of parameter values, of obtaining a particular set of data. To calculate a likelihood, we have to consider a particular specific model that may have generated the data. That model might have parameter values that need to be specified. We can refer to this specified model as a hypothesis, H. The likelihood is then:</p>
-<p>(eq. 2.1) \[ L(H|D) = Pr(D|H) \]</p>
+(eq. 2.1)
+<div>
+<p><br /><span class="math display"><em>L</em>(<em>H</em>|<em>D</em>)=<em>P</em><em>r</em>(<em>D</em>|<em>H</em>)</span><br /></p>
+</div>
 <p>Here, L and Pr stand for likelihood and probability, D for the data, and H for the hypothesis, which again includes both the model being considered and a set of parameter values. The | symbol stands for “given,” so equation 2.1 can be read as “the likelihood of the hypothesis given the data is equal to the probability of the data given the hypothesis.” In other words, the likelihood represents the probability under a given model and parameter values that we would obtain the data that we actually see.</p>
 <p>For any given model, different parameter values will generally affect the likelihood. As you might guess, we favor parameter values that give us the highest probability of obtaining the data that we see. One way to estimate parameters from data, then, is by finding the parameter values that maximize the likelihood; that is, the parameter values that give the highest likelihood, and the highest probability of obtaining the data. These estimates are then referred to as maximum likelihood (ML) estimates. In an ML framework, we suppose that the hypothesis that has the best fit to the data is the one that has the highest probability of having generated that data.</p>
 <p>For the example above, we need to calculate the likelihood as the probability of obtaining heads 63 out of 100 lizard flips, given some model of lizard flipping. In general, we can write the likelihood for any combination of k “successes” (flips that give heads) out of n trials. We will also have one parameter, p, which will represent the probability of “success,” that is, the probability that any one flip comes up heads. We can calculate the likelihood of our data using the binomial theorem:</p>
@@ -91,8 +94,11 @@ $$</span><br /></p>
 L(H|D)= {100 \choose 63} p^{63} (1-p)^{37}
 $$</span><br /></p>
 </div>
-<p><img src="{{site.baseurl}}/images/flip_likelihood_surface.png" /> Figure 2.2. Likelihood surface for the parameter p, given a coin that has been flipped as heads 63 times out of 100.</p>
-<p>We can make a plot of the likelihood, L, as a function of p (Figure 2.2). When we do this, we see that the maximum likelihood value of p, which we can call <span class="math inline">$\hat{p}$</span>, is at p = 0.63. This is the “brute force” approach to finding the maximum likelihood: try many different values of the parameters and pick the one with the highest likelihood. We can do this much more efficiently using numerical methods as described in later chapters in this book.</p>
+<div class="figure">
+<img src="{{site.baseurl}}/images/flip_likelihood_surface.png" alt="Figure 2.2. Likelihood surface for the parameter p, given a coin that has been flipped as heads 63 times out of 100." />
+<p class="caption">Figure 2.2. Likelihood surface for the parameter p, given a coin that has been flipped as heads 63 times out of 100.</p>
+</div>
+<p>We can make a plot of the likelihood, L, as a function of p (Figure 2.2). When we do this, we see that the maximum likelihood value of p, which we can call <br /><span class="math display">$$\hat{p}$$</span><br />, is at p = 0.63. This is the “brute force” approach to finding the maximum likelihood: try many different values of the parameters and pick the one with the highest likelihood. We can do this much more efficiently using numerical methods as described in later chapters in this book.</p>
 <p>We could also have obtained the maximum likelihood estimate for p through differentiation. This problem is much easier if we work with the log-likelihood rather than the likelihood itself (note that whatever value of p that maximizes the likelihood will also maximize the log-likelihood, because the log function is strictly increasing). So:</p>
 (eq. 2.4)
 <div>
@@ -111,7 +117,7 @@ $$</span><br /></p>
 (eq. 2.6)
 <div>
 <p><br /><span class="math display">$$
-\begin{array}{lcr}
+\begin{array}{lcl}
 \frac{k}{\hat{p}} - \frac{n-k}{1-\hat{p}} &amp; = &amp; 0\\
 \frac{k}{\hat{p}} &amp; = &amp; \frac{n-k}{1-\hat{p}}\\
 k (1-\hat{p}) &amp; = &amp; \hat{p} (n-k)\\
@@ -139,27 +145,33 @@ $$</span><br /></p>
 <p>For the lizard flip example above, we can calculate the ln-likelihood under a hypothesis of p = 0.5 as:</p>
 (eq. 2.8)
 <div>
-<p><br /><span class="math display">$$\begin{eqnarray}
+<p><br /><span class="math display">$$
+\begin{array}{lcl}
 \ln{L} &amp;=&amp; \ln{\left(\frac{100}{63}\right)} + 63 \cdot \ln{0.5} + (100-63) \cdot \ln{(1-0.5)} \nonumber \\
-\ln{L} &amp;=&amp; -5.92\nonumber
-\end{eqnarray}$$</span><br /></p>
+\ln{L} &amp;=&amp; -5.92\nonumber\\
+\end{array}
+$$</span><br /></p>
 </div>
 <p>We can compare this to the likelihood of our maximum-likelihood estimate :</p>
 (eq. 2.9)
 <div>
-<p><br /><span class="math display">$$\begin{eqnarray}
+<p><br /><span class="math display">$$
+\begin{array}{lcl}
 \ln{L} &amp;=&amp; \ln{\left(\frac{100}{63}\right)} + 63 \cdot \ln{0.63} + (100-63) \cdot \ln{(1-0.63)} \nonumber \\
 \ln{L} &amp;=&amp; -2.50\nonumber
-\end{eqnarray}$$</span><br /></p>
+\end{array}
+$$</span><br /></p>
 </div>
 <p>We then calculate the likelihood ratio test statistic:</p>
 (eq. 2.10)
 <div>
-<p><br /><span class="math display">$$\begin{eqnarray}
+<p><br /><span class="math display">$$
+\begin{array}{lcl}
 \Delta &amp;=&amp; 2 \cdot (\ln{L_2}-\ln{L_1}) \nonumber \\
 \Delta &amp;=&amp; 2 \cdot (-2.50 - -5.92) \nonumber \\
 \Delta &amp;=&amp; 6.84\nonumber
-\end{eqnarray}$$</span><br /></p>
+\end{array}
+$$</span><br /></p>
 </div>
 <p>If we compare this to a <span class="math inline"><em>χ</em><sup>2</sup></span> distribution with one d.f., we find that P = 0.009. Because this P-value is less than the threshold of 0.05, we reject the null hypothesis, and support the alternative. We conclude that this is not a fair lizard.</p>
 <p>Although described above in terms of two competing hypotheses, likelihood ratio tests can be applied to more complex situations with more than two competing models. For example, if all of the models form a sequence of increasing complexity, with each model a special case of the next more complex model, one can compare each pair of hypotheses in sequence, stopping the first time the test statistic is non-significant. Alternatively, in some cases, hypotheses can be placed in a bifurcating choice tree, and one can proceed from simple to complex models down a particular path of paired comparisons of nested models. This approach is commonly used to select models of DNA sequence evolution.</p>
@@ -182,7 +194,7 @@ $$</span><br /></p>
 <p>To select among models, one can then compare their <span class="math inline"><em>A</em><em>I</em><em>C</em><sub><em>c</em></sub></span> values, and choose the model with the smallest value. It is easier to make comparisons in <span class="math inline"><em>A</em><em>I</em><em>C</em><sub><em>c</em></sub></span> scores between models by calculating the difference, <span class="math inline"><em>Δ</em><em>A</em><em>I</em><em>C</em><sub><em>c</em></sub></span>. For example, if you are comparing a set of models, you can calculate <span class="math inline"><em>Δ</em><em>A</em><em>I</em><em>C</em><sub><em>c</em></sub></span> for model i as:</p>
 (eq. 2.13)
 <div>
-<p>\[ AIC_{c_i} = AIC_{c_i} - AIC_{c_{min}} \]</p>
+<p><br /><span class="math display"><em>Δ</em><em>A</em><em>I</em><em>C</em><sub><em>c</em><sub><em>i</em></sub></sub> = <em>A</em><em>I</em><em>C</em><sub><em>c</em><sub><em>i</em></sub></sub> − <em>A</em><em>I</em><em>C</em><sub><em>c</em><sub><em>m</em><em>i</em><em>n</em></sub></sub></span><br /></p>
 </div>
 <p>where <span class="math inline"><em>A</em><em>I</em><em>C</em><sub><em>c</em><sub><em>i</em></sub></sub></span> is the <span class="math inline"><em>A</em><em>I</em><em>C</em><sub><em>c</em></sub></span> score for model i and <span class="math inline"><em>A</em><em>I</em><em>C</em><sub><em>c</em><sub><em>m</em><em>i</em><em>n</em></sub></sub></span> is the minimum <span class="math inline"><em>A</em><em>I</em><em>C</em><sub><em>c</em></sub></span> score across all of the models.</p>
 <p>As a broad rule of thumb for comparing <span class="math inline"><em>A</em><em>I</em><em>C</em></span> values, any model with a <span class="math inline"><em>Δ</em><em>A</em><em>I</em><em>C</em><sub><em>c</em><sub><em>i</em></sub></sub></span> of less than four is roughly equivalent to the model with the lowest <span class="math inline"><em>A</em><em>I</em><em>C</em><sub><em>c</em></sub></span> value. Models with <span class="math inline"><em>Δ</em><em>A</em><em>I</em><em>C</em><sub><em>c</em><sub><em>i</em></sub></sub></span> between 4 and 8 have little support in the data, while any model with a <span class="math inline"><em>Δ</em><em>A</em><em>I</em><em>C</em><sub><em>c</em><sub><em>i</em></sub></sub></span> greater than 10 can safely be ignored.</p>
@@ -199,66 +211,80 @@ $$</span><br /></p>
 (eq. 2.15)<br />
 
 <div>
-<p><br /><span class="math display">$$\begin{eqnarray*}
+<p><br /><span class="math display">$$
+\begin{array}{lcl}
 AIC_1 &amp;=&amp; 2 k_1 - 2 ln{L_1} = 2 \cdot 0 - 2 \cdot -5.92 \\\
 AIC_1 &amp;=&amp; 11.8 \\\
 AIC_2 &amp;=&amp; 2 k_2 - 2 ln{L_2} = 2 \cdot 1 - 2 \cdot -2.50 \\\
 AIC_2 &amp;=&amp; 7.0 \\\
-\end{eqnarray*}$$</span><br /></p>
+\end{array}
+$$</span><br /></p>
 </div>
 <p>Our example is a bit unusual in that model one has no estimated parameters; this happens sometimes but is not typical for biological applications. We can correct these values for our sample size, which in this case is <span class="math inline"><em>n</em> = 100</span> lizard flips:</p>
 (eq. 2.16)<br />
 
 <div>
-<p><br /><span class="math display">$$\begin{eqnarray*}
+<p><br /><span class="math display">$$
+\begin{array}{lcl}
 AIC_{c_1} &amp;=&amp; AIC_1 + \frac{2 k_1 (k_1 + 1)}{n - k_1 - 1} \\\
 AIC_{c_1} &amp;=&amp; 11.8 + \frac{2 \cdot 0 (0 + 1)}{100-0-1} \\\
 AIC_{c_1} &amp;=&amp; 11.8 \\\
 AIC_{c_2} &amp;=&amp; AIC_2 + \frac{2 k_2 (k_2 + 1)}{n - k_2 - 1} \\\
 AIC_{c_2} &amp;=&amp; 7.0 + \frac{2 \cdot 1 (1 + 1)}{100-1-1} \\\
 AIC_{c_2} &amp;=&amp; 7.0 \\\
-\end{eqnarray*}$$</span><br /></p>
+\end{array}
+$$</span><br /></p>
 </div>
 <p>Notice that, in this particular case, the correction did not affect our <span class="math inline"><em>A</em><em>I</em><em>C</em></span> values, at least to one decimal place. This is because the sample size is large relative to the number of parameters. Note that model 2 has the smallest <span class="math inline"><em>A</em><em>I</em><em>C</em><sub><em>c</em></sub></span> score and is thus the model that is best supported by the data. Noting this, we can now convert these <span class="math inline"><em>A</em><em>I</em><em>C</em><sub><em>c</em></sub></span> scores to a relative scale:</p>
 (eq. 2.17)<br />
 
 <div>
-<p><br /><span class="math display">$$\begin{eqnarray*}
+<p><br /><span class="math display">$$
+\begin{array}{lcl}
 \Delta AIC_{c_1} &amp;=&amp; AIC_{c_1}-AIC{c_{min}} \\\
 &amp;=&amp; 11.8-7.0 \\\
 &amp;=&amp; 4.8 \\\
-\end{eqnarray*}$$</span><br /></p>
+\end{array}
+$$</span><br /></p>
 </div>
 <div>
-<p><br /><span class="math display">$$\begin{eqnarray*}
+<p><br /><span class="math display">$$
+\begin{array}{lcl}
 \Delta AIC_{c_2} &amp;=&amp; AIC_{c_2}-AIC{c_{min}} \\\
 &amp;=&amp; 7.0-7.0 \\\
 &amp;=&amp; 0 \\\
-\end{eqnarray*}$$</span><br /></p>
+\end{array}
+$$</span><br /></p>
 </div>
 <p>Note that the <span class="math inline"><em>Δ</em><em>A</em><em>I</em><em>C</em><sub><em>c</em><sub><em>i</em></sub></sub></span> for model 1 is greater than four, suggesting that this model (the “fair” lizard) has little support in the data.<!--YOU DON'T MENTION 4 BEING A THRESHOLD FOR THE AIC UNTIL HERE--> Finally, we can use the relative AICc scores to calculate Akaike weights:</p>
 (eq. 2.18)<br />
 
 <div>
-<p><br /><span class="math display">$$\begin{eqnarray*}
+<p><br /><span class="math display">$$
+\begin{array}{lcl}
 \sum_i{e^{-\Delta_i/2}} &amp;=&amp; e^{-\Delta_1/2} + e^{-\Delta_2/2} \\\
 &amp;=&amp; e^{-4.8/2} + e^{-0/2} \\\
 &amp;=&amp; 1.09 \\\
-\end{eqnarray*}$$</span><br /></p>
+\end{array}
+$$</span><br /></p>
 </div>
 <div>
-<p><br /><span class="math display">$$\begin{eqnarray*}
+<p><br /><span class="math display">$$
+\begin{array}{lcl}
 w_1 &amp;=&amp; \frac{e^{-\Delta AIC_{c_1}/2}}{\sum_i{e^{-\Delta AIC_{c_i}/2}}} \\\
 &amp;=&amp; \frac{0.09}{1.09} \\\
 &amp;=&amp; 0.08
-\end{eqnarray*}$$</span><br /></p>
+\end{array}
+$$</span><br /></p>
 </div>
 <div>
-<p><br /><span class="math display">$$\begin{eqnarray*}
+<p><br /><span class="math display">$$
+\begin{array}{lcl}
 w_2 &amp;=&amp; \frac{e^{-\Delta AIC_{c_2}/2}}{\sum_i{e^{-\Delta AIC_{c_i}/2}}} \\\
 &amp;=&amp; \frac{1.00}{1.09} \\\
 &amp;=&amp; 0.92
-\end{eqnarray*}$$</span><br /></p>
+\end{array}
+$$</span><br /></p>
 </div>
 <p>Our results are again consistent with the results of the likelihood ratio test. The relative likelihood of an unfair lizard is 0.92, and we can be quite confident that our lizard is not a fair flipper.</p>
 <p>AIC weights are also useful for another purpose: we can use them to get model-averaged parameter estimates. These are parameter estimates that are combined across different models proportional to the support for those models. As a thought example, imagine that we are considering two models, A and B, for a particular dataset. Both model A and model B have the same parameter p, and this is the parameter we are particularly interested in. In other words, we do not know which model is the best model for our data, but what we really need is a good estimate of p. We can do that using model averaging. If model A has a high AIC weight, then the model-averaged parameter estimate for p will be very close to our estimate of p under model A; however, if both models have about equal support then the parameter estimate will be close to the average of the two different estimates. Model averaging can be very useful in cases where there is a lot of uncertainty in model choice for models that share parameters of interest. Sometimes the models themselves are not of interest, but need to be considered as possibilities; in this case, model averaging lets us estimate parameters in a way that is not as strongly dependent on our choice of models.</p>
@@ -276,7 +302,9 @@ $$</span><br /></p>
 (eq. 2.20)<br />
 
 <div>
-<p>\[ Pr(D) = \int_H Pr(H|D) Pr(H) dH \]</p>
+<p><br /><span class="math display">$$
+Pr(D) = \\int_H Pr(H|D) Pr(H) dH
+$$</span><br /></p>
 </div>
 <p>However, <span class="math inline"><em>P</em><em>r</em>(<em>D</em>)</span> is constant when comparing the fit of different models for a given data set and thus has no influence on Bayesian model selection under most circumstances (and all the examples in this book).</p>
 <p>In our example of lizard flipping, we can do an analysis in a Bayesian framework. For model 1, there are no free parameters. Because of this, <span class="math inline"><em>P</em>(<em>H</em>)=1</span> and <span class="math inline"><em>P</em>(<em>D</em>|<em>H</em>)=<em>P</em>(<em>D</em>)</span>, so that <span class="math inline"><em>P</em>(<em>H</em>|<em>D</em>)=1</span>. This may seem strange but what the result means is that our data has no influence on the structure of the model. We do not learn anything about a model with no free parameters by collecting data!</p>
@@ -307,10 +335,9 @@ $$</span><br /></p>
 <p>We can compare this posterior distribution of our parameter estimate, p, given the data, to our uniform prior (Figure 2.3). If you inspect this plot, you see that the posterior distribution is very different from the prior – that is, the data have changed our view of the values that parameters should take.</p>
 <p>As you can see from this example, Bayes theorem lets us combine our prior belief about parameter values with the information from the data in order to obtain a posterior. These posterior distributions are very easy to interpret, as they express the probability of the model parameters given our data. However, that clarity comes at a cost of requiring an explicit prior. Later in the book we will learn how to use this feature of Bayesian statistics to our advantage when we actually do have some prior knowledge about parameter values.</p>
 <div class="figure">
-<img src="{{site.baseurl}}/images/figure2-3.png" />
-
+<img src="{{site.baseurl}}/images/figure2-3.png" alt="Figure 2.3. Bayesian prior (dotted line) and posterior (solid line) distributions for lizard flipping." />
+<p class="caption">Figure 2.3. Bayesian prior (dotted line) and posterior (solid line) distributions for lizard flipping.</p>
 </div>
-<p>Figure 2.3. Bayesian prior (dotted line) and posterior (solid line) distributions for lizard flipping.</p>
 <h3 id="section-2.4b-bayesian-mcmc">Section 2.4b: Bayesian MCMC</h3>
 <p>The other main tool in the toolbox of Bayesian comparative methods is the use of Markov-chain Monte Carlo (MCMC) tools to calculate posterior probabilities. MCMC techniques use an algorithm that uses a “chain” of calculations to sample the posterior distribution. MCMC requires calculation of likelihoods but not complicated mathematics (e.g. integration of probability distributions), and so represents a more flexible approach to Bayesian computation. Frequently, the integrals in equation 2.21 are intractable, so that the most efficient way to fit Bayesian models is by using MCMC. Also, setting up an MCMC is, in my experience, easier than people expect!</p>
 <p>An MCMC analysis requires that one constructs and samples from a Markov chain. A Markov chain is a random process that changes from one state to another with certain probabilities that depend only on the current state of the system, and not what has come before. A simple example of a Markov chain is the movement of a playing piece in the game Chutes and Ladders; the position of the piece moves from one square to another following probabilities given by the dice and the layout of the game board. The movement of the piece from any square on the board does not depend on how the piece got to that square.</p>
@@ -352,7 +379,7 @@ $$</span><br /></p>
 <p>Find the product of the prior odds, proposal density ratio, and the likelihood ratio:</p>
 (eq. 2.27)
 <div>
-<p>\[ a = a_1 a_2 a_3 \]</p>
+<p><br /><span class="math display"><em>a</em> = <em>a</em><sub>1</sub> ⋅ <em>a</em><sub>2</sub> ⋅ <em>a</em><sub>3</sub></span><br /></p>
 </div>
 <h3 id="accept-or-reject.">5. Accept or reject.</h3>
 <p>Draw a random number <span class="math inline"><em>x</em></span> from a uniform distribution between 0 and 1. If <span class="math inline"><em>x</em> &lt; <em>a</em></span>, accept the proposed value of <span class="math inline"><em>p</em>’</span>; otherwise reject, and retain the current value <span class="math inline"><em>p</em></span>.</p>
@@ -394,10 +421,9 @@ $$</span><br /></p>
 <p>We can now calculate <span class="math inline"><em>a</em> = <em>a</em><sub>1</sub> ⋅ <em>a</em><sub>2</sub> ⋅ <em>a</em><sub>3</sub> = 1 ⋅ 1 ⋅ 0.94 = 0.94</span>. We next choose a random number between 0 and 1 – say that we draw <span class="math inline"><em>x</em> = 0.34</span>. We then notice that our random number <span class="math inline"><em>x</em></span> is less than or equal to <span class="math inline"><em>a</em></span>, so we accept the proposed value of <span class="math inline"><em>p</em>’</span>. If the random number that we drew were greater than 0.94, we would reject the proposed value, and keep our original parameter value <span class="math inline"><em>p</em> = 0.60</span> going into the next generation.</p>
 <p>If we repeat this procedure a large number of times, we will obtain a long chain of values of <span class="math inline"><em>p</em></span>. You can see the results of such a run in Figure 2.4. In panel A, I have plotted the likelihoods for each successive value of p. You can see that the likelihoods increase for the first ~1000 or so generations, then reach a plateau around <span class="math inline"><em>l</em><em>n</em><em>L</em> = −3</span>. Panel B shows a plot of the values of <span class="math inline"><em>p</em></span>, which rapidly converge to a stable distribution around <span class="math inline"><em>p</em> = 0.63</span>. We can also plot a histogram of these posterior estimates of <span class="math inline"><em>p</em></span>. In panel C, I have done that – but with a twist. Because the MCMC algorithm creates a series of parameter estimates, these numbers show autocorrelation – that is, each estimate is similar to estimates that come just before and just after. This autocorrelation can cause problems for data analysis. The simplest solution is to subsample these values, picking only, say, one value every 100 generations. That is what I have done in the histogram in panel C. This panel also includes the analytic posterior distribution that we calculated above – notice how well our Metropolis-Hastings algorithm did in reconstructing this distribution!</p>
 <div class="figure">
-<img src="{{site.baseurl}}/images/figure2-4.png" />
-
+<img src="{{site.baseurl}}/images/figure2-4.png" alt="Figure 2.4. Bayesian MCMC from lizard flipping example." />
+<p class="caption">Figure 2.4. Bayesian MCMC from lizard flipping example.</p>
 </div>
-<p>Figure 2.4. Bayesian MCMC from lizard flipping example.</p>
 <p>This simple example glosses over some of the details of MCMC algorithms, but we will get into those details later, and there are many other books that treat this topic in great depth (e.g. Christensen et al. 2010). The point is that we can solve some of the challenges involved in Bayesian statistics using numerical “tricks” like MCMC, that exploit the power of modern computers to fit models and estimate model parameters.</p>
 <h3 id="section-2.4c-bayes-factors">Section 2.4c: Bayes factors</h3>
 <p>Now that we know how to use data and a prior to calculate a posterior distribution, we can move to the topic of model selection. We already learned one general method for model selection using AIC. We can also do model selection in a Bayesian framework. The simplest way is to calculate and then compare the posterior probabilities for a set of models under consideration. One can do this by calculating Bayes factors:</p>
@@ -413,7 +439,8 @@ $$</span><br /></p>
 (eq. 2.33)<br />
 
 <div>
-<p><br /><span class="math display">$$\begin{eqnarray}
+<p><br /><span class="math display">$$
+\begin{array}{lcl}
 Pr(D|H_1) &amp;=&amp; \binom{100}{63} 0.5^0.63 (1-0.5)^{100-63} \\\
 &amp;=&amp; 0.00270 \\\
 Pr(D|H_2) &amp;=&amp; \int_{p=0}^{1} \binom{100}{63} p^63 (1-p)^{100-63} \\\
@@ -421,7 +448,8 @@ Pr(D|H_2) &amp;=&amp; \int_{p=0}^{1} \binom{100}{63} p^63 (1-p)^{100-63} \\\
 &amp;=&amp; 0.0099 \\\
 B_{12} &amp;=&amp; \frac{0.0099}{0.00270} \\\
 &amp;=&amp; 3.67 \\\
-\end{eqnarray}$$</span><br /></p>
+\end{array}
+$$</span><br /></p>
 </div>
 <p>In the above example, <span class="math inline"><em>β</em>(<em>x</em>, <em>y</em>)</span> is the Beta function. Our calculations show that the Bayes factor is 3.67 in favor of model 2 compared to model 1. This is typically interpreted as substantial (but not decisive) evidence in favor of model 2. Again, we can be reasonably confident that our lizard is not a fair flipper.</p>
 <p>In the lizard flipping example we can calculate Bayes factors exactly because we know the solution to the integral in equation 2.33. However, if we don’t know how to solve this equation (a typical situation in comparative methods), we can still approximate Bayes factors from our MCMC runs. Methods to do this, including arrogance sampling and stepping stone models, are complex and beyond the scope of this book. However, one common method for approximating Bayes Factors involves calculating the harmonic mean of the likelihoods over the MCMC chain for each model. The ratio of these two likelihoods is then used as an approximation of the Bayes factor <span class="citation">(Newton and Raftery <a href="#ref-Newton1994-cs">1994</a>)</span>. Unfortunately, this method is extremely unreliable, and probably should never be used (see <a href="https://radfordneal.wordpress.com/2008/08/17/the-harmonic-mean-of-the-likelihood-worst-monte-carlo-method-ever/">this blog post</a> for more details).</p>

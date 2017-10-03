@@ -7,3 +7,5 @@ title: Home
 <sup><sub>*Tree Nursery Paul Klee 1929*</sub></sup>
 
 [Table of contents]({{ site.baseurl }}/chapters/)
+
+[pdf version]({{ site.baseurl }}/pdf/phylogeneticComparativeMethods.pdf)
