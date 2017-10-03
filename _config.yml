@@ -20,7 +20,9 @@ author:
 version:             1.0.0
 
 # Gems
-
+gems:
+  - jekyll-pdf
+  
 # github settings
 github:
   repo:             https://github.com/lukejharmon/pcm
