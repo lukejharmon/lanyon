@@ -14,9 +14,9 @@ In this chapter, I will consider four ways that comparative methods can move bey
 
 In 1999, Mark Pagel introduced three statistical models that allow one to test whether data deviates from a constant-rate Mk process evolving on a phylogenetic tree [@Pagel1999-ic, @Pagel1999-fx]. Each of these three models is a statistical transformation of the elements of the phylogenetic variance-covariance matrix, $\mathbf{C}$, that we first encountered in [Chapter 3]({{ site.baseurl }}/chapter3_bmintro/). All three can also be thought of as a transformation of the branch lengths of the tree, which adds a more intuitive understanding of the statistical properties of the tree transformations (Figure 6.1). We can transform the tree and then simulate characters under a Brownian motion model on the transformed tree, generating very different patterns than if they had been simulated on the starting tree.
 
-![]({{ site.baseurl }}/images/figure6-1.png)
+![Figure 6.1. Branch length transformations effectively alter the relative rate of evolution on certain branches in the tree. If we make a branch longer, there is more “evolutionary time” for characters to change, and so we are effectively increasing the rate of evolution along that branch.]({{ site.baseurl }}/images/figure6-1.png)
 
-Figure 6.1. Branch length transformations effectively alter the relative rate of evolution on certain branches in the tree. If we make a branch longer, there is more “evolutionary time” for characters to change, and so we are effectively increasing the rate of evolution along that branch.
+
 
 There are three Pagel tree transformations (lambda: $\lambda$, delta: $\delta$, and kappa: $\kappa$). I will describe each of them along with common methods for fitting Pagel models under ML, AIC, and Bayesian frameworks. Pagel’s three transformations can also be related to evolutionary processes, although those relationships are sometimes vague compared to approaches based on explicit evolutionary models rather than tree transformations (see below for more comments on this distinction).
 
@@ -126,9 +126,9 @@ One of the earliest methods for comparing rates across clades is to compare the 
 
 In his original description of this approach, Garland [-@Garland1992-kv] proposed using a statistical test to compare the absolute value of contrasts between clades (or between a single clade and the rest of the phylogenetic tree). In particular, Garland [-@Garland1992-kv] suggests using a t-test, as long as the absolute value of independent contrasts are approximately normally distributed. However, under a Brownian motion model, the contrasts themselves – but not the absolute values of the contrasts – should be approximately normal, so it is quite likely that absolute values of contrasts will strongly violate the assumptions of a t-test.
 
-![]({{ site.baseurl }}/images/figure6-2.png)
+![Figure 6.2. Rate tests comparing carnivores (black) with other mammals (red; Panel A). Box-plots show only a slight difference in the absolute value of independent contrasts for the two clades, and the distribution of absolute values of contrasts is strongly skewed.]({{ site.baseurl }}/images/figure6-2.png)
 
-Figure 6.2. Rate tests comparing carnivores (black) with other mammals (red; Panel A). Box-plots show only a slight difference in the absolute value of independent contrasts for the two clades, and the distribution of absolute values of contrasts is strongly skewed.
+
 
 In fact, if we try this test on mammal body size, contrasting the two major clades in the tree (carnivores versus non-carnivores, Figure 6.2A), there looks to be a small difference in the absolute value of contrasts (Figure 6.2B). A t-test is not significant (Welch two-sample t-test $P = 0.42$), but we also can see that the distribution of PIC absolute values is strongly skewed (Figure 6.2C).
 
@@ -178,9 +178,9 @@ It is even possible to explore variation in Brownian rates without invoking part
 
 We can also consider the case where a trait evolves under the influence of stabilizing selection. Assume that a trait has some optimal value, and that when the population mean differs from the optimum the population will experience selection towards the optimum. As I will show below, when traits evolve under stabilizing selection with a constant optimum, the pattern of traits through time can be described under an OU model. It is worth mentioning, though, that this is only one (of many!) models that follow an OU process over long time scales. In other words, even though this model can be described by OU, we cannot make inferences the other direction and claim that OU means that our population is under constant stabilizing selection. In fact, we will see later that we can almost always rule this model out over long time scales by looking at the actual parameter values of the model compared to what we know about species’ population sizes and trait heritabilities.
 
-![]({{ site.baseurl }}/images/figure6-3.png)
+![Figure 6.3. Plot of species trait (x axis) versus fitness (y axis) showing a hypothetical landscape that would produce stabilizing selection. (figure stolen from web, need a better one!)]({{ site.baseurl }}/images/figure6-3.png)
 
-Figure 6.3. Plot of species trait (x axis) versus fitness (y axis) showing a hypothetical landscape that would produce stabilizing selection. (figure stolen from web, need a better one!)
+
 
 We can follow the modeling approach from chapter 3 to derive the expected distribution of species’ traits on a tree under stabilizing selection. We can first consider the evolution of the trait on the “stem” branch, before the divergence of species A and B. We model stabilizing selection with a single optimal trait value, located at $\theta$. An example of such a surface is plotted as Figure 6.3. We can describe fitness of an individual with phenotype $z$ as:
 

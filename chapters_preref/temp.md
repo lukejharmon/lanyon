@@ -1,305 +1,328 @@
-# Chapter 5: Fitting Brownian Motion Models to Multiple Characters
+# Chapter 7: Models of discrete character evolution
 
-## Section 5.1: Introduction
+## Biological motivation: Limblessness as a discrete trait
 
-As discussed in Chapter 4, body size is one of the most important traits of an animal. In particular, scientists often argue that body size is important because of its close relationships to almost all of an animal’s ecological interactions, from whether it is a predator or prey to its metabolic rate. If that is true, we should be able to use body size to predict other traits that might be related through shared evolutionary processes. We need to understand how the evolution of body size is correlated with other species’ characteristics.In this chapter, we will use the example of home range size, which is the area where an animal carries out its day-to-day activities. We will again use data from Garland [-@Garland1992-kv] and test for a relationship between body size and the size of a mammal’s home range.
+Squamates, the clade that includes all living species of lizards, are well known for their diversity. From the gigantic Komodo dragon of Indonesia (Figure 7.1A, *Varanus komodoensis*) to tiny leaf chameleons of Madagascar (Figure 7.1B, *Brookesia*), squamates span an impressive range of form and ecological niche use. Even the snakes (Figure 7.1C and D), extraordinarily diverse in their own right (~3,500 species), are actually a clade that is nested within squamates. The squamate lineage that is ancestral to snakes became limbless about 170 million years ago (see [Timetree of Life](www.timetree.org)) – and also underwent a suite of changes to their head shape, digestive tract, and other traits associated with their limbless lifestyle. In other words, snakes are lizards – highly modified lizards, but lizards nonetheless. And snakes are not the only limbless lineage of squamates. In fact, lineages within squamates have lost their limbs over and over again through their history (e.g. Figure 7.1E and F), with some estimates that squamates have lost their limbs at least 26 times in the past 240 million years.
 
-A wide variety of hypotheses can be framed as tests of correlations between continuously varying traits across species. For example, is the body size of a species related to its metabolic rate? How does the head length of a species relate to overall size, and do deviations from this relationship relate to an animal’s diet? These questions and others like them are of interest to evolutionary biologists because they allow us to test hypotheses about the factors in influencing character evolution over long time scales. These types of approaches allow us to answer some of the classic “why” questions in biology. Why are elephants so large? Why do some species of crocodilians have longer heads than others? If we find a correlation between two characters, we might suspect that there is a causal relationship between our two variables of interest - or perhaps that both of our measured variables share a common cause.
-
-In this chapter, I describe methods for using empirical data to estimate the parameters of multivariate Brownian motion models. I will then describe a model-fitting approach to test for evolutionary correlations. This model fitting approach is simple but not commonly used. Finally, I will review two common statistical approaches to test for evolutionary correlations, phylogenetic independent contrasts and phylogenetic generalized least squares, and describe their relationship to model-fitting approaches.
-
-## Section 5.2: What is evolutionary correlation?
-
-There is sometimes a bit of confusion among beginners as to what, exactly, we are doing when we carry out a comparative method, especially when testing for character correlations. Common language that comparative methods “control for phylogeny” or “remove the phylogeny from the data” is not necessarily enlightening. Another common explanation is that species are not statistically independent and that we must account for that with comparative methods, is accurate, I still don’t think this statement fully captures the tree-thinking perspective enabled by comparative methods. In this section, I will use the particular example of correlated evolution to try to illustrate the power of comparative methods and how they differ from standard statistical approaches that do not use phylogenies.
-
-In statistics, two variables can be correlated with one another. We might refer to this as a standard correlation. When two traits are correlated, it means that given the value of one trait – say, body size in mammals – one can predict the value of another – like home range area. Correlations can be positive (large values of $x$ are associated with large values of $y$) or negative (large values of $x$ are associated with small values of $y$). A surprisingly wide variety of hypotheses in biology can be tested by evaluating correlations between characters.
-
-In comparative biology, we are often interested more specifically in evolutionary correlations. Evolutionary correlations occur when two traits tend to evolve together due to processes like mutation, genetic drift, or natural selection. If there is an evolutionary correlation between two characters, it means that we can predict the magnitude and direction of changes in one character given knowledge of evolutionary changes in another. Just like standard correlations, evolutionary correlations can be positive (increases in trait $x$ are associated with increases in $y$) or negative (decreases in $x$ are associated with increases in $y$).
-
-We can now contrast standard correlations, testing the relationships between trait values across a set of species, with evolutionary correlations - where evolutionary changes in two traits are related to each other. This is a key distinction, because phylogenetic relatedness alone can lead to a relationship between two variables that are not, in fact, evolving together [Figure 5.1; also see @Felsenstein1985-bt]. In such cases, standard correlations will, correctly, tell us that one can predict the value of trait $y$ by knowing the value of trait $x$, at least among extant species; but we would be misled if we tried to make any evolutionary causal inference from this pattern. In the example of Figure 5.1, we can only predict $x$ from $y$ because the value of trait $x$ tells us which clade the species belongs to, which, in turn, allows reasonable prediction of $y$. In fact, this is a classical example of a case where correlation is not causation: the two variables are only correlated with one another because both are related to phylogeny.
-
-If we want to test hypotheses about trait evolution, we should specifically test evolutionary correlations<sup><a name="footnote5.1_back">[1](#footnote5.1)</a></sup>. If we find a relationship among the independent contrasts for two characters, for example, then we can infer that changes in each character are related to changes in the other – an inference that is much closer to most biological hypotheses about why characters might be related. In this case, then, we can think of statistical comparative methods as focused on disentangling patterns due to phylogenetic relatedness from patterns due to evolutionary correlations.
-
-![Figure 5.1. Examples from simulations of pure birth trees ($b = 1$) with $n = 100$ species. Plotted points represent character values for extant species in each clade. In all three panels, $\sigma_x^2 = \sigma_y^2 = 1$. $\sigma_{xy}^2$ varies with $\sigma_{xy}^2 = 0$ (panel A), $\sigma_{xy}^2 = 0.8$ (panel B), and  $\sigma_{xy}^2 = -0.8$ (panel C). Note the (apparent) negative correlation in panel A, which can be explained by phylogenetic relatedness of species within two clades. Only panels B and C show data with an evolutionary correlation. However, this would be difficult or impossible to conclude without using comparative methods.](../images/figure5-1.png)
+![Figure 7.1. Squamates, legged and legless. A. Komodo dragon, B. Brookesia chameleon, C. and D. snakes, E. and F. legless lizards.
+](../images/figure7-1.png)
 
 
 
-## Section 5.3: Modeling the evolution of correlated characters
+Limblessness is an example of a discrete trait – a trait that can occupy one of a set of distinct character states. Analyzing the evolution of discrete traits requires a different modeling approach than what we used for continuous traits. In this chapter, I will introduce the Mk model, which is a general approach to modeling the evolution of discrete traits on trees. Fitting this model to comparative data will help us understand the evolution of traits like limblessness where species can be placed into one of a number of discrete character states.
 
-We can model the evolution of multiple (potentially correlated) continuous characters using a multivariate Brownian motion model. This model is similar to univariate Brownian motion (see chapter 3), but can model the evolution of many characters at the same time. As with univariate Brownian motion, trait values change randomly in both direction and distance over any time interval. Here, though, these changes are drawn from multivariate normal distributions. Multivariate Brownian motion can encompass the situation where each character evolves independently of one another, but can also describe situations where characters evolve in a correlated way.
+Key Questions
+-	How can we model the evolution of discrete characters that have a set number of fixed states?
+-	How can we change the parameters of the Mk model to construct more elaborate models of discrete character evolution?
+-	How do we simulate the evolution of a discrete character?
 
-We can describe multivariate Brownian motion with a set of parameters that are described by $\mathbf{a}$, a vector of phylogenetic means for all $m$ characters:
+## Modeling the evolution of discrete states
 
-(eq. 5.1)
+So far, we have only dealt with continuously varying characters. However, many characters of interest to biologists can best be described by characters with a set number of fixed states. For limblessness in squamates, introduced above (snakes and lizards), each species is either legless (state 0) or not (state 1; actually, there are some species that might be considered “intermediate,” but we will ignore that here). We might have particular questions about the evolution of limblessness in squamates. For example, how many times this character has changed in the evolutionary history of squamates? How often does limblessness evolve? Do limbs ever re-evolve? Is the evolution of limblessness related to some other aspect of the lives of these reptiles?
+
+We will consider discrete characters where each species might exhibit one of k states. (In the limbless example above, k=2). For characters with more than two states, there is a key distinction between ordered and unordered characters. Ordered characters can be placed in an order so that transitions only occur between adjacent states. For example, I might include “intermediate” species that are somewhere in between limbed and limbless – for example, the “mermaid skinks” (Sirenoscincus) from Madagascar, so called because they lack hind limbs (Figure 7.2). An ordered model might only allow transitions between limbless and intermediate, and intermediate and limbed; it would be impossible under such a model to go directly from limbed to limbless without first becoming intermediate. For unordered characters, any state can change into any other state. In this chapter, I will focus mainly on unordered characters; we will return to ordered characters later in the book.
+
+![Figure 7.2. Mermaid skink](../images/figure7-2.png)
+
+
+
+Most work on the evolution of discrete characters on phylogenetic trees has focused on the evolution of gene or protein sequences. Gene sequences are made up of four character states (A, C, T, and G for DNA). Models of sequence evolution allow transitions among all of these states at certain rates, and may allow transition rates to vary across sites, among clades, or through time. There are a huge number of named models that have been applied to this problem (e.g. Jukes-Cantor, JC; General Time-Reversible, GTR; and many more), and a battery of statistical approaches are available to fit these models to data (e.g. Posada and Crandall 1998). 
+
+Any discrete character can be modeled in a similar way as gene sequences. When considering phenotypic characters, we should keep in mind two main differences from the analysis of DNA sequences. First, arbitrary discrete characters may have any number of states (beyond the four associated with DNA sequence data). Second, characters are typically analyzed independently rather than combining long sets of characters and assuming that they share the same model of change.
+
+## The Mk Model
+
+The most basic model for discrete character evolution is called the Mk model. First developed for trait data by Pagel (1994; although the name Mk comes from Lewis 2001), this model is a direct analogue of the Jukes-Cantor (JC) model for sequence evolution. The model applies to a discrete character having k unordered states. Such a character might have $k = 2$, $k = 3$, or even more states. Evolution involves changing between these k states (Figure 7.3).
+
+![Figure 7.3. Examples of discrete characters with (A) $k = 2$, (B) $k = 3$, and (C) $k = 4$ states.](../images/figure7-3.png)
+
+
+
+The basic version of the Mk model assumes that transitions among these states follow a Markov process. This means that the probability of changing from one state to another depends only on the current state, and not on what has come before. For example, it makes no difference if a lineage has just evolved the trait of “feathers,” or whether they have had feathers for millions of years – the probability of evolving a different character state is the same in both cases. The basic Mk model also assumes that every state is equally likely to change to any other states. 
+
+For the basic Mk model, we can denote the instantaneous rate of change between states using the parameter $q$. In general, $q_{ij}$ is called the instantaneous rate between character states $i$ and $j$. It is defined as the limit of the rate measured over very short time intervals. Imagine that you calculate a rate of character change by counting the number of changes of state of a character over some time interval, $t$. The instantaneous rate is the value that this rate approaches as $t$ gets smaller and smaller so that the time interval is nearly zero. Again, for the basic Mk model, instantaneous rates between all pairs of characters are equal; that is, $q_{ij} = q_{mn}$ for all $i \neq j$ and $m \neq n$.We can summarize general Markov models for discrete characters using a transition rate matrix:
+
+(eq. 7.1)
 <div>
 $$
-\mathbf{a} =
+\mathbf{Q} =
 \begin{bmatrix}
-\bar{z}_1 (0) & \bar{z}_2 (0) & \dots & \bar{z}_m (0)\\
+-r_1 & q_{12} & \dots & q_{1k} \\
+q_{21} & -r_2 & \dots & q_{2k} \\
+\vdots & \vdots & \ddots & \vdots\\
+q_{k1} & q{k2} & \dots & -r_k \\
 \end{bmatrix}
 $$
 </div>
 
-This vector represents the starting point in $m$-dimensional space for our random walk. In the context of comparative methods, this is the character measurements for the lineage at the root of the tree. Additionally, we have an evolutionary rate matrix $\mathbf{R}$:
 
-(eq. 5.2)
+Note that the instantaneous rates are only entered into the off-diagonal parts of the matrix. Along the diagonal, these matrices always have a set of negative numbers. For any $\mathbf{Q}$ matrix, the sum of all the elements in each row is zero – a necessary condition for a transition rate matrix. Because of this, each negative number has a value, $r_i$, equal to the sum of all of the other numbers in the row. For example, 
+
+(eq. 7.2)
 <div>
 $$
-\mathbf{R} =
+r_1 = \sum_{i=2}^{k} q_{1i}
+$$
+</div>
+
+
+
+For a two-state Mk model, $k = 2$ and rates are symmetric so that $q_{12} = q_{21}$. In this case, we can write the transition rate matrix as:
+
+(eq. 7.3)
+<div>
+$$
+\mathbf{Q} =
 \begin{bmatrix}
-    \sigma_1^2 & \sigma_{21} & \dots & \sigma_{n1}\\
-    \sigma_{21} & \sigma_2^2 & \dots & \vdots\\
-    \vdots & \vdots & \ddots & \vdots\\
-    \sigma_{1n} & \dots & \dots & \sigma_m^2\\
-\end{bmatrix}$$
-</div>
-
-Here, the rate parameter for each axis ($\sigma_i^2$) is along the matrix diagonal. Off-diagonal elements represent evolutionary covariances between pairs of axes (note that $\sigma_{ij} = \sigma_{ji}$). It is worth noting that each individual character evolves under a Brownian motion process. Covariances among characters, though, potentially make this model distinct from one where each character evolves independently of all the others (Figure 5.2).
-
-![Figure 5.2. Hypothetical pathways of evolution (arrows) for (A) two uncorrelated traits, (B) two traits evolving with a positive covariance, and (C) two traits evolving with a negative covariance. Note that in (B), when trait 1 gets larger trait 2 also gets larger, but in (C) positive changes in trait 1 are paired with negative changes in trait 2.](../images/figure5-2.png)
-
-
-
-When you have data for multiple continuous characters across many species along with a phylogenetic tree, you can fit a multivariate Brownian motion model to the data, as discussed in Chapter 3. The equations for estimating $\hat{\mathbf{a}}$ (the estimated vector of phylogenetic means for all characters) and $\hat{\mathbf{R}}$ (the estimated evolutionary rate matrix) are [@Revell2008-qr, @Hohenlohe2008-sj]:
-
-(eq. 5.3)
-<div>
-$$
-\hat{\mathbf{a}} = [(\mathbf{1} \mathbf{C}^{-1} \mathbf{1})^{-1}(\mathbf{1} \mathbf{C}^{-1} \mathbf{X})]^\intercal
-$$
-</div>
-
-
-(eq. 5.4)
-<div>
-$$
-\hat{\mathbf{R}} = \frac{(\mathbf{X} - \mathbf{1} \mathbf{\hat{a}})^\intercal \mathbf{C}^{-1} (\mathbf{X} - \mathbf{1} \mathbf{\hat{a}})}{n}
-$$
-</div>
-
-
-Note here that we use $\mathbf{X}$ to denote the $n$ (species) $\times m$ (traits) matrix of all traits across all species. Note the similarity between these multivariate equations (5.3 and 5.4) and their univariate equivalents (equations 4.6 and 4.7).
-
-To calculate the likelihood, we can use the fact that, under our multivariate Brownian motion model, the joint distribution of all traits across all species has a multivariate normal distribution. Again following Chapter 3, we find the variance-covariance matrix that describes that model by combining the two matrices $\mathbf{R}$ and $\mathbf{C}$ into a single large matrix using the Kroeneker product:
-
-(eq. 5.5) 	
-<div>
-$$
-\mathbf{V} = \mathbf{R} \otimes \mathbf{C}
-$$
-</div>
-
-This matrix $\mathbf{V}$ is $nm \times nm$. We can then substitute $\mathbf{V}$ for $\mathbf{C}$ in equation (4.5) to calculate the likelihood:
-
-(eq. 5.6)
-<div>
-$$
-L(\mathbf{x}_{nm} | \mathbf{a}, \mathbf{R}, \mathbf{C}) =
-\frac
-{e^{-1/2 (\mathbf{x}_{nm}- \mathbf{D} \cdot \mathbf{a})^\intercal (\mathbf{V})^{-1} (\mathbf{x}_nm-\mathbf{D} \cdot \mathbf{a})}}
-{\sqrt{(2 \pi)^{nm} det(\mathbf{V})}}
-$$
-</div>
-
-Here $\mathbf{D}$ is an $nm \times m$ design matrix where each element $\mathbf{D}_{ij}$ is 1 if $(j-1) \cdot n < i \leq j \cdot n$ and 0 otherwise.  is a single vector with all trait values for all species, listed so that the first $n$ elements in the vector are trait 1, the next $n$ are for trait 2, and so on:
-
-(eq. 5.7)
-<div>
-$$
-\mathbf{x}_{nm} =
-\begin{bmatrix}
-x_{11} & x_{12} & \dots & x_{1n} & x_{21} & \dots & x_{nm}\\
+-q & q \\
+q & -q \\
 \end{bmatrix}
 $$
 </div>
 
-Again, we can find the value of the likelihood at its maximum by calculating $L(\mathbf{x}_{nm} | \mathbf{a}, \mathbf{R}, \mathbf{C})$ using eq. 5.6.
+Likewise, for $k = 3$,
 
-## Section 5.4: Testing for evolutionary correlations
-
-There are many ways to test for evolutionary correlations between two characters. Traditional methods like PICs and PGLS work great for testing evolutionary regression, which is very similar to testing for evolutionary correlations. However, when using those methods the connection to actual models of character evolution can remain opaque. Thus, I will first present approaches to test for correlated evolution based on model selection using AIC and Bayesian analysis. I will then return to “standard” methods for evolutionary regression at the end of the chapter.
-
-### Section 5.4a: Testing for character correlations using maximum likelihood and AIC
-
-To test for an evolutionary correlation between two characters, we are really interested in the elements in the matrix $\mathbf{R}$. For two characters, $x$ and $y$, $\mathbf{R}$ can be written as:
-
-(eq. 5.8) 	
+(eq. 7.4)	
 <div>
 $$
-\mathbf{R} =
+\mathbf{Q} =
 \begin{bmatrix}
-\sigma_x^2 & \sigma_{xy} \\
-\sigma_{xy} & \sigma_y^2 \\
+-2 q & q & q \\
+q & -2 q & q \\
+q & q & -2 q \\
 \end{bmatrix}
 $$
 </div>
 
-We are interested in the parameter $\sigma_{xy}$ - the evolutionary covariance - and whether it is equal to zero (no correlation) or not. One simple way to test this hypothesis is to set up two competing hypotheses and compare them to each other. One hypothesis ($H_1$) is that the traits evolve independently of each other, and another ($H_2$) that the traits evolve with some covariance $\sigma_{xy}$. We can write these two rate matrices as:
+In general,
 
-(eq. 5.9)
+(eq. 7.5)	
 <div>
 $$
-\begin{array}{lcr}
-\mathbf{R}_{H_1} =
+\mathbf{Q} = q
 \begin{bmatrix}
-\sigma_x^2 & 0 \\
-0 & \sigma_y^2 \\
-\end{bmatrix} &
-\mathbf{R}_{H_2} =
-\begin{bmatrix}
-\sigma_x^2 & \sigma_{xy} \\
-\sigma_{xy} & \sigma_y^2 \\
-\end{bmatrix}\\
+1-k & 1 & \dots & 1 \\
+1 & 1-k & \dots & 1 \\
+\vdots & \vdots & \ddots & \vdots\\
+1 & 1 & \dots & 1\\
+\end{bmatrix}
+$$
+</div>
+
+Once we have this transition rate matrix, we can calculate the probability distribution of trait states after any time interval t using the equation:
+
+(eq. 7.6)
+<div>
+$$
+\mathbf{P}(t) = e^{\mathbf{Q}t}
+$$
+</div>
+
+This equation looks simple, but calculating $P(t)$ involves matrix exponentiation – raising $e$ to a power defined by a matrix. This calculation is substantially different from raising $e$ to the power defined by each element of a matrix. I will not cover the details of matrix exponentiation here – interested readers should see Yang (2006) for details – but the calculations are not trivial. The result is a matrix, $\mathbf{P}$, of transition probabilities. Each element in this matrix ($p_{ij}$) gives the probability that starting in state $i$ you will end up in state $j$ over that time interval $t$. For the standard Mk model, there is a general solution to this equation:
+
+(eq. 7.7)	
+<div>
+$$
+\begin{array}{l}
+p_{ii}(t) = \frac{1}{k} + \frac{k-1}{k} e^{-kqt} \\
+p_{ij}(t) = \frac{1}{k} - \frac{1}{k} e^{-kqt} \\
 \end{array}
 $$
 </div>
 
-We can calculate an ML estimate of the parameters in $\mathbf{R}_{H_2}$ using equation 5.4. The maximum likelihood estimate of $\mathbf{R}_{H_1}$ can be obtained by noting that, if character evolution is independent across all characters, then both $\sigma_x^2$ and $\sigma_y^2$ can be obtained by treating each character separately and using equations from chapter 3 to solve for each. It turns out that the ML estimates for $\sigma_x^2$ and $\sigma_y^2$ are always exactly the same for $H_1$ and $H_2$.
+In particular, when k = 2,
 
-To compare these two models, we calculate the likelihood of each using equation 5.5. We can then compare these two likelihoods using either a likelihood ratio test or by comparing AICc scores (see [chapter 2]({{site.baseurl}}/chapter2_stats/).  
-
-![Figure 5.3. The relationship between mammal body mass and home-range size. Solid line is a regression line from a standard analysis, dotted line from PGLS, which uses the phylogenetic tree (see below for a detailed description).](../images/figure5-3.png)
-
-
-
-For the mammal example, we can consider the two traits of (ln-transformed) body size and home range size [@Garland1992-kv]. These two characters have a positive correlation using standard regression analysis ($r = 0.27$), and a linear regression is significant ($P = 0.0001$; Figure 5.3). If we fit a multivariate Brownian motion model to these data, considering home range as trait 1 and body mass as trait 2, we obtain the following parameter estimates:
-
-(eq. 5.10)
+(eq. 7.8)	
 <div>
 $$
-\begin{array}{cc}
-\hat{\mathbf{a}}_{H_2} =
-\begin{bmatrix}
-2.54 \\
-4.64 \\
-\end{bmatrix} &
-\hat{\mathbf{R}}_{H_2} =
-\begin{bmatrix}
-0.24 & 0.10 \\
-0.10 & 0.09 \\
-\end{bmatrix}\\
+\begin{array}{l}
+p_{ii}(t) = \frac{1}{k} + \frac{k-1}{k} e^{-kqt} = \frac{1}{2} + \frac{2-1}{2}e^{-2qt}=\frac{1+e^{-2qt}}{2} \\
+p_{ij}(t) = \frac{1}{k} - \frac{1}{k} e^{-kqt} = \frac{1}{2} - \frac{1}{2}e^{-2qt}=\frac{1-e^{-2qt}}{2} \\
 \end{array}
 $$
 </div>
 
+If we consider what happens when time gets very large in these equations, we see an interesting pattern. Any term that has $e^{-t}$ in it gets closer and closer to zero as t increases. Because of this, for all values of $k$, each $p_{ij}(t)$ converges to a constant value, $1/k$. This is the stationary distribution of character states, $\pi$, defined as the equilibrium frequency of character states if the process is run many times for a long enough time period. In general, the stationary distribution of an Mk model is:
 
-Note the positive off-diagonal element in the estimated $\mathbf{R}$ matrix, suggesting a positive evolutionary correlation between these two traits. This model corresponds to hypothesis 2 above, and has a log-likelihood of $lnL = -164.0$. If we fit a model with no correlation between the two traits, we obtain:
-
-(eq. 5.11)
+(eq. 7.9)
 <div>
 $$
-\begin{array}{cc}
-\hat{\mathbf{a}}_{H_2} =
+\pi =
 \begin{bmatrix}
-2.54 \\
-4.64 \\
-\end{bmatrix} &
-\hat{\mathbf{R}}_{H_2} =
-\begin{bmatrix}
-0.24 & 0 \\
-0 & 0.09 \\
-\end{bmatrix}\\
-\end{array}
-$$
-</div>
-
-
-It is worth noting again that only the estimates of the evolutionary correlation were affected by this model restriction; all other parameter estimates remain the same. This model has a more negative log-likelihood of $lnL = -180.5$.
-
-A likelihood ratio test gives $\Delta = 33.0$, and $P << 0.001$, rejecting the null hypothesis. The difference in $AIC_c$ scores is 30.9, and the Akaike weight for model 2 is effectively 1.0. Both ways of comparing these two models give strong support for hypothesis 2. We can conclude that there is an evolutionary correlation between body mass and home range size in mammals. What this means in evolutionary terms is that, across mammals, evolutionary changes in body mass tend to covary with changes in home range.
-
-### Section 5.4b: Testing for character correlations using Bayesian model selection
-
-We can also implement a Bayesian approach to testing for the correlated evolution of two characters. The simplest way to do this is just to use the standard algorithm for Bayesian MCMC to fit a correlated model to the two characters. We can modify the algorithm presented in chapter 2 as follows:
-
-
-1.	Sample a set of starting parameter values $\sigma_x^2$, $\sigma_y^2$, and $\sigma_{xy}$ from the prior distribution. For this example, we can set our prior distribution as uniform between 0 and 1 for $\sigma_x^2$ and $\sigma_y^2$ and uniform from -1 to +1 for $\sigma_{xy}$.
-2.	Given the current parameter values, select new proposed parameter values using the proposal density $Q(p'|p)$. Here, for all three parameter values, we will use a uniform proposal density with width 0.2, so that $Q(p'|p) \sim U(p-0.1,p+0.1)$.
-3.	Calculate three ratios:
-a.	The prior odds ratio. This is the ratio of the probability of drawing the parameter values p and p’ from the prior. Since our priors are uniform, this is always 1.
-b.	The proposal density ratio. This is the ratio of probability of proposals going from p to p’ and the reverse. Our proposal density is symmetrical, so that $Q(p'|p) = Q(p|p')$ and $a_2 = 1$.
-c.	The likelihood ratio. This is the ratio of probabilities of the data given the two different parameter values. We can calculate these probabilities from equation 5.6 above.
-(eq. 5.12)
-<div>
-$$
-a_3 = \frac{L(p'|D)}{L(p|D)} = \frac{P(D|p')}{P(D|p)}
-$$
-</div>
-4.	Find the product of the prior odds, proposal density ratio, and the likelihood ratio. In this case, both the prior odds and proposal density ratios are 1, so $a = a_3$.
-5.	Draw a random number $x$ from a uniform distribution between 0 and 1. If $x<a$, accept the proposed value of all parameters; otherwise reject, and retain the current parameter values.
-6.	Repeat steps 2-5 a large number of times.
-
-
-We can then inspect the posterior distribution for the parameter  is significantly greater than (or less than) zero. As an example, I ran this MCMC for 100,000 generations, discarding the first 10,000 generations as burn-in. I then sampled the posterior distribution every 100 generations, and obtained the following parameter estimates: $\sigma_x^2 = 0.26$ (95% CI: 0.18 - 0.38), $\sigma_y^2 = 0.10$ (95% CI: 0.06 -0.15), and $\sigma_{xy} = 0.11$ (95% CI: 0.06 - 0.17; see Figure 5.4). These results are comparable to our ML estimates. Furthermore, the 95% CI for $\sigma_{xy}$ does not overlap with 0; in fact, none of the 901 posterior estimates of $\sigma_{xy}$ are less than zero. Again, we can conclude with confidence that there is an evolutionary correlation between these two characters.
-
-![Figure 5.4. Bayesian analysis of evolutionary correlation. A. likelihood trace, B. posterior distribution of $\sigma_{xy}$, C. posterior distribution of $a_2$.](../images/figure5-4.png)
-
-
-
-### Section 5.5c: Testing for character correlations using traditional approaches (PIC, PGLS)
-
-The approach outlined above, which tests for an evolutionary correlation among characters using model selection, is not typically applied in the comparative biology literature. Instead, most tests of character correlation rely on phylogenetic regression using one of two methods: phylogenetic independent contrasts (PICs) and phylogenetic general least squares (PGLS). PGLS is actually mathematically identical to PICs in the simple case described here, and more flexible than PICs for other models and types of characters. Here I will review both PICs and PGLS and explain how they work and how they relate to the models described above.
-
-Phylogenetic independent contrasts can be used to carry out a regression test for the relationship between two different characters. To do this, one calculates standardized PICs for trait $x$ and trait $y$. One then uses standard regression forced through the origin to test for a relationship between these two sets of PICs. It is necessary to force the regression through the origin because the direction of subtraction of contrasts across any node in the tree is arbitrary; a reflection of all of the contrasts across both axes simultaneously should have no effect on the analyses<sup><a name="footnote5.2_back">[2](#footnote5.2)</a></sup>.
-
-For mammal homerange and body mass, a PIC regression test shows a significant correlation between the two traits ($P << 0.0001$; Figure 5.5).  
-
-![Figure 5.5. Regression based on independent contrasts. The regression line is forced through the origin.](../images/figure5-5.png)
-
-
-
-There is one drawback to PIC regression analysis, though – one does not recover an estimate of the intercept of the regression of $y$ on $x$ – that is, the value of $y$ one would expect when $x = 0$. The easiest way to get this parameter estimate is to instead use Phylogenetic Generalized Least Squares (PGLS). PGLS uses the common statistical machinery of generalized least squares, and applies it to phylogenetic comparative data. In normal generalized least squares, one constructs a model of the relationship between $y$ and $x$, as:
-
-(eq. 5.13)
-<div>
-$$
-\mathbf{y} = \mathbf{X_D} \mathbf{b} + \epsilon
-$$
-</div>
-
-Here, $\mathbf{y}$ is an $n \times 1$ vector of trait values and $\mathbf{b}$ is a vector of unknown regression coefficients that must be estimated from the data. $\mathbf{X_D}$ is a design matrix including the traits that one wishes to test for a correlation with $y$ and – if the model includes an intercept – a column of 1s. To test for correlations, we use:
-
-(eq. 5.14)
-<div>
-$$
-\mathbf{X_D} =
-\begin{bmatrix}
-1 & x_1 \\
-1 & x_2 \\
-\dots & \dots \\
-1 & x_n \\
+1/k & 1/k & \dots & 1/k\\
 \end{bmatrix}
 $$
 </div>
 
-In this case, $b$ is $2 \times 1$ and the resulting model can be used to test correlations between two characters. However, $\mathbf{X_D}$ could also be multivariate, and can include more than one character that might be related to $y$. This allows us to carry out the equivalent of multiple regression in a phylogenetic context. Finally,  $\epsilon$ are the residuals – the difference between the y-values predicted by the model and their actual values. In traditional regression, one assumes that the residuals are all normally distributed with the same variance. By contrast, with GLS, one assumes that the residuals might not be independent of each other; instead, they are multivariate normal with expected mean zero and some variance-covariance matrix $\mathbf{\Omega}$.
+In the case of k = 2,
 
-In the case of Brownian motion, we can model the residuals as having variances and covariances that follow the structure of the phylogenetic tree. In other words, we can substitute our phylogenetic variance-covariance matrix $\mathbf{C}$ as the matrix $\mathbf{\Omega}$. We can then carry out standard GLS analyses to estimate model parameters:
-
-(eq. 5.15)
+(eq. 7.10)
 <div>
 $$
-\hat{\mathbf{b}} = (\mathbf{X}_D ^ \intercal \mathbf{\Omega}^{-1} \mathbf{X}_D ^ \intercal)^{-1} \mathbf{X}_D ^ \intercal \mathbf{\Omega}^{-1} \mathbf{y} = (\mathbf{X}_D ^ \intercal \mathbf{C}^{-1} \mathbf{X}_D ^ \intercal)^{-1} \mathbf{X}_D ^ \intercal \mathbf{C}^{-1} \mathbf{y}
+\pi =
+\begin{bmatrix}
+1/2 & 1/2 \\
+\end{bmatrix}
 $$
 </div>
 
-One might notice a similarity between equation 5.15 and equation 4.7. In fact, if $\mathbf{X}_D$ from (5.14) is used for PGLS, then the first term in $\hat{\mathbf{b}}$ is the phylogenetic mean $\theta$. The other term in $\hat{\mathbf{b}}$ will be an estimate for the slope of the relationship between $y$ and $x$, the calculation of which statistically controls for the effect of phylogenetic relationships.
+## The Extended Mk Model
 
-Applying PGLS to mammal body mass and home range results in an identical estimate of the slope and P-value as we obtain using independent contrasts (see Box 4.1). PGLS also returns an estimate of the intercept of this relationship, which cannot be obtained from the PICs.
+The Mk model assumes that transitions among all possible character states occur at the same rate. However, that may not be a valid assumption. For example, it is often supposed that it is easier to lose a complex character than to gain one. We might want to fit models that allow for such asymmetries in rates.
 
-Of course, another difference is that PICs and PGLS use regression, while the approach outlined above tests for a correlation. These two types of statistical tests are different. Correlation tests for a relationship between $x$ and $y$, while regression tries to find the best way to predict $y$ from $x$. For correlation, it does not matter which variable we call $x$ and which we call $y$. However, in regression we will get a different slope if we predict $y$ given $x$ instead of predicting $x$ given $y$. The model that is assumed by phylogenetic regression models is also different from the model above, where we assumed that the two characters evolve under a correlated Brownian motion model. By contrast, PGLS (and, implicitly, PICs) assume that the deviations of each species from the regression line evolve under a Brownian motion model. We can imagine, for example, that species can freely slide along the regression line, but that evolving around that line can be captured by a normal Brownian model. Another way to think about a PGLS model is that we are treating $x$ as a fixed property of species. The deviation of $y$ from what is predicted by $x$ is what evolves under a Brownian motion model. If this seems strange, that’s because it is! There are other, more complex models for modeling the correlated evolution of two characters that make assumptions that are more evolutionarily realistic; we will return to this topic later in the book. At the same time, PGLS is a well-used method for evolutionary regression, and is undoubtedly useful despite its somewhat strange assumptions.
+For models of DNA sequence evolution there are a wide range of models allowing different rates between distinct types of nucleotides. Unequal rates are usually incorporated into the Mk model in two ways. First, one can consider the symmetric model (SYM). In the symmetric model, the rate of change between any two character states is the same forwards as it is backwards (that is, rates of change are symmetric; $q_{ij} = q_{ji}$). The rate for a particular pair of states might differ from other pairs of character stats. The rate matrix for this model has as many free rate parameters as there are pairs of character states, $k (k - 1) / 2$.
 
-PGLS analysis, as described above, assumes that characters are evolving under a Brownian motion model. However, one can change the structure of the error variance-covariance matrix to reflect other models of evolution, such as OU. We return to this topic in a later chapter.
+(eq. 7.11)
+<div>
+$$
+p = \frac{k(k-1)}{2}
+$$
+</div>
 
-## Section 5.6: Summary
+However, in general symmetric models will not have stationary distributions where all character states occur at equal frequencies, as noted above for the Mk model. We can account for these uneven frequencies by adding additional parameters to our model:
 
-There are at least four methods for testing for an evolutionary correlation between continuous characters: likelihood ratio test, AIC model selection, PICs, and PGLS. These four methods as presented all make the same assumptions about the data and, therefore, have quite similar statistical properties (even simulating under a multivariate Brownian motion model, which deviates from the model assumptions, both PICs and PGLS have appropriate Type I error rates and very similar power). Any of these are good choices for testing for the presence of an evolutionary correlation in your data.
+(eq. 7.12)
+<div>
+$$
+\pi_{SYM} =
+\begin{bmatrix}
+\pi_1 & \pi_2 & \dots & 1 - \sum_{i=1}^{n-1} \pi_i
+\end{bmatrix}
+$$
+</div>
 
-## Section 5.7: Footnotes
+Note that we only have to specify $n -1$ equilibrium frequencies, since we know that they all sum to one. We have added $n - 1$ new parameters, for a total number of parameters:
 
-<a name="footnote5.1">1</a>: We might also want to carry out linear regression, which is related to correlation analysis but distinct. We will show examples of phylogenetic regression at the end of this chapter.[*back to main text*](#footnote5.1_back)
+(eq. 7.13)
+<div>
+$$
+p = \frac{k(k-1)}{2} + n-1
+$$
+</div>
 
-<a name="footnote5.2">2</a>:  Another way to think about regression through the origin is to think of pairs of contrasts across any node in the tree as two-dimensional vectors. Calculating a vector correlation is equivalent to calculating a regression forced through the origin. [*back to main text*](#footnote5.2_back)
 
+To obtain a $\mathbf{Q}$-matrix for this model, we combine the information from both the relative transition rates and equilibrium frequencies:
 
-## Section 5.8: References
+(eq. 7.14)
+<div>
+$$
+\mathbf{Q} =
+\begin{bmatrix}
+\cdot & r_1 & \dots & r_{n-1} \\
+r_1 & \cdot & \dots & \vdots \\
+\vdots & \vdots & \cdot & r_{k(k-1)/2} \\
+r_{n-1} & \dots r_{k(k-1)/2} & \cdot \\
+\end{bmatrix}
+\begin{bmatrix}
+\pi_1 & 0 & 0 & 0 \\
+0 & \pi_2 & 0 & 0 \\
+0 & 0 & \ddots & 0 \\
+0 & 0 & 0 & \pi_n \\
+\end{bmatrix}
+$$
+</div>
+
+In this equation I have left the diagonal of the first matrix as dots. The final $\mathbf{Q}$-matrix must have all rows sum to one, so one can adjust the values of that matrix after the multiplication step.
+
+In the case of a two-state model, for example, we can create a model where the forward rate is double the backward rate, and the equilibrium frequency of character one is 0.75. Then:
+
+(eq. 7.15)
+<div>
+$$
+\mathbf{Q} =
+\begin{bmatrix}
+\cdot & 1 \\
+2 & \cdot \\
+\end{bmatrix}
+\begin{bmatrix}
+0.75 & 0 \\
+0 & 0.25 \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+\cdot & 0.25 \\
+1.5 & \cdot \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+-0.25 & 0.25 \\
+1.5 & -1.5 \\
+\end{bmatrix}
+$$
+</div>
+
+The second common extension of the Mk model is called the all-rates-different model (ARD). In this model every possible type of transition can have a different rate. There are thus $k (k - 1)$ free rate parameters for this model, and again $n - 1$ parameters to specify the equilibrium frequencies of the character states.
+
+The same algorithm can be used to calculate the likelihood for both of these extended Mk models (SYM and ARD). These models have more parameters than the standard Mk. To find maximum likelihood solutions, we must optimize the likelihood across the entire set of unknown parameters (see Chapter 7).
+
+## Simulating the Mk model on a tree
+
+We can also use the equations above to simulate evolution under an Mk or extended-Mk model on a tree. To do this, we simulate character evolution on each branch of the tree, starting at the root and progressing towards the tips. At speciation, we assume that both daughter species inherit the character state of their parental species immediately following speciation, and then evolve independently after that. At the end of the simulation, we will obtain a set of character states, one for each tip in the tree. The distribution of character states will depend on the shape of the phylogenetic tree (both its topology and branch lengths) along with the parameters of our model of character evolution.
+
+We first draw a beginning character state at the root of the tree. There are several common ways to do this. For example, we can either draw from the stationary distribution or from one where each character state is equally likely. In the case of the standard Mk model, these are the same. For example, if we are simulating evolution under Mk with $k = 2$, then state 0 and 1 each have a probability of $1/2$ at the root. We can draw the root state from a binomial distribution with $p = 0.5$.
+
+Once we have a character state for the root, we then simulate evolution along each branch in the tree. We start with the (usually two) branches descending from the root. We then proceed up the tree, branch by branch, until we get to the tips. 
+
+We can understand this algorithm perfectly well by thinking about what happens on each branch of the tree, and then extending that algorithm to all of the branches (as described above). For each branch, we first calculate $\mathbf{P}(t)$, the transition probability matrix, given the length of the branch and our model of evolution as summarized by $\mathbf{Q}$ and the branch length $t$. We then focus on the row of $\mathbf{P}(t)$ that corresponds to the character state at the beginning of the branch. For example, let’s consider a basic two-state Mk model with $q = 0.5$. We will call the states 0 and 1. We can calculate $\mathbf{P}(t)$ for a branch with length $t = 3$ as:
+
+(eq. 7.16)
+<div>
+$$
+\mathbf{P}(t) = e^{\mathbf{Q} t} = exp(
+\begin{bmatrix}
+-0.5 & 0.5 \\
+0.5 & -0.5 \\
+\end{bmatrix}
+) \cdot 3) =
+\begin{bmatrix}
+0.525 & 0.475 \\
+0.475 & 0.525 \\
+\end{bmatrix}
+$$
+</div>
+
+If we had started with character state 0 at the beginning of this branch, we would focus on the first row of this matrix. We want to end up at state 0 with probability 0.525 and change to state 1 with probability 0.475. We again draw a uniform random deviate $u$, and choose state 0 if $0 \leq u < 0.525$ and state 1 if $0.525 \leq u < 1$. If we started with a different character state, we would use a different row in the matrix. If this is an internal branch in the tree, then both daughter species inherit the character state that we chose immediately following speciation – but might diverge soon after! By repeating this along every branch in the tree, we obtain a set of character states at the tips of the tree. This is then the output of our simulation.
+
+Two additional details here are worth noting. First, the procedure for simulating characters under the extended-Mk model are identical to those above, except matrix exponentials are more complicated than in the standard Mk model. Second, if you are simulating a character with more than two states, then the procedure for drawing a random number is slightly different. One still obtains the relevant row from $\mathbf{P}(t)$ and draws a uniform random deviate $u$. Imagine that we have a ten-state character with states 0 - 9. We start at state 0 at the beginning of the simulation. Again using $q = 0.5$ and $t = 3$, we find that:
+
+(eq. 7.17)
+<div>
+$$
+\begin{array}{l}
+p_{ii}(t) = \frac{1}{k} + \frac{k-1}{k} e^{-kqt} = \frac{1}{10}+\frac{9}{10}e^{-2 \cdot 0.5 \cdot 3} = 0.145\\
+p_{ij}(t) = \frac{1}{k} - \frac{1}{k} e^{-kqt} \frac{1}{10} - \frac{1}{10}e^{-2 \cdot 0.5 \cdot 3} = 0.095\\
+\end{array}
+$$
+</div>	
+
+We focus on the first row of $\mathbf{P}(t)$, which has elements:
+
+<div>
+$$
+\begin{bmatrix}
+0.145 & 0.095 & 0.095 & 0.095 & 0.095 & 0.095 & 0.095 & 0.095 & 0.095 & 0.095 \\
+\end{bmatrix}
+$$
+</div>
+
+We calculate the cumulative sum of these elements, adding them together so that each number represents the sum of itself and all preceding elements in the vector:
+
+<div>
+$$
+\begin{bmatrix}
+0.145 & 0.240 & 0.335 & 0.430 & 0.525 & 0.620 & 0.715 & 0.810 & 0.905 & 1.000 \\
+\end{bmatrix}
+$$
+</div>
+
+Now we compare $u$ to the numbers in this cumulative sum vector. We select the smallest element that is still strictly larger than $u$, and assign this character state for the end of the branch. For example, if $u = 0.475$, the 5th element, 0.525, is the smallest number that is still greater than $u$. This corresponds to character state 4, which we assign to the end of the branch. This last procedure is a numerical trick. Imagine that we have a line segment with length 1. The cumulative sum vector breaks the unit line into segments, each of which is exactly as long as the probability of each event in the set. One then just draws a random number between 0 and 1 using a uniform distribution. The segment that contains this random number is our event. 
+
+We can apply this approach to simulate the evolution of limblessness in squamates. Below, I present the results of three such simulations. These simulations are a little different than what I describe above because they consider all changes in the tree, rather than just character states at nodes and tips; but the model (and the principal) is the same. You can see that the model leaves an imprint on the pattern of changes in the tree, and you can imagine that one might be able to reconstruct the model using a phylogenetic comparative approach. Of course, typically we know only the tip states, and have to reconstruct changes along branches in the tree. We will discuss parameter estimation for the Mk and extended-Mk models in the next chapter.
+
+![Figure 7.4. Simulated character evolution on a phylogenetic tree of squamates (from Brandley et al. 2008) under an equal-rates Mk model with slow, fast, and asymmetric transition rates (from right to left). In all three cases, I assumed that the ancestor of squamates had limbs. ](../images/figure7-4.png)
+
+ 
+
+## Chapter summary
+
+In this chapter I have described the Mk model, which can be used to describe the evolution of discrete characters that have a set number of fixed states. We can also elaborate on the Mk model to allow more complex models of discrete character evolution (the extended-Mk model). These models can all be used to simulate the evolution of discrete characters on trees. In summary, the Mk and extended Mk model are general models that one can use for the evolution of discrete characters. In the next chapter, I will show how to fit these models to data and use them to test evolutionary hypotheses.
