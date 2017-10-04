@@ -18,11 +18,11 @@ One general rule for continuous traits in biology is to carry out a log-transfor
 
 The information required to estimate evolutionary rates is efficiently summarized in the early (but still useful) phylogenetic comparative method of independent contrasts [@Felsenstein1985-bt]. Independent contrasts summarize the amount of character change across each node in the tree, and can be used to estimate the rate of character change across a phylogeny. There is also a simple mathematical relationship between contrasts and maximum-likelihood rate estimates that I will discuss below.
 
-We can understand the basic idea behind independent contrasts if we think about the branches in the phylogenetic tree as the historical “pathways” of evolution. Each branch on the tree represents a lineage that was alive at some time in the history of the Earth, and during that time experienced some amount of evolutionary change. We can imagine trying to measure that change initially by comparing sister taxa. We can compare the trait values of the two sister taxa by finding the difference in their trait values, and then compare that to the total amount of time they have had to evolve that difference. By doing this for all sister taxa in the tree, we will get an estimate of the average rate of character evolution (Figure 4.1A). But what about deeper nodes in the tree? We could use other non-sister species pairs, but then we would be counting some branches in the tree of life more than once (Figure 4.1B). Instead, we use a “pruning algorithm,” [Felsenstein1985-bt, Felsenstein2004-eo] chopping off pairs of sister taxa to create a smaller tree (Figure 4.1C). Eventually, all of the nodes in the tree will be trimmed off – and the algorithm will finish. Independent contrasts provides a way to generalize the approach of comparing sister taxa so that we can quantify the rate of evolution throughout the whole tree.
+We can understand the basic idea behind independent contrasts if we think about the branches in the phylogenetic tree as the historical “pathways” of evolution. Each branch on the tree represents a lineage that was alive at some time in the history of the Earth, and during that time experienced some amount of evolutionary change. We can imagine trying to measure that change initially by comparing sister taxa. We can compare the trait values of the two sister taxa by finding the difference in their trait values, and then compare that to the total amount of time they have had to evolve that difference. By doing this for all sister taxa in the tree, we will get an estimate of the average rate of character evolution ( 4.1A). But what about deeper nodes in the tree? We could use other non-sister species pairs, but then we would be counting some branches in the tree of life more than once (Figure 4.1B). Instead, we use a “pruning algorithm,” [Felsenstein1985-bt, Felsenstein2004-eo] chopping off pairs of sister taxa to create a smaller tree (Figure 4.1C). Eventually, all of the nodes in the tree will be trimmed off – and the algorithm will finish. Independent contrasts provides a way to generalize the approach of comparing sister taxa so that we can quantify the rate of evolution throughout the whole tree.
 
-![]({{ site.baseurl }}/images/figure4-1.png)
+![Figure 4.1. Pruning algorithm that can be used to identify five independent contrasts for a tree with six species [from @Felsenstein1985-bt]. The numbered order in this figure is only one of two possibilities that work; one can also prune the tree in the order 1, 2, 4, 3, 5 and get identical results.]({{ site.baseurl }}/images/figure4-1.png)
 
-Figure 4.1. Pruning algorithm that can be used to identify five independent contrasts for a tree with six species [from @Felsenstein1985-bt]. The numbered order in this figure is only one of two possibilities that work; one can also prune the tree in the order 1, 2, 4, 3, 5 and get identical results.
+
 
 A more precise algorithm describing how phylogenetic independent contrasts are calculated is provided in Box 4.2, below [@Felsenstein1985-bt]. Each contrast can be described as an estimate of the direction and amount of evolutionary change across the nodes in the tree. PICs are calculated from the tips of the tree towards the root, as differences between trait values at the tips of the tree and/or calculated average values at internal nodes. The differences themselves are sometimes called “raw contrasts” [@Felsenstein1985-bt]. These raw contrasts will all be statistically independent of each other under a wide range of evolutionary models – in fact, as long as each lineage in a phylogenetic tree evolves independently of every other lineage, regardless of the evolutionary model, the raw contrasts will be independent of each other. However, people almost never use raw contrasts because they are not identically distributed; each raw contrast has a different expected distribution that depends on the model of evolution and the branch lengths of the tree. Felsenstein [-@Felsenstein1985-bt] divided the raw contrasts by their expected standard deviation under a Brownian motion, resulting in standardized contrasts. These standardized contrasts are, under a BM model, both independent and identically distributed, and can be used in a variety of statistical tests.
 
@@ -73,9 +73,9 @@ It is worth noting that $x_k$ is a weighted average of $x_i$ and $x_j$, but does
 
 As mentioned above, we can apply the algorithm of independent contrasts to learn something about rates of body size evolution in mammals. We have a phylogenetic tree with branch lengths as well as body mass estimates for 49 species (Figure 4.2). If we ln-transform mass and then apply the method above to our data on mammal body size, we obtain a set of 48 standardized contrasts. A histogram of these contrasts is shown as Figure 4.2.
 
-![]({{ site.baseurl }}/images/figure4-2.png)
+![Figure 4.2. Histogram of PICs for ln-transformed mammal body mass on a phylogenetic tree with branch lengths in millions of years [from @Garland1992-kv].]({{ site.baseurl }}/images/figure4-2.png)
 
-Figure 4.2. Histogram of PICs for ln-transformed mammal body mass on a phylogenetic tree with branch lengths in millions of years [from @Garland1992-kv].
+
 
 Note that each contrast is an amount of change $x_i - x_j$ divided by a branch length $v_i + v_j$, which is a measure of time. Thus, PICs from a single trait can be used to estimate , the net rate of evolution under a Brownian model. The PIC estimate of the evolutionary rate is:
 
@@ -112,17 +112,17 @@ As an example, with the mammal data, we can calculate the likelihood for a model
 
 To find the ML estimates of our model parameters, we need to find the parameter values that maximize that function. One (not very efficient) way to do this is to calculate the likelihood across a wide range of parameter values. One can then visualize the resulting likelihood surface and identify the maximum of the likelihood function. For example, the likelihood surface for the mammal body size data given a Brownian motion model is shown in Figure 4.3. Note that this surface has a peak around $\sigma^2 = 0.09$ and $\bar{z}(0) = 4$. Inspecting the matrix of ML values, we find the highest likelihood (-78.05) at $\sigma^2 = 0.089$ and $\bar{z}(0) = 4.65$.
 
-![]({{ site.baseurl }}/images/figure4-3.png)
+![Figure 4.3. Likelihood surface for the evolution of mammalian body mass using the data from Garland [-@Garland1992-kv].]({{ site.baseurl }}/images/figure4-3.png)
 
-Figure 4.3. Likelihood surface for the evolution of mammalian body mass using the data from Garland [-@Garland1992-kv].
+
 
 The calculation described above is inefficient, because we have to calculate likelihoods at a wide range of parameter values that are far from the optimum. To be more efficient, we can use numerical optimization, a branch of computer science that is dedicated to finding efficient algorithms that search for the optima (minima or maxima) of functions. One simple example is based on Newton’s method of optimization [as implemented, for example, by the r function nlm()]. We can use this algorithm to quickly find accurate ML estimates<sup><a name="footnote4.2_back">[2](#footnote4.2)</a></sup>.
 
 Using optimization algorithms we find a ML solution at $\sigma^2 = 0.08804487$ and $\bar{z}(0) = 4.640571$, with $lnL = -78.04942$. Importantly, the solution is located with only 10 likelihood calculations. I have plotted the path through parameter space taken by Newton’s method when searching for the optimum in Figure 4.4. Notice two things: first, that the function starts at some point and heads uphill on the likelihood surface until an optimum is found; and second, that this calculation requires many fewer steps (and much less time) than calculating the likelihood for a wide range of parameter values.
 
-![]({{ site.baseurl }}/images/figure4-4.png)
+![Figure 4.4. Likelihood surface for the evolution of mammalian body mass using the data from Garland [-@Garland1992-kv]. Shown here is the path taken by the optimization algorithm to find the peak of the likelihood surface. The last five steps of this ten-step algorithm are too close together to be seen in this figure.]({{ site.baseurl }}/images/figure4-4.png)
 
-Figure 4.4. Likelihood surface for the evolution of mammalian body mass using the data from Garland [-@Garland1992-kv]. Shown here is the path taken by the optimization algorithm to find the peak of the likelihood surface. The last five steps of this ten-step algorithm are too close together to be seen in this figure.
+
 
 Using an optimization algorithm also has the added benefit of providing (approximate) confidence intervals for parameter values based on the hessian of the likelihood surface. This approach assumes that the shape of the likelihood surface in the immediate vicinity of the peak can be approximated by a quadratic function, and uses the curvature of that function to approximate the standard errors of parameter values [@Burnham2003-mt]. If the surface is strongly peaked, the SEs will be small, while if the surface is very broad, the SEs will be large. For example, the likelihood surface around the ML values for mammal body size evolution has a Hessian of:
 
@@ -161,7 +161,7 @@ $$
 $$
 </div>
 
-where $n$ is the number of taxa in the tree, $\mathbf{C} is the $n \times n$ variance-covariance matrix under Brownian motion for tip characters given the phylogenetic tree, $x$ is an $n \times 1$ vector of trait values for tip species in the tree, $\mathbf{1}$ is an $n \times 1$ column vector of ones, $\hat{\bar{z}}(0)$ is the estimated root state for the character, and $\hat{\sigma}_{ML}^2$ is the estimated net rate of evolution.
+where $n$ is the number of taxa in the tree, $\mathbf{C}$ is the $n \times n$ variance-covariance matrix under Brownian motion for tip characters given the phylogenetic tree, $x$ is an $n \times 1$ vector of trait values for tip species in the tree, $\mathbf{1}$ is an $n \times 1$ column vector of ones, $\hat{\bar{z}}(0)$ is the estimated root state for the character, and $\hat{\sigma}_{ML}^2$ is the estimated net rate of evolution.
 
 Applying this approach to mammal body size, we obtain estimates that are exactly the same as our results from numeric optimization: $\sigma^2 = 0.088$ and $\bar{z}(0) = 4.64$.
 
@@ -217,9 +217,9 @@ $$
 
 Using the mammal body size data, I ran the analysis with uniform priors from (0, 0.5) for $\sigma_2$ and from (0, 10) for $\bar{z}(0)$. I used an MCMC with 10,000 generations, discarding the first 1000 as burn-in. Sampling every 10 generations, I obtain parameter estimates of $\sigma_2  = 0.10$ (95% credible interval: $0.066 – 0.15$) and $\bar{z}(0) = 3.5$ (95% credible interval: $2.3 – 5.3$; Figure 4.5).
 
-![]({{ site.baseurl }}/images/figure4-5.png)
+![Figure 4.5. Bayesian analysis of body size evolution in mammals. Figure shows the likelihood profile (A) and posterior distributions for model parameters $\sigma_2$ (B) and $\bar{z}(0)$ (C).]({{ site.baseurl }}/images/figure4-5.png)
 
-Figure 4.5. Bayesian analysis of body size evolution in mammals. Figure shows the likelihood profile (A) and posterior distributions for model parameters $\sigma_2$ (B) and $\bar{z}(0)$ (C).
+
 
 Note that the parameter estimates from all three approaches (REML, ML, and Bayesian) were similar. Even the confidence/credible intervals varied a little bit but were of about the same size in all three cases. All of the approaches above are mathematically related and should, in general, return similar results. One might place higher value on the Bayesian credible intervals over confidence intervals from the Hessian of the likelihood surface, for two reasons: the Hessian leads to an estimate of the CI under certain conditions that may or may not be true for your analysis; and second, Bayesian credible intervals reflect overall uncertainty better than ML confidence intervals (see [chapter 2]({{ site.baseurl }}/chapter2_stats/)).
 

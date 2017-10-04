@@ -20,9 +20,9 @@ We can now contrast standard correlations, testing the relationships between tra
 
 If we want to test hypotheses about trait evolution, we should specifically test evolutionary correlations<sup><a name="footnote5.1_back">[1](#footnote5.1)</a></sup>. If we find a relationship among the independent contrasts for two characters, for example, then we can infer that changes in each character are related to changes in the other – an inference that is much closer to most biological hypotheses about why characters might be related. In this case, then, we can think of statistical comparative methods as focused on disentangling patterns due to phylogenetic relatedness from patterns due to evolutionary correlations.
 
-![]({{ site.baseurl }}/images/figure5-1.png)
+![Figure 5.1. Examples from simulations of pure birth trees ($b = 1$) with $n = 100$ species. Plotted points represent character values for extant species in each clade. In all three panels, $\sigma_x^2 = \sigma_y^2 = 1$. $\sigma_{xy}^2$ varies with $\sigma_{xy}^2 = 0$ (panel A), $\sigma_{xy}^2 = 0.8$ (panel B), and  $\sigma_{xy}^2 = -0.8$ (panel C). Note the (apparent) negative correlation in panel A, which can be explained by phylogenetic relatedness of species within two clades. Only panels B and C show data with an evolutionary correlation. However, this would be difficult or impossible to conclude without using comparative methods.]({{ site.baseurl }}/images/figure5-1.png)
 
-Figure 5.1. Examples from simulations of pure birth trees ($b = 1$) with $n = 100$ species. Plotted points represent character values for extant species in each clade. In all three panels, $\sigma_x^2 = \sigma_y^2 = 1$. $\sigma_{xy}^2$ varies with $\sigma_{xy}^2 = 0$ (panel A), $\sigma_{xy}^2 = 0.8$ (panel B), and  $\sigma_{xy}^2 = -0.8$ (panel C). Note the (apparent) negative correlation in panel A, which can be explained by phylogenetic relatedness of species within two clades. Only panels B and C show data with an evolutionary correlation. However, this would be difficult or impossible to conclude without using comparative methods.
+
 
 ## Section 5.3: Modeling the evolution of correlated characters
 
@@ -56,9 +56,9 @@ $$
 
 Here, the rate parameter for each axis ($\sigma_i^2$) is along the matrix diagonal. Off-diagonal elements represent evolutionary covariances between pairs of axes (note that $\sigma_{ij} = \sigma_{ji}$). It is worth noting that each individual character evolves under a Brownian motion process. Covariances among characters, though, potentially make this model distinct from one where each character evolves independently of all the others (Figure 5.2).
 
-![]({{ site.baseurl }}/images/figure5-2.png)
+![Figure 5.2. Hypothetical pathways of evolution (arrows) for (A) two uncorrelated traits, (B) two traits evolving with a positive covariance, and (C) two traits evolving with a negative covariance. Note that in (B), when trait 1 gets larger trait 2 also gets larger, but in (C) positive changes in trait 1 are paired with negative changes in trait 2.]({{ site.baseurl }}/images/figure5-2.png)
 
-Figure 5.2. Hypothetical pathways of evolution (arrows) for (A) two uncorrelated traits, (B) two traits evolving with a positive covariance, and (C) two traits evolving with a negative covariance. Note that in (B), when trait 1 gets larger trait 2 also gets larger, but in (C) positive changes in trait 1 are paired with negative changes in trait 2.
+
 
 When you have data for multiple continuous characters across many species along with a phylogenetic tree, you can fit a multivariate Brownian motion model to the data, as discussed in Chapter 3. The equations for estimating $\hat{\mathbf{a}}$ (the estimated vector of phylogenetic means for all characters) and $\hat{\mathbf{R}}$ (the estimated evolutionary rate matrix) are [@Revell2008-qr, @Hohenlohe2008-sj]:
 
@@ -158,9 +158,9 @@ We can calculate an ML estimate of the parameters in $\mathbf{R}_{H_2}$ using eq
 
 To compare these two models, we calculate the likelihood of each using equation 5.5. We can then compare these two likelihoods using either a likelihood ratio test or by comparing AICc scores (see [chapter 2]({{site.baseurl}}/chapter2_stats/).  
 
-![]({{ site.baseurl }}/images/figure5-3.png)
+![Figure 5.3. The relationship between mammal body mass and home-range size. Solid line is a regression line from a standard analysis, dotted line from PGLS, which uses the phylogenetic tree (see below for a detailed description).]({{ site.baseurl }}/images/figure5-3.png)
 
-Figure 5.3. The relationship between mammal body mass and home-range size. Solid line is a regression line from a standard analysis, dotted line from PGLS, which uses the phylogenetic tree (see below for a detailed description).
+
 
 For the mammal example, we can consider the two traits of (ln-transformed) body size and home range size [@Garland1992-kv]. These two characters have a positive correlation using standard regression analysis ($r = 0.27$), and a linear regression is significant ($P = 0.0001$; Figure 5.3). If we fit a multivariate Brownian motion model to these data, considering home range as trait 1 and body mass as trait 2, we obtain the following parameter estimates:
 
@@ -230,11 +230,11 @@ $$
 6.	Repeat steps 2-5 a large number of times.
 
 
-We can then inspect the posterior distribution for the parameter  is significantly greater than (or less than) zero. As an example, I ran this MCMC for 100,000 generations, discarding the first 10,000 generations as burn-in. I then sampled the posterior distribution every 100 generations, and obtained the following parameter estimates: $\sigma_x^2 = 0.26$ (95% CI: 0.18 - 0.38), $\sigma_y^2 = 0.10$ (95% CI: 0.06 -0.15), and $\sigma_{xy} = 0.11$ (95% CI: 0.06 - 0.17; see Figure 5.4). These results are comparable to our ML estimates. Furthermore, the 95% CI for $\sigma_{xy}$ does not overlap with 0; in fact, none of the 901 posterior estimates of $$\sigma_{xy}$ are less than zero. Again, we can conclude with confidence that there is an evolutionary correlation between these two characters.
+We can then inspect the posterior distribution for the parameter  is significantly greater than (or less than) zero. As an example, I ran this MCMC for 100,000 generations, discarding the first 10,000 generations as burn-in. I then sampled the posterior distribution every 100 generations, and obtained the following parameter estimates: $\sigma_x^2 = 0.26$ (95% CI: 0.18 - 0.38), $\sigma_y^2 = 0.10$ (95% CI: 0.06 -0.15), and $\sigma_{xy} = 0.11$ (95% CI: 0.06 - 0.17; see Figure 5.4). These results are comparable to our ML estimates. Furthermore, the 95% CI for $\sigma_{xy}$ does not overlap with 0; in fact, none of the 901 posterior estimates of $\sigma_{xy}$ are less than zero. Again, we can conclude with confidence that there is an evolutionary correlation between these two characters.
 
-![]({{ site.baseurl }}/images/figure5-4.png)
+![Figure 5.4. Bayesian analysis of evolutionary correlation. A. likelihood trace, B. posterior distribution of $\sigma_{xy}$, C. posterior distribution of $a_2$.]({{ site.baseurl }}/images/figure5-4.png)
 
-Figure 5.4. Bayesian analysis of evolutionary correlation. A. likelihood trace, B. posterior distribution of $\sigma_{xy}$, C. posterior distribution of $a_2$.
+
 
 ### Section 5.5c: Testing for character correlations using traditional approaches (PIC, PGLS)
 
@@ -244,9 +244,9 @@ Phylogenetic independent contrasts can be used to carry out a regression test fo
 
 For mammal homerange and body mass, a PIC regression test shows a significant correlation between the two traits ($P << 0.0001$; Figure 5.5).  
 
-![]({{ site.baseurl }}/images/figure5-5.png)
+![Figure 5.5. Regression based on independent contrasts. The regression line is forced through the origin.]({{ site.baseurl }}/images/figure5-5.png)
 
-Figure 5.5. Regression based on independent contrasts. The regression line is forced through the origin.
+
 
 There is one drawback to PIC regression analysis, though – one does not recover an estimate of the intercept of the regression of $y$ on $x$ – that is, the value of $y$ one would expect when $x = 0$. The easiest way to get this parameter estimate is to instead use Phylogenetic Generalized Least Squares (PGLS). PGLS uses the common statistical machinery of generalized least squares, and applies it to phylogenetic comparative data. In normal generalized least squares, one constructs a model of the relationship between $y$ and $x$, as:
 
@@ -257,7 +257,7 @@ $$
 $$
 </div>
 
-Here, $\mathbf{y}$ is an $n \times 1$ vector of trait values and $\mathbf{b}$ is a vector of unknown regression coefficients that must be estimated from the data. \mathbf{X_D}$ is a design matrix including the traits that one wishes to test for a correlation with $y$ and – if the model includes an intercept – a column of 1s. To test for correlations, we use:
+Here, $\mathbf{y}$ is an $n \times 1$ vector of trait values and $\mathbf{b}$ is a vector of unknown regression coefficients that must be estimated from the data. $\mathbf{X_D}$ is a design matrix including the traits that one wishes to test for a correlation with $y$ and – if the model includes an intercept – a column of 1s. To test for correlations, we use:
 
 (eq. 5.14)
 <div>
