@@ -16,3 +16,5 @@ title: Chapters
 [Chapter 6]({{ site.baseurl }}/chapter6_beyondbm/) - Beyond Brownian Motion
 
 [Chapter 7]({{ site.baseurl }}/chapter7_introdiscrete/) - Models of discrete character evolution
+
+[Chapter 8]({{ site.baseurl }}/chapter8_fitdiscrete/) - Fitting models of discrete character evolution

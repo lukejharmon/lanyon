@@ -1,0 +1,139 @@
+---
+layout: chapter
+title: Fitting models of discrete character evolution
+---
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+<div id="TOC">
+<ul>
+<li><a href="#chapter-8-fitting-models-of-discrete-character-evolution">Chapter 8: Fitting models of discrete character evolution</a><ul>
+<li><a href="#biological-motivation-the-evolution-of-limbs-and-limblessness">Biological motivation: The evolution of limbs and limblessness</a><ul>
+<li><a href="#key-biological-questions">Key Biological Questions</a></li>
+</ul></li>
+<li><a href="#fitting-mk-models-to-comparative-data">Fitting Mk models to comparative data</a></li>
+<li><a href="#section"></a></li>
+<li><a href="#using-maximum-likelihood-to-estimate-parameters-of-the-mk-model">Using maximum likelihood to estimate parameters of the Mk model</a></li>
+<li><a href="#section-1"></a></li>
+<li><a href="#section-2"></a></li>
+<li><a href="#chapter-summary">Chapter summary</a></li>
+</ul></li>
+</ul>
+</div>
+<h1 id="chapter-8-fitting-models-of-discrete-character-evolution">Chapter 8: Fitting models of discrete character evolution</h1>
+<h2 id="biological-motivation-the-evolution-of-limbs-and-limblessness">Biological motivation: The evolution of limbs and limblessness</h2>
+<p>In the introduction to Chapter 7, I mentioned that squamates had lost their limbs repeatedly over their evolutionary history. This is a pattern that has been known for decades, but analyses have been limited by the lack of a well-supported species-level phylogenetic tree of squamates. Only in the past few years have phylogenetic trees been produced at a scale broad enough to take a comprehensive look at this question (e.g. Bergmann et al. 2011; Pyron et al. 2013; see Figure 8.1). Such efforts to reconstruct this section of the tree of life provide exciting potential to revisit old questions with new data.</p>
+<div class="figure">
+<img src="{{site.baseurl}}/images/figure8-1.png" alt="Figure 8.1. A view of the squamate tree of life. Data from Bergmann et al. 2011, visualized using OneZoom (Rosindell and Harmon 2012; see www.onezoom.org)." />
+<p class="caption">Figure 8.1. A view of the squamate tree of life. Data from Bergmann et al. 2011, visualized using OneZoom (Rosindell and Harmon 2012; see www.onezoom.org).</p>
+</div>
+<p>Plotting the pattern of limbed and limbless species on the tree leads to interesting questions about the tempo and mode of this trait in squamates. For example, are there multiple gains as well as losses of limbs? Do gains and losses happen at the same rate, or (as we might expect) are gains more rare than losses? We can test hypothesis such as these using the the Mk and extended-Mk models (see chapter 7). In this chapter we will fit these models to phylogenetic comparative data.</p>
+<h3 id="key-biological-questions">Key Biological Questions</h3>
+<ul>
+<li><p>How do we calculate the likelihoods of Mk and extended-Mk models on phylogenetic trees?</p></li>
+<li><p>How can we use these approaches to test hypotheses about character evolution?</p></li>
+</ul>
+<h2 id="fitting-mk-models-to-comparative-data">Fitting Mk models to comparative data</h2>
+<p>The equations in Chapter 7 give us enough information to calculate the likelihood for comparative data on a tree. To understand how this is done, we can start with the simplest case, where we know the beginning state of a character, the branch length, and the end state. We can then apply this method across an entire tree using a pruning algorithm, which will allow calculation of the likelihood of the data given the model and phylogenetic tree.</p>
+<p>Imagine that a two-state character changes from a state of 0 to a state of 1 sometime over a time interval of t = 3. We can set q = 0.5 to calculate a probability matrix:</p>
+<p>(eq. 8.1)</p>
+<p>For this simple example, we started with state 0, so we look at the first row. We ended at state 1, so we look specifically at P12(t): the probability of starting with state 0 and ending with state 1 over time t. This is the probability of obtaining the data given the model (i.e. the likelihood): L = 0.475.</p>
+<p>When we have comparative data the situation is more complex. If we knew the ancestral character states and states at every node in the tree, then calculation of the overall likelihood would be straightforward – we could just apply the approach above many times, once for each branch of the tree. However, there are two problems with this approach. First, we don’t know the starting state of the character at the root of the tree, and must treat that as an unknown. Second, we are modeling a process that is happening independently on many branches in a phylogenetic tree, and only observe the states at the end of these branches. All of the character states at internal nodes of the tree are unknown. The likelihood that we want to calculate has to be summed across all of these unknown character state possibilities on the internal branches of the tree.</p>
+<p>Thankfully, Felsenstein (1973) provides an elegant algorithm for calculating the likelihoods for discrete characters on a tree. This algorithm, called Felsenstein’s pruning algorithm, is described with an example in box 8.1. Felsenstein’s pruning algorithm was important in the history of phylogenetics because it allowed scientists to efficiently calculate the likelihoods of comparative data given a tree and a model. One can then maximize that likelihood by changing model parameters (and perhaps also the topology and branch lengths of the tree; see Felsenstein 2003).</p>
+<hr />
+<h2 id="section"></h2>
+<p>Box 8.1: Felsenstein’s pruning algorithm</p>
+<p>Felsenstein’s pruning algorithm is an example of dynamic programming, a type of algorithm that has many applications in comparative biology. In dynamic programming, we break down a complex problem into a series of simpler steps that have a nested structure. This allows us to reuse computations in an efficient way and speeds up the time required to make calculations.</p>
+<p>&lt;&lt;&lt; Figure 8.2 (four panels) &gt;&gt;&gt;</p>
+<p>Panel A:</p>
+<p>Panel B:</p>
+<p>Panel C:</p>
+<p>Panel D:</p>
+<p>The best way to illustrate Felsenstein’s algorithm is through an example, which is presented in the figure above. We are trying to calculate the likelihood for a three-state character on a phylogenetic tree that includes six species. In the figure, each tip and internal node in the tree has four boxes, which will contain the probabilities for the three character states at that point in the tree (Figure 8.2 A).</p>
+<ol style="list-style-type: decimal">
+<li><p>The first step in the algorithm is to fill in the probabilities for the tips. In this case, we know the states at the tips of the tree, so we just put a one in the box that corresponds to the actual character state and zeros in all others (Figure 8.2 B). In other words, we are stating that we know precisely the character states at the tips; the probability that that species has the state that we observe is 1, and all other states have probability zero.</p></li>
+<li>Next, we identify a node where all of its immediate descendants are tips. There will always be at least one such node; often, there will be more than one, in which case we will arbitrarily choose one. For this example, we will choose the node that is the most recent common ancestor of species A and B, labeled as node 1 in Figure 8.2 B.</li>
+<li><p>We then use equation 7.6 to calculate the conditional likelihood for each character state for the subtree that includes the node of interest and its tip descendants. For each character state, the conditional likelihood is the probability, given the data and the model, of obtaining the tip character states if you start with that character state at the root. In other words, we keep track of the likelihood for the tipward parts of the tree, including our data, if the node we are considering had each of the possible character states. This calculation is:</p></li>
+</ol>
+<p>For the example given, the two tip character states are 0 (for species A) and 1 (for species B). We can calculate the conditional likelihood for character state 0 at node 1 as:</p>
+<p>Notice that for x = 0 and for x = 1 and x = 2; similarly, for x = 1 and for x = 0 and x = 2. We can calculate the probability terms from the probability matrix. In this case , so for both the left and right branch:</p>
+<p>so that</p>
+<p>and</p>
+<p>finally</p>
+<p>We can use a similar approach to find that:</p>
+<p>and</p>
+<p>These numbers are entered into the appropriate boxes in Figure xxx.C.</p>
+<ol start="4" style="list-style-type: decimal">
+<li>We then repeat the above calculation for every node in the tree. For nodes 3-5, not all of the and terms are zero; their values can be read out of the boxes on the tree. The result of all of these calculations can be seen in Figure 8.2 D.</li>
+<li>We can now calculate the likelihood across the whole tree using the conditional likelihoods for the three states at the root of the tree. We use the equation:</li>
+</ol>
+<p>Where is the prior probability of that character state at the root of the tree. We will take these prior probabilities to be equal for each state, or uniform (); two other possibilities are given in the text. The likelihood for our example, then, is:</p>
+<p>Note that if you try this example in another software package, like GEIGER or PAUP*, the software will calculate a ln-likelihood of -6.5, which is exactly the natural log of the value calculated here.</p>
+<hr />
+<p>Felsenstein’s pruning algorithm proceeds backwards in time from the tips to the root of the tree (see Box 8.1). At the root, we must specify the probabilities of each character state in the common ancestor of the species in the clade. As mentioned in Chapter 7, there are at least three possible methods for doing this. First, one can assume that each state can occur at the root with equal probability. Second, one can assume that the states are drawn from their stationary distribution, as given by the model. The stationary distribution is a stable probability distribution of states that is reached by the model after a long amount of time. Third, one might have some information about the root state – perhaps from fossils, or information about character states in a set of outgroup taxa – that can be used to assign probabilities to the states. In practice, the first two of these methods are more common. In the case discussed above – an Mk model with all transition rates equal – the stationary distribution is one where all states are equally probable, so the first two methods are identical. In general, though, these three methods can give different results.</p>
+<h2 id="using-maximum-likelihood-to-estimate-parameters-of-the-mk-model">Using maximum likelihood to estimate parameters of the Mk model</h2>
+<p>The algorithm in Box 8.1 gives the likelihood for any particular discrete-state Markov model on a tree, but requires us to specify a value of the rate parameter q. In the example given, this rate parameter q = 1.0 corresponds to a lnL of -6.5. But is this the best value of q to use for our Mk model? Probably not. We can use maximum likelihood to find a better estimate of this parameter.</p>
+<p>If we apply the pruning algorithm across a range of different values of q, the likelihood changes. To find the ML estimate of q, we simply need to try a range of q-values, and stop at the value of q that has the highest log-likelihood.</p>
+<p>The process of trying a range of possibilities for q is inefficient, though. A better strategy involves the use of optimization algorithms, a well-developed field of mathematical analysis. These algorithms differ in their details, but we can illustrate how they work with a general example. Imagine that you are near Mt. St. Helens, and you are tasked with finding the peak of that mountain. It is foggy, but you can see the area around your feet and have an accurate altimeter. One strategy is to simply look at the slope of the mountain where you are standing, and climb uphill. If the slope is steep, you probably still are far from the top, and should climb fast; if the slope is shallow, you might be near the top of the mountain. It may seem obvious that this will get you to a local peak, but perhaps not the highest peak of Mt. St. Helens. Mathematical optimization schemes have this potential difficulty as well, but use some tricks to jump around in parameter space and try to find the highest peak as they climb. Details of actual optimization algorithms are beyond the scope of this book; for more information, see Nocedal and Wright (2000).</p>
+<p>XXX Lizard example</p>
+<p>The example above considers maximization of a single parameter, which is a relatively simple problem. When we extend this to a multi-parameter model – for example, the extended Mk model will all rates different (ARD) – maximizing the likelihood becomes much more difficult. A large number of algorithms exist to solve this problem (multivariate optimization methods); this is a bit outside the scope of this chapter. The R exercise associated with this chapter will allow you to explore some R functions for optimization.</p>
+<p>We can also analyze this model using a Bayesian MCMC framework. We can modify the standard approach to Bayesian MCMC (see chapter 2):</p>
+<ol style="list-style-type: decimal">
+<li><p>Sample a starting parameter value, q, from its prior distributions. For this example, we can set our prior distribution as uniform between 0 and 1. (Note that one can also treat probabilities of states at the root as a parameter to be estimated from the data).</p></li>
+<li><p>Given the current parameter value, select new proposed parameter values using the proposal density . For example, we might use a uniform proposal density with width 0.2, so that .</p></li>
+<li>Calculate three ratios:</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li>The prior odds ratio. In this case, since our prior is uniform, this is 1.</li>
+<li>The proposal density ratio. In this case our proposal density is symmetrical, so.<br />
+</li>
+<li>The likelihood ratio. We can calculate the likelihoods using Felsenstein’s pruning algorithm (Box 8.1); then:</li>
+</ol>
+<ol start="4" style="list-style-type: decimal">
+<li><p>Find the product of the prior odds, proposal density ratio, and the likelihood ratio. In this case, both the prior odds and proposal density ratios are 1, so:</p></li>
+<li>Draw a random number x from a uniform distribution between 0 and 1. If x &lt; a, accept the proposed value of both parameters; otherwise reject, and retain the current value of the two parameters.</li>
+<li><p>Repeat steps 2-5 a large number of times.</p></li>
+</ol>
+<p>XXX Lizard example</p>
+<h2 id="section-1"></h2>
+<p>Exploring Mk: the “total garbage” test</p>
+<p>One problem that arises sometimes in maximum likelihood optimization happens when instead of a peak, the likelihood surface has a long flat “ridge” of equally likely parameter values. In the case of the Mk model, it is common to find that all values of q greater than a certain value have the same likelihood. This is because above a certain rate, evolution has been so rapid that all traces of the history of evolution of that character have been obliterated. After this point, character states of each lineage are random, and have no relationship to the shape of the phylogenetic tree. Our optimization techniques will not work in this case because there is no value of q that has a higher likelihood than other values. Once we get onto the ridge, all values of q have the same likelihood.</p>
+<p>For Mk models, there is a simple test that allows us to recognize when the likelihood surface has a long ridge, and q values cannot be estimated. I like to call this test the “total garbage” test because it can tell you if your data are “garbage” with respect to historical inference – that is, your data have no information about historical patterns of trait change.</p>
+<p>To carry out the total garbage test, imagine that you are just drawing trait values out of a hat. That is, each species has some probability p of having character state 0, and some probability (1 - p) of having state 1 (one can also generalize this test to multi-state models). This model is easy to write down. For a tree of size n, the probability of drawing k species with state 0 is:</p>
+<p>(eq. 8.2)</p>
+<p>This equation gives the likelihood of the “total garbage” model for any value of p. Equation 8.2 is related to a binomial distribution (lacking only the factorial term). We know from probability theory that the ML estimate of p is k / n, with likelihood given by the above formula.</p>
+<p>Now consider the likelihood surface of the Mk model. When Mk likelihood surfaces have long ridges, they are always for high values of q – and when the transition rate of character changes is high, this model converges to our “drawing from a hat” (or “garbage”) model. The likelihood ridge lies at the value that is exactly taken from equation 8.2 above.</p>
+<p>Thus, one can compare the likelihood of our Mk model to the total garbage model. If the maximum likelihood value of q has the same likelihood as our garbage model, then we know that we are on a ridge of the likelihood surface and q cannot be estimated. We also have no ability to make any statements about the past evolution of our character – in particular, we cannot estimate ancestral character state with any precision. By contrast, if the likelihood of the Mk model is greater than the total garbage model, then our data contains some historical information.</p>
+<p>XXX Lizard example</p>
+<h2 id="section-2"></h2>
+<p>Testing for differences in the forwards and backwards rate of character change</p>
+<p>I have been referring to an example of flower evolution throughout this chapter, but we have not yet tested the hypothesis that I stated in the introduction: that transition rates from actinomorphy to zygomorphy are much higher than the reverse.</p>
+<p>To do this, we can compare our one-rate Mk model with a two-rate model with differences in the rate of forwards and backwards transitions. This is a special case of the “all-rates different” model discussed in chapter two. Q matrices for these two models will be:</p>
+<p>(eq. 8.3)</p>
+<p>Notice that model one has one parameter, while the other has two. One can compare them using standard methods discussed in previous chapters – that is, a likelihood-ratio test, AIC, BIC, or other similar methods.</p>
+<p>We can apply all of the above methods to analyze the evolution of limblessness in squamates. We can use the tree and character state data from Brandley et al. (2008), which is plotted with ancestral state reconstructions as Figure 8.2.</p>
+<div class="figure">
+<img src="{{site.baseurl}}/images/figure8-3.png" alt="Figure 8.2. Reconstructed patterns of the evolution of limbs and limblessness across squamates. Tips show states of extant taxa (here, I classified species with neither fore- nor hindlimbs as limbless, which is conservative given the variation across this clade (see chapter 7). Pie charts on internal nodes show proportional marginal likelihoods for ancestral state reconstruction. Data from Brandley et al. 2008." />
+<p class="caption">Figure 8.2. Reconstructed patterns of the evolution of limbs and limblessness across squamates. Tips show states of extant taxa (here, I classified species with neither fore- nor hindlimbs as limbless, which is conservative given the variation across this clade (see chapter 7). Pie charts on internal nodes show proportional marginal likelihoods for ancestral state reconstruction. Data from Brandley et al. 2008.</p>
+</div>
+<p>If we fit an Mk model to these data assuming equal state frequencies at the root of the tree, we obtain a lnL of -80.5 and an estimate of the Q matrix as:</p>
+<p>An extended-Mk model with different forward and backward rates gives a lnL of -79.4 and:</p>
+<p>Note that the ARD model has a higher backwards than forwards rate; that is, we estimate a rate of gaining limbs that is higher than the rate of losing them! Is this statistically supported? We can compare the AIC scores of the two models. For the ER model, AICc = 163.0, while for the ARD model AICc = 162.8. The AICc score is higher for the unequal rates model, but only by about 0.2 – which is not definitive either way. So based on this analysis, we cannot rule out the possibility that forward and backward rates are equal.</p>
+<p>A Bayesian analysis of the ARD model gives similar conclusions (Figure 8.3). We can see that the posterior distribution for the backwards rate (q21) is higher than the forwards rate (q12), but that the two distributions are broadly overlapping.</p>
+<div class="figure">
+<img src="{{site.baseurl}}/images/figure8-4.png" alt="Figure 8.4. Bayesian posterior distibutions for the extended-Mk model applied to the evolution of limblessness in squamates." />
+<p class="caption">Figure 8.4. Bayesian posterior distibutions for the extended-Mk model applied to the evolution of limblessness in squamates.</p>
+</div>
+<p>You might wonder about how we can reconcile these results, which suggest that squamates gain limbs at least as frequently as they lose them, with our biological intuition that limbs should be much more difficult to gain than they are to lose. But keep in mind that our comparative analysis is not using any information other than the states of extant species to reconstruct these rates. In particular, identifying irreversible evolution using comparative methods is a problem that is known to be quite difficult, and might require outside information in order to resolve conclusively. For example, if we had some information about the relative number of mutational steps required to gain and lose limbs, we could use an informative prior – which would, I suspect, suggest that limbs are more difficult to gain than they are to lose. Such a prior could dramatically alter the results presented in Figure 8.3. We will return to the problem of irreversible evolution later in the book (Chapter 13).</p>
+<h2 id="chapter-summary">Chapter summary</h2>
+<p>In this chapter I describe how Felsenstein’s pruning algorithm can be used to calculate the likelihoods of Mk and extended-Mk models on phylogenetic trees. I have also described both ML and Bayesian frameworks that can be used to test hypotheses about character evolution. This chapter also includes a description of the “total garbage” test, which will tell you if your data has information about evolutionary rates of a given character.</p>
+<p>Analyzing our example of lizard limbs shows the power of this approach; we can estimate transition rates for this character over macroevolutionary time, and we can say with some certainty that transitions between limbed and limbless have been asymmetric. In the next chapter, we will build on the Mk model and further develop our comparative toolkit for understanding the evolution of discrete characters.</p>
+</body>
+</html>

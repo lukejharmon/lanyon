@@ -25,3 +25,7 @@ rm t1.html
 pandoc -s --toc -V toc-title:"Table of Contents" --bibliography pcm_paperpile.bib --filter pandoc-citeproc --csl evolution.csl --metadata link-citations=true chapter7_introdiscrete_pre.md -o t1.html
 cat metadata_ch7.yaml t1.html | sed s/%7B%7B%20/{{/ | sed s/%20%7D%7D/}}/ > ../chapter7_introdiscrete.html
 rm t1.html
+
+pandoc -s --toc -V toc-title:"Table of Contents" --bibliography pcm_paperpile.bib --filter pandoc-citeproc --csl evolution.csl --metadata link-citations=true chapter8_fitdiscrete_pre.md -o t1.html
+cat metadata_ch8.yaml t1.html | sed s/%7B%7B%20/{{/ | sed s/%20%7D%7D/}}/ > ../chapter8_fitdiscrete.html
+rm t1.html
