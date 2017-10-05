@@ -16,6 +16,8 @@ Key Questions
 -	How can we change the parameters of the Mk model to construct more elaborate models of discrete character evolution?
 -	How do we simulate the evolution of a discrete character?
 
+![Figure 7 Animation test]({{ site.baseurl }}/images/figure7-animated.gif)
+
 ## Modeling the evolution of discrete states
 
 So far, we have only dealt with continuously varying characters. However, many characters of interest to biologists can best be described by characters with a set number of fixed states. For limblessness in squamates, introduced above (snakes and lizards), each species is either legless (state 0) or not (state 1; actually, there are some species that might be considered “intermediate,” but we will ignore that here). We might have particular questions about the evolution of limblessness in squamates. For example, how many times this character has changed in the evolutionary history of squamates? How often does limblessness evolve? Do limbs ever re-evolve? Is the evolution of limblessness related to some other aspect of the lives of these reptiles?
