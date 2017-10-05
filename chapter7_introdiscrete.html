@@ -38,10 +38,7 @@ title: Models of discrete character evolution
 <li><p>How can we change the parameters of the Mk model to construct more elaborate models of discrete character evolution?</p></li>
 <li><p>How do we simulate the evolution of a discrete character?</p></li>
 </ul>
-<div class="figure">
-<img src="{{site.baseurl}}/images/figure7-animated.gif" alt="Figure 7 Animation test" />
-<p class="caption">Figure 7 Animation test</p>
-</div>
+<p><img data-gifffer="{{ site.baseurl }}/images/figure7-animated.gif" /></p>
 <h2 id="modeling-the-evolution-of-discrete-states">Modeling the evolution of discrete states</h2>
 <p>So far, we have only dealt with continuously varying characters. However, many characters of interest to biologists can best be described by characters with a set number of fixed states. For limblessness in squamates, introduced above (snakes and lizards), each species is either legless (state 0) or not (state 1; actually, there are some species that might be considered “intermediate,” but we will ignore that here). We might have particular questions about the evolution of limblessness in squamates. For example, how many times this character has changed in the evolutionary history of squamates? How often does limblessness evolve? Do limbs ever re-evolve? Is the evolution of limblessness related to some other aspect of the lives of these reptiles?</p>
 <p>We will consider discrete characters where each species might exhibit one of k states. (In the limbless example above, k=2). For characters with more than two states, there is a key distinction between ordered and unordered characters. Ordered characters can be placed in an order so that transitions only occur between adjacent states. For example, I might include “intermediate” species that are somewhere in between limbed and limbless – for example, the “mermaid skinks” (Sirenoscincus) from Madagascar, so called because they lack hind limbs (Figure 7.2). An ordered model might only allow transitions between limbless and intermediate, and intermediate and limbed; it would be impossible under such a model to go directly from limbed to limbless without first becoming intermediate. For unordered characters, any state can change into any other state. In this chapter, I will focus mainly on unordered characters; we will return to ordered characters later in the book.</p>

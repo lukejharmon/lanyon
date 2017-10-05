@@ -16,7 +16,8 @@ Key Questions
 -	How can we change the parameters of the Mk model to construct more elaborate models of discrete character evolution?
 -	How do we simulate the evolution of a discrete character?
 
-![Figure 7 Animation test]({{ site.baseurl }}/images/figure7-animated.gif)
+<img data-gifffer="{{ site.baseurl }}/images/figure7-animated.gif" />
+
 
 ## Modeling the evolution of discrete states
 
