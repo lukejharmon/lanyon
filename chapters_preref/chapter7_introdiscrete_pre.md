@@ -16,8 +16,6 @@ Key Questions
 -	How can we change the parameters of the Mk model to construct more elaborate models of discrete character evolution?
 -	How do we simulate the evolution of a discrete character?
 
-<img data-gifffer="{{ site.baseurl }}/images/figure7-animated.gif" />
-
 
 ## Modeling the evolution of discrete states
 
@@ -327,5 +325,8 @@ We can apply this approach to simulate the evolution of limblessness in squamate
  
 
 ## Chapter summary
+
+<img data-gifffer="{{ site.baseurl }}/images/figure7-animated.gif" />
+
 
 In this chapter I have described the Mk model, which can be used to describe the evolution of discrete characters that have a set number of fixed states. We can also elaborate on the Mk model to allow more complex models of discrete character evolution (the extended-Mk model). These models can all be used to simulate the evolution of discrete characters on trees. In summary, the Mk and extended Mk model are general models that one can use for the evolution of discrete characters. In the next chapter, I will show how to fit these models to data and use them to test evolutionary hypotheses.
