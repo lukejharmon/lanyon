@@ -9,6 +9,7 @@
 Plotting the pattern of limbed and limbless species on the tree leads to interesting questions about the tempo and mode of this trait in squamates. For example, are there multiple gains as well as losses of limbs? Do gains and losses happen at the same rate, or (as we might expect) are gains more rare than losses? We can test hypothesis such as these using the the Mk and extended-Mk models (see chapter 7). In this chapter we will fit these models to phylogenetic comparative data.
 
 ### Key Biological Questions
+
 -	How do we calculate the likelihoods of Mk and extended-Mk models on phylogenetic trees?
 -	How can we use these approaches to test hypotheses about character evolution?
 
@@ -28,7 +29,7 @@ When we have comparative data the situation is more complex. If we knew the ance
 
 ---
 
-## Box 8.1: Felsenstein’s pruning algorithm
+### Box 8.1: Felsenstein's pruning algorithm
 
 Felsenstein’s pruning algorithm is an example of dynamic programming, a type of algorithm that has many applications in comparative biology. In dynamic programming, we break down a complex problem into a series of simpler steps that have a nested structure. This allows us to reuse computations in an efficient way and speeds up the time required to make calculations.
 
@@ -82,7 +83,10 @@ We can also analyze this model using a Bayesian MCMC framework. We can modify th
 
 XXX Lizard example
 
-## Exploring Mk: the “total garbage” test
+
+## Exploring Mk: the "total garbage" test
+
+
 
 One problem that arises sometimes in maximum likelihood optimization happens when instead of a peak, the likelihood surface has a long flat “ridge” of equally likely parameter values. In the case of the Mk model, it is common to find that all values of q greater than a certain value have the same likelihood. This is because above a certain rate, evolution has been so rapid that all traces of the history of evolution of that character have been obliterated. After this point, character states of each lineage are random, and have no relationship to the shape of the phylogenetic tree. Our optimization techniques will not work in this case because there is no value of q that has a higher likelihood than other values. Once we get onto the ridge, all values of q have the same likelihood.
 
@@ -100,7 +104,9 @@ This equation gives the likelihood of the “total garbage” model for any valu
 
 XXX Lizard example
 
-## Testing for differences in the forwards and backwards rate of character change
+
+## Testing for differences in the forwards and backwards rate of character change
+
 
 I have been referring to an example of flower evolution throughout this chapter, but we have not yet tested the hypothesis that I stated in the introduction: that transition rates from actinomorphy to zygomorphy are much higher than the reverse.
 
