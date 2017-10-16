@@ -18,3 +18,5 @@ title: Chapters
 [Chapter 7]({{ site.baseurl }}/chapter7_introdiscrete/) - Models of discrete character evolution
 
 [Chapter 8]({{ site.baseurl }}/chapter8_fitdiscrete/) - Fitting models of discrete character evolution
+
+[Chapter 9]({{ site.baseurl }}/chapter9_beyondmk/) - Beyond the Mk model
