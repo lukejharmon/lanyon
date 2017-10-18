@@ -20,3 +20,5 @@ title: Chapters
 [Chapter 8]({{ site.baseurl }}/chapter8_fitdiscrete/) - Fitting models of discrete character evolution
 
 [Chapter 9]({{ site.baseurl }}/chapter9_beyondmk/) - Beyond the Mk model
+
+[Chapter 10]({{ site.baseurl }}/chapter10_birthdeath/) - Birth-death models
