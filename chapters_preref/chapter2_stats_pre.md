@@ -24,17 +24,17 @@ The next step is to define a test statistic, some way of measuring the patterns 
 
 If the test statistic is very different from what one would expect under the null hypothesis, then the P-value will be small: we are unlikely to obtain the test statistic seen in the data if the null hypothesis were true. In that case, we reject the null hypothesis. By contrast, if that probability is large, then there is nothing “special” about your data, at least from the standpoint of your null hypothesis. The test statistic is within the range expected under the null hypothesis, and we fail to reject that null hypothesis. Note the careful language here – in a standard frequentist framework, you never accept the null hypothesis, you simply fail to reject it.
 
-Getting back to our lizard-flipping example, we can use a frequentist approach and carry out a binomial test, which allows us to test whether a given event with two outcomes has a certain probability of success. In this case, we are interested in testing the null hypothesis that our lizard is a fair flipper; that is, that the probability of heads p<sub>H</sub> = 0.5. The binomial test uses the number of “successes” (we will use the number of heads, 63) as a test statistic. We then ask whether this test statistic is either much larger or much smaller than we might expect under our null hypothesis. So, our null hypothesis is that p<sub>H</sub> = 0.5; our alternative, then, is that p<sub>H</sub> takes some other value: p<sub>H</sub> ≠ 0.5.
+Getting back to our lizard-flipping example, we can use a frequentist approach and carry out a binomial test, which allows us to test whether a given event with two outcomes has a certain probability of success. In this case, we are interested in testing the null hypothesis that our lizard is a fair flipper; that is, that the probability of heads $p_H = 0.5$. The binomial test uses the number of “successes” (we will use the number of heads, $k = 63$) as a test statistic. We then ask whether this test statistic is either much larger or much smaller than we might expect under our null hypothesis. So, our null hypothesis is that $p_H = 0.5$; our alternative, then, is that $p_H$ takes some other value: $p_H \neq 0.5$.
 
-To carry out the test, we consider the distribution of our test statistic (the number of heads) under our null hypothesis (p<sub>H</sub> = 0.5; Figure 2.1).
+To carry out the test, we consider the distribution of our test statistic (the number of heads) under our null hypothesis ($p_H = 0.5$; Figure 2.1).
 
 ![Figure 2.1. The unfair lizard. We use the null hypothesis to generate a null distribution for our test statistic, which in this case is a binomial distribution centered around 50. We then look at our test statistic and calculate the probability of obtaining a result at least as extreme as this value.]({{ site.baseurl }}/images/binomial_null.jpg)
 
-In this case, we can use the known probabilities of the binomial distribution to calculate our P-value. We want to know the probability of obtaining a result at least as extreme as our data when drawing from a binomial distribution with parameters p = 0.5 and n = 100. We calculate the area of this distribution that lies to the right of 63. This area, P = 0.003, can be obtained either from a table, from statistical software, or by using a relatively simple calculation. The value, 0.003, represents the probability of obtaining at least 63 heads out of 100 trials with p<sub>H</sub> = 0.5. This number is the P-value from our binomial test. Because we only calculated the area of our null distribution in one tail (in this case, the right, where values are greater than or equal to 63), then this is actually a one-tailed test, and we are only considering part of our null hypothesis where p<sub>H</sub> > 0.5. Such an approach might be suitable in some cases, but more typically we need to multiply this number by 2 to get a two-tailed test. By doing so, our P-value of 0.006 includes the possibility of results as extreme as our test statistic in either direction, either too many or too few heads. Since P < 0.05 we reject the null hypothesis, and conclude that we have an unfair lizard.
+In this case, we can use the known probabilities of the binomial distribution to calculate our P-value. We want to know the probability of obtaining a result at least as extreme as our data when drawing from a binomial distribution with parameters $p = 0.5$ and $n = 100$. We calculate the area of this distribution that lies to the right of 63. This area, $P = 0.003$, can be obtained either from a table, from statistical software, or by using a relatively simple calculation. The value, 0.003, represents the probability of obtaining at least 63 heads out of 100 trials with $p_H = 0.5$. This number is the P-value from our binomial test. Because we only calculated the area of our null distribution in one tail (in this case, the right, where values are greater than or equal to 63), then this is actually a one-tailed test, and we are only considering part of our null hypothesis where $p_H > 0.5$. Such an approach might be suitable in some cases, but more typically we need to multiply this number by 2 to get a two-tailed test. By doing so, our P-value of 0.006 includes the possibility of results as extreme as our test statistic in either direction, either too many or too few heads. Since P < 0.05 we reject the null hypothesis, and conclude that we have an unfair lizard.
 
 In biology, null hypotheses play a critical role in many statistical analyses. So why not end this chapter now? One issue is that biological null hypotheses are almost always uninteresting. They often describe the situation where patterns in the data occur only by chance. However, if you are comparing living species to each other, there are almost always some differences between them. In fact, for biology, null hypotheses are quite often obviously false. For example, two different species living in different habitats are not identical, and if we measure them enough we will discover this fact. From this point of view, both outcomes of a standard hypothesis test are unenlightening. One either rejects a silly hypothesis that was probably known to be false from the start, or one “fails to reject” this null hypothesis. There is much more information to be gained by estimating parameter values and carrying out model selection in a likelihood or Bayesian framework, as we will see below. Still, frequentist statistical approaches are common, have their place in our toolbox, and will come up in several sections of this book.
 
-One key concept in standard hypothesis testing is the idea of statistical error. Statistical errors come in two flavors: type I and type II errors. Type I errors occur when the null hypothesis is true but the investigator mistakenly rejects it. Standard hypothesis testing controls type I errors using a parameter, α, which defines the accepted rate of type I errors. For example, if α = 0.05, one should expect to commit a type I error about 5% of the time. When multiple standard hypothesis tests are carried out, investigators often “correct” their P-values using Bonferroni correction. If you do this, then there is only a 5% chance of a single type I error across all of the tests being considered. This singular focus on type I errors, however, has a cost. One can also commit type II errors, when the null hypothesis is false but one fails to reject it. The rate of type II errors in statistical tests can be extremely high. While statisticians do take care to create approaches that have high power, traditional hypothesis testing usually fixes type I errors at 5% while type II error rates remain unknown. There are simple ways to calculate type II error rates (e.g. power analyses) but these are only rarely carried out. Furthermore, Bonferroni correction dramatically increases the type II error rate. This is important because – as stated by Perneger [-@Perneger1998-qd] – “… type II errors are no less false than type I errors.”
+One key concept in standard hypothesis testing is the idea of statistical error. Statistical errors come in two flavors: type I and type II errors. Type I errors occur when the null hypothesis is true but the investigator mistakenly rejects it. Standard hypothesis testing controls type I errors using a parameter, $\alpha$, which defines the accepted rate of type I errors. For example, if $\alpha = 0.05$, one should expect to commit a type I error about 5% of the time. When multiple standard hypothesis tests are carried out, investigators often “correct” their P-values using Bonferroni correction. If you do this, then there is only a 5% chance of a single type I error across all of the tests being considered. This singular focus on type I errors, however, has a cost. One can also commit type II errors, when the null hypothesis is false but one fails to reject it. The rate of type II errors in statistical tests can be extremely high. While statisticians do take care to create approaches that have high power, traditional hypothesis testing usually fixes type I errors at 5% while type II error rates remain unknown. There are simple ways to calculate type II error rates (e.g. power analyses) but these are only rarely carried out. Furthermore, Bonferroni correction dramatically increases the type II error rate. This is important because – as stated by Perneger [-@Perneger1998-qd] – “… type II errors are no less false than type I errors.”
 
 I will cover some examples of the frequentist approach in this book, mainly when discussing traditional methods like phylogenetic independent contrasts (PICs). Also, one of the model selection approaches used frequently in this book, likelihood ratio tests, rely on a standard frequentist set-up with null and alternative hypotheses.
 
@@ -64,7 +64,7 @@ For the example above, we need to calculate the likelihood as the probability of
 (eq. 2.2)
 <div>
 $$
-L(H|D)=P(D|p)= {n \choose k} p^k (1-p)^{n-k}
+L(H|D)=Pr(D|p)= {n \choose k} p_H^k (1-p_H)^{n-k}
 $$
 </div>
 
@@ -77,17 +77,17 @@ L(H|D)= {100 \choose 63} p^{63} (1-p)^{37}
 $$
 </div>	 
 
-![Figure 2.2. Likelihood surface for the parameter p, given a coin that has been flipped as heads 63 times out of 100.]({{ site.baseurl }}/images/flip_likelihood_surface.png)
+![Figure 2.2. Likelihood surface for the parameter $p_H$, given a coin that has been flipped as heads 63 times out of 100.]({{ site.baseurl }}/images/flip_likelihood_surface.png)
 
 
-We can make a plot of the likelihood, L, as a function of p (Figure 2.2). When we do this, we see that the maximum likelihood value of p, which we can call $$\hat{p}$$, is at p = 0.63. This is the “brute force” approach to finding the maximum likelihood: try many different values of the parameters and pick the one with the highest likelihood. We can do this much more efficiently using numerical methods as described in later chapters in this book.
+We can make a plot of the likelihood, L, as a function of p (Figure 2.2). When we do this, we see that the maximum likelihood value of p, which we can call $\hat{p}_H$, is at $\hat{p}_H = 0.63$. This is the “brute force” approach to finding the maximum likelihood: try many different values of the parameters and pick the one with the highest likelihood. We can do this much more efficiently using numerical methods as described in later chapters in this book.
 
-We could also have obtained the maximum likelihood estimate for p through differentiation. This problem is much easier if we work with the log-likelihood rather than the likelihood itself (note that whatever value of p that maximizes the likelihood will also maximize the log-likelihood, because the log function is strictly increasing). So:
+We could also have obtained the maximum likelihood estimate for $p_H$ through differentiation. This problem is much easier if we work with the ln-likelihood rather than the likelihood itself (note that whatever value of $p_H$ that maximizes the likelihood will also maximize the ln-likelihood, because the log function is strictly increasing). So:
 
 (eq. 2.4)
 <div>
 $$
-\ln{L} = \ln{n \choose k} + k \ln{p}+ (n-k)\ln{(1-p)}
+\ln{L} = \ln{n \choose k} + k \ln{p_H}+ (n-k)\ln{(1-p_H)}
 $$
 </div>
 
@@ -96,36 +96,36 @@ Note that the natural log (ln) transformation changes our equation from a power 
 (eq. 2.5)
 <div>
 $$
-\frac{d \ln{L}}{dp} = \frac{k}{p} - \frac{(n-k)}{(1-p)}
+\frac{d \ln{L}}{dp_H} = \frac{k}{p_H} - \frac{(n-k)}{(1-p_H)}
 $$
 </div>
 
-The maximum of the likelihood represents a peak, which we can find by setting the derivative $\frac{d \ln{L}}{dp}$ to zero. We then find the value of p that solves that equation, which will be our estimate $\hat{p}$. So we have:
+The maximum of the likelihood represents a peak, which we can find by setting the derivative $\frac{d \ln{L}}{dp_H}$ to zero. We then find the value of $p_H$ that solves that equation, which will be our estimate $\hat{p}_H$. So we have:
 
 (eq. 2.6)
 <div>
 $$
 \begin{array}{lcl}
-\frac{k}{\hat{p}} - \frac{n-k}{1-\hat{p}} & = & 0\\
-\frac{k}{\hat{p}} & = & \frac{n-k}{1-\hat{p}}\\
-k (1-\hat{p}) & = & \hat{p} (n-k)\\
-k-k\hat{p} & = & n\hat{p}-k\hat{p}\\
+\frac{k}{\hat{p}_H} - \frac{n-k}{1-\hat{p}_H} & = & 0\\
+\frac{k}{\hat{p}_H} & = & \frac{n-k}{1-\hat{p}_H}\\
+k (1-\hat{p}_H) & = & \hat{p}_H (n-k)\\
+k-k\hat{p}_H & = & n\hat{p}_H-k\hat{p}_H\\
 k & = & n\hat{p}\\
-\hat{p} &=& k / n\\
+\hat{p}_H &=& k / n\\
 \end{array}
 $$
 </div>
-Notice that, for our simple example, k / n = 63 / 100 = 0.63, which is exactly equal to the maximum likelihood from figure 2.2.
+Notice that, for our simple example, $k / n = 63 / 100 = 0.63$, which is exactly equal to the maximum likelihood from figure 2.2.
 
-Maximum likelihood estimates have many desirable statistical properties. It is worth noting, however, that they will not always return accurate parameter estimates, even when the data is generated under the actual model we are considering. In fact, ML parameters can sometimes be biased. To understand what this means, we need to introduce two new concepts: bias and precision. Imagine that we were to simulate datasets under some model A with parameter a. For each simulation, we then used ML to estimate the parameter $\hat{a}$ for the simulated data. The precision of our ML estimate tells us how different, on average, each of our estimated parameters $\hat{a_i}$ are from one another. Precise estimates are estimated with less uncertainty. Bias, on the other hand, measures how close our estimates $\hat{a_i}$ are to the true value $a$. If our ML parameter estimate is biased, then the average of the $\hat{a_i}$ will differ from the true value $a$. It is not uncommon for ML estimates to be biased in a way that depends on sample size, so that the estimates get closer to the truth as sample size increases, but can be quite far off when the number of data points is small compared to the number of parameters being estimated.
+Maximum likelihood estimates have many desirable statistical properties. It is worth noting, however, that they will not always return accurate parameter estimates, even when the data is generated under the actual model we are considering. In fact, ML parameters can sometimes be biased. To understand what this means, we need to introduce two new concepts: bias and precision. Imagine that we were to simulate datasets under some model A with parameter a. For each simulation, we then used ML to estimate the parameter $\hat{a}$ for the simulated data. The precision of our ML estimate tells us how different, on average, each of our estimated parameters $\hat{a}_i$ are from one another. Precise estimates are estimated with less uncertainty. Bias, on the other hand, measures how close our estimates $\hat{a}_i$ are to the true value $a$. If our ML parameter estimate is biased, then the average of the $\hat{a}_i$ will differ from the true value $a$. It is not uncommon for ML estimates to be biased in a way that depends on sample size, so that the estimates get closer to the truth as sample size increases, but can be quite far off when the number of data points is small compared to the number of parameters being estimated.
 
-In our example of lizard flipping, we estimated a parameter value of $\hat{p} = 0.63$. This is different from 0.5 – which was our expectation under the null hypothesis. So is this lizard fair? Or, alternatively, can we reject the null hypothesis that $p=0.5$? To evaluate this, we need to use model selection.
+In our example of lizard flipping, we estimated a parameter value of $\hat{p}_H = 0.63$. This is different from 0.5 – which was our expectation under the null hypothesis. So is this lizard fair? Or, alternatively, can we reject the null hypothesis that $p_H = 0.5$? To evaluate this, we need to use model selection.
 
 ### Section 2.3b: The likelihood ratio test
 
 Model selection involves comparing a set of potential models and using some criterion to select the one that provides the “best” explanation of the data. Different approaches define “best” in different ways. I will first discuss the simplest, but also the most limited, of these techniques, the likelihood ratio test. Likelihood ratio tests can only be used in one particular situation: to compare two models where one of the models is a special case of the other. This means that model A (the simpler model with fewer parameters) is exactly equivalent to the more complex model B with parameters restricted to certain values. For example, perhaps model B has parameters x, y, and z that can take on any values. Model A is the same as model B but with parameter z fixed at 0. That is, A is the special case of B when parameter z = 0. This is sometimes described as model A is nested within model B, since every possible version of model A is equal to a certain case of model B, but model B also includes more possibilities.
 
-For example, consider again our example of flipping a lizard. One model is that the lizard is “fair:” that is, that the probability of heads is equal to 1/2. A different model might be that the probability of heads is some other value p, which could be 1/2, 1/3, or any other value between 0 and 1. Here, the latter (complex) model has one additional parameter, p, compared to the former (simple) model; the simple model is a special case of the complex model when p = ½.
+For example, consider again our example of flipping a lizard. One model is that the lizard is “fair:” that is, that the probability of heads is equal to 1/2. A different model might be that the probability of heads is some other value p, which could be 1/2, 1/3, or any other value between 0 and 1. Here, the latter (complex) model has one additional parameter, $p_H$, compared to the former (simple) model; the simple model is a special case of the complex model when $p_H = 1/2$.
 
 For such nested models, one can calculate the likelihood ratio test statistic as
 
@@ -136,18 +136,18 @@ $$
 $$
 </div>
 
-Here, $\Delta$ is the likelihood ratio test statistic, $L_2$ the likelihood of the more complex (parameter rich) model, and $L_1$ the likelihood of the simpler model. Since the models are nested, the likelihood of the complex model will always be greater than or equal to the likelihood of the simple model; this means that the test statistic Δ will never be negative. In fact, if you ever obtain a negative likelihood ratio test statistic, something has gone wrong – either your calculations are wrong, or you have not actually found ML solutions, or the models are not actually nested.
+Here, $\Delta$ is the likelihood ratio test statistic, $L_2$ the likelihood of the more complex (parameter rich) model, and $L_1$ the likelihood of the simpler model. Since the models are nested, the likelihood of the complex model will always be greater than or equal to the likelihood of the simple model; this means that the test statistic $\Delta$ will never be negative. In fact, if you ever obtain a negative likelihood ratio test statistic, something has gone wrong – either your calculations are wrong, or you have not actually found ML solutions, or the models are not actually nested.
 
-To carry out a statistical test comparing the two models, we compare the test statistic $\Delta$ to its expectation under the null hypothesis. For likelihood ratio tests, the null hypothesis is always the simpler of the two models. When sample sizes are large, the null distribution of the likelihood ratio test statistic follows a chi-squared distribution with degrees of freedom equal to the difference in the number of parameters between the two models. This means that if the simpler hypothesis were true, and one carried out this test many times on large independent datasets, the test statistic would approximately follow this $\chi^2$ distribution. To reject the simpler model, then, one compares the test statistic with a critical value derived from the appropriate chi-squared distribution. If the test statistic is larger than the critical value, one rejects the null hypothesis. Otherwise, we fail to reject the null hypothesis. In this case, we only need to consider one tail of the chi-squared test, as every deviation from the null model will push us towards higher $\Delta$ values and towards the right tail of the distribution.
+To carry out a statistical test comparing the two models, we compare the test statistic $\Delta$ to its expectation under the null hypothesis. For likelihood ratio tests, the null hypothesis is always the simpler of the two models. When sample sizes are large, the null distribution of the likelihood ratio test statistic follows a chi-squared ($\chi^2$) distribution with degrees of freedom equal to the difference in the number of parameters between the two models. This means that if the simpler hypothesis were true, and one carried out this test many times on large independent datasets, the test statistic would approximately follow this $\chi^2$ distribution. To reject the simpler model, then, one compares the test statistic with a critical value derived from the appropriate $\chi^2$ distribution. If the test statistic is larger than the critical value, one rejects the null hypothesis. Otherwise, we fail to reject the null hypothesis. In this case, we only need to consider one tail of the $\chi^2$ test, as every deviation from the null model will push us towards higher $\Delta$ values and towards the right tail of the distribution.
 
-For the lizard flip example above, we can calculate the ln-likelihood under a hypothesis of p = 0.5 as:
+For the lizard flip example above, we can calculate the ln-likelihood under a hypothesis of $p_H = 0.5$ as:
 
 (eq. 2.8)
 <div>
 $$
 \begin{array}{lcl}
-\ln{L} &=& \ln{\left(\frac{100}{63}\right)} + 63 \cdot \ln{0.5} + (100-63) \cdot \ln{(1-0.5)} \nonumber \\
-\ln{L} &=& -5.92\nonumber\\
+\ln{L_1} &=& \ln{\left(\frac{100}{63}\right)} + 63 \cdot \ln{0.5} + (100-63) \cdot \ln{(1-0.5)} \nonumber \\
+\ln{L_1} &=& -5.92\nonumber\\
 \end{array}
 $$
 </div>
@@ -158,8 +158,8 @@ We can compare this to the likelihood of our maximum-likelihood estimate  :
 <div>
 $$
 \begin{array}{lcl}
-\ln{L} &=& \ln{\left(\frac{100}{63}\right)} + 63 \cdot \ln{0.63} + (100-63) \cdot \ln{(1-0.63)} \nonumber \\
-\ln{L} &=& -2.50\nonumber
+\ln{L_2} &=& \ln{\left(\frac{100}{63}\right)} + 63 \cdot \ln{0.63} + (100-63) \cdot \ln{(1-0.63)} \nonumber \\
+\ln{L_2} &=& -2.50\nonumber
 \end{array}
 $$ 	 	
 </div>
@@ -177,7 +177,7 @@ $$
 $$ 	 	
 </div>
 
-If we compare this to a $\chi^2$ distribution with one d.f., we find that P = 0.009. Because this P-value is less than the threshold of 0.05, we reject the null hypothesis, and support the alternative. We conclude that this is not a fair lizard.
+If we compare this to a $\chi^2$ distribution with one d.f., we find that $P = 0.009$. Because this P-value is less than the threshold of 0.05, we reject the null hypothesis, and support the alternative. We conclude that this is not a fair lizard.
 
 Although described above in terms of two competing hypotheses, likelihood ratio tests can be applied to more complex situations with more than two competing models. For example, if all of the models form a sequence of increasing complexity, with each model a special case of the next more complex model, one can compare each pair of hypotheses in sequence, stopping the first time the test statistic is non-significant. Alternatively, in some cases, hypotheses can be placed in a bifurcating choice tree, and one can proceed from simple to complex models down a particular path of paired comparisons of nested models. This approach is commonly used to select models of DNA sequence evolution.
 
@@ -196,7 +196,7 @@ AIC = 2k - 2 ln{L}
 
 This function that balances the likelihood of the model and the number of parameters estimated in the process of fitting the model to the data. One can think of the AIC criterion as identifying the model that provides the most efficient way to describe patterns in the data with few parameters. However, this shorthand description of AIC does not capture the actual mathematical and philosophical justification for equation (2.11). In fact, this equation is not arbitrary; instead, it comes from information theory [for more information, see @Burnham2003-mt].
 
-The AIC equation (2.11) above is only valid for quite large sample sizes relative to the number of parameters being estimated (for n samples and k parameters, n/k > 40). Most empirical data sets include fewer than 40 independent data points per parameter, so a small sample size correction should be employed:
+The AIC equation (2.11) above is only valid for quite large sample sizes relative to the number of parameters being estimated (for n samples and k parameters, $n/k > 40$). Most empirical data sets include fewer than 40 independent data points per parameter, so a small sample size correction should be employed:
 
 (eq. 2.12)
 <div>
@@ -339,30 +339,30 @@ The benefit of Bayesian approaches is that they allow us to estimate the probabi
 (eq. 2.20)	 
 <div>
 $$
-Pr(D) = \\int_H Pr(H|D) Pr(H) dH
+Pr(D) = \int_H Pr(H|D) Pr(H) dH
 $$
 </div>
 
 However, $Pr(D)$ is constant when comparing the fit of different models for a given data set and thus has no influence on Bayesian model selection under most circumstances (and all the examples in this book).
 
-In our example of lizard flipping, we can do an analysis in a Bayesian framework. For model 1, there are no free parameters. Because of this, $P(H) = 1$ and $P(D|H) = P(D)$, so that $P(H|D) = 1$. This may seem strange but what the result means is that our data has no influence on the structure of the model. We do not learn anything about a model with no free parameters by collecting data!
+In our example of lizard flipping, we can do an analysis in a Bayesian framework. For model 1, there are no free parameters. Because of this, $Pr(H) = 1$ and $Pr(D|H) = P(D)$, so that $Pr(H|D) = 1$. This may seem strange but what the result means is that our data has no influence on the structure of the model. We do not learn anything about a model with no free parameters by collecting data!
 
-If we consider model 2 above, the parameter p must be estimated. We can set a uniform prior between 0 and 1 for p, so that $f(p) = 1$ for all p in the interval [0,1]. We can also write this as “our prior for p is U(0,1)”. Then:
+If we consider model 2 above, the parameter $p_H$ must be estimated. We can set a uniform prior between 0 and 1 for $p_H$, so that $f(p_H) = 1$ for all $p_H$ in the interval [0,1]. We can also write this as “our prior for $p_h$ is U(0,1)”. Then:
 
 (eq. 2.21)	 
 <div>
 $$
-Pr(H|D) = \frac{Pr(D|H) \cdot Pr(H)}{Pr(D)} = \frac{P(k|p,N) f(p)}{\int_{0}^{1} P(k|p,N) f(p) dp}
+Pr(H|D) = \frac{Pr(D|H) \cdot Pr(H)}{Pr(D)} = \frac{P(k|p_H,N) f(p_H)}{\int_{0}^{1} P(k|p_H,N) f(p_h) dp_H}
 $$
 </div>
 
 
-Next we note that $P(D|H)$ is the likelihood of our data given the model, which is already stated above as equation 2.2. Plugging this into our equation, we have:
+Next we note that $Pr(D|H)$ is the likelihood of our data given the model, which is already stated above as equation 2.2. Plugging this into our equation, we have:
 
 (eq. 2.22)	 
 <div>
 $$
-Pr(H|D) = \frac{\binom{N}{k} p^k (1-p)^{N-k}}{\int_{0}^{1} \binom{N}{k} p^k (1-p)^{N-k} dp}
+Pr(H|D) = \frac{\binom{N}{k} p_H^k (1-p_H)^{N-k}}{\int_{0}^{1} \binom{N}{k} p_H^k (1-p_H)^{N-k} dp_H}
 $$
 </div>
 
@@ -371,11 +371,11 @@ This ugly equation is actually a beta distribution, which can be expressed more 
 (eq. 2.23)	 
 <div>
 $$
-Pr(H|D) = \frac{(N+1)!}{k!(N-k)!} p^k (1-p)^{N-k}
+Pr(H|D) = \frac{(N+1)!}{k!(N-k)!} p_H^k (1-p_H)^{N-k}
 $$
 </div>
 
-We can compare this posterior distribution of our parameter estimate, p, given the data, to our uniform prior (Figure 2.3). If you inspect this plot, you see that the posterior distribution is very different from the prior – that is, the data have changed our view of the values that parameters should take.
+We can compare this posterior distribution of our parameter estimate, $p_H$, given the data, to our uniform prior (Figure 2.3). If you inspect this plot, you see that the posterior distribution is very different from the prior – that is, the data have changed our view of the values that parameters should take.
 
 As you can see from this example, Bayes theorem lets us combine our prior belief about parameter values with the information from the data in order to obtain a posterior. These posterior distributions are very easy to interpret, as they express the probability of the model parameters given our data. However, that clarity comes at a cost of requiring an explicit prior. Later in the book we will learn how to use this feature of Bayesian statistics to our advantage when we actually do have some prior knowledge about parameter values.
 
@@ -412,7 +412,7 @@ This is the ratio of the probability of drawing the parameter values $p$ and $p�
 (eq. 2.24)
 <div>
 $$
-a_1 = \frac{P(p')}{P(p)}
+R_{prior} = \frac{P(p')}{P(p)}
 $$
 </div>	 
 
@@ -423,7 +423,7 @@ This is the ratio of probability of proposals going from $p$ to $p’$ and the r
 (eq. 2.25)	 
 <div>
 $$
-a_2 = \frac{Q(p'|p)}{Q(p|p')}
+R_{proposal} = \frac{Q(p'|p)}{Q(p|p')}
 $$
 </div>	 
 
@@ -434,7 +434,7 @@ This is the ratio of probabilities of the data given the two different parameter
 (eq. 2.26)	 
 <div>
 $$
-a_3 = \frac{L(p'|D)}{L(p|D)} = \frac{P(D|p')}{P(D|p)}
+R_{likelihood} = \frac{L(p'|D)}{L(p|D)} = \frac{P(D|p')}{P(D|p)}
 $$
 </div>	 
 
@@ -446,13 +446,13 @@ Find the product of the prior odds, proposal density ratio, and the likelihood r
 (eq. 2.27)
 <div>
 $$
-a = a_1 \cdot a_2 \cdot a_3
+R_{accept} = R_{prior} \cdot R_{proposal} \cdot R_{likelihood}
 $$
 </div>
 
 ### 5\. Accept or reject.
 
-Draw a random number $x$ from a uniform distribution between 0 and 1. If $x<a$, accept the proposed value of $p’$; otherwise reject, and retain the current value $p$.
+Draw a random number $x$ from a uniform distribution between 0 and 1. If $x < R_{accept}$, accept the proposed value of $p’$; otherwise reject, and retain the current value $p$.
 
 ### 6\. Repeat.
 
@@ -471,11 +471,11 @@ We then calculate our three ratios. Here things are simpler than you might have 
 (eq. 2.28)
 <div>
 $$
-a_1 = \frac{P(p')}{P(p)} = \frac{1}{1} = 1
+R_{prior} = \frac{P(p')}{P(p)} = \frac{1}{1} = 1
 $$
 </div>	 
 
-Similarly, because our proposal distribution is symmetrical, $Q(p'|p) = Q(p|p')$ and $a_2 = 1$. That means that we only need to calculate the likelihood ratio for $p$ and $p’$. We can do this by plugging our values for $p$ (or $p’$) into equation 2.2:
+Similarly, because our proposal distribution is symmetrical, $Q(p'|p) = Q(p|p')$ and $R_{proposal} = 1$. That means that we only need to calculate the likelihood ratio, $R_{likelihood}$ for $p$ and $p’$. We can do this by plugging our values for $p$ (or $p’$) into equation 2.2:
 
 (eq. 2.29)
 <div>
@@ -497,11 +497,11 @@ The likelihood ratio is then:
 (eq. 2.31)	 
 <div>
 $$
-a_3 = \frac{P(D|p')}{P(D|p)} = \frac{0.064}{0.068} = 0.94
+R_{likelihood} = \frac{P(D|p')}{P(D|p)} = \frac{0.064}{0.068} = 0.94
 $$
 </div>
 
-We can now calculate $a = a_1 \cdot a_2 \cdot a_3 = 1 \cdot 1 \cdot 0.94 = 0.94$. We next choose a random number between 0 and 1 – say that we draw $x = 0.34$. We then notice that our random number $x$ is less than or equal to $a$, so we accept the proposed value of $p’$. If the random number that we drew were greater than 0.94, we would reject the proposed value, and keep our original parameter value $p = 0.60$ going into the next generation.
+We can now calculate $R_{accept} = R_{prior} \cdot R_{proposal} \cdot R_{likelihood} = 1 \cdot 1 \cdot 0.94 = 0.94$. We next choose a random number between 0 and 1 – say that we draw $x = 0.34$. We then notice that our random number $x$ is less than or equal to $R_{accept}$, so we accept the proposed value of $p’$. If the random number that we drew were greater than 0.94, we would reject the proposed value, and keep our original parameter value $p = 0.60$ going into the next generation.
 
 If we repeat this procedure a large number of times, we will obtain a long chain of values of $p$. You can see the results of such a run in Figure 2.4. In panel A, I have plotted the likelihoods for each successive value of p. You can see that the likelihoods increase for the first ~1000 or so generations, then reach a plateau around $lnL = -3$. Panel B shows a plot of the values of $p$, which rapidly converge to a stable distribution around $p = 0.63$. We can also plot a histogram of these posterior estimates of $p$. In panel C, I have done that – but with a twist. Because the MCMC algorithm creates a series of parameter estimates, these numbers show autocorrelation – that is, each estimate is similar to estimates that come just before and just after. This autocorrelation can cause problems for data analysis. The simplest solution is to subsample these values, picking only, say, one value every 100 generations. That is what I have done in the histogram in panel C. This panel also includes the analytic posterior distribution that we calculated above – notice how well our Metropolis-Hastings algorithm did in reconstructing this distribution!
 
@@ -522,11 +522,11 @@ B_{12} = \frac{Pr(D|H_1)}{Pr(D|H_2)}
 $$
 </div>	 
 
-Bayes factors are ratios of the marginal likelihoods $P(D | H)$ of two competing models. They represent the probability of the data averaged over the posterior distribution of parameter estimates. It is important to note that these marginal likelihoods are different from the likelihoods used above for $AIC$ model comparison in an important way. With $AIC$ and other related tests, we calculate the likelihoods for a given model and a particular set of parameter values – in the coin flipping example, the likelihood for model 2 when $p = 0.63$. By contrast, Bayes factors’ marginal likelihoods give the probability of the data averaged over all possible parameter values for a model, weighted by their prior probability.
+Bayes factors are ratios of the marginal likelihoods $P(D | H)$ of two competing models. They represent the probability of the data averaged over the posterior distribution of parameter estimates. It is important to note that these marginal likelihoods are different from the likelihoods used above for $AIC$ model comparison in an important way. With $AIC$ and other related tests, we calculate the likelihoods for a given model and a particular set of parameter values – in the coin flipping example, the likelihood for model 2 when $p_H = 0.63$. By contrast, Bayes factors’ marginal likelihoods give the probability of the data averaged over all possible parameter values for a model, weighted by their prior probability.
 
 Because of the use of marginal likelihoods, Bayes factor allows us to do model selection in a way that accounts for uncertainty in our parameter estimates – again, though, at the cost of requiring explicit prior probabilities for all model parameters. Such comparisons can be quite different from likelihood ratio tests or comparisons of $AIC_c$ scores. Bayes factors represent model comparisons that integrate over all possible parameter values rather than comparing the fit of models only at the parameter values that best fit the data. In other words, $AIC_c$ scores compare the fit of two models given particular estimated values for all of the parameters in each of the models. By contrast, Bayes factors make a comparison between two models that accounts for uncertainty in their parameter estimates. This will make the biggest difference when some parameters of one or both models have relatively wide uncertainty. If all parameters can be estimated with precision, results from both approaches should be similar.
 
-Calculation of Bayes factors can be quite complicated, requiring integration across probability distributions. In the case of our coin-flipping problem, we have already done that to obtain the beta distribution in equation 2.22. We can then calculate Bayes factors to compare the fit of two competing models. Let’s compare the two models for coin flipping considered above: model 1, where $p = 0.5$, and model 2, where $p = 0.63$. Then:
+Calculation of Bayes factors can be quite complicated, requiring integration across probability distributions. In the case of our coin-flipping problem, we have already done that to obtain the beta distribution in equation 2.22. We can then calculate Bayes factors to compare the fit of two competing models. Let’s compare the two models for coin flipping considered above: model 1, where $p_H = 0.5$, and model 2, where $p_H = 0.63$. Then:
 
 
 (eq. 2.33)	 
