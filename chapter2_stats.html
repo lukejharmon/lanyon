@@ -30,17 +30,11 @@ pdf: true
 <li><a href="#section-2.4-bayesian-statistics">Section 2.4: Bayesian statistics</a><ul>
 <li><a href="#section-2.4a-bayes-theorem">Section 2.4a: Bayes Theorem</a></li>
 <li><a href="#section-2.4b-bayesian-mcmc">Section 2.4b: Bayesian MCMC</a></li>
-<li><a href="#get-a-starting-parameter-value.">1. Get a starting parameter value.</a></li>
-<li><a href="#propose-a-new-parameter.">2. Propose a new parameter.</a></li>
-<li><a href="#calculate-three-ratios.">3. Calculate three ratios.</a></li>
-<li><a href="#multiply.">4. Multiply.</a></li>
-<li><a href="#accept-or-reject.">5. Accept or reject.</a></li>
-<li><a href="#repeat.">6. Repeat.</a></li>
 <li><a href="#section-2.4c-bayes-factors">Section 2.4c: Bayes factors</a></li>
 </ul></li>
 <li><a href="#section-2.5-aic-versus-bayes">Section 2.5: AIC versus Bayes</a></li>
 <li><a href="#section-2.6-models-and-comparative-methods">Section 2.6: Models and comparative methods</a></li>
-<li><a href="#chapter-2-references">Chapter 2 References</a></li>
+<li><a href="#references">References</a></li>
 </ul></li>
 </ul>
 </div>
@@ -342,12 +336,20 @@ $$</span><br /></p>
 <p>Some Markov chains have an equilibrium distribution, which is a stable probability distribution of the model’s states after the chain has run for a very long time. For Bayesian analysis, we use a technique called a Metropolis-Hasting algorithm to construct a special Markov chain that has an equilibrium distribution that is the same as the Bayesian posterior distribution of our statistical model. Then, using a random simulation on this chain (this is the Markov-chain Monte Carlo, MCMC), we can sample from the posterior distribution of our model.</p>
 <p>The following algorithm uses a Metropolis-Hastings algorithm to carry out a Bayesian MCMC analysis with one free parameter:</p>
 <hr />
-<h3 id="get-a-starting-parameter-value.">1. Get a starting parameter value.</h3>
+<h3>
+1. Get a starting parameter value.
+</h3>
 <p>Sample a starting parameter value, <span class="math inline"><em>p</em></span>, from the prior distribution.</p>
-<h3 id="propose-a-new-parameter.">2. Propose a new parameter.</h3>
+<h3>
+2. Propose a new parameter.
+</h3>
 <p>Given the current parameter value, <span class="math inline"><em>p</em></span>, select a new proposed parameter value, <span class="math inline"><em>p</em>’</span>, using the proposal density <span class="math inline"><em>Q</em>(<em>p</em>′|<em>p</em>)</span>.</p>
-<h3 id="calculate-three-ratios.">3. Calculate three ratios.</h3>
-<h4 id="a.-the-prior-odds-ratio.">a. The prior odds ratio.</h4>
+<h3>
+3. Calculate three ratios.
+</h3>
+<h4>
+a. The prior odds ratio.
+</h4>
 <p>This is the ratio of the probability of drawing the parameter values <span class="math inline"><em>p</em></span> and <span class="math inline"><em>p</em>’</span> from the prior.</p>
 (eq. 2.24)
 <div>
@@ -355,7 +357,9 @@ $$</span><br /></p>
 R_{prior} = \frac{P(p')}{P(p)}
 $$</span><br /></p>
 </div>
-<h4 id="b.-the-proposal-density-ratio.">b. The proposal density ratio.</h4>
+<h4>
+b. The proposal density ratio.
+</h4>
 <p>This is the ratio of probability of proposals going from <span class="math inline"><em>p</em></span> to <span class="math inline"><em>p</em>’</span> and the reverse. Often, one can construct a proposal density that is symmetrical, so that <span class="math inline"><em>Q</em>(<em>p</em>′|<em>p</em>)=<em>Q</em>(<em>p</em>|<em>p</em>′)</span> and <span class="math inline"><em>a</em><sub>2</sub> = 1</span>.</p>
 (eq. 2.25)<br />
 
@@ -364,7 +368,9 @@ $$</span><br /></p>
 R_{proposal} = \frac{Q(p'|p)}{Q(p|p')}
 $$</span><br /></p>
 </div>
-<h4 id="c.-the-likelihood-ratio.">c. The likelihood ratio.</h4>
+<h4>
+c. The likelihood ratio.
+</h4>
 <p>This is the ratio of probabilities of the data given the two different parameter values.</p>
 (eq. 2.26)<br />
 
@@ -373,15 +379,21 @@ $$</span><br /></p>
 R_{likelihood} = \frac{L(p'|D)}{L(p|D)} = \frac{P(D|p')}{P(D|p)}
 $$</span><br /></p>
 </div>
-<h3 id="multiply.">4. Multiply.</h3>
+<h3>
+4. Multiply.
+</h3>
 <p>Find the product of the prior odds, proposal density ratio, and the likelihood ratio:</p>
 (eq. 2.27)
 <div>
 <p><br /><span class="math display"><em>R</em><sub><em>a</em><em>c</em><em>c</em><em>e</em><em>p</em><em>t</em></sub> = <em>R</em><sub><em>p</em><em>r</em><em>i</em><em>o</em><em>r</em></sub> ⋅ <em>R</em><sub><em>p</em><em>r</em><em>o</em><em>p</em><em>o</em><em>s</em><em>a</em><em>l</em></sub> ⋅ <em>R</em><sub><em>l</em><em>i</em><em>k</em><em>e</em><em>l</em><em>i</em><em>h</em><em>o</em><em>o</em><em>d</em></sub></span><br /></p>
 </div>
-<h3 id="accept-or-reject.">5. Accept or reject.</h3>
+<h3>
+5. Accept or reject.
+</h3>
 <p>Draw a random number <span class="math inline"><em>x</em></span> from a uniform distribution between 0 and 1. If <span class="math inline"><em>x</em> &lt; <em>R</em><sub><em>a</em><em>c</em><em>c</em><em>e</em><em>p</em><em>t</em></sub></span>, accept the proposed value of <span class="math inline"><em>p</em>’</span>; otherwise reject, and retain the current value <span class="math inline"><em>p</em></span>.</p>
-<h3 id="repeat.">6. Repeat.</h3>
+<h3>
+6. Repeat.
+</h3>
 <p>Repeat steps 2-5 a large number of times.</p>
 <hr />
 <p>Carrying out these steps, one obtains a set of parameter values, <span class="math inline"><em>p</em><sub><em>i</em></sub></span>, where <span class="math inline"><em>i</em></span> is from 1 to the total number of generations in the MCMC. Typically, the chain has a “burn-in” period at the beginning. This is the time before the chain has reached a stationary distribution, and can be observed when parameter values show trends through time and the likelihood for models has yet to plateau. If you eliminate this “burn-in” period, then you can treat the rest of the chain as a sample from the posterior distribution, and summarize it in a variety of ways; for example, by calculating a mean, 95% confidence interval, or plotting a histogram.</p>
@@ -458,7 +470,7 @@ $$</span><br /></p>
 <h2 id="section-2.6-models-and-comparative-methods">Section 2.6: Models and comparative methods</h2>
 <p>For the rest of this book I will introduce several models that can be applied to evolutionary data. I will discuss how to simulate evolutionary processes under these models, how to compare data to these models, and how to use model selection to discriminate amongst them. In each section, I will describe standard statistical tests (when available) along with ML and Bayesian approaches.</p>
 <p>One theme in the book is that I emphasize fitting models to data and estimating parameters. I think that this approach is very useful for the future of the field of comparative statistics for three main reasons. First, it is flexible; one can easily compare a wide range of competing models to your data. Second, it is extendable; one can create new models and automatically fit them into a preexisting framework for data analysis. Finally, it is powerful; a model fitting approach allows us to construct comparative tests that relate directly to particular biological hypotheses.</p>
-<h2 id="chapter-2-references" class="unnumbered">Chapter 2 References</h2>
+<h2 id="references" class="unnumbered">References</h2>
 <div id="refs" class="references">
 <div id="ref-Burnham2003-mt">
 <p>Burnham, K. P., and D. R. Anderson. 2003. Model selection and multimodel inference: A practical Information-Theoretic approach. Springer Science &amp; Business Media.</p>

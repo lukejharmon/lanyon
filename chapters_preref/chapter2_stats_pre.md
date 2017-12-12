@@ -395,17 +395,18 @@ The following algorithm uses a Metropolis-Hastings algorithm to carry out a Baye
 
 ---
 
-### 1\. Get a starting parameter value.
+<h3> 1\. Get a starting parameter value. </h3>
 
 Sample a starting parameter value, $p$, from the prior distribution.
 
-### 2\. Propose a new parameter.
+<h3> 2\. Propose a new parameter.</h3>
 
 Given the current parameter value, $p$, select a new proposed parameter value, $p’$, using the proposal density $Q(p'|p)$.
 
-### 3\. Calculate three ratios.
 
-#### a\. The prior odds ratio.
+<h3> 3\. Calculate three ratios.</h3>
+
+<h4> a\. The prior odds ratio.</h4>
 
 This is the ratio of the probability of drawing the parameter values $p$ and $p’$ from the prior.
 
@@ -416,7 +417,7 @@ R_{prior} = \frac{P(p')}{P(p)}
 $$
 </div>	 
 
-#### b\. The proposal density ratio.
+<h4> b\. The proposal density ratio.</h4>
 
 This is the ratio of probability of proposals going from $p$ to $p’$ and the reverse. Often, one can construct a proposal density that is symmetrical, so that  $Q(p'|p) = Q(p|p')$ and $a_2 = 1$.
 
@@ -427,7 +428,7 @@ R_{proposal} = \frac{Q(p'|p)}{Q(p|p')}
 $$
 </div>	 
 
-#### c\. The likelihood ratio.
+<h4> c\. The likelihood ratio.</h4>
 
 This is the ratio of probabilities of the data given the two different parameter values.
 
@@ -439,7 +440,7 @@ $$
 </div>	 
 
 
-### 4\. Multiply.
+<h3> 4\. Multiply.</h3>
 
 Find the product of the prior odds, proposal density ratio, and the likelihood ratio:
 
@@ -450,11 +451,11 @@ R_{accept} = R_{prior} \cdot R_{proposal} \cdot R_{likelihood}
 $$
 </div>
 
-### 5\. Accept or reject.
+<h3>  5\. Accept or reject. </h3>
 
 Draw a random number $x$ from a uniform distribution between 0 and 1. If $x < R_{accept}$, accept the proposed value of $p’$; otherwise reject, and retain the current value $p$.
 
-### 6\. Repeat.
+<h3>  6\. Repeat. </h3>
 
 Repeat steps 2-5 a large number of times.
 
@@ -564,4 +565,4 @@ For the rest of this book I will introduce several models that can be applied to
 
 One theme in the book is that I emphasize fitting models to data and estimating parameters. I think that this approach is very useful for the future of the field of comparative statistics for three main reasons. First, it is flexible; one can easily compare a wide range of competing models to your data. Second, it is extendable; one can create new models and automatically fit them into a preexisting framework for data analysis. Finally, it is powerful; a model fitting approach allows us to construct comparative tests that relate directly to particular biological hypotheses.
 
-## Chapter 2 References
+## References
