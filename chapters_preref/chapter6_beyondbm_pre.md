@@ -1,3 +1,5 @@
+[pdf version]({{ site.baseurl }}/pdf/chapter6_beyondbm.pdf)
+
 # Chapter 6: Beyond Brownian Motion
 
 ## Section 6.1: Introduction
@@ -12,7 +14,7 @@ In this chapter, I will consider four ways that comparative methods can move bey
 
 ## Section 6.2: Transforming the evolutionary variance-covariance matrix
 
-In 1999, Mark Pagel introduced three statistical models that allow one to test whether data deviates from a constant-rate Mk process evolving on a phylogenetic tree [@Pagel1999-ic, @Pagel1999-fx]. Each of these three models is a statistical transformation of the elements of the phylogenetic variance-covariance matrix, $\mathbf{C}$, that we first encountered in [Chapter 3]({{ site.baseurl }}/chapter3_bmintro/). All three can also be thought of as a transformation of the branch lengths of the tree, which adds a more intuitive understanding of the statistical properties of the tree transformations (Figure 6.1). We can transform the tree and then simulate characters under a Brownian motion model on the transformed tree, generating very different patterns than if they had been simulated on the starting tree.
+In 1999, Mark Pagel introduced three statistical models that allow one to test whether data deviates from a constant-rate Mk process evolving on a phylogenetic tree [@Pagel1999-ic; @Pagel1999-fx]. Each of these three models is a statistical transformation of the elements of the phylogenetic variance-covariance matrix, $\mathbf{C}$, that we first encountered in [Chapter 3]({{ site.baseurl }}/chapter3_bmintro/). All three can also be thought of as a transformation of the branch lengths of the tree, which adds a more intuitive understanding of the statistical properties of the tree transformations (Figure 6.1). We can transform the tree and then simulate characters under a Brownian motion model on the transformed tree, generating very different patterns than if they had been simulated on the starting tree.
 
 ![Figure 6.1. Branch length transformations effectively alter the relative rate of evolution on certain branches in the tree. If we make a branch longer, there is more “evolutionary time” for characters to change, and so we are effectively increasing the rate of evolution along that branch.]({{ site.baseurl }}/images/figure6-1.png)
 
@@ -20,17 +22,17 @@ In 1999, Mark Pagel introduced three statistical models that allow one to test w
 
 There are three Pagel tree transformations (lambda: $\lambda$, delta: $\delta$, and kappa: $\kappa$). I will describe each of them along with common methods for fitting Pagel models under ML, AIC, and Bayesian frameworks. Pagel’s three transformations can also be related to evolutionary processes, although those relationships are sometimes vague compared to approaches based on explicit evolutionary models rather than tree transformations (see below for more comments on this distinction).
 
-Perhaps the most commonly used Pagel tree transformation is $\lambda$. When using $\lambda$, one multiplies all off-diagonal elements in the phylogenetic variance-covariance matrix by the value of $\lambda$. The diagonal elements remain unchanged. So, if the original matrix is:
+Perhaps the most commonly used Pagel tree transformation is $\lambda$. When using $\lambda$, one multiplies all off-diagonal elements in the phylogenetic variance-covariance matrix by the value of $\lambda$. The diagonal elements remain unchanged. So, if the original matrix for $r$ characters is:
 
 (Equation 6.1)
 <div>
 $$
 \mathbf{C_o} =
 \begin{bmatrix}
-\sigma_1^2 & \sigma_{12} & \dots & \sigma_{1n}\\
-\sigma_{21} & \sigma_2^2 & \dots & \sigma_{2n}\\
+\sigma_1^2 & \sigma_{12} & \dots & \sigma_{1r}\\
+\sigma_{21} & \sigma_2^2 & \dots & \sigma_{2r}\\
 \vdots & \vdots & \ddots & \vdots\\
-\sigma_{n1} & \sigma_{n2} & \dots & \sigma_{n}^2\\
+\sigma_{r1} & \sigma_{r2} & \dots & \sigma_{r}^2\\
 \end{bmatrix}
 $$
 </div>
@@ -42,38 +44,38 @@ Then the transformed matrix will be:
 $$
 \mathbf{C_\lambda} =
 \begin{bmatrix}
-\sigma_1^2 & \lambda \cdot \sigma_{12} & \dots & \lambda \cdot \sigma_{1n}\\
-\lambda \cdot \sigma_{21} & \sigma_2^2 & \dots & \lambda \cdot \sigma_{2n}\\
+\sigma_1^2 & \lambda \cdot \sigma_{12} & \dots & \lambda \cdot \sigma_{1r}\\
+\lambda \cdot \sigma_{21} & \sigma_2^2 & \dots & \lambda \cdot \sigma_{2r}\\
 \vdots & \vdots & \ddots & \vdots\\
-\lambda \cdot \sigma_{n1} & \lambda \cdot \sigma_{n2} & \dots & \sigma_{n}^2\\
+\lambda \cdot \sigma_{r1} & \lambda \cdot \sigma_{r2} & \dots & \sigma_{r}^2\\
 \end{bmatrix}
 $$
 </div>
 
-In terms of branch length transformations, $\lambda$ compresses internal branches while leaving the tip branches of the tree unaffected (Figure 6.1). λ can range from 1 (no transformation) to 0 (which results in a complete star phylogeny, with all tip branches equal in length and all internal branches of length 0). One can use values of $\lambda$ greater than one on the variance-covariance matrix, although some values of $\lambda$ result in matrices that are not valid variance-covariance matrices and/or do not correspond with any phylogenetic tree transformation. For this reason I recommend that $\lambda$ be limited to values between 0 and 1.
+In terms of branch length transformations, $\lambda$ compresses internal branches while leaving the tip branches of the tree unaffected (Figure 6.1). $\lambda$ can range from 1 (no transformation) to 0 (which results in a complete star phylogeny, with all tip branches equal in length and all internal branches of length 0). One can use values of $\lambda$ greater than one on the variance-covariance matrix, although some values of $\lambda$ result in matrices that are not valid variance-covariance matrices and/or do not correspond with any phylogenetic tree transformation. For this reason I recommend that $\lambda$ be limited to values between 0 and 1.
 
 $\lambda$ is often used to measure the “phylogenetic signal” in comparative data. This makes intuitive sense, as $\lambda$ scales the tree between a constant-rates model to one where every species is statistically independent of every other species in the tree. Statistically, this can be very useful information. However, there is some danger is in attributing a statistical result – either phylogenetic signal or not – to any particular biological process. For example, phylogenetic signal is sometimes called a “phylogenetic constraint.” But one way to obtain a high phylogenetic signal ($\lambda$ near 1) is to evolve traits under a Brownian motion model, which involves completely unconstrained character evolution. Likewise, a lack of phylogenetic signal – which might be called “low phylogenetic constraint” – results from an OU model with a high $\alpha$ parameter (see below), which is a model where trait evolution away from the optimal value is, in fact, highly constrained. Revell et al. [-@Revell2008-vu] show a broad range of circumstances that can lead to patterns of high or low phylogenetic signal, and caution against over-interpretation of results from analyses of phylogenetic signal, like Pagel’s $\lambda$. Also worth noting is that statistical estimates of $\lambda$ under a ML model tend to be clustered near 0 and 1 regardless of the true value, and AIC model selection can tend to prefer $\lambda$ models even when data is simulated under Brownian motion [@Boettiger2012-vg].
 
-Pagel’s $\delta$ is designed to capture variation in rates of evolution through time. Under the delta transformation, all elements of the phylogenetic variance-covariance matrix are raised to the power $\delta$. So, if our original C matrix is given above (equation 6.1), then the δ-transformed version will be:
+Pagel’s $\delta$ is designed to capture variation in rates of evolution through time. Under the delta transformation, all elements of the phylogenetic variance-covariance matrix are raised to the power $\delta$. So, if our original $\mathbf{C}$ matrix is given above (equation 6.1), then the $\delta$-transformed version will be:
 
 (6.3)
 <div>
 $$
 \mathbf{C_\delta} =
 \begin{bmatrix}
-(\sigma_1^2)^\delta & (\sigma_{12})^\delta & \dots & (\sigma_{1n})^\delta\\
-(\sigma_{21})^\delta & (\sigma_2^2)^\delta & \dots & (\sigma_{2n})^\delta\\
+(\sigma_1^2)^\delta & (\sigma_{12})^\delta & \dots & (\sigma_{1r})^\delta\\
+(\sigma_{21})^\delta & (\sigma_2^2)^\delta & \dots & (\sigma_{2r})^\delta\\
 \vdots & \vdots & \ddots & \vdots\\
-(\sigma_{n1})^\delta & (\sigma_{n2})^\delta & \dots & (\sigma_{n}^2)^\delta\\
+(\sigma_{r1})^\delta & (\sigma_{r2})^\delta & \dots & (\sigma_{r}^2)^\delta\\
 \end{bmatrix}
 $$
 </div>
 
 
 
-Since these elements represent the heights of nodes in the phylogenetic tree, then $\delta$ can also be viewed as a transformation of phylogenetic node heights. When $\delta$ is one, the tree is unchanged and one still has a constant-rate Brownian motion process; when $\delta$ is less than 1, node heights are reduced, but deeper branches in the tree are reduced less than shallower branches (Figure 6.1). This effectively represents a model where the rate of evolution slows through time. By contrast, $\delta$ > 1 stretches the shallower branches in the tree more than the deep branches, mimicking a model where the rate of evolution speeds up through time. There is a close connection between the delta model, the ACDC model [@Blomberg2003-as], and Harmon et al.’s [-@Harmon2010-wg] early burst model [see also @Uyeda2014-ng, especially the appendix).
+Since these elements represent the heights of nodes in the phylogenetic tree, then $\delta$ can also be viewed as a transformation of phylogenetic node heights. When $\delta$ is one, the tree is unchanged and one still has a constant-rate Brownian motion process; when $\delta$ is less than 1, node heights are reduced, but deeper branches in the tree are reduced less than shallower branches (Figure 6.1). This effectively represents a model where the rate of evolution slows through time. By contrast, $\delta > 1$ stretches the shallower branches in the tree more than the deep branches, mimicking a model where the rate of evolution speeds up through time. There is a close connection between the delta model, the ACDC model [@Blomberg2003-as], and Harmon et al.’s [-@Harmon2010-wg] early burst model [see also @Uyeda2014-ng, especially the appendix).
 
-Finally, the $\kappa$ transformation is sometimes used to capture patterns of “speciational” change in trees. In the $\kappa$ model, one raises all of the branch lengths in the tree by the power $\kappa$. This has a complicated effect on the phylogenetic variance-covariance matrix, as the effect that this transformation has on each covariance element depends on both the value of $\kappa$ and the number of branches that extend from the root of the tree to the most recent common ancestor of each pair of species. So, if our original C matrix is given by equation 6.1, the transformed version will be:
+Finally, the $\kappa$ transformation is sometimes used to capture patterns of “speciational” change in trees. In the $\kappa$ model, one raises all of the branch lengths in the tree by the power $\kappa$. This has a complicated effect on the phylogenetic variance-covariance matrix, as the effect that this transformation has on each covariance element depends on both the value of $\kappa$ and the number of branches that extend from the root of the tree to the most recent common ancestor of each pair of species. So, if our original $\mathbf{C}$ matrix is given by equation 6.1, the transformed version will be:
 
 (Equation 6.4)
 <div>
@@ -83,23 +85,23 @@ $$
 b_{1,1}^k + b_{1,2}^k \dots + b_{1,d_1}^k &
 b_{1-2,1}^k + b_{1-2,2}^k \dots + b_{1-2,d_{1-2}}^k &
 \dots &
-b_{1-n,1}^k + b_{1-n,2}^k \dots + b_{1-n,d_{1-n}}^k \\
+b_{1-r,1}^k + b_{1-r,2}^k \dots + b_{1-r,d_{1-r}}^k \\
 b_{2-1,1}^k + b_{2-1,2}^k \dots + b_{2-1,d_{1-2}}^k &
 b_{2,1}^k + b_{2,2}^k \dots + b_{2,d_2}^k &
 \dots &
-b_{2-n,1}^k + b_{2-n,2}^k \dots + b_{2-n,d_{2-n}}^k \\
+b_{2-r,1}^k + b_{2-r,2}^k \dots + b_{2-r,d_{2-r}}^k \\
 \vdots & \vdots & \ddots & \vdots\\
-b_{n-1,1}^k + b_{n-1,2}^k \dots + b_{n-1,d_{1-n}}^k &
-b_{n-2,1}^k + b_{n-2,2}^k \dots + b_{n-2,d_{1-2}}^k &
+b_{r-1,1}^k + b_{r-1,2}^k \dots + b_{r-1,d_{1-r}}^k &
+b_{r-2,1}^k + b_{r-2,2}^k \dots + b_{r-2,d_{1-2}}^k &
 \dots &
-b_{n,1}^k + b_{n,2}^k \dots + b_{n,d_{n}}^k \\
+b_{r,1}^k + b_{r,2}^k \dots + b_{r,d_{r}}^k \\
 \end{smallmatrix}\right)
 $$
 </div>
 
 where $b_{x,y}$ is the branch length of the branch that is the most recent common ancestor of taxa $x$ and $y$, while $d_{x,y}$ is the total number of branches that one encounters traversing the path from the root to the most recent common ancestor of the species pair specified by $x,y$ (or to the tip $x$ if just one taxon is specified). Needless to say, this transformation is easier to understand as a transformation of the tree branches themselves rather than of the associated variance-covariance matrix.
 
-When the $\kappa$ parameter is one, the tree is unchanged and one still has a constant-rate Brownian motion process; when $\kappa = 0$, all branch lengths are one. Kappa values in between these two extremes represent intermediates (Figure 6.1). Kappa is often interpreted in terms of a model where character change is more or less concentrated at speciation events. For this interpretation to be valid, we have to assume that the phylogenetic tree, as given, includes all (or even most) of the speciation events in the history of the clade. The problem with this assumption is that speciation events are almost certainly missing due to sampling: perhaps some living species from the clade have not been sampled, or species that are part of the clade have gone extinct before the present day and are thus not sampled. There are much better ways of estimating speciational models that can account for these issues in sampling [e.g. @Bokma2008-cm, @Goldberg2012-gs]; these newer methods should be preferred over Pagel’s $\kappa$ for testing for a speciational pattern in trait data.
+When the $\kappa$ parameter is one, the tree is unchanged and one still has a constant-rate Brownian motion process; when $\kappa = 0$, all branch lengths are one. Kappa values in between these two extremes represent intermediates (Figure 6.1). Kappa is often interpreted in terms of a model where character change is more or less concentrated at speciation events. For this interpretation to be valid, we have to assume that the phylogenetic tree, as given, includes all (or even most) of the speciation events in the history of the clade. The problem with this assumption is that speciation events are almost certainly missing due to sampling: perhaps some living species from the clade have not been sampled, or species that are part of the clade have gone extinct before the present day and are thus not sampled. There are much better ways of estimating speciational models that can account for these issues in sampling [e.g. @Bokma2008-cm; @Goldberg2012-gs]; these newer methods should be preferred over Pagel’s $\kappa$ for testing for a speciational pattern in trait data.
 
 There are two main ways to assess the fit of the three Pagel-style models to data. First, one can use ML to estimate parameters and likelihood ratio tests (or $AIC_c$ scores) to compare the fit of various models. As mentioned above, simulation studies suggest that this can sometimes lead to overconfidence, at least for the $\lambda$ model. Sometimes researchers will compare the fit of a particular model (e.g. $\lambda$) with models where that parameter is fixed at its two extreme values (0 or 1; this is not possible with $\delta$). Second, one can use Bayesian methods to estimate posterior distributions of parameter values, then inspect those distributions to see if they overlap with values of interest (say, 0 or 1).
 
@@ -116,7 +118,7 @@ Note that Brownian motion is the preferred model with the lowest $AIC_c$ score, 
 
 ## Section 6.3: Variation in rates of trait evolution across clades
 
-One assumption of Brownian motion is that the rate of change ($\sigma^2$) is constant, both through time and across lineages. However, some of the most interesting hypotheses in evolution relate to differences in the rates of character change across clades. For example, key innovations are evolutionary events that open up new areas of niche space to evolving clades [reviewed in @Alfaro2013-pl, @Hunter1998-ul]. This new niche space is an ecological opportunity that can then be filled by newly evolved species [@Yoder2010-ei]. If this were happening in a clade, we might expect that rates of trait evolution would be elevated following the acquisition of the key innovation [@Yoder2010-ei].
+One assumption of Brownian motion is that the rate of change ($\sigma^2$) is constant, both through time and across lineages. However, some of the most interesting hypotheses in evolution relate to differences in the rates of character change across clades. For example, key innovations are evolutionary events that open up new areas of niche space to evolving clades [reviewed in @Alfaro2013-pl; @Hunter1998-ul]. This new niche space is an ecological opportunity that can then be filled by newly evolved species [@Yoder2010-ei]. If this were happening in a clade, we might expect that rates of trait evolution would be elevated following the acquisition of the key innovation [@Yoder2010-ei].
 
 There are several methods that one can use to test for differences in the rate of evolution across clades. First, one can compare the magnitude of independent contrasts across clades; second, one can use model comparison approaches to compare the fit of single- and multiple-rate models to data on trees; and third, one can use a Bayesian approach combined with reversible-jump machinery to try to find the places on the tree where rate shifts have occurred. I will explain each of these methods in turn.
 
@@ -160,7 +162,7 @@ $$
 
 We can now treat this as a model comparison-problem, contrasting $H_1$: traits on the tree evolved under a constant-rate Brownian motion model, with $H_2$: traits on the tree evolved under a multi-rate Brownian motion model. Note that $H_1$ is a special case of $H_2$ when $\sigma_1^2 = \sigma_2^2$; that is, these two models are nested and can be compared using a likelihood ratio test. Of course, one can also compare the two models using AIC.
 
-For the mammal body size example, you might recall our ML single-rate Brownian motion model ($\sigma^2 = 0.088$, $\bar{z}(0) = 4.64$, $lnL = -78.0$, $AIC_c = 160.4$). We can compare that to the fit of a model where carnivores get their own rate parameter ($\sigma_c^2$) that might differ from that of the rest of the tree ($\sigma_o^2$). Fitting that model, we find the following maximum likelihood parameter estimates: $\sigma_c^2 = 0.068$, $\sigma_o^2 = 0.01$, $\bar{z}(0) = 4.51$). Carnivores do appear to be evolving more rapidly. However, the fit of this model is not substantially better than the single-rate Brownian motion ($lnL = -77.6$, $AIC_c = 162.3$).
+For the mammal body size example, you might recall our ML single-rate Brownian motion model ($\sigma^2 = 0.088$, $\bar{z}(0) = 4.64$, $lnL = -78.0$, $AIC_c = 160.4$). We can compare that to the fit of a model where carnivores get their own rate parameter ($\sigma_c^2$) that might differ from that of the rest of the tree ($\sigma_o^2$). Fitting that model, we find the following maximum likelihood parameter estimates: $\hat{\sigma}_c^2 = 0.068$, $\hat{\sigma}_o^2 = 0.01$, $\hat{\bar{z}}(0) = 4.51$). Carnivores do appear to be evolving more rapidly. However, the fit of this model is not substantially better than the single-rate Brownian motion ($lnL = -77.6$, $AIC_c = 162.3$).
 
 There is one complication, which is how to deal with the actual branch along which the rate shift is thought to have occurred. O’Meara et al. [-@OMeara2006-he] describe “censored” and “noncensored” versions of their test, which differ in whether or not branches where rate shifts actually occur are included in the calculation. In the censored version of the test, we omit the branch where we think a shift occurred, while in the noncensored version we include that branch in one of the two rate categories (this is what I did in the example above, adding the stem branch of carnivores in the “non-carnivore” category). One could also specify where, exactly, the rate shift occurred along the branch in question, placing part of the branch in each of the two rate categories as appropriate. However, since we typically have little information about what happened on particular branches in a phylogenetic tree, results from these two approaches are not very different – unless, as stated by O’Meara et al. [-@OMeara2006-he], unusual evolutionary processes have occurred on the branch in question.
 
@@ -168,9 +170,9 @@ A similar approach was described by Thomas et al. [-@Thomas2006-oa] but consider
 
 ### Section 6.3c: Rate tests using Bayesian MCMC
 
-It is also possible to carry out this test in a Bayesian MCMC framework. The simplest way to do that would be to fit model H2 above, that traits on the tree evolved under a multi-rate Brownian motion model, in a Bayesian framework. We can then specify prior distributions and sample the three model parameters ($\bar{z}(0)$, $\sigma_1^2$, and $\sigma_2^2$) through our MCMC. At the end of our analysis, we will have posterior distributions for the three model parameters. We can test whether rates differ among clades by calculating a posterior distribution for the composite parameter $\sigma_{diff}^2 = \sigma_1^2 - \sigma_2^2$. The proportion of the posterior distribution for $\sigma_{diff}^2$ that is positive or negative gives the posterior probability that $\sigma_1^2$ is greater or less than $\sigma_1^2$, respectively.
+It is also possible to carry out this test in a Bayesian MCMC framework. The simplest way to do that would be to fit model H2 above, that traits on the tree evolved under a multi-rate Brownian motion model, in a Bayesian framework. We can then specify prior distributions and sample the three model parameters ($\bar{z}(0)$, $\sigma_1^2$, and $\sigma_2^2$) through our MCMC. At the end of our analysis, we will have posterior distributions for the three model parameters. We can test whether rates differ among clades by calculating a posterior distribution for the composite parameter $\sigma_{diff}^2 = \sigma_1^2 - \sigma_2^2$. The proportion of the posterior distribution for $\sigma_{diff}^2$ that is positive or negative gives the posterior probability that $\sigma_1^2$ is greater or less than $\sigma_2^2$, respectively.
 
-Perhaps, though, researchers are unsure of where, exactly, the rate shift might have occurred, and want to incorporate some uncertainty in their analysis. In some cases, rate shifts are thought to be associated with some other discrete character, such as living on land (state 0) or in the water (1). In such cases, one way to proceed is to use stochastic character mapping (see [Chapter 9]()) to map state changes for the discrete character on the tree, and then run an analysis where rates of evolution of the continuous character of interest depend on the mapping of our discrete states. This protocol is described most fully by Revell [-@Revell2013-ie], who also points out that rate estimates are biased to be more similar when the discrete character evolves quickly.
+Perhaps, though, researchers are unsure of where, exactly, the rate shift might have occurred, and want to incorporate some uncertainty in their analysis. In some cases, rate shifts are thought to be associated with some other discrete character, such as living on land (state 0) or in the water (1). In such cases, one way to proceed is to use stochastic character mapping (see [Chapter 8]({{ site.baseurl }}/chapter8_fitdiscrete)) to map state changes for the discrete character on the tree, and then run an analysis where rates of evolution of the continuous character of interest depend on the mapping of our discrete states. This protocol is described most fully by Revell [-@Revell2013-ie], who also points out that rate estimates are biased to be more similar when the discrete character evolves quickly.
 
 It is even possible to explore variation in Brownian rates without invoking particular a priori hypotheses about where the rates might change along branches in a tree. These methods rely on reversible-jump MCMC, a Bayesian statistical technique that allows one to consider a large number of models, all with different numbers of parameters, in a single Bayesian analysis. In this case, we consider models where each branch in the tree can potentially have its own Brownian rate parameter. By constraining sets of these rate parameters to be equal to one another, we can specify a huge number of models for rate variation across trees. The reversible-jump machinery, which is beyond the scope of this book, allows us to generate a posterior distribution that spans this large set of models [see @Eastman2011-uj for details].
 
@@ -517,7 +519,7 @@ $$
 
 We can fit an OU model to data in a similar way to how we fit BM models in the previous chapters. For any given parameters ($\bar{z}_0$, $\sigma^2$, $\alpha$, and $\theta$) and a phylogenetic tree with branch lengths, one can calculate an expected vector of species means and a species variance-covariance matrix. One then uses the likelihood equation for a multivariate normal distribution to calculate the likelihood of this model. This likelihood can then be used for parameter estimation in either a ML or a Bayesian framework.
 
-We can illustrate how this works by fitting an OU model to the mammal body size data that we have been discussing. Using ML, we obtain parameter estimates $\bar{z}_0 = 4.60$, $\sigma^2 = 0.10$, $\alpha = 0.0082$, and $\theta = 4.60$. This model has a lnL of -77.6, a little higher than BM, but an $AIC_c$ score of 161.2, worse than BM. We still prefer Brownian motion for these data. Over many datasets, though, OU models fit better than Brownian motion (see Harmon et al. 2010, Pennell et al. 2015).
+We can illustrate how this works by fitting an OU model to the mammal body size data that we have been discussing. Using ML, we obtain parameter estimates $\hat{\bar{z}}_0 = 4.60$, $\hat{\sigma}^2 = 0.10$, $\hat{\alpha} = 0.0082$, and $\hat{\theta} = 4.60$. This model has a lnL of -77.6, a little higher than BM, but an $AIC_c$ score of 161.2, worse than BM. We still prefer Brownian motion for these data. Over many datasets, though, OU models fit better than Brownian motion [see @Harmon2010-wg; @Pennell2013-er].
 
 ## Section 6.6: Early burst models
 
@@ -525,16 +527,16 @@ Adaptive radiations are a slippery idea. Many definitions have been proposed, so
 
 One idea, then, is that we could detect the presence of adaptive radiations by looking for bursts of trait evolution deep in the tree. If we can identify clades, like Darwin’s finches, for example, that might be adaptive radiations, we should be able to uncover this “early burst” pattern of trait evolution.
 
-The simplest way to model an early burst of evolution in a continuous trait is to use a time-varying Brownian motion model. Imagine that species in a clade evolved under a Brownian motion model, but one where the Brownian rate parameter ($\sigma^2$) slowed through time. In particular, we can follow Harmon et al. (2010) and define the rate parameter as a function of time, as:
+The simplest way to model an early burst of evolution in a continuous trait is to use a time-varying Brownian motion model. Imagine that species in a clade evolved under a Brownian motion model, but one where the Brownian rate parameter ($\sigma^2$) slowed through time. In particular, we can follow Harmon et al. [-@Harmon2010-wg] and define the rate parameter as a function of time, as:
 
 (6.57)
 <div>
 $$
-\sigma^2(t) = \sigma_0^2 e^{r t}
+\sigma^2(t) = \sigma_0^2 e^{b t}
 $$
 </div>
 
-We describe the rate of decay of the rate using the parameter $r$, which must be negative to fit our idea of adaptive radiations. The rate of evolution will slow through time, and will decay more quickly if the absolute value of $r$ is large.
+We describe the rate of decay of the rate using the parameter $b$, which must be negative to fit our idea of adaptive radiations. The rate of evolution will slow through time, and will decay more quickly if the absolute value of $b$ is large.
 
 This model also generates a multivariate normal distribution of tip values. Harmon et al. (2010) followed Blomberg's "ACDC" model to write equations for the means and variances of tips on a tree under this model, which are:
 
@@ -543,21 +545,21 @@ This model also generates a multivariate normal distribution of tip values. Harm
 $$
 \begin{array}{l}
 \mu_i(t) = \bar{z}_0 \\
-V_i(t) = \sigma_0^2 \frac{e^{r T_i}-1}{r}
-V_{ij}(t) = \sigma_0^2 \frac{e^{r s_{ij}}-1}{r}
+V_i(t) = \sigma_0^2 \frac{e^{b T_i}-1}{b}
+V_{ij}(t) = \sigma_0^2 \frac{e^{b s_{ij}}-1}{b}
 \end{array}
 $$
 </div>
 
-Again, we can generate a vector of means and a variance-covariance matrix for this model given parameter values ($\bar{z}_0$, $\sigma^2$, and $r$) and a phylogenetic tree. We can then use the multivariate normal probability distribution function to calculate a likelihood, which we can then use in a ML or Bayesian statistical framework.
+Again, we can generate a vector of means and a variance-covariance matrix for this model given parameter values ($\bar{z}_0$, $\sigma^2$, and $b$) and a phylogenetic tree. We can then use the multivariate normal probability distribution function to calculate a likelihood, which we can then use in a ML or Bayesian statistical framework.
 
-For mammal body size, the early burst model does not explain patterns of body size evolution, at least for the data considered here ($\bar{z}_0 = 4.64$, $\sigma^2 = 0.088$, $r = -0.000001$, $lnL = -78.0$, $AIC_c = 162.6$).
+For mammal body size, the early burst model does not explain patterns of body size evolution, at least for the data considered here ($\hat{\bar{z}}_0 = 4.64$, $\hat{\sigma}^2 = 0.088$, $\hat{b} = -0.000001$, $lnL = -78.0$, $AIC_c = 162.6$).
 
 ## Section 6.7: Peak shift models
 
-A second model considered by Hansen and Martins (1996) describes the circumstance where traits change in a punctuated manner. One can imagine a scenario where species evolve on an adaptive landscape with many peaks; usually, populations stay on a single peak and phenotypes do not change, but occasionally a population will transition from one peak to another. We can either assume that these changes occur at random times, with an average interval between peak shifts of , or we can associate shifts with other traits that we map on the phylogenetic tree (for example, major geographic dispersal or vicariance events, or the evolution of certain traits.
+A second model considered by Hansen and Martins [-@Hansen1996-zs] describes the circumstance where traits change in a punctuated manner. One can imagine a scenario where species evolve on an adaptive landscape with many peaks; usually, populations stay on a single peak and phenotypes do not change, but occasionally a population will transition from one peak to another. We can either assume that these changes occur at random times, defining an average interval between peak shifts, or we can associate shifts with other traits that we map on the phylogenetic tree (for example, major geographic dispersal or vicariance events, or the evolution of certain traits).
 
-We have developed peak shift models by integrating OU models and reversible-jump MCMC (Uyeda et al. 2014). The mathematics of this model are beyond the scope of this book, but follow closely from the description of the multi-rate Brownian motion model described in the section “variation in rates of trait evolution across clades,” above. In this case, when we change model parameters, we move among OU regimes, and can alter any of the OU model parameters (or ). The approach can be used to either identify parts of the tree that are evolving in separate regimes or to test particular hypotheses about the drivers of evolution.
+We have developed peak shift models by integrating OU models and reversible-jump MCMC [@Uyeda2014-ng]. The mathematics of this model are beyond the scope of this book, but follow closely from the description of the multi-rate Brownian motion model described in the section “variation in rates of trait evolution across clades,” above. In this case, when we change model parameters, we move among OU regimes, and can alter the OU model parameters $\sigma^2$ or $\alpha$. The approach can be used to either identify parts of the tree that are evolving in separate regimes or to test particular hypotheses about the drivers of evolution.
 
 ## Section 6.8: Summary
 

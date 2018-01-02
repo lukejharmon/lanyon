@@ -1,4 +1,4 @@
-[pdf version]({{ site.baseurl }}/pdf/chapter4_fitbm.pdf)
+[pdf version]({{ site.baseurl }}/pdf/chapter5_mvbm.pdf)
 
 # Chapter 5: Fitting Brownian Motion Models to Multiple Characters
 
