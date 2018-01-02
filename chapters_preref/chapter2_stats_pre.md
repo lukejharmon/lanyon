@@ -24,7 +24,7 @@ The next step is to define a test statistic, some way of measuring the patterns 
 
 If the test statistic is very different from what one would expect under the null hypothesis, then the P-value will be small: we are unlikely to obtain the test statistic seen in the data if the null hypothesis were true. In that case, we reject the null hypothesis. By contrast, if that probability is large, then there is nothing “special” about your data, at least from the standpoint of your null hypothesis. The test statistic is within the range expected under the null hypothesis, and we fail to reject that null hypothesis. Note the careful language here – in a standard frequentist framework, you never accept the null hypothesis, you simply fail to reject it.
 
-Getting back to our lizard-flipping example, we can use a frequentist approach and carry out a binomial test, which allows us to test whether a given event with two outcomes has a certain probability of success. In this case, we are interested in testing the null hypothesis that our lizard is a fair flipper; that is, that the probability of heads $p_H = 0.5$. The binomial test uses the number of “successes” (we will use the number of heads, $k = 63$) as a test statistic. We then ask whether this test statistic is either much larger or much smaller than we might expect under our null hypothesis. So, our null hypothesis is that $p_H = 0.5$; our alternative, then, is that $p_H$ takes some other value: $p_H \neq 0.5$.
+Getting back to our lizard-flipping example, we can use a frequentist approach and carry out a binomial test, which allows us to test whether a given event with two outcomes has a certain probability of success. In this case, we are interested in testing the null hypothesis that our lizard is a fair flipper; that is, that the probability of heads $p_H = 0.5$. The binomial test uses the number of “successes” (we will use the number of heads, $H = 63$) as a test statistic. We then ask whether this test statistic is either much larger or much smaller than we might expect under our null hypothesis. So, our null hypothesis is that $p_H = 0.5$; our alternative, then, is that $p_H$ takes some other value: $p_H \neq 0.5$.
 
 To carry out the test, we consider the distribution of our test statistic (the number of heads) under our null hypothesis ($p_H = 0.5$; Figure 2.1).
 
@@ -59,16 +59,16 @@ Here, L and Pr stand for likelihood and probability, D for the data, and H for t
 
 For any given model, different parameter values will generally affect the likelihood. As you might guess, we favor parameter values that give us the highest probability of obtaining the data that we see. One way to estimate parameters from data, then, is by finding the parameter values that maximize the likelihood; that is, the parameter values that give the highest likelihood, and the highest probability of obtaining the data. These estimates are then referred to as maximum likelihood (ML) estimates. In an ML framework, we suppose that the hypothesis that has the best fit to the data is the one that has the highest probability of having generated that data.  
 
-For the example above, we need to calculate the likelihood as the probability of obtaining heads 63 out of 100 lizard flips, given some model of lizard flipping. In general, we can write the likelihood for any combination of k “successes” (flips that give heads) out of n trials. We will also have one parameter, p, which will represent the probability of “success,” that is, the probability that any one flip comes up heads. We can calculate the likelihood of our data using the binomial theorem:
+For the example above, we need to calculate the likelihood as the probability of obtaining heads 63 out of 100 lizard flips, given some model of lizard flipping. In general, we can write the likelihood for any combination of H “successes” (flips that give heads) out of n trials. We will also have one parameter, $p_H$, which will represent the probability of “success,” that is, the probability that any one flip comes up heads. We can calculate the likelihood of our data using the binomial theorem:
 
 (eq. 2.2)
 <div>
 $$
-L(H|D)=Pr(D|p)= {n \choose k} p_H^k (1-p_H)^{n-k}
+L(H|D)=Pr(D|p)= {n \choose H} p_H^H (1-p_H)^{n-H}
 $$
 </div>
 
-In the example given, n = 100 and k = 63, so:
+In the example given, n = 100 and H = 63, so:
 
 (eq. 2.3)
 <div>
@@ -87,7 +87,7 @@ We could also have obtained the maximum likelihood estimate for $p_H$ through di
 (eq. 2.4)
 <div>
 $$
-\ln{L} = \ln{n \choose k} + k \ln{p_H}+ (n-k)\ln{(1-p_H)}
+\ln{L} = \ln{n \choose H} + H \ln{p_H}+ (n-H)\ln{(1-p_H)}
 $$
 </div>
 
@@ -96,7 +96,7 @@ Note that the natural log (ln) transformation changes our equation from a power 
 (eq. 2.5)
 <div>
 $$
-\frac{d \ln{L}}{dp_H} = \frac{k}{p_H} - \frac{(n-k)}{(1-p_H)}
+\frac{d \ln{L}}{dp_H} = \frac{H}{p_H} - \frac{(n-H)}{(1-p_H)}
 $$
 </div>
 
@@ -106,16 +106,16 @@ The maximum of the likelihood represents a peak, which we can find by setting th
 <div>
 $$
 \begin{array}{lcl}
-\frac{k}{\hat{p}_H} - \frac{n-k}{1-\hat{p}_H} & = & 0\\
-\frac{k}{\hat{p}_H} & = & \frac{n-k}{1-\hat{p}_H}\\
-k (1-\hat{p}_H) & = & \hat{p}_H (n-k)\\
-k-k\hat{p}_H & = & n\hat{p}_H-k\hat{p}_H\\
-k & = & n\hat{p}\\
-\hat{p}_H &=& k / n\\
+\frac{H}{\hat{p}_H} - \frac{n-H}{1-\hat{p}_H} & = & 0\\
+\frac{H}{\hat{p}_H} & = & \frac{n-H}{1-\hat{p}_H}\\
+H (1-\hat{p}_H) & = & \hat{p}_H (n-H)\\
+H-H\hat{p}_H & = & n\hat{p}_H-H\hat{p}_H\\
+H & = & n\hat{p}\\
+\hat{p}_H &=& H / n\\
 \end{array}
 $$
 </div>
-Notice that, for our simple example, $k / n = 63 / 100 = 0.63$, which is exactly equal to the maximum likelihood from figure 2.2.
+Notice that, for our simple example, $H / n = 63 / 100 = 0.63$, which is exactly equal to the maximum likelihood from figure 2.2.
 
 Maximum likelihood estimates have many desirable statistical properties. It is worth noting, however, that they will not always return accurate parameter estimates, even when the data is generated under the actual model we are considering. In fact, ML parameters can sometimes be biased. To understand what this means, we need to introduce two new concepts: bias and precision. Imagine that we were to simulate datasets under some model A with parameter a. For each simulation, we then used ML to estimate the parameter $\hat{a}$ for the simulated data. The precision of our ML estimate tells us how different, on average, each of our estimated parameters $\hat{a}_i$ are from one another. Precise estimates are estimated with less uncertainty. Bias, on the other hand, measures how close our estimates $\hat{a}_i$ are to the true value $a$. If our ML parameter estimate is biased, then the average of the $\hat{a}_i$ will differ from the true value $a$. It is not uncommon for ML estimates to be biased in a way that depends on sample size, so that the estimates get closer to the truth as sample size increases, but can be quite far off when the number of data points is small compared to the number of parameters being estimated.
 
@@ -352,7 +352,7 @@ If we consider model 2 above, the parameter $p_H$ must be estimated. We can set 
 (eq. 2.21)	 
 <div>
 $$
-Pr(H|D) = \frac{Pr(D|H) \cdot Pr(H)}{Pr(D)} = \frac{P(k|p_H,N) f(p_H)}{\int_{0}^{1} P(k|p_H,N) f(p_h) dp_H}
+Pr(H|D) = \frac{Pr(D|H) \cdot Pr(H)}{Pr(D)} = \frac{P(H|p_H,N) f(p_H)}{\int_{0}^{1} P(H|p_H,N) f(p_h) dp_H}
 $$
 </div>
 
@@ -362,7 +362,7 @@ Next we note that $Pr(D|H)$ is the likelihood of our data given the model, which
 (eq. 2.22)	 
 <div>
 $$
-Pr(H|D) = \frac{\binom{N}{k} p_H^k (1-p_H)^{N-k}}{\int_{0}^{1} \binom{N}{k} p_H^k (1-p_H)^{N-k} dp_H}
+Pr(H|D) = \frac{\binom{N}{H} p_H^H (1-p_H)^{N-H}}{\int_{0}^{1} \binom{N}{H} p_H^H (1-p_H)^{N-H} dp_H}
 $$
 </div>
 
@@ -371,7 +371,7 @@ This ugly equation is actually a beta distribution, which can be expressed more 
 (eq. 2.23)	 
 <div>
 $$
-Pr(H|D) = \frac{(N+1)!}{k!(N-k)!} p_H^k (1-p_H)^{N-k}
+Pr(H|D) = \frac{(N+1)!}{H!(N-H)!} p_H^H (1-p_H)^{N-H}
 $$
 </div>
 
@@ -481,7 +481,7 @@ Similarly, because our proposal distribution is symmetrical, $Q(p'|p) = Q(p|p')$
 (eq. 2.29)
 <div>
 $$
-P(D|p) = {N \choose k} p^k (1-p)^{N-k} = {100 \choose 63} 0.6^63 (1-0.6)^{100-63} = 0.068
+P(D|p) = {N \choose H} p^H (1-p)^{N-H} = {100 \choose 63} 0.6^63 (1-0.6)^{100-63} = 0.068
 $$
 </div>
 
@@ -489,7 +489,7 @@ Likewise,
 (eq. 2.30)	 
 <div>
 $$
-P(D|p') = {N \choose k} p'^k (1-p')^{N-k} = {100 \choose 63} 0.595^63 (1-0.595)^{100-63} = 0.064
+P(D|p') = {N \choose H} p'^H (1-p')^{N-H} = {100 \choose 63} 0.595^63 (1-0.595)^{100-63} = 0.064
 $$
 </div>
 

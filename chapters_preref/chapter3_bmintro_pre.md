@@ -8,7 +8,7 @@ Squamates, the group that includes snakes and lizards, is exceptionally diverse.
 
 Imagine that you want to use statistical approaches to understand how traits change through time. To do that, you need to have an exact mathematical specification of how evolution takes place. Obviously there are a wide variety of models of trait evolution, from simple to complex. For example, you might create a model where a trait starts with a certain value and has some constant probability of changing in any unit of time. Alternatively, you might make a model that is more detailed and explicit, and considers a large set of individuals in a population. You could assign genotypes to each individual and allow the population to change through reproduction and natural selection. In this chapter – and in comparative methods as a whole – the models we will consider will be much closer to the first of these two models. However, there are still important connections between these simple models and more realistic models of trait evolution. (see chapter 5).
 
-In the next six chapters, I will discuss models for two different types of characters. In this chapter and chapters [four]({{ site.baseurl }}/chapter4_fitbm), [five]({{ site.baseurl }}/chapter5_mvbm), and [six]({{ site.baseurl }}/chapter6_beyondbm), I will consider traits that follow continuous distributions – that is, traits that can have real-numbered values. For example, body mass in kilograms is a continuous character. I will discuss the most commonly used model for these continuous characters, Brownian motion, in this chapter and the [next](({{ site.baseurl }}/chapter4_fitbm)), while chapter [five]({{ site.baseurl }}/chapter5_mvbm) covers multivariate Brownian motion. We will go beyond Brownian motion in chapter [six]({{ site.baseurl }}/chapter6_beyondbm). In chapter [seven]({{ site.baseurl }}/chapter7_introdiscrete) and the chapters that follow it, I will cover discrete characters, characters that can occupy one of a number of distinct character states (for example, species of squamates can either be legless or have legs).
+In the next six chapters, I will discuss models for two different types of characters. In this chapter and chapters [four]({{ site.baseurl }}/chapter4_fitbm), [five]({{ site.baseurl }}/chapter5_mvbm), and [six]({{ site.baseurl }}/chapter6_beyondbm), I will consider traits that follow continuous distributions – that is, traits that can have real-numbered values. For example, body mass in kilograms is a continuous character. I will discuss the most commonly used model for these continuous characters, Brownian motion, in this chapter and the [next](({{ site.baseurl }}/chapter4_fitbm)), while chapter [five]({{ site.baseurl }}/chapter5_mvbm) covers multivariate Brownian motion. We will go beyond Brownian motion in chapter [six]({{ site.baseurl }}/chapter6_beyondbm). In chapter [seven]({{ site.baseurl }}/chapter7_introdiscrete) and the chapters that immediately follow, I will cover discrete characters, characters that can occupy one of a number of distinct character states (for example, species of squamates can either be legless or have legs).
 
 ## Section 3.2: Properties of Brownian Motion
 
@@ -36,7 +36,7 @@ Imagine that we run a Brownian motion process over a given time interval many ti
 
 ![]({{ site.baseurl }}/images/figure3-2.png)
 
-Figure 3.2. Ending character values from of 100,000 Brownian motion simulations with $\Theta = 0$, $t = 100$, and $\sigma^2 = 1$. Panel (A) shows a histogram of the outcome of these simulations, while panel (B) shows a normal Q-Q plot for these data. If the data follow a normal distribution, the points in the Q-Q plot should form a straight line.
+Figure 3.2. Ending character values from of 100,000 Brownian motion simulations with $\bar{z}(0) = 0$, $t = 100$, and $\sigma^2 = 1$. Panel (A) shows a histogram of the outcome of these simulations, while panel (B) shows a normal Q-Q plot for these data. If the data follow a normal distribution, the points in the Q-Q plot should form a straight line.
 
 Figure 3.3 shows how rate parameter $\sigma^2$ affects the rate of spread of Brownian walks. The panels show sets of 100 Brownian motion simulations run over 1000 time units for $\sigma^2 = 1$ (Panel A), $\sigma^2 = 5$ (Panel B), and $\sigma^2 = 25$ (Panel C). You can see that simulations with a higher rate parameter create a larger spread of trait values per unit time.
 
@@ -79,23 +79,25 @@ $$
 
 Note that this equation already matches the first property of Brownian motion.
 
-Next, we need to also consider the variance of these mean phenotypes, which we will call the between-population phenotypic variance ($\sigma_B^2$). Importantly, this is the same quantity we earlier described as the “variance” of traits over time – that is, the variance of mean trait values across many independent “runs” of evolutionary change over a certain time period. To calculate this quantity, we need to consider variation within our model populations. Because of our simplifying assumptions, we only need focus on additive genetic variance within each population at some time $t$, which we can denote as $\sigma_A^2$ [see @Lynch1998-em]. Additive genetic variation in a population will change over time due to genetic drift (which tends to decrease $\sigma_A^2$) and mutational input (which tends to increase $\sigma_A^2$). We can model the expected value of $\sigma_A^2$ from one generation to the next as [@Clayton1955-vd; @Lande1980-yn; @Lande1979-em].
+Next, we need to also consider the variance of these mean phenotypes, which we will call the between-population phenotypic variance ($\sigma_B^2$). Importantly, $\sigma_B^2$ is the same quantity we earlier described as the “variance” of traits over time – that is, the variance of mean trait values across many independent “runs” of evolutionary change over a certain time period. In this book, we will typically consider variation among species rather than populations. However, we will also always assume that species are made up of one population, and so we can apply the same mathematical equations across species in a phylogenetic tree.
+
+To calculate $\sigma_B^2$, we need to consider variation within our model populations. Because of our simplifying assumptions, we only need focus on additive genetic variance within each population at some time $t$, which we can denote as $\sigma_a^2$ [see @Lynch1998-em]. Additive genetic variation in a population will change over time due to genetic drift (which tends to decrease $\sigma_a^2$) and mutational input (which tends to increase $\sigma_a^2$). We can model the expected value of $\sigma_a^2$ from one generation to the next as [@Clayton1955-vd; @Lande1980-yn; @Lande1979-em].
 
 (eq. 3.2)
 <div>
 $$
-E[\sigma_A^2 (t+1)]=(1-\frac{1}{2 N_e})E[\sigma_A^2 (t)]+\sigma_m^2
+E[\sigma_a^2 (t+1)]=(1-\frac{1}{2 N_e})E[\sigma_a^2 (t)]+\sigma_m^2
 $$
 </div>
 
-where t is the elapsed time in generations, $N_e$ is the effective population size, and $\sigma_m^2$ is the mutational variance. You can see from this equation that additive genetic variance at time $t+1$ depends on inheritance ($\sigma_A^2$ in generation $t+1$ depends on $\sigma_A^2$ in generation $t$), genetic drift ($\sigma_A^2$ decreases each generation by a factor that depends on effective population size, $N_e$), and mutation ($\sigma_A^2$ increases by $\sigma_m^2$ each generation).
+where t is the elapsed time in generations, $N_e$ is the effective population size, and $\sigma_m^2$ is the mutational variance. You can see from this equation that additive genetic variance at time $t+1$ depends on inheritance ($\sigma_a^2$ in generation $t+1$ depends on $\sigma_a^2$ in generation $t$), genetic drift ($\sigma_a^2$ decreases each generation by a factor that depends on effective population size, $N_e$), and mutation ($\sigma_a^2$ increases by $\sigma_m^2$ each generation).
 
-If we assume that we know the starting value at time 0, $\sigma_A^2(0)$, we can calculate the expected additive genetic variance at any time $t$ as:
+If we assume that we know the starting value at time 0, $\sigma_a^2(0)$, we can calculate the expected additive genetic variance at any time $t$ as:
 
 (eq. 3.3)
 <div>
 $$
-E[\sigma_A^2 (t)]={(1-\frac{1}{2 N_e})}^t [\sigma_A^2 (0) - 2 N_e \sigma_m^2 ]+ 2 N_e \sigma_m^2
+E[\sigma_a^2 (t)]={(1-\frac{1}{2 N_e})}^t [\sigma_a^2 (0) - 2 N_e \sigma_m^2 ]+ 2 N_e \sigma_m^2
 $$
 </div>
 
@@ -104,37 +106,35 @@ Note that the first term in the above equation, ${(1-\frac{1}{2 N_e})}^t$, goes 
 (eq. 3.4)
 <div>
 $$
-\lim_{t\to\infty} E[\sigma_A^2 (t)] = 2 N_e \sigma_m ^2
+\lim_{t\to\infty} E[\sigma_a^2 (t)] = 2 N_e \sigma_m ^2
 $$
 </div>
 
 Thus the equilibrium genetic variance depends on both population size and mutational input.
 
-We can now derive the between-population phenotypic variance at time $t$, $\sigma_B^2 (t)$. We will assume that $\sigma_A^2$ is at equilibrium and thus constant (equation 3.4). Mean trait values in independently evolving populations will diverge from one another. After some time period $t$ has elapsed, that the expected among-population variance will be [from @Lande1976-ol]:
+We can now derive the between-population phenotypic variance at time $t$, $\sigma_B^2 (t)$. We will assume that $\sigma_a^2$ is at equilibrium and thus constant (equation 3.4). Mean trait values in independently evolving populations will diverge from one another. After some time period $t$ has elapsed, that the expected among-population variance will be [from @Lande1976-ol]:
 
 (eq. 3.5)
 <div>
 $$
-\sigma_B^2 (t)=\frac{t \sigma_A^2}{N_e}
+\sigma_B^2 (t)=\frac{t \sigma_a^2}{N_e}
 $$
 </div>
 
 
 
-Substituting the equilibrium value of   from equation 3.4 into equation 3.5 gives [@Lande1980-yn; @Lande1979-em]:
+Substituting the equilibrium value of $sigma_a^2$ from equation 3.4 into equation 3.5 gives [@Lande1980-yn; @Lande1979-em]:
 
 (eq. 3.6)
 <div>
 $$
-\sigma_B^2 (t)=\frac{t \sigma_A^2}{N_e} = \frac{t \cdot 2 N_e \sigma_m^2}{N_e} = 2 t \sigma_m^2
+\sigma_B^2 (t)=\frac{t \sigma_a^2}{N_e} = \frac{t \cdot 2 N_e \sigma_m^2}{N_e} = 2 t \sigma_m^2
 $$
 </div>
 
-
-
 Notice that for this model, the  amount of variation among populations depends only on the rate of mutational input, and is independent of both the starting state of the populations and their effective population size. This model predicts, then, that long-term rates of evolution are dominated by the supply of new mutations to a population.
 
-Lynch and Hill [-@Lynch1986-xl] show that equation 3.6 is a general result that holds under a range of models, even those that include dominance, linkage, nonrandom mating, and other processes. Equation 3.6 is somewhat useful, but we cannot often measure the mutational variance  $\sigma_m ^2$ for any natural populations [but see @Turelli1984-ic]. To address this, we can consider the expected heritability for the infinite alleles model at mutational equilibrium. Heritability describes the proportion of total genetic variation within a population ($\sigma_w ^2$) that is due to additive genetic effects ($\sigma_a ^2$): $h^2=\frac{\sigma_A^2}{\sigma_w^2}$. Substituting equation 3.4, we find that:
+Lynch and Hill [-@Lynch1986-xl] show that equation 3.6 is a general result that holds under a range of models, even those that include dominance, linkage, nonrandom mating, and other processes. Equation 3.6 is somewhat useful, but we cannot often measure the mutational variance  $\sigma_m ^2$ for any natural populations [but see @Turelli1984-ic]. To address this, we can consider the expected heritability for the infinite alleles model at mutational equilibrium. Heritability describes the proportion of total genetic variation within a population ($\sigma_w ^2$) that is due to additive genetic effects ($\sigma_a ^2$): $h^2=\frac{\sigma_a^2}{\sigma_w^2}$. Substituting equation 3.4, we find that:
 
 (eq. 3.7)
 <div>
@@ -152,7 +152,7 @@ $$
 $$
 </div>
 
-Here, $h^2$ is heritability, $N_e$ the effective population size, and $\sigma_w^2$ the within-population phenotypic variance, which differs from $\sigma_A^2$ because it includes all sources of variation within populations, including both non-additive genetic effects and environmental effects. Substituting this expression for $\sigma_w^2$ into equation 3.6, we have:
+Here, $h^2$ is heritability, $N_e$ the effective population size, and $\sigma_w^2$ the within-population phenotypic variance, which differs from $\sigma_a^2$ because it includes all sources of variation within populations, including both non-additive genetic effects and environmental effects. Substituting this expression for $\sigma_w^2$ into equation 3.6, we have:
 
 (eq. 3.9)
 <div>
@@ -165,7 +165,7 @@ So, after some time interval $t$, the mean phenotype of a population has an expe
 
 To derive this result, we had to make particular assumptions about normality of new mutations that might seem quite unrealistic. It is worth noting that if phenotypes are affected by enough mutations, the central limit theorem guarantees that the distribution of phenotypes within populations will be normal – no matter what the underlying distribution of those mutations might be. We also had to assume that traits are neutral, a more dubious assumption that we relax below.
 
-Note, finally, that this quantitative genetics model predicts that traits will evolve under a Brownian motion model. Thus, our quantitative genetics model has the same statistical properties of Brownian motion. We only need to match the parameters: $\Theta = \bar{z}(0)$, and $\sigma^2 = h^2 \sigma_w^2 / N_e$. In some cases in the literature, the magnitude of trait change is expressed in within-population phenotypic standard deviations, $\sqrt{\sigma_w^2}$, per generation [e.g. @Harmon2010-wg; @Estes2007-mi]. In that case, since dividing a random normal deviate by $x$ is equivalent to dividing its variance by $x^2$, we have $\sigma^2 = h^2 / N_e$.
+Note, finally, that this quantitative genetics model predicts that traits will evolve under a Brownian motion model. Thus, our quantitative genetics model has the same statistical properties of Brownian motion. We only need to translate one parameter: $\sigma^2 = h^2 \sigma_w^2 / N_e$. In some cases in the literature, the magnitude of trait change is expressed in within-population phenotypic standard deviations, $\sqrt{\sigma_w^2}$, per generation [e.g. @Harmon2010-wg; @Estes2007-mi]. In that case, since dividing a random normal deviate by $x$ is equivalent to dividing its variance by $x^2$, we have $\sigma^2 = h^2 / N_e$.
 
 ### Section 3.3b: Brownian motion under selection
 
@@ -193,6 +193,8 @@ $$
 
 That is, the drift rate when selection is (on average) much stronger than drift is completely dominated by the selection term. This is not that far fetched, as many studies have shown selection in the wild that is both stronger than drift and commonly changing in both direction and magnitude from one generation to the next.
 
+The important take-home point here, though, is that the pattern of trait evolution through time under this model still follows a Brownian motion model, even though changes are dominated by selection and not drift. In other words, Brownian motion evolution does not imply that characters are not under selection!
+
 In a second model, Hansen and Martins [-@Hansen1996-zs] consider a population subject to strong stabilizing selection for a particular optimal value, but where the position of the optimum itself changes randomly according to a Brownian motion process. In this case, population means can again be described by Brownian motion, but now the rate parameter reflects movement of the optimum rather than the action of mutation and drift. Specifically, if we describe movement of the optimum by a Brownian rate parameter $\sigma_E^2$, then:
 
 (eq. 3.12)
@@ -202,7 +204,9 @@ $$
 $$
 </div>
 
-To obtain this result we must assume that the strength of stabilizing selection is not very weak [at least on the order of $1/t_{ij}$ where $t_{ij}$ is the number of generations separating pairs of populations; @Hansen1996-zs]. Again in this case, the rate of the random walk is totally determined by the action of selection rather than drift.
+To obtain this result we must assume that the strength of stabilizing selection is not very weak [at least on the order of $1/t_{ij}$ where $t_{ij}$ is the number of generations separating pairs of populations; @Hansen1996-zs].
+
+Again in this case, the population is under strong selection in any one generation, but long-term patterns of trait change can be described by Brownian motion. The rate of the random walk is totally determined by the action of selection rather than drift.
 
 Finally, Hansen and Martins [-@Hansen1996-zs] consider the situation where populations evolve following a trend. In this case, we get evolution that is different from Brownian motion, but shares some key attributes. Consider a population under constant directional selection, $s$, so that:
 
@@ -242,18 +246,20 @@ $$
 $$
 </div>
 
-Note that the variance of this process is exactly identical to the variance among populations in a pure drift model (equation 3.9). Selection only changes the expectation for the species mean (of course, we assume that variation within populations and heritability are constant, which will only be true if selection is quite weak). In fact, equations 3.14 and 3.16 are exactly the same as what we would expect under a pure-drift model in the same population, but starting with a trait value equal to $\Theta = t \cdot (h^2 s)$ . That is, from the perspective of data only on living species, these two pure drift and linear selection models are statistically indistinguishable.  The implications of this are striking: we can never find evidence for trends in evolution studying only living species.
+Note that the variance of this process is exactly identical to the variance among populations in a pure drift model (equation 3.9). Selection only changes the expectation for the species mean (of course, we assume that variation within populations and heritability are constant, which will only be true if selection is quite weak). In fact, equations 3.14 and 3.16 are exactly the same as what we would expect under a pure-drift model in the same population, but starting with a trait value equal to $\bar{z}(0) = t \cdot (h^2 s)$ . That is, from the perspective of data only on living species, these two pure drift and linear selection models are statistically indistinguishable.  The implications of this are striking: we can never find evidence for trends in evolution studying only living species.
 
-In summary, we can describe three very different ways that traits might evolve under Brownian motion – pure drift, randomly varying selection, and varying stabilizing selection  – and one model, constant directional selection, which creates patterns among extant species that are indistinguishable from Brownian motion. There are certainly more such models, with a variety of assumptions. You might notice that none of these “Brownian” models are particularly detailed, especially for modeling evolution over long time scales. It is hard to imagine a case where a trait might be influenced only by random mutations of small effect over many alleles, or where selection would act in a truly random way from one generation to the next for millions of years. However, there are tremendous statistical benefits to using Brownian models for comparative analyses. Many of the results derived in this book, for example, are simple under Brownian motion but much more complex and different under other models.
+In summary, we can describe three very different ways that traits might evolve under Brownian motion – pure drift, randomly varying selection, and varying stabilizing selection  – and one model, constant directional selection, which creates patterns among extant species that are indistinguishable from Brownian motion. There are certainly more such models, with a variety of assumptions. One can never tell them apart by evaluating the qualitative pattern of evolution across species - they all predict the same pattern of Brownian motion evolution. The details differ, in that the models have Brownian motion rate parameters that differ from one another and relate to measurable quantities like population size and the strength of selection. Only by knowing something about these parameters can we distinguish among these possible scenarios.
+
+You might notice that none of these “Brownian” models are particularly detailed, especially for modeling evolution over long time scales. You might even complain that these models are unrealistic. It is hard to imagine a case where a trait might be influenced only by random mutations of small effect over many alleles, or where selection would act in a truly random way from one generation to the next for millions of years. And you would be right! However, there are tremendous statistical benefits to using Brownian models for comparative analyses. Many of the results derived in this book, for example, are simple under Brownian motion but much more complex and different under other models. And it is also the case that some (but not all) methods are robust to modest violations of Brownian motion, in the same way that many standard statistical analyses are robust to minor variations of the assumptions of normality. In any case, we will proceed with models based on Brownian motion, keeping in mind these caveats.
 
 ## Section 3.4: Brownian motion on a phylogenetic tree
 
-We can use the basic properties of Brownian motion model to figure out what will happen when characters evolve under this model on the branches of a phylogenetic tree. First, consider evolution along a single branch with length $t_1$ (Figure 3.4A). In this case, we can model simple Brownian motion over time $t_1$ and denote the starting value as $\bar{z}(0)$. If we evolve with some rate parameter $\sigma^2$, then:
+We can use the basic properties of Brownian motion model to figure out what will happen when characters evolve under this model on the branches of a phylogenetic tree. First, consider evolution along a single branch with length $t_1$ (Figure 3.4A). In this case, we can model simple Brownian motion over time $t_1$ and denote the starting value as $\bar{z}(0)$. If we evolve with some rate parameter $\sigma_B^2$, then:
 
 (eq. 3.17)
 <div>
 $$
-E[\bar{z}(t)] \sim N(\bar{z}(0), \sigma^2 t_1)
+E[\bar{z}(t)] \sim N(\bar{z}(0), \sigma_B^2 t_1)
 $$
 </div>
 
@@ -261,12 +267,12 @@ $$
 
 Figure 3.4. Brownian motion on a simple tree. A. Evolution in a single lineage over time period $t_1$. B. Evolution on a phylogenetic tree relating species a and b, with branch lengths as given by $t_1$, $t_2$, and $t_3$.
 
-Now consider a small section of a phylogenetic tree including two species and an ancestral stem branch (Figure 3.4B). Assume a character evolves on that tree under Brownian motion, again with starting value $\bar{z}(0)$ and rate parameter $\sigma^2$. First consider species a. The mean trait in that species $\bar{x_a}$ evolves under Brownian motion from the ancestor to species a over a total time of $t1+t2$. Thus,
+Now consider a small section of a phylogenetic tree including two species and an ancestral stem branch (Figure 3.4B). Assume a character evolves on that tree under Brownian motion, again with starting value $\bar{z}(0)$ and rate parameter $\sigma_B^2$. First consider species a. The mean trait in that species $\bar{x}_a$ evolves under Brownian motion from the ancestor to species a over a total time of $t1+t2$. Thus,
 
 (eq. 3.18)
 <div>
 $$
-\bar{x_a} \sim N[\bar{z}(0),\sigma^2 (t_1+t_2)]
+\bar{x}_a \sim N[\bar{z}(0), \sigma_B^2 (t_1+t_2)]
 $$
 </div>
 
@@ -276,33 +282,33 @@ Similarly for species b, over a total time of $t1+t3$
 (eq. 3.19)
 <div>
 $$
-\bar{x_b} \sim N[\bar{z}(0),\sigma^2 (t_1+t_3)]
+\bar{x}_b \sim N[\bar{z}(0),\sigma_B^2 (t_1+t_3)]
 $$
 </div>
 
-However, $\bar{x_a}$ and $\bar{x_b}$ are not independent of each other. Instead, the two species share one branch in common (along branch 1). Each tip trait value can be thought of as the sum of two normal deviates, one (from branch 1) that is shared between the two species and one that is unique (branch 2 for species a and branch 3 for species b). In this case, mean trait values $\bar{x_a}$ and $\bar{x_b}$ will share similarity due to their shared evolutionary history. We can describe this similarity by calculating the covariance between the traits of species a and b. We note that:
+However, $\bar{x}_a$ and $\bar{x}_b$ are not independent of each other. Instead, the two species share one branch in common (along branch 1). Each tip trait value can be thought of as the sum of two normal deviates, one (from branch 1) that is shared between the two species and one that is unique (branch 2 for species a and branch 3 for species b). In this case, mean trait values $\bar{x}_a$ and $\bar{x}_b$ will share similarity due to their shared evolutionary history. We can describe this similarity by calculating the covariance between the traits of species a and b. We note that:
 
 (eq. 3.20)
 <div>
 $$
 \begin{array}{lcr}
-\bar{x_a} = \Delta \bar{x_1} + \Delta \bar{x_2}\\
-\bar{x_b} = \Delta \bar{x_1} + \Delta \bar{x_3}\\
+\bar{x}_a = \Delta \bar{x}_1 + \Delta \bar{x}_2\\
+\bar{x}_b = \Delta \bar{x}_1 + \Delta \bar{x}_3\\
 \end{array}
 $$
 </div>
 
 
-Where $\Delta \bar{x_1}$, $\Delta \bar{x_2}$, and $\Delta \bar{x_3}$ represent evolution along the three branches in the tree, are all normally distributed with mean zero and variances $\sigma2 t1$, $\sigma2 t2$, and $\sigma2 t3$, respectively. $\bar{x_a}$ and $\bar{x_b}$ are sums of normal random variables and are themselves normal. The covariance of these two terms is simply the variance of their shared term:
+Where $\Delta \bar{x}_1$, $\Delta \bar{x}_2$, and $\Delta \bar{x}_3$ represent evolution along the three branches in the tree, are all normally distributed with mean zero and variances $\sigma^2 t_1$, $\sigma^2 t_2$, and $\sigma^2 t_3$, respectively. $\bar{x}_a$ and $\bar{x}_b$ are sums of normal random variables and are themselves normal. The covariance of these two terms is simply the variance of their shared term:
 
 (eq. 3.21)
 <div>
 $$
-cov(\bar{x_a},\bar{x_b})=var(\Delta \bar{x_1})=\sigma^2 t_1
+cov(\bar{x}_a,\bar{x}_b)=var(\Delta \bar{x}_1)=\sigma_B^2 t_1
 $$
 </div>
 
-In fact, the trait values for the two species are drawn from a multivariate normal distribution. Each trait has the same expected value, $\Theta$, and the two traits have a variance-covariance matrix:
+In fact, the trait values for the two species are drawn from a multivariate normal distribution. Each trait has the same expected value, $\bar{z}(0)$, and the two traits have a variance-covariance matrix:
 
 (eq. 3.22)
 <div>
@@ -319,7 +325,7 @@ $$
 $$
 </div>
 
-The matrix on the right side of equation 3.22 is commonly encountered in comparative biology, and will come up again in this book. We will call this matrix the phylogenetic variance-covariance matrix, $\mathbf{C}$. This matrix has a special structure. For phylogenetic trees with $n$ species, this is an $n x n$ matrix, with each row and column corresponding to one of the $n$ taxa in the tree. Along the diagonal are the total distances of each taxon from the root of the tree, while the off-diagonal elements are the total branch lengths shared by particular pairs of taxa. For example, $\mathbf{C}(1,2)$ and $\mathbf{C}(2,1)$ – which are equal because the matrix $\mathbf{C}$ is always symmetric – is the shared phylogenetic path length between the species in the first row – here, species a - and the species in the second row – here, species b. Under Brownian motion, these shared path lengths are proportional to the phylogenetic covariances of trait values. A full example of a phylogenetic variance-covariance matrix for a small tree is shown in Figure 3.5. This multivariate normal distribution completely describes the expected statistical distribution of traits on the tips of a phylogenetic tree if the traits evolve according to a Brownian motion model.
+The matrix on the right side of equation 3.22 is commonly encountered in comparative biology, and will come up again in this book. We will call this matrix the phylogenetic variance-covariance matrix, $\mathbf{C}$. This matrix has a special structure. For phylogenetic trees with $n$ species, this is an $n \times n$ matrix, with each row and column corresponding to one of the $n$ taxa in the tree. Along the diagonal are the total distances of each taxon from the root of the tree, while the off-diagonal elements are the total branch lengths shared by particular pairs of taxa. For example, $\mathbf{C}(1,2)$ and $\mathbf{C}(2,1)$ – which are equal because the matrix $\mathbf{C}$ is always symmetric – is the shared phylogenetic path length between the species in the first row – here, species a - and the species in the second row – here, species b. Under Brownian motion, these shared path lengths are proportional to the phylogenetic covariances of trait values. A full example of a phylogenetic variance-covariance matrix for a small tree is shown in Figure 3.5. This multivariate normal distribution completely describes the expected statistical distribution of traits on the tips of a phylogenetic tree if the traits evolve according to a Brownian motion model.
 
 ![]({{ site.baseurl }}/images/figure3-5.jpeg)
 
@@ -329,9 +335,9 @@ Figure 3.5. Example of a phylogenetic tree (left) and its associated phylogeneti
 
 The Brownian motion model we described above was for a single character. However, we often want to consider more than one character at once. This requires the use of multivariate models. The situation is more complex than the univariate case – but not much! In this section I will derive the expectation for a set of (potentially correlated) traits evolving together under a multivariate Brownian motion model.
 
-Character values across species can covary because of phylogenetic relationships, because different characters tend to evolve together, or both. Fortunately, we can generalize the model described above to deal with both of these types of covariation. To do this, we must combine two variance-covariance matrices. The first one, $\mathbf{C}$, we have already seen; it describes the variances and covariances across *species* for single traits due to shared evolutionary history along the branches of a phylogentic tree. The second variance-covariance matrix, which we can call $\mathbf{R}$, describes the variances and covariances across *traits* due to their tendencies to evolve together. For example, if a species of lizard gets larger due to the action of natural selection, then many of its other traits, like head and limb size, will get larger too due to allometry. The diagonal entries of the matrix $\mathbf{R}$ will provide our estimates of $\sigma_i^2$, the net rate of evolution, for each trait, while off-diagonal elements represent evolutionary covariances between pairs of traits. We will denote number of species as $n$ and the number of traits as $m$, so that $\mathbf{C}$ is $n \times n$ and $\mathbf{R}$ is $m \times m$.
+Character values across species can covary because of phylogenetic relationships, because different characters tend to evolve together, or both. Fortunately, we can generalize the model described above to deal with both of these types of covariation. To do this, we must combine two variance-covariance matrices. The first one, $\mathbf{C}$, we have already seen; it describes the variances and covariances across *species* for single traits due to shared evolutionary history along the branches of a phylogentic tree. The second variance-covariance matrix, which we can call $\mathbf{R}$, describes the variances and covariances across *traits* due to their tendencies to evolve together. For example, if a species of lizard gets larger due to the action of natural selection, then many of its other traits, like head and limb size, will get larger too due to allometry. The diagonal entries of the matrix $\mathbf{R}$ will provide our estimates of $\sigma_i^2$, the net rate of evolution, for each trait, while off-diagonal elements, $\sigma_{ij}$, represent evolutionary covariances between pairs of traits. We will denote number of species as $n$ and the number of traits as $m$, so that $\mathbf{C}$ is $n \times n$ and $\mathbf{R}$ is $m \times m$.
 
-Our multivariate model of evolution has parameters that can be described by an $m \times 1$ vector, $\mathbf{a}$, containing the starting values for each trait – $\bar{z_1}(0)$, $\bar{z_2}(0)$, and so on, up to $\bar{z_m}(0)$, and an $m x m$ matrix, $\mathbf{R}$, described above. This model has $m$ parameters for $\mathbf{a}$ and $m \cdot (m+1)/2$ parameters for $\mathbf{R}$, for a total of $m\cdot(m+3)/2$ parameters.
+Our multivariate model of evolution has parameters that can be described by an $m \times 1$ vector, $\mathbf{a}$, containing the starting values for each trait – $\bar{z}_1(0)$, $\bar{z}_2(0)$, and so on, up to $\bar{z}_m(0)$, and an $m \times m$ matrix, $\mathbf{R}$, described above. This model has $m$ parameters for $\mathbf{a}$ and $m \cdot (m+1)/2$ parameters for $\mathbf{R}$, for a total of $m\cdot(m+3)/2$ parameters.
 
 Under our multivariate Brownian motion model, the joint distribution of all traits across all species still follows a multivariate normal distribution. We find the variance-covariance matrix that describes all characters across all species by combining the two matrices $\mathbf{R}$ and $\mathbf{C}$ into a single large matrix using the Kroeneker product:
 
@@ -352,8 +358,8 @@ $$
 \begin{array}{lcr}
 \mathbf{a} =
 \begin{bmatrix}
-    \bar{z_1}(0) \\
-    \bar{z_2}(0) \\
+    \bar{z}_1(0) \\
+    \bar{z}_2(0) \\
 \end{bmatrix} \\
 \mathbf{R} =
 \begin{bmatrix}
@@ -412,7 +418,7 @@ $$
 $$
 </div>
 
-Thus, the four trait values (two traits for two species) are drawn from a multivariate normal distribution with mean $a=[\bar{z_1}(0), \bar{z_1}(0), \bar{z_2}(0), \bar{z_2}(0)]$ and the variance-covariance matrix shown above.
+Thus, the four trait values (two traits for two species) are drawn from a multivariate normal distribution with mean $a=[\bar{z}_1(0), \bar{z}_1(0), \bar{z}_2(0), \bar{z}_2(0)]$ and the variance-covariance matrix shown above.
 
 Both univariate and multivariate Brownian motion models result in traits that follow multivariate normal distributions. This is statistically convenient, and in part explains the popularity of Brownian models in comparative biology.
 
@@ -420,14 +426,14 @@ Both univariate and multivariate Brownian motion models result in traits that fo
 
 To simulate Brownian motion evolution on trees, we use the three properties of the model described above. For each branch on the tree, we can draw from a normal distribution (for a single trait) or a multivariate normal distribution (for more than one trait) to determine the evolution that occurs on that branch. We can then add these evolutionary changes together to obtain character states at every node and tip of the tree.
 
-I will illustrate one such simulation for the simple tree depicted in figure 3.4b. We first set the ancestral character state to be θ, which will then be the expected value for all the nodes and tips in the tree. This tree has three branches, so we draw three values from normal distributions. These normal distributions have variances that are given by the rate of evolution and the branch length of the tree, as stated in equation 3.1. Note that we are modeling changes on these branches, so even if $\bar{z_1}(0) ≠ 0$ the values for changes on branches are drawn from a distribution with a mean of zero. In the case of the tree in Figure 3.1, $x1 \sim N(0, \sigma^2 t_1)$. Similarly, $x2 \sim N(0, \sigma^2 t_2)$ and $x3 \sim N(0, \sigma^2 t_3)$. If I set $\sigma^2 = 1$ for the purposes of this example, I might obtain $x_1 = -1.6$, $x_2 = 0.1$, and $x_3 = -0.3$. These values represent the evolutionary changes that occur along branches in the simulation. To calculate trait values for species, we add: $x_a = θ + x_1 + x_2 = 0 - 1.6 + 0.1 = -1.5$, and $x_b = θ + x_1 + x_3 = 0 -1.6 + -0.3 = -1.9$.
+I will illustrate one such simulation for the simple tree depicted in figure 3.4b. We first set the ancestral character state to be $\bar{z}(0)$, which will then be the expected value for all the nodes and tips in the tree. This tree has three branches, so we draw three values from normal distributions. These normal distributions have variances that are given by the rate of evolution and the branch length of the tree, as stated in equation 3.1. Note that we are modeling changes on these branches, so even if $\bar{z}(0) ≠ 0$ the values for changes on branches are drawn from a distribution with a mean of zero. In the case of the tree in Figure 3.1, $x_1 \sim N(0, \sigma^2 t_1)$. Similarly, $x_2 \sim N(0, \sigma^2 t_2)$ and $x_3 \sim N(0, \sigma^2 t_3)$. If I set $\sigma^2 = 1$ for the purposes of this example, I might obtain $x_1 = -1.6$, $x_2 = 0.1$, and $x_3 = -0.3$. These values represent the evolutionary changes that occur along branches in the simulation. To calculate trait values for species, we add: $x_a = θ + x_1 + x_2 = 0 - 1.6 + 0.1 = -1.5$, and $x_b = θ + x_1 + x_3 = 0 -1.6 + -0.3 = -1.9$.
 
-This simulation algorithm works fine but is actually more complicated than it needs to be, especially for large trees. We already know that xA and xB come from a multivariate normal distribution with known mean vector and variance-covariance matrix. We can simply draw a vector from this distribution, and our tip values will have exactly the same statistical properties as if they were simulated on a phylogenetic tree. These two methods for simulating character evolution on trees are exactly equivalent to one another.
+This simulation algorithm works fine but is actually more complicated than it needs to be, especially for large trees. We already know that $x_a$ and $x_b$ come from a multivariate normal distribution with known mean vector and variance-covariance matrix. So, as a simple alternative, we can simply draw a vector from this distribution, and our tip values will have exactly the same statistical properties as if they were simulated on a phylogenetic tree. These two methods for simulating character evolution on trees are exactly equivalent to one another. In our small example, this alternative is not too much simpler than just adding the branches - but in some circumstances it is much easier to draw from a multivariate normal distribution.
 
-In this chapter, we consider Brownian motion, and first connected that process to a model of genetic drift for traits that have no effect on fitness. However, Brownian motion can result from a variety of other models, some of which include natural selection. For example, traits will follow Brownian motion under selection is if the strength and direction of selection varies randomly through time. As the time intervals between samples becomes large relative to the frequency of selection, then evolution will follow a Brownian model.
+In this chapter, we consider Brownian motion. We first connected Brownian motion to a model of neutral genetic drift for traits that have no effect on fitness. However, as I demonstrated, Brownian motion can result from a variety of other models, some of which include natural selection. For example, traits will follow Brownian motion under selection is if the strength and direction of selection varies randomly through time. As the time intervals between samples becomes large relative to the frequency of selection, then evolution will follow a Brownian model. In other words, testing for a Brownian motion model with your data tells you nothing about whether or not the trait is under selection.
 
-There is a general feature of models that evolve in a Brownian way: they involve the action of a large number of very small “forces” pushing on characters. No matter the particular distribution of these small effects or even what causes them, if you add together enough of them you will obtain a normal distribution of outcomes and, sometimes, be able to model this process using Brownian motion. The main restriction might be the unbounded nature of Brownian motion – species are expected to become more and more different through time, without any limit, which must be unrealistic over very long time scales.
+There is one general feature of all models that evolve in a Brownian way: they involve the action of a large number of very small “forces” pushing on characters. No matter the particular distribution of these small effects or even what causes them, if you add together enough of them you will obtain a normal distribution of outcomes and, sometimes, be able to model this process using Brownian motion. The main restriction might be the unbounded nature of Brownian motion – species are expected to become more and more different through time, without any limit, which must be unrealistic over very long time scales. We will deal with this issue in later chapters.
 
 In summary, Brownian motion is mathematically tractable, and has convenient statistical properties. There are also some circumstances under which one would expect traits to evolve under a Brownian model. However, as we will see later in the book, one should view Brownian motion as an assumption that might not hold for real data sets.
 
-## Chapter 3 References
+## References
