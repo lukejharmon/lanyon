@@ -224,7 +224,7 @@ r_{n-1} & \dots r_{k(k-1)/2} & \cdot \\
 $$
 </div>
 
-In this equation I have left the diagonal of the first matrix as dots. The final $\mathbf{Q}$-matrix must have all rows sum to one, so one can adjust the values of that matrix after the multiplication step.
+In this equation I have left the diagonal of the first matrix as dots. The final $\mathbf{Q}$-matrix$ must have all rows sum to one, so one can adjust the values of that matrix after the multiplication step.
 
 In the case of a two-state model, for example, we can create a model where the forward rate is double the backward rate, and the equilibrium frequency of character one is 0.75. Then:
 
@@ -253,7 +253,7 @@ $$
 $$
 </div>
 
-It is worth noting that this approach of setting parameters that define equilibrium state frequences, although borrowed from molecular evolution, is not completely standard in the comparative methods literature. One also sees equilibrium frequencies treated as a fixed property of the model, and assumed to be either equal across states or tied directly to the parameters in the \mathbf{Q}-matrix.
+It is worth noting that this approach of setting parameters that define equilibrium state frequences, although borrowed from molecular evolution, is not completely standard in the comparative methods literature. One also sees equilibrium frequencies treated as a fixed property of the model, and assumed to be either equal across states or tied directly to the parameters in the $\mathbf{Q}$-matrix.
 
 The second common extension of the Mk model is called the all-rates-different model [ARD; @Paradis2004-xk]. In this model every possible type of transition can have a different rate. There are thus $k (k - 1)$ free rate parameters for this model, and again $n - 1$ parameters to specify the equilibrium frequencies of the character states.
 
