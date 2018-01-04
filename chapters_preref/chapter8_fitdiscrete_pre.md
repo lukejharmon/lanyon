@@ -6,7 +6,7 @@
 
 In the introduction to Chapter 7, I mentioned that squamates had lost their limbs repeatedly over their evolutionary history. This is a pattern that has been known for decades, but analyses have been limited by the lack of a large, well-supported species-level phylogenetic tree of squamates [but see @Brandley2008-wr]. Only in the past few years have phylogenetic trees been produced at a scale broad enough to take a comprehensive look at this question [e.g. @Bergmann2012-vm; @Pyron2013-pk; see Figure 8.1). Such efforts to reconstruct this section of the tree of life provide exciting potential to revisit old questions with new data.
 
-![Figure 8.1. A view of the squamate tree of life. Data from Bergmann et al. [-@Bergmann2012-vm], visualized using OneZoom [@Rosindell2012-bo; see www.onezoom.org].]({{ site.baseurl }}/images/figure8-1.png)
+![Figure 8.1. A view of the squamate tree of life. Data from Bergmann et al. [-@Bergmann2012-vm], visualized using OneZoom [@Rosindell2012-bo; see [www.onezoom.org](http://www.onezoom.org)].]({{ site.baseurl }}/images/figure8-1.png)
 
 Plotting the pattern of limbed and limbless species on the tree leads to interesting questions about the tempo and mode of this trait in squamates. For example, are there multiple gains as well as losses of limbs? Do gains and losses happen at the same rate, or (as we might expect) are gains more rare than losses? We can test hypothesis such as these using the the Mk and extended-Mk models (see chapter 7). In this chapter we will fit these models to phylogenetic comparative data.
 
@@ -231,19 +231,25 @@ b.	The proposal density ratio, $R_{proposal}$. In this case our proposal density
 
 ## Exploring Mk: the "total garbage" test
 
-One problem that arises sometimes in maximum likelihood optimization happens when instead of a peak, the likelihood surface has a long flat “ridge” of equally likely parameter values. In the case of the Mk model, it is common to find that all values of q greater than a certain value have the same likelihood. This is because above a certain rate, evolution has been so rapid that all traces of the history of evolution of that character have been obliterated. After this point, character states of each lineage are random, and have no relationship to the shape of the phylogenetic tree. Our optimization techniques will not work in this case because there is no value of q that has a higher likelihood than other values. Once we get onto the ridge, all values of q have the same likelihood.
+One problem that arises sometimes in maximum likelihood optimization happens when instead of a peak, the likelihood surface has a long flat “ridge” of equally likely parameter values. In the case of the Mk model, it is common to find that all values of $q$ greater than a certain value have the same likelihood. This is because above a certain rate, evolution has been so rapid that all traces of the history of evolution of that character have been obliterated. After this point, character states of each lineage are random, and have no relationship to the shape of the phylogenetic tree. Our optimization techniques will not work in this case because there is no value of q that has a higher likelihood than other values. Once we get onto the ridge, all values of $q$ have the same likelihood.
 
-For Mk models, there is a simple test that allows us to recognize when the likelihood surface has a long ridge, and q values cannot be estimated. I like to call this test the “total garbage” test because it can tell you if your data are “garbage” with respect to historical inference – that is, your data have no information about historical patterns of trait change. 
+For Mk models, there is a simple test that allows us to recognize when the likelihood surface has a long ridge, and $q$ values cannot be estimated. I like to call this test the “total garbage” test because it can tell you if your data are “garbage” with respect to historical inference – that is, your data have no information about historical patterns of trait change. 
 
-To carry out the total garbage test, imagine that you are just drawing trait values out of a hat. That is, each species has some probability p of having character state 0, and some probability (1 - p) of having state 1 (one can also generalize this test to multi-state models). This model is easy to write down. For a tree of size n, the probability of drawing k species with state 0 is:
+To carry out the total garbage test, imagine that you are just drawing trait values out of a hat. That is, each species has some probability $p$ of having character state 0, and some probability ($1 - p$) of having state 1 (one can also generalize this test to multi-state models). This model is easy to write down. For a tree of size $n$, the probability of drawing $n_0$ species with state 0 is:
 
-(eq. 8.2)	
+(eq. 8.10)
+<div>
+$$
+L_{garbage} = p^{n_0} (1-p)^{n-n_0}
+$$
+</div>
 
-This equation gives the likelihood of the “total garbage” model for any value of p. Equation 8.2 is related to a binomial distribution (lacking only the factorial term). We know from probability theory that the ML estimate of p is k / n, with likelihood given by the above formula.
 
-Now consider the likelihood surface of the Mk model. When Mk likelihood surfaces have long ridges, they are always for high values of q – and when the transition rate of character changes is high, this model converges to our “drawing from a hat” (or “garbage”) model. The likelihood ridge lies at the value that is exactly taken from equation 8.2 above.
+This equation gives the likelihood of the “total garbage” model for any value of $p$. Equation 8.10 is related to a binomial distribution (lacking only the factorial term). We also know from probability theory that the ML estimate of $p$ is $k / n$, with likelihood given by the above formula.
 
-Thus, one can compare the likelihood of our Mk model to the total garbage model. If the maximum likelihood value of q has the same likelihood as our garbage model, then we know that we are on a ridge of the likelihood surface and q cannot be estimated. We also have no ability to make any statements about the past evolution of our character – in particular, we cannot estimate ancestral character state with any precision. By contrast, if the likelihood of the Mk model is greater than the total garbage model, then our data contains some historical information.
+Now consider the likelihood surface of the Mk model. When Mk likelihood surfaces have long ridges, they are nearly always for high values of $q$ – and when the transition rate of character changes is high, this model converges to our “drawing from a hat” (or “garbage”) model. The likelihood ridge lies at the value that is exactly taken from equation 8.10 above.
+
+Thus, one can compare the likelihood of our Mk model to the total garbage model. If the maximum likelihood value of $q$ has the same likelihood as our garbage model, then we know that we are on a ridge of the likelihood surface and $q$ cannot be estimated. We also have no ability to make any statements about the past evolution of our character – in particular, we cannot estimate ancestral character state with any precision. By contrast, if the likelihood of the Mk model is greater than the total garbage model, then our data contains some historical information. We can also make this comparison using AIC, considering the total garbage model as having a single parameter p.
 
 XXX Lizard example
 
@@ -251,29 +257,95 @@ This equation gives the likelihood of the “total garbage” model for any valu
 ## Testing for differences in the forwards and backwards rate of character change
 
 
-I have been referring to an example of flower evolution throughout this chapter, but we have not yet tested the hypothesis that I stated in the introduction: that transition rates from actinomorphy to zygomorphy are much higher than the reverse.
+I have been referring to an example of lizard limb evolution throughout this chapter, but we have not yet tested the hypothesis that I stated in the introduction: that transition rates for losing limbs are higher than rates of gaining limbs.
 
-To do this, we can compare our one-rate Mk model with a two-rate model with differences in the rate of forwards and backwards transitions. This is a special case of the “all-rates different” model discussed in chapter two. Q matrices for these two models will be:		
+To do this, we can compare our one-rate Mk model with a two-rate model with differences in the rate of forwards and backwards transitions. This is a special case of the “all-rates different” model discussed in chapter two. Q matrices for these two models will be, for model 1 (equal rates):
 
-(eq. 8.3)		
+(eq. 8.11)		
+<div>
+$$
+\mathbf{Q_ER} =
+\begin{bmatrix}
+-q & q \\
+q & -q \\
+\end{bmatrix}
+$$
+</div>
 
-Notice that model one has one parameter, while the other has two. One can compare them using standard methods discussed in previous chapters – that is, a likelihood-ratio test, AIC, BIC, or other similar methods.
+<div>
+$$
+\mathbf{\pi_ER} =
+\begin{bmatrix}
+1/2 & 1/2 \\
+\end{bmatrix}
+$$
+</div>
 
-We can apply all of the above methods to analyze the evolution of limblessness in squamates. We can use the tree and character state data from Brandley et al. (2008), which is plotted with ancestral state reconstructions as Figure 8.2.
+And for model 2, asymmetric:
 
-![Figure 8.2. Reconstructed patterns of the evolution of limbs and limblessness across squamates. Tips show states of extant taxa (here, I classified species with neither fore- nor hindlimbs as limbless, which is conservative given the variation across this clade (see chapter 7). Pie charts on internal nodes show proportional marginal likelihoods for ancestral state reconstruction. Data from Brandley et al. 2008.]({{ site.baseurl }}/images/figure8-3.png)
+(eq. 8.12)		
+<div>
+$$
+\mathbf{Q_ASY} =
+\begin{bmatrix}
+-q_1 & q_1 \\
+q_2 & -q_2 \\
+\end{bmatrix}
+$$
+</div>
 
-If we fit an Mk model to these data assuming equal state frequencies at the root of the tree, we obtain a lnL of -80.5 and an estimate of the Q matrix as:
+<div>
+$$
+\mathbf{\pi_ASY} =
+\begin{bmatrix}
+1/2 & 1/2 \\
+\end{bmatrix}
+$$
+</div>
 
-An extended-Mk model with different forward and backward rates gives a lnL of -79.4 and:
+Notice that the ER model has one parameter, while the ASY model has two. Also we have specified equal probabilities of each character at the root of the tree, which may not be justified. But this comparison is still useful as a simple example.
 
-Note that the ARD model has a higher backwards than forwards rate; that is, we estimate a rate of gaining limbs that is higher than the rate of losing them! Is this statistically supported? We can compare the AIC scores of the two models. For the ER model, AICc = 163.0, while for the ARD model AICc = 162.8. The AICc score is higher for the unequal rates model, but only by about 0.2 – which is not definitive either way. So based on this analysis, we cannot rule out the possibility that forward and backward rates are equal.
+One can compare the two nested models using standard methods discussed in previous chapters – that is, a likelihood-ratio test, AIC, BIC, or other similar methods.
 
-A Bayesian analysis of the ARD model gives similar conclusions (Figure 8.3). We can see that the posterior distribution for the backwards rate (q21) is higher than the forwards rate (q12), but that the two distributions are broadly overlapping.
+We can apply all of the above methods to analyze the evolution of limblessness in squamates. We can use the tree and character state data from Brandley et al. [-@Brandley2008-wr], which is plotted with ancestral state reconstructions as Figure 8.3.
+
+![Figure 8.3. Reconstructed patterns of the evolution of limbs and limblessness across squamates. Tips show states of extant taxa (here, I classified species with neither fore- nor hindlimbs as limbless, which is conservative given the variation across this clade (see chapter 7). Pie charts on internal nodes show proportional marginal likelihoods for ancestral state reconstruction. Data from [@Brandley2008-wr]]({{ site.baseurl }}/images/figure8-3.png)
+
+If we fit an Mk model to these data assuming equal state frequencies at the root of the tree, we obtain a lnL of -80.5 and an estimate of the $Q_ER$ matrix as:
+
+(eq. 8.13)		
+<div>
+$$
+\mathbf{Q_ER} =
+\begin{bmatrix}
+-0.0019 & 0.0019 \\
+0.0019 & -0.0019 \\
+\end{bmatrix}
+$$
+</div>
+
+
+The ASY model with different forward and backward rates gives a lnL of -79.4 and:
+
+(eq. 8.13)		
+<div>
+$$
+\mathbf{Q_ASY} =
+\begin{bmatrix}
+-0.0016 & 0.0016 \\
+0.0038 & -0.0038 \\
+\end{bmatrix}
+$$
+</div>
+
+
+Note that the ASY model has a higher backwards than forwards rate; as expected, we estimate a rate of losing limbs that is higher than the rate of gaining them (although the difference is surprisingly low). Is this statistically supported? We can compare the AIC scores of the two models. For the ER model, AICc = 163.0, while for the ASY model AICc = 162.8. The AICc score is higher for the unequal rates model, but only by about 0.2 – which is not definitive either way. So based on this analysis, we cannot rule out the possibility that forward and backward rates are equal.
+
+A Bayesian analysis of the ASY model gives similar conclusions (Figure 8.3). We can see that the posterior distribution for the backwards rate (q21) is higher than the forwards rate (q12), but that the two distributions are broadly overlapping.
 
 ![Figure 8.4. Bayesian posterior distibutions for the extended-Mk model applied to the evolution of limblessness in squamates.]({{ site.baseurl }}/images/figure8-4.png)
 
-You might wonder about how we can reconcile these results, which suggest that squamates gain limbs at least as frequently as they lose them, with our biological intuition that limbs should be much more difficult to gain than they are to lose. But keep in mind that our comparative analysis is not using any information other than the states of extant species to reconstruct these rates. In particular, identifying irreversible evolution using comparative methods is a problem that is known to be quite difficult, and might require outside information in order to resolve conclusively. For example, if we had some information about the relative number of mutational steps required to gain and lose limbs, we could use an informative prior – which would, I suspect, suggest that limbs are more difficult to gain than they are to lose. Such a prior could dramatically alter the results presented in Figure 8.3. We will return to the problem of irreversible evolution later in the book (Chapter 13).
+You might wonder about how we can reconcile these results, which suggest that squamates gain limbs at least as frequently as they lose them, with our biological intuition that limbs should be much more difficult to gain than they are to lose. But keep in mind that our comparative analysis is not using any information other than the states of extant species to reconstruct these rates. In particular, identifying irreversible evolution using comparative methods is a problem that is known to be quite difficult, and might require outside information in order to resolve conclusively. For example, if we had some information about the relative number of mutational steps required to gain and lose limbs, we could use an informative prior – which would, I suspect, suggest that limbs are more difficult to gain than they are to lose. Such a prior could dramatically alter the results presented in Figure 8.4. We will return to the problem of irreversible evolution later in the book (Chapter 13).
 
 ## Chapter summary
 
