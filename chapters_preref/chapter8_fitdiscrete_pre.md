@@ -178,9 +178,26 @@ Figure 8.2D. Conditional likelihoods entered for all nodea.
 ]({{ site.baseurl }}/images/figure8-2D.png)
 
 
-5.	We can now calculate the likelihood across the whole tree using the conditional likelihoods for the three states at the root of the tree. We use the equation:
+5.	We can now calculate the likelihood across the whole tree using the conditional likelihoods for the three states at the root of the tree.
 
-Where  is the prior probability of that character state at the root of the tree. We will take these prior probabilities to be equal for each state, or uniform (); two other possibilities are given in the text. The likelihood for our example, then, is: Note that if you try this example in another software package, like GEIGER or PAUP*, the software will calculate a ln-likelihood of -6.5, which is exactly the natural log of the value calculated here.
+(eq. 8.8)
+<div>
+$$
+L = \sum\limits_{x \in k} \pi_x L_{root} (x)
+$$
+</div>
+
+
+Where $\pi_x$ is the prior probability of that character state at the root of the tree. For this example, we will take these prior probabilities to be uniform, equal for each state ($\pi_x = 1/k = 1/3$). The likelihood for our example, then, is: 
+
+(eq. 8.9)
+<div>
+$$
+L = 1/3 \cdot 0.00150 + 1/3 \cdot 0.00151 + 1/3 \cdot 0.00150 = 0.00150
+$$
+</div>
+
+Note that if you try this example in another software package, like GEIGER or PAUP*, the software will calculate a ln-likelihood of -6.5, which is exactly the natural log of the value calculated here.
 
 ---
 
@@ -188,30 +205,31 @@ Where  is the prior probability of that character state at the root of the tree.
 
 ## Using maximum likelihood to estimate parameters of the Mk model
 
-The algorithm in Box 8.1 gives the likelihood for any particular discrete-state Markov model on a tree, but requires us to specify a value of the rate parameter q. In the example given, this rate parameter q = 1.0 corresponds to a lnL of -6.5. But is this the best value of q to use for our Mk model? Probably not. We can use maximum likelihood to find a better estimate of this parameter. 
+The algorithm in Box 8.1 gives the likelihood for any particular discrete-state Markov model on a tree, but requires us to specify a value of the rate parameter $q$. In the example given, this rate parameter $q = 1.0$ corresponds to a lnL of -6.5. But is this the best value of $q$ to use for our Mk model? Probably not. We can use maximum likelihood to find a better estimate of this parameter. 
 
-If we apply the pruning algorithm across a range of different values of q, the likelihood changes. To find the ML estimate of q, we simply need to try a range of q-values, and stop at the value of q that has the highest log-likelihood.
-
-The process of trying a range of possibilities for q is inefficient, though. A better strategy involves the use of optimization algorithms, a well-developed field of mathematical analysis. These algorithms differ in their details, but we can illustrate how they work with a general example. Imagine that you are near Mt. St. Helens, and you are tasked with finding the peak of that mountain. It is foggy, but you can see the area around your feet and have an accurate altimeter. One strategy is to simply look at the slope of the mountain where you are standing, and climb uphill. If the slope is steep, you probably still are far from the top, and should climb fast; if the slope is shallow, you might be near the top of the mountain. It may seem obvious that this will get you to a local peak, but perhaps not the highest peak of Mt. St. Helens. Mathematical optimization schemes have this potential difficulty as well, but use some tricks to jump around in parameter space and try to find the highest peak as they climb. Details of actual optimization algorithms are beyond the scope of this book; for more information, see Nocedal and Wright (2000).
+If we apply the pruning algorithm across a range of different values of $q$, the likelihood changes. To find the ML estimate of $q$, we can again use numerical optimization methods.
 
 XXX Lizard example
 
-The example above considers maximization of a single parameter, which is a relatively simple problem. When we extend this to a multi-parameter model – for example, the extended Mk model will all rates different (ARD) – maximizing the likelihood becomes much more difficult. A large number of algorithms exist to solve this problem (multivariate optimization methods); this is a bit outside the scope of this chapter. The R exercise associated with this chapter will allow you to explore some R functions for optimization. 
+The example above considers maximization of a single parameter, which is a relatively simple problem. When we extend this to a multi-parameter model – for example, the extended Mk model will all rates different (ARD) – maximizing the likelihood becomes much more difficult. R packages solve this problem by using sophisticated algorithms and applying them multiple times to make sure that the value found is actually a maximum. 
 
 We can also analyze this model using a Bayesian MCMC framework. We can modify the standard approach to Bayesian MCMC (see chapter 2):
 
-1.	Sample a starting parameter value, q, from its prior distributions. For this example, we can set our prior distribution as uniform between 0 and 1. (Note that one can also treat probabilities of states at the root as a parameter to be estimated from the data).
-2.	Given the current parameter value, select new proposed parameter values using the proposal density . For example, we might use a uniform proposal density with width 0.2, so that .
-3.	Calculate three ratios:a.	The prior odds ratio. In this case, since our prior is uniform, this is 1.b.	The proposal density ratio. In this case our proposal density is symmetrical, so.	c.	The likelihood ratio. We can calculate the likelihoods using Felsenstein’s pruning algorithm (Box 8.1); then:	
-4.	Find the product of the prior odds, proposal density ratio, and the likelihood ratio. In this case, both the prior odds and proposal density ratios are 1, so: 
-5.	Draw a random number x from a uniform distribution between 0 and 1. If x < a, accept the proposed value of both parameters; otherwise reject, and retain the current value of the two parameters.6.	Repeat steps 2-5 a large number of times.
+1.	Sample a starting parameter value, $q$, from its prior distributions. For this example, we can set our prior distribution as uniform between 0 and 1. (Note that one can also treat probabilities of states at the root as a parameter to be estimated from the data).
+
+2.	Given the current parameter value, select new proposed parameter values using the proposal density $Q(q'|q)$. For example, we might use a uniform proposal density with width 0.2, so that $Q(q'|q) ~ U(q - 0.1, q + 0.1)$.
+
+3.	Calculate three ratios:
+a.	The prior odds ratio, $R_{prior}$. In this case, since our prior is uniform, $R_{prior} = 1$.
+b.	The proposal density ratio, $R_{proposal}$. In this case our proposal density is symmetrical, so $R_{proposal}$ = 1.
+c.	The likelihood ratio, $R_{likelihood}$. We can calculate the likelihoods using Felsenstein’s pruning algorithm (Box 8.1); then calculate this value based on equation 2.26.
+4.	Find $R_{accept}$ as the product of the prior odds, proposal density ratio, and the likelihood ratio. In this case, both the prior odds and proposal density ratios are 1, so $R_{accept} = R_{likelihood}$ 
+5.	Draw a random number $u$ from a uniform distribution between 0 and 1. If $u < R_{accept}$, accept the proposed value of both parameters; otherwise reject, and retain the current value of the two parameters.6.	Repeat steps 2-5 a large number of times.
 
 XXX Lizard example
 
 
 ## Exploring Mk: the "total garbage" test
-
-
 
 One problem that arises sometimes in maximum likelihood optimization happens when instead of a peak, the likelihood surface has a long flat “ridge” of equally likely parameter values. In the case of the Mk model, it is common to find that all values of q greater than a certain value have the same likelihood. This is because above a certain rate, evolution has been so rapid that all traces of the history of evolution of that character have been obliterated. After this point, character states of each lineage are random, and have no relationship to the shape of the phylogenetic tree. Our optimization techniques will not work in this case because there is no value of q that has a higher likelihood than other values. Once we get onto the ridge, all values of q have the same likelihood.
 

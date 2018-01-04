@@ -165,33 +165,41 @@ $$</span><br /></p>
 <p class="caption">Figure 8.2D. Conditional likelihoods entered for all nodea.</p>
 </div>
 <ol start="5" style="list-style-type: decimal">
-<li>We can now calculate the likelihood across the whole tree using the conditional likelihoods for the three states at the root of the tree. We use the equation:</li>
+<li>We can now calculate the likelihood across the whole tree using the conditional likelihoods for the three states at the root of the tree.</li>
 </ol>
-<p>Where is the prior probability of that character state at the root of the tree. We will take these prior probabilities to be equal for each state, or uniform (); two other possibilities are given in the text. The likelihood for our example, then, is:</p>
+(eq. 8.8)
+<div>
+<p><br /><span class="math display">$$
+L = \sum\limits_{x \in k} \pi_x L_{root} (x)
+$$</span><br /></p>
+</div>
+<p>Where <span class="math inline"><em>π</em><sub><em>x</em></sub></span> is the prior probability of that character state at the root of the tree. For this example, we will take these prior probabilities to be uniform, equal for each state (<span class="math inline"><em>π</em><sub><em>x</em></sub> = 1/<em>k</em> = 1/3</span>). The likelihood for our example, then, is:</p>
+(eq. 8.9)
+<div>
+<p><br /><span class="math display"><em>L</em> = 1/3 ⋅ 0.00150 + 1/3 ⋅ 0.00151 + 1/3 ⋅ 0.00150 = 0.00150</span><br /></p>
+</div>
 <p>Note that if you try this example in another software package, like GEIGER or PAUP*, the software will calculate a ln-likelihood of -6.5, which is exactly the natural log of the value calculated here.</p>
 <hr />
 <p>Felsenstein’s pruning algorithm proceeds backwards in time from the tips to the root of the tree (see Box 8.1). At the root, we must specify the probabilities of each character state in the common ancestor of the species in the clade. As mentioned in Chapter 7, there are at least three possible methods for doing this. First, one can assume that each state can occur at the root with equal probability. Second, one can assume that the states are drawn from their stationary distribution, as given by the model. The stationary distribution is a stable probability distribution of states that is reached by the model after a long amount of time. Third, one might have some information about the root state – perhaps from fossils, or information about character states in a set of outgroup taxa – that can be used to assign probabilities to the states. In practice, the first two of these methods are more common. In the case discussed above – an Mk model with all transition rates equal – the stationary distribution is one where all states are equally probable, so the first two methods are identical. In general, though, these three methods can give different results.</p>
 <h2 id="using-maximum-likelihood-to-estimate-parameters-of-the-mk-model">Using maximum likelihood to estimate parameters of the Mk model</h2>
-<p>The algorithm in Box 8.1 gives the likelihood for any particular discrete-state Markov model on a tree, but requires us to specify a value of the rate parameter q. In the example given, this rate parameter q = 1.0 corresponds to a lnL of -6.5. But is this the best value of q to use for our Mk model? Probably not. We can use maximum likelihood to find a better estimate of this parameter.</p>
-<p>If we apply the pruning algorithm across a range of different values of q, the likelihood changes. To find the ML estimate of q, we simply need to try a range of q-values, and stop at the value of q that has the highest log-likelihood.</p>
-<p>The process of trying a range of possibilities for q is inefficient, though. A better strategy involves the use of optimization algorithms, a well-developed field of mathematical analysis. These algorithms differ in their details, but we can illustrate how they work with a general example. Imagine that you are near Mt. St. Helens, and you are tasked with finding the peak of that mountain. It is foggy, but you can see the area around your feet and have an accurate altimeter. One strategy is to simply look at the slope of the mountain where you are standing, and climb uphill. If the slope is steep, you probably still are far from the top, and should climb fast; if the slope is shallow, you might be near the top of the mountain. It may seem obvious that this will get you to a local peak, but perhaps not the highest peak of Mt. St. Helens. Mathematical optimization schemes have this potential difficulty as well, but use some tricks to jump around in parameter space and try to find the highest peak as they climb. Details of actual optimization algorithms are beyond the scope of this book; for more information, see Nocedal and Wright (2000).</p>
+<p>The algorithm in Box 8.1 gives the likelihood for any particular discrete-state Markov model on a tree, but requires us to specify a value of the rate parameter <span class="math inline"><em>q</em></span>. In the example given, this rate parameter <span class="math inline"><em>q</em> = 1.0</span> corresponds to a lnL of -6.5. But is this the best value of <span class="math inline"><em>q</em></span> to use for our Mk model? Probably not. We can use maximum likelihood to find a better estimate of this parameter.</p>
+<p>If we apply the pruning algorithm across a range of different values of <span class="math inline"><em>q</em></span>, the likelihood changes. To find the ML estimate of <span class="math inline"><em>q</em></span>, we can again use numerical optimization methods.</p>
 <p>XXX Lizard example</p>
-<p>The example above considers maximization of a single parameter, which is a relatively simple problem. When we extend this to a multi-parameter model – for example, the extended Mk model will all rates different (ARD) – maximizing the likelihood becomes much more difficult. A large number of algorithms exist to solve this problem (multivariate optimization methods); this is a bit outside the scope of this chapter. The R exercise associated with this chapter will allow you to explore some R functions for optimization.</p>
+<p>The example above considers maximization of a single parameter, which is a relatively simple problem. When we extend this to a multi-parameter model – for example, the extended Mk model will all rates different (ARD) – maximizing the likelihood becomes much more difficult. R packages solve this problem by using sophisticated algorithms and applying them multiple times to make sure that the value found is actually a maximum.</p>
 <p>We can also analyze this model using a Bayesian MCMC framework. We can modify the standard approach to Bayesian MCMC (see chapter 2):</p>
 <ol style="list-style-type: decimal">
-<li><p>Sample a starting parameter value, q, from its prior distributions. For this example, we can set our prior distribution as uniform between 0 and 1. (Note that one can also treat probabilities of states at the root as a parameter to be estimated from the data).</p></li>
-<li><p>Given the current parameter value, select new proposed parameter values using the proposal density . For example, we might use a uniform proposal density with width 0.2, so that .</p></li>
-<li>Calculate three ratios:</li>
+<li><p>Sample a starting parameter value, <span class="math inline"><em>q</em></span>, from its prior distributions. For this example, we can set our prior distribution as uniform between 0 and 1. (Note that one can also treat probabilities of states at the root as a parameter to be estimated from the data).</p></li>
+<li><p>Given the current parameter value, select new proposed parameter values using the proposal density <span class="math inline"><em>Q</em>(<em>q</em>′|<em>q</em>)</span>. For example, we might use a uniform proposal density with width 0.2, so that <span class="math inline"><em>Q</em>(<em>q</em>′|<em>q</em>) <em>U</em>(<em>q</em> − 0.1, <em>q</em> + 0.1)</span>.</p></li>
+<li><p>Calculate three ratios:</p></li>
 </ol>
 <ol style="list-style-type: lower-alpha">
-<li>The prior odds ratio. In this case, since our prior is uniform, this is 1.</li>
-<li>The proposal density ratio. In this case our proposal density is symmetrical, so.<br />
-</li>
-<li>The likelihood ratio. We can calculate the likelihoods using Felsenstein’s pruning algorithm (Box 8.1); then:</li>
+<li><p>The prior odds ratio, <span class="math inline"><em>R</em><sub><em>p</em><em>r</em><em>i</em><em>o</em><em>r</em></sub></span>. In this case, since our prior is uniform, <span class="math inline"><em>R</em><sub><em>p</em><em>r</em><em>i</em><em>o</em><em>r</em></sub> = 1</span>.</p></li>
+<li><p>The proposal density ratio, <span class="math inline"><em>R</em><sub><em>p</em><em>r</em><em>o</em><em>p</em><em>o</em><em>s</em><em>a</em><em>l</em></sub></span>. In this case our proposal density is symmetrical, so <span class="math inline"><em>R</em><sub><em>p</em><em>r</em><em>o</em><em>p</em><em>o</em><em>s</em><em>a</em><em>l</em></sub></span> = 1.</p></li>
+<li>The likelihood ratio, <span class="math inline"><em>R</em><sub><em>l</em><em>i</em><em>k</em><em>e</em><em>l</em><em>i</em><em>h</em><em>o</em><em>o</em><em>d</em></sub></span>. We can calculate the likelihoods using Felsenstein’s pruning algorithm (Box 8.1); then calculate this value based on equation 2.26.</li>
 </ol>
 <ol start="4" style="list-style-type: decimal">
-<li><p>Find the product of the prior odds, proposal density ratio, and the likelihood ratio. In this case, both the prior odds and proposal density ratios are 1, so:</p></li>
-<li>Draw a random number x from a uniform distribution between 0 and 1. If x &lt; a, accept the proposed value of both parameters; otherwise reject, and retain the current value of the two parameters.</li>
+<li><p>Find <span class="math inline"><em>R</em><sub><em>a</em><em>c</em><em>c</em><em>e</em><em>p</em><em>t</em></sub></span> as the product of the prior odds, proposal density ratio, and the likelihood ratio. In this case, both the prior odds and proposal density ratios are 1, so <span class="math inline"><em>R</em><sub><em>a</em><em>c</em><em>c</em><em>e</em><em>p</em><em>t</em></sub> = <em>R</em><sub><em>l</em><em>i</em><em>k</em><em>e</em><em>l</em><em>i</em><em>h</em><em>o</em><em>o</em><em>d</em></sub></span></p></li>
+<li>Draw a random number <span class="math inline"><em>u</em></span> from a uniform distribution between 0 and 1. If <span class="math inline"><em>u</em> &lt; <em>R</em><sub><em>a</em><em>c</em><em>c</em><em>e</em><em>p</em><em>t</em></sub></span>, accept the proposed value of both parameters; otherwise reject, and retain the current value of the two parameters.</li>
 <li><p>Repeat steps 2-5 a large number of times.</p></li>
 </ol>
 <p>XXX Lizard example</p>
