@@ -1,0 +1,174 @@
+---
+title: "Chapters 7 and 8 Squamate Example"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+require(geiger)
+require(phytools)
+require(RCurl)
+require(diversitree)
+```
+
+## Reading in the data files
+
+First we read in the data files.
+
+```{r}
+
+sqTree<-read.tree(text=getURL("https://raw.githubusercontent.com/lukejharmon/pcm/master/datafiles/squamate.phy"))
+plot(sqTree)
+
+sqData<-read.csv(text=getURL("https://raw.githubusercontent.com/lukejharmon/pcm/master/datafiles/brandley_table.csv"))
+
+
+```
+
+
+## Simulate binary character on tree
+
+This code generates plots like Figure 7.4
+
+```{r}
+
+qMatrix<-cbind(c(-1, 1), c(1, -1))*0.001
+sh_slow<-sim.history(sqTree, qMatrix, anc="1")
+plotSimmap(sh_slow, pts=F, ftype="off")
+add.simmap.legend(leg=c("limbed", "limbless"), colors=c("black", "red"), x=0.024, y =23, prompt=F)
+
+
+qMatrix<-cbind(c(-1, 1), c(1, -1))*0.01
+sh_fast<-sim.history(sqTree, qMatrix, anc="1")
+plotSimmap(sh_fast, pts=F, ftype="off")
+
+
+qMatrix<-cbind(c(-0.02, 0.02), c(0.005, -0.005))
+sh_asy<-sim.history(sqTree, qMatrix, anc="1")
+
+plotSimmap(sh_asy, pts=F, ftype="off")
+
+
+```
+
+## Find the limbless species
+
+Brandley et al.'s data has limb measurements. We will get our discrete character by counting species with zero-length fore- and hind limbs as limbless. This is different from the original analysis in Brandley et al., which counts things like spurs as "limbs" - and so our results might differ from theirs a bit.
+
+```{r}
+
+limbless<-as.numeric(sqData[,"FLL"]==0 & sqData[,"HLL"]==0)
+sum(limbless)
+
+# get names that match
+nn<-sqData[,1]
+nn2<-sub(" ", "_", nn)
+names(limbless)<-nn2
+
+
+```
+
+### Fit Mk model
+
+We can fit a symmetric Mk model to these data using both likelihood and MCMC
+
+```{r}
+
+# likelihood
+td<-treedata(sqTree, limbless)
+dModel<-fitDiscrete(td$phy, td$data)
+
+# MCMC
+mk_diversitree<-make.mk2(force.ultrametric(td$phy), td$data[,1])
+simplemk<-constrain(mk_diversitree, q01~q10)
+er_bayes<-mcmc(simplemk, x.init=0.1, nsteps=10000, w=0.01)
+hist(er_bayes[-(1:1000),"q10"])
+quantile(er_bayes[-(1:1000),"q10"], c(0.025, 0.975))
+mean(er_bayes[-(1:1000),"q10"])
+```
+
+
+
+## Ancestral state reconstruction
+
+We can do a basic ASR analysis.
+
+```{r}
+
+td<-treedata(sqTree, limbless)
+
+limbless2<-as.numeric(td$data)
+names(limbless2)<-rownames(td$data)
+
+aa<-rerootingMethod(sqTree, limbless2, model="ER")
+
+plot(sqTree,no.margin=TRUE,edge.width=2, show.tip.label=FALSE)
+nodelabels(pie=aa$marginal.anc,piecol=palette()[1:4], cex=0.3)
+
+mm<-match(sqTree$tip.label, names(limbless2))
+tiplabels(pie=to.matrix(limbless2[mm],colnames(aa$marginal.anc)), piecol=palette()[1:4],cex=0.1)
+add.simmap.legend(leg=c("limbed", "limbless"), colors=c("black", "red"), x=0.024, y =23, prompt=F)
+
+
+```
+
+## Compare ER and ASY models
+
+Now we can compare the fit of a model where gains and losses occur at the same rate to one where the rates differ.
+
+```{r}
+
+# now we can try to compare the fit of some models using fitDiscrete
+dModel2<-fitDiscrete(td$phy, td$data, model="ARD")
+
+# are these different?
+dModel$opt$aicc
+dModel2$opt$aicc
+# not really.
+
+# Bayesian analysis
+st2<-force.ultrametric(td$phy)
+bayesFit<-mcmc(mk_diversitree, x.init=c(0.001610655, 0.003824740), lower=c(0.000001, 0.000001), upper=c(1,1), nsteps=10000, w=1)
+
+
+plot.PostDist <- function(data, col=c("dodgerblue4", "#eaab00", "FF6C91"), pdf=FALSE, file=NA, ...){
+	
+	cc <- colnames(data)
+	par <- vector()
+	for (i in 1:length(cc)){
+		tmp <- rep(cc[i], nrow(data))
+		par <- c(par, tmp)
+	}
+
+	estimate <- vector()
+	for (j in 1:length(cc)){
+		tmp2 <- data[,cc[j]]
+		estimate <- c(estimate, tmp2)
+	}
+
+	data.by.par <- cbind.data.frame(estimate, par)
+	colnames(data.by.par) <- c("estimate", "par")
+	
+	col <- col[1:length(cc)]
+	
+	if (pdf == TRUE){
+		pdf(file=file, ...)
+		
+		ggplot(data.by.par, aes(x = estimate), environment= environment()) + geom_density(alpha = 0.5, aes(fill=par)) + scale_fill_manual(values=col) + ggtitle("Posterior Distribution")
+	
+	}
+	
+	p <- ggplot(data.by.par, aes(x = estimate), environment= environment()) + geom_density(alpha = 0.5, aes(fill=par)) + scale_fill_manual(values=col) + ggtitle("Posterior Distribution")
+	
+	print(p)
+	
+	if (pdf == TRUE){
+		dev.off()
+	}
+
+}
+require(ggplot2)
+plot.PostDist(bayesFit[,2:3])
+```
+
+```
