@@ -209,7 +209,7 @@ Note that if you try this example in another software package, like GEIGER or PA
 
 If we apply the pruning algorithm across a range of different values of $q$, the likelihood changes. To find the ML estimate of $q$, we can again use numerical optimization methods.
 
-XXX Lizard example
+Applying this method to the lizard data, we obtain a maximum liklihood estimate of $q = 0.001850204$ corresponding to $lnL = -80.487176$.
 
 The example above considers maximization of a single parameter, which is a relatively simple problem. When we extend this to a multi-parameter model – for example, the extended Mk model will all rates different (ARD) – maximizing the likelihood becomes much more difficult. R packages solve this problem by using sophisticated algorithms and applying them multiple times to make sure that the value found is actually a maximum. 
 
@@ -226,8 +226,7 @@ b.	The proposal density ratio, $R_{proposal}$. In this case our proposal density
 4.	Find $R_{accept}$ as the product of the prior odds, proposal density ratio, and the likelihood ratio. In this case, both the prior odds and proposal density ratios are 1, so $R_{accept} = R_{likelihood}$ 
 5.	Draw a random number $u$ from a uniform distribution between 0 and 1. If $u < R_{accept}$, accept the proposed value of both parameters; otherwise reject, and retain the current value of the two parameters.6.	Repeat steps 2-5 a large number of times.
 
-XXX Lizard example
-
+We can run this analysis on our squamate data, obtaining a posterior with a mean estimate of $q = 0.001980785$ and a 95% credible interval of $0.001174813 - 0.003012715$.
 
 ## Exploring Mk: the "total garbage" test
 
@@ -245,14 +244,14 @@ $$
 </div>
 
 
-This equation gives the likelihood of the “total garbage” model for any value of $p$. Equation 8.10 is related to a binomial distribution (lacking only the factorial term). We also know from probability theory that the ML estimate of $p$ is $k / n$, with likelihood given by the above formula.
+This equation gives the likelihood of the “total garbage” model for any value of $p$. Equation 8.10 is related to a binomial distribution (lacking only the factorial term). We also know from probability theory that the ML estimate of $p$ is $n_0 / n$, with likelihood given by the above formula.
 
 Now consider the likelihood surface of the Mk model. When Mk likelihood surfaces have long ridges, they are nearly always for high values of $q$ – and when the transition rate of character changes is high, this model converges to our “drawing from a hat” (or “garbage”) model. The likelihood ridge lies at the value that is exactly taken from equation 8.10 above.
 
 Thus, one can compare the likelihood of our Mk model to the total garbage model. If the maximum likelihood value of $q$ has the same likelihood as our garbage model, then we know that we are on a ridge of the likelihood surface and $q$ cannot be estimated. We also have no ability to make any statements about the past evolution of our character – in particular, we cannot estimate ancestral character state with any precision. By contrast, if the likelihood of the Mk model is greater than the total garbage model, then our data contains some historical information. We can also make this comparison using AIC, considering the total garbage model as having a single parameter p.
 
-XXX Lizard example
-
+For the squamates, we have $n = 258$ and $n_0 = 207$. We calculate $p = n_0 / n =  207/258 = 0.8023256$. So the likelihood of our garbage model is $L_{garbage} = p^{n_0} (1-p)^{n-n_0} = 0.8023256^207 (1-0.8023256)^51 = 1.968142e-56$. This calculation is both easier and more useful, though, on a natural-log scale: $lnL_{garbage} = n_0 \cdot ln(p) + (n-n_0) \cdot ln(1-p) = 207 \cdot ln(0.8023256) + 51 \cdot ln(1-0.8023256) = -128.2677$. Compare this
+to the log-likelihood of our Mk model, $lnL = -80.487176$, and you will see that the garbage model is a terrible fit to these data.
 
 ## Testing for differences in the forwards and backwards rate of character change
 
@@ -339,7 +338,7 @@ $$
 </div>
 
 
-Note that the ASY model has a higher backwards than forwards rate; as expected, we estimate a rate of losing limbs that is higher than the rate of gaining them (although the difference is surprisingly low). Is this statistically supported? We can compare the AIC scores of the two models. For the ER model, AICc = 163.0, while for the ASY model AICc = 162.8. The AICc score is higher for the unequal rates model, but only by about 0.2 – which is not definitive either way. So based on this analysis, we cannot rule out the possibility that forward and backward rates are equal.
+Note that the ASY model has a higher backwards than forwards rate; as expected, we estimate a rate of losing limbs that is higher than the rate of gaining them (although the difference is surprisingly low). Is this statistically supported? We can compare the AIC scores of the two models. For the ER model, $AIC_c = 163.0$, while for the ASY model $AIC_c = 162.8$. The AICc score is higher for the unequal rates model, but only by about 0.2 – which is not definitive either way. So based on this analysis, we cannot rule out the possibility that forward and backward rates are equal.
 
 A Bayesian analysis of the ASY model gives similar conclusions (Figure 8.3). We can see that the posterior distribution for the backwards rate (q21) is higher than the forwards rate (q12), but that the two distributions are broadly overlapping.
 
