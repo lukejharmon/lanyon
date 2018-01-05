@@ -1,6 +1,8 @@
+# Chapter 8: Fitting models of discrete character evolution
+
 [pdf version]({{ site.baseurl }}/pdf/chapter8_fitdiscrete.pdf)
 
-# Chapter 8: Fitting models of discrete character evolution
+R markdown to [recreate analyses]({{ site.baseurl }}/rmarkdown/chapter8_squamatelimbs.html)
 
 ## Biological motivation: The evolution of limbs and limblessness
 

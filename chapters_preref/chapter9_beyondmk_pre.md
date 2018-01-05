@@ -1,3 +1,5 @@
+[pdf version]({{ site.baseurl }}/pdf/chapter9_beyondmk.pdf)
+
 # Chapter 9: Beyond the Mk Model
 
 ## Biological motivation: The Evolution of Frog Life History Strategies
@@ -183,3 +185,9 @@ Notice that the simple, 2-parameter independent evolution model is a special cas
 It is worth noting that there are other models that one can fit for the evolution of two binary traits that I did not discuss above. For example, one can model the situation where the two traits each have different forwards and backwards rates, but are evolving independently. This is a four-parameter model. Additionally, one can allow both forward and backward rates to differ and to depend on the character state of the other trait: an eight-parameter model. All of these models – and others not described here – can be compared using AIC, BIC, or Bayes Factors. Pagel and Meade (2006) describe a particularly innovative and synthetic method to test hypotheses about correlated evolution of discrete characters in a Bayesian framework using reversible-jump MCMC.
 
 One can also test for correlations among discrete characters using threshold models. Here, one assumes that the liabilities for the two characters evolve in a correlated fashion. More specifically, we can model liabilities for the two threshold characters using a bivariate Brownian motion model, with some evolutionary covariance $\sigma_{12}^2$ between the two liabilities. We can then use either ML or Bayesian methods to determine if the evolutionary covariance between the two characters is non-zero (following the methods described in chapter 5, but using likelihoods based on discrete characters as described above.
+
+## Chapter summary
+
+
+
+## References

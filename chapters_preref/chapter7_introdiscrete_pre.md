@@ -1,6 +1,8 @@
+# Chapter 7: Models of discrete character evolution
+
 [pdf version]({{ site.baseurl }}/pdf/chapter7_introdiscrete.pdf)
 
-# Chapter 7: Models of discrete character evolution
+R markdown to [recreate analyses]({{ site.baseurl }}/rmarkdown/chapter8_squamatelimbs.html)
 
 ## Biological motivation: Limblessness as a discrete trait
 

@@ -23,9 +23,12 @@ title: Beyond the Mk Model
 <li><a href="#threshold-models">Threshold models</a></li>
 <li><a href="#modeling-more-than-one-discrete-character-at-a-time">Modeling more than one discrete character at a time</a></li>
 <li><a href="#testing-for-correlated-evolution-of-different-characters">Testing for correlated evolution of different characters</a></li>
+<li><a href="#chapter-summary">Chapter summary</a></li>
+<li><a href="#references">References</a></li>
 </ul></li>
 </ul>
 </div>
+<p><a href="{{site.baseurl}}/pdf/chapter9_beyondmk.pdf">pdf version</a></p>
 <h1 id="chapter-9-beyond-the-mk-model">Chapter 9: Beyond the Mk Model</h1>
 <h2 id="biological-motivation-the-evolution-of-frog-life-history-strategies">Biological motivation: The Evolution of Frog Life History Strategies</h2>
 <p>Frog reproduction is one of the most bizarrely interesting topics in all of biology. Across the nearly 6,000 species of living frogs, one can observe a bewildering variety of reproductive strategies and modes. As children, we learn of the “classic” frog life history strategy: the female lays jellied eggs in water, which hatch into tadpoles, then later metamorphose into their adult form (e.g. Figure 9.1A). But this is really just the tip of the frog reproduction iceberg. There are foam-nesting frogs, which hang their eggs from leaves in foamy sacs over streams; when the eggs hatch, they drop into the water (Figure 9.1B). Male midwife toads carry fertilized eggs on their backs until they are ready to hatch, at which point they wade into water and their tadpoles wriggle free (Figure 9.1C). Perhaps most bizarre of all are the gastric-brooding frogs, now thought to be extinct. In this species, female frogs swallow their fertilized eggs, which hatch and undergo early development in their mother’s stomach (Figure 9.1D). The young were then regurgitated to start their independent lives.</p>
@@ -245,5 +248,7 @@ $$</span><br /></p>
 <p>Notice that the simple, 2-parameter independent evolution model is a special case of the more complex, 4-parameter dependent model. Because of this, we can compare the two with a likelihood ratio test. Alternatively, AIC or Bayes factors can be used. If we find support for the 4-parameter model, we can conclude that the two characters have an evolutionary correlation.</p>
 <p>It is worth noting that there are other models that one can fit for the evolution of two binary traits that I did not discuss above. For example, one can model the situation where the two traits each have different forwards and backwards rates, but are evolving independently. This is a four-parameter model. Additionally, one can allow both forward and backward rates to differ and to depend on the character state of the other trait: an eight-parameter model. All of these models – and others not described here – can be compared using AIC, BIC, or Bayes Factors. Pagel and Meade (2006) describe a particularly innovative and synthetic method to test hypotheses about correlated evolution of discrete characters in a Bayesian framework using reversible-jump MCMC.</p>
 <p>One can also test for correlations among discrete characters using threshold models. Here, one assumes that the liabilities for the two characters evolve in a correlated fashion. More specifically, we can model liabilities for the two threshold characters using a bivariate Brownian motion model, with some evolutionary covariance <span class="math inline"><em>σ</em><sub>12</sub><sup>2</sup></span> between the two liabilities. We can then use either ML or Bayesian methods to determine if the evolutionary covariance between the two characters is non-zero (following the methods described in chapter 5, but using likelihoods based on discrete characters as described above.</p>
+<h2 id="chapter-summary">Chapter summary</h2>
+<h2 id="references">References</h2>
 </body>
 </html>
