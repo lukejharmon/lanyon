@@ -1,8 +1,5 @@
 To-do list:
 
-Add examples to chapter 9
-Add references to chapter 9
-
 Fix up chapter 10
 
 Enter chapter 11
