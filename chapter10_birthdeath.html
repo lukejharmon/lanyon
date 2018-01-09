@@ -30,11 +30,11 @@ title: Birth-death models
 <p><a href="{{site.baseurl}}/pdf/chapter10_birthdeath.pdf">pdf version</a></p>
 <h2 id="introduction-plant-diversity-imbalance">Introduction: Plant diversity imbalance</h2>
 <p>The diversity of flowering plants (the angiosperms) dwarfs the diversity of their closest evolutionary relatives (Figure 10.1). There are more than 260,000 species of angiosperms (that we know; more are added every day). The clade originated some 130 million years ago, so all of these species have formed since then. One can contrast the diversity of angiosperms with the diversity of other groups that originated at around the same time. For example, gymnosperms, which are as old as angiosperms, include only around 1000 species, and may even represent more than one clade. The diversity of angiosperms also dwarfs the diversity of familiar vertebrate groups of similar age (e.g. squamates, snakes and lizards, which diverged from their sister taxon, the tuatara, some 250 mya or more, include fewer than 8000 species).</p>
-<p>The evolutionary rise of angiosperm diversity puzzled Darwin over his career, and the issues surrounding angiosperm diversification are often referred to as “Darwin’s abominable mystery” in the scientific literature (e.g. Davies et al. 2004). The main mystery is the tremendous variation in numbers of species across plant clades (see Figure 10.1). This variation even applies within angiosperms, where some clades are much more diverse than others.</p>
+<p>The evolutionary rise of angiosperm diversity puzzled Darwin over his career, and the issues surrounding angiosperm diversification are often referred to as “Darwin’s abominable mystery” in the scientific literature <span class="citation">(e.g. Davies et al. <a href="#ref-Davies2004-dl">2004</a>)</span>. The main mystery is the tremendous variation in numbers of species across plant clades (see Figure 10.1). This variation even applies within angiosperms, where some clades are much more diverse than others.</p>
 <p>At a global scale, the number of species in a clade can change only via two processes: speciation and extinction. This means that we must look to speciation and extinction rates – and how they vary through time and across clades – to explain phenomena like the extraordinary diversity of Angiosperms. It is to this topic that we turn in the next few chapters. Since Darwin’s time, we have learned an extraordinary amount about the evolutionary processes that led to the diversity of angiosperms that we see today. These data provide an incredible window into the causes and effects of speciation and extinction over macroevolutionary time scales.</p>
 <div class="figure">
-<img src="{{site.baseurl}}/images/figure10-1.png" alt="Figure 10.1. Diversity of major groups of embryophytes (land plants). Angiosperms, including some 250,000 species, comprise more than 90% of species of land plants. Figure taken from Crepet and Niklas 2009" />
-<p class="caption">Figure 10.1. Diversity of major groups of embryophytes (land plants). Angiosperms, including some 250,000 species, comprise more than 90% of species of land plants. Figure taken from Crepet and Niklas 2009</p>
+<img src="{{site.baseurl}}/images/figure10-1.png" alt="Figure 10.1. Diversity of major groups of embryophytes (land plants). Angiosperms, including some 250,000 species, comprise more than 90% of species of land plants. Figure taken from Crepet and Niklas (2009)" />
+<p class="caption">Figure 10.1. Diversity of major groups of embryophytes (land plants). Angiosperms, including some 250,000 species, comprise more than 90% of species of land plants. Figure taken from <span class="citation">Crepet and Niklas (<a href="#ref-Crepet2009-qf">2009</a>)</span></p>
 </div>
 <p>Comparative methods can be applied to understand patterns of species richness, both across clades and through time, by estimating speciation and extinction rates. In this chapter, I will introduce birth-death models, by far the most common model for understanding diversification in a comparative framework. I will discuss the mathematics of birth-death models and how these models relate to the shapes of phylogenetic trees. I will describe how to simulate phylogenetic trees under a birth-death model. Finally, I will discuss tree balance and lineage-through-time plots, two common ways to measure the shapes of phylogenetic trees.</p>
 <p>Key Questions</p>
@@ -123,7 +123,7 @@ $$</span><br /></p>
 <div>
 <p><br /><span class="math display"><em>d</em><em>p</em><sub><em>n</em></sub>(<em>t</em>)/<em>d</em><em>t</em> = (<em>n</em> − 1)<em>λ</em><em>p</em><sub><em>n</em> − 1</sub>(<em>t</em>)+(<em>n</em> + 1)<em>μ</em><em>p</em><sub><em>n</em> + 1</sub>(<em>t</em>)−<em>n</em>(<em>λ</em> + <em>μ</em>)<em>p</em><sub><em>n</em></sub>(<em>t</em>)</span><br /></p>
 </div>
-<p>We can then solve this set of differential equations to obtain the probability distribution of <span class="math inline"><em>p</em><sub><em>n</em></sub>(<em>t</em>)</span>. Using the same boundary condition, <span class="math inline"><em>N</em>(0)=<em>n</em><sub>0</sub></span>, we have <span class="math inline"><em>p</em><sub>0</sub>(<em>t</em>)=1</span> for <span class="math inline"><em>n</em> = <em>n</em><sub>0</sub></span> and 0 otherwise. Then, we can find the solution to the differential equations 10.9, 10.10, and 10.9. The derivation of the solution to this set of differential equations is beyond the scope of this book (but see Kot 2001 for a nice explanation of the mathematics). A solution was first obtained by Bailey (1964), but I will use the simpler equivalent form from Foote et al. (1999). For <span class="math inline"><em>p</em><sub>0</sub>(<em>t</em>)</span> – that is, the probability that the entire lineage has gone extinct at time t – we have:</p>
+<p>We can then solve this set of differential equations to obtain the probability distribution of <span class="math inline"><em>p</em><sub><em>n</em></sub>(<em>t</em>)</span>. Using the same boundary condition, <span class="math inline"><em>N</em>(0)=<em>n</em><sub>0</sub></span>, we have <span class="math inline"><em>p</em><sub>0</sub>(<em>t</em>)=1</span> for <span class="math inline"><em>n</em> = <em>n</em><sub>0</sub></span> and 0 otherwise. Then, we can find the solution to the differential equations 10.9, 10.10, and 10.9. The derivation of the solution to this set of differential equations is beyond the scope of this book (but see <span class="citation">(Kot <a href="#ref-Kot2001-va">2001</a>)</span> for a nice explanation of the mathematics). A solution was first obtained by Bailey <span class="citation">(<a href="#ref-Bailey1964-ka">1964</a>)</span>, but I will use the simpler equivalent form from Foote et al. <span class="citation">(<a href="#ref-Foote1999-rq">1999</a>)</span>. For <span class="math inline"><em>p</em><sub>0</sub>(<em>t</em>)</span> – that is, the probability that the entire lineage has gone extinct at time t – we have:</p>
 (eq. 10.12)
 <div>
 <p><br /><span class="math display"><em>p</em><sub>0</sub>(<em>t</em>)=<em>α</em><sub>0</sub><sup><em>n</em></sup></span><br /></p>
@@ -147,8 +147,8 @@ $$</span><br /></p>
 \beta =\frac{(e^rt-1)}{(e^rt-\epsilon)}
 $$</span><br /></p>
 </div>
-<p><span class="math inline"><em>α</em></span> is the probability that any particular lineage has gone extinct before time t.</p>
-<p>Note that when <span class="math inline"><em>n</em><sub>0</sub> = 1</span> – that is, when we start with a single lineage - equations 10.12 and 10.13 simplify to (Raup 1985):</p>
+<p><span class="math inline"><em>α</em></span> is the probability that any particular lineage has gone extinct before time <span class="math inline"><em>t</em></span>.</p>
+<p>Note that when <span class="math inline"><em>n</em><sub>0</sub> = 1</span> – that is, when we start with a single lineage - equations 10.12 and 10.13 simplify to <span class="citation">(Raup <a href="#ref-Raup1985-wn">1985</a>)</span>:</p>
 (eq. 10.15)
 <div>
 <p><br /><span class="math display"><em>p</em><sub>0</sub>(<em>t</em>)=<em>α</em></span><br /></p>
@@ -189,18 +189,18 @@ $$</span><br /></p>
 <img src="{{site.baseurl}}/images/figure10-6.png" alt="Figure 10.6. Several phylogenetic trees showing different ways to plot the same tree shape." />
 <p class="caption">Figure 10.6. Several phylogenetic trees showing different ways to plot the same tree shape.</p>
 </div>
-<p>Tree topology ignores both branch lengths and tree tip labels. For example, the two trees in figure 10.6 A and D have the same tree topology even though they share no tips in common. What they do share is that their nodes have the same patterns in terms of the number of descendants on each “side” of the bifurcation. By contrast, the phylogenetic tree in 10.6 E has a different topology. (Note that what I am calling tree topology is sometimes referred to as “unlabeled” tree topology; e.g. Felsenstein 2004).</p>
+<p>Tree topology ignores both branch lengths and tree tip labels. For example, the two trees in figure 10.6 A and D have the same tree topology even though they share no tips in common. What they do share is that their nodes have the same patterns in terms of the number of descendants on each “side” of the bifurcation. By contrast, the phylogenetic tree in 10.6 E has a different topology. <span class="citation">(Note that what I am calling tree topology is sometimes referred to as “unlabeled” tree topology; e.g. Felsenstein <a href="#ref-Felsenstein2004-eo">2004</a>)</span>.</p>
 <p>Finally, tree balance is a way of expressing differences in the number of descendants between pairs of sister lineages at different points in a phylogenetic tree. For example, consider the phylogenetic tree depicted in figure 10.6D. The deepest split in that tree separates a clade with five species (lizard, snake, turtle, frog, salamander) from a clade with a single species (trout), and so that node in the tree is unbalanced with a (5, 1) pattern. By contrast, the deepest split in 10.6E separates two clades of equal size. In that tree, the deepest node is balanced with a (3, 3) pattern. A number of approaches in macroevolution use balance at nodes and across whole trees to try to capture important evolutionary patterns.</p>
-<p>We can start to understand these approaches by considering the balance of a single node n in a phylogenetic tree. There are two clades descended from this node; let’s call them a and b. We assume that the total number of species descended from the node <span class="math inline"><em>N</em><sub><em>t</em><em>o</em><em>t</em><em>a</em><em>l</em></sub></span> = <span class="math inline"><em>N</em><sub><em>a</em></sub> + <em>N</em><sub><em>b</em></sub></span> is constant and that neither Na nor Nb is zero. An important result, first discussed by Farris (1976) for a pure-birth model, is that all possible numerical divisions of <span class="math inline"><em>N</em><sub><em>t</em><em>o</em><em>t</em><em>a</em><em>l</em></sub></span> into <span class="math inline"><em>N</em><sub><em>a</em></sub> + <em>N</em><sub><em>b</em></sub></span> are equally probable. For example, if <span class="math inline"><em>N</em><sub><em>t</em><em>o</em><em>t</em><em>a</em><em>l</em></sub> = 10</span>, then all possible divisions: <span class="math inline">1 + 9</span>, <span class="math inline">2 + 8</span>, <span class="math inline">3 + 7</span>, <span class="math inline">4 + 6</span>, <span class="math inline">5 + 5</span>, <span class="math inline">6 + 4</span>, <span class="math inline">7 + 3</span>, <span class="math inline">8 + 2</span>, and <span class="math inline">9 + 1</span> are all equally probable, so that each will be predicted to occur with a probability 1/9. Formally</p>
+<p>We can start to understand these approaches by considering the balance of a single node n in a phylogenetic tree. There are two clades descended from this node; let’s call them a and b. We assume that the total number of species descended from the node <span class="math inline"><em>N</em><sub><em>t</em><em>o</em><em>t</em><em>a</em><em>l</em></sub></span> = <span class="math inline"><em>N</em><sub><em>a</em></sub> + <em>N</em><sub><em>b</em></sub></span> is constant and that neither Na nor Nb is zero. An important result, first discussed by Farris <span class="citation">(<a href="#ref-Farris1976-ck">1976</a>)</span> for a pure-birth model, is that all possible numerical divisions of <span class="math inline"><em>N</em><sub><em>t</em><em>o</em><em>t</em><em>a</em><em>l</em></sub></span> into <span class="math inline"><em>N</em><sub><em>a</em></sub> + <em>N</em><sub><em>b</em></sub></span> are equally probable. For example, if <span class="math inline"><em>N</em><sub><em>t</em><em>o</em><em>t</em><em>a</em><em>l</em></sub> = 10</span>, then all possible divisions: <span class="math inline">1 + 9</span>, <span class="math inline">2 + 8</span>, <span class="math inline">3 + 7</span>, <span class="math inline">4 + 6</span>, <span class="math inline">5 + 5</span>, <span class="math inline">6 + 4</span>, <span class="math inline">7 + 3</span>, <span class="math inline">8 + 2</span>, and <span class="math inline">9 + 1</span> are all equally probable, so that each will be predicted to occur with a probability 1/9. Formally</p>
 (eq. 10.17)
 <div>
 <p><br /><span class="math display">$$
 p(N_a│N_{total})=\frac{1}{N_{total}-1}
 $$</span><br /></p>
 </div>
-<p>(Note that there is a subtle difference between equation 10.2 above and some equations in the literature, e.g. Slowinsky and Guyer 1993. Ths difference has to do with whether we label the two descendent clades, a and b, or not; if the clades are unlabeled, then there is no difference between 4+6 and 6+4, so that the probability that the largest clade, whichever it might be, has 6 species is twice what is given by my equation).</p>
-<p>Equation 10.17 applies even if there is extinction, as long as both sister clades have the same speciation and extinction rates (Slowinsky and Guyer 1989). This equation has been used to compare diversification rates between sister clades, either for a single pair or across multiple pairs (see Chapter 11).</p>
-<p>Tree balance statistics provide a way of comparing numbers of taxa across all of the nodes in a phylogenetic tree simultaneously. There are a surprisingly large number of tree balance statistics, but all rely on summarizing information about the balance of each node across a whole tree. Colless’ index <span class="math inline"><em>I</em><sub><em>c</em></sub></span> is one of the simplest – and, perhaps, most commonly used – indices of tree balance. <span class="math inline"><em>I</em><sub><em>c</em></sub></span> is the sum of the difference in the number of tips subtended on each side of every node in the tree, standardized by the maximum that such a sum can achieve:</p>
+<p>[Note that there is a subtle difference between equation 10.2 above and some equations in the literature, e.g. <span class="citation">Slowinski and Guyer (<a href="#ref-Slowinski1993-ks">1993</a>)</span>. This difference has to do with whether we label the two descendent clades, a and b, or not; if the clades are unlabeled, then there is no difference between 4+6 and 6+4, so that the probability that the largest clade, whichever it might be, has 6 species is twice what is given by my equation].</p>
+<p>Equation 10.17 applies even if there is extinction, as long as both sister clades have the same speciation and extinction rates <span class="citation">(Slowinski and Guyer <a href="#ref-Slowinski1993-ks">1993</a>)</span>. This equation has been used to compare diversification rates between sister clades, either for a single pair or across multiple pairs (see Chapter 11).</p>
+<p>Tree balance statistics provide a way of comparing numbers of taxa across all of the nodes in a phylogenetic tree simultaneously. There are a surprisingly large number of tree balance statistics, but all rely on summarizing information about the balance of each node across a whole tree. Colless’ index <span class="math inline"><em>I</em><sub><em>c</em></sub></span> <span class="citation">(Colless <a href="#ref-Colless1982-kz">1982</a>)</span> is one of the simplest – and, perhaps, most commonly used – indices of tree balance. <span class="math inline"><em>I</em><sub><em>c</em></sub></span> is the sum of the difference in the number of tips subtended on each side of every node in the tree, standardized by the maximum that such a sum can achieve:</p>
 (eq. 10.18)
 <div>
 <p><br /><span class="math display">$$
@@ -212,7 +212,7 @@ $$</span><br /></p>
 <img src="{{site.baseurl}}/images/figure10-7.png" alt="Figure 10.7. A. a pectinate tree (I_C = 1); B. a random tree (0 &lt; I_C &lt; 1); C. A balanced tree (I_C = 0)." />
 <p class="caption">Figure 10.7. A. a pectinate tree (<span class="math inline"><em>I</em><sub><em>C</em></sub> = 1</span>); B. a random tree (<span class="math inline">0 &lt; <em>I</em><sub><em>C</em></sub> &lt; 1</span>); C. A balanced tree (<span class="math inline"><em>I</em><sub><em>C</em></sub> = 0</span>).</p>
 </div>
-<p>There are a number of other indices of phylogenetic tree balance (reviewed in Mooers and Heard xxx; and others). All of these indices are used in a similar way: one can then compare the value of the tree index to what one might expect under a particular model of diversification, typically birth-death. In fact, since these indices focus on tree topology and ignore branch lengths, one can actually consider their general behavior under a set of equal-rates Markov (ERM) models. This set includes any model where birth and death rates are equal across all lineages in a phylogenetic tree at a particular time. ERM models include birth-death models as described above, but also encompass models where birth and/or death rates change through time.</p>
+<p>There are a number of other indices of phylogenetic tree balance <span class="citation">(reviewed in Mooers and Heard <a href="#ref-Mooers1997-ow">1997</a>)</span>. All of these indices are used in a similar way: one can then compare the value of the tree index to what one might expect under a particular model of diversification, typically birth-death. In fact, since these indices focus on tree topology and ignore branch lengths, one can actually consider their general behavior under a set of equal-rates Markov (ERM) models. This set includes any model where birth and death rates are equal across all lineages in a phylogenetic tree at a particular time. ERM models include birth-death models as described above, but also encompass models where birth and/or death rates change through time.</p>
 <h2 id="lineage-through-time-plots">Lineage-through-time plots</h2>
 <p>The other main way to quantify phylogenetic tree shape is by making lineage-through-time plots. These plots have time along the x axis (from the root of the tree to the present day), and the reconstructed number of lineages on the y-axis (Figure 10.8). Since we are usually considering birth-death models, where the number of lineages is expected to grow (or shrink) exponentially through time, then it is typical practice to log-transform the y-axis.</p>
 <div class="figure">
@@ -226,6 +226,41 @@ $$</span><br /></p>
 </div>
 <h2 id="chapter-summary">Chapter Summary</h2>
 <p>In this chapter, I introduced birth-death models and summarized their basic mathematical properties. Birth-death models predict patterns of species diversity over time intervals, and can also be used to model the growth of phylogenetic trees. We can visualize these patterns by measuring tree balance and creating lineage-through-time (LTT) plots.</p>
-<h2 id="references">References</h2>
+<h2 id="references" class="unnumbered">References</h2>
+<div id="refs" class="references">
+<div id="ref-Bailey1964-ka">
+<p>Bailey, N. T. J. 1964. The elements of stochastic processes with applications to the natural sciences. John Wiley &amp; Sons.</p>
+</div>
+<div id="ref-Colless1982-kz">
+<p>Colless, D. H. 1982. Review of phylogenetics: The theory and practice of phylogenetic systematics. Syst. Zool.</p>
+</div>
+<div id="ref-Crepet2009-qf">
+<p>Crepet, W. L., and K. J. Niklas. 2009. Darwin’s second “abominable mystery”: Why are there so many angiosperm species? Am. J. Bot. Botanical Soc America.</p>
+</div>
+<div id="ref-Davies2004-dl">
+<p>Davies, T. J., T. G. Barraclough, M. W. Chase, P. S. Soltis, D. E. Soltis, and V. Savolainen. 2004. Darwin’s abominable mystery: Insights from a supertree of the angiosperms. Proc. Natl. Acad. Sci. U. S. A. 101:1904–1909.</p>
+</div>
+<div id="ref-Farris1976-ck">
+<p>Farris, J. S. 1976. Expected asymmetry of phylogenetic trees. Syst. Zool. 25:196–198. [Oxford University Press, Society of Systematic Biologists, Taylor &amp; Francis, Ltd.].</p>
+</div>
+<div id="ref-Felsenstein2004-eo">
+<p>Felsenstein, J. 2004. Inferring phylogenies. Sinauer Associates, Inc., Sunderland, MA.</p>
+</div>
+<div id="ref-Foote1999-rq">
+<p>Foote, M., J. P. Hunter, C. M. Janis, and J. J. Sepkoski Jr. 1999. Evolutionary and preservational constraints on origins of biologic groups: Divergence times of eutherian mammals. Science 283:1310–1314.</p>
+</div>
+<div id="ref-Kot2001-va">
+<p>Kot, M. 2001. Stochastic birth and death processes. Pp. 25–42 <em>in</em> M. Kot, ed. Elements of mathematical ecology. Cambridge University Press, Cambridge.</p>
+</div>
+<div id="ref-Mooers1997-ow">
+<p>Mooers, A. O., and S. B. Heard. 1997. Inferring evolutionary process from phylogenetic tree shape. Q. Rev. Biol. 72:31–54.</p>
+</div>
+<div id="ref-Raup1985-wn">
+<p>Raup, D. M. 1985. Mathematical models of cladogenesis. Paleobiology 11:42–52.</p>
+</div>
+<div id="ref-Slowinski1993-ks">
+<p>Slowinski, J. B., and C. Guyer. 1993. Testing whether certain traits have caused amplified diversification: An improved method based on a model of random speciation and extinction. Am. Nat. 142:1019–1024.</p>
+</div>
+</div>
 </body>
 </html>
