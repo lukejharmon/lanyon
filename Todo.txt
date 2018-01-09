@@ -1,6 +1,9 @@
 To-do list:
 
-Fix up chapter 10
+
+Chapter 10 equations
+Chapter 10 figures
+Chapter 10 References
 
 Enter chapter 11
 Enter chapter 12
@@ -24,3 +27,5 @@ Proofread chapter 14
 
 Write acknowledgements section
 Check copyright on all figures
+
+Add version number and changelog

@@ -1,5 +1,7 @@
 # Chapter 10: Introduction to birth-death models
 
+[pdf version]({{ site.baseurl }}/pdf/chapter10_birthdeath.pdf)
+
 ## Introduction: Plant diversity imbalance
 
 The diversity of flowering plants (the angiosperms) dwarfs the diversity of their closest evolutionary relatives (Figure 10.1). There are more than 260,000 species of angiosperms (that we know; more are added every day). The clade originated some 130 million years ago, so all of these species have formed since then. One can contrast the diversity of angiosperms with the diversity of other groups that originated at around the same time. For example, gymnosperms, which are as old as angiosperms, include only around 1000 species, and may even represent more than one clade. The diversity of angiosperms also dwarfs the diversity of familiar vertebrate groups of similar age (e.g. squamates, snakes and lizards, which diverged from their sister taxon, the tuatara, some 250 mya or more, include fewer than 8000 species).
@@ -25,84 +27,173 @@ Comparative methods can be applied to understand patterns of species richness, b
 
 A birth-death model is a continuous-time Markov process that is typically used to study how the number of individuals in a population change through time. (For macroevolution, these “individuals” are usually species). In a birth-death model, two things can occur: births, where the number of individuals increases by one; and deaths, where the number of individuals decreases by one. We assume that no more than one new individual can form during any one event. In phylogenetic terms, that means that birth-death trees cannot have “hard polytomies.”
 
-In macroevolution, we apply the birth-death model to species, and typically consider a model where each lineage has a constant probability of either giving birth (speciating) or dying (going extinct). We denote the per-lineage birth rate as λ and the per-lineage death rate as μ. For now we consider these rates to be constant, but we will relax that assumption later in the book.
+In macroevolution, we apply the birth-death model to species, and typically consider a model where each lineage has a constant probability of either giving birth (speciating) or dying (going extinct). We denote the per-lineage birth rate as $\lambda$ and the per-lineage death rate as $\mu$. For now we consider these rates to be constant, but we will relax that assumption later in the book.
 
-We can understand the behavior of birth-death models if we consider the waiting time between successive speciation and extinction events in the tree. Imagine that we are considering a single lineage that exists at time t0. We can think about the waiting time to the next event, which will either be a speciation event splitting that lineage into two (Figure 10.2A) or an extinction event marking the end of that lineage (Figure 10.2B). Under a birth-death model, both of these events follow a Poisson process, so that the expected waiting time to an event follows an exponential distribution (Figure 10.2C). The expected waiting time to the next speciation event is exponential with parameter λ, and the expected waiting time to the next extinction event exponential with parameter μ. Of course, only one of these can be the next event. The expected waiting time to the next event (of any sort) is exponential with parameter λ + μ, and the probability that that event is speciation is λ / (λ + μ), extinction μ / (λ + μ).
+We can understand the behavior of birth-death models if we consider the waiting time between successive speciation and extinction events in the tree. Imagine that we are considering a single lineage that exists at time $t_0$. We can think about the waiting time to the next event, which will either be a speciation event splitting that lineage into two (Figure 10.2A) or an extinction event marking the end of that lineage (Figure 10.2B). Under a birth-death model, both of these events follow a Poisson process, so that the expected waiting time to an event follows an exponential distribution (Figure 10.2C). The expected waiting time to the next speciation event is exponential with parameter $\lambda$, and the expected waiting time to the next extinction event exponential with parameter $\mu$. (Of course, only one of these can be the next event. The expected waiting time to the next event (of any sort) is exponential with parameter $\lambda + \mu$, and the probability that that event is speciation is $\lambda / (\mu + \lambda)$, extinction $\mu / (\mu + \lambda)$.)
 
 
 ![Figure 10.2. Illustration of the basic properties of birth-death models. A. Waiting time to a speciation event; B. Waiting time to an extinction event; C. Exponential distribution of waiting times until the next event; D. A birth-death tree with waiting times.]({{ site.baseurl }}/images/figure10-2.png)
 
-When we have more than one lineage “alive” in the tree at any time point, then the waiting time to the next event changes, although its distribution is still exponential. In general, if there are N(t) lineages alive at time t, then the waiting time to the next event follows an exponential distribution with parameter N (λ + μ), with the probability that that event is speciation or extinction the same as given above. Using this approach, we can grow phylogenetic trees of any size (Figure 10.2D).
+When we have more than one lineage “alive” in the tree at any time point, then the waiting time to the next event changes, although its distribution is still exponential. In general, if there are $N(t)$ lineages alive at time $t$, then the waiting time to the next event follows an exponential distribution with parameter $N (\lambda + \mu)$, with the probability that that event is speciation or extinction the same as given above. You can see from this equation that the rate parameter of the exponential distribution gets larger as the number of lineages increases. This means that the expected waiting times across all lineages get shorter and shorter as more lineages accumulate.
 
-We can derive some important properties of the birth-death process on trees. To do so, it is useful to define two additional parameters, the net diversification rate (r) and the relative extinction rate (ϵ):
+Using this approach, we can grow phylogenetic trees of any size (Figure 10.2D).
 
-(10.1)	r=λ-μ
-ϵ=μ⁄λ
+We can derive some important properties of the birth-death process on trees. To do so, it is useful to define two additional parameters, the net diversification rate ($r$) and the relative extinction rate ($\epsilon$):
+
+(eq. 10.1)
+<div>
+$$
+r = \lambda - \mu
+$$
+</div>
+
+<div>
+$$
+\epsilon = \frac{\mu}{\lambda}
+$$
+</div>
 
 These two parameters simplify some of the equations below, and are also commonly encountered in the literature.
 
-To derive some general properties of the birth-death model, we first consider the process over a small interval of time, Δt. We assume that this interval is so short that it contains at most a single event, either speciation or extinction (the interval might also contain no events at all). The probability of speciation and extinction over the time interval can be expressed as:
+To derive some general properties of the birth-death model, we first consider the process over a small interval of time, $\Delta t$. We assume that this interval is so short that it contains at most a single event, either speciation or extinction (the interval might also contain no events at all). The probability of speciation and extinction over the time interval can be expressed as:
 
-(10.2)
+(eq. 10.2)
+<div>
+$$
+Pr_{speciation} = N(t) \lambda \Delta t
+$$
+</div>
+<div>
+$$
+Pr_{speciation} = N(t) \lambda \Delta t
+$$
+</div>
 
+We now consider the total number of living species at some time $t$, and write this as $N(t)$. It is useful to think about the expected value of $N(t)$ under a birth-death model [we consider the full distribution of $N(t)$ below]. The expected value of $N(t)$ after a small time interval $\Delta t$ is:
 
-We now consider the total number of living species at some time t, and write this as N(t). It is useful to think about the expected value of N(t) under a birth-death model [we consider the full distribution of N(t) below]. The expected value of N(t) after a small time interval Δt is:
-
-(10.3)	N(t+Δt)=N(t)+N(t)λΔt-N(t)μΔt
-
-We can convert this to a differential equation by subtracting N(t) from both sides, then dividing by Δt and taking the limit as Δt becomes very small:
-
-(10.4)	dN/dt=N(λ-μ)
-
-We can solve this differential equation if we set a boundary condition that N(0)=a; that is, at time 0, we start out with a lineages. We then obtain:
-
-(10.5)	N(t)=ae^(λ-μ)t=ae^rt
-
-This deterministic equation gives us the expected value for the number of species through time under a birth-death model. Notice that the number of species grows exponentially through time as long as λ>μ, e.g. r>0, and decays otherwise (Figure 10.3).
-
-
-![Figure 10.3. Expected number of species under a birth-death model with r=λ-μ > 0 and r < 0.]({{ site.baseurl }}/images/figure10-3.png)
-
-We are also interested in the stochastic behavior of the model – that is, how much should we expect N(t) to vary from one replicate to the next? We can calculate the full probability distribution for N(t), which we write as p_n (t)=Pr[N(t)=n] for all n ≥ 0, to completely describe the birth-death model’s behavior. To derive this probability distribution, we can start with a set of equations, one for each value of n, which we will denote as p_0 (t) (there are an infinite set of such equations, from p_0to p_∞). We can then write a set of difference equations that describe the different ways that one can reach any state over some small time interval Δt. We again assume that Δt is sufficiently small that at most one event (a birth or a death) can occur. As an example, for n = 0, we can either be at n = 0 at the beginning of the time interval, or be at n = 1 and have the last surviving lineage go extinct. We write this as:
-
-(10.6)	p_0 (t+Δt)=p_1 (t)μΔt+p_0 (t)
-
-For any n≥1, we can reach the state of n lineages in three ways: from a birth (from n – 1 to n), a death (from n + 1 to n), or neither (from n to n). This is written as:
-
-(10.7)
-
-p_n (t+Δt)=p_(n-1) (t)(n-1)λΔt+p_(n+1) (t)(n+1)μΔt+p_n (t)(1-n(λ+μ))Δt
-
-We can convert this set of difference equations to differential equations by subtracting p_n (t) from both sides, then dividing by Δt and taking the limit as Δt becomes very small. So, when n = 0, we use 10.6 to obtain:
-
-(10.8)
-(dp_0)/dt=μp_1
-
-and, from 10.7, for all n≥1:
-
-(10.9)
-(dp_n)/dt=(n-1)λp_(n-1)+(n+1)μp_(n+1)-n(λ+μ) p_n
+(eq. 10.3)
+<div>
+$$
+N(t+\Delta t) = N(t)+N(t) \lambda \Delta t-N(t) \mu \Delta t
+$$
+</div>
 
 
-We can then solve this set of differentia	l equations to obtain the probability distribution of pn(t). Using the same boundary condition, N(0)=a, we have p_0 (t)=1 for n = a and 0 otherwise. Then, we can find the solution to the differential equations 10.8 and 10.9. The derivation of the solution to this set of differential equations is beyond the scope of this book (but see Kot 2001 for a nice explanation of the mathematics). A solution was first obtained by Bailey (1964), but I will use the simpler equivalent form from Foote et al. (1999). For p_0 (t) – that is, the probability that the entire lineage has gone extinct at time t – we have:
 
-(10.10)	p_0 (t)=α^a
+We can convert this to a differential equation by subtracting $N(t)$ from both sides, then dividing by $\Delta t$ and taking the limit as $\Delta t$ becomes very small:
 
-And for all n≥1:
+(eq. 10.4)
+<div>
+$$
+dN/dt=N(\lambda-\mu)
+$$
+</div>
 
-(10.11)
+We can solve this differential equation if we set a boundary condition that $N(0)=n_0$; that is, at time $0$, we start out with $n_0$ lineages. We then obtain:
+
+(eq. 10.5)
+<div>
+$$
+N(t)=n_0 e^{\lambda-\mu} t= n_0 e^{r t}
+$$
+</div>
+
+This deterministic equation gives us the expected value for the number of species through time under a birth-death model. Notice that the number of species grows exponentially through time as long as $\lambda > \mu$, e.g. $r>0$, and decays otherwise (Figure 10.3).
+
+
+![Figure 10.3. Expected number of species under a birth-death model with $r=\lambda-\mu > 0$ and $r < 0$.]({{ site.baseurl }}/images/figure10-3.png)
+
+We are also interested in the stochastic behavior of the model – that is, how much should we expect $N(t)$ to vary from one replicate to the next? We can calculate the full probability distribution for $N(t)$, which we write as $p_n(t)=Pr[N(t)=n]$ for all $n \geq 0$, to completely describe the birth-death model’s behavior. To derive this probability distribution, we can start with a set of equations, one for each value of $n$, which we will denote as $p_n(t)$ (there are an infinite set of such equations, from $p_0$ to $p_\infty$). We can then write a set of difference equations that describe the different ways that one can reach any state over some small time interval $\Delta t$. We again assume that $\Delta t$ is sufficiently small that at most one event (a birth or a death) can occur. As an example, consider what can happen to make $n = 0$ at the end of a certain time interval. There are two possibilities: either we were already at $n = 0$ at the beginning of the time interval and (by definition) nothing happened, or we were at $n = 1$ and the last surviving lineage went extinct. We write this as:
+
+(eq. 10.6)
+<div>
+$$
+p_0(t+\Delta t)=p_1(t) \mu \Delta t+ p_0(t)
+$$
+</div>
+
+Similarly, we can reach $n = 1$ by either starting with $n=1$ and having no events, or going from $n = 2$ via extinction.
+
+(eq. 10.7)
+<div>
+$$
+p_1(t+\Delta t)=p_1(t) (1-(\lambda+\mu)) \Delta t+ p_2(t) 2 \mu \Delta t
+$$
+</div>
+
+Finally, any $n > 1$, we can reach the state of $n$ lineages in three ways: from a birth (from $n – 1$ to $n$), a death (from $n + 1$ to $n$), or neither (from $n$ to $n$).
+
+(eq. 10.8)
+<div>
+$$
+p_n(t+\Delta t) = p_{n-1}(t) (n-1) \lambda \Delta t+p_{n+1}(t) (n+1) \mu \Delta t + p_n(t) (1-n(\lambda+\mu)) \Delta t
+$$
+</div>
+
+We can convert this set of difference equations to differential equations by subtracting $p_n(t)$ from both sides, then dividing by $\Delta t$ and taking the limit as $\Delta t$ becomes very small. So, when $n = 0$, we use 10.6 to obtain:
+
+(eq. 10.9)
+<div>
+$$
+dp_0(t)/dt=\mu p_1(t)
+$$
+</div>
+
+From 10.7:
+
+(eq. 10.10)
+<div>
+$$
+dp_1(t)/dt=2 \mu p_2(t) - (\lambda - \mu) p_1(t)
+$$
+</div>
+
+and from 10.8, for all $n>1$:
+
+(eq. 10.11)
+<div>
+$$
+dp_n(t)/dt=(n-1) \lambda p_{n-1}(t) + (n+1) \mu p_{n+1}(t) - n(λ+μ) p_n(t)
+$$
+</div>
+
+We can then solve this set of differential equations to obtain the probability distribution of $p_n(t)$. Using the same boundary condition, $N(0)=n_0$, we have $p_0(t)=1$ for $n = n_0$ and 0 otherwise. Then, we can find the solution to the differential equations 10.9, 10.10, and 10.9. The derivation of the solution to this set of differential equations is beyond the scope of this book (but see Kot 2001 for a nice explanation of the mathematics). A solution was first obtained by Bailey (1964), but I will use the simpler equivalent form from Foote et al. (1999). For $p_0(t)$ – that is, the probability that the entire lineage has gone extinct at time t – we have:
+
+(eq. 10.12)
+<div>
+$$
+p_0(t)=\alpha^n_0
+$$
+</div>
+
+And for all $n \geq 1$:
+
+(eq. 10.13)
+<div>
+$$
+p_n(t) = \sum\limits_{j=1}^{min(n_0,n)} n_0 \choose j {n-1} \choose {j-1} \alpha^{n_0 - j} \beta^{n-j} [(1-\alpha)(1-\beta)]^j
+$$
+</div>
 
 Where:
 
-(10.12)	α=ϵ(e^rt-1)/(e^rt-ϵ)	β=(e^rt-1)/(e^rt-ϵ)
+(eq. 10.14)
+<div>
+$$
+\alpha=\epsilon (e^rt-1)/(e^rt-\epsilon)
+$$
+</div>
+<div>
+$$
+\beta =(e^rt-1)/(e^rt-\epsilon)
+$$
+</div>
 
-We can first write down the probability that this lineage has gone extinct; this means it has left no descendants at time t:
+\alpha is actually the probability that any particular lineage has gone extinct before time t.
 
-(10.13)	α_1 (t)=Pr[N(t)=0]=ϵ(e^rt-1)/(e^rt-ϵ)
+Note that when $n_0 = 1$ – that is, when we start with a single lineage - equations 10.12 and 10.13 simplify to (Raup 1985):
 
-Note that when a = 1 – that is, when we start with a single lineage - equations 10.10 and 10.11 simplify to (Raup 1985):
-
-(10.14)	p_0 (t)=α
+(10.15)	p_0 (t)=α
 
 And for all n≥1:
 
@@ -184,6 +275,8 @@ Lineage-through-time plots are effective ways to visualize patterns of lineage d
 ![Figure 10.9. Example LTT plots.]({{ site.baseurl }}/images/figure10-9.png)
 
 
-## Summary
+## Chapter Summary
 
 In this chapter, I introduced birth-death models and summarized their basic mathematical properties. Birth-death models predict patterns of species diversity over time intervals, and can also be used to model the growth of phylogenetic trees. We can visualize these patterns by measuring tree balance and creating lineage-through-time (LTT) plots.
+
+## References
