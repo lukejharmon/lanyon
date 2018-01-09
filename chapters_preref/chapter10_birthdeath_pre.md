@@ -15,7 +15,7 @@ At a global scale, the number of species in a clade can change only via two proc
 
 Comparative methods can be applied to understand patterns of species richness, both across clades and through time, by estimating speciation and extinction rates. In this chapter, I will introduce birth-death models, by far the most common model for understanding diversification in a comparative framework. I will discuss the mathematics of birth-death models and how these models relate to the shapes of phylogenetic trees. I will describe how to simulate phylogenetic trees under a birth-death model. Finally, I will discuss tree balance and lineage-through-time plots, two common ways to measure the shapes of phylogenetic trees.
 
-## Key Questions
+Key Questions
 
 - How can we use birth-death models to model diversification?
 - How do we simulate phylogenetic trees under a birth-death model?
@@ -171,36 +171,46 @@ And for all $n \geq 1$:
 (eq. 10.13)
 <div>
 $$
-p_n(t) = \sum\limits_{j=1}^{min(n_0,n)} n_0 \choose j {n-1} \choose {j-1} \alpha^{n_0 - j} \beta^{n-j} [(1-\alpha)(1-\beta)]^j
+p_n(t) = \sum\limits_{j=1}^{min(n_0,n)} \binom{n_0}{j} \binom{n-1}{j-1} \alpha^{n_0 - j} \beta^{n-j} [(1-\alpha)(1-\beta)]^j
 $$
 </div>
+
 
 Where:
 
 (eq. 10.14)
 <div>
 $$
-\alpha=\epsilon (e^rt-1)/(e^rt-\epsilon)
+\alpha=\frac{\epsilon (e^rt-1)}{(e^rt-\epsilon)}
 $$
 </div>
 <div>
 $$
-\beta =(e^rt-1)/(e^rt-\epsilon)
+\beta =\frac{(e^rt-1)}{(e^rt-\epsilon)}
 $$
 </div>
 
-\alpha is actually the probability that any particular lineage has gone extinct before time t.
+$\alpha$ is the probability that any particular lineage has gone extinct before time t.
 
 Note that when $n_0 = 1$ – that is, when we start with a single lineage - equations 10.12 and 10.13 simplify to (Raup 1985):
 
-(10.15)	p_0 (t)=α
+(eq. 10.15)
+<div>
+$$
+p_0(t)=\alpha
+$$
+</div>
 
-And for all n≥1:
+And for all $n\geq 1$:
 
-(10.15)
-p_n (t)=(1-α)(1-β) β^(i-1)
+(eq. 10.16)
+<div>
+$$
+p_n(t)=(1-\alpha)(1-\beta) \beta^{i-1}
+$$
+</div>
 
-In all cases the expected number of lineages in the tree is exactly as stated above in equation (10.5), but now we have the full probability distribution of the number of lineages given a, t, λ, and μ.  A few plots capture the general shape of this distribution (Figure 10.4).
+In all cases the expected number of lineages in the tree is exactly as stated above in equation (10.5), but now we have the full probability distribution of the number of lineages given $n_0$, $t$, $\lambda$, and $\mu$.  A few plots capture the general shape of this distribution (Figure 10.4).
 
 
 ![Figure 10.4. Probability distributions of N(t) under A. pure birth, B. birth death after a short time, and C. birth-death after a long time.]({{ site.baseurl }}/images/figure10-4.png)
@@ -220,15 +230,15 @@ The main complication in phylogenetic studies of birth-death models is that we g
 
 We can use the statistical properties of birth-death models to simulate phylogenetic trees through time. We could begin with a single lineage at time 0. However, phylogenetic tree often start with the first speciation event in the clade, so one can also begin the simulation with two lineages at time 0 (this distinction relates to our earlier discussion of crown versus stem ages; see also chapter 11).
 
-To simulate our tree, we need to draw waiting times between speciation and extinction events, connect new lineages to the tree, and prune lineages when they go extinct. We also need a stopping criterion, which can have to do with a particular number of taxa or a fixed time interval. We will consider the latter, and leave growing trees to a fixed number of taxa as an exercise for the reader. Our simulation algorithm is as follows. I assume that we have a certain number of “living” lineages in our tree (1 or 2 initially), a current time (tc = 0 initially), and a stopping time tstop.
+To simulate our tree, we need to draw waiting times between speciation and extinction events, connect new lineages to the tree, and prune lineages when they go extinct. We also need a stopping criterion, which can have to do with a particular number of taxa or a fixed time interval. We will consider the latter, and leave growing trees to a fixed number of taxa as an exercise for the reader. Our simulation algorithm is as follows. I assume that we have a certain number of “living” lineages in our tree (1 or 2 initially), a current time ($t_c = 0$ initially), and a stopping time $t_{stop}$.
 
-1. Draw a waiting time ti to the next speciation or extinction event. Waiting times are drawn from an exponential distribution with rate parameter NA * (λ + μ) where NA is the current number of living lineages in the tree.
-2. Check to see if the simulation ends before the next event. That is, if tc + ti > tstop, end the simulation.
-3. Decide whether the next event is a speciation event [with probability λ / (λ + μ)] or an extinction event [with probability μ / (λ + μ)]. This can be done by drawing a uniform random number ui from the interval [0,1] and assigning speciation to the event if ui < λ / (λ + μ) and extinction otherwise.
+1. Draw a waiting time $t_i$ to the next speciation or extinction event. Waiting times are drawn from an exponential distribution with rate parameter $N_{alive} * (\lambda + \mu)$ where $N_{alive}$ is the current number of living lineages in the tree.
+2. Check to see if the simulation ends before the next event. That is, if $t_c + t_i > t_{stop}$, end the simulation.
+3. Decide whether the next event is a speciation event [with probability $\lambda / (\lambda + \mu)$] or an extinction event [with probability $\mu / (\lambda + \mu)$]. This can be done by drawing a uniform random number $u_i$ from the interval $[0,1]$ and assigning speciation to the event if $u_i < \lambda / (\lambda + \mu)$ and extinction otherwise.
 4. If (3) is a speciation event, then choose a random living lineage in the tree. Attach a new branch to the tree at this point, and add one new living lineage to the simulation. Return to step 1.
 5. If (3) is an extinction event, choose a random living lineage in the tree. That lineage is now dead. As long as there is still at least one living lineage in the tree, return to (1); otherwise, your whole clade has gone extinct, and you can stop the simulation.
 
-This procedure returns a phylogenetic tree that includes both living and dead lineages. One can prune out any extinct taxa to return a birth-death tree of survivors, which is more in line with what we typically study using extant species. It is also worth noting that entire clades can – and often do – go extinct under this protocol before one reaches time tstop.
+This procedure returns a phylogenetic tree that includes both living and dead lineages. One can prune out any extinct taxa to return a birth-death tree of survivors, which is more in line with what we typically study using extant species. It is also worth noting that entire clades can – and often do – go extinct under this protocol before one reaches time $t_{stop}$.
 
 We can think about phylogenetic predictions of birth-death models in two ways: by considering tree topology, and by considering tree branch lengths. I will consider each of these two aspects of trees below.
 
@@ -243,21 +253,32 @@ Tree topology ignores both branch lengths and tree tip labels. For example, the 
 
 Finally, tree balance is a way of expressing differences in the number of descendants between pairs of sister lineages at different points in a phylogenetic tree. For example, consider the phylogenetic tree depicted in figure 10.6D. The deepest split in that tree separates a clade with five species (lizard, snake, turtle, frog, salamander) from a clade with a single species (trout), and so that node in the tree is unbalanced with a (5, 1) pattern. By contrast, the deepest split in 10.6E separates two clades of equal size. In that tree, the deepest node is balanced with a (3, 3) pattern. A number of approaches in macroevolution use balance at nodes and across whole trees to try to capture important evolutionary patterns.
 
-We can start to understand these approaches by considering the balance of a single node n in a phylogenetic tree. There are two clades descended from this node; let’s call them a and b. We assume that the total number of species descended from the node Nn = Na + Nb is constant and that neither Na nor Nb is zero. An important result, first discussed by Farris (1976) for a pure-birth model, is that all possible numerical divisions of Nn into Na + Nb are equally probable. For example, if Nn = 10, then all possible divisions: 1+9, 2+8, 3+7, 4+6, 5+5, 6+4, 7+3, 8+2, and 9+1 are all equally probable, so that each will be predicted to occur with a probability 1/9. Formally
+We can start to understand these approaches by considering the balance of a single node n in a phylogenetic tree. There are two clades descended from this node; let’s call them a and b. We assume that the total number of species descended from the node $N_{total}$ = $N_a + N_b$ is constant and that neither Na nor Nb is zero. An important result, first discussed by Farris (1976) for a pure-birth model, is that all possible numerical divisions of $N_{total}$ into $N_a + N_b$ are equally probable. For example, if $N_{total} = 10$, then all possible divisions: $1+9$, $2+8$, $3+7$, $4+6$, $5+5$, $6+4$, $7+3$, $8+2$, and $9+1$ are all equally probable, so that each will be predicted to occur with a probability 1/9. Formally
 
-(eq. 10.2)
-p(N_a│N_n )=1/(N_n-1)
+(eq. 10.17)
+<div>
+$$
+p(N_a│N_{total})=\frac{1}{N_{total}-1}
+$$
+</div>
 
-(Note that there is a subtle difference between equation 10.2 above and some equations in the literature, e.g. Slowinsky and Guyer 1993. Ths difference has to do with whether we label the two descendent clades, a and b, or not; if the clades are unlabeled, then there is no difference between 4+6 and 6+4, so that the probability that the largest clade, whichever it might be, has 6 species is twice what is given by my equation). Equation 10.2 applies even if there is extinction, as long as both sister clades have the same speciation and extinction rates (Slowinsky and Guyer 1989). This equation has been used to compare diversification rates between sister clades, either for a single pair or across multiple pairs (see Chapter 11).
+(Note that there is a subtle difference between equation 10.2 above and some equations in the literature, e.g. Slowinsky and Guyer 1993. Ths difference has to do with whether we label the two descendent clades, a and b, or not; if the clades are unlabeled, then there is no difference between 4+6 and 6+4, so that the probability that the largest clade, whichever it might be, has 6 species is twice what is given by my equation).
 
-Tree balance statistics provide a way of comparing numbers of taxa across all of the nodes in a phylogenetic tree simultaneously. There are a surprisingly large number of tree balance statistics, but all rely on summarizing information about the balance of each node across a whole tree. Colless’ index Ic is one of the simplest – and, perhaps, most commonly used – indices of tree balance. Ic is the sum of the difference in the number of tips subtended on each side of every node in the tree, standardized by the maximum that such a sum can achieve:
+Equation 10.17 applies even if there is extinction, as long as both sister clades have the same speciation and extinction rates (Slowinsky and Guyer 1989). This equation has been used to compare diversification rates between sister clades, either for a single pair or across multiple pairs (see Chapter 11).
 
-(eq. 10.3)
+Tree balance statistics provide a way of comparing numbers of taxa across all of the nodes in a phylogenetic tree simultaneously. There are a surprisingly large number of tree balance statistics, but all rely on summarizing information about the balance of each node across a whole tree. Colless’ index $I_c$ is one of the simplest – and, perhaps, most commonly used – indices of tree balance. $I_c$ is the sum of the difference in the number of tips subtended on each side of every node in the tree, standardized by the maximum that such a sum can achieve:
 
-If the tree is perfectly balanced (only possible when N is some power of 2, e.g. 2, 4, 8, 16, etc.), then IC = 0 (Figure 10.7C). By contrast, if the tree is completely pectinate, which means that each split in the tree contrasts a clade with 1 species with the rest of the species in the clade, then IC = 1 (Figure 10.7A). Most phylogenetic trees have values of IC between 0 and 1 (Figure 10.7B).
+(eq. 10.18)
+<div>
+$$
+I_C = \frac{\sum\limits_{all nodes} (N_L - N_R)}{(N-1)(N-2)/2}
+$$
+</div>
+
+If the tree is perfectly balanced (only possible when $N$ is some power of 2, e.g. 2, 4, 8, 16, etc.), then $I_C$ = 0 (Figure 10.7C). By contrast, if the tree is completely pectinate, which means that each split in the tree contrasts a clade with 1 species with the rest of the species in the clade, then $I_C = 1$ (Figure 10.7A). Most phylogenetic trees have values of $I_C$ between 0 and 1 (Figure 10.7B).
 
 
-![Figure 10.7. A. a pectinate tree; B. a random tree; C. A balanced tree.]({{ site.baseurl }}/images/figure10-7.png)
+![Figure 10.7. A. a pectinate tree ($I_C = 1$); B. a random tree ($0 < I_C < 1$); C. A balanced tree ($I_C = 0$).]({{ site.baseurl }}/images/figure10-7.png)
 
 There are a number of other indices of phylogenetic tree balance (reviewed in Mooers and Heard xxx; and others). All of these indices are used in a similar way: one can then compare the value of the tree index to what one might expect under a particular model of diversification, typically birth-death. In fact, since these indices focus on tree topology and ignore branch lengths, one can actually consider their general behavior under a set of equal-rates Markov (ERM) models. This set includes any model where birth and death rates are equal across all lineages in a phylogenetic tree at a particular time. ERM models include birth-death models as described above, but also encompass models where birth and/or death rates change through time.
 
