@@ -251,6 +251,8 @@ Tree topology summarizes the patterns of evolutionary relatedness among a group 
 
 Tree topology ignores both branch lengths and tree tip labels. For example, the two trees in figure 10.6 A and D have the same tree topology even though they share no tips in common. What they do share is that their nodes have the same patterns in terms of the number of descendants on each “side” of the bifurcation. By contrast, the phylogenetic tree in 10.6 E has a different topology. [Note that what I am calling tree topology is sometimes referred to as “unlabeled” tree topology; e.g. @Felsenstein2004-eo].
 
+![Figure 10.7. Two different phylogenetic trees sharing the same tree shape (A and B), and one with a different shape (C).]({{ site.baseurl }}/images/figure10-7.png)
+
 Finally, tree balance is a way of expressing differences in the number of descendants between pairs of sister lineages at different points in a phylogenetic tree. For example, consider the phylogenetic tree depicted in figure 10.6D. The deepest split in that tree separates a clade with five species (lizard, snake, turtle, frog, salamander) from a clade with a single species (trout), and so that node in the tree is unbalanced with a (5, 1) pattern. By contrast, the deepest split in 10.6E separates two clades of equal size. In that tree, the deepest node is balanced with a (3, 3) pattern. A number of approaches in macroevolution use balance at nodes and across whole trees to try to capture important evolutionary patterns.
 
 We can start to understand these approaches by considering the balance of a single node n in a phylogenetic tree. There are two clades descended from this node; let’s call them a and b. We assume that the total number of species descended from the node $N_{total}$ = $N_a + N_b$ is constant and that neither Na nor Nb is zero. An important result, first discussed by Farris [-@Farris1976-ck] for a pure-birth model, is that all possible numerical divisions of $N_{total}$ into $N_a + N_b$ are equally probable. For example, if $N_{total} = 10$, then all possible divisions: $1+9$, $2+8$, $3+7$, $4+6$, $5+5$, $6+4$, $7+3$, $8+2$, and $9+1$ are all equally probable, so that each will be predicted to occur with a probability 1/9. Formally
@@ -278,7 +280,7 @@ $$
 If the tree is perfectly balanced (only possible when $N$ is some power of 2, e.g. 2, 4, 8, 16, etc.), then $I_C$ = 0 (Figure 10.7C). By contrast, if the tree is completely pectinate, which means that each split in the tree contrasts a clade with 1 species with the rest of the species in the clade, then $I_C = 1$ (Figure 10.7A). Most phylogenetic trees have values of $I_C$ between 0 and 1 (Figure 10.7B).
 
 
-![Figure 10.7. A. a pectinate tree ($I_C = 1$); B. a random tree ($0 < I_C < 1$); C. A balanced tree ($I_C = 0$).]({{ site.baseurl }}/images/figure10-7.png)
+![Figure 10.8. A. a pectinate tree ($I_C = 1$); B. a random tree ($0 < I_C < 1$); C. A balanced tree ($I_C = 0$).]({{ site.baseurl }}/images/figure10-8.png)
 
 There are a number of other indices of phylogenetic tree balance [reviewed in @Mooers1997-ow]. All of these indices are used in a similar way: one can then compare the value of the tree index to what one might expect under a particular model of diversification, typically birth-death. In fact, since these indices focus on tree topology and ignore branch lengths, one can actually consider their general behavior under a set of equal-rates Markov (ERM) models. This set includes any model where birth and death rates are equal across all lineages in a phylogenetic tree at a particular time. ERM models include birth-death models as described above, but also encompass models where birth and/or death rates change through time.
 
@@ -287,13 +289,13 @@ There are a number of other indices of phylogenetic tree balance [reviewed in @M
 The other main way to quantify phylogenetic tree shape is by making lineage-through-time plots. These plots have time along the x axis (from the root of the tree to the present day), and the reconstructed number of lineages on the y-axis (Figure 10.8). Since we are usually considering birth-death models, where the number of lineages is expected to grow (or shrink) exponentially through time, then it is typical practice to log-transform the y-axis.
 
 
-![Figure 10.8. Lineage-through-time plot.]({{ site.baseurl }}/images/figure10-8.png)
+![Figure 10.9. Lineage-through-time plot.]({{ site.baseurl }}/images/figure10-9.png)
 
 
 Lineage-through-time plots are effective ways to visualize patterns of lineage diversification through time. Under a pure-birth model, LTT plots follow a straight line on average (Figure 10.9A). By contrast, extinction should leave a clear signal in LTT plots because the probability of a lineage going extinction depends on how long it has been around; old lineages are much more likely to have been hit by extinction than relatively young lineages. We see this reflected in LTT plots as the “pull of the present” – an upturn in the slope of the LTT plot near the present day (Figure 10.9B). Incomplete sampling – that is, not sampling all of the living species in a clade – can also have a huge impact on the shape of LTT plots (Figure 10.9C). We will discuss LTT plots further in chapter 11, where we will use them to make inferences about patterns of lineage diversification through time.
 
 
-![Figure 10.9. Example LTT plots.]({{ site.baseurl }}/images/figure10-9.png)
+![Figure 10.10. Example LTT plots.]({{ site.baseurl }}/images/figure10-10.png)
 
 
 ## Chapter Summary
