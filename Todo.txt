@@ -1,7 +1,5 @@
 To-do list:
 
-Chapter 10 figures
-
 Enter chapter 11
 Enter chapter 12
 Enter chapter 13
