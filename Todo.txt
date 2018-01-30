@@ -1,9 +1,34 @@
 To-do list:
 
-Enter chapter 11
+Chapter 11 equations
+Chapter 11 References
+Chapter 11 examples
+Chapter 11 Proofread
+
+
 Enter chapter 12
+
+Chapter 12 figures
+Chapter 12 equations
+Chapter 12 References
+Chapter 12 examples
+Chapter 12 Proofread
+
 Enter chapter 13
+
+Chapter 13 figures
+Chapter 13 equations
+Chapter 13 References
+Chapter 13 examples
+Chapter 13 Proofread
+
 Enter chapter 14
+
+Chapter 14 figures
+Chapter 14 equations
+Chapter 14 References
+Chapter 14 examples
+Chapter 14 Proofread
 
 Proofread chapter 1
 Proofread chapter 2
