@@ -39,4 +39,8 @@ cat chapter10_birthdeath_pre.md | sed s@\{\{[[:space:]]site.baseurl[[:space:]]\}
 pandoc temp.md --latex-engine=xelatex --bibliography pcm_paperpile.bib --filter pandoc-citeproc --csl evolution.csl --metadata link-citations=true -o ../pdf/chapter10_birthdeath.pdf
 rm temp.md
 
-"/System/Library/Automator/Combine PDF Pages.action/Contents/Resources/join.py" -o ../pdf/phylogeneticComparativeMethods.pdf ../pdf/chapter1_introduction.pdf ../pdf/chapter2_stats.pdf ../pdf/chapter3_bmintro.pdf ../pdf/chapter4_fitbm.pdf ../pdf/chapter5_mvbm.pdf ../pdf/chapter6_beyondbm.pdf ../pdf/chapter7_introdiscrete.pdf ../pdf/chapter8_fitdiscrete.pdf ../pdf/chapter9_beyondmk.pdf ../pdf/chapter10_birthdeath.pdf
+cat chapter11_fitbd_pre.md | sed s@\{\{[[:space:]]site.baseurl[[:space:]]\}\}@..@ > temp.md
+pandoc temp.md --latex-engine=xelatex --bibliography pcm_paperpile.bib --filter pandoc-citeproc --csl evolution.csl --metadata link-citations=true -o ../pdf/chapter11_fitbd.pdf
+rm temp.md
+
+"/System/Library/Automator/Combine PDF Pages.action/Contents/Resources/join.py" -o ../pdf/phylogeneticComparativeMethods.pdf ../pdf/chapter1_introduction.pdf ../pdf/chapter2_stats.pdf ../pdf/chapter3_bmintro.pdf ../pdf/chapter4_fitbm.pdf ../pdf/chapter5_mvbm.pdf ../pdf/chapter6_beyondbm.pdf ../pdf/chapter7_introdiscrete.pdf ../pdf/chapter8_fitdiscrete.pdf ../pdf/chapter9_beyondmk.pdf ../pdf/chapter10_birthdeath.pdf ../pdf/chapter11_fitbd.pdf

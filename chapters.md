@@ -21,4 +21,6 @@ title: Chapters
 
 [Chapter 9]({{ site.baseurl }}/chapter9_beyondmk/) - Beyond the Mk model
 
-[Chapter 10]({{ site.baseurl }}/chapter10_birthdeath/) - Birth-death models
+[Chapter 10]({{ site.baseurl }}/chapter10_birthdeath/) - Introduction to birth-death models
+
+[Chapter 11]({{ site.baseurl }}/chapter11_fitbd/) - Fitting birth-death models

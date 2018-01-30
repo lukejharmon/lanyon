@@ -37,3 +37,7 @@ rm t1.html
 pandoc -s --toc -V toc-title:"Table of Contents" --bibliography pcm_paperpile.bib --filter pandoc-citeproc --csl evolution.csl --metadata link-citations=true chapter10_birthdeath_pre.md -o t1.html
 cat metadata_ch10.yaml t1.html | sed s/%7B%7B%20/{{/ | sed s/%20%7D%7D/}}/ > ../chapter10_birthdeath.html
 rm t1.html
+
+pandoc -s --toc -V toc-title:"Table of Contents" --bibliography pcm_paperpile.bib --filter pandoc-citeproc --csl evolution.csl --metadata link-citations=true chapter11_fitbd_pre.md -o t1.html
+cat metadata_ch11.yaml t1.html | sed s/%7B%7B%20/{{/ | sed s/%20%7D%7D/}}/ > ../chapter11_fitbd.html
+rm t1.html
