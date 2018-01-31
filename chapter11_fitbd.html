@@ -40,30 +40,212 @@ title: Fitting birth-death models
 </ol>
 <h2 id="clade-age-and-diversity">Clade age and diversity</h2>
 <p>If we know the age of a clade and its current diversity, then we can calculate the net diversification rate for that clade. The simplest way follows Magallon and Sanderson (2001), who give an equation for the estimate of net diversification rate as:</p>
-<p>(eq. 11.1) r ̂=(log⁡(n))/t_stem</p>
-<p>where tstem is the stem group age and r=λ-μ. Alternatively, one can use tcrown, the crown group age:</p>
-<p>(eq. 11.2) r ̂=(log⁡(n)-log⁡(2))/t_crown</p>
-<p>The two equations differ because at the crown group age one is considering the clade's diversification starting with two lineages rather than one (Figure 11.2). Furthermore, these two equations give ML estimates for r only if there is no extinction. If there has been extinction in the history of the clade, then these estimates will be biased. Under a scenario with extinction, one can define ϵ=μ/λ and use the following method-of-moments estimators from Rohatgi (1976, following the notation of Magallon and Sanderson 2001):</p>
-<p>(eq. 11.3) r ̂=(log⁡[n(1-ϵ)+ϵ])/t_stem</p>
+<p>(eq. 11.1)</p>
+<div>
+<p><br /><span class="math display">$$
+\hat{r} = \frac{ln(n)}{t_{stem}}
+$$</span><br /></p>
+</div>
+<p>where <span class="math inline"><em>t</em><sub><em>s</em></sub><em>t</em><em>e</em><em>m</em></span> is the stem group age and <span class="math inline"><em>r</em> = <em>λ</em> − <em>μ</em></span>. Alternatively, one can use <span class="math inline"><em>t</em><sub><em>c</em><em>r</em><em>o</em><em>w</em><em>n</em></sub></span>, the crown group age:</p>
+<p>(eq. 11.2)</p>
+<div>
+<p><br /><span class="math display">$$
+\hat{r} = \frac{ln(n)-ln(2)}{t_{crown}}
+$$</span><br /></p>
+</div>
+<p>The two equations differ because at the crown group age one is considering the clade's diversification starting with two lineages rather than one (Figure 11.2).</p>
+<div class="figure">
+<img src="{{site.baseurl}}\images\figure11-2.png" alt="Figure 11.2. Crown and stem age of a clade." />
+<p class="caption">Figure 11.2. Crown and stem age of a clade.</p>
+</div>
+<p>These two equations give ML estimates for r only if there is no extinction. If there has been extinction in the history of the clade, then these estimates will be biased. Under a scenario with extinction, one can define <span class="math inline"><em>ϵ</em> = <em>μ</em>/<em>λ</em></span> and use the following method-of-moments estimators from Rohatgi (1976, following the notation of Magallon and Sanderson 2001):</p>
+<p>(eq. 11.3)</p>
+<div>
+<p><br /><span class="math display">$$
+\hat{r} = \frac{log⁡[n(1-\epsilon)+\epsilon]}{t_{stem}}
+$$</span><br /></p>
+</div>
 <p>for stem age, and</p>
-<p>(eq. 11.4) r ̂=(log⁡[n(1-ϵ^2 )/2+2ϵ+((1-ϵ) √(n(nϵ^2-8ϵ+2nϵ+n))/2]-log⁡(2))/t_crown</p>
-<p>for crown age. (Note that eq. 11.3 and 11.4 reduce to 11.1 and 11.2, respectively, when ε = 0). Magallon and Sanderson (2001), following Strathmann and Slatkin (1983), describe how to use eq. 10.13 and 10.15 to calculate confidence intervals for the number of species at a given time.</p>
-<p>For example, consider these data, which summarize the ages and diversities of a number of plant lineages in the Páromo (from Madriñán et al. 2013). For each lineage, I have calculated the pure-birth estimate of speciation rate (from equation 11.2, since these are crown ages), and net diversification rates under three scenarios for extinction (ϵ=0.1, ϵ=0.5, and ϵ=0.9).</p>
-<p>Lineage n Age r ̂_pb r ̂_([ϵ=0.1]) r ̂_([ϵ=0.5]) r ̂_([ϵ=0.9]) Aragoa 17 0.42 5.10 5.08 4.53 2.15 Arcytophyllum 14 10.96 0.18 0.18 0.16 0.07 Berberis 32 3.8 0.73 0.73 0.66 0.36 Calceolaria 65 2.5 1.39 1.39 1.28 0.78 Draba 55 3.05 1.09 1.08 1.00 0.59 Espeletiinae 120 4.04 1.01 1.01 0.94 0.62 Festuca 36 4.28 0.68 0.67 0.61 0.34 Jamesonia + Eriosorus 32 7.6 0.36 0.36 0.33 0.18 Lupinus 66 1.47 2.38 2.37 2.19 1.34 Lysipomia 27 8.96 0.29 0.29 0.26 0.14 Oreobolus 5 3.01 0.30 0.30 0.26 0.09 Puya 46 0.8 3.92 3.91 3.58 2.07 Valeriana 53 14.58 0.22 0.22 0.21 0.12</p>
+<p>(eq. 11.4)</p>
+<div>
+<p><br /><span class="math display">$$
+\hat{r} = \frac{ln[\frac{n(1-\epsilon^2 )}{2}+2 \epsilon+\frac{(1-\epsilon) \sqrt{n(n \epsilon^2-8\epsilon+2 n \epsilon+n)}}{2}]-ln(2)}{t_{crown}}
+$$</span><br /></p>
+</div>
+<p>for crown age. (Note that eq. 11.3 and 11.4 reduce to 11.1 and 11.2, respectively, when <span class="math inline"><em>ϵ</em> = 0</span>). Magallon and Sanderson (2001), following Strathmann and Slatkin (1983), describe how to use eq. 10.13 and 10.15 to calculate confidence intervals for the number of species at a given time.</p>
+<p>For example, consider these data, which summarize the ages and diversities of a number of plant lineages in the Páromo (from Madriñán et al. 2013). For each lineage, I have calculated the pure-birth estimate of speciation rate (from equation 11.2, since these are crown ages), and net diversification rates under three scenarios for extinction (<span class="math inline"><em>ϵ</em> = 0.1</span>, <span class="math inline"><em>ϵ</em> = 0.5</span>, and <span class="math inline"><em>ϵ</em> = 0.9</span>).</p>
+<table style="width:47%;">
+<colgroup>
+<col width="5%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Lineage</th>
+<th align="right">n</th>
+<th align="right">Age</th>
+<th align="right"><span class="math inline">$\hat{r}_{pb}$</span></th>
+<th align="right"><span class="math inline">$\hat{r}_{\epsilon = 0.1}$</span></th>
+<th align="right"><span class="math inline">$\hat{r}_{\epsilon = 0.5}$</span></th>
+<th align="right"><span class="math inline">$\hat{r}_{\epsilon = 0.9}$</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Aragoa</td>
+<td align="right">17</td>
+<td align="right">0.42</td>
+<td align="right">5.10</td>
+<td align="right">5.08</td>
+<td align="right">4.53</td>
+<td align="right">2.15</td>
+</tr>
+<tr class="even">
+<td>Arcytophyllum</td>
+<td align="right">14</td>
+<td align="right">10.96</td>
+<td align="right">0.18</td>
+<td align="right">0.18</td>
+<td align="right">0.16</td>
+<td align="right">0.07</td>
+</tr>
+<tr class="odd">
+<td>Berberis</td>
+<td align="right">32</td>
+<td align="right">3.80</td>
+<td align="right">0.73</td>
+<td align="right">0.73</td>
+<td align="right">0.66</td>
+<td align="right">0.36</td>
+</tr>
+<tr class="even">
+<td>Calceolaria</td>
+<td align="right">65</td>
+<td align="right">2.50</td>
+<td align="right">1.39</td>
+<td align="right">1.39</td>
+<td align="right">1.28</td>
+<td align="right">0.78</td>
+</tr>
+<tr class="odd">
+<td>Draba</td>
+<td align="right">55</td>
+<td align="right">3.05</td>
+<td align="right">1.09</td>
+<td align="right">1.08</td>
+<td align="right">1.00</td>
+<td align="right">0.59</td>
+</tr>
+<tr class="even">
+<td>Espeletiinae</td>
+<td align="right">120</td>
+<td align="right">4.04</td>
+<td align="right">1.01</td>
+<td align="right">1.01</td>
+<td align="right">0.94</td>
+<td align="right">0.62</td>
+</tr>
+<tr class="odd">
+<td>Festuca</td>
+<td align="right">36</td>
+<td align="right">4.28</td>
+<td align="right">0.68</td>
+<td align="right">0.67</td>
+<td align="right">0.61</td>
+<td align="right">0.34</td>
+</tr>
+<tr class="even">
+<td>Jamesonia + Eriosorus</td>
+<td align="right">32</td>
+<td align="right">7.60</td>
+<td align="right">0.36</td>
+<td align="right">0.36</td>
+<td align="right">0.33</td>
+<td align="right">0.18</td>
+</tr>
+<tr class="odd">
+<td>Lupinus</td>
+<td align="right">66</td>
+<td align="right">1.47</td>
+<td align="right">2.38</td>
+<td align="right">2.37</td>
+<td align="right">2.19</td>
+<td align="right">1.34</td>
+</tr>
+<tr class="even">
+<td>Lysipomia</td>
+<td align="right">27</td>
+<td align="right">8.96</td>
+<td align="right">0.29</td>
+<td align="right">0.29</td>
+<td align="right">0.26</td>
+<td align="right">0.14</td>
+</tr>
+<tr class="odd">
+<td>Oreobolus</td>
+<td align="right">5</td>
+<td align="right">3.01</td>
+<td align="right">0.30</td>
+<td align="right">0.30</td>
+<td align="right">0.26</td>
+<td align="right">0.09</td>
+</tr>
+<tr class="even">
+<td>Puya</td>
+<td align="right">46</td>
+<td align="right">0.80</td>
+<td align="right">3.92</td>
+<td align="right">3.91</td>
+<td align="right">3.58</td>
+<td align="right">2.07</td>
+</tr>
+<tr class="odd">
+<td>Valeriana</td>
+<td align="right">53</td>
+<td align="right">14.58</td>
+<td align="right">0.22</td>
+<td align="right">0.22</td>
+<td align="right">0.21</td>
+<td align="right">0.12</td>
+</tr>
+</tbody>
+</table>
 <p>Table 11.1. Estimates of net diversification rates for Páramo lineages using equations 11.2 and 11.4.</p>
-<p>We can also estimate birth and death rates for clade ages and diversities using ML or Bayesian approaches. We already know the full probability distribution for birth-death models starting from any standing diversity N(0)=a (see equations 10.13 and 10.15). We can use these equations to calculate the likelihood of any particular combination of N and t (either tstem or tcrown) given particular values of λ and μ. We can then find parameter values that maximize that likelihood. Of course, with data from only a single clade, we cannot estimate parameters reliably; in fact, we are trying to estimate two parameters from a single data point, which is a futile endeavor. (It is common, in this case, to assume some level of extinction and calculate net diversification rates based on that). One can also assume that a set of clades have the same speciation and extinction rates and fit them simultaneously, estimating ML parameter values. This is the approach taken by Magallon and Sanderson in their 2001 paper on diversification rates across angiosperms.</p>
-<p>When we apply this approach to the Paramo data, shown above, we obtain ML estimates of r ̂=0.27 and ϵ ̂=0. If we were forced to estimate an overall average rate of speciation for all of these clades, this might be a reasonable estimate. However, the table above also suggests that, perhaps, some of these clades might be diversifiying faster than others. We will return to the issue of rate variation across clades in the next chapter.</p>
+<p>We can also estimate birth and death rates for clade ages and diversities using ML or Bayesian approaches. We already know the full probability distribution for birth-death models starting from any standing diversity <span class="math inline"><em>N</em>(0)=<em>n</em><sub>0</sub></span> (see equations 10.13 and 10.15). We can use these equations to calculate the likelihood of any particular combination of <span class="math inline"><em>N</em></span> and <span class="math inline"><em>t</em></span> (either <span class="math inline"><em>t</em><sub><em>s</em><em>t</em><em>e</em><em>m</em></sub></span> or <span class="math inline"><em>t</em><sub><em>c</em><em>r</em><em>o</em><em>w</em><em>n</em></sub></span>) given particular values of <span class="math inline"><em>λ</em></span> and <span class="math inline"><em>μ</em></span>. We can then find parameter values that maximize that likelihood. Of course, with data from only a single clade, we cannot estimate parameters reliably; in fact, we are trying to estimate two parameters from a single data point, which is a futile endeavor. (It is common, in this case, to assume some level of extinction and calculate net diversification rates based on that, as we did in Table 11.1 above).</p>
+<p>One can also assume that a set of clades have the same speciation and extinction rates and fit them simultaneously, estimating ML parameter values. This is the approach taken by Magallon and Sanderson in their 2001 paper on diversification rates across angiosperms. When we apply this approach to the Paramo data, shown above, we obtain ML estimates of <span class="math inline">$\hat{r} = 0.27$</span> and <span class="math inline">$\hat{\epsilon} = 0$</span>. If we were forced to estimate an overall average rate of speciation for all of these clades, this might be a reasonable estimate. However, the table above also suggests that, perhaps, some of these clades might be diversifiying faster than others. We will return to the issue of variation in diversification rates across clades in the next chapter.</p>
 <p>Another approach is to use a Bayesian approach to calculate posterior distributions for birth and death rates based on clade ages and diversities. This approach has not, to my knowledge, been implemented in any software package, although the method is straightforward (for similar approaches, see xxx B Moore). To do this, we will modify the basic algorithm for Bayesian MCMC (see Chapter 2) as follows:</p>
-<pre><code>Sample a set of starting parameter values, r and ϵ, from their prior distributions. For this example, we can set our prior distribution for both parameters as exponential with a mean and variance of λ_p=1 (note that this choice might depend on the units you are using, especially for r). Note the potentially confusing notation here - λ_p is the single parameter of the prior distribution, and is not specific to speciation rates. We then select starting r and ϵ from their priors.
-Given the current parameter values, select new proposed parameter values using the proposal density  . For both parameter values, we can use a uniform proposal density with width wp, so that:
-Q(p^&#39;│p)~U(p-w_p/2,p+w_p/2).</code></pre>
-<p>We can either choose both parameter values simultaneously, or one at a time (the latter is typically more effective). Calculate three ratios: The prior odds ratio. This is the ratio of the probability of drawing the parameter values p and p' from the prior. Since we have exponential priors for both parameters, we can always calculate this ratio as: a_1=(λ_p e^(-λ_p p'))⁄(λ_p e^(-λ_p p) )=e^(λ_p (p-p^')). The proposal density ratio. This is the ratio of probability of proposals going from p to p' and the reverse. We have already declared a symmetrical proposal density, so that = and . The likelihood ratio. This is the ratio of probabilities of the data given the two different parameter values. We can calculate these probabilities from equations 11.3 or 4 (depending on if the data are stem ages of crown ages). Then:</p>
-<pre><code>Find the product of the prior odds, proposal density ratio, and the likelihood ratio. In this case, the proposal density ratios are 1, so:
-a=a_1 a_3
-
-Draw a random number x from a uniform distribution between 0 and 1. If x &lt; a, accept the proposed value of both parameters; otherwise reject, and retain the current value of the two parameters.
-Repeat steps 2-5 a large number of times.</code></pre>
-<p>When we apply this technique to the Páromo (from Madriñán et al. 2013), we obtain posterior distributions for both r (mean = 0.497, 95% CI = 0.08-1.77) and ϵ (mean = 0.36, 95% CI = 0.02-0.84; Figure xxx).</p>
+<ol style="list-style-type: decimal">
+<li><p>Sample a set of starting parameter values, <span class="math inline"><em>r</em></span> and <span class="math inline"><em>ϵ</em></span>, from their prior distributions. For this example, we can set our prior distribution for both parameters as exponential with a mean and variance of <span class="math inline"><em>λ</em><sub><em>p</em></sub> = 1</span> (note that this choice might depend on the units you are using, especially for <span class="math inline"><em>r</em></span>). Note the potentially confusing notation here - <span class="math inline"><em>λ</em><sub><em>p</em></sub></span> is the single parameter of the prior distribution, and we will use it as a prior on both speciation and extinction rates. We then select starting r and <span class="math inline"><em>ϵ</em></span> from their priors.</p></li>
+<li><p>Given the current parameter values, select new proposed parameter values using the proposal density <span class="math inline"><em>Q</em>(<em>p</em>′|<em>p</em>)</span>. For both parameter values, we can use a uniform proposal density with width <span class="math inline"><em>w</em><sub><em>p</em></sub></span>, so that <span class="math inline"><em>Q</em>(<em>p</em>′|<em>p</em>) <em>U</em>(<em>p</em> − <em>w</em><sub><em>p</em></sub>/2, <em>p</em> + <em>w</em><sub><em>p</em></sub>/2)</span>. We can either choose both parameter values simultaneously, or one at a time (the latter is typically more effective).</p></li>
+<li><p>Calculate three ratios:</p></li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li>The prior odds ratio. This is the ratio of the probability of drawing the parameter values <span class="math inline"><em>p</em></span> and <span class="math inline"><em>p</em>′</span> from the prior. Since we have exponential priors for both parameters, we can calculate this ratio as:</li>
+</ol>
+<p>(eq. 11.5)</p>
+<div>
+<p><br /><span class="math display">$$
+R_{prior} = \frac{\lambda_p e^{-\lambda_p p'}}{\lambda_p e^{-\lambda_p p}}=e^{\lambda_p (p-p')}
+$$</span><br /></p>
+</div>
+<ol start="2" style="list-style-type: lower-alpha">
+<li><p>The proposal density ratio. This is the ratio of probability of proposals going from p to p' and the reverse. We have already declared a symmetrical proposal density, so that = and .</p></li>
+<li><p>The likelihood ratio. This is the ratio of probabilities of the data given the two different parameter values. We can calculate these probabilities from equations 11.3 or 4 (depending on if the data are stem ages of crown ages). Then:</p></li>
+</ol>
+<ol start="4" style="list-style-type: decimal">
+<li><p>Find the product of the prior odds, proposal density ratio, and the likelihood ratio. In this case, the proposal density ratios are 1, so: a=a_1 a_3</p>
+<p>Draw a random number x from a uniform distribution between 0 and 1. If x &lt; a, accept the proposed value of both parameters; otherwise reject, and retain the current value of the two parameters. Repeat steps 2-5 a large number of times.</p></li>
+</ol>
+<p>When we apply this technique to the Páromo (from Madriñán et al. 2013), we obtain posterior distributions for both r (mean = 0.497, 95% CI = 0.08-1.77) and <span class="math inline"><em>ϵ</em></span> (mean = 0.36, 95% CI = 0.02-0.84; Figure xxx).</p>
+<div class="figure">
+<img src="{{site.baseurl}}\images\figure11-3.png" alt="Figure 11.3. Posterior distributions for r and \epsilon for Páromo clades (Madriñán et al. 2013)." />
+<p class="caption">Figure 11.3. Posterior distributions for <span class="math inline"><em>r</em></span> and <span class="math inline"><em>ϵ</em></span> for Páromo clades (Madriñán et al. 2013).</p>
+</div>
 <p>Thus, we can estimate diversification rates from data on clade ages and diversities. If we have a whole set of such clades, we can (in principal) estimate both speciation and extinction rates, so long as we are willing to assume that all of the clades share equal diversificiation rates. However, as we will see in the next section, this assumption is almost always dubious!</p>
 <h2 id="tree-balance">Tree Balance</h2>
 <p>We can use the concept of tree balance to evaluate the fit of constant-rate birth-death models to phylogenetic trees. Tree balance is based on comparing the number of species descended from each pair of sister lineages in the tree. For single nodes, we already know that the distribution of sister taxa species richness is uniform over all possible divisions of Nn species into two clades of size Na and Nb. We can use this fact to derive a simple test of whether the distribution of species between two sister clades is unusual compared to the expectation under a birth-death model. This test can be used, for example, to test whether the diversity of exceptional clades, like passerine birds, is higher than one would expect when compared to their sister clade. This approach traces back to Raup and colleagues, who applied stochastic birth-death models to paleontology in a series of influential papers in the 1970s (e.g. Raup et al. 1973; Raup and Gould 1974). Slowinsky and Guyer (1993) developed a test based on calculating a p-value for a division at least as extreme as seen in a particular comparisons of sister clades. We consider Nn total species divided into two sister clades of sizes Na and Nb, where Na &lt; Nb and Na + Nb = Nn. Then:</p>
@@ -92,21 +274,21 @@ Repeat steps 2-5 a large number of times.</code></pre>
 <p>Most modern approaches to fitting birth-death models to phylogenetic trees use the intervals between speciation events on a tree - the &quot;waiting times&quot; between successive speciation - to estimate the parameters of birth-death models. Figure xxx shows these waiting times. Frequently, information about the pattern of species accumulation in a phylogenetic tree is summarized by a lineage-through-time (LTT) plot, which is a plot of the number of lineages in a tree against time. Typically, the y-axis of LTT plots is log-transformed, so that the expected pattern under a constant-rate pure-birth model is a straight line. Note also that LTT plots ignore the relative order of speciation events - that is, the two trees shown in Figure xxx (below) have the same LTT plot. Stadler (2013) calls models justifying such an approach &quot;species-exchangable&quot; models - we can change the identity of species at any time point without changing the expected behavior of the model. Because of this, approaches to understanding birth-death models based on branching times are complementary to approaches based on tree topology.</p>
 <p>For phylogenetic trees with only extant (living) species, such plots are always strictly increasing - even when the total number of species in the clade has gone up and down through time. But even though we often have no information about extinct species in a clade, we can still (in theory) infer the presence of extinction from an LTT plot. This is because in our birth-death model we assume that each lineage has a constant probability of extinction per unit time. Lineages that have been around for the longest, then, have the highest cumulative probability of extinction - and, likewise, young lineages have had little time to go extinct. This leads to an excess of young lineages, which is seen as a steep upturn in the LTT plot towards the present day. This upturn, called the &quot;pull of the recent,&quot; allows our statistical methods to detect the signature of extinction in the branch lengths of a tree.</p>
 <p>In order to use ML and Bayesian methods for estimating the parameters of birth-death models from comparative data, we need to write down the likelihoods of the waiting times between speciation events in a tree. There is a little bit of variation in notation in the literature, so I will follow Stadler (xxx) to maintain consistency. We will assume that the clade begins at time 0 with a single species. Speciation and extinction events occur at various times, and the process ends at time t0 when the clade has n extant species. Extinction will result in species that do not extend all the way to t0. For now, we will assume that we only have data on extant species. We will refer to the phylogenetic tree that shows branching times leading to the extant species as the reconstructed tree (Nee xxx). For a reconstructed tree with n species, there are n-1 speciation times, which we will denote as t1, t2, …, tn. Note that in this notation, t1 &lt; t2 &lt; … &lt; tn-1, that is, our speciation times are constantly increasing (this is an important notational difference between Stadler (2013) and Nee (xxx). For now, we will assume complete sampling; that is, all n species alive at the present day are in the tree.</p>
-<p>We can now write down the likelihood of observing the set of speciation times t1, t2, …, tn given our total age, t0, the extant diversity of the clade, n, and our birth-death model parameters λ and μ. There are a number of ways to condition this likelihood (see Stadler 2012 for a review). We will follow most of the R packages and condition the process as starting at some time t1 in the past with two lineages (since we rarely have information on the stem age of our clade) and both surviving to the present day (e.g. Stadler 2012 equation 5). We then have:</p>
+<p>We can now write down the likelihood of observing the set of speciation times t1, t2, …, tn given our total age, t0, the extant diversity of the clade, n, and our birth-death model parameters <span class="math inline"><em>λ</em></span> and <span class="math inline"><em>μ</em></span>. There are a number of ways to condition this likelihood (see Stadler 2012 for a review). We will follow most of the R packages and condition the process as starting at some time t1 in the past with two lineages (since we rarely have information on the stem age of our clade) and both surviving to the present day (e.g. Stadler 2012 equation 5). We then have:</p>
 <p>Where p_0 (t_i) and p_1 (t_i) are the probabilities of observing 0 and 1 species, respectively, after sampling a birth-death tree of age t, and can be calculated as:</p>
-<p>p_0 (t)=1-(λ-μ)/(λ-μe^(-(λ-μ)t) )</p>
-<p>p_1 (t)=(〖(λ-μ)〗^2 e<sup>(-(λ-μ)t))/(λ-μe</sup>(-(λ-μ)t) )^2</p>
+<p>p_0 (t)=1-(-)/(-^(-(-)t) )</p>
+<p>p_1 (t)=(〖(-)〗^2 e<sup>(-(-)t))/(-</sup>(-(-)t) )^2</p>
 <p>&lt;&lt; THIS SHOULD MATCH 10.14 but I don't think it does - why not? &gt;&gt;</p>
-<p>Given equation xxx for the likelihood, we can estimate birth and death rates using both ML and Bayesian approaches. For the ML estimate, we maximize equation xxx over λ and μ. For a pure-birth model, that is when μ = 0, the maximum likelihood estimate of λ can be calculated analytically as:</p>
-<p>λ= (n-2)/s</p>
+<p>Given equation xxx for the likelihood, we can estimate birth and death rates using both ML and Bayesian approaches. For the ML estimate, we maximize equation xxx over <span class="math inline"><em>λ</em></span> and <span class="math inline"><em>μ</em></span>. For a pure-birth model, that is when <span class="math inline"><em>μ</em></span> = 0, the maximum likelihood estimate of <span class="math inline"><em>λ</em></span> can be calculated analytically as:</p>
+<p>= (n-2)/s</p>
 <p>where s is the sum of branch lengths in the tree,</p>
 <p>This is the Kendal-Moran estimator of the speciation rate (Baldwin and Sanderson 1998).</p>
-<p>For a birth-death model, we can use numerical methods to maximize the likelihood over λ and μ. EXAMPLE</p>
+<p>For a birth-death model, we can use numerical methods to maximize the likelihood over <span class="math inline"><em>λ</em></span> and <span class="math inline"><em>μ</em></span>. EXAMPLE</p>
 <p>We can also estimate birth and death rates using a Bayesian MCMC. We can use exactly the method spelled out above for clade ages and diversities, but substitute equation xxx for the likelihood, thus using the waiting times derived from a phylogenetic tree to estimate model parameters. EXAMPLE.</p>
 <p>It is important to think about sampling when fitting birth-death models to phylogenetic trees. If any species are missing from your phylogenetic tree, they will lead to biased parameter estimates. This is because missing species are disproportionally likely to connect to the tree on short, rather than long, branches. If we randomly sample lineages from a tree, we will end up badly underestimating both speciation and extinction rates (and wrongly inferring slowdowns; see chapter 12).</p>
 <p>Fortunately, the mathematics for incomplete sampling of reconstructed phylogenetic trees has also been worked out. We can substitute in equations that include ρ, the proportion of sampled species, for equations xxx and xxx above:</p>
-<p>p_0 (t)=1-ρ(λ-μ)/(ρλ+(λ(1-ρ)-μ〖)e〗^(-(λ-μ)t) )</p>
-<p>p_1 (t)=(〖ρ(λ-μ)〗^2 e<sup>(-(λ-μ)t))/(ρλ+(λ(1-ρ)-μ〖)e〗</sup>(-(λ-μ)t) )^2</p>
+<p>p_0 (t)=1-ρ(-)/(ρ+((1-ρ)-〖)e〗^(-(-)t) )</p>
+<p>p_1 (t)=(〖ρ(-)〗^2 e<sup>(-(-)t))/(ρ+((1-ρ)-〖)e〗</sup>(-(-)t) )^2</p>
 <p>EXAMPLE</p>
 <h2 id="chapter-summary">Chapter Summary</h2>
 <p>In this chapter, I described how to estimate parameters from birth-death models using data on species diversity and ages, and how to use patterns of tree balance to test hypotheses about changing birth and death rates. I also described how to calculate the likelihood for birth-death models on trees, which leads directly to both ML and Bayesian methods for estimating birth and death rates. Next, we will explore elaborations on birth-death models, and discuss models that go beyond constant-rates birth-death models to analyze the diversity of life on Earth.</p>

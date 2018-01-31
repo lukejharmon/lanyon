@@ -215,6 +215,8 @@ Applying this method to the lizard data, we obtain a maximum liklihood estimate 
 
 The example above considers maximization of a single parameter, which is a relatively simple problem. When we extend this to a multi-parameter model – for example, the extended Mk model will all rates different (ARD) – maximizing the likelihood becomes much more difficult. R packages solve this problem by using sophisticated algorithms and applying them multiple times to make sure that the value found is actually a maximum. 
 
+## Using Bayesian MCMC to estimate parameters of the Mk model
+
 We can also analyze this model using a Bayesian MCMC framework. We can modify the standard approach to Bayesian MCMC (see chapter 2):
 
 1.	Sample a starting parameter value, $q$, from its prior distributions. For this example, we can set our prior distribution as uniform between 0 and 1. (Note that one can also treat probabilities of states at the root as a parameter to be estimated from the data).

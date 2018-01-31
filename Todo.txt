@@ -3,6 +3,7 @@ To-do list:
 Chapter 11 equations
 Chapter 11 References
 Chapter 11 examples
+Fix Figure 11.3
 Chapter 11 Proofread
 
 
