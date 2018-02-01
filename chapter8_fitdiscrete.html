@@ -20,6 +20,7 @@ title: Fitting models of discrete character evolution
 <li><a href="#box-8.1-felsensteins-pruning-algorithm">Box 8.1: Felsenstein's pruning algorithm</a></li>
 </ul></li>
 <li><a href="#using-maximum-likelihood-to-estimate-parameters-of-the-mk-model">Using maximum likelihood to estimate parameters of the Mk model</a></li>
+<li><a href="#using-bayesian-mcmc-to-estimate-parameters-of-the-mk-model">Using Bayesian MCMC to estimate parameters of the Mk model</a></li>
 <li><a href="#exploring-mk-the-total-garbage-test">Exploring Mk: the &quot;total garbage&quot; test</a></li>
 <li><a href="#testing-for-differences-in-the-forwards-and-backwards-rate-of-character-change">Testing for differences in the forwards and backwards rate of character change</a></li>
 <li><a href="#chapter-summary">Chapter summary</a></li>
@@ -187,6 +188,7 @@ $$</span><br /></p>
 <p>If we apply the pruning algorithm across a range of different values of <span class="math inline"><em>q</em></span>, the likelihood changes. To find the ML estimate of <span class="math inline"><em>q</em></span>, we can again use numerical optimization methods.</p>
 <p>Applying this method to the lizard data, we obtain a maximum liklihood estimate of <span class="math inline"><em>q</em> = 0.001850204</span> corresponding to <span class="math inline"><em>l</em><em>n</em><em>L</em> = −80.487176</span>.</p>
 <p>The example above considers maximization of a single parameter, which is a relatively simple problem. When we extend this to a multi-parameter model – for example, the extended Mk model will all rates different (ARD) – maximizing the likelihood becomes much more difficult. R packages solve this problem by using sophisticated algorithms and applying them multiple times to make sure that the value found is actually a maximum.</p>
+<h2 id="using-bayesian-mcmc-to-estimate-parameters-of-the-mk-model">Using Bayesian MCMC to estimate parameters of the Mk model</h2>
 <p>We can also analyze this model using a Bayesian MCMC framework. We can modify the standard approach to Bayesian MCMC (see chapter 2):</p>
 <ol style="list-style-type: decimal">
 <li><p>Sample a starting parameter value, <span class="math inline"><em>q</em></span>, from its prior distributions. For this example, we can set our prior distribution as uniform between 0 and 1. (Note that one can also treat probabilities of states at the root as a parameter to be estimated from the data).</p></li>

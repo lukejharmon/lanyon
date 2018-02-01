@@ -136,25 +136,50 @@ Thus, we can estimate diversification rates from data on clade ages and diversit
 
 ## Tree Balance
 
-We can use the concept of tree balance to evaluate the fit of constant-rate birth-death models to phylogenetic trees. Tree balance is based on comparing the number of species descended from each pair of sister lineages in the tree. For single nodes, we already know that the distribution of sister taxa species richness is uniform over all possible divisions of Nn species into two clades of size Na and Nb. We can use this fact to derive a simple test of whether the distribution of species between two sister clades is unusual compared to the expectation under a birth-death model. This test can be used, for example, to test whether the diversity of exceptional clades, like passerine birds, is higher than one would expect when compared to their sister clade. This approach traces back to Raup and colleagues, who applied stochastic birth-death models to paleontology in a series of influential papers in the 1970s (e.g. Raup et al. 1973; Raup and Gould 1974). Slowinsky and Guyer (1993) developed a test based on calculating a p-value for a division at least as extreme as seen in a particular comparisons of sister clades. We consider Nn total species divided into two sister clades of sizes Na and Nb, where Na < Nb and Na + Nb = Nn. Then:
+We can use the concept of tree balance to evaluate the fit of constant-rate birth-death models to phylogenetic trees. Tree balance is based on comparing the number of species descended from each pair of sister lineages in the tree. For single nodes, we already know that the distribution of sister taxa species richness is uniform over all possible divisions of $N_n$ species into two clades of size $N_a$ and $N_b$. We can use this fact to derive a simple test of whether the distribution of species between two sister clades is unusual compared to the expectation under a birth-death model. This test can be used, for example, to test whether the diversity of exceptional clades, like passerine birds, is higher than one would expect when compared to their sister clade. This approach traces back to Raup and colleagues, who applied stochastic birth-death models to paleontology in a series of influential papers in the 1970s (e.g. Raup et al. 1973; Raup and Gould 1974). Slowinsky and Guyer (1993) developed a test based on calculating a P-value for a division at least as extreme as seen in a particular comparisons of sister clades. We consider Nn total species divided into two sister clades of sizes $N_a$ and $N_b$, where $N_a < N_b$ and $N_a + N_b = N_n$. Then:
 
-(eq. 11.5)	P=(2N_a)/(N_n-1)
+(eq. 11.7)
 
-(if Na = Nb, then P = 1).
+If $N_a \neq N_b$:
+<div>
+$$
+P = \frac{2 N_a}{N_n - 1}
+$$
+</div>
 
-For example, we can assess diversification in the Andean representatives of the legume genus Lupinus (Hughes and Eastwood 2006). In particular, this genus includes a young radiation of 81 Andean species, spanning a wide range of growth forms. The likely sister clade to this spectacular Andean radiation is a clade of Lupinus species in Mexico that includes 46 species (Drummond et al. 2013). We can then calculate a P-value testing the null hypothesis that both of these clades have the same diversification rate:
+If $P > 1$ then set $P = 1$
 
-(eq. 11.6)	P=(2N_a)/(N_n-1)=(2∙46)/(91-1)=1.0
+For example, we can assess diversification in the Andean representatives of the legume genus Lupinus (Hughes and Eastwood 2006). In particular, this genus includes a young radiation of 81 Andean species, spanning a wide range of growth forms. The likely sister clade to this spectacular Andean radiation is a clade of Lupinus species in Mexico that includes 46 species (Drummond et al. 2013). In this case $N_a = 81 - 46 = 35$, and we can then calculate a P-value testing the null hypothesis that both of these clades have the same diversification rate:
+
+(eq. 11.8)
+
+<div>
+$$
+P = \frac{2 N_a}{N_n - 1} = \frac{2 \cdot 35}{81 - 1} = 0.875
+$$
+</div>
 
 We cannot reject the null hypothesis. Indeed, later work suggests that the actual increase in diversification rate for Lupinus occurred deeper in the phylogenetic tree, in the ancestor of a more broadly ranging New World clade (Drummond et al. 2013, Hughes et al. 2015).
 
-Often, we are interested in testing whether a particular trait - say, dispersal into the Paramo - is responsible for the increase in species richness that we see in some clades. In that case, a single comparison of sister clades may be unsatisfying, as sister clades almost always differ in many characters, beyond just the trait of interest. Even if the clade with our putative "key innovation" is more diverse, we still might not be confidence in inferring a correlation from a single observation. To address this problem, many studies have used natural replicates across the tree of life, comparing the species richnesses of many pairs of sister clades that differ in a given trait of interest. Following Slowinsky and Guyer's logic above, we could calculate a p-value for each clade, and then combine those p-values into an overall test. In this case, one clade (with diversity N1) has the trait of interest and the other does not (N0), and our formula is half of equation 11.5 since we will consider this a one-tailed test:
+Often, we are interested in testing whether a particular trait - say, dispersal into the Paramo - is responsible for the increase in species richness that we see in some clades. In that case, a single comparison of sister clades may be unsatisfying, as sister clades almost always differ in many characters, beyond just the trait of interest. Even if the clade with our putative "key innovation" is more diverse, we still might not be confidence in inferring a correlation from a single observation. To address this problem, many studies have used natural replicates across the tree of life, comparing the species richnesses of many pairs of sister clades that differ in a given trait of interest. Following Slowinsky and Guyer's logic above, we could calculate a p-value for each clade, and then combine those p-values into an overall test. In this case, one clade (with diversity $N_1$) has the trait of interest and the other does not ($N_0$), and our formula is half of equation 11.5 since we will consider this a one-tailed test:
 
-(eq. 11.7)	P=N_0/(N_n-1)
+(eq. 11.9)
 
-Slowinsky and Guyer (1993) recommended combining these p-values using Fisher's combined probability test, so that:
+<div>
+$$
+P = \frac{N_0}{N_n - 1}
+$$
+</div>
 
-	P_total=-2∑▒〖lnP_i 〗
+When analyzing replicate clade comparisons - e.g. many sister clades, where in each case one has the trait of interest and the other does not - Slowinsky and Guyer (1993) recommended combining these p-values using Fisher's combined probability test, so that:
+
+(eq. 11.10)
+
+<div>
+$$
+P_{total} = -2 \sum ln(P_i)
+$$
+</div>
 
 Follow-up work showed that this test, though, can be very sensitive to outliers - that is, clades with extreme differences in diversity - and can, in some cases with two characters, show that both characters significantly increase diversity (Vamosi and Vamosi 2005)! Fortunately, there are a number of improved methods that can be used that are similar in spirit to the original Slowinsky and Guyer test but more statistically robust (xxx add references).  
 
@@ -176,35 +201,85 @@ XXX example
 
 Another approach that uses more of the information in a phylogenetic tree involves fitting birth-death models to the distribution of branching times in a phylogenetic tree. This approach traces all the way back to Yule (1924), who first applied stochastic process models to the growth of phylogenetic trees. More recently, Raup et al. (1973 and various follow-ups) spurred modern approaches to quantitative macroevolution by demonstrating how variable clades grown under simple birth-death models can be.
 
-Most modern approaches to fitting birth-death models to phylogenetic trees use the intervals between speciation events on a tree - the "waiting times" between successive speciation - to estimate the parameters of birth-death models. Figure xxx shows these waiting times. Frequently, information about the pattern of species accumulation in a phylogenetic tree is summarized by a lineage-through-time (LTT) plot, which is a plot of the number of lineages in a tree against time. Typically, the y-axis of LTT plots is log-transformed, so that the expected pattern under a constant-rate pure-birth model is a straight line. Note also that LTT plots ignore the relative order of speciation events - that is, the two trees shown in Figure xxx (below) have the same LTT plot. Stadler (2013) calls models justifying such an approach "species-exchangable" models - we can change the identity of species at any time point without changing the expected behavior of the model. Because of this, approaches to understanding birth-death models based on branching times are complementary to approaches based on tree topology.
+Most modern approaches to fitting birth-death models to phylogenetic trees use the intervals between speciation events on a tree - the "waiting times" between successive speciation - to estimate the parameters of birth-death models. Figure 10.2 shows these waiting times. Frequently, information about the pattern of species accumulation in a phylogenetic tree is summarized by a lineage-through-time (LTT) plot, which is a plot of the number of lineages in a tree against time (see Figure 10.9). As I introduced in Chapter 10, the y-axis of LTT plots is log-transformed, so that the expected pattern under a constant-rate pure-birth model is a straight line. Note also that LTT plots ignore the relative order of speciation events. Stadler (2013) calls models justifying such an approach "species-exchangable" models - we can change the identity of species at any time point without changing the expected behavior of the model. Because of this, approaches to understanding birth-death models based on branching times are different from - and complementary to - approaches based on tree topology.
 
-For phylogenetic trees with only extant (living) species, such plots are always strictly increasing - even when the total number of species in the clade has gone up and down through time. But even though we often have no information about extinct species in a clade, we can still (in theory) infer the presence of extinction from an LTT plot. This is because in our birth-death model we assume that each lineage has a constant probability of extinction per unit time. Lineages that have been around for the longest, then, have the highest cumulative probability of extinction - and, likewise, young lineages have had little time to go extinct. This leads to an excess of young lineages, which is seen as a steep upturn in the LTT plot towards the present day. This upturn, called the "pull of the recent," allows our statistical methods to detect the signature of extinction in the branch lengths of a tree.
+As discussed in the previous chapter, even though we often have no information about extinct species in a clade, we can still (in theory) infer the presence of extinction from an LTT plot. The signal of extinction is an excess of young lineages, which is seen as the "pull of the recent" in our LTT plots (Figure 10.10). Statistical approaches can capture this pattern in a more rigorous way.
 
-In order to use ML and Bayesian methods for estimating the parameters of birth-death models from comparative data, we need to write down the likelihoods of the waiting times between speciation events in a tree. There is a little bit of variation in notation in the literature, so I will follow Stadler (xxx) to maintain consistency. We will assume that the clade begins at time 0 with a single species. Speciation and extinction events occur at various times, and the process ends at time t0 when the clade has n extant species. Extinction will result in species that do not extend all the way to t0. For now, we will assume that we only have data on extant species. We will refer to the phylogenetic tree that shows branching times leading to the extant species as the reconstructed tree (Nee xxx). For a reconstructed tree with n species, there are n-1 speciation times, which we will denote as t1, t2, …, tn. Note that in this notation, t1 < t2 < … < tn-1, that is, our speciation times are constantly increasing (this is an important notational difference between Stadler (2013) and Nee (xxx). For now, we will assume complete sampling; that is, all n species alive at the present day are in the tree.
+## Likelihood of waiting times under a birth-death model
 
-We can now write down the likelihood of observing the set of speciation times t1, t2, …, tn given our total age, t0, the extant diversity of the clade, n, and our birth-death model parameters $\lambda$ and $\mu$. There are a number of ways to condition this likelihood (see Stadler 2012 for a review). We will follow most of the R packages and condition the process as starting at some time t1 in the past with two lineages (since we rarely have information on the stem age of our clade) and both surviving to the present day (e.g. Stadler  2012 equation 5). We then have:
+In order to use ML and Bayesian methods for estimating the parameters of birth-death models from comparative data, we need to write down the likelihoods of the waiting times between speciation events in a tree. There is a little bit of variation in notation in the literature, so I will follow Stadler (xxx) to maintain consistency. We will assume that the clade begins at time $t_1$ with a pair of species. Most analyses condition the process as starting at this time $t_1$, the node at the root of the tree, since we rarely have information on the stem age of our clade. We will also condition on both of these initial lineages surviving to the present day, as this is a requirement to obtain a tree like what we have (e.g. Stadler  2012 equation 5).
+
+Speciation and extinction events occur at various times, and the process ends at time $0$ when the clade has $n$ extant species - that is, we measure time backwards from the present day. Extinction will result in species that do not extend all the way to time 0. For now, we will assume that we only have data on extant species. We will refer to the phylogenetic tree that shows branching times leading to the extant species as the reconstructed tree (Nee xxx). For a reconstructed tree with $n$ species, there are $n-1$ speciation times, which we will denote as $t_1$, $t_2$, $t_3$, ..., $t_{n-1}$. The leaves of our ultrametric tree all terminate at time 0.
+
+Note that in this notation, $t_1 > t_2 > \dots > t_{n-1} > 0$, that is, our speciation times are measured from the tips and constantly decreasing (this is an important notational difference between Stadler (2013) and Nee (xxx), who considers the time intervals between speciation events, e.g. $t_1 - t_2$). For now, we will assume complete sampling; that is, all $n$ species alive at the present day are in the tree.
+
+We can now write down the likelihood of observing the set of speciation times $t_1$, $t_2$, ..., $t_{n-1}$ given the extant diversity of the clade, $n$, and our birth-death model parameters $\lambda$ and $\mu$. Conditioning on both initial lineages surviving to the present day, we then have:
+
+(eq. 11.11)
+
+<div>
+$$
+L(t_i|\lambda, \mu) = \Big(\frac{p_1(t_1)}{1-p_0(t_1)}\Big)^2 \prod_{i=2}^{n-1} \lambda p_1(t_i)
+$$
+</div>
+
+Where $p_0 (t_i)$ and $p_1 (t_i)$ are the probabilities of observing 0 and 1 species, respectively, after sampling a birth-death tree of age t, and can be calculated as:
 
 
-Where p_0 (t_i) and p_1 (t_i) are the probabilities of observing 0 and 1 species, respectively, after sampling a birth-death tree of age t, and can be calculated as:
+(eq. 11.12)
 
-p_0 (t)=1-(\lambda-\mu)/(\lambda-\mue^(-(\lambda-\mu)t) )
+<div>
+$$
+p_0 (t)=1-\frac{\lambda-\mu}{\lambda-\mu e^{-(\lambda-\mu)t}}
+$$
+</div>
 
-p_1 (t)=(〖(\lambda-\mu)〗^2 e^(-(\lambda-\mu)t))/(\lambda-\mue^(-(\lambda-\mu)t) )^2
+(eq. 11.13)
 
-<< THIS SHOULD MATCH 10.14 but I don't think it does - why not? >>
+<div>
+$$
+p_1 (t)= \frac{(\lambda-\mu)^2 e^{-(\lambda-\mu)t}}{(\lambda-\mu e^{-(\lambda-\mu) t})^2}
+$$
+</div>
 
-Given equation xxx for the likelihood, we can estimate birth and death rates using both ML and Bayesian approaches. For the ML estimate, we maximize equation xxx over $\lambda$ and $\mu$. For a pure-birth model, that is when $\mu$ = 0, the maximum likelihood estimate of $\lambda$ can be calculated analytically as:
+Note that equation 11.12 is algebraically equivalent to the equation for $a$ in equation 10.14.
 
-\lambda=  (n-2)/s
+## Using maximum likelihood to fit a birth-death model
 
-where s is the sum of branch lengths in the tree,
+Given equation 11.11 for the likelihood, we can estimate birth and death rates using both ML and Bayesian approaches. For the ML estimate, we maximize equation 11.11 over $\lambda$ and $\mu$. For a pure-birth model, that is when $\mu$ = 0, the maximum likelihood estimate of $\lambda$ can be calculated analytically as:
+
+(eq. 11.14)
+
+<div>
+$$
+\lambda=  \frac{n-2}{s_{branch}}
+$$
+</div>
+
+where $s_{branch}$ is the sum of branch lengths in the tree,
+
+(eq. 11.15)
+
+<div>
+$$
+s_{branch} = \sum_{i=1}^{n-1} i t_i
+$$
+</div>
 
 
 This is the Kendal-Moran estimator of the speciation rate (Baldwin and Sanderson 1998).
 
-For a birth-death model, we can use numerical methods to maximize the likelihood over $\lambda$ and $\mu$. EXAMPLE
+For a birth-death model, we can use numerical methods to maximize the likelihood over $\lambda$ and $\mu$.
 
-We can also estimate birth and death rates using a Bayesian MCMC. We can use exactly the method spelled out above for clade ages and diversities, but substitute equation xxx for the likelihood, thus using the waiting times derived from a phylogenetic tree to estimate model parameters. EXAMPLE.
+EXAMPLE
+
+## Using Bayesian MCMC to fit a birth-death model
+
+We can also estimate birth and death rates using a Bayesian MCMC. We can use exactly the method spelled out above for clade ages and diversities, but substitute equation xxx for the likelihood, thus using the waiting times derived from a phylogenetic tree to estimate model parameters.
+
+EXAMPLE.
+
+## Sampling and birth-death models
 
 It is important to think about sampling when fitting birth-death models to phylogenetic trees. If any species are missing from your phylogenetic tree, they will lead to biased parameter estimates. This is because missing species are disproportionally likely to connect to the tree on short, rather than long, branches. If we randomly sample lineages from a tree, we will end up badly underestimating both speciation and extinction rates (and wrongly inferring slowdowns; see chapter 12).
 
