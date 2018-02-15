@@ -50,7 +50,7 @@ title: Fitting birth-death models
 \hat{r} = \frac{ln(n)}{t_{stem}}
 $$</span><br /></p>
 </div>
-<p>where <span class="math inline"><em>t</em><sub><em>s</em></sub><em>t</em><em>e</em><em>m</em></span> is the stem group age and <span class="math inline"><em>r</em> = <em>λ</em> − <em>μ</em></span>. Alternatively, one can use <span class="math inline"><em>t</em><sub><em>c</em><em>r</em><em>o</em><em>w</em><em>n</em></sub></span>, the crown group age:</p>
+<p>where <span class="math inline"><em>t</em><sub><em>s</em><em>t</em><em>e</em><em>m</em></sub></span> is the stem group age and <span class="math inline"><em>r</em> = <em>λ</em> − <em>μ</em></span>. Alternatively, one can use <span class="math inline"><em>t</em><sub><em>c</em><em>r</em><em>o</em><em>w</em><em>n</em></sub></span>, the crown group age:</p>
 <p>(eq. 11.2)</p>
 <div>
 <p><br /><span class="math display">$$
@@ -351,9 +351,19 @@ $$</span><br /></p>
 <p>EXAMPLE.</p>
 <h2 id="sampling-and-birth-death-models">Sampling and birth-death models</h2>
 <p>It is important to think about sampling when fitting birth-death models to phylogenetic trees. If any species are missing from your phylogenetic tree, they will lead to biased parameter estimates. This is because missing species are disproportionally likely to connect to the tree on short, rather than long, branches. If we randomly sample lineages from a tree, we will end up badly underestimating both speciation and extinction rates (and wrongly inferring slowdowns; see chapter 12).</p>
-<p>Fortunately, the mathematics for incomplete sampling of reconstructed phylogenetic trees has also been worked out. We can substitute in equations that include ρ, the proportion of sampled species, for equations xxx and xxx above:</p>
-<p>p_0 (t)=1-ρ(-)/(ρ+((1-ρ)-〖)e〗^(-(-)t) )</p>
-<p>p_1 (t)=(〖ρ(-)〗^2 e<sup>(-(-)t))/(ρ+((1-ρ)-〖)e〗</sup>(-(-)t) )^2</p>
+<p>Fortunately, the mathematics for incomplete sampling of reconstructed phylogenetic trees has also been worked out. We can substitute in equations that include <span class="math inline"><em>ρ</em></span>, the proportion of sampled species, for equations 11.12 and 11.13 above:</p>
+<p>(eq. 11.15)</p>
+<div>
+<p><br /><span class="math display">$$
+p_0 (t) = 1 - \frac{\rho (\lambda - \mu)}{\rho \lambda + (\lambda (1 - \rho)-\mu)e^{-(\lambda - \mu)t}}
+$$</span><br /></p>
+</div>
+<p>(eq. 11.16)</p>
+<div>
+<p><br /><span class="math display">$$
+p_1 (t) = \frac{\rho (\lambda - \mu)^2 e^{-(\lambda - \mu)t}}{(\rho \lambda + (\lambda (1 - \rho)-\mu)e^{-(\lambda - \mu)t})^2}
+$$</span><br /></p>
+</div>
 <p>EXAMPLE</p>
 <h2 id="chapter-summary">Chapter Summary</h2>
 <p>In this chapter, I described how to estimate parameters from birth-death models using data on species diversity and ages, and how to use patterns of tree balance to test hypotheses about changing birth and death rates. I also described how to calculate the likelihood for birth-death models on trees, which leads directly to both ML and Bayesian methods for estimating birth and death rates. Next, we will explore elaborations on birth-death models, and discuss models that go beyond constant-rates birth-death models to analyze the diversity of life on Earth.</p>

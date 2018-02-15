@@ -28,7 +28,7 @@ $$
 $$
 </div>
 
-where $t_stem$ is the stem group age and $r=\lambda-\mu$. Alternatively, one can use $t_{crown}$, the crown group age:
+where $t_{stem}$ is the stem group age and $r=\lambda-\mu$. Alternatively, one can use $t_{crown}$, the crown group age:
 
 (eq. 11.2)
 
@@ -283,11 +283,23 @@ EXAMPLE.
 
 It is important to think about sampling when fitting birth-death models to phylogenetic trees. If any species are missing from your phylogenetic tree, they will lead to biased parameter estimates. This is because missing species are disproportionally likely to connect to the tree on short, rather than long, branches. If we randomly sample lineages from a tree, we will end up badly underestimating both speciation and extinction rates (and wrongly inferring slowdowns; see chapter 12).
 
-Fortunately, the mathematics for incomplete sampling of reconstructed phylogenetic trees has also been worked out. We can substitute in equations that include ρ, the proportion of sampled species, for equations xxx and xxx above:
+Fortunately, the mathematics for incomplete sampling of reconstructed phylogenetic trees has also been worked out. We can substitute in equations that include $\rho$, the proportion of sampled species, for equations 11.12 and 11.13 above:
 
-p_0 (t)=1-ρ(\lambda-\mu)/(ρ\lambda+(\lambda(1-ρ)-\mu〖)e〗^(-(\lambda-\mu)t) )
+(eq. 11.15)
 
-p_1 (t)=(〖ρ(\lambda-\mu)〗^2 e^(-(\lambda-\mu)t))/(ρ\lambda+(\lambda(1-ρ)-\mu〖)e〗^(-(\lambda-\mu)t) )^2
+<div>
+$$
+p_0 (t) = 1 - \frac{\rho (\lambda - \mu)}{\rho \lambda + (\lambda (1 - \rho)-\mu)e^{-(\lambda - \mu)t}}
+$$
+</div>
+
+(eq. 11.16)
+
+<div>
+$$
+p_1 (t) = \frac{\rho (\lambda - \mu)^2 e^{-(\lambda - \mu)t}}{(\rho \lambda + (\lambda (1 - \rho)-\mu)e^{-(\lambda - \mu)t})^2}
+$$
+</div>
 
 EXAMPLE
 
