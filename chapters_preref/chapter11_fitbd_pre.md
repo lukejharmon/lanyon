@@ -4,7 +4,7 @@
 
 ## Introduction: Diversity hotspots
 
-The number of species on the Earth remains highly uncertain, but ranges somewhere above 10 million. As far as we know, all of those species are descended from a single common ancestor that lived some 4.5 billion years ago. All species on Earth, then, formed by the process of speciation, the process by which one species splits into two (or more) descendants. Imbalance in diversity across the tree of life tells us that speciation is much more common in some lineages than others. Moreover, numerous studies have argued that certain habitats are "hotbeds" of speciation. For example, the high Andes ecosystem called the Páromo - a peculiar landscape of alien-looking plants and spectacled bears - harbors the highest speciation rates on the planet.
+The number of species on the Earth remains highly uncertain, but ranges somewhere above 10 million [@Mora2011-jh]. As far as we know, all of those species are descended from a single common ancestor that lived some 4.2 billion years ago [@Hedges2009-lj]. All species on Earth, then, formed by the process of speciation, the process by which one species splits into two (or more) descendants [@Coyne2004-vv]. Imbalance in diversity across the tree of life tells us that speciation is much more common in some lineages than others [@Mooers1997-ow]. Moreover, numerous studies have argued that certain habitats are "hotbeds" of speciation [e.g. @Hutter2017-tf, @Miller2017-ja]. For example, the high Andes ecosystem called the Páromo - a peculiar landscape of alien-looking plants and spectacled bears - harbors the highest speciation rates on the planet [@Madrinan2013-oi].
 
 
 ![Figure 11.1 Páromo ecosystem, Chingaza Natural National Park, Colombia. Photo taken by the author.]({{ site.baseurl }}/images/figure11-1.png)
@@ -18,7 +18,7 @@ Key questions:
 
 ## Clade age and diversity
 
-If we know the age of a clade and its current diversity, then we can calculate the net diversification rate for that clade. The simplest way follows Magallon and Sanderson (2001), who give an equation for the estimate of net diversification rate as:
+If we know the age of a clade and its current diversity, then we can calculate the net diversification rate for that clade. The simplest way follows Magallón and Sanderson [-@Magallon2001-xi], who give an equation for the estimate of net diversification rate as:
 
 (eq. 11.1)
 
@@ -43,8 +43,7 @@ The two equations differ because at the crown group age one is considering the c
 ![Figure 11.2. Crown and stem age of a clade.]({{ site.baseurl }}\images\figure11-2.png)
 
 
-
-These two equations give ML estimates for r only if there is no extinction. If there has been extinction in the history of the clade, then these estimates will be biased. Under a scenario with extinction, one can define $\epsilon= \mu / \lambda$ and use the following method-of-moments estimators from Rohatgi (1976, following the notation of Magallon and Sanderson 2001):
+These two equations give ML estimates for r only if there is no extinction. If there has been extinction in the history of the clade, then these estimates will be biased. Under a scenario with extinction, one can define $\epsilon= \mu / \lambda$ and use the following method-of-moments estimators from Rohatgi [-@Rohatgi1976-du, following the notation of @Magallon2001-xi]:
 
 (eq. 11.3)
 
@@ -64,9 +63,9 @@ $$
 $$
 </div>
 
-for crown age. (Note that eq. 11.3 and 11.4 reduce to 11.1 and 11.2, respectively, when $\epsilon = 0$). Magallon and Sanderson (2001), following Strathmann and Slatkin (1983), describe how to use eq. 10.13 and 10.15 to calculate confidence intervals for the number of species at a given time.
+for crown age. (Note that eq. 11.3 and 11.4 reduce to 11.1 and 11.2, respectively, when $\epsilon = 0$). Magallón and Sanderson [-@Magallon2001-xi], following Strathmann and Slatkin [-@Strathmann1983-lz], describe how to use eq. 10.13 and 10.15 to calculate confidence intervals for the number of species at a given time.
 
-For example, consider these data, which summarize the ages and diversities of a number of plant lineages in the Páromo (from Madriñán et al. 2013). For each lineage, I have calculated the pure-birth estimate of speciation rate (from equation 11.2, since these are crown ages), and net diversification rates under three scenarios for extinction ($\epsilon = 0.1$,   $\epsilon = 0.5$, and $\epsilon = 0.9$).
+For example, consider these data, which summarize the ages and diversities of a number of plant lineages in the Páromo [from @Madrinan2013-oi]. For each lineage, I have calculated the pure-birth estimate of speciation rate (from equation 11.2, since these are crown ages), and net diversification rates under three scenarios for extinction ($\epsilon = 0.1$,   $\epsilon = 0.5$, and $\epsilon = 0.9$).
 
 | Lineage |	n |	Age	| $\hat{r}_{pb}$ | $\hat{r}_{\epsilon = 0.1}$ | $\hat{r}_{\epsilon = 0.5}$ | $\hat{r}_{\epsilon = 0.9}$ |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -88,7 +87,7 @@ Table 11.1. Estimates of net diversification rates for Páramo lineages using eq
 
 We can also estimate birth and death rates for clade ages and diversities using ML or Bayesian approaches. We already know the full probability distribution for birth-death models starting from any standing diversity $N(0)=n_0$ (see equations 10.13 and 10.15). We can use these equations to calculate the likelihood of any particular combination of $N$ and $t$ (either $t_{stem}$ or $t_{crown}$) given particular values of $\lambda$ and $\mu$. We can then find parameter values that maximize that likelihood. Of course, with data from only a single clade, we cannot estimate parameters reliably; in fact, we are trying to estimate two parameters from a single data point, which is a futile endeavor. (It is common, in this case, to assume some level of extinction and calculate net diversification rates based on that, as we did in Table 11.1 above).
 
-One can also assume that a set of clades have the same speciation and extinction rates and fit them simultaneously, estimating ML parameter values. This is the approach taken by Magallon and Sanderson in their 2001 paper on diversification rates across angiosperms. When we apply this approach to the Paramo data, shown above, we obtain ML estimates of $\hat{r} = 0.27$ and $\hat{\epsilon} = 0$. If we were forced to estimate an overall average rate of speciation for all of these clades, this might be a reasonable estimate. However, the table above also suggests that, perhaps, some of these clades might be diversifiying faster than others. We will return to the issue of variation in diversification rates across clades in the next chapter.
+One can also assume that a set of clades have the same speciation and extinction rates and fit them simultaneously, estimating ML parameter values. This is the approach taken by Magallón and Sanderson's [-@Magallon2001-xi] paper on diversification rates across angiosperms. When we apply this approach to the Paramo data, shown above, we obtain ML estimates of $\hat{r} = 0.27$ and $\hat{\epsilon} = 0$. If we were forced to estimate an overall average rate of speciation for all of these clades, this might be a reasonable estimate. However, the table above also suggests that, perhaps, some of these clades might be diversifiying faster than others. We will return to the issue of variation in diversification rates across clades in the next chapter.
 
 Another approach is to use a Bayesian approach to calculate posterior distributions for birth and death rates based on clade ages and diversities. This approach has not, to my knowledge, been implemented in any software package, although the method is straightforward (for similar approaches, see xxx B Moore). To do this, we will modify the basic algorithm for Bayesian MCMC (see Chapter 2) as follows:
 
@@ -128,15 +127,15 @@ $$
 
 6.	Repeat steps 2-5 a large number of times.
 
-When we apply this technique to the Páromo (from Madriñán et al. 2013), we obtain posterior distributions for both $r$ (mean = 0.497, 95% CI = 0.08-1.77) and $\epsilon$ (mean = 0.36, 95% CI = 0.02-0.84; Figure 11.3).
+When we apply this technique to the Páromo [from @Madrinan2013-oi], we obtain posterior distributions for both $r$ (mean = 0.497, 95% CI = 0.08-1.77) and $\epsilon$ (mean = 0.36, 95% CI = 0.02-0.84; Figure 11.3).
 
-![Figure 11.3. Posterior distributions for $r$ and $\epsilon$ for Páromo clades (Madriñán et al. 2013).]({{ site.baseurl }}\images\figure11-3.png)
+![Figure 11.3. Posterior distributions for $r$ and $\epsilon$ for Páromo clades [@Madrinan2013-oi].]({{ site.baseurl }}\images\figure11-3.png)
 
 Thus, we can estimate diversification rates from data on clade ages and diversities. If we have a whole set of such clades, we can (in principal) estimate both speciation and extinction rates, so long as we are willing to assume that all of the clades share equal diversification rates. However, as we will see in the next section, this assumption is almost always dubious!
 
 ## Tree Balance
 
-We can use the concept of tree balance to evaluate the fit of constant-rate birth-death models to phylogenetic trees. Tree balance is based on comparing the number of species descended from each pair of sister lineages in the tree. For single nodes, we already know that the distribution of sister taxa species richness is uniform over all possible divisions of $N_n$ species into two clades of size $N_a$ and $N_b$. We can use this fact to derive a simple test of whether the distribution of species between two sister clades is unusual compared to the expectation under a birth-death model. This test can be used, for example, to test whether the diversity of exceptional clades, like passerine birds, is higher than one would expect when compared to their sister clade. This approach traces back to Raup and colleagues, who applied stochastic birth-death models to paleontology in a series of influential papers in the 1970s (e.g. Raup et al. 1973; Raup and Gould 1974). Slowinsky and Guyer (1993) developed a test based on calculating a P-value for a division at least as extreme as seen in a particular comparisons of sister clades. We consider Nn total species divided into two sister clades of sizes $N_a$ and $N_b$, where $N_a < N_b$ and $N_a + N_b = N_n$. Then:
+We can use the concept of tree balance to evaluate the fit of constant-rate birth-death models to phylogenetic trees. Tree balance is based on comparing the number of species descended from each pair of sister lineages in the tree. For single nodes, we already know that the distribution of sister taxa species richness is uniform over all possible divisions of $N_n$ species into two clades of size $N_a$ and $N_b$. We can use this fact to derive a simple test of whether the distribution of species between two sister clades is unusual compared to the expectation under a birth-death model. This test can be used, for example, to test whether the diversity of exceptional clades, like passerine birds, is higher than one would expect when compared to their sister clade. This approach traces back to Raup and colleagues, who applied stochastic birth-death models to paleontology in a series of influential papers in the 1970s [e.g. @Raup1973-xy, @Raup1974-dx]. Slowinsky and Guyer [-@Slowinski1993-ks] developed a test based on calculating a P-value for a division at least as extreme as seen in a particular comparisons of sister clades. We consider Nn total species divided into two sister clades of sizes $N_a$ and $N_b$, where $N_a < N_b$ and $N_a + N_b = N_n$. Then:
 
 (eq. 11.7)
 
@@ -149,7 +148,7 @@ $$
 
 If $P > 1$ then set $P = 1$
 
-For example, we can assess diversification in the Andean representatives of the legume genus Lupinus (Hughes and Eastwood 2006). In particular, this genus includes a young radiation of 81 Andean species, spanning a wide range of growth forms. The likely sister clade to this spectacular Andean radiation is a clade of Lupinus species in Mexico that includes 46 species (Drummond et al. 2013). In this case $N_a = 81 - 46 = 35$, and we can then calculate a P-value testing the null hypothesis that both of these clades have the same diversification rate:
+For example, we can assess diversification in the Andean representatives of the legume genus *Lupinus* [@Hughes2006-nr]. In particular, this genus includes a young radiation of 81 Andean species, spanning a wide range of growth forms. The likely sister clade to this spectacular Andean radiation is a clade of *Lupinus* species in Mexico that includes 46 species [@Drummond2012-zs]. In this case $N_a = 81 - 46 = 35$, and we can then calculate a P-value testing the null hypothesis that both of these clades have the same diversification rate:
 
 (eq. 11.8)
 
@@ -159,9 +158,9 @@ P = \frac{2 N_a}{N_n - 1} = \frac{2 \cdot 35}{81 - 1} = 0.875
 $$
 </div>
 
-We cannot reject the null hypothesis. Indeed, later work suggests that the actual increase in diversification rate for Lupinus occurred deeper in the phylogenetic tree, in the ancestor of a more broadly ranging New World clade (Drummond et al. 2013, Hughes et al. 2015).
+We cannot reject the null hypothesis. Indeed, later work suggests that the actual increase in diversification rate for Lupinus occurred deeper in the phylogenetic tree, in the ancestor of a more broadly ranging New World clade [@Drummond2012-zs, @Hughes2006-nr].
 
-Often, we are interested in testing whether a particular trait - say, dispersal into the Paramo - is responsible for the increase in species richness that we see in some clades. In that case, a single comparison of sister clades may be unsatisfying, as sister clades almost always differ in many characters, beyond just the trait of interest. Even if the clade with our putative "key innovation" is more diverse, we still might not be confidence in inferring a correlation from a single observation. To address this problem, many studies have used natural replicates across the tree of life, comparing the species richnesses of many pairs of sister clades that differ in a given trait of interest. Following Slowinsky and Guyer's logic above, we could calculate a p-value for each clade, and then combine those p-values into an overall test. In this case, one clade (with diversity $N_1$) has the trait of interest and the other does not ($N_0$), and our formula is half of equation 11.5 since we will consider this a one-tailed test:
+Often, we are interested in testing whether a particular trait - say, dispersal into the Páramo - is responsible for the increase in species richness that we see in some clades. In that case, a single comparison of sister clades may be unsatisfying, as sister clades almost always differ in many characters, beyond just the trait of interest. Even if the clade with our putative "key innovation" is more diverse, we still might not be confidence in inferring a correlation from a single observation. To address this problem, many studies have used natural replicates across the tree of life, comparing the species richnesses of many pairs of sister clades that differ in a given trait of interest. Following Slowinsky and Guyer's logic above, we could calculate a p-value for each clade, and then combine those p-values into an overall test. In this case, one clade (with diversity $N_1$) has the trait of interest and the other does not ($N_0$), and our formula is half of equation 11.5 since we will consider this a one-tailed test:
 
 (eq. 11.9)
 
@@ -171,7 +170,7 @@ P = \frac{N_0}{N_n - 1}
 $$
 </div>
 
-When analyzing replicate clade comparisons - e.g. many sister clades, where in each case one has the trait of interest and the other does not - Slowinsky and Guyer (1993) recommended combining these p-values using Fisher's combined probability test, so that:
+When analyzing replicate clade comparisons - e.g. many sister clades, where in each case one has the trait of interest and the other does not - Slowinsky and Guyer [-@Slowinski1993-ks] recommended combining these p-values using Fisher's combined probability test, so that:
 
 (eq. 11.10)
 
