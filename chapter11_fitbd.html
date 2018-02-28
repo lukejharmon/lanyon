@@ -222,7 +222,7 @@ $$</span><br /></p>
 <p>Table 11.1. Estimates of net diversification rates for Páramo lineages using equations 11.2 and 11.4.</p>
 <p>We can also estimate birth and death rates for clade ages and diversities using ML or Bayesian approaches. We already know the full probability distribution for birth-death models starting from any standing diversity <span class="math inline"><em>N</em>(0)=<em>n</em><sub>0</sub></span> (see equations 10.13 and 10.15). We can use these equations to calculate the likelihood of any particular combination of <span class="math inline"><em>N</em></span> and <span class="math inline"><em>t</em></span> (either <span class="math inline"><em>t</em><sub><em>s</em><em>t</em><em>e</em><em>m</em></sub></span> or <span class="math inline"><em>t</em><sub><em>c</em><em>r</em><em>o</em><em>w</em><em>n</em></sub></span>) given particular values of <span class="math inline"><em>λ</em></span> and <span class="math inline"><em>μ</em></span>. We can then find parameter values that maximize that likelihood. Of course, with data from only a single clade, we cannot estimate parameters reliably; in fact, we are trying to estimate two parameters from a single data point, which is a futile endeavor. (It is common, in this case, to assume some level of extinction and calculate net diversification rates based on that, as we did in Table 11.1 above).</p>
 <p>One can also assume that a set of clades have the same speciation and extinction rates and fit them simultaneously, estimating ML parameter values. This is the approach taken by Magallón and Sanderson's <span class="citation">(<a href="#ref-Magallon2001-xi">2001</a>)</span> paper on diversification rates across angiosperms. When we apply this approach to the Paramo data, shown above, we obtain ML estimates of <span class="math inline">$\hat{r} = 0.27$</span> and <span class="math inline">$\hat{\epsilon} = 0$</span>. If we were forced to estimate an overall average rate of speciation for all of these clades, this might be a reasonable estimate. However, the table above also suggests that, perhaps, some of these clades might be diversifiying faster than others. We will return to the issue of variation in diversification rates across clades in the next chapter.</p>
-<p>Another approach is to use a Bayesian approach to calculate posterior distributions for birth and death rates based on clade ages and diversities. This approach has not, to my knowledge, been implemented in any software package, although the method is straightforward (for similar approaches, see xxx B Moore). To do this, we will modify the basic algorithm for Bayesian MCMC (see Chapter 2) as follows:</p>
+<p>Another approach is to use a Bayesian approach to calculate posterior distributions for birth and death rates based on clade ages and diversities. This approach has not, to my knowledge, been implemented in any software package, although the method is straightforward <span class="citation">(for a related approach, see <span class="citeproc-not-found" data-reference-id="Hohna2016-dw"><strong>???</strong></span>)</span>. To do this, we will modify the basic algorithm for Bayesian MCMC (see Chapter 2) as follows:</p>
 <ol style="list-style-type: decimal">
 <li><p>Sample a set of starting parameter values, <span class="math inline"><em>r</em></span> and <span class="math inline"><em>ϵ</em></span>, from their prior distributions. For this example, we can set our prior distribution for both parameters as exponential with a mean and variance of <span class="math inline"><em>λ</em><sub><em>p</em></sub> = 1</span> (note that this choice might depend on the units you are using, especially for <span class="math inline"><em>r</em></span>). Note the potentially confusing notation here - <span class="math inline"><em>λ</em><sub><em>p</em></sub></span> is the single parameter of the prior distribution, and we will use it as a prior on both speciation and extinction rates. We then select starting r and <span class="math inline"><em>ϵ</em></span> from their priors.</p></li>
 <li><p>Given the current parameter values, select new proposed parameter values using the proposal density <span class="math inline"><em>Q</em>(<em>p</em>′|<em>p</em>)</span>. For both parameter values, we can use a uniform proposal density with width <span class="math inline"><em>w</em><sub><em>p</em></sub></span>, so that <span class="math inline"><em>Q</em>(<em>p</em>′|<em>p</em>) <em>U</em>(<em>p</em> − <em>w</em><sub><em>p</em></sub>/2, <em>p</em> + <em>w</em><sub><em>p</em></sub>/2)</span>. We can either choose both parameter values simultaneously, or one at a time (the latter is typically more effective).</p></li>
@@ -289,6 +289,91 @@ $$</span><br /></p>
 <p><br /><span class="math display"><em>P</em><sub><em>t</em><em>o</em><em>t</em><em>a</em><em>l</em></sub> = −2∑<em>l</em><em>n</em>(<em>P</em><sub><em>i</em></sub>)</span><br /></p>
 </div>
 <p>Follow-up work showed that this test, though, can be very sensitive to outliers - that is, clades with extreme differences in diversity - and can, in some cases with two characters, show that both characters significantly increase diversity <span class="citation">(Vamosi and Vamosi <a href="#ref-Vamosi2005-mn">2005</a>)</span>! Fortunately, there are a number of improved methods that can be used that are similar in spirit to the original Slowinsky and Guyer test but more statistically robust <span class="citation">(e.g Paradis <a href="#ref-Paradis2012-vp">2012</a>)</span>.</p>
+<p>As an example, consider the following data, which compares the diversity of many sister pairs of plants. In each case, one clade has fleshy fruits and the other dry <span class="citation">(data from Vamosi and Vamosi <a href="#ref-Vamosi2005-mn">2005</a>)</span>:</p>
+<table style="width:25%;">
+<colgroup>
+<col width="5%" />
+<col width="6%" />
+<col width="5%" />
+<col width="6%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Fleshy fruit clade</th>
+<th align="right"><span class="math inline"><em>n</em><sub><em>f</em><em>l</em><em>e</em><em>s</em><em>h</em><em>y</em></sub></span></th>
+<th>Dry fruit clade</th>
+<th align="right"><span class="math inline"><em>n</em><sub><em>d</em><em>r</em><em>y</em></sub></span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><em>Pangium</em></td>
+<td align="right">1</td>
+<td><em>Acharia</em> + <em>Kigellaria</em></td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td><em>Cyrilla</em></td>
+<td align="right">1</td>
+<td><em>Clethra</em></td>
+<td align="right">64</td>
+</tr>
+<tr class="odd">
+<td><em>Roussea</em></td>
+<td align="right">1</td>
+<td><em>Lobelia</em></td>
+<td align="right">300</td>
+</tr>
+<tr class="even">
+<td><em>Myriophylum + Haloragis + Penthorum</em></td>
+<td align="right">1</td>
+<td><em>Tetracarpaea</em></td>
+<td align="right">89</td>
+</tr>
+<tr class="odd">
+<td><em>Austrobaileya</em></td>
+<td align="right">1</td>
+<td><em>Illicium + Schisandra</em></td>
+<td align="right">67</td>
+</tr>
+<tr class="even">
+<td><em>Davidsonia</em></td>
+<td align="right">3</td>
+<td><em>Bauera</em></td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td><em>Mitchella</em></td>
+<td align="right">3</td>
+<td><em>Pentas</em></td>
+<td align="right">34</td>
+</tr>
+<tr class="even">
+<td><em>Milligania </em></td>
+<td align="right">5</td>
+<td><em>Borya</em></td>
+<td align="right">10</td>
+</tr>
+<tr class="odd">
+<td><em>Sambucus</em></td>
+<td align="right">9</td>
+<td> <em>Viburnum</em></td>
+<td align="right">150</td>
+</tr>
+<tr class="even">
+<td><em>Pereskia</em></td>
+<td align="right">16</td>
+<td><em>Mollugo</em></td>
+<td align="right">35</td>
+</tr>
+<tr class="odd">
+<td><em>Decaisnea + Sargentodoxa +  Tinospora + Menispermum +  Nandina + Caulophyllum + Hydrastis + Glaucidium</em></td>
+<td align="right">33</td>
+<td><em>Euptelea</em></td>
+<td align="right">2</td>
+</tr>
+</tbody>
+</table>
 <p>Finally, we can assess the overall balance of an entire phylogenetic tree using tree balance statistics. There are a relatively large number of such statistics, and different indices capture different aspects of diversification <span class="citation">(Mooers and Heard <a href="#ref-Mooers1997-ow">1997</a>)</span>. Since the test statistics are based on descriptions of patterns in trees rather than particular processes, the relationship between imbalance and evolutionary processes can be difficult to untangle! But all tree balance indices allow one to reject the null hypothesis that the tree was generated under a birth-death model. Actually, the expected patterns of tree balance are absolutely identical under a broader class of models called &quot;Equal-Rates Markov&quot; (ERM) models <span class="citation">(Harding <a href="#ref-Harding1971-bb">1971</a>, <span class="citation">Mooers and Heard (<a href="#ref-Mooers1997-ow">1997</a>)</span>)</span>. ERM models specify that diversification rates (both speciation and extinction) are equal across all lineages for any particular point in time. However, those rates may or may not change through time. If they don't change through time, then we have a constant rate birth-death model, as described above - so birth-death models are ERM models. But ERM models also include, for example, models where birth rates slow through time, or extinction rates increase through time, and so on. All of these models predict exactly the same pattern of tree balance.</p>
 <p>Typical steps for using tree balance indices to test the null hypothesis that the tree was generated under an ERM model are as follows:</p>
 <ol style="list-style-type: decimal">

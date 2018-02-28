@@ -89,7 +89,7 @@ We can also estimate birth and death rates for clade ages and diversities using 
 
 One can also assume that a set of clades have the same speciation and extinction rates and fit them simultaneously, estimating ML parameter values. This is the approach taken by Magallón and Sanderson's [-@Magallon2001-xi] paper on diversification rates across angiosperms. When we apply this approach to the Paramo data, shown above, we obtain ML estimates of $\hat{r} = 0.27$ and $\hat{\epsilon} = 0$. If we were forced to estimate an overall average rate of speciation for all of these clades, this might be a reasonable estimate. However, the table above also suggests that, perhaps, some of these clades might be diversifiying faster than others. We will return to the issue of variation in diversification rates across clades in the next chapter.
 
-Another approach is to use a Bayesian approach to calculate posterior distributions for birth and death rates based on clade ages and diversities. This approach has not, to my knowledge, been implemented in any software package, although the method is straightforward (for similar approaches, see xxx B Moore). To do this, we will modify the basic algorithm for Bayesian MCMC (see Chapter 2) as follows:
+Another approach is to use a Bayesian approach to calculate posterior distributions for birth and death rates based on clade ages and diversities. This approach has not, to my knowledge, been implemented in any software package, although the method is straightforward [for a related approach, see @Hohna2016-dw]. To do this, we will modify the basic algorithm for Bayesian MCMC (see Chapter 2) as follows:
 
 1.  Sample a set of starting parameter values, $r$ and $\epsilon$, from their prior distributions. For this example, we can set our prior distribution for both parameters as exponential with a mean and variance of $\lambda_p = 1$ (note that this choice might depend on the units you are using, especially for $r$). Note the potentially confusing notation here - $\lambda_p$ is the single parameter of the prior distribution, and we will use it as a prior on both speciation and extinction rates. We then select starting r and $\epsilon$ from their priors.
 
@@ -181,6 +181,23 @@ $$
 </div>
 
 Follow-up work showed that this test, though, can be very sensitive to outliers - that is, clades with extreme differences in diversity - and can, in some cases with two characters, show that both characters significantly increase diversity [@Vamosi2005-mn]! Fortunately, there are a number of improved methods that can be used that are similar in spirit to the original Slowinsky and Guyer test but more statistically robust [e.g @Paradis2012-vp].  
+
+As an example, consider the following data, which compares the diversity of many sister pairs of plants. In each case, one clade has fleshy fruits and the other dry [data from @Vamosi2005-mn]:
+
+| Fleshy fruit clade | $n_{fleshy}$ |	Dry fruit clade	| $n_{dry}$ |
+| --- | ---: | --- | ---: |
+| *Pangium* | 1 | *Acharia* + *Kigellaria* | 2 |
+| *Cyrilla* | 1 | *Clethra* | 64 |
+| *Roussea* | 1 | *Lobelia* | 300 |
+| *Myriophylum + Haloragis + Penthorum* | 1 | *Tetracarpaea* | 89 |
+| *Austrobaileya* | 1 | *Illicium + Schisandra* | 67 |
+| *Davidsonia* | 3 | *Bauera* | 4 |
+| *Mitchella* | 3 | *Pentas* | 34 |
+| *Milligania * | 5 | *Borya* | 10 |
+| *Sambucus* | 9 |  *Viburnum* | 150 |
+| *Pereskia* | 16 | *Mollugo* | 35 |
+| *Decaisnea + Sargentodoxa +  Tinospora + Menispermum +  Nandina + Caulophyllum + Hydrastis + Glaucidium* | 33 | *Euptelea* | 2 |
+
 
 Finally, we can assess the overall balance of an entire phylogenetic tree using tree balance statistics. There are a relatively large number of such statistics, and different indices capture different aspects of diversification [@Mooers1997-ow]. Since the test statistics are based on descriptions of patterns in trees rather than particular processes, the relationship between imbalance and evolutionary processes can be difficult to untangle! But all tree balance indices allow one to reject the null hypothesis that the tree was generated under a birth-death model. Actually, the expected patterns of tree balance are absolutely identical under a broader class of models called "Equal-Rates Markov" (ERM) models [@Harding1971-bb, @Mooers1997-ow]. ERM models specify that diversification rates (both speciation and extinction) are equal across all lineages for any particular point in time. However, those rates may or may not change through time. If they don't change through time, then we have a constant rate birth-death model, as described above - so birth-death models are ERM models. But ERM models also include, for example, models where birth rates slow through time, or extinction rates increase through time, and so on. All of these models predict exactly the same pattern of tree balance.
 
