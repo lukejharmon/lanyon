@@ -197,7 +197,14 @@ As an example, consider the following data, which compares the diversity of many
 | *Sambucus* | 9 |  *Viburnum* | 150 |
 | *Pereskia* | 16 | *Mollugo* | 35 |
 | *Decaisnea + Sargentodoxa +  Tinospora + Menispermum +  Nandina + Caulophyllum + Hydrastis + Glaucidium* | 33 | *Euptelea* | 2 |
-
+| *Tetracera* | 40 | *Dillenia* | 60 |
+| *Osbeckia* | 50 | *Mouriri* | 81 |
+| *Hippocratea* | 100 | *Plagiopteron* | 1 |
+| *Cyclanthus + Sphaeradenia + Freycinetia* | 216 | *Petrosavia + Japonlirion* | 3 |
+| *Bixa* | 393 | *Theobroma + Grewia + Tilia + Sterculia + Durio* | 1 |
+| *Impatiens* | 850 | *Idria* | 11 |
+| *Lamium + Clerodendrum + Callicarpa + Phyla + Pedicularis + Paulownia* | 947 | *Euthystachys* | 1 |
+| *Callicarpa + Phyla + Pedicularis + Paulownia + Solanum* | 1700 | *Solanum* | 18 |
 
 Finally, we can assess the overall balance of an entire phylogenetic tree using tree balance statistics. There are a relatively large number of such statistics, and different indices capture different aspects of diversification [@Mooers1997-ow]. Since the test statistics are based on descriptions of patterns in trees rather than particular processes, the relationship between imbalance and evolutionary processes can be difficult to untangle! But all tree balance indices allow one to reject the null hypothesis that the tree was generated under a birth-death model. Actually, the expected patterns of tree balance are absolutely identical under a broader class of models called "Equal-Rates Markov" (ERM) models [@Harding1971-bb, @Mooers1997-ow]. ERM models specify that diversification rates (both speciation and extinction) are equal across all lineages for any particular point in time. However, those rates may or may not change through time. If they don't change through time, then we have a constant rate birth-death model, as described above - so birth-death models are ERM models. But ERM models also include, for example, models where birth rates slow through time, or extinction rates increase through time, and so on. All of these models predict exactly the same pattern of tree balance.
 
