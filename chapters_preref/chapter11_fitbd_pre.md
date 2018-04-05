@@ -129,13 +129,14 @@ $$
 
 When we apply this technique to the Páromo [from @Madrinan2013-oi], we obtain posterior distributions for both $r$ (mean = 0.497, 95% CI = 0.08-1.77) and $\epsilon$ (mean = 0.36, 95% CI = 0.02-0.84; Figure 11.3).
 
-![Figure 11.3. Posterior distributions for $r$ and $\epsilon$ for Páromo clades [@Madrinan2013-oi].]({{ site.baseurl }}/images/figure11-3.png)
+![Figure 11.3. Posterior distribution for $r$ and $\epsilon$ for Páromo clades [@Madrinan2013-oi].]({{ site.baseurl }}/images/figure11-3.png)
+
 
 Thus, we can estimate diversification rates from data on clade ages and diversities. If we have a whole set of such clades, we can (in principal) estimate both speciation and extinction rates, so long as we are willing to assume that all of the clades share equal diversification rates. However, as we will see in the next section, this assumption is almost always dubious!
 
 ## Tree Balance
 
-We can use the concept of tree balance to evaluate the fit of constant-rate birth-death models to phylogenetic trees. Tree balance is based on comparing the number of species descended from each pair of sister lineages in the tree. For single nodes, we already know that the distribution of sister taxa species richness is uniform over all possible divisions of $N_n$ species into two clades of size $N_a$ and $N_b$. We can use this fact to derive a simple test of whether the distribution of species between two sister clades is unusual compared to the expectation under a birth-death model. This test can be used, for example, to test whether the diversity of exceptional clades, like passerine birds, is higher than one would expect when compared to their sister clade. This approach traces back to Raup and colleagues, who applied stochastic birth-death models to paleontology in a series of influential papers in the 1970s [e.g. @Raup1973-xy, @Raup1974-dx]. Slowinsky and Guyer [-@Slowinski1993-ks] developed a test based on calculating a P-value for a division at least as extreme as seen in a particular comparisons of sister clades. We consider Nn total species divided into two sister clades of sizes $N_a$ and $N_b$, where $N_a < N_b$ and $N_a + N_b = N_n$. Then:
+We can use the concept of tree balance to evaluate the fit of constant-rate birth-death models to phylogenetic trees. Tree balance is based on comparing the number of species descended from each pair of sister lineages in the tree. For single nodes, we already know that the distribution of sister taxa species richness is uniform over all possible divisions of $N_n$ species into two clades of size $N_a$ and $N_b$. We can use this fact to derive a simple test of whether the distribution of species between two sister clades is unusual compared to the expectation under a birth-death model. This test can be used, for example, to test whether the diversity of exceptional clades, like passerine birds, is higher than one would expect when compared to their sister clade. This approach traces back to Raup and colleagues, who applied stochastic birth-death models to paleontology in a series of influential papers in the 1970s [e.g. @Raup1973-xy, @Raup1974-dx]. Slowinsky and Guyer [-@Slowinski1993-ks] developed a test based on calculating a P-value for a division at least as extreme as seen in a particular comparisons of sister clades. We consider $N_n$ total species divided into two sister clades of sizes $N_a$ and $N_b$, where $N_a < N_b$ and $N_a + N_b = N_n$. Then:
 
 (eq. 11.7)
 
@@ -176,37 +177,62 @@ When analyzing replicate clade comparisons - e.g. many sister clades, where in e
 
 <div>
 $$
-P_{total} = -2 \sum ln(P_i)
+{\chi^2}_{combined} = -2 \sum ln(P_i)
 $$
 </div>
 
-Follow-up work showed that this test, though, can be very sensitive to outliers - that is, clades with extreme differences in diversity - and can, in some cases with two characters, show that both characters significantly increase diversity [@Vamosi2005-mn]! Fortunately, there are a number of improved methods that can be used that are similar in spirit to the original Slowinsky and Guyer test but more statistically robust [e.g @Paradis2012-vp].  
+Under the null hypothesis, this test statistic, ${\chi^2}_{combined}$, should follow a chi-squared distribution with $2k$ degrees of freedom where k is the number of tests.
 
 As an example, consider the following data, which compares the diversity of many sister pairs of plants. In each case, one clade has fleshy fruits and the other dry [data from @Vamosi2005-mn]:
 
 | Fleshy fruit clade | $n_{fleshy}$ |	Dry fruit clade	| $n_{dry}$ |
 | --- | ---: | --- | ---: |
-| *Pangium* | 1 | *Acharia* + *Kigellaria* | 2 |
+| *Pangium* | 1 | *Acharia*+*Kigellaria* | 2 |
 | *Cyrilla* | 1 | *Clethra* | 64 |
 | *Roussea* | 1 | *Lobelia* | 300 |
-| *Myriophylum + Haloragis + Penthorum* | 1 | *Tetracarpaea* | 89 |
-| *Austrobaileya* | 1 | *Illicium + Schisandra* | 67 |
+| *Myriophylum+Haloragis+Penthorum* | 1 | *Tetracarpaea* | 89 |
+| *Austrobaileya* | 1 | *Illicium+Schisandra* | 67 |
 | *Davidsonia* | 3 | *Bauera* | 4 |
 | *Mitchella* | 3 | *Pentas* | 34 |
 | *Milligania * | 5 | *Borya* | 10 |
 | *Sambucus* | 9 |  *Viburnum* | 150 |
 | *Pereskia* | 16 | *Mollugo* | 35 |
-| *Decaisnea + Sargentodoxa +  Tinospora + Menispermum +  Nandina + Caulophyllum + Hydrastis + Glaucidium* | 33 | *Euptelea* | 2 |
+| *Decaisnea+Sargentodoxa+ Tinospora+Menispermum +  Nandina+Caulophyllum+Hydrastis+Glaucidium* | 33 | *Euptelea* | 2 |
 | *Tetracera* | 40 | *Dillenia* | 60 |
 | *Osbeckia* | 50 | *Mouriri* | 81 |
 | *Hippocratea* | 100 | *Plagiopteron* | 1 |
-| *Cyclanthus + Sphaeradenia + Freycinetia* | 216 | *Petrosavia + Japonlirion* | 3 |
-| *Bixa* | 393 | *Theobroma + Grewia + Tilia + Sterculia + Durio* | 1 |
+| *Cyclanthus+Sphaeradenia+Freycinetia* | 216 | *Petrosavia+Japonlirion* | 3 |
+| *Bixa* | 393 | *Theobroma+Grewia+Tilia+ Sterculia+Durio* | 1 |
 | *Impatiens* | 850 | *Idria* | 11 |
-| *Lamium + Clerodendrum + Callicarpa + Phyla + Pedicularis + Paulownia* | 947 | *Euthystachys* | 1 |
-| *Callicarpa + Phyla + Pedicularis + Paulownia + Solanum* | 1700 | *Solanum* | 18 |
+| *Lamium+Clerodendrum+Callicarpa+Phyla +Pedicularis+Paulownia* | 947 | *Euthystachys* | 1 |
+| *Callicarpa+Phyla+Pedicularis+Paulownia+Solanum* | 1700 | *Solanum* | 18 |
 
-Finally, we can assess the overall balance of an entire phylogenetic tree using tree balance statistics. There are a relatively large number of such statistics, and different indices capture different aspects of diversification [@Mooers1997-ow]. Since the test statistics are based on descriptions of patterns in trees rather than particular processes, the relationship between imbalance and evolutionary processes can be difficult to untangle! But all tree balance indices allow one to reject the null hypothesis that the tree was generated under a birth-death model. Actually, the expected patterns of tree balance are absolutely identical under a broader class of models called "Equal-Rates Markov" (ERM) models [@Harding1971-bb, @Mooers1997-ow]. ERM models specify that diversification rates (both speciation and extinction) are equal across all lineages for any particular point in time. However, those rates may or may not change through time. If they don't change through time, then we have a constant rate birth-death model, as described above - so birth-death models are ERM models. But ERM models also include, for example, models where birth rates slow through time, or extinction rates increase through time, and so on. All of these models predict exactly the same pattern of tree balance.
+The individual clades show mixed support for the hypothesis, with only 7 of the 18 comparisons showing higher diversity in the fleshy clade, but 6 of those 7 comparisons significant at $P < 0.05$ using equation 11.9. The combined probability test gives a test statistic of ${\chi^2}_{combined} = 72.8$. Comparing this to a $\chi^2$ distribution with 36 degrees of freedom, we obtain $P = 0.00027$, a highly significant result. This implies that fleshy fruits do, in fact, result in a higher diversification rate. However, if we test the opposite hypothesis, we find that 11 of 18 comparisons show higher diversity in the non-fleshy clade, with 4 significant at $P < 0.05$. The combined probability test gives ${\chi^2}_{combined} = 58.9$ and $P = 0.0094$. So we reject the null hypothesis and conclude that non-fleshy fruits diversify at a higher rate!
+
+What's going on here? It turns out that this test is very sensitive to outliers - that is, clades with extreme differences in diversity. These clades are very different than what one would expect under the null hypothesis, leading to rejection of the null - and, in some cases with two characters, when there are outliers on both sides [e.g. the proportion of species in each state has a u-shaped distribution; @Paradis2012-vp] we can show that both characters significantly increase diversity [@Vamosi2005-mn]! Fortunately, there are a number of improved methods that can be used that are similar in spirit to the original Slowinsky and Guyer test but more statistically robust [e.g @Paradis2012-vp]. For example, we can apply the "richness Yule test" as described in Paradis [-@Paradis2012-vp], to the data from Vamosi et al. [-@Vamosi2005-mn]. This is a modified version of the McConway-Sims test [@McConway2004-jg], and compares the likelihood of a equal rate yule model applied to all clades to a model where one trait is associated with higher or lower diversification rates. This test requires knowledge of clade ages, which I don't have for these data, but [ @Paradis2012-vp] shows that the test is robust to this assumption and recommends substituting a large and equal age for each clade (I chose 1000). This test shows a significant likelihood ratio test (null model $lnL = -215.6$, alternative model $lnL = -205.7$, $P = 0.000008$), and estimates a higher rate of diversification for fleshy fruits (since the age of the clade is arbitrary, the actual rates are not meaningful, but their estimated ratio $\lambda_1 / \lambda_0 = 1.39$ suggests that fleshy fruited lineages have a diversification rate almost 40% higher).
+
+Finally, we can assess the overall balance of an entire phylogenetic tree using tree balance statistics. There are a relatively large number of such statistics, and different indices capture different aspects of diversification [@Mooers1997-ow]. It is not worth listing them all here, since the have been described and characterized in the literature [e.g. @Blum2006-jo]; instead, I will describe just one common statistic, Colless' I. To calculate Colless' I, we find the number of species that descend from the right ($r_i$) and the left ($s_i$) side of every node $i$ in the tree. If the tree has n tips and thus $n-1$ nodes, we can calculate:
+
+
+(eq. 11.11)
+
+<div>
+$$
+I_c = \sum^{n-1}_{i=1} |r_i - s_i|
+$$
+</div>
+
+This sum will depend strongly on tree size, and so is not comparable across trees of different sizes; to allow comparisons, $I_c$ is usually standardized by subtracting the expected mean for trees of that size under an ERM model, and dividing by the standard deviation. Both of these can be calculated [@Blum2006-xo], and standardized I_c calculated using a small approximation [following @Bortolussi2006-jx] as:
+
+(eq. 11.11)
+
+<div>
+$$
+I^{'}_c = \frac{I_c-n*log(n)-n(\gamma-1-log(2))}{n}
+$$
+</div>
+
+Since the test statistics are based on descriptions of patterns in trees rather than particular processes, the relationship between imbalance and evolutionary processes can be difficult to untangle! But all tree balance indices allow one to reject the null hypothesis that the tree was generated under a birth-death model. Actually, the expected patterns of tree balance are absolutely identical under a broader class of models called "Equal-Rates Markov" (ERM) models [@Harding1971-bb, @Mooers1997-ow]. ERM models specify that diversification rates (both speciation and extinction) are equal across all lineages for any particular point in time. However, those rates may or may not change through time. If they don't change through time, then we have a constant rate birth-death model, as described above - so birth-death models are ERM models. But ERM models also include, for example, models where birth rates slow through time, or extinction rates increase through time, and so on. All of these models predict exactly the same pattern of tree balance.
 
 Typical steps for using tree balance indices to test the null hypothesis that the tree was generated under an ERM model are as follows:
 
@@ -218,7 +244,7 @@ Step 2 is unnecessary in cases where we know null distributions for tree balance
 
 Typically, phylogenetic trees are more imbalanced than expected under the ERM model.  In fact, this is one of the most robust generalizations that one can make about macroevolutionary patterns in phylogenetic trees. This deviation means that diversification rates vary among lineages in the tree of life. We will discuss how to quantify and describe this variation in later chapters. These tests are all similar in that they use multiple non-nested comparisons of species richness in sister clades to calculate a test statistic, which is then compared to a null distribution, usually based on a constant-rates birth-death process [reviewed in @Vamosi2005-mn, @Paradis2012-vp].
 
-XXX example
+As an example, we can apply the whole-tree balance approach to the tree of *Lupinus* [@Drummond2012-zs]. For this tree, which has 137 tips, we calculate $I_c = 1010$ and $I^{'}_c = 3.57$. This is much higher than expected by chance under an ERM model, with $P = 0.0004$. That is, our tree is significantly more imbalanced than expected under a ERM model, which includes both pure birth and birth-death. We can safely conclude that there is variation in speciation and/or extinction rates across lineages in the tree.
 
 ## Fitting birth-death models to branching times
 
