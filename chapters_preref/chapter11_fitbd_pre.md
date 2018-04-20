@@ -4,12 +4,14 @@
 
 ## Introduction: Diversity hotspots
 
-The number of species on the Earth remains highly uncertain, but ranges somewhere above 10 million [@Mora2011-jh]. As far as we know, all of those species are descended from a single common ancestor that lived some 4.2 billion years ago [@Hedges2009-lj]. All species on Earth, then, formed by the process of speciation, the process by which one species splits into two (or more) descendants [@Coyne2004-vv]. Imbalance in diversity across the tree of life tells us that speciation is much more common in some lineages than others [@Mooers1997-ow]. Moreover, numerous studies have argued that certain habitats are "hotbeds" of speciation [e.g. @Hutter2017-tf, @Miller2017-ja]. For example, the high Andes ecosystem called the Páromo - a peculiar landscape of alien-looking plants and spectacled bears - harbors the highest speciation rates on the planet [@Madrinan2013-oi].
+The number of species on the Earth remains highly uncertain, but our best estimates are above 10 million [@Mora2011-jh]. As far as we know, all of those species are descended from a single common ancestor that lived some 4.2 billion years ago [@Hedges2009-lj]. All species on Earth formed by the process of speciation, the process by which one species splits into two (or more) descendants [@Coyne2004-vv].
+
+Some parts of the tree of life have more species than others. This imbalance in diversity tells us that speciation is much more common in some lineages than others [@Mooers1997-ow]. Likewise, numerous studies have argued that certain habitats are "hotbeds" of speciation [e.g. @Hutter2017-tf, @Miller2017-ja]. For example, the high Andes ecosystem called the Páromo - a peculiar landscape of alien-looking plants and spectacled bears - might harbor the highest speciation rates on the planet [@Madrinan2013-oi].
 
 
 ![Figure 11.1 Páromo ecosystem, Chingaza Natural National Park, Colombia. Photo taken by the author.]({{ site.baseurl }}/images/figure11-1.png)
 
-In this chapter we will explore how we can fit birth-death models to data and, in the process, learn about speciation and extinction rates. Birth-death models can be applied to clade ages and diversities or to patterns of branching times in phylogenetic trees. We will explore both maximum likelihood and Bayesian methods to do this.
+In this chapter we will explore how we can fit birth-death models to data and, in the process, learn about speciation and extinction rates. Birth-death models can be applied to data on clade ages and diversities, or fit to the branching times in phylogenetic trees. We will explore both maximum likelihood and Bayesian methods to do this.
 
 Key questions:
 
