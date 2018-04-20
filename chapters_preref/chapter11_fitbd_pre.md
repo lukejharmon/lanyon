@@ -320,13 +320,16 @@ This is the Kendal-Moran estimator of the speciation rate [@Nee2006-cd].
 
 For a birth-death model, we can use numerical methods to maximize the likelihood over $\lambda$ and $\mu$.
 
-EXAMPLE
+For example, we can use ML to fit a birth-death model to the *Lupinus* tree [@Drummond2012-zs], which has 137 tip species and a total age of 16.6 million years. Doing so, we obtain ML parameter estimates of $\lambda = 0.46$ and $\mu = 0.20$, with a log-likelihood of $lnL_{bd} = 262.3$. Compare this to a pure birth model on the same tree, which gives $\lambda = 0.35$ and $lnL_{pb} = 260.4$. One can compare the fit of these two models using AIC scores: $AIC_{bd} = -520.6$ and $AIC_{pb} = -518.8$, so the birth-death model has a better (lower) AIC score but by less than two AIC units. A likelihood ratio test, which gives $\Delta = 3.7$ and $P = 0.054$. In other words, we estimate a non-zero extinction rate in the clade, but the evidence supporting that model over a pure-birth is not particularly strong.
+
 
 ## Using Bayesian MCMC to fit a birth-death model
 
 We can also estimate birth and death rates using a Bayesian MCMC. We can use exactly the method spelled out above for clade ages and diversities, but substitute equation xxx for the likelihood, thus using the waiting times derived from a phylogenetic tree to estimate model parameters.
 
-EXAMPLE.
+Applying this to Lupines, we obtain the posterior distributions shown in figure 11.4. The mean of the posterior for each parameter is $\lambda = 0.48$ and $\mu = 0.23$, quite close to the ML estimates for these parameters.
+
+![Figure 11.4. Posterior distribution for $b$ and $d$ for *Lupinus*  [@Drummond2012-zs].]({{ site.baseurl }}/images/figure11-4.png)
 
 ## Sampling and birth-death models
 
@@ -349,8 +352,6 @@ $$
 p_1 (t) = \frac{\rho (\lambda - \mu)^2 e^{-(\lambda - \mu)t}}{(\rho \lambda + (\lambda (1 - \rho)-\mu)e^{-(\lambda - \mu)t})^2}
 $$
 </div>
-
-EXAMPLE
 
 ## Chapter Summary
 

@@ -494,10 +494,14 @@ $$</span><br /></p>
 </div>
 <p>This is the Kendal-Moran estimator of the speciation rate <span class="citation">(Nee <a href="#ref-Nee2006-cd">2006</a>)</span>.</p>
 <p>For a birth-death model, we can use numerical methods to maximize the likelihood over <span class="math inline"><em>λ</em></span> and <span class="math inline"><em>μ</em></span>.</p>
-<p>EXAMPLE</p>
+<p>For example, we can use ML to fit a birth-death model to the <em>Lupinus</em> tree <span class="citation">(Drummond et al. <a href="#ref-Drummond2012-zs">2012</a>)</span>, which has 137 tip species and a total age of 16.6 million years. Doing so, we obtain ML parameter estimates of <span class="math inline"><em>λ</em> = 0.46</span> and <span class="math inline"><em>μ</em> = 0.20</span>, with a log-likelihood of <span class="math inline"><em>l</em><em>n</em><em>L</em><sub><em>b</em><em>d</em></sub> = 262.3</span>. Compare this to a pure birth model on the same tree, which gives <span class="math inline"><em>λ</em> = 0.35</span> and <span class="math inline"><em>l</em><em>n</em><em>L</em><sub><em>p</em><em>b</em></sub> = 260.4</span>. One can compare the fit of these two models using AIC scores: <span class="math inline"><em>A</em><em>I</em><em>C</em><sub><em>b</em><em>d</em></sub> = −520.6</span> and <span class="math inline"><em>A</em><em>I</em><em>C</em><sub><em>p</em><em>b</em></sub> = −518.8</span>, so the birth-death model has a better (lower) AIC score but by less than two AIC units. A likelihood ratio test, which gives <span class="math inline"><em>Δ</em> = 3.7</span> and <span class="math inline"><em>P</em> = 0.054</span>. In other words, we estimate a non-zero extinction rate in the clade, but the evidence supporting that model over a pure-birth is not particularly strong.</p>
 <h2 id="using-bayesian-mcmc-to-fit-a-birth-death-model">Using Bayesian MCMC to fit a birth-death model</h2>
 <p>We can also estimate birth and death rates using a Bayesian MCMC. We can use exactly the method spelled out above for clade ages and diversities, but substitute equation xxx for the likelihood, thus using the waiting times derived from a phylogenetic tree to estimate model parameters.</p>
-<p>EXAMPLE.</p>
+<p>Applying this to Lupines, we obtain the posterior distributions shown in figure 11.4. The mean of the posterior for each parameter is <span class="math inline"><em>λ</em> = 0.48</span> and <span class="math inline"><em>μ</em> = 0.23</span>, quite close to the ML estimates for these parameters.</p>
+<div class="figure">
+<img src="{{site.baseurl}}/images/figure11-4.png" alt="Figure 11.4. Posterior distribution for b and d for Lupinus (Drummond et al. 2012)." />
+<p class="caption">Figure 11.4. Posterior distribution for <span class="math inline"><em>b</em></span> and <span class="math inline"><em>d</em></span> for <em>Lupinus</em> <span class="citation">(Drummond et al. <a href="#ref-Drummond2012-zs">2012</a>)</span>.</p>
+</div>
 <h2 id="sampling-and-birth-death-models">Sampling and birth-death models</h2>
 <p>It is important to think about sampling when fitting birth-death models to phylogenetic trees. If any species are missing from your phylogenetic tree, they will lead to biased parameter estimates. This is because missing species are disproportionally likely to connect to the tree on short, rather than long, branches. If we randomly sample lineages from a tree, we will end up badly underestimating both speciation and extinction rates (and wrongly inferring slowdowns; see chapter 12).</p>
 <p>Fortunately, the mathematics for incomplete sampling of reconstructed phylogenetic trees has also been worked out. We can substitute in equations that include <span class="math inline"><em>ρ</em></span>, the proportion of sampled species, for equations 11.12 and 11.13 above:</p>
@@ -513,7 +517,6 @@ $$</span><br /></p>
 p_1 (t) = \frac{\rho (\lambda - \mu)^2 e^{-(\lambda - \mu)t}}{(\rho \lambda + (\lambda (1 - \rho)-\mu)e^{-(\lambda - \mu)t})^2}
 $$</span><br /></p>
 </div>
-<p>EXAMPLE</p>
 <h2 id="chapter-summary">Chapter Summary</h2>
 <p>In this chapter, I described how to estimate parameters from birth-death models using data on species diversity and ages, and how to use patterns of tree balance to test hypotheses about changing birth and death rates. I also described how to calculate the likelihood for birth-death models on trees, which leads directly to both ML and Bayesian methods for estimating birth and death rates. Next, we will explore elaborations on birth-death models, and discuss models that go beyond constant-rates birth-death models to analyze the diversity of life on Earth.</p>
 <h2 id="references" class="unnumbered">References</h2>

@@ -1,5 +1,4 @@
 To-do list:
-Chapter 11 examples
 Fix Figure 11.3
 Chapter 11 Proofread
 
