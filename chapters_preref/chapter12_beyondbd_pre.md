@@ -4,12 +4,12 @@
 
 ## Section 12.1: Capturing variable evolution
 
-There are times and places where the tree of life has grown more rapidly than others. For example, islands and island-like habitats are often described as “incubators” of new species, and diversification rates in such habitats can proceed at an extremely rapid pace. On a broader scale, many studies have shown that speciation rates are elevated and/or extinction rates depressed following mass extinctions. Finally, some clades seem to diversity much more rapidly than others. That is why, for instance, I can see so many birds out the window of this coffee shop, but no tuataras (Figure 12.1). All of these facts lead to the idea that simple, constant-rate birth-death models are not adequate to capture the complexity and dynamics of speciation and extinction across the tree of life. Speciation and extinction rates vary through time, across clades, and among geographic regions. We can sometimes predict this variation based on what we know about the mechanisms that lead to speciation and/or extinction.
+As we discovered in Chapter 11, there are times and places where the tree of life has grown more rapidly than others. For example, islands and island-like habitats are often described as “incubators” of new species, and diversification rates in such habitats can proceed at an extremely rapid pace. On a broader scale, many studies have shown that speciation rates are elevated and/or extinction rates depressed following mass extinctions. Finally, some clades seem to diversity much more rapidly than others. That is why, for instance, I can see so many birds out the window of this coffee shop, but no tuataras (Figure 12.1).
 
 
+![Figure 12.1. Birds, like this mountain bluebird, are very diverse in the present day, with about 10,000 species. By contrast, tuataras (right) are very depauperate, with only one or two species (depending on taxonomy) in the present day. However, the stem age of tuataras is very much older than the stem age of birds.]({{ site.baseurl }}/images/figure12-1.png)
 
-
-Figure 12.1. Birds, like this mountain bluebird, are very diverse in the present day, with about 10,000 species. By contrast, tuataras (right) are very depauperate, with only one or two species (depending on taxonomy) in the present day. However, the stem age of tuataras is very much older than the stem age of birds.
+All of these facts lead to the idea that simple, constant-rate birth-death models are not adequate to capture the complexity and dynamics of speciation and extinction across the tree of life. Speciation and extinction rates vary through time, across clades, and among geographic regions. We can sometimes predict this variation based on what we know about the mechanisms that lead to speciation and/or extinction.
 
 In this chapter, I will explore some extensions to birth-death models that allow us to explore diversification in more detail. This chapter also leads naturally to the next, chapter 13, which will consider the case where diversification rates depend on species’ traits.
 
@@ -26,25 +26,24 @@ We know from analyses of tree balance that the tree of life is more imbalanced t
 
 The simplest method to carry out this test is by using model selection in a ML framework. To do this, we first fit a constant-rates birth-death model to the entire tree, and calculate a likelihood. We can then fit variable-rates birth-death models to the data, comparing the fit of these models using either likelihood ratio tests or AICc.
 
-
-<< Figure 12.2 >>
+![Figure 12.2. A phylogenetic tree including three clades, illustrating two possible models for diversification: a constant rates model, where all three clades have the same diversification parameters $\lambda$ and $\mu$, and a variable rates model, where clade A has parameters that differ from those of the other two clades.]({{ site.baseurl }}/images/figure12-2.png)
 
 Consider the example in Figure 12.2. We would like to know whether clade A has speciation and extinction rates, λA and μA, that differ from the background rates, λB and μB – we will call this a “variable rates” model. The alternative is a “constant rates” model where the entire clade has constant rate parameters λT and μT. These two models are nested, since the constant-rates model is a special case of the variable rates model where λT = λA = λB and μT = μA = μB. Calculating the likelihood for these two models is reasonably straightforward, although we have to account for the fact that one section of the tree has been pruned out of the background when calculating its rates.
 
-For a real example, let’s look at the phylogenetic tree of vertebrates and evaluate the hypothesis that birds have distinct diversification rates from other major lineages (mammals, tuataras, squamates, turtles, and crocodiles; Figure 12.3).
+For a real example, let’s look at the phylogenetic tree of amniotes and evaluate the hypothesis that birds have distinct diversification rates from other major lineages (mammals, tuataras, squamates, turtles, and crocodiles; Figure 12.3).
 
-
-<< Figure 12.3 >>
+![Figure 12.3. Phylogenetic tree of amniotes with divergence times and diversities of major clades.]({{ site.baseurl }}/images/figure12-3.png)
 
 We can calculate the likelihood of the constant rates model, with two parameters λT and μT, to a variable rates model with four parameters λbird, μbird, λother, and μother. For this example, we obtain the following results.
 
-Model	Parameter estimates	ln-Likelihood	AIC
-Constant rates	λT = 0.022
-μT = 0.0	-75.7	155.4
-Variable rates	λbird = 0.052
-μbird = 0.018
-λother = 0.126
-μother = 0.102	-73.5	155.0
+| Model	| Parameter estimates |	ln-Likelihood |	AIC |
+| --- | ---: | ---: | ---: |
+| Constant rates | $\lambda_T = 0.022$ | -75.7 | 155.4 |
+| | $\mu_T = 0.0$ | | |
+| Variable rates | $\lambda_{bird} = 0.052$ 	| -73.5 | 155.0 |
+| | $\mu_{bird} = 0.018$ | | |
+| | $\lambda_{other} = 0.126$ | | |
+| | $\mu_{other} = 0.102$ | | |
 
 
 We see from these results that there is effectively no difference between the two models, and so no reason (from this small dataset) to conclude that birds are significantly different from other amniotes (but see xxx).

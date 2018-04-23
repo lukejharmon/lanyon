@@ -1,8 +1,4 @@
 To-do list:
-
-Enter chapter 12
-
-Chapter 12 figures
 Chapter 12 equations
 Chapter 12 References
 Chapter 12 examples
