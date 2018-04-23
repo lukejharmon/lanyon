@@ -2,7 +2,7 @@
 
 [pdf version]({{ site.baseurl }}/pdf/chapter11_fitbd.pdf)
 
-## Section 6.1: Introduction, diversity hotspots
+## Section 11.1: Introduction, diversity hotspots
 
 The number of species on the Earth remains highly uncertain, but our best estimates are around 10 million [@Mora2011-jh]. This is a mind-boggling number, and far more than have been described. As far as we know, all of those species are descended from a single common ancestor that lived some 4.2 billion years ago [@Hedges2009-lj]. All of these species formed by the process of speciation, the process by which one species splits into two (or more) descendants [@Coyne2004-vv].
 
@@ -18,7 +18,7 @@ Key questions:
 1. How can we calculate speciation and extinction rates using clade ages and diversities?
 2. How can we fit a birth-death model to the pattern of branching times on a phylogenetic tree?
 
-## Section 6.2: Clade age and diversity
+## Section 11.2: Clade age and diversity
 
 If we know the age of a clade and its current diversity, then we can calculate the net diversification rate for that clade. Before presenting equations, I want to make a distinction between two different ways that one can measure the age of a clade: the stem age and the crown age. A clade's crown age is the age of the common ancestor of all species in the clade. By contrast, a clade's stem age measures the time that that clade descended from a common ancestor with its sister clade. The stem age of a clade is always at least as old, and usually older, than the crown age.
 
@@ -145,11 +145,11 @@ When we apply this technique to the Páromo [from @Madrinan2013-oi] and priors w
 
 Thus, we can estimate diversification rates from data on clade ages and diversities. If we have a whole set of such clades, we can (in principal) estimate both speciation and extinction rates, so long as we are willing to assume that all of the clades share equal diversification rates. However, as we will see in the next section, this assumption is almost always dubious!
 
-##  Section 6.3: Tree Balance
+##  Section 11.3: Tree Balance
 
 Tree balance considers how "balanced" the branches of a phylogenetic tree are. That is, if we look at each node in the tree, are the two sister clades of the same size (balanced) or wildly different (imbalanced)? This concept can then be applied to understand the extent to which diversification has varied across that tree. We can use the concept of tree balance to evaluate the appropriateness of constant-rate birth-death models to phylogenetic trees. Birth-death trees have a certain amount of "balance," perhaps a bit less than your intuition might suggest (see chapter 10). We can look to real trees to see if the amount of balance matches what we expect under birth-death models. A less balanced pattern in real trees would suggest that speciation and/or extinction rate vary among lineages more than we would expect. By contrast, more balanced trees would suggest more even and predictable diversification across the tree of life than expected under birth-death models. This approach traces back to Raup and colleagues, who applied stochastic birth-death models to paleontology in a series of influential papers in the 1970s [e.g. @Raup1973-xy, @Raup1974-dx].
 
-##  Section 6.3a: Sister clades and the balance of individual nodes
+##  Section 11.3a: Sister clades and the balance of individual nodes
 
 For single nodes, we already know that the distribution of sister taxa species richness is uniform over all possible divisions of $N_n$ species into two clades of size $N_a$ and $N_b$. This idea idea leads to simple test of whether the distribution of species between two sister clades is unusual compared to the expectation under a birth-death model [@Slowinski1993-ks]. This test can be used, for example, to test whether the diversity of exceptional clades, like passerine birds, is higher than one would expect when compared to their sister clade. This is the simplest measure of tree balance, as it only considers one node in the tree at a time.
 
@@ -234,7 +234,7 @@ What's going on here? It turns out that this test is very sensitive to outliers 
 
 Fortunately, there are a number of improved methods that can be used that are similar in spirit to the original Slowinsky and Guyer test but more statistically robust [e.g @Paradis2012-vp]. For example, we can apply the "richness Yule test" as described in Paradis [-@Paradis2012-vp], to the data from Vamosi et al. [-@Vamosi2005-mn]. This is a modified version of the McConway-Sims test [@McConway2004-jg], and compares the likelihood of a equal rate yule model applied to all clades to a model where one trait is associated with higher or lower diversification rates. This test requires knowledge of clade ages, which I don't have for these data, but [ @Paradis2012-vp] shows that the test is robust to this assumption and recommends substituting a large and equal age for each clade. I chose 1000, and found a significant likelihood ratio test (null model $lnL = -215.6$, alternative model $lnL = -205.7$, $P = 0.000008$). This method estimates a higher rate of diversification for fleshy fruits (since the age of the clade is arbitrary, the actual rates are not meaningful, but their estimated ratio $\lambda_1 / \lambda_0 = 1.39$ suggests that fleshy fruited lineages have a diversification rate almost 40% higher).
 
-##  Section 6.3b: Balance of whole phylogenetic tremendous
+##  Section 11.3b: Balance of whole phylogenetic tremendous
 
 We can assess the overall balance of an entire phylogenetic tree using tree balance statistics. There are a relatively large number of such statistics, and different indices capture different aspects of diversification [@Mooers1997-ow]. It is not worth listing them all here, since the have been described and characterized in the literature [e.g. @Blum2006-jo]; instead, I will describe just one common statistic, Colless' I, since other metrics capture the same pattern in slightly different ways.
 
@@ -273,7 +273,7 @@ Typically, phylogenetic trees are more imbalanced than expected under the ERM mo
 
 As an example, we can apply the whole-tree balance approach to the tree of *Lupinus* [@Drummond2012-zs]. For this tree, which has 137 tips, we calculate $I_c = 1010$ and $I^{'}_c = 3.57$. This is much higher than expected by chance under an ERM model, with $P = 0.0004$. That is, our tree is significantly more imbalanced than expected under a ERM model, which includes both pure birth and birth-death. We can safely conclude that there is variation in speciation and/or extinction rates across lineages in the tree.
 
-##  Section 6.4: Fitting birth-death models to branching times
+##  Section 11.4: Fitting birth-death models to branching times
 
 Another approach that uses more of the information in a phylogenetic tree involves fitting birth-death models to the distribution of branching times. This approach traces all the way back to Yule [-@Yule1925-dv], who first applied stochastic process models to the growth of phylogenetic trees. More recently, a series of papers by Raup and colleagues [@Gould1977-dh, @Raup1974-dx, @Raup1985-wn, @Raup1973-xy] spurred modern approaches to quantitative macroevolution by simulating random clades, then demonstrating how variable such clades grown under simple birth-death models can be.
 
@@ -281,7 +281,7 @@ Most modern approaches to fitting birth-death models to phylogenetic trees use t
 
 As discussed in the previous chapter, even though we often have no information about extinct species in a clade, we can still (in theory) infer the presence of extinction from an LTT plot. The signal of extinction is an excess of young lineages, which is seen as the "pull of the recent" in our LTT plots (Figure 10.10). Statistical approaches can capture this pattern in a more rigorous way.
 
-###  Section 6.4a: Likelihood of waiting times under a birth-death model
+###  Section 11.4a: Likelihood of waiting times under a birth-death model
 
 In order to use ML and Bayesian methods for estimating the parameters of birth-death models from comparative data, we need to write down the likelihoods of the waiting times between speciation events in a tree. There is a little bit of variation in notation in the literature, so I will follow Stadler [@Stadler2013-vw] to maintain consistency. We will assume that the clade begins at time $t_1$ with a pair of species. Most analyses follow this convention, and condition the process as starting at the time $t_1$, representing the node at the root of the tree. This makes sense because we rarely have information on the stem age of our clade. We will also condition on both of these initial lineages surviving to the present day, as this is a requirement to obtain a tree with this crown age [e.g. @Stadler2013-yf equation 5).
 
@@ -320,7 +320,7 @@ $$
 
 Note that equation 11.12 is algebraically equivalent to the equation for $a$ in equation 10.14.
 
-### Section 6.4b: Using maximum likelihood to fit a birth-death model
+### Section 11.4b: Using maximum likelihood to fit a birth-death model
 
 Given equation 11.11 for the likelihood, we can estimate birth and death rates using both ML and Bayesian approaches. For the ML estimate, we maximize equation 11.11 over $\lambda$ and $\mu$. For a pure-birth model, we can set $\mu$ = 0, and the maximum likelihood estimate of $\lambda$ can be calculated analytically as:
 
@@ -350,7 +350,7 @@ For a birth-death model, we can use numerical methods to maximize the likelihood
 For example, we can use ML to fit a birth-death model to the *Lupinus* tree [@Drummond2012-zs], which has 137 tip species and a total age of 16.6 million years. Doing so, we obtain ML parameter estimates of $\lambda = 0.46$ and $\mu = 0.20$, with a log-likelihood of $lnL_{bd} = 262.3$. Compare this to a pure birth model on the same tree, which gives $\lambda = 0.35$ and $lnL_{pb} = 260.4$. One can compare the fit of these two models using AIC scores: $AIC_{bd} = -520.6$ and $AIC_{pb} = -518.8$, so the birth-death model has a better (lower) AIC score but by less than two AIC units. A likelihood ratio test, which gives $\Delta = 3.7$ and $P = 0.054$. In other words, we estimate a non-zero extinction rate in the clade, but the evidence supporting that model over a pure-birth is not particularly strong.
 
 
-### Section 6.4c: Using Bayesian MCMC to fit a birth-death model
+### Section 11.4c: Using Bayesian MCMC to fit a birth-death model
 
 We can also estimate birth and death rates using a Bayesian MCMC. We can use exactly the method spelled out above for clade ages and diversities, but substitute equation 11.11 for the likelihood, thus using the waiting times derived from a phylogenetic tree to estimate model parameters.
 
@@ -358,7 +358,7 @@ Applying this to Lupines with the same priors as before, we obtain the posterior
 
 ![Figure 11.4. Posterior distribution for $b$ and $d$ for *Lupinus*  [@Drummond2012-zs].]({{ site.baseurl }}/images/figure11-4.png)
 
-## Section 6.5: Sampling and birth-death models
+## Section 11.5: Sampling and birth-death models
 
 It is important to think about sampling when fitting birth-death models to phylogenetic trees. If any species are missing from your phylogenetic tree, they will lead to biased parameter estimates. This is because missing species are disproportionally likely to connect to the tree on short, rather than long, branches. If we randomly sample lineages from a tree, we will end up badly underestimating both speciation and extinction rates (and wrongly inferring slowdowns; see chapter 12).
 
@@ -380,7 +380,7 @@ p_1 (t) = \frac{\rho (\lambda - \mu)^2 e^{-(\lambda - \mu)t}}{(\rho \lambda + (\
 $$
 </div>
 
-##  Section 6.6: Summary
+##  Section 11.6: Summary
 
 In this chapter, I described how to estimate parameters from birth-death models using data on species diversity and ages, and how to use patterns of tree balance to test hypotheses about changing birth and death rates. I also described how to calculate the likelihood for birth-death models on trees, which leads directly to both ML and Bayesian methods for estimating birth and death rates. Next, we will explore elaborations on birth-death models, and discuss models that go beyond constant-rates birth-death models to analyze the diversity of life on Earth.
 

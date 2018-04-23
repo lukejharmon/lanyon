@@ -24,3 +24,9 @@ title: Chapters
 [Chapter 10]({{ site.baseurl }}/chapter10_birthdeath/) - Introduction to birth-death models
 
 [Chapter 11]({{ site.baseurl }}/chapter11_fitbd/) - Fitting birth-death models
+
+[Chapter 12]({{ site.baseurl }}/chapter12_beyondbd/) - Beyond birth-death models
+
+[Chapter 13]({{ site.baseurl }}/) -
+
+[Chapter 14]({{ site.baseurl }}/) -
