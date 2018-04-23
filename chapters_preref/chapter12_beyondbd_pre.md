@@ -24,17 +24,17 @@ Key questions:
 
 We know from analyses of tree balance that the tree of life is more imbalanced than birth-death models predict. We can explore this variation in diversification rates by allowing birth and death models to vary along branches in phylogenetic trees. The simplest scenario is when one has a particular prediction about diversification rates to test. For example, we might wonder if diversification rates in one clade (clade A in Figure 12.2) is higher than in the rest of the phylogenetic tree. We can test this hypothesis by fitting a multiple-rate birth-death model.
 
-The simplest method to carry out this test is by using model selection in a ML framework. To do this, we first fit a constant-rates birth-death model to the entire tree, and calculate a likelihood. We can then fit variable-rates birth-death models to the data, comparing the fit of these models using either likelihood ratio tests or AICc.
+The simplest method to carry out this test is by using model selection in a ML framework. To do this, we first fit a constant-rates birth-death model to the entire tree, and calculate a likelihood. We can then fit variable-rates birth-death models to the data, comparing the fit of these models using either likelihood ratio tests or $AIC_C$.
 
 ![Figure 12.2. A phylogenetic tree including three clades, illustrating two possible models for diversification: a constant rates model, where all three clades have the same diversification parameters $\lambda$ and $\mu$, and a variable rates model, where clade A has parameters that differ from those of the other two clades.]({{ site.baseurl }}/images/figure12-2.png)
 
-Consider the example in Figure 12.2. We would like to know whether clade A has speciation and extinction rates, λA and μA, that differ from the background rates, λB and μB – we will call this a “variable rates” model. The alternative is a “constant rates” model where the entire clade has constant rate parameters λT and μT. These two models are nested, since the constant-rates model is a special case of the variable rates model where λT = λA = λB and μT = μA = μB. Calculating the likelihood for these two models is reasonably straightforward, although we have to account for the fact that one section of the tree has been pruned out of the background when calculating its rates.
+Consider the example in Figure 12.2. We would like to know whether clade A has speciation and extinction rates, $\lambda_A$ and $\mu_A$, that differ from the background rates, $\lambda_B$ and $\mu_B$ – we will call this a “variable rates” model. The alternative is a “constant rates” model where the entire clade has constant rate parameters $\lambda_T$ and $\mu_T$. These two models are nested, since the constant-rates model is a special case of the variable rates model where $\lambda_T = \lambda_A = \lambda_B$ and $\mu_T = \mu_A = \mu_B$. Calculating the likelihood for these two models is reasonably straightforward, although we have to account for the fact that one section of the tree has been pruned out of the background when calculating its rates.
 
 For a real example, let’s look at the phylogenetic tree of amniotes and evaluate the hypothesis that birds have distinct diversification rates from other major lineages (mammals, tuataras, squamates, turtles, and crocodiles; Figure 12.3).
 
 ![Figure 12.3. Phylogenetic tree of amniotes with divergence times and diversities of major clades.]({{ site.baseurl }}/images/figure12-3.png)
 
-We can calculate the likelihood of the constant rates model, with two parameters λT and μT, to a variable rates model with four parameters λbird, μbird, λother, and μother. For this example, we obtain the following results.
+We can calculate the likelihood of the constant rates model, with two parameters $\lambda_T$ and $\mu_T$, to a variable rates model with four parameters $\lambda_{bird}$, $\mu_{bird}$, $\lambda_{other}$, and $\mu_{other}$. For this example, we obtain the following results.
 
 | Model	| Parameter estimates |	ln-Likelihood |	AIC |
 | --- | ---: | ---: | ---: |
@@ -48,7 +48,7 @@ We can calculate the likelihood of the constant rates model, with two parameters
 
 We see from these results that there is effectively no difference between the two models, and so no reason (from this small dataset) to conclude that birds are significantly different from other amniotes (but see xxx).
 
-Of course, more elaborate comparisons are possible. For example, one could compare the fit of four models, as follows: Model 1, constant rates; Model 2, speciation rate in clade A differs from the background; Model 3, extinction rate in clade A differs from the background; and Model 4, both speciation and extinction rates in clade A differ from the background. In this case, some of the pairs of models are nested – for example, Model 1 is a special case of Model 2, which is, in turn, a special case of Model 4 – but all four do not make a nested series. Here we benefit from using a model selection approach based on AICc. We can fit all four models and use their relative number of parameters to calculate AICc scores. We can then calculate AICc weights to evaluate the relative support for each of these four models. (As an aside, it might be difficult to differentiate among these four possibilities without a lot of data!)
+Of course, more elaborate comparisons are possible. For example, one could compare the fit of four models, as follows: Model 1, constant rates; Model 2, speciation rate in clade A differs from the background; Model 3, extinction rate in clade A differs from the background; and Model 4, both speciation and extinction rates in clade A differ from the background. In this case, some of the pairs of models are nested – for example, Model 1 is a special case of Model 2, which is, in turn, a special case of Model 4 – but all four do not make a nested series. Here we benefit from using a model selection approach based on $AIC_C$. We can fit all four models and use their relative number of parameters to calculate $AIC_C$ scores. We can then calculate $AIC_C$ weights to evaluate the relative support for each of these four models. (As an aside, it might be difficult to differentiate among these four possibilities without a lot of data!)
 
 But what if you do not have an a priori reason to predict differential diversification rates across clades? Or, what if the only reason you think one clade might have a different diversification rate than another is that it has more species? (Such reasoning is circular, and will wreak havoc with your analyses!) In such cases, we can use methods that allow us to fit general models where diversification rates are allowed to vary across clades in the tree. Available methods are relatively recent and a bit beyond the scope of this book. Newer methods use Bayesian machinery (especially reversible-jump MCMC) to fit multi-rate models of diversification to comparative datasets (e.g. Alfaro et al. 2009, Rabosky et al. xxx, Ane paper).
 
@@ -56,14 +56,59 @@ But what if you do not have an a priori reason to predict differential diversifi
 
 In addition to considering rate variation across clades, we might also wonder whether birth and/or death rates have changed through time. For example, perhaps we think our clade is an adaptive radiation that experienced rapid diversification upon arrival to an island archipelago and slowed as this new adaptive zone got filled. This hypothesis is an example of density-dependent diversification, where diversification rate depends on the number of lineages that are present. Alternatively, perhaps our clade has been experiencing extinction rates that have changed through time, perhaps peaking during some time period of unfavorable climactic conditions. This is another hypothesis that predicts variation in diversification (speciation and extinction) rates through time.
 
-We can fit time-dependent diversification models using likelihood equations that allow arbitrary variation in speciation and/or extinction rates through time. To figure out the likelihood we can first make a simplifying assumption: though diversification rates might change, they are constant across all lineages at any particular time point. In particular, this means that speciation (and/or extinction) rates slow down (or speed up) in exactly the same way across all lineages in an evolving clade. Our assumption also means that we can consider time-slices through the tree rather than individual branches, i.e. we can get all the information that we need to fit these models from lineage through time plots. This type of a model is called “Equal-Rates Markov” in the literature and predicts exactly the same distribution of tree balance statistics as constant-rate birth death models.
+We can fit time-dependent diversification models using likelihood equations that allow arbitrary variation in speciation and/or extinction rates, either as a function of time or depending on the number of other lineages in the clade. To figure out the likelihood we can first make a simplifying assumption: though diversification rates might change, they are constant across all lineages at any particular time point. In particular, this means that speciation (and/or extinction) rates slow down (or speed up) in exactly the same way across all lineages in an evolving clade. Our assumption also means that we can consider time-slices through the tree rather than individual branches, i.e. we can get all the information that we need to fit these models from lineage through time plots. This type of a model is called “Equal-Rates Markov” in the literature and predicts exactly the same distribution of tree balance statistics as constant-rate birth death models.
 
-For the purposes of this chapter, I will consider only the simplest time-dependent model where diversification rates (speciation, extinction, or both) change linearly through time. In other words, for time-dependent speciation, we can consider the case where:
+We can use the general approach from Rabosky and Lovette [xxx] to fit time-varying models. The main limitation of this approach is that it does not include extinction; we will return to time-varying models with extinction later in this section. First, Rabosky and Lovette write the likelihood of the phylogenetic tree as:
 
+(eq. 12.1)
 
-where λ_0 is the initial speciation rate at time zero and m is the slope of the relationship between speciation rate and time. If m > 0, then speciation rate speeds up through time, leading to a tree with an excess of young lineages and a lineage-through-time plot that bends upwards on a ln-scale; when m < 0, speciation rate slows through time, resulting in a tree with long tip branches and a lineage-through-time plot that bends down towards the present day.
+<div>
+$$
+L = (N-1)! \prod_{i=3}^{N} {\lambda(t_i)} \prod_{i=3}^{N} {\xi_i} {\xi^2_2}
+$$
+</div>
 
-<< Include likelihood equations >>
+Where:
+
+(eq. 12.2)
+
+<div>
+$$
+\xi_i = exp[\int_{t_i}^{T} -\lambda(s) ds]
+$$
+</div>
+
+Note that equation 12.2 requires that we define speciation rate as a function of time. To begin, we can consider only the simplest time-dependent model, where speciation rates change linearly through time. Following Rabosky and Lovette [xxx], we can consider the case where:
+
+(eq. 12.3)
+
+<div>
+$$
+\lambda(t) = \lambda_0 (1 - \frac{t}{K})
+$$
+</div>
+
+where \lambda_0 is the initial speciation rate at time zero (here taken at the root of the tree and measured forwards in time. K is the time when speciation rate hits zero. In this model, referred to by Rabosky and Lovette as the "continuous-decline" model, there are no speciation events in the tree after time K.
+
+Substituting 12.3 into 12.2, we have:
+
+<div>
+$$
+\xi_i = exp[\int_{t_i}^{T} (-\lambda_0 + \lambda_0 \frac{t}{K}) ds]
+$$
+</div>
+
+<div>
+$$
+\xi_i = exp[(\frac{2 \lambda_0}{K} t^2 + C)\Big|_{t_i}^{T}]
+$$
+</div>
+
+<div>
+$$
+\xi_i = exp[(T^2 - t^2_i) \cdot 2 \lambda_0 / k]
+$$
+</div>
 
 Likelihood equations for general time-dependent diversification are…
 
