@@ -310,74 +310,88 @@ $$
 $$
 </div>
 
-The three parts of this equation represent the three ways a lineage might not make it to the present day: either it goes extinct during the interval being considered ($\mu$), it survives that interval but goes extinct some time later ($- (\mu + \lambda) E(t)$), or it speciates in the interval but both descendants go extinct before the present day ($\lambda E(t)^2$).
+The three parts of this equation represent the three ways a lineage might not make it to the present day: either it goes extinct during the interval being considered ($\mu$), it survives that interval but goes extinct some time later ($- (\mu + \lambda) E(t)$), or it speciates in the interval but both descendants go extinct before the present day ($\lambda E(t)^2$). We will also specify that $\lambda > \mu$; it is possible to relax that assumption, but it makes the solution more complicated.
 
 We can solve these equations so that we will be able to update the probability moving backwards along any branch of the tree with length t. First, solving equation 11.13 and using our initial condition E(0) = 0:
 
 (eq. 11.14)
-If $\lambda \neq \mu$
-
 <div>
 $$
 E(t) = 1 - \frac{\lambda-\mu}{\lambda - (\lambda-\mu)e^{(\lambda - \mu)t}}
 $$
 </div>
 
-If $\lambda = \mu$
-
-<div>
-$$
-E(t) = \frac{\lambda t}{1 - \lambda t}
-$$
-</div>
 
 We can now substitute this expression for E(t) into eq. 11.12 and solve, conditioning on $D_N(0) = 1$:
 
 (eq. 11.15)
-If $\lambda \neq \mu $
 <div>
 $$
 D_N(t) = e^{-(\lambda - \mu)(t - t_N)} \frac{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_N})^2}{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t})^2} \cdot D_N(t_N)
 $$
 </div>
 
-If $\lambda = \mu$
+Here t_N is the depth (measured from the present day) of node N.
+
+Now we need to consider what happens when two branches come together at a node. Since there is a node, we know there has been a speciation event. We multiply the probability calculations flowing down each branch by the probability of a speciation event. So:
+
+(eq. 11.16)
 <div>
 $$
-D_N(t) = \frac{(1 + \lambda t_N)^2}{(1 + \lambda t)^2} D_N(t_n)
+D_{N'}(t) = D_{N}(t) D_{M}(t) \lambda
 $$
 </div>
 
-xxxConditioning on both initial lineages surviving to the present day, we then have:
+Where clade N' is the clade made up of the combination of two sister clades N and M.
 
-(eq. 11.11)
+For the parent clade to have gone extinct before the present, both daughters must have gone extinct, so:
 
+(eq. 11.17)
 <div>
 $$
-L(t_i|\lambda, \mu) = \Big(\frac{p_1(t_1)}{1-p_0(t_1)}\Big)^2 \prod_{i=2}^{n-1} \lambda p_1(t_i)
+E_{N'}(t) = E_{N}(t) E_{M}(t)
 $$
 </div>
 
-Where $p_0 (t_i)$ and $p_1 (t_i)$ are the probabilities of observing 0 and 1 species, respectively, after sampling a birth-death tree of age t, and can be calculated as:
+To apply this approach across an entire phylogenetic tree, we multiply equations 11.15 and 11.16 across all branches and nodes in the tree. Thus, the full likelihood is:
 
-
-(eq. 11.12)
-
+(eq. 11.18)
 <div>
 $$
-p_0 (t)=1-\frac{\lambda-\mu}{\lambda-\mu e^{-(\lambda-\mu)t}}
+L = \lambda^n[\prod_{k = 1}^{2N} e^{(\lambda-\mu)(t_{k,b} - t_{k,t})} \cdot \frac{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_N})^2}{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t})^2}]
 $$
 </div>
 
-(eq. 11.13)
+Most methods fitting birth-death models to trees condition on the existence of a tree, which requires that the two lineages following the initial split in the tree survived to the present day. Conditioning on this, the likelihood becomes:
 
+
+(eq. 11.19)
 <div>
 $$
-p_1 (t)= \frac{(\lambda-\mu)^2 e^{-(\lambda-\mu)t}}{(\lambda-\mu e^{-(\lambda-\mu) t})^2}
+L = (N-1)! \lambda^(N-2) \Big(\prod_{i=2}^{N-1} P_s(t_i, T)) \cdot (1-u_s(t_1))^2 \prod_{i=2}^{N-1} (1-u_s(t_i))
 $$
 </div>
 
-Note that equation 11.12 is algebraically equivalent to the equation for $a$ in equation 10.14.
+Here $N$ is the number of tips in the tree and $t_i$ the speciation times as defined above. $P_s(t_i, T)$ and $u_s(t_i)$ are functions. $P_s(t_i, T)$ is the probability that a lineage at time $t_i$ leaves at least one lineage at the present:
+
+(eq. 11.20)
+<div>
+$$
+P_s(t_i, T) =
+$$
+</div>
+
+
+and $u_s(t_i)$ is:
+
+(eq. 11.21)
+<div>
+$$
+u_s(t_i) =
+$$
+</div>
+
+
 
 ### Section 11.4b: Using maximum likelihood to fit a birth-death model
 
