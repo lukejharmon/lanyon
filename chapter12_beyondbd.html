@@ -130,6 +130,7 @@ $$</span><br /></p>
 </div>
 <p>where _0 is the initial speciation rate at time zero (here taken at the root of the tree and measured forwards in time. K is the time when speciation rate hits zero. In this model, referred to by Rabosky and Lovette as the &quot;continuous-decline&quot; model, there are no speciation events in the tree after time K.</p>
 <p>Substituting 12.3 into 12.2, we have:</p>
+<p>(eq. 12.4)</p>
 <div>
 <p><br /><span class="math display">$$
 \xi_i = exp[\int_{t_i}^{T} (-\lambda_0 + \lambda_0 \frac{t}{K}) ds]
@@ -141,9 +142,26 @@ $$</span><br /></p>
 $$</span><br /></p>
 </div>
 <div>
-<p><br /><span class="math display"><em>ξ</em><sub><em>i</em></sub> = <em>e</em><em>x</em><em>p</em>[(<em>T</em><sup>2</sup> − <em>t</em><sub><em>i</em></sub><sup>2</sup>)⋅2<em>λ</em><sub>0</sub>/<em>k</em>]</span><br /></p>
+<p><br /><span class="math display">$$
+\xi_i = exp[\frac{2 \lambda_0}{K}(T^2 - t^2_i)]
+$$</span><br /></p>
 </div>
-<p>Likelihood equations for general time-dependent diversification are…</p>
+<p>One can then substitute this formula into equation 12.1 to calculate the likelihood of a model where speciation rate declines through time.</p>
+<p>Alternatively, we could define speciation rate in a truly diversity dependent manner as depending on the number of species in a particular place. Again using a linear model, we can use:</p>
+<p>(eq. 12.5)</p>
+<div>
+<p><br /><span class="math display">$$
+\lambda(t) = \lambda_0 (1 - \frac{N_t}{K})
+$$</span><br /></p>
+</div>
+<p>Since speciation rate now depends on number of lineages rather than time, we have to use a different basic likelihood function, from Rabosky and Lovette (2008 Evolution):</p>
+<p>(eq. 12.6)</p>
+<div>
+<p><br /><span class="math display">$$
+L = (N-1)! \prod_{i=3}^{N} {\lambda(t_i) P(t_i, T)} \prod_{i=3}^{N} {\xi_i} {\xi^2_2}
+$$</span><br /></p>
+</div>
+<p>Here, the term <span class="math inline"><em>P</em>(<em>t</em><sub><em>i</em></sub>, <em>T</em>)</span> represents the probability that a lineage survives from time <span class="math inline"><em>t</em><sub><em>i</em></sub></span> to time <span class="math inline"><em>t</em></span>.</p>
 <p>This sort of approach has become very popular, as time-dependent diversification models are consistent with many ecological models of how multi-species clades might evolve through time. For example, adaptive radiation models based on ecological opportunity predict that, as niches are filled and ecological opportunity “used up,” then we should see a declining rate of diversification through time. By contrast, some models predict that species create new opportunities for other species, and thus predict accelerating diversification through time. These are reasonable hypotheses, but there is a statistical challenge: in each case, there is a very different model that predicts the exact same pattern. In the case of decelerating diversification, the predicted pattern of a lineage-through-time plot that bends down towards the present day can also come from a model where lineages accumulate at a constant rate, but then are not fully sampled at the present day. In other words, if we are missing some living species from our phylogenetic tree and we don’t account for that, then we would mistake a constant-rates birth death model for a signal of slowing diversification through time. Methods have been developed that can account for this, either by simulation or analytical equations that account for randomly missing taxa. Some methods can even account for the fact that the missing taxa might be non-random, as missing taxa tend to be either rare or poorly differentiated from their sister lineages (e.g. often younger than expected by chance).</p>
 <p>Likewise, a pattern of accelerating differentiation mimics the pattern caused by extinction. A phylogenetic tree with high but constant rates of speciation and extinction is impossible to distinguish from a tree with no extinction and speciation rates that accelerate through time.</p>
 <p>Both of the above caveats are certainly worth considering when interpreting the results of tests of diversification from phylogenetic data. In many cases, adding fossil information will allow investigators to reliably distinguish between the stated alternatives, although methods that tie fossils and trees together are still relatively poorly developed. And various methods have been developed that will give ambiguous results when multiple models provide equivalent explanations for the data.</p>

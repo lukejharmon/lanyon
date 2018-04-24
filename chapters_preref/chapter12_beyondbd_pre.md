@@ -92,6 +92,8 @@ where \lambda_0 is the initial speciation rate at time zero (here taken at the r
 
 Substituting 12.3 into 12.2, we have:
 
+(eq. 12.4)
+
 <div>
 $$
 \xi_i = exp[\int_{t_i}^{T} (-\lambda_0 + \lambda_0 \frac{t}{K}) ds]
@@ -106,11 +108,34 @@ $$
 
 <div>
 $$
-\xi_i = exp[(T^2 - t^2_i) \cdot 2 \lambda_0 / k]
+\xi_i = exp[\frac{2 \lambda_0}{K}(T^2 - t^2_i)]
 $$
 </div>
 
-Likelihood equations for general time-dependent diversification are…
+One can then substitute this formula into equation 12.1 to calculate the likelihood of a model where speciation rate declines through time.
+
+Alternatively, we could define speciation rate in a truly diversity dependent manner as depending on the number of species in a particular place. Again using a linear model, we can use:
+
+(eq. 12.5)
+
+<div>
+$$
+\lambda(t) = \lambda_0 (1 - \frac{N_t}{K})
+$$
+</div>
+
+Since speciation rate now depends on number of lineages rather than time, we have to use a different basic likelihood function, from Rabosky and Lovette (2008 Evolution):
+
+(eq. 12.6)
+
+<div>
+$$
+L = (N-1)! \prod_{i=3}^{N} {\lambda(t_i) P(t_i, T)} \prod_{i=3}^{N} {\xi_i} {\xi^2_2}
+$$
+</div>
+
+Here, the term $P(t_i, T)$ represents the probability that a lineage survives from time $t_i$ to time $t$. 
+
 
 This sort of approach has become very popular, as time-dependent diversification models are consistent with many ecological models of how multi-species clades might evolve through time. For example, adaptive radiation models based on ecological opportunity predict that, as niches are filled and ecological opportunity “used up,” then we should see a declining rate of diversification through time. By contrast, some models predict that species create new opportunities for other species, and thus predict accelerating diversification through time. These are reasonable hypotheses, but there is a statistical challenge: in each case, there is a very different model that predicts the exact same pattern. In the case of decelerating diversification, the predicted pattern of a lineage-through-time plot that bends down towards the present day can also come from a model where lineages accumulate at a constant rate, but then are not fully sampled at the present day. In other words, if we are missing some living species from our phylogenetic tree and we don’t account for that, then we would mistake a constant-rates birth death model for a signal of slowing diversification through time. Methods have been developed that can account for this, either by simulation or analytical equations that account for randomly missing taxa. Some methods can even account for the fact that the missing taxa might be non-random, as missing taxa tend to be either rare or poorly differentiated from their sister lineages (e.g. often younger than expected by chance).
 

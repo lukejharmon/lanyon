@@ -147,11 +147,13 @@ Thus, we can estimate diversification rates from data on clade ages and diversit
 
 ##  Section 11.3: Tree Balance
 
-Tree balance considers how "balanced" the branches of a phylogenetic tree are. That is, if we look at each node in the tree, are the two sister clades of the same size (balanced) or wildly different (imbalanced)? This concept can then be applied to understand the extent to which diversification has varied across that tree. We can use the concept of tree balance to evaluate the appropriateness of constant-rate birth-death models to phylogenetic trees. Birth-death trees have a certain amount of "balance," perhaps a bit less than your intuition might suggest (see chapter 10). We can look to real trees to see if the amount of balance matches what we expect under birth-death models. A less balanced pattern in real trees would suggest that speciation and/or extinction rate vary among lineages more than we would expect. By contrast, more balanced trees would suggest more even and predictable diversification across the tree of life than expected under birth-death models. This approach traces back to Raup and colleagues, who applied stochastic birth-death models to paleontology in a series of influential papers in the 1970s [e.g. @Raup1973-xy, @Raup1974-dx].
+As we discussed in Chapter 10, tree balance considers how "balanced" the branches of a phylogenetic tree are. That is, if we look at each node in the tree, are the two sister clades of the same size (balanced) or wildly different (imbalanced)?
+
+Birth-death trees have a certain amount of "balance," perhaps a bit less than your intuition might suggest (see chapter 10). We can look to real trees to see if the amount of balance matches what we expect under birth-death models. A less balanced pattern in real trees would suggest that speciation and/or extinction rate vary among lineages more than we would expect. By contrast, more balanced trees would suggest more even and predictable diversification across the tree of life than expected under birth-death models. This approach traces back to Raup and colleagues, who applied stochastic birth-death models to paleontology in a series of influential papers in the 1970s [e.g. @Raup1973-xy, @Raup1974-dx].
 
 ##  Section 11.3a: Sister clades and the balance of individual nodes
 
-For single nodes, we already know that the distribution of sister taxa species richness is uniform over all possible divisions of $N_n$ species into two clades of size $N_a$ and $N_b$. This idea idea leads to simple test of whether the distribution of species between two sister clades is unusual compared to the expectation under a birth-death model [@Slowinski1993-ks]. This test can be used, for example, to test whether the diversity of exceptional clades, like passerine birds, is higher than one would expect when compared to their sister clade. This is the simplest measure of tree balance, as it only considers one node in the tree at a time.
+For single nodes, we already know that the distribution of sister taxa species richness is uniform over all possible divisions of $N_n$ species into two clades of size $N_a$ and $N_b$ (Chapter 11). This idea idea leads to simple test of whether the distribution of species between two sister clades is unusual compared to the expectation under a birth-death model [@Slowinski1993-ks]. This test can be used, for example, to test whether the diversity of exceptional clades, like passerine birds, is higher than one would expect when compared to their sister clade. This is the simplest measure of tree balance, as it only considers one node in the tree at a time.
 
  Slowinsky and Guyer [-@Slowinski1993-ks] developed a test based on calculating a P-value for a division at least as extreme as seen in a particular comparisons of sister clades. We consider $N_n$ total species divided into two sister clades of sizes $N_a$ and $N_b$, where $N_a < N_b$ and $N_a + N_b = N_n$. Then:
 
@@ -236,20 +238,9 @@ Fortunately, there are a number of improved methods that can be used that are si
 
 ##  Section 11.3b: Balance of whole phylogenetic tremendous
 
-We can assess the overall balance of an entire phylogenetic tree using tree balance statistics. There are a relatively large number of such statistics, and different indices capture different aspects of diversification [@Mooers1997-ow]. It is not worth listing them all here, since the have been described and characterized in the literature [e.g. @Blum2006-jo]; instead, I will describe just one common statistic, Colless' I, since other metrics capture the same pattern in slightly different ways.
+We can assess the overall balance of an entire phylogenetic tree using tree balance statistics. As discussed, I will describe just one common statistic, Colless' I, since other metrics capture the same pattern in slightly different ways.
 
-To calculate Colless' I, we find the number of species that descend from the right ($r_i$) and the left ($s_i$) side of every node $i$ in the tree. If the tree has n tips and thus $n-1$ nodes, we can calculate:
-
-
-(eq. 11.11)
-
-<div>
-$$
-I_c = \sum^{n-1}_{i=1} |r_i - s_i|
-$$
-</div>
-
-This sum will depend strongly on tree size, and so is not comparable across trees of different sizes; to allow comparisons, $I_c$ is usually standardized by subtracting the expected mean for trees of that size under an ERM model, and dividing by the standard deviation. Both of these can be calculated analytically [@Blum2006-xo], and standardized I_c calculated using a small approximation [following @Bortolussi2006-jx] as:
+To calculate Colless' I, we can use equation 10.18. This result will depend strongly on tree size, and so is not comparable across trees of different sizes; to allow comparisons, $I_c$ is usually standardized by subtracting the expected mean for trees of that size under an ERM model, and dividing by the standard deviation. Both of these can be calculated analytically [@Blum2006-xo], and standardized I_c calculated using a small approximation [following @Bortolussi2006-jx] as:
 
 (eq. 11.11)
 
@@ -285,11 +276,79 @@ As discussed in the previous chapter, even though we often have no information a
 
 In order to use ML and Bayesian methods for estimating the parameters of birth-death models from comparative data, we need to write down the likelihoods of the waiting times between speciation events in a tree. There is a little bit of variation in notation in the literature, so I will follow Stadler [@Stadler2013-vw] to maintain consistency. We will assume that the clade begins at time $t_1$ with a pair of species. Most analyses follow this convention, and condition the process as starting at the time $t_1$, representing the node at the root of the tree. This makes sense because we rarely have information on the stem age of our clade. We will also condition on both of these initial lineages surviving to the present day, as this is a requirement to obtain a tree with this crown age [e.g. @Stadler2013-yf equation 5).
 
-Speciation and extinction events occur at various times, and the process ends at time $0$ when the clade has $n$ extant species - that is, we measure time backwards from the present day. Extinction will result in species that do not extend all the way to time 0. For now, we will assume that we only have data on extant species. We will refer to the phylogenetic tree that shows branching times leading to the extant species as the reconstructed tree [Nee1994-xg]. For a reconstructed tree with $n$ species, there are $n-1$ speciation times, which we will denote as $t_1$, $t_2$, $t_3$, ..., $t_{n-1}$. The leaves of our ultrametric tree all terminate at time 0.
+Speciation and extinction events occur at various times, and the process ends at time $0$ when the clade has $n$ extant species - that is, we measure time backwards from the present day. Extinction will result in species that do not extend all the way to time 0. For now, we will assume that we only have data on extant species. We will refer to the phylogenetic tree that shows branching times leading to the extant species as the reconstructed tree [@Nee1994-xg]. For a reconstructed tree with $n$ species, there are $n-1$ speciation times, which we will denote as $t_1$, $t_2$, $t_3$, ..., $t_{n-1}$. The leaves of our ultrametric tree all terminate at time 0.
 
-Note that in this notation, $t_1 > t_2 > \dots > t_{n-1} > 0$, that is, our speciation times are measured from the tips and constantly decreasing (this is an important notational difference between Stadler [-@Stadler2013-yf] and Nee [-@Nee1994-xg and others], the latter of which considers the time intervals between speciation events, e.g. $t_1 - t_2$ in our notation). For now, we will assume complete sampling; that is, all $n$ species alive at the present day are represented in the tree.
+Note that in this notation, $t_1 > t_2 > \dots > t_{n-1} > 0$, that is, our speciation times are measured backwards from the tips, and as we increase the index the times are constantly decreasing (this is an important notational difference between Stadler [-@Stadler2013-yf], used here, and Nee [-@Nee1994-xg and others], the latter of which considers the time intervals between speciation events, e.g. $t_1 - t_2$ in our notation). For now, we will assume complete sampling; that is, all $n$ species alive at the present day are represented in the tree.
 
-We can now write down the likelihood of observing the set of speciation times $t_1$, $t_2$, ..., $t_{n-1}$ given the extant diversity of the clade, $n$, and our birth-death model parameters $\lambda$ and $\mu$. Conditioning on both initial lineages surviving to the present day, we then have:
+We will now derive a likelihood of of observing the set of speciation times $t_1$, $t_2$, ..., $t_{n-1}$ given the extant diversity of the clade, $n$, and our birth-death model parameters $\lambda$ and $\mu$. To do this, we will use an approach based on differential equations introduced by [xxx Maddison] and applied to the present context by [xxx FitzJohn et al.].
+
+We need to keep track of two probabilities: $D_N(t)$, the probability that a lineage at some time t in the past will evolve into the extant clade N as observed today; and $E(t)$, the probability that a lineage at some time t will go completely extinct and leave no descendants at the present day. (Later, we will redefine $E(t)$ so that it includes the possibility that the lineages has descendants but none have been sampled). The general idea of how this method works is that we will assign values to these probabilities at the tips of the tree, and then define a set of rules to update them as we flow back through the tree from the tips to the root. When we arrive at the root of the tree, our $D_N(t)$ will represent the probability of observing the actual tree given our model - that is, the value of $D_N(t)$ at the root gives the likelihood.
+
+So, what rules can we use to make these calculations backwards in time through the tree? First, we can define our starting points. Since every tip $i$ represents a living lineage, we can define $D_N(t) = 1$ and $E(t) = 0$ at each tip.
+
+We now need to define how these probabilities change as we move backwards along branches, and what happens at the tree nodes.
+
+Next, imagine we move backwards along some section of a tree branch with no nodes. Since that section of branch exists in our tree, we know two things: the lineage did not go extinct during that time, and if speciation occured, the lineage that split off did not survive to the present day. We can capture these two possibilities in a differential equation that considers how our overall liklihood changes over some very small unit of time.
+
+(eq. 11.12)
+
+<div>
+$$
+\frac{dD_N(t)}{dt} = -(\lambda + \mu) D_N(t) + 2 \lambda E(t) D_N(t)
+$$
+</div>
+
+Here, the first part of the equation, $-(\lambda + \mu) D_N(t)$, represents the probability of not speciating nor going extinct, while the second part, $2 \lambda E(t) D_N(t)$,  represents the probability of speciation followed by the ultimate extinction of one of the two daughter lineages. The $2$ in this equation appears because we must account for the fact that, following speciation from an ancestor to daughters A and B, we would see the same pattern no matter which of the two descendants survived to the present.
+
+We also need to update our extinction probability going back through the tree:
+
+(eq. 11.13)
+
+<div>
+$$
+\frac{dE(t)}{dt} = \mu - (\mu + \lambda) E(t) + \lambda E(t)^2
+$$
+</div>
+
+The three parts of this equation represent the three ways a lineage might not make it to the present day: either it goes extinct during the interval being considered ($\mu$), it survives that interval but goes extinct some time later ($- (\mu + \lambda) E(t)$), or it speciates in the interval but both descendants go extinct before the present day ($\lambda E(t)^2$).
+
+We can solve these equations so that we will be able to update the probability moving backwards along any branch of the tree with length t. First, solving equation 11.13 and using our initial condition E(0) = 0:
+
+(eq. 11.14)
+If $\lambda \neq \mu$
+
+<div>
+$$
+E(t) = 1 - \frac{\lambda-\mu}{\lambda - (\lambda-\mu)e^{(\lambda - \mu)t}}
+$$
+</div>
+
+If $\lambda = \mu$
+
+<div>
+$$
+E(t) = \frac{\lambda t}{1 - \lambda t}
+$$
+</div>
+
+We can now substitute this expression for E(t) into eq. 11.12 and solve, conditioning on $D_N(0) = 1$:
+
+(eq. 11.15)
+If $\lambda \neq \mu $
+<div>
+$$
+D_N(t) = e^{-(\lambda - \mu)(t - t_N)} \frac{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_N})^2}{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t})^2} \cdot D_N(t_N)
+$$
+</div>
+
+If $\lambda = \mu$
+<div>
+$$
+D_N(t) = \frac{(1 + \lambda t_N)^2}{(1 + \lambda t)^2} D_N(t_n)
+$$
+</div>
+
+xxxConditioning on both initial lineages surviving to the present day, we then have:
 
 (eq. 11.11)
 
