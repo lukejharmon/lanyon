@@ -274,21 +274,43 @@ As discussed in the previous chapter, even though we often have no information a
 
 ###  Section 11.4a: Likelihood of waiting times under a birth-death model
 
-In order to use ML and Bayesian methods for estimating the parameters of birth-death models from comparative data, we need to write down the likelihoods of the waiting times between speciation events in a tree. There is a little bit of variation in notation in the literature, so I will follow Stadler [@Stadler2013-vw] to maintain consistency. We will assume that the clade begins at time $t_1$ with a pair of species. Most analyses follow this convention, and condition the process as starting at the time $t_1$, representing the node at the root of the tree. This makes sense because we rarely have information on the stem age of our clade. We will also condition on both of these initial lineages surviving to the present day, as this is a requirement to obtain a tree with this crown age [e.g. @Stadler2013-yf equation 5).
+In order to use ML and Bayesian methods for estimating the parameters of birth-death models from comparative data, we need to write down the likelihoods of the waiting times between speciation events in a tree. There is a little bit of variation in notation in the literature, so I will follow Stadler [@Stadler2013-vw] and Maddison (xxx), among others, to maintain consistency. We will assume that the clade begins at time $t_1$ with a pair of species. Most analyses follow this convention, and condition the process as starting at the time $t_1$, representing the node at the root of the tree. This makes sense because we rarely have information on the stem age of our clade. We will also condition on both of these initial lineages surviving to the present day, as this is a requirement to obtain a tree with this crown age [e.g. @Stadler2013-yf equation 5).
 
 Speciation and extinction events occur at various times, and the process ends at time $0$ when the clade has $n$ extant species - that is, we measure time backwards from the present day. Extinction will result in species that do not extend all the way to time 0. For now, we will assume that we only have data on extant species. We will refer to the phylogenetic tree that shows branching times leading to the extant species as the reconstructed tree [@Nee1994-xg]. For a reconstructed tree with $n$ species, there are $n-1$ speciation times, which we will denote as $t_1$, $t_2$, $t_3$, ..., $t_{n-1}$. The leaves of our ultrametric tree all terminate at time 0.
 
 Note that in this notation, $t_1 > t_2 > \dots > t_{n-1} > 0$, that is, our speciation times are measured backwards from the tips, and as we increase the index the times are constantly decreasing (this is an important notational difference between Stadler [-@Stadler2013-yf], used here, and Nee [-@Nee1994-xg and others], the latter of which considers the time intervals between speciation events, e.g. $t_1 - t_2$ in our notation). For now, we will assume complete sampling; that is, all $n$ species alive at the present day are represented in the tree.
 
-We will now derive a likelihood of of observing the set of speciation times $t_1$, $t_2$, ..., $t_{n-1}$ given the extant diversity of the clade, $n$, and our birth-death model parameters $\lambda$ and $\mu$. To do this, we will use an approach based on differential equations introduced by [xxx Maddison] and applied to the present context by [xxx FitzJohn et al.].
+We will now derive a likelihood of of observing the set of speciation times $t_1$, $t_2$, ..., $t_{n-1}$ given the extant diversity of the clade, $n$, and our birth-death model parameters $\lambda$ and $\mu$. To do this, we will use an approach based on differential equations introduced by [xxx Maddison]. So, what rules can we use to make these calculations backwards in time through the tree?
 
-We need to keep track of two probabilities: $D_N(t)$, the probability that a lineage at some time t in the past will evolve into the extant clade N as observed today; and $E(t)$, the probability that a lineage at some time t will go completely extinct and leave no descendants at the present day. (Later, we will redefine $E(t)$ so that it includes the possibility that the lineages has descendants but none have been sampled). The general idea of how this method works is that we will assign values to these probabilities at the tips of the tree, and then define a set of rules to update them as we flow back through the tree from the tips to the root. When we arrive at the root of the tree, our $D_N(t)$ will represent the probability of observing the actual tree given our model - that is, the value of $D_N(t)$ at the root gives the likelihood.
+The general idea is that we will assign values to these probabilities at the tips of the tree, and then define a set of rules to update them as we flow back through the tree from the tips to the root. When we arrive at the root of the tree, we will have the probability of observing the actual tree given our model - that is, the likelihood.
 
-So, what rules can we use to make these calculations backwards in time through the tree? First, we can define our starting points. Since every tip $i$ represents a living lineage, we can define $D_N(t) = 1$ and $E(t) = 0$ at each tip.
+To begin with, we need to keep track of two probabilities: $D_N(t)$, the probability that a lineage at some time t in the past will evolve into the extant clade N as observed today; and $E(t)$, the probability that a lineage at some time t will go completely extinct and leave no descendants at the present day. (Later, we will redefine $E(t)$ so that it includes the possibility that the lineages has descendants but none have been sampled). We then apply these probabilities to the tree using three main ideas (Figure 11.4)
 
-We now need to define how these probabilities change as we move backwards along branches, and what happens at the tree nodes.
+![Figure 11.4. General outline of steps for calculating likelihood of a tree under a birth-death model.]({{ site.baseurl }}/images/figure11-4.png)
 
-Next, imagine we move backwards along some section of a tree branch with no nodes. Since that section of branch exists in our tree, we know two things: the lineage did not go extinct during that time, and if speciation occured, the lineage that split off did not survive to the present day. We can capture these two possibilities in a differential equation that considers how our overall liklihood changes over some very small unit of time.
+1. We  define our starting points at the tips of the tree.
+
+2. We  define how the probabilities defined in (1) change as we move backwards along branches of the tree.
+
+3. We define what happens to our probabilities at the tree nodes.
+
+Then, starting at the tips of the tree, we make our way to the root. At each tip, we have a starting value for both $D_N(t)$ and $E(t)$. We move backwards along the branches of the tree, updating both probabilities as we go using step 2. When two branches come togther at a node, we combine those probabilities using step 3.
+
+In this way, we walk through the tree, starting with the tips and passing over every branch and node (Figure 11.4). When we get to the root we will have $D_N(t_{root})$, which is the full likelihood that we want.
+
+You might wonder why we need to calculate both $D_N(t)$ and $E(t)$ if the likelihood is captured by $D_N(t)$ at the root. The reason is that the probability of observing a tree is dependent on these extinction probabilities calculated back through time. We need to keep track of $E(t)$ to know about $D_N(t)$ and how it changes. You will see below that $E(t)$ appears directly in our differential equations for $D_N(t)$.
+
+First, the starting point. Since every tip $i$ represents a living lineage, we know it is alive at the present day - so we can define $D_N(t) = 1$. We also know that it will not go extinct before being included in the tree, so $E(t) = 0$. This gives our starting values for the two probabilities at each tip in the tree (Figure 11.5).
+
+![Figure 11.5. Starting points at tree tips for likelihood probability calculations.]({{ site.baseurl }}/images/figure11-5.png)
+
+
+Next, imagine we move backwards along some section of a tree branch with no nodes. We will consider an arbitrary branch of the tree. Since we are going back in time, we will start at some node in the tree N, which occurs at a time $t_n$, and denote the time going back into the past as t (Figure 11.6).
+
+![Figure 11.6. Updating $D_N(t)$ and $E(t) along a tree branch.]({{ site.baseurl }}/images/figure11-6.png)
+
+
+Since that section of branch exists in our tree, we know two things: the lineage did not go extinct during that time, and if speciation occured, the lineage that split off did not survive to the present day. We can capture these two possibilities in a differential equation that considers how our overall likelihood changes over some very small unit of time.
 
 (eq. 11.12)
 
@@ -322,7 +344,7 @@ $$
 </div>
 
 
-We can now substitute this expression for E(t) into eq. 11.12 and solve, conditioning on $D_N(0) = 1$:
+We can now substitute this expression for E(t) into eq. 11.12 and solve.
 
 (eq. 11.15)
 <div>
@@ -331,9 +353,13 @@ D_N(t) = e^{-(\lambda - \mu)(t - t_N)} \frac{(\lambda - (\lambda-\mu)e^{(\lambda
 $$
 </div>
 
-Here t_N is the depth (measured from the present day) of node N.
+Remember that t_N is the depth (measured from the present day) of node N (Figure 11.6).
 
-Now we need to consider what happens when two branches come together at a node. Since there is a node, we know there has been a speciation event. We multiply the probability calculations flowing down each branch by the probability of a speciation event. So:
+Finally, we need to consider what happens when two branches come together at a node. Since there is a node, we know there has been a speciation event. We multiply the probability calculations flowing down each branch by the probability of a speciation event (Figure 11.7).
+
+![Figure 11.7. Updating $D_N(t)$ and $E(t)$ along a tree branch.]({{ site.baseurl }}/images/figure11-7.png)
+
+So:
 
 (eq. 11.16)
 <div>
@@ -358,44 +384,25 @@ To apply this approach across an entire phylogenetic tree, we multiply equations
 (eq. 11.18)
 <div>
 $$
-L = \lambda^n[\prod_{k = 1}^{2N} e^{(\lambda-\mu)(t_{k,b} - t_{k,t})} \cdot \frac{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_N})^2}{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t})^2}]
+L = \lambda^n \big[ \prod_{k = 1}^{2N} e^{(\lambda-\mu)(t_{k,b} - t_{k,t})} \cdot \frac{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_{k,t}})^2}{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_{k,b}})^2} \big]
 $$
 </div>
 
-Most methods fitting birth-death models to trees condition on the existence of a tree, which requires that the two lineages following the initial split in the tree survived to the present day. Conditioning on this, the likelihood becomes:
-
+Most methods fitting birth-death models to trees condition on the existence of a tree - that is, conditioning on the fact that the whole process did not go extinct before the present day, and the speciation event from the root node led to two surviving lineages. To do this conditioning, we divide equation 11.18 by $\lambda [1-E(t_{root})]^2$.
 
 (eq. 11.19)
 <div>
 $$
-L = (N-1)! \lambda^(N-2) \Big(\prod_{i=2}^{N-1} P_s(t_i, T)) \cdot (1-u_s(t_1))^2 \prod_{i=2}^{N-1} (1-u_s(t_i))
+L = \frac{\lambda^n \big[ \prod_{k = 1}^{2N} e^{(\lambda-\mu)(t_{k,b} - t_{k,t})} \cdot \frac{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_{k,t}})^2}{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_{k,b}})^2} \big]}{\lambda [1-E(t_{root})]^2} =  \frac{\lambda^{n-1} \big[ \prod_{k = 1}^{2N} e^{(\lambda-\mu)(t_{k,b} - t_{k,t})} \cdot \frac{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_{k,t}})^2}{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_{k,b}})^2} \big]}{ [1-E(t_{root})]^2}
 $$
 </div>
 
-Here $N$ is the number of tips in the tree and $t_i$ the speciation times as defined above. $P_s(t_i, T)$ and $u_s(t_i)$ are functions. $P_s(t_i, T)$ is the probability that a lineage at time $t_i$ leaves at least one lineage at the present:
-
-(eq. 11.20)
-<div>
-$$
-P_s(t_i, T) =
-$$
-</div>
-
-
-and $u_s(t_i)$ is:
-
-(eq. 11.21)
-<div>
-$$
-u_s(t_i) =
-$$
-</div>
-
+Many likelihoods for birth-death waiting times, for example those in the original derivation by Nee, include an additional term, $(N-1)!$. This is because there are $(N-1)!$ possible topologies for any set of $N-1$ waiting times, all equally likely. Since this term is constant for a given tree size N, then leaving it out has no influence on the relative likelihoods of different models - but it is necessary to know about this multiplier if comparing likelihoods across different implementations of birth-death and related processes!
 
 
 ### Section 11.4b: Using maximum likelihood to fit a birth-death model
 
-Given equation 11.11 for the likelihood, we can estimate birth and death rates using both ML and Bayesian approaches. For the ML estimate, we maximize equation 11.11 over $\lambda$ and $\mu$. For a pure-birth model, we can set $\mu$ = 0, and the maximum likelihood estimate of $\lambda$ can be calculated analytically as:
+Given equation 11.18 for the likelihood, we can estimate birth and death rates using both ML and Bayesian approaches. For the ML estimate, we maximize equation 11.11 over $\lambda$ and $\mu$. For a pure-birth model, we can set $\mu$ = 0, and the maximum likelihood estimate of $\lambda$ can be calculated analytically as:
 
 (eq. 11.14)
 
@@ -427,9 +434,9 @@ For example, we can use ML to fit a birth-death model to the *Lupinus* tree [@Dr
 
 We can also estimate birth and death rates using a Bayesian MCMC. We can use exactly the method spelled out above for clade ages and diversities, but substitute equation 11.11 for the likelihood, thus using the waiting times derived from a phylogenetic tree to estimate model parameters.
 
-Applying this to Lupines with the same priors as before, we obtain the posterior distributions shown in figure 11.4. The mean of the posterior for each parameter is $\lambda = 0.48$ and $\mu = 0.23$, quite close to the ML estimates for these parameters.
+Applying this to Lupines with the same priors as before, we obtain the posterior distributions shown in figure 11.5. The mean of the posterior for each parameter is $\lambda = 0.48$ and $\mu = 0.23$, quite close to the ML estimates for these parameters.
 
-![Figure 11.4. Posterior distribution for $b$ and $d$ for *Lupinus*  [@Drummond2012-zs].]({{ site.baseurl }}/images/figure11-4.png)
+![Figure 11.8. Posterior distribution for $b$ and $d$ for *Lupinus*  [@Drummond2012-zs].]({{ site.baseurl }}/images/figure11-8.png)
 
 ## Section 11.5: Sampling and birth-death models
 
