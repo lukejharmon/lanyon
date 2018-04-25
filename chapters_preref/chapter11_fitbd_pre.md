@@ -305,9 +305,9 @@ First, the starting point. Since every tip $i$ represents a living lineage, we k
 ![Figure 11.5. Starting points at tree tips for likelihood probability calculations.]({{ site.baseurl }}/images/figure11-5.png)
 
 
-Next, imagine we move backwards along some section of a tree branch with no nodes. We will consider an arbitrary branch of the tree. Since we are going back in time, we will start at some node in the tree N, which occurs at a time $t_n$, and denote the time going back into the past as t (Figure 11.6).
+Next, imagine we move backwards along some section of a tree branch with no nodes. We will consider an arbitrary branch of the tree. Since we are going back in time, we will start at some node in the tree N, which occurs at a time $t_N$, and denote the time going back into the past as t (Figure 11.6).
 
-![Figure 11.6. Updating $D_N(t)$ and $E(t) along a tree branch.]({{ site.baseurl }}/images/figure11-6.png)
+![Figure 11.6. Updating $D_N(t)$ and calculating $E(t)$ along a tree branch.]({{ site.baseurl }}/images/figure11-6.png)
 
 
 Since that section of branch exists in our tree, we know two things: the lineage did not go extinct during that time, and if speciation occured, the lineage that split off did not survive to the present day. We can capture these two possibilities in a differential equation that considers how our overall likelihood changes over some very small unit of time.
@@ -322,7 +322,7 @@ $$
 
 Here, the first part of the equation, $-(\lambda + \mu) D_N(t)$, represents the probability of not speciating nor going extinct, while the second part, $2 \lambda E(t) D_N(t)$,  represents the probability of speciation followed by the ultimate extinction of one of the two daughter lineages. The $2$ in this equation appears because we must account for the fact that, following speciation from an ancestor to daughters A and B, we would see the same pattern no matter which of the two descendants survived to the present.
 
-We also need to update our extinction probability going back through the tree:
+We also need to calculate our extinction probability going back through the tree:
 
 (eq. 11.13)
 
@@ -332,7 +332,9 @@ $$
 $$
 </div>
 
-The three parts of this equation represent the three ways a lineage might not make it to the present day: either it goes extinct during the interval being considered ($\mu$), it survives that interval but goes extinct some time later ($- (\mu + \lambda) E(t)$), or it speciates in the interval but both descendants go extinct before the present day ($\lambda E(t)^2$). We will also specify that $\lambda > \mu$; it is possible to relax that assumption, but it makes the solution more complicated.
+The three parts of this equation represent the three ways a lineage might not make it to the present day: either it goes extinct during the interval being considered ($\mu$), it survives that interval but goes extinct some time later ($- (\mu + \lambda) E(t)$), or it speciates in the interval but both descendants go extinct before the present day ($\lambda E(t)^2$). Unlike the $D_N(t)$ term, this probability depends only on time and not the topological structure of the tree.
+
+We will also specify that $\lambda > \mu$; it is possible to relax that assumption, but it makes the solution more complicated.
 
 We can solve these equations so that we will be able to update the probability moving backwards along any branch of the tree with length t. First, solving equation 11.13 and using our initial condition E(0) = 0:
 
@@ -353,7 +355,7 @@ D_N(t) = e^{-(\lambda - \mu)(t - t_N)} \frac{(\lambda - (\lambda-\mu)e^{(\lambda
 $$
 </div>
 
-Remember that t_N is the depth (measured from the present day) of node N (Figure 11.6).
+Remember that $t_N$ is the depth (measured from the present day) of node N (Figure 11.6).
 
 Finally, we need to consider what happens when two branches come together at a node. Since there is a node, we know there has been a speciation event. We multiply the probability calculations flowing down each branch by the probability of a speciation event (Figure 11.7).
 
@@ -370,42 +372,44 @@ $$
 
 Where clade N' is the clade made up of the combination of two sister clades N and M.
 
-For the parent clade to have gone extinct before the present, both daughters must have gone extinct, so:
+To apply this approach across an entire phylogenetic tree, we multiply equations 11.15 and 11.16 across all branches and nodes in the tree. Thus, the full likelihood is:
 
 (eq. 11.17)
 <div>
 $$
-E_{N'}(t) = E_{N}(t) E_{M}(t)
+L = \lambda^{n-1} \big[ \prod_{k = 1}^{2n-2} e^{(\lambda-\mu)(t_{k,b} - t_{k,t})} \cdot \frac{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_{k,t}})^2}{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_{k,b}})^2} \big]
 $$
 </div>
 
-To apply this approach across an entire phylogenetic tree, we multiply equations 11.15 and 11.16 across all branches and nodes in the tree. Thus, the full likelihood is:
+Here, $n$ is the number of tips in the tree (note that the original derivation in Maddison uses $n$ as the number of nodes, but I have changed it for consistency with the rest of the book).
+
+The product in equation 11.17 is taken over all $2n-2$ branches in the tree. Each branch $k$ has two times associated with it, one towards the base of the tree, $t_{k,b}$, and one towards the tips, $t_{k,t}$.
+
+Most methods fitting birth-death models to trees condition on the existence of a tree - that is, conditioning on the fact that the whole process did not go extinct before the present day, and the speciation event from the root node led to two surviving lineages. To do this conditioning, we divide equation 11.17 by $\lambda [1-E(t_{root})]^2$.
+
+Additionally, likelihoods for birth-death waiting times, for example those in the original derivation by Nee, include an additional term, $(n-1)!$. This is because there are $(n-1)!$ possible topologies for any set of $n-1$ waiting times, all equally likely. Since this term is constant for a given tree size $n$, then leaving it out has no influence on the relative likelihoods of different parameter calues - but it is necessary to know about this multiplier if comparing likelihoods across different models for model selection, or comparing the output of different programs.
+
+Accounting for these two factors, the full likelihood is:
 
 (eq. 11.18)
 <div>
 $$
-L = \lambda^n \big[ \prod_{k = 1}^{2N} e^{(\lambda-\mu)(t_{k,b} - t_{k,t})} \cdot \frac{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_{k,t}})^2}{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_{k,b}})^2} \big]
+L = (n-1)! \frac{\lambda^{n-2} \big[ \prod_{k = 1}^{2n-2} e^{(\lambda-\mu)(t_{k,b} - t_{k,t})} \cdot \frac{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_{k,t}})^2}{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_{k,b}})^2} \big]}{ [1-E(t_{root})]^2}
 $$
 </div>
 
-Most methods fitting birth-death models to trees condition on the existence of a tree - that is, conditioning on the fact that the whole process did not go extinct before the present day, and the speciation event from the root node led to two surviving lineages. To do this conditioning, we divide equation 11.18 by $\lambda [1-E(t_{root})]^2$.
-
-Additionally, likelihoods for birth-death waiting times, for example those in the original derivation by Nee, include an additional term, $(N-1)!$. This is because there are $(N-1)!$ possible topologies for any set of $N-1$ waiting times, all equally likely. Since this term is constant for a given tree size N, then leaving it out has no influence on the relative likelihoods of different models - but it is necessary to know about this multiplier if comparing likelihoods across different implementations of birth-death and related processes!
-
-Accounting for these two factors, the full likelihood should be:
+where:
 
 (eq. 11.19)
 <div>
 $$
-L = (N-1)! \frac{\lambda^{n-1} \big[ \prod_{k = 1}^{2N} e^{(\lambda-\mu)(t_{k,b} - t_{k,t})} \cdot \frac{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_{k,t}})^2}{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_{k,b}})^2} \big]}{ [1-E(t_{root})]^2}
+E(t_{root}) = 1 - \frac{\lambda-\mu}{\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_{root}}}
 $$
 </div>
 
-
-
 ### Section 11.4b: Using maximum likelihood to fit a birth-death model
 
-Given equation 11.18 for the likelihood, we can estimate birth and death rates using both ML and Bayesian approaches. For the ML estimate, we maximize equation 11.11 over $\lambda$ and $\mu$. For a pure-birth model, we can set $\mu$ = 0, and the maximum likelihood estimate of $\lambda$ can be calculated analytically as:
+Given equation 11.19 for the likelihood, we can estimate birth and death rates using both ML and Bayesian approaches. For the ML estimate, we maximize equation 11.19 over $\lambda$ and $\mu$. For a pure-birth model, we can set $\mu$ = 0, and the maximum likelihood estimate of $\lambda$ can be calculated analytically as:
 
 (eq. 11.20)
 
@@ -421,7 +425,7 @@ where $s_{branch}$ is the sum of branch lengths in the tree,
 
 <div>
 $$
-s_{branch} = \sum_{i=1}^{n-1} t_i
+s_{branch} = \sum_{i=1}^{n-1} t_i + t_{n-1}
 $$
 </div>
 
@@ -452,6 +456,11 @@ Fortunately, the mathematics for incomplete sampling of reconstructed phylogenet
 <div>
 $$
 D_N(0) = 1-f
+$$
+</div>
+
+<div>
+$$
 E(0) = f
 $$
 </div>
@@ -461,7 +470,7 @@ Repeating the calculations above along branches and at nodes, but with the start
 (eq. 11.23)
 <div>
 $$
-L = \lambda^n \big[ \prod_{k = 1}^{2N} e^{(\lambda-\mu)(t_{k,b} - t_{k,t})} \cdot \frac{(f \lambda - (\mu - \lambda(1-f))e^{(\lambda - \mu)t_{k,t}})^2}{(f \lambda - (\mu - \lambda(1-f))e^{(\lambda - \mu)t_{k,b}})^2} \big]
+L = \lambda^{n-1} \big[ \prod_{k = 1}^{2n-2} e^{(\lambda-\mu)(t_{k,b} - t_{k,t})} \cdot \frac{(f \lambda - (\mu - \lambda(1-f))e^{(\lambda - \mu)t_{k,t}})^2}{(f \lambda - (\mu - \lambda(1-f))e^{(\lambda - \mu)t_{k,b}})^2} \big]
 $$
 </div>
 
@@ -470,7 +479,16 @@ Again, the above formula is proportional to the full likelihood, which is:
 (eq. 11.24)
 <div>
 $$
-L = (N-1)! \frac{\lambda^{n-1} \big[ \prod_{k = 1}^{2N} e^{(\lambda-\mu)(t_{k,b} - t_{k,t})} \cdot \frac{(f \lambda - (\mu - \lambda(1-f))e^{(\lambda - \mu)t_{k,t}})^2}{(f \lambda - (\mu - \lambda(1-f))e^{(\lambda - \mu)t_{k,b}})^2} \big]}{[1-E(t_{root})]^2}
+L = (n-1)! \frac{\lambda^{n-2} \big[ \prod_{k = 1}^{2n-2} e^{(\lambda-\mu)(t_{k,b} - t_{k,t})} \cdot \frac{(f \lambda - (\mu - \lambda(1-f))e^{(\lambda - \mu)t_{k,t}})^2}{(f \lambda - (\mu - \lambda(1-f))e^{(\lambda - \mu)t_{k,b}})^2} \big]}{[1-E(t_{root})]^2}
+$$
+</div>
+
+and:
+
+(eq. 11.25)
+<div>
+$$
+E(t_{root}) = 1 - \frac{\lambda-\mu}{\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_{root}}}
 $$
 </div>
 
