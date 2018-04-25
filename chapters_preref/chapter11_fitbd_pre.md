@@ -390,21 +390,24 @@ $$
 
 Most methods fitting birth-death models to trees condition on the existence of a tree - that is, conditioning on the fact that the whole process did not go extinct before the present day, and the speciation event from the root node led to two surviving lineages. To do this conditioning, we divide equation 11.18 by $\lambda [1-E(t_{root})]^2$.
 
+Additionally, likelihoods for birth-death waiting times, for example those in the original derivation by Nee, include an additional term, $(N-1)!$. This is because there are $(N-1)!$ possible topologies for any set of $N-1$ waiting times, all equally likely. Since this term is constant for a given tree size N, then leaving it out has no influence on the relative likelihoods of different models - but it is necessary to know about this multiplier if comparing likelihoods across different implementations of birth-death and related processes!
+
+Accounting for these two factors, the full likelihood should be:
+
 (eq. 11.19)
 <div>
 $$
-L = \frac{\lambda^n \big[ \prod_{k = 1}^{2N} e^{(\lambda-\mu)(t_{k,b} - t_{k,t})} \cdot \frac{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_{k,t}})^2}{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_{k,b}})^2} \big]}{\lambda [1-E(t_{root})]^2} =  \frac{\lambda^{n-1} \big[ \prod_{k = 1}^{2N} e^{(\lambda-\mu)(t_{k,b} - t_{k,t})} \cdot \frac{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_{k,t}})^2}{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_{k,b}})^2} \big]}{ [1-E(t_{root})]^2}
+L = (N-1)! \frac{\lambda^{n-1} \big[ \prod_{k = 1}^{2N} e^{(\lambda-\mu)(t_{k,b} - t_{k,t})} \cdot \frac{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_{k,t}})^2}{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_{k,b}})^2} \big]}{ [1-E(t_{root})]^2}
 $$
 </div>
 
-Many likelihoods for birth-death waiting times, for example those in the original derivation by Nee, include an additional term, $(N-1)!$. This is because there are $(N-1)!$ possible topologies for any set of $N-1$ waiting times, all equally likely. Since this term is constant for a given tree size N, then leaving it out has no influence on the relative likelihoods of different models - but it is necessary to know about this multiplier if comparing likelihoods across different implementations of birth-death and related processes!
 
 
 ### Section 11.4b: Using maximum likelihood to fit a birth-death model
 
 Given equation 11.18 for the likelihood, we can estimate birth and death rates using both ML and Bayesian approaches. For the ML estimate, we maximize equation 11.11 over $\lambda$ and $\mu$. For a pure-birth model, we can set $\mu$ = 0, and the maximum likelihood estimate of $\lambda$ can be calculated analytically as:
 
-(eq. 11.14)
+(eq. 11.20)
 
 <div>
 $$
@@ -414,16 +417,16 @@ $$
 
 where $s_{branch}$ is the sum of branch lengths in the tree,
 
-(eq. 11.15)
+(eq. 11.21)
 
 <div>
 $$
-s_{branch} = \sum_{i=1}^{n-1} i t_i
+s_{branch} = \sum_{i=1}^{n-1} t_i
 $$
 </div>
 
 
-Equation 11.14 is also called the Kendal-Moran estimator of the speciation rate [@Nee2006-cd].
+Equation 11.21 is also called the Kendal-Moran estimator of the speciation rate [@Nee2006-cd].
 
 For a birth-death model, we can use numerical methods to maximize the likelihood over $\lambda$ and $\mu$.
 
@@ -442,23 +445,35 @@ Applying this to Lupines with the same priors as before, we obtain the posterior
 
 It is important to think about sampling when fitting birth-death models to phylogenetic trees. If any species are missing from your phylogenetic tree, they will lead to biased parameter estimates. This is because missing species are disproportionally likely to connect to the tree on short, rather than long, branches. If we randomly sample lineages from a tree, we will end up badly underestimating both speciation and extinction rates (and wrongly inferring slowdowns; see chapter 12).
 
-Fortunately, the mathematics for incomplete sampling of reconstructed phylogenetic trees has also been worked out. We can substitute in equations that include $\rho$, the proportion of sampled species, for equations 11.12 and 11.13 above:
+Fortunately, the mathematics for incomplete sampling of reconstructed phylogenetic trees has also been worked out. Using the framework above of calculating backwards through time, we modify the starting points for each tip in the tree to reflect $f$, the probability of sampling a species (following Fitzjohn xxx):
 
-(eq. 11.15)
-
-<div>
-$$
-p_0 (t) = 1 - \frac{\rho (\lambda - \mu)}{\rho \lambda + (\lambda (1 - \rho)-\mu)e^{-(\lambda - \mu)t}}
-$$
-</div>
-
-(eq. 11.16)
+(eq. 11.22)
 
 <div>
 $$
-p_1 (t) = \frac{\rho (\lambda - \mu)^2 e^{-(\lambda - \mu)t}}{(\rho \lambda + (\lambda (1 - \rho)-\mu)e^{-(\lambda - \mu)t})^2}
+D_N(0) = 1-f
+E(0) = f
 $$
 </div>
+
+Repeating the calculations above along branches and at nodes, but with the starting conditions above, we obtain the following likelihood:
+
+(eq. 11.23)
+<div>
+$$
+L = \lambda^n \big[ \prod_{k = 1}^{2N} e^{(\lambda-\mu)(t_{k,b} - t_{k,t})} \cdot \frac{(f \lambda - (\mu - \lambda(1-f))e^{(\lambda - \mu)t_{k,t}})^2}{(f \lambda - (\mu - \lambda(1-f))e^{(\lambda - \mu)t_{k,b}})^2} \big]
+$$
+</div>
+
+Again, the above formula is proportional to the full likelihood, which is:
+
+(eq. 11.24)
+<div>
+$$
+L = (N-1)! \frac{\lambda^{n-1} \big[ \prod_{k = 1}^{2N} e^{(\lambda-\mu)(t_{k,b} - t_{k,t})} \cdot \frac{(f \lambda - (\mu - \lambda(1-f))e^{(\lambda - \mu)t_{k,t}})^2}{(f \lambda - (\mu - \lambda(1-f))e^{(\lambda - \mu)t_{k,b}})^2} \big]}{[1-E(t_{root})]^2}
+$$
+</div>
+
 
 ##  Section 11.6: Summary
 
