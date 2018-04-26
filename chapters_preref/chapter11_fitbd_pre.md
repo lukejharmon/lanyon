@@ -274,13 +274,13 @@ As discussed in the previous chapter, even though we often have no information a
 
 ###  Section 11.4a: Likelihood of waiting times under a birth-death model
 
-In order to use ML and Bayesian methods for estimating the parameters of birth-death models from comparative data, we need to write down the likelihoods of the waiting times between speciation events in a tree. There is a little bit of variation in notation in the literature, so I will follow Stadler [@Stadler2013-vw] and Maddison (xxx), among others, to maintain consistency. We will assume that the clade begins at time $t_1$ with a pair of species. Most analyses follow this convention, and condition the process as starting at the time $t_1$, representing the node at the root of the tree. This makes sense because we rarely have information on the stem age of our clade. We will also condition on both of these initial lineages surviving to the present day, as this is a requirement to obtain a tree with this crown age [e.g. @Stadler2013-yf equation 5).
+In order to use ML and Bayesian methods for estimating the parameters of birth-death models from comparative data, we need to write down the likelihoods of the waiting times between speciation events in a tree. There is a little bit of variation in notation in the literature, so I will follow Stadler [-@Stadler2013-vw] and Maddison et al. [-@Maddison2007-vu], among others, to maintain consistency. We will assume that the clade begins at time $t_1$ with a pair of species. Most analyses follow this convention, and condition the process as starting at the time $t_1$, representing the node at the root of the tree. This makes sense because we rarely have information on the stem age of our clade. We will also condition on both of these initial lineages surviving to the present day, as this is a requirement to obtain a tree with this crown age [e.g. @Stadler2013-yf equation 5).
 
 Speciation and extinction events occur at various times, and the process ends at time $0$ when the clade has $n$ extant species - that is, we measure time backwards from the present day. Extinction will result in species that do not extend all the way to time 0. For now, we will assume that we only have data on extant species. We will refer to the phylogenetic tree that shows branching times leading to the extant species as the reconstructed tree [@Nee1994-xg]. For a reconstructed tree with $n$ species, there are $n-1$ speciation times, which we will denote as $t_1$, $t_2$, $t_3$, ..., $t_{n-1}$. The leaves of our ultrametric tree all terminate at time 0.
 
 Note that in this notation, $t_1 > t_2 > \dots > t_{n-1} > 0$, that is, our speciation times are measured backwards from the tips, and as we increase the index the times are constantly decreasing (this is an important notational difference between Stadler [-@Stadler2013-yf], used here, and Nee [-@Nee1994-xg and others], the latter of which considers the time intervals between speciation events, e.g. $t_1 - t_2$ in our notation). For now, we will assume complete sampling; that is, all $n$ species alive at the present day are represented in the tree.
 
-We will now derive a likelihood of of observing the set of speciation times $t_1$, $t_2$, ..., $t_{n-1}$ given the extant diversity of the clade, $n$, and our birth-death model parameters $\lambda$ and $\mu$. To do this, we will use an approach based on differential equations introduced by [xxx Maddison]. So, what rules can we use to make these calculations backwards in time through the tree?
+We will now derive a likelihood of of observing the set of speciation times $t_1$, $t_2$, ..., $t_{n-1}$ given the extant diversity of the clade, $n$, and our birth-death model parameters $\lambda$ and $\mu$. To do this, we will follow very closely an approach based on differential equations introduced by Maddison et al. [-@Maddison2007-vu]. So, what rules can we use to make these calculations backwards in time through the tree?
 
 The general idea is that we will assign values to these probabilities at the tips of the tree, and then define a set of rules to update them as we flow back through the tree from the tips to the root. When we arrive at the root of the tree, we will have the probability of observing the actual tree given our model - that is, the likelihood.
 
@@ -449,7 +449,9 @@ Applying this to Lupines with the same priors as before, we obtain the posterior
 
 It is important to think about sampling when fitting birth-death models to phylogenetic trees. If any species are missing from your phylogenetic tree, they will lead to biased parameter estimates. This is because missing species are disproportionally likely to connect to the tree on short, rather than long, branches. If we randomly sample lineages from a tree, we will end up badly underestimating both speciation and extinction rates (and wrongly inferring slowdowns; see chapter 12).
 
-Fortunately, the mathematics for incomplete sampling of reconstructed phylogenetic trees has also been worked out. Using the framework above of calculating backwards through time, we modify the starting points for each tip in the tree to reflect $f$, the probability of sampling a species (following Fitzjohn xxx):
+Fortunately, the mathematics for incomplete sampling of reconstructed phylogenetic trees has also been worked out. There are two ways to do this, depending on how the tree is actually sampled. If we consider the missing species to be random with respect to the taxa included in the tree, then one can use a sampling fraction to account for them. By contrast, we often are in the situation where we have tips in our tree that are single representatives of diverse clades (e.g. genera). We usually know the diversity of these unsampled clades in our tree of representatives. I will follow [@Hohna2011-tn, @Hohna2014-ba] and refer to this approach as *representative sampling* (and the previous alternative as *uniform sampling*).
+
+For the uniform sampling approach, we use the framework above of calculating backwards through time, but modify the starting points for each tip in the tree to reflect $f$, the probability of sampling a species (following Fitzjohn et al. [-@FitzJohn2009-sg]):
 
 (eq. 11.22)
 
@@ -492,6 +494,18 @@ E(t_{root}) = 1 - \frac{\lambda-\mu}{\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_
 $$
 </div>
 
+For representative sampling, one approach is to consider the data as divided into two part, phylogenetic and taxonomic. The taxonomic part is the stem age and extant diversity of the unsampled clades, while the phylogenetic part is the relationships among those clades. Following Rabosky and Lovette [-@Rabosky2007-ou], we can then calculate:
+
+(eq. 11.26)
+<div>
+$$
+L_{total} = L_{phylogenetic} \cdot L_{taxonomic}
+$$
+</div>
+
+Where $L_{phylogenetic}$ can be calculated using equation 11.18 and $L_{taxonomic}$ calculated for each clade using equation 10.16 and then multiplied to get the overall likelihood.
+
+An alternative is Hohna's [-@Hohna2011-tn] diversified sampling ("DS") model. This model makes a different assumption: when sampling n taxa from an overall set of m, the deepest $n-1$ nodes have been included. Hohna's approach allows users to fit a model with representative sampling but without requiring assignment of extant diversity to each clade.
 
 ##  Section 11.6: Summary
 
