@@ -539,18 +539,18 @@ $$</span><br /></p>
 (eq. 11.17)
 <div>
 <p><br /><span class="math display">$$
-L = \lambda^{n-1} \big[ \prod_{k = 1}^{2n-2} e^{(\lambda-\mu)(t_{k,b} - t_{k,t})} \cdot \frac{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_{k,t}})^2}{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_{k,b}})^2} \big]
+L(t_1, t_2, \dots, t_n) = \lambda^{n-1} \big[ \prod_{k = 1}^{2n-2} e^{(\lambda-\mu)(t_{k,b} - t_{k,t})} \cdot \frac{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_{k,t}})^2}{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_{k,b}})^2} \big]
 $$</span><br /></p>
 </div>
 <p>Here, <span class="math inline"><em>n</em></span> is the number of tips in the tree (note that the original derivation in Maddison uses <span class="math inline"><em>n</em></span> as the number of nodes, but I have changed it for consistency with the rest of the book).</p>
 <p>The product in equation 11.17 is taken over all <span class="math inline">2<em>n</em> − 2</span> branches in the tree. Each branch <span class="math inline"><em>k</em></span> has two times associated with it, one towards the base of the tree, <span class="math inline"><em>t</em><sub><em>k</em>, <em>b</em></sub></span>, and one towards the tips, <span class="math inline"><em>t</em><sub><em>k</em>, <em>t</em></sub></span>.</p>
 <p>Most methods fitting birth-death models to trees condition on the existence of a tree - that is, conditioning on the fact that the whole process did not go extinct before the present day, and the speciation event from the root node led to two surviving lineages. To do this conditioning, we divide equation 11.17 by <span class="math inline"><em>λ</em>[1 − <em>E</em>(<em>t</em><sub><em>r</em><em>o</em><em>o</em><em>t</em></sub>)]<sup>2</sup></span>.</p>
-<p>Additionally, likelihoods for birth-death waiting times, for example those in the original derivation by Nee, include an additional term, <span class="math inline">(<em>n</em> − 1)!</span>. This is because there are <span class="math inline">(<em>n</em> − 1)!</span> possible topologies for any set of <span class="math inline"><em>n</em> − 1</span> waiting times, all equally likely. Since this term is constant for a given tree size <span class="math inline"><em>n</em></span>, then leaving it out has no influence on the relative likelihoods of different parameter calues - but it is necessary to know about this multiplier if comparing likelihoods across different models for model selection, or comparing the output of different programs.</p>
+<p>Additionally, likelihoods for birth-death waiting times, for example those in the original derivation by Nee, include an additional term, <span class="math inline">(<em>n</em> − 1)!</span>. This is because there are <span class="math inline">(<em>n</em> − 1)!</span> possible topologies for any set of <span class="math inline"><em>n</em> − 1</span> waiting times, all equally likely. Since this term is constant for a given tree size <span class="math inline"><em>n</em></span>, then leaving it out has no influence on the relative likelihoods of different parameter values - but it is necessary to know about this multiplier if comparing likelihoods across different models for model selection, or comparing the output of different programs.</p>
 <p>Accounting for these two factors, the full likelihood is:</p>
 (eq. 11.18)
 <div>
 <p><br /><span class="math display">$$
-L = (n-1)! \frac{\lambda^{n-2} \big[ \prod_{k = 1}^{2n-2} e^{(\lambda-\mu)(t_{k,b} - t_{k,t})} \cdot \frac{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_{k,t}})^2}{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_{k,b}})^2} \big]}{ [1-E(t_{root})]^2}
+L(\tau) = (n-1)! \frac{\lambda^{n-2} \big[ \prod_{k = 1}^{2n-2} e^{(\lambda-\mu)(t_{k,b} - t_{k,t})} \cdot \frac{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_{k,t}})^2}{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_{k,b}})^2} \big]}{ [1-E(t_{root})]^2}
 $$</span><br /></p>
 </div>
 <p>where:</p>
@@ -587,7 +587,7 @@ $$</span><br /></p>
 </div>
 <h2 id="section-11.5-sampling-and-birth-death-models">Section 11.5: Sampling and birth-death models</h2>
 <p>It is important to think about sampling when fitting birth-death models to phylogenetic trees. If any species are missing from your phylogenetic tree, they will lead to biased parameter estimates. This is because missing species are disproportionally likely to connect to the tree on short, rather than long, branches. If we randomly sample lineages from a tree, we will end up badly underestimating both speciation and extinction rates (and wrongly inferring slowdowns; see chapter 12).</p>
-<p>Fortunately, the mathematics for incomplete sampling of reconstructed phylogenetic trees has also been worked out. There are two ways to do this, depending on how the tree is actually sampled. If we consider the missing species to be random with respect to the taxa included in the tree, then one can use a sampling fraction to account for them. By contrast, we often are in the situation where we have tips in our tree that are single representatives of diverse clades (e.g. genera). We usually know the diversity of these unsampled clades in our tree of representatives. I will follow <span class="citation">(<span class="citeproc-not-found" data-reference-id="Hohna2011-tn"><strong>???</strong></span>, <span class="citation">(<span class="citeproc-not-found" data-reference-id="Hohna2014-ba"><strong>???</strong></span>)</span>)</span> and refer to this approach as <em>representative sampling</em> (and the previous alternative as <em>uniform sampling</em>).</p>
+<p>Fortunately, the mathematics for incomplete sampling of reconstructed phylogenetic trees has also been worked out. There are two ways to do this, depending on how the tree is actually sampled. If we consider the missing species to be random with respect to the taxa included in the tree, then one can use a sampling fraction to account for them. By contrast, we often are in the situation where we have tips in our tree that are single representatives of diverse clades (e.g. genera). We usually know the diversity of these unsampled clades in our tree of representatives. I will follow <span class="citation">(Höhna et al. <a href="#ref-Hohna2011-tn">2011</a>, <span class="citation">Höhna (<a href="#ref-Hohna2014-ba">2014</a>)</span>)</span> and refer to this approach as <em>representative sampling</em> (and the previous alternative as <em>uniform sampling</em>).</p>
 <p>For the uniform sampling approach, we use the framework above of calculating backwards through time, but modify the starting points for each tip in the tree to reflect <span class="math inline"><em>f</em></span>, the probability of sampling a species (following Fitzjohn et al. <span class="citation">(<a href="#ref-FitzJohn2009-sg">2009</a>)</span>):</p>
 <p>(eq. 11.22)</p>
 <div>
@@ -600,14 +600,14 @@ $$</span><br /></p>
 (eq. 11.23)
 <div>
 <p><br /><span class="math display">$$
-L = \lambda^{n-1} \big[ \prod_{k = 1}^{2n-2} e^{(\lambda-\mu)(t_{k,b} - t_{k,t})} \cdot \frac{(f \lambda - (\mu - \lambda(1-f))e^{(\lambda - \mu)t_{k,t}})^2}{(f \lambda - (\mu - \lambda(1-f))e^{(\lambda - \mu)t_{k,b}})^2} \big]
+L(t_1, t_2, \dots, t_n) = \lambda^{n-1} \big[ \prod_{k = 1}^{2n-2} e^{(\lambda-\mu)(t_{k,b} - t_{k,t})} \cdot \frac{(f \lambda - (\mu - \lambda(1-f))e^{(\lambda - \mu)t_{k,t}})^2}{(f \lambda - (\mu - \lambda(1-f))e^{(\lambda - \mu)t_{k,b}})^2} \big]
 $$</span><br /></p>
 </div>
 <p>Again, the above formula is proportional to the full likelihood, which is:</p>
 (eq. 11.24)
 <div>
 <p><br /><span class="math display">$$
-L = (n-1)! \frac{\lambda^{n-2} \big[ \prod_{k = 1}^{2n-2} e^{(\lambda-\mu)(t_{k,b} - t_{k,t})} \cdot \frac{(f \lambda - (\mu - \lambda(1-f))e^{(\lambda - \mu)t_{k,t}})^2}{(f \lambda - (\mu - \lambda(1-f))e^{(\lambda - \mu)t_{k,b}})^2} \big]}{[1-E(t_{root})]^2}
+L(\tau) = (n-1)! \frac{\lambda^{n-2} \big[ \prod_{k = 1}^{2n-2} e^{(\lambda-\mu)(t_{k,b} - t_{k,t})} \cdot \frac{(f \lambda - (\mu - \lambda(1-f))e^{(\lambda - \mu)t_{k,t}})^2}{(f \lambda - (\mu - \lambda(1-f))e^{(\lambda - \mu)t_{k,b}})^2} \big]}{[1-E(t_{root})]^2}
 $$</span><br /></p>
 </div>
 <p>and:</p>
@@ -617,13 +617,13 @@ $$</span><br /></p>
 E(t_{root}) = 1 - \frac{\lambda-\mu}{\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_{root}}}
 $$</span><br /></p>
 </div>
-<p>For representative sampling, one approach is to consider the data as divided into two part, phylogenetic and taxonomic. The taxonomic part is the stem age and extant diversity of the unsampled clades, while the phylogenetic part is the relationships among those clades. Following Rabosky and Lovette <span class="citation">(<span class="citeproc-not-found" data-reference-id="Rabosky2007-ou"><strong>???</strong></span>)</span>, we can then calculate:</p>
+<p>For representative sampling, one approach is to consider the data as divided into two parts, phylogenetic and taxonomic. The taxonomic part is the stem age and extant diversity of the unsampled clades, while the phylogenetic part is the relationships among those clades. Following Rabosky and Lovette <span class="citation">(<a href="#ref-Rabosky2007-ou">2007</a>)</span>, we can then calculate:</p>
 (eq. 11.26)
 <div>
 <p><br /><span class="math display"><em>L</em><sub><em>t</em><em>o</em><em>t</em><em>a</em><em>l</em></sub> = <em>L</em><sub><em>p</em><em>h</em><em>y</em><em>l</em><em>o</em><em>g</em><em>e</em><em>n</em><em>e</em><em>t</em><em>i</em><em>c</em></sub> ⋅ <em>L</em><sub><em>t</em><em>a</em><em>x</em><em>o</em><em>n</em><em>o</em><em>m</em><em>i</em><em>c</em></sub></span><br /></p>
 </div>
 <p>Where <span class="math inline"><em>L</em><sub><em>p</em><em>h</em><em>y</em><em>l</em><em>o</em><em>g</em><em>e</em><em>n</em><em>e</em><em>t</em><em>i</em><em>c</em></sub></span> can be calculated using equation 11.18 and <span class="math inline"><em>L</em><sub><em>t</em><em>a</em><em>x</em><em>o</em><em>n</em><em>o</em><em>m</em><em>i</em><em>c</em></sub></span> calculated for each clade using equation 10.16 and then multiplied to get the overall likelihood.</p>
-<p>An alternative is Hohna's <span class="citation">(<span class="citeproc-not-found" data-reference-id="Hohna2011-tn"><strong>???</strong></span>)</span> diversified sampling (&quot;DS&quot;) model. This model makes a different assumption: when sampling n taxa from an overall set of m, the deepest <span class="math inline"><em>n</em> − 1</span> nodes have been included. Hohna's approach allows users to fit a model with representative sampling but without requiring assignment of extant diversity to each clade.</p>
+<p>An alternative is Hohna's <span class="citation">(<a href="#ref-Hohna2011-tn">2011</a>)</span> diversified sampling (&quot;DS&quot;) model. This model makes a different assumption: when sampling n taxa from an overall set of m, the deepest <span class="math inline"><em>n</em> − 1</span> nodes have been included. Hohna's approach allows users to fit a model with representative sampling but without requiring assignment of extant diversity to each clade.</p>
 <h2 id="section-11.6-summary">Section 11.6: Summary</h2>
 <p>In this chapter, I described how to estimate parameters from birth-death models using data on species diversity and ages, and how to use patterns of tree balance to test hypotheses about changing birth and death rates. I also described how to calculate the likelihood for birth-death models on trees, which leads directly to both ML and Bayesian methods for estimating birth and death rates. Next, we will explore elaborations on birth-death models, and discuss models that go beyond constant-rates birth-death models to analyze the diversity of life on Earth.</p>
 <h2 id="references" class="unnumbered">References</h2>
@@ -655,8 +655,14 @@ $$</span><br /></p>
 <div id="ref-Hedges2009-lj">
 <p>Hedges, B. S., and S. Kumar. 2009. The timetree of life. Oxford University Press, Oxford.</p>
 </div>
+<div id="ref-Hohna2014-ba">
+<p>Höhna, S. 2014. Likelihood inference of non-constant diversification rates with incomplete taxon sampling. PLoS One 9:e84184.</p>
+</div>
 <div id="ref-Hohna2016-dw">
 <p>Höhna, S., M. R. May, and B. R. Moore. 2016. TESS: An R package for efficiently simulating phylogenetic trees and performing bayesian inference of lineage diversification rates. Bioinformatics 32:789–791.</p>
+</div>
+<div id="ref-Hohna2011-tn">
+<p>Höhna, S., T. Stadler, F. Ronquist, and T. Britton. 2011. Inferring speciation and extinction rates under different sampling schemes. Mol. Biol. Evol. 28:2577–2589.</p>
 </div>
 <div id="ref-Hughes2006-nr">
 <p>Hughes, C., and R. Eastwood. 2006. Island radiation on a continental scale: Exceptional rates of plant diversification after uplift of the andes. Proc. Natl. Acad. Sci. U. S. A. 103:10334–10339.</p>
@@ -693,6 +699,9 @@ $$</span><br /></p>
 </div>
 <div id="ref-Paradis2012-vp">
 <p>Paradis, E. 2012. SHIFT IN DIVERSIFICATION IN SISTER-CLADE COMPARISONS: A MORE POWERFUL TEST. Evolution 66:288–295. Wiley Online Library.</p>
+</div>
+<div id="ref-Rabosky2007-ou">
+<p>Rabosky, D. L., S. C. Donnellan, A. L. Talaba, and I. J. Lovette. 2007. Exceptional among-lineage variation in diversification rates during the radiation of australia’s most diverse vertebrate clade. Proc. Biol. Sci. 274:2915–2923.</p>
 </div>
 <div id="ref-Raup1985-wn">
 <p>Raup, D. M. 1985. Mathematical models of cladogenesis. Paleobiology 11:42–52.</p>

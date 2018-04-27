@@ -18,8 +18,10 @@ title: Beyond birth-death models
 <li><a href="#section-12.1-capturing-variable-evolution">Section 12.1: Capturing variable evolution</a></li>
 <li><a href="#section-12.2-variation-in-diversification-rates-across-clades">Section 12.2: Variation in diversification rates across clades</a></li>
 <li><a href="#section-12.3-variation-in-diversification-rates-through-time">Section 12.3: Variation in diversification rates through time</a></li>
-<li><a href="#section-12.4-protracted-speciation">Section 12.4: Protracted speciation</a></li>
+<li><a href="#section-12.4-diversity-dependent-models">Section 12.4: Diversity-dependent models</a></li>
+<li><a href="#section-12.5-protracted-speciation">Section 12.5: Protracted speciation</a></li>
 <li><a href="#section-12.5-summary">Section 12.5: Summary</a></li>
+<li><a href="#footnotes">Footnotes</a></li>
 </ul></li>
 <li><a href="#references">References</a></li>
 </ul>
@@ -110,69 +112,83 @@ title: Beyond birth-death models
 <h2 id="section-12.3-variation-in-diversification-rates-through-time">Section 12.3: Variation in diversification rates through time</h2>
 <p>In addition to considering rate variation across clades, we might also wonder whether birth and/or death rates have changed through time. For example, perhaps we think our clade is an adaptive radiation that experienced rapid diversification upon arrival to an island archipelago and slowed as this new adaptive zone got filled. This hypothesis is an example of density-dependent diversification, where diversification rate depends on the number of lineages that are present. Alternatively, perhaps our clade has been experiencing extinction rates that have changed through time, perhaps peaking during some time period of unfavorable climactic conditions. This is another hypothesis that predicts variation in diversification (speciation and extinction) rates through time.</p>
 <p>We can fit time-dependent diversification models using likelihood equations that allow arbitrary variation in speciation and/or extinction rates, either as a function of time or depending on the number of other lineages in the clade. To figure out the likelihood we can first make a simplifying assumption: though diversification rates might change, they are constant across all lineages at any particular time point. In particular, this means that speciation (and/or extinction) rates slow down (or speed up) in exactly the same way across all lineages in an evolving clade. Our assumption also means that we can consider time-slices through the tree rather than individual branches, i.e. we can get all the information that we need to fit these models from lineage through time plots. This type of a model is called “Equal-Rates Markov” in the literature and predicts exactly the same distribution of tree balance statistics as constant-rate birth death models.</p>
-<p>The most general way to fit time-varying birth-death models to phylogenetic trees is described in Morlon.</p>
+<p>The most general way to fit time-varying birth-death models to phylogenetic trees is described in Morlon (xxx). This approach is set up slightly differently than the Maddison/FitzJohn approach described in chapter 11, in that we assume that we know the stem age of a clade. Our time intervals, defined from the present day backwards as before, are then <span class="math inline"><em>t</em><sub>1</sub>, <em>t</em><sub>2</sub>, ..., <em>t</em><sub><em>n</em></sub></span>, where <span class="math inline"><em>t</em><sub>1</sub></span> is the stem age and <span class="math inline"><em>t</em><sub>2</sub></span> the crown age of the clade, and the other <span class="math inline"><em>n</em> − 2</span> terms represent the rest of the branching times in the tree.</p>
+<p>Consider the case where both speciation and extinction rates vary as a function of time, <span class="math inline"><em>λ</em>(<em>t</em>)</span> and <span class="math inline"><em>μ</em>(<em>t</em>)</span>. Morlon derives the likelihood for such a model as:</p>
 <p>(eq. 12.1)</p>
 <div>
-<p>$$</p>
-<p>$$</p>
+<p><br /><span class="math display">$$
+L(t_1, t_2, \dots, t_{n-1}) = (n+1)! \frac{f^n \sum_{i=1}^{n-1} \lambda(t_i) \Psi(s_{i,1}, t_i) \Psi(s_{i,2}, t_i)}{\lambda [1-E(t_1)]^2}
+$$</span><br /></p>
 </div>
 <p>Where:</p>
 <p>(eq. 12.2)</p>
 <div>
-<p><br /><span class="math display"><em>ξ</em><sub><em>i</em></sub> = <em>e</em><em>x</em><em>p</em>[∫<sub><em>t</em><sub><em>i</em></sub></sub><sup><em>T</em></sup> − <em>λ</em>(<em>s</em>)<em>d</em><em>s</em>]</span><br /></p>
+<p><br /><span class="math display">$$
+E(t) = 1 - \frac{e^{\int_0^t [\lambda(u) - \mu(u)]du}}{\frac{1}{f} + \int_0^t e^{\int_0^s [\lambda(u) - \mu(u)]du} \lambda(s) ds}
+$$</span><br /></p>
 </div>
-<p>Note that equation 12.2 requires that we define speciation rate as a function of time. To begin, we can consider only the simplest time-dependent model, where speciation rates change linearly through time. Following Rabosky and Lovette [xxx], we can consider the case where:</p>
+<p>and:</p>
 <p>(eq. 12.3)</p>
 <div>
 <p><br /><span class="math display">$$
-\lambda(t) = \lambda_0 (1 - \frac{t}{K})
+\Psi(s, t) = e^{\int_s^t [\lambda(u) - \mu(u)]du} \Big[  1 + \frac{\int_s^t e^{\int_0^\tau [\lambda(\sigma) - \mu(\sigma)]d\sigma}\lambda(\tau)d\tau}{\frac{1}{f} + \int_0^s e^{\int_0^\tau [\lambda(\sigma) - \mu(\sigma)]d\sigma} \lambda(\tau) d\tau} \Big]^{-2}
 $$</span><br /></p>
 </div>
-<p>where _0 is the initial speciation rate at time zero (here taken at the root of the tree and measured forwards in time. K is the time when speciation rate hits zero. In this model, referred to by Rabosky and Lovette as the &quot;continuous-decline&quot; model, there are no speciation events in the tree after time K.</p>
-<p>Substituting 12.3 into 12.2, we have:</p>
+<p>Following chapter 11, <span class="math inline"><em>n</em></span> is the number of tips in the tree, and divergence times <span class="math inline"><em>t</em><sub>1</sub>, <em>t</em><sub>2</sub>, …, <em>t</em><sub><em>n</em> − 1</sub></span> are defined measured from the present (e.g. decreasing towards the present day). <span class="math inline"><em>λ</em>(<em>t</em>)</span> and <span class="math inline"><em>μ</em>(<em>t</em>)</span> are speciation and extinction rates expressed as an arbitrary function of time, <span class="math inline"><em>f</em></span> is the sampling fraction (under a uniform sampling model). For a node starting at time <span class="math inline"><em>t</em><sub><em>i</em></sub></span>, <span class="math inline"><em>s</em><sub><em>i</em>, 1</sub></span> and <span class="math inline"><em>s</em><sub><em>i</em>, 2</sub></span> are the times when the two daughter lineages encounter a speciation event in the reconstructed tree<sup><a name="footnote12.1_back"><a href="#footnote4.1">1</a></a></sup>. <span class="math inline"><em>E</em>(<em>t</em>)</span>, as before, is the probability that a lineage alive at time <span class="math inline"><em>t</em></span> leaves no descendents in the sample. Finally, <span class="math inline"><em>Ψ</em>(<em>s</em>, <em>t</em>)</span> is the probability that a lineage alive at time <span class="math inline"><em>s</em></span> leaves exactly one descent at time <span class="math inline"><em>t</em> &lt; <em>s</em></span> in the reconstructed tree,</p>
+<p>Note that my equations here differ from the originals in Morlon et al. (xxx), which assumed that we have information about the stem lineage (and, thus, uses an index on <span class="math inline"><em>t</em><sub><em>i</em></sub></span> that goes up to <span class="math inline"><em>n</em></span> instead of <span class="math inline"><em>n</em> − 1</span>, and a different denominator conditioning on survival of the descendants of the single stem lineage; see also the online supplement for Morlon et al. (xxx)). I also multiply by the total number of topological arrangements of n taxa, <span class="math inline">(<em>n</em> + 1)!</span>.</p>
+<p>If one substitutes constants for speciation and extinction (<span class="math inline"><em>λ</em>(<em>t</em>)=<em>λ</em><sub><em>c</em></sub></span>, <span class="math inline"><em>μ</em>(<em>t</em>)=<em>μ</em><sub><em>c</em></sub></span>) in equation 12.1, then one obtains equation 11.24; if one additionally considers the case of complete sampling and substitutes <span class="math inline"><em>f</em> = 1</span> then we obtain equation 11.18. This provides a single unified framework for time-varying phylogenetic trees with uniform incomplete sampling (see also Hohna xxx for independent but equivalent derivations that also extend to the case of representative sampling).</p>
+<p>Equation 12.1 requires that we define speciation rate as a function of time. Two types of time-varying models are currently common in the comparative literature: linear and expoential. If speciation rates change linearly through time (see Rabosky and Lovette [xxx] for an early version of this model):</p>
 <p>(eq. 12.4)</p>
 <div>
-<p><br /><span class="math display">$$
-\xi_i = exp[\int_{t_i}^{T} (-\lambda_0 + \lambda_0 \frac{t}{K}) ds]
-$$</span><br /></p>
+<p><br /><span class="math display"><em>λ</em>(<em>t</em>)=<em>λ</em><sub>0</sub> + <em>α</em><sub><em>λ</em></sub><em>t</em></span><br /></p>
 </div>
+<p>Where <span class="math inline"><em>λ</em><sub>0</sub></span> is the initial speciation rate at the present and alpha the slope of speciation rate change as we go back through time. <span class="math inline"><em>α</em><sub><em>λ</em></sub></span> must be chosen so that speciation rates do not become negative as we move back through the tree: <span class="math inline"><em>α</em><sub><em>λ</em></sub> &gt; −<em>λ</em><sub>0</sub>/<em>t</em><sub>1</sub></span>. Note that the interpretation of <span class="math inline"><em>α</em><sub><em>λ</em></sub></span> is a bit strange since we measure time backwards: a positive <span class="math inline"><em>α</em><sub><em>λ</em></sub></span>, for example, would mean that speciation rates have declined from the past to the present. Other time-dependent models published earlier (e.g. Rabosky and Lovette, which considered a linearly declining pure-birth model) do not have this property.</p>
+<p>We could also consider a linear change in extinction through time:</p>
+<p>(eq. 12.5)</p>
 <div>
-<p><br /><span class="math display">$$
-\xi_i = exp[(\frac{2 \lambda_0}{K} t^2 + C)\Big|_{t_i}^{T}]
-$$</span><br /></p>
+<p><br /><span class="math display"><em>μ</em>(<em>t</em>)=<em>μ</em><sub>0</sub> + <em>α</em><sub><em>μ</em></sub><em>t</em></span><br /></p>
 </div>
+<p>Again, <span class="math inline"><em>α</em><sub><em>μ</em></sub></span> is the change in extinction rate through time, and must be interpreted in the same &quot;backwards&quot; way as <span class="math inline"><em>a</em><em>l</em><em>p</em><em>h</em><em>a</em><sub><em>λ</em></sub></span>. Again, we must restrict our parameter to avoid a negative rate: <span class="math inline">$\\alpha_{\mu} &gt; - \mu_0 / t_1$</span></p>
+<p>One can then substitute either of these formulas into equation 12.1 to calculate the likelihood of a model where speciation rate declines through time. Most implementations of this approach use numerical approximations rather than analytic solutions for this model (see, e.g., Morlon et al. xxx, Etienne et al. xxx).</p>
+<p>Another common model has speciation and/or extinction rates changing exponentially through time:</p>
+<p>(eq. 12.6)</p>
 <div>
-<p><br /><span class="math display">$$
-\xi_i = exp[\frac{2 \lambda_0}{K}(T^2 - t^2_i)]
-$$</span><br /></p>
+<p><br /><span class="math display"><em>λ</em>(<em>t</em>)=<em>λ</em><sub>0</sub><em>e</em><em>x</em><em>p</em>(<em>β</em><sub><em>l</em><em>a</em><em>m</em><em>b</em><em>d</em><em>a</em></sub><em>t</em>)</span><br /></p>
 </div>
-<p>One can then substitute this formula into equation 12.1 to calculate the likelihood of a model where speciation rate declines through time.</p>
-<p>Alternatively, we could define speciation rate in a truly diversity dependent manner as depending on the number of species in a particular place. Again using a linear model, we can use:</p>
+<p>and/or</p>
+<p>(eq. 12.7)</p>
+<div>
+<p><br /><span class="math display"><em>μ</em>(<em>t</em>)=<em>μ</em><sub>0</sub><em>e</em><em>x</em><em>p</em>(<em>β</em><sub><em>m</em><em>u</em></sub><em>t</em>)</span><br /></p>
+</div>
+<p>xxx example</p>
+<h2 id="section-12.4-diversity-dependent-models">Section 12.4: Diversity-dependent models</h2>
+<p>Time-dependent models in the previous section are often used as a proxy to capture processes like key innovations or adaptive radiations. Some of these theories suggest that diversification rates should depend on the number of species alive in a certain time or place, rather than time. Therefore, we might want to define speciation rate in a truly diversity dependent manner rather than using time as a proxy:</p>
 <p>(eq. 12.5)</p>
 <div>
 <p><br /><span class="math display">$$
 \lambda(t) = \lambda_0 (1 - \frac{N_t}{K})
 $$</span><br /></p>
 </div>
-<p>Since speciation rate now depends on number of lineages rather than time, we have to use a different basic likelihood function, from Rabosky and Lovette (2008 Evolution):</p>
+<p>Since speciation rate now depends on number of lineages rather than time, we can't plug this expression into the general formula from Morlon (xxx) above. Instead, we have two options. First, we can use a basic likelihood function, from Rabosky (xxx), derived in the case where there is no extinction:</p>
 <p>(eq. 12.6)</p>
 <div>
-<p><br /><span class="math display">$$
-L = (N-1)! \prod_{i=3}^{N} {\lambda(t_i) P(t_i, T)} \prod_{i=3}^{N} {\xi_i} {\xi^2_2}
-$$</span><br /></p>
+<p><br /><span class="math display"></span><br /></p>
 </div>
-<p>Here, the term <span class="math inline"><em>P</em>(<em>t</em><sub><em>i</em></sub>, <em>T</em>)</span> represents the probability that a lineage survives from time <span class="math inline"><em>t</em><sub><em>i</em></sub></span> to time <span class="math inline"><em>t</em></span>.</p>
-<p>This sort of approach has become very popular, as time-dependent diversification models are consistent with many ecological models of how multi-species clades might evolve through time. For example, adaptive radiation models based on ecological opportunity predict that, as niches are filled and ecological opportunity “used up,” then we should see a declining rate of diversification through time. By contrast, some models predict that species create new opportunities for other species, and thus predict accelerating diversification through time. These are reasonable hypotheses, but there is a statistical challenge: in each case, there is a very different model that predicts the exact same pattern. In the case of decelerating diversification, the predicted pattern of a lineage-through-time plot that bends down towards the present day can also come from a model where lineages accumulate at a constant rate, but then are not fully sampled at the present day. In other words, if we are missing some living species from our phylogenetic tree and we don’t account for that, then we would mistake a constant-rates birth death model for a signal of slowing diversification through time. Methods have been developed that can account for this, either by simulation or analytical equations that account for randomly missing taxa. Some methods can even account for the fact that the missing taxa might be non-random, as missing taxa tend to be either rare or poorly differentiated from their sister lineages (e.g. often younger than expected by chance).</p>
+<p>Alternatively, we can include extinction, and use the approach outlined by Etienne et al. (xxx and xxx). This approach focuses on numerical solutions to differential equations moving forward through time in the tree. The overall idea of the approach is similar to Morlon, but details differ; likelihoods from Etienne et al. should be directly comparable to all the likelihoods presented in this book provided that the conditioning is the same and they are multiplied by the total number of topological arrangements <span class="math inline">(<em>n</em> + 1)!</span> to get a likelihood for the tree rather than for the branching times. Etienne's approach can also deal with incomplete sampling under a uniform sampling model.</p>
+<p>xxx example</p>
+<p>Both density- and time-dependent approaches has become very popular, as time-dependent diversification models are consistent with many ecological models of how multi-species clades might evolve through time. For example, adaptive radiation models based on ecological opportunity predict that, as niches are filled and ecological opportunity “used up,” then we should see a declining rate of diversification through time. By contrast, some models predict that species create new opportunities for other species, and thus predict accelerating diversification through time. These are reasonable hypotheses, but there is a statistical challenge: in each case, there is a very different model that predicts the exact same pattern. In the case of decelerating diversification, the predicted pattern of a lineage-through-time plot that bends down towards the present day can also come from a model where lineages accumulate at a constant rate, but then are not fully sampled at the present day. In other words, if we are missing some living species from our phylogenetic tree and we don’t account for that, then we would mistake a constant-rates birth death model for a signal of slowing diversification through time. Methods have been developed that can account for this, either by simulation or analytical equations that account for randomly missing taxa. Some methods can even account for the fact that the missing taxa might be non-random, as missing taxa tend to be either rare or poorly differentiated from their sister lineages (e.g. often younger than expected by chance).</p>
 <p>Likewise, a pattern of accelerating differentiation mimics the pattern caused by extinction. A phylogenetic tree with high but constant rates of speciation and extinction is impossible to distinguish from a tree with no extinction and speciation rates that accelerate through time.</p>
 <p>Both of the above caveats are certainly worth considering when interpreting the results of tests of diversification from phylogenetic data. In many cases, adding fossil information will allow investigators to reliably distinguish between the stated alternatives, although methods that tie fossils and trees together are still relatively poorly developed. And various methods have been developed that will give ambiguous results when multiple models provide equivalent explanations for the data.</p>
-<h2 id="section-12.4-protracted-speciation">Section 12.4: Protracted speciation</h2>
-<p>In all of the diverisification models that we have considered so far, speciation happens instantly; one moment we have a single species, and then immediately true. But this is not biologically plausible. Speciation takes time, as evidenced by the increasing numbers of partially distinct populations that biologists have identified in the natural world. Furthermore, the fact that speciation takes take can have a profound impact on the shapes of phylogenetic trees. Because of this, it is worth considering diversification models that explicitly account for the fact that the process of speciation has a beginning and an end.</p>
+<h2 id="section-12.5-protracted-speciation">Section 12.5: Protracted speciation</h2>
+<p>In all of the diversification models that we have considered so far, speciation happens instantly; one moment we have a single species, and then immediately true. But this is not biologically plausible. Speciation takes time, as evidenced by the increasing numbers of partially distinct populations that biologists have identified in the natural world. Furthermore, the fact that speciation takes take can have a profound impact on the shapes of phylogenetic trees. Because of this, it is worth considering diversification models that explicitly account for the fact that the process of speciation has a beginning and an end.</p>
 <p>The most successful models to tackle this question have been models of protracted speciation (xxx citations). In such models, speciation begins by the formation of an incipient species. This represents a “partial” species; one can imagine, for example, that this is a population that has split off from the main range of the species, but has not yet evolved full reproductive isolation. The incipient species only becomes a “full” species if it survives some time interval, tau, that represents the time it takes to evolve full reproductive isolation (Figure xxx).</p>
 <p>Because speciation takes time, the main impact of this model is that we predict fewer very young species in our tree – that is, the nodes closest to the tips of the tree are not as young as they would be compared to pure-birth or birth-death models without protracted speciation (Figure xxx). As a result, protracted speciation models produce lineage through time plots that can mimic the properties often attributed to diversity-dependence, even without any interactions among lineages (ref)!</p>
 <p>Likelihood approaches are available for this model of protracted speciation. The way they work is that… (xxx)</p>
 <p>So far, models of protracted speciation remain mostly in the realm of ecological neutral theory. However, I think models that treat speciation as a process that takes time – rather than something instantaneous – will be an important addition to our macroevolutionary toolbox in the future.</p>
 <h2 id="section-12.5-summary">Section 12.5: Summary</h2>
 <p>In this chapter I discussed models that go beyond constant rate birth-death models. We can fit models where speciation rate varies across clades or through time (or both; see Rabosky xxx). In some cases, very different models predict the same pattern in phylogenetic trees, warranting some caution until direct fossil data can be incorporated. I also described a model of protracted speciation, where speciation takes some time to complete. This latter model is potentially better connected to microevolutionary models of speciation, and could point towards fruitful directions for the field. We know that simple birth-death models do not capture the richness of speciation and extinction across the tree of life, so these models that range beyond birth and death are critical to the growth of comparative methods.</p>
+<h2 id="footnotes">Footnotes</h2>
+<p><a name="footnote12.1">1</a>: Even though this approach requires topology, Morlon et al. (xxx) show that their likelihood is equivalent to other approaches, such as Nee and Maddison, that rely only on branching times and ignore topology completely. This is because trees with the same set of branching times but different topologies have identical likelihoods under this model.</p>
 <h1 id="references">References</h1>
 </body>
 </html>

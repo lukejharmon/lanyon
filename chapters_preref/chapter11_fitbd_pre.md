@@ -377,7 +377,7 @@ To apply this approach across an entire phylogenetic tree, we multiply equations
 (eq. 11.17)
 <div>
 $$
-L = \lambda^{n-1} \big[ \prod_{k = 1}^{2n-2} e^{(\lambda-\mu)(t_{k,b} - t_{k,t})} \cdot \frac{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_{k,t}})^2}{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_{k,b}})^2} \big]
+L(t_1, t_2, \dots, t_n) = \lambda^{n-1} \big[ \prod_{k = 1}^{2n-2} e^{(\lambda-\mu)(t_{k,b} - t_{k,t})} \cdot \frac{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_{k,t}})^2}{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_{k,b}})^2} \big]
 $$
 </div>
 
@@ -387,14 +387,14 @@ The product in equation 11.17 is taken over all $2n-2$ branches in the tree. Eac
 
 Most methods fitting birth-death models to trees condition on the existence of a tree - that is, conditioning on the fact that the whole process did not go extinct before the present day, and the speciation event from the root node led to two surviving lineages. To do this conditioning, we divide equation 11.17 by $\lambda [1-E(t_{root})]^2$.
 
-Additionally, likelihoods for birth-death waiting times, for example those in the original derivation by Nee, include an additional term, $(n-1)!$. This is because there are $(n-1)!$ possible topologies for any set of $n-1$ waiting times, all equally likely. Since this term is constant for a given tree size $n$, then leaving it out has no influence on the relative likelihoods of different parameter calues - but it is necessary to know about this multiplier if comparing likelihoods across different models for model selection, or comparing the output of different programs.
+Additionally, likelihoods for birth-death waiting times, for example those in the original derivation by Nee, include an additional term, $(n-1)!$. This is because there are $(n-1)!$ possible topologies for any set of $n-1$ waiting times, all equally likely. Since this term is constant for a given tree size $n$, then leaving it out has no influence on the relative likelihoods of different parameter values - but it is necessary to know about this multiplier if comparing likelihoods across different models for model selection, or comparing the output of different programs.
 
 Accounting for these two factors, the full likelihood is:
 
 (eq. 11.18)
 <div>
 $$
-L = (n-1)! \frac{\lambda^{n-2} \big[ \prod_{k = 1}^{2n-2} e^{(\lambda-\mu)(t_{k,b} - t_{k,t})} \cdot \frac{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_{k,t}})^2}{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_{k,b}})^2} \big]}{ [1-E(t_{root})]^2}
+L(\tau) = (n-1)! \frac{\lambda^{n-2} \big[ \prod_{k = 1}^{2n-2} e^{(\lambda-\mu)(t_{k,b} - t_{k,t})} \cdot \frac{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_{k,t}})^2}{(\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_{k,b}})^2} \big]}{ [1-E(t_{root})]^2}
 $$
 </div>
 
@@ -472,7 +472,7 @@ Repeating the calculations above along branches and at nodes, but with the start
 (eq. 11.23)
 <div>
 $$
-L = \lambda^{n-1} \big[ \prod_{k = 1}^{2n-2} e^{(\lambda-\mu)(t_{k,b} - t_{k,t})} \cdot \frac{(f \lambda - (\mu - \lambda(1-f))e^{(\lambda - \mu)t_{k,t}})^2}{(f \lambda - (\mu - \lambda(1-f))e^{(\lambda - \mu)t_{k,b}})^2} \big]
+L(t_1, t_2, \dots, t_n) = \lambda^{n-1} \big[ \prod_{k = 1}^{2n-2} e^{(\lambda-\mu)(t_{k,b} - t_{k,t})} \cdot \frac{(f \lambda - (\mu - \lambda(1-f))e^{(\lambda - \mu)t_{k,t}})^2}{(f \lambda - (\mu - \lambda(1-f))e^{(\lambda - \mu)t_{k,b}})^2} \big]
 $$
 </div>
 
@@ -481,7 +481,7 @@ Again, the above formula is proportional to the full likelihood, which is:
 (eq. 11.24)
 <div>
 $$
-L = (n-1)! \frac{\lambda^{n-2} \big[ \prod_{k = 1}^{2n-2} e^{(\lambda-\mu)(t_{k,b} - t_{k,t})} \cdot \frac{(f \lambda - (\mu - \lambda(1-f))e^{(\lambda - \mu)t_{k,t}})^2}{(f \lambda - (\mu - \lambda(1-f))e^{(\lambda - \mu)t_{k,b}})^2} \big]}{[1-E(t_{root})]^2}
+L(\tau) = (n-1)! \frac{\lambda^{n-2} \big[ \prod_{k = 1}^{2n-2} e^{(\lambda-\mu)(t_{k,b} - t_{k,t})} \cdot \frac{(f \lambda - (\mu - \lambda(1-f))e^{(\lambda - \mu)t_{k,t}})^2}{(f \lambda - (\mu - \lambda(1-f))e^{(\lambda - \mu)t_{k,b}})^2} \big]}{[1-E(t_{root})]^2}
 $$
 </div>
 
@@ -494,7 +494,7 @@ E(t_{root}) = 1 - \frac{\lambda-\mu}{\lambda - (\lambda-\mu)e^{(\lambda - \mu)t_
 $$
 </div>
 
-For representative sampling, one approach is to consider the data as divided into two part, phylogenetic and taxonomic. The taxonomic part is the stem age and extant diversity of the unsampled clades, while the phylogenetic part is the relationships among those clades. Following Rabosky and Lovette [-@Rabosky2007-ou], we can then calculate:
+For representative sampling, one approach is to consider the data as divided into two parts, phylogenetic and taxonomic. The taxonomic part is the stem age and extant diversity of the unsampled clades, while the phylogenetic part is the relationships among those clades. Following Rabosky and Lovette [-@Rabosky2007-ou], we can then calculate:
 
 (eq. 11.26)
 <div>
