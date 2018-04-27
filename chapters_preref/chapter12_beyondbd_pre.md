@@ -93,7 +93,7 @@ $$
 $$
 </div>
 
-Following chapter 11, $n$ is the number of tips in the tree, and divergence times $t_1, t_2, \dots, t_{n-1}$ are defined measured from the present (e.g. decreasing towards the present day). $\lambda(t)$ and $\mu(t)$ are speciation and extinction rates expressed as an arbitrary function of time, $f$ is the sampling fraction (under a uniform sampling model). For a node starting at time $t_i$, $s_{i, 1}$ and $s_{i, 2}$ are the times when the two daughter lineages encounter a speciation event in the reconstructed tree<sup><a name="footnote12.1_back">[1](#footnote4.1)</a></sup>. $E(t)$, as before, is the probability that a lineage alive at time $t$ leaves no descendents in the sample. Finally, $\Psi(s, t)$ is the probability that a lineage alive at time $s$ leaves exactly one descent at time $t < s$ in the reconstructed tree,
+Following chapter 11, $n$ is the number of tips in the tree, and divergence times $t_1, t_2, \dots, t_{n-1}$ are defined measured from the present (e.g. decreasing towards the present day). $\lambda(t)$ and $\mu(t)$ are speciation and extinction rates expressed as an arbitrary function of time, $f$ is the sampling fraction (under a uniform sampling model). For a node starting at time $t_i$, $s_{i, 1}$ and $s_{i, 2}$ are the times when the two daughter lineages encounter a speciation event in the reconstructed tree<sup><a name="footnote12.1_back">[1](#footnote12.1)</a></sup>. $E(t)$, as before, is the probability that a lineage alive at time $t$ leaves no descendents in the sample. Finally, $\Psi(s, t)$ is the probability that a lineage alive at time $s$ leaves exactly one descent at time $t < s$ in the reconstructed tree,
 
 Note that my equations here differ from the originals in Morlon et al. (xxx), which assumed that we have information about the stem lineage (and, thus, uses an index on $t_i$ that goes up to $n$ instead of $n-1$, and a different denominator conditioning on survival of the descendants of the single stem lineage; see also the online supplement for Morlon et al. (xxx)). I also multiply by the total number of topological arrangements of n taxa, $(n+1)!$.
 
@@ -121,7 +121,7 @@ $$
 $$
 </div>
 
-Again, $\alpha_{\mu}$ is the change in extinction rate through time, and must be interpreted in the same "backwards" way as $alpha_{\lambda}$. Again, we must restrict our parameter to avoid a negative rate: $\\alpha_{\mu} > - \mu_0 / t_1$
+Again, $\alpha_{\mu}$ is the change in extinction rate through time, and must be interpreted in the same "backwards" way as $\alpha_{\lambda}$. Again, we must restrict our parameter to avoid a negative rate: $\alpha_{\mu} > - \mu_0 / t_1$
 
 One can then substitute either of these formulas into equation 12.1 to calculate the likelihood of a model where speciation rate declines through time. Most implementations of this approach use numerical approximations rather than analytic solutions for this model (see, e.g., Morlon et al. xxx, Etienne et al. xxx).
 
@@ -131,7 +131,7 @@ Another common model has speciation and/or extinction rates changing exponential
 
 <div>
 $$
-\lambda(t) = \lambda_0 exp(\beta_{lambda} t)
+\lambda(t) = \lambda_0 exp(\beta_{\lambda} t)
 $$
 </div>
 
@@ -141,7 +141,7 @@ and/or
 
 <div>
 $$
-\mu(t) = \mu_0 exp(\beta_{mu} t)
+\mu(t) = \mu_0 exp(\beta_{\mu} t)
 $$
 </div>
 
@@ -159,16 +159,7 @@ $$
 $$
 </div>
 
-Since speciation rate now depends on number of lineages rather than time, we can't plug this expression into the general formula from Morlon (xxx) above. Instead, we have two options. First, we can use a basic likelihood function, from Rabosky (xxx), derived in the case where there is no extinction:
-
-(eq. 12.6)
-
-<div>
-$$
-$$
-</div>
-
-Alternatively, we can include extinction, and use the approach outlined by Etienne et al. (xxx and xxx). This approach focuses on numerical solutions to differential equations moving forward through time in the tree. The overall idea of the approach is similar to Morlon, but details differ; likelihoods from Etienne et al. should be directly comparable to all the likelihoods presented in this book provided that the conditioning is the same and they are multiplied by the total number of topological arrangements $(n+1)!$ to get a likelihood for the tree rather than for the branching times. Etienne's approach can also deal with incomplete sampling under a uniform sampling model.
+Since speciation rate now depends on number of lineages rather than time, we can't plug this expression into the general formula from Morlon (xxx) above. Instead, we can use the approach outlined by Etienne et al. (xxx and xxx). This approach focuses on numerical solutions to differential equations moving forward through time in the tree. The overall idea of the approach is similar to Morlon, but details differ; likelihoods from Etienne et al. should be directly comparable to all the likelihoods presented in this book provided that the conditioning is the same and they are multiplied by the total number of topological arrangements $(n+1)!$ to get a likelihood for the tree rather than for the branching times. Etienne's approach can also deal with incomplete sampling under a uniform sampling model.
 
 xxx example
 
@@ -187,9 +178,9 @@ The most successful models to tackle this question have been models of protracte
 
 Because speciation takes time, the main impact of this model is that we predict fewer very young species in our tree – that is, the nodes closest to the tips of the tree are not as young as they would be compared to pure-birth or birth-death models without protracted speciation (Figure xxx). As a result, protracted speciation models produce lineage through time plots that can mimic the properties often attributed to diversity-dependence, even without any interactions among lineages (ref)!
 
-Likelihood approaches are available for this model of protracted speciation. The way they work is that… (xxx)
+Likelihood approaches are available for this model of protracted speciation. Again, the likelihood must be calculated using numerical methods (Etienne et al.). XXX example.
 
-So far, models of protracted speciation remain mostly in the realm of ecological neutral theory. However, I think models that treat speciation as a process that takes time – rather than something instantaneous – will be an important addition to our macroevolutionary toolbox in the future.
+So far, models of protracted speciation remain mostly in the realm of ecological neutral theory, and are just beginning to move into phylogenetics and evolutionary biology (see, e.g., Knowles). However, I think models that treat speciation as a process that takes time – rather than something instantaneous – will be an important addition to our macroevolutionary toolbox in the future.
 
 ## Section 12.5: Summary
 
@@ -197,6 +188,6 @@ In this chapter I discussed models that go beyond constant rate birth-death mode
 
 ## Footnotes
 
-<a name="footnote12.1">1</a>: Even though this approach requires topology, Morlon et al. (xxx) show that their likelihood is equivalent to other approaches, such as Nee and Maddison, that rely only on branching times and ignore topology completely. This is because trees with the same set of branching times but different topologies have identical likelihoods under this model.
+<a name="footnote12.1">1</a>: Even though this approach requires topology, Morlon et al. (xxx) show that their likelihood is equivalent to other approaches, such as Nee and Maddison, that rely only on branching times and ignore topology completely. This is because trees with the same set of branching times but different topologies have identical likelihoods under this model.[*back to main text*](#footnote12.1_back)
 
 # References
