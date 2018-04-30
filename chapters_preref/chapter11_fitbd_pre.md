@@ -505,7 +505,7 @@ $$
 
 Where $L_{phylogenetic}$ can be calculated using equation 11.18 and $L_{taxonomic}$ calculated for each clade using equation 10.16 and then multiplied to get the overall likelihood.
 
-An alternative is Hohna's [-@Hohna2011-tn] diversified sampling ("DS") model. This model makes a different assumption: when sampling n taxa from an overall set of m, the deepest $n-1$ nodes have been included. Hohna's approach allows users to fit a model with representative sampling but without requiring assignment of extant diversity to each clade.
+There are two alternatives. One is Hohna's [-@Hohna2011-tn] diversified sampling ("DS") model. This model makes a different assumption: when sampling n taxa from an overall set of m, the deepest $n-1$ nodes have been included. Hohna's approach allows users to fit a model with representative sampling but without requiring assignment of extant diversity to each clade. Another approach, by Stadler and Smrckova [-@Stadler2016-zl], calculates likelihoods for representatively sampled trees and can fit models of time-varying speciation and extinction rates (see chapter 12).
 
 ##  Section 11.6: Summary
 
