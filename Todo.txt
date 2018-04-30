@@ -1,6 +1,4 @@
 To-do list:
-Chapter 12 equations
-Chapter 12 References
 Chapter 12 examples
 Chapter 12 Proofread
 
