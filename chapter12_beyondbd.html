@@ -52,12 +52,12 @@ title: Beyond birth-death models
 <p class="caption">Figure 12.2. A phylogenetic tree including three clades, illustrating two possible models for diversification: a constant rates model, where all three clades have the same diversification parameters <span class="math inline"><em>λ</em></span> and <span class="math inline"><em>μ</em></span>, and a variable rates model, where clade A has parameters that differ from those of the other two clades.</p>
 </div>
 <p>Consider the example in Figure 12.2. We would like to know whether clade A has speciation and extinction rates, <span class="math inline"><em>λ</em><sub><em>A</em></sub></span> and <span class="math inline"><em>μ</em><sub><em>A</em></sub></span>, that differ from the background rates, <span class="math inline"><em>λ</em><sub><em>B</em></sub></span> and <span class="math inline"><em>μ</em><sub><em>B</em></sub></span> – we will call this a “variable rates” model. The alternative is a “constant rates” model where the entire clade has constant rate parameters <span class="math inline"><em>λ</em><sub><em>T</em></sub></span> and <span class="math inline"><em>μ</em><sub><em>T</em></sub></span>. These two models are nested, since the constant-rates model is a special case of the variable rates model where <span class="math inline"><em>λ</em><sub><em>T</em></sub> = <em>λ</em><sub><em>A</em></sub> = <em>λ</em><sub><em>B</em></sub></span> and <span class="math inline"><em>μ</em><sub><em>T</em></sub> = <em>μ</em><sub><em>A</em></sub> = <em>μ</em><sub><em>B</em></sub></span>. Calculating the likelihood for these two models is reasonably straightforward - we simply calculate the likelihood for each section of the tree using the relevant equation from Chapter 11, and then multiply the likelihoods from the two parts of the tree (or add the log-likelihoods) to get the overall likelihood.</p>
-<p>For a real example, let’s look at the phylogenetic tree of amniotes and evaluate the hypothesis that birds have distinct diversification rates from other major lineages (mammals, tuataras, squamates, turtles, and crocodiles; Figure 12.3). We can use a phylogenetic tree showing the relationship among major clades, and add divergence times from <a href="http://timetree.org/">Timetree</a> <span class="citation">(Hedges et al. <a href="#ref-Hedges2006-ta">2006</a>)</span>. We can then calculate likelihoods based on equation 11.24.</p>
+<p>For a real example, let’s look at the phylogenetic tree of amphibians and evaluate the hypothesis that the tailed and New Zealand frogs, sister clade to the rest of frogs, diversified at a slower rate than other amphibians (Figure 12.3). We can use the phylogenetic &quot;backbone&quot; tree from Pyron and Jetz <span class="citation">(<span class="citeproc-not-found" data-reference-id="Jetz2018-mh"><strong>???</strong></span>)</span>, assigning diversities based on the classification associated with that publication. We can then calculate likelihoods based on equation 11.24.</p>
 <div class="figure">
-<img src="{{site.baseurl}}/images/figure12-3.png" alt="Figure 12.3. Phylogenetic tree of amniotes with divergence times and diversities of major clades." />
-<p class="caption">Figure 12.3. Phylogenetic tree of amniotes with divergence times and diversities of major clades.</p>
+<img src="{{site.baseurl}}/images/figure12-3.png" alt="Figure 12.3. Phylogenetic tree of amphibians with divergence times and diversities of major clades." />
+<p class="caption">Figure 12.3. Phylogenetic tree of amphibians with divergence times and diversities of major clades.</p>
 </div>
-<p>We can calculate the likelihood of the constant rates model, with two parameters <span class="math inline"><em>λ</em><sub><em>T</em></sub></span> and <span class="math inline"><em>μ</em><sub><em>T</em></sub></span>, to a variable rates model with four parameters <span class="math inline"><em>λ</em><sub><em>b</em><em>i</em><em>r</em><em>d</em></sub></span>, <span class="math inline"><em>μ</em><sub><em>b</em><em>i</em><em>r</em><em>d</em></sub></span>, <span class="math inline"><em>λ</em><sub><em>o</em><em>t</em><em>h</em><em>e</em><em>r</em></sub></span>, and <span class="math inline"><em>μ</em><sub><em>o</em><em>t</em><em>h</em><em>e</em><em>r</em></sub></span>. For this example, we obtain the following results.</p>
+<p>We can calculate the likelihood of the constant rates model, with two parameters <span class="math inline"><em>λ</em><sub><em>T</em></sub></span> and <span class="math inline"><em>μ</em><sub><em>T</em></sub></span>, to a variable rates model with four parameters <span class="math inline">$\lambda_{t&amp;NZ}$</span>, <span class="math inline">$\mu_{t&amp;NZ}$</span>, <span class="math inline"><em>λ</em><sub><em>o</em><em>t</em><em>h</em><em>e</em><em>r</em></sub></span>, and <span class="math inline"><em>μ</em><sub><em>o</em><em>t</em><em>h</em><em>e</em><em>r</em></sub></span>. For this example, we obtain the following results.</p>
 <table>
 <thead>
 <tr class="header">
@@ -70,43 +70,43 @@ title: Beyond birth-death models
 <tbody>
 <tr class="odd">
 <td>Constant rates</td>
-<td align="right"><span class="math inline"><em>λ</em><sub><em>T</em></sub> = 0.022</span></td>
-<td align="right">-75.7</td>
-<td align="right">155.4</td>
+<td align="right"><span class="math inline"><em>λ</em><sub><em>T</em></sub> = 0.030</span></td>
+<td align="right">-1053.9</td>
+<td align="right">2111.8</td>
 </tr>
 <tr class="even">
 <td></td>
-<td align="right"><span class="math inline"><em>μ</em><sub><em>T</em></sub> = 0.0</span></td>
+<td align="right"><span class="math inline"><em>μ</em><sub><em>T</em></sub> = 0.28</span></td>
 <td align="right"></td>
 <td align="right"></td>
 </tr>
 <tr class="odd">
 <td>Variable rates</td>
-<td align="right"><span class="math inline"><em>λ</em><sub><em>b</em><em>i</em><em>r</em><em>d</em></sub> = 0.052</span></td>
-<td align="right">-73.5</td>
-<td align="right">155.0</td>
+<td align="right"><span class="math inline">$r_{t&amp;NZ} = 0.010$</span></td>
+<td align="right">-1045.4</td>
+<td align="right">2101.1</td>
 </tr>
 <tr class="even">
 <td></td>
-<td align="right"><span class="math inline"><em>μ</em><sub><em>b</em><em>i</em><em>r</em><em>d</em></sub> = 0.018</span></td>
+<td align="right"><span class="math inline">$\epsilon_{t&amp;NZ} = 0.007$</span></td>
 <td align="right"></td>
 <td align="right"></td>
 </tr>
 <tr class="odd">
 <td></td>
-<td align="right"><span class="math inline"><em>λ</em><sub><em>o</em><em>t</em><em>h</em><em>e</em><em>r</em></sub> = 0.126</span></td>
+<td align="right"><span class="math inline"><em>r</em><sub><em>o</em><em>t</em><em>h</em><em>e</em><em>r</em></sub> = 0.29</span></td>
 <td align="right"></td>
 <td align="right"></td>
 </tr>
 <tr class="even">
 <td></td>
-<td align="right"><span class="math inline"><em>μ</em><sub><em>o</em><em>t</em><em>h</em><em>e</em><em>r</em></sub> = 0.102</span></td>
+<td align="right"><span class="math inline"><em>ϵ</em><sub><em>o</em><em>t</em><em>h</em><em>e</em><em>r</em></sub> = 0.27</span></td>
 <td align="right"></td>
 <td align="right"></td>
 </tr>
 </tbody>
 </table>
-<p>We see from these results that there is effectively no difference between the two models, and so no reason (from this small dataset) to conclude that birds are significantly different from other amniotes.</p>
+<p>We see from these results that there is good reason to think that there is a difference in diversification rates in these &quot;oddball&quot; frogs compared to the rest of the amphibians.</p>
 <p>Of course, more elaborate comparisons are possible. For example, one could compare the fit of four models, as follows: Model 1, constant rates; Model 2, speciation rate in clade A differs from the background; Model 3, extinction rate in clade A differs from the background; and Model 4, both speciation and extinction rates in clade A differ from the background. In this case, some of the pairs of models are nested – for example, Model 1 is a special case of Model 2, which is, in turn, a special case of Model 4 – but all four do not make a nested series. Here we benefit from using a model selection approach based on <span class="math inline"><em>A</em><em>I</em><em>C</em><sub><em>C</em></sub></span>. We can fit all four models and use their relative number of parameters to calculate <span class="math inline"><em>A</em><em>I</em><em>C</em><sub><em>C</em></sub></span> scores. We can then calculate <span class="math inline"><em>A</em><em>I</em><em>C</em><sub><em>C</em></sub></span> weights to evaluate the relative support for each of these four models. (As an aside, it might be difficult to differentiate among these four possibilities without a lot of data!)</p>
 <p>But what if you do not have an a priori reason to predict differential diversification rates across clades? Or, what if the only reason you think one clade might have a different diversification rate than another is that it has more species? (Such reasoning is circular, and will wreak havoc with your analyses!) In such cases, we can use methods that allow us to fit general models where diversification rates are allowed to vary across clades in the tree. Available methods use stepwise AIC <span class="citation">(MEDUSA, Alfaro et al. <a href="#ref-Alfaro2009-hz">2009</a>; but see May and Moore <a href="#ref-May2016-cm">2016</a>)</span>, or reversible-jump Bayesian MCMC <span class="citation">(Rabosky <a href="#ref-Rabosky2014-qo">2014</a>, but see <span class="citation">Moore et al. (<a href="#ref-Moore2016-ei">2016</a>)</span>, <span class="citation">Rabosky (<a href="#ref-Rabosky2017-bl">2017</a>)</span>)</span>.</p>
 <p>One note: all current approaches fit a model where birth and death rates change at discrete times in the phylogenetic tree - that is, along certain branches in the tree leading to extant taxa. One might wish for an approach, then, that models such changes - using, for example, a Poisson process - and then locates the changes on the tree. However, we still lack the mathematics to solve for <span class="math inline"><em>E</em>(<em>t</em>)</span> (e.g. equation 11.19) under such a model <span class="citation">(Moore et al. <a href="#ref-Moore2016-ei">2016</a>)</span>. Given that, we can view current implementations of models where rates vary across clades as an approximation to the likelihood, and one that discounts the possibility of shifts in speciation and/or extinction rates among any clades that did not happen to survive until the present day <span class="citation">(Rabosky <a href="#ref-Rabosky2017-bl">2017</a>)</span> - and we are stuck with that until a better alternative is developed!</p>
@@ -221,9 +221,6 @@ $$</span><br /></p>
 </div>
 <div id="ref-Etienne2016-pf">
 <p>Etienne, R. S., A. L. Pigot, and A. B. Phillimore. 2016. How reliably can we infer diversity-dependent diversification from phylogenies? Methods Ecol. Evol. 7:1092–1099.</p>
-</div>
-<div id="ref-Hedges2006-ta">
-<p>Hedges, S. B., J. Dudley, and S. Kumar. 2006. TimeTree: A public knowledge-base of divergence times among organisms. Bioinformatics 22:2971–2972.</p>
 </div>
 <div id="ref-Hohna2014-ba">
 <p>Höhna, S. 2014. Likelihood inference of non-constant diversification rates with incomplete taxon sampling. PLoS One 9:e84184.</p>
