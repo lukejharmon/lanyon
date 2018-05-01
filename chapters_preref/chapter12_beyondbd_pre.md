@@ -6,10 +6,10 @@ NOTE THIS CHAPTER IS IN PROGRESS!
 
 ## Section 12.1: Capturing variable evolution
 
-As we discovered in Chapter 11, there are times and places where the tree of life has grown more rapidly than others. For example, islands and island-like habitats are sometimes described as hotspots of speciation [@Hughes2006-nr, @Losos2000-rr], and diversification rates in such habitats can proceed at an extremely rapid pace. On a broader scale, many studies have shown that speciation rates are elevated and/or extinction rates depressed following mass extinctions [e.g. @Sepkoski1984-vz]. Finally, some clades seem to diversity much more rapidly than others. That is why, for instance, I can see so many birds out the window of this coffee shop, but no tuataras (Figure 12.1).
+As we discovered in Chapter 11, there are times and places where the tree of life has grown more rapidly than others. For example, islands and island-like habitats are sometimes described as hotspots of speciation [@Hughes2006-nr, @Losos2000-rr], and diversification rates in such habitats can proceed at an extremely rapid pace. On a broader scale, many studies have shown that speciation rates are elevated and/or extinction rates depressed following mass extinctions [e.g. @Sepkoski1984-vz]. Finally, some clades seem to diversity much more rapidly than others. In my corner of the world, the Pacific Northwest of the United States, this variation is best seen in our local amphibians. We have species like the spotted frog and the Pacific tree frog, which represent two very diverse frog lineages (Ranidae and Hylidae, respectively). At the same time, if one drives a bit to the high mountain streams, you can find frogs with tiny tails. These Inland Tailed Frogs are members of *Ascaphidae*, a genus with only two species, one coastal and one inland. (As an aside, the tail, found only in males, is an intromittent organ used for internal fertilization - analogous to a penis, but different!) These two tailed frog species are the sister group to a small radiation of four species frogs in New Zealand (Leopelmatidae, which have no tails). These two clades together - just six species - make up the sister clade to all other frogs, nearly 7000 species. We seek to explain patterns like this contrast in the diversity of two groups which decend from a common ancestor and are, thus, the same age.
 
 
-![Figure 12.1. Birds, like this mountain bluebird, are very diverse in the present day, with about 10,000 species. By contrast, tuataras (right) are very depauperate, with only one or two species (depending on taxonomy) in the present day. However, the stem age of tuataras is very much older than the stem age of birds.]({{ site.baseurl }}/images/figure12-1.png)
+![Figure 12.1. Contrasts in frog diversity. Spotted frogs (A) and Pacific tree frogs (B) come from diverse clades, while tailed frogs (C) and New Zealand frogs (D) are from depauperate clades. Photo sources <sup><a name="footnote12.1_back">[1](#footnote12.1)</a></sup>]({{ site.baseurl }}/images/figure12-1.png)
 
 All of these facts lead to the idea that simple, constant-rate birth-death models are not adequate to capture the complexity and dynamics of speciation and extinction across the tree of life. Speciation and extinction rates vary through time, across clades, and among geographic regions. We can sometimes predict this variation based on what we know about the mechanisms that lead to speciation and/or extinction.
 
@@ -32,23 +32,23 @@ The simplest method to carry out this test is by using model selection in a ML f
 
 Consider the example in Figure 12.2. We would like to know whether clade A has speciation and extinction rates, $\lambda_A$ and $\mu_A$, that differ from the background rates, $\lambda_B$ and $\mu_B$ – we will call this a “variable rates” model. The alternative is a “constant rates” model where the entire clade has constant rate parameters $\lambda_T$ and $\mu_T$. These two models are nested, since the constant-rates model is a special case of the variable rates model where $\lambda_T = \lambda_A = \lambda_B$ and $\mu_T = \mu_A = \mu_B$. Calculating the likelihood for these two models is reasonably straightforward - we simply calculate the likelihood for each section of the tree using the relevant equation from Chapter 11, and then multiply the likelihoods from the two parts of the tree (or add the log-likelihoods) to get the overall likelihood.
 
-For a real example, let’s look at the phylogenetic tree of amniotes and evaluate the hypothesis that birds have distinct diversification rates from other major lineages (mammals, tuataras, squamates, turtles, and crocodiles; Figure 12.3). We can use a phylogenetic tree showing the relationship among major clades, and add divergence times from [Timetree](http://timetree.org/) [@Hedges2006-ta]. We can then calculate likelihoods based on equation 11.24.
+For a real example, let’s look at the phylogenetic tree of amphibians and evaluate the hypothesis that the tailed and New Zealand frogs, sister clade to the rest of frogs, diversified at a slower rate than other amphibians (Figure 12.3). We can use the phylogenetic "backbone" tree from Pyron and Jetz [@Jetz2018-mh], assigning diversities based on the classification associated with that publication. We can then calculate likelihoods based on equation 11.24.
 
-![Figure 12.3. Phylogenetic tree of amniotes with divergence times and diversities of major clades.]({{ site.baseurl }}/images/figure12-3.png)
+![Figure 12.3. Phylogenetic tree of amphibians with divergence times and diversities of major clades.]({{ site.baseurl }}/images/figure12-3.png)
 
-We can calculate the likelihood of the constant rates model, with two parameters $\lambda_T$ and $\mu_T$, to a variable rates model with four parameters $\lambda_{bird}$, $\mu_{bird}$, $\lambda_{other}$, and $\mu_{other}$. For this example, we obtain the following results.
+We can calculate the likelihood of the constant rates model, with two parameters $\lambda_T$ and $\mu_T$, to a variable rates model with four parameters $\lambda_{t&NZ}$, $\mu_{t&NZ}$, $\lambda_{other}$, and $\mu_{other}$. For this example, we obtain the following results.
 
 | Model	| Parameter estimates |	ln-Likelihood |	AIC |
 | --- | ---: | ---: | ---: |
-| Constant rates | $\lambda_T = 0.022$ | -75.7 | 155.4 |
-| | $\mu_T = 0.0$ | | |
-| Variable rates | $\lambda_{bird} = 0.052$ 	| -73.5 | 155.0 |
-| | $\mu_{bird} = 0.018$ | | |
-| | $\lambda_{other} = 0.126$ | | |
-| | $\mu_{other} = 0.102$ | | |
+| Constant rates | $\lambda_T = 0.030$ | -1053.9 | 2111.8 |
+| | $\mu_T = 0.28$ | | |
+| Variable rates | $r_{t&NZ} = 0.010$ 	| -1045.4 | 2101.1 |
+| | $\epsilon_{t&NZ} = 0.007$ | | |
+| | $r_{other} = 0.29$ | | |
+| | $\epsilon_{other} = 0.27$ | | |
 
 
-We see from these results that there is effectively no difference between the two models, and so no reason (from this small dataset) to conclude that birds are significantly different from other amniotes.
+We see from these results that there is good reason to think that there is a difference in diversification rates in these "oddball" frogs compared to the rest of the amphibians.
 
 Of course, more elaborate comparisons are possible. For example, one could compare the fit of four models, as follows: Model 1, constant rates; Model 2, speciation rate in clade A differs from the background; Model 3, extinction rate in clade A differs from the background; and Model 4, both speciation and extinction rates in clade A differ from the background. In this case, some of the pairs of models are nested – for example, Model 1 is a special case of Model 2, which is, in turn, a special case of Model 4 – but all four do not make a nested series. Here we benefit from using a model selection approach based on $AIC_C$. We can fit all four models and use their relative number of parameters to calculate $AIC_C$ scores. We can then calculate $AIC_C$ weights to evaluate the relative support for each of these four models. (As an aside, it might be difficult to differentiate among these four possibilities without a lot of data!)
 
@@ -95,7 +95,7 @@ $$
 $$
 </div>
 
-Following chapter 11, $n$ is the number of tips in the tree, and divergence times $t_1, t_2, \dots, t_{n-1}$ are defined measured from the present (e.g. decreasing towards the present day). $\lambda(t)$ and $\mu(t)$ are speciation and extinction rates expressed as an arbitrary function of time, $f$ is the sampling fraction (under a uniform sampling model). For a node starting at time $t_i$, $s_{i, 1}$ and $s_{i, 2}$ are the times when the two daughter lineages encounter a speciation event in the reconstructed tree<sup><a name="footnote12.1_back">[1](#footnote12.1)</a></sup>. $E(t)$, as before, is the probability that a lineage alive at time $t$ leaves no descendants in the sample. Finally, $\Psi(s, t)$ is the probability that a lineage alive at time $s$ leaves exactly one descent at time $t < s$ in the reconstructed tree,
+Following chapter 11, $n$ is the number of tips in the tree, and divergence times $t_1, t_2, \dots, t_{n-1}$ are defined measured from the present (e.g. decreasing towards the present day). $\lambda(t)$ and $\mu(t)$ are speciation and extinction rates expressed as an arbitrary function of time, $f$ is the sampling fraction (under a uniform sampling model). For a node starting at time $t_i$, $s_{i, 1}$ and $s_{i, 2}$ are the times when the two daughter lineages encounter a speciation event in the reconstructed tree<sup><a name="footnote12.2_back">[2](#footnote12.2)</a></sup>. $E(t)$, as before, is the probability that a lineage alive at time $t$ leaves no descendants in the sample. Finally, $\Psi(s, t)$ is the probability that a lineage alive at time $s$ leaves exactly one descent at time $t < s$ in the reconstructed tree,
 
 Note that my equations here differ from the originals in Morlon et al. [-@Morlon2011-ci], which assumed that we have information about the stem lineage (and, thus, uses an index on $t_i$ that goes up to $n$ instead of $n-1$, and a different denominator conditioning on survival of the descendants of the single stem lineage; see also the online supplement for Morlon et al. [-@Morlon2011-ci]). I also multiply by the total number of topological arrangements of n taxa, $(n+1)!$.
 
@@ -192,6 +192,9 @@ In this chapter I discussed models that go beyond constant rate birth-death mode
 
 ## Footnotes
 
-<a name="footnote12.1">1</a>: Even though this approach requires topology, Morlon et al. (xxx) show that their likelihood is equivalent to other approaches, such as Nee and Maddison, that rely only on branching times and ignore topology completely. This is because trees with the same set of branching times but different topologies have identical likelihoods under this model.[*back to main text*](#footnote12.1_back)
+<a name="footnote12.1">1</a>: A - photo by Sean Neilsen (NPS) [Public domain], via Wikimedia Commons; B - By The High Fin Sperm Whale [CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0) or GFDL (http://www.gnu.org/copyleft/fdl.html)], from Wikimedia Commons; C - photo by (Raymond)[https://yarpnews.wordpress.com/] [CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)], via Wikimedia Commons; D - By Phil Bishop (http://calphotos.berkeley.edu) [CC BY-SA 2.5  (https://creativecommons.org/licenses/by-sa/2.5) or CC BY-SA 2.5  (https://creativecommons.org/licenses/by-sa/2.5)], via Wikimedia Commons. [*back to main text*](#footnote12.1_back)
+
+
+<a name="footnote12.2">2</a>: Even though this approach requires topology, Morlon et al. [-@Morlon2011-ci] show that their likelihood is equivalent to other approaches, such as Nee and Maddison, that rely only on branching times and ignore topology completely. This is because trees with the same set of branching times but different topologies have identical likelihoods under this model.[*back to main text*](#footnote12.2_back)
 
 # References
