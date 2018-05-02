@@ -36,16 +36,16 @@ For a real example, let’s look at the phylogenetic tree of amphibians and eval
 
 ![Figure 12.3. Phylogenetic tree of amphibians with divergence times and diversities of major clades.]({{ site.baseurl }}/images/figure12-3.png)
 
-We can calculate the likelihood of the constant rates model, with two parameters $\lambda_T$ and $\mu_T$, to a variable rates model with four parameters $\lambda_{t&NZ}$, $\mu_{t&NZ}$, $\lambda_{other}$, and $\mu_{other}$. For this example, we obtain the following results.
+We can calculate the likelihood of the constant rates model, with two parameters $\lambda_T$ and $\mu_T$, to a variable rates model with four parameters $\lambda_{liop}$, $\mu_{liop}$, $\lambda_{other}$, and $\mu_{other}$. For this example, we obtain the following results.
 
 | Model	| Parameter estimates |	ln-Likelihood |	AIC |
 | --- | ---: | ---: | ---: |
-| Constant rates | $\lambda_T = 0.030$ | -1053.9 | 2111.8 |
+| Constant rates | $\lambda_T = 0.30$ | -1053.9 | 2111.8 |
 | | $\mu_T = 0.28$ | | |
-| Variable rates | $r_{t&NZ} = 0.010$ 	| -1045.4 | 2101.1 |
-| | $\epsilon_{t&NZ} = 0.007$ | | |
-| | $r_{other} = 0.29$ | | |
-| | $\epsilon_{other} = 0.27$ | | |
+| Variable rates | $lambda_{liop} = 0.010$ 	| -1045.4 | 2101.1 |
+| | $\mu_{liop} = 0.007$ | | |
+| | $lambda_{other} = 0.29$ | | |
+| | $\mu_{other} = 0.27$ | | |
 
 
 We see from these results that there is good reason to think that there is a difference in diversification rates in these "oddball" frogs compared to the rest of the amphibians.
@@ -53,6 +53,11 @@ We see from these results that there is good reason to think that there is a dif
 Of course, more elaborate comparisons are possible. For example, one could compare the fit of four models, as follows: Model 1, constant rates; Model 2, speciation rate in clade A differs from the background; Model 3, extinction rate in clade A differs from the background; and Model 4, both speciation and extinction rates in clade A differ from the background. In this case, some of the pairs of models are nested – for example, Model 1 is a special case of Model 2, which is, in turn, a special case of Model 4 – but all four do not make a nested series. Here we benefit from using a model selection approach based on $AIC_C$. We can fit all four models and use their relative number of parameters to calculate $AIC_C$ scores. We can then calculate $AIC_C$ weights to evaluate the relative support for each of these four models. (As an aside, it might be difficult to differentiate among these four possibilities without a lot of data!)
 
 But what if you do not have an a priori reason to predict differential diversification rates across clades? Or, what if the only reason you think one clade might have a different diversification rate than another is that it has more species? (Such reasoning is circular, and will wreak havoc with your analyses!) In such cases, we can use methods that allow us to fit general models where diversification rates are allowed to vary across clades in the tree. Available methods use stepwise AIC [MEDUSA, @Alfaro2009-hz; but see @May2016-cm], or reversible-jump Bayesian MCMC [@Rabosky2014-qo, but see @Moore2016-ei, @Rabosky2017-bl].
+
+For example, running a stepwise-AIC algorithm on the amphibian data [@Alfaro2009-hz] results in a model with 11 different speciation and extinction regimes (Figure xxx). This is good evidence that diversification rates have varied wildly through the history of amphibians.
+
+![Figure 12.4. .]({{ site.baseurl }}/images/figure12-4.png)
+
 
 One note: all current approaches fit a model where birth and death rates change at discrete times in the phylogenetic tree - that is, along certain branches in the tree leading to extant taxa. One might wish for an approach, then, that models such changes - using, for example, a Poisson process - and then locates the changes on the tree. However, we still lack the mathematics to solve for $E(t)$ (e.g. equation 11.19) under such a model [@Moore2016-ei]. Given that, we can view current implementations of models where rates vary across clades as an approximation to the likelihood, and one that discounts the possibility of shifts in speciation and/or extinction rates among any clades that did not happen to survive until the present day [@Rabosky2017-bl] - and we are stuck with that until a better alternative is developed!
 

@@ -57,7 +57,7 @@ title: Beyond birth-death models
 <img src="{{site.baseurl}}/images/figure12-3.png" alt="Figure 12.3. Phylogenetic tree of amphibians with divergence times and diversities of major clades." />
 <p class="caption">Figure 12.3. Phylogenetic tree of amphibians with divergence times and diversities of major clades.</p>
 </div>
-<p>We can calculate the likelihood of the constant rates model, with two parameters <span class="math inline"><em>λ</em><sub><em>T</em></sub></span> and <span class="math inline"><em>μ</em><sub><em>T</em></sub></span>, to a variable rates model with four parameters <span class="math inline">$\lambda_{t&amp;NZ}$</span>, <span class="math inline">$\mu_{t&amp;NZ}$</span>, <span class="math inline"><em>λ</em><sub><em>o</em><em>t</em><em>h</em><em>e</em><em>r</em></sub></span>, and <span class="math inline"><em>μ</em><sub><em>o</em><em>t</em><em>h</em><em>e</em><em>r</em></sub></span>. For this example, we obtain the following results.</p>
+<p>We can calculate the likelihood of the constant rates model, with two parameters <span class="math inline"><em>λ</em><sub><em>T</em></sub></span> and <span class="math inline"><em>μ</em><sub><em>T</em></sub></span>, to a variable rates model with four parameters <span class="math inline"><em>λ</em><sub><em>l</em><em>i</em><em>o</em><em>p</em></sub></span>, <span class="math inline"><em>μ</em><sub><em>l</em><em>i</em><em>o</em><em>p</em></sub></span>, <span class="math inline"><em>λ</em><sub><em>o</em><em>t</em><em>h</em><em>e</em><em>r</em></sub></span>, and <span class="math inline"><em>μ</em><sub><em>o</em><em>t</em><em>h</em><em>e</em><em>r</em></sub></span>. For this example, we obtain the following results.</p>
 <table>
 <thead>
 <tr class="header">
@@ -70,7 +70,7 @@ title: Beyond birth-death models
 <tbody>
 <tr class="odd">
 <td>Constant rates</td>
-<td align="right"><span class="math inline"><em>λ</em><sub><em>T</em></sub> = 0.030</span></td>
+<td align="right"><span class="math inline"><em>λ</em><sub><em>T</em></sub> = 0.30</span></td>
 <td align="right">-1053.9</td>
 <td align="right">2111.8</td>
 </tr>
@@ -82,25 +82,25 @@ title: Beyond birth-death models
 </tr>
 <tr class="odd">
 <td>Variable rates</td>
-<td align="right"><span class="math inline">$r_{t&amp;NZ} = 0.010$</span></td>
+<td align="right"><span class="math inline"><em>l</em><em>a</em><em>m</em><em>b</em><em>d</em><em>a</em><sub><em>l</em><em>i</em><em>o</em><em>p</em></sub> = 0.010</span></td>
 <td align="right">-1045.4</td>
 <td align="right">2101.1</td>
 </tr>
 <tr class="even">
 <td></td>
-<td align="right"><span class="math inline">$\epsilon_{t&amp;NZ} = 0.007$</span></td>
+<td align="right"><span class="math inline"><em>μ</em><sub><em>l</em><em>i</em><em>o</em><em>p</em></sub> = 0.007</span></td>
 <td align="right"></td>
 <td align="right"></td>
 </tr>
 <tr class="odd">
 <td></td>
-<td align="right"><span class="math inline"><em>r</em><sub><em>o</em><em>t</em><em>h</em><em>e</em><em>r</em></sub> = 0.29</span></td>
+<td align="right"><span class="math inline"><em>l</em><em>a</em><em>m</em><em>b</em><em>d</em><em>a</em><sub><em>o</em><em>t</em><em>h</em><em>e</em><em>r</em></sub> = 0.29</span></td>
 <td align="right"></td>
 <td align="right"></td>
 </tr>
 <tr class="even">
 <td></td>
-<td align="right"><span class="math inline"><em>ϵ</em><sub><em>o</em><em>t</em><em>h</em><em>e</em><em>r</em></sub> = 0.27</span></td>
+<td align="right"><span class="math inline"><em>μ</em><sub><em>o</em><em>t</em><em>h</em><em>e</em><em>r</em></sub> = 0.27</span></td>
 <td align="right"></td>
 <td align="right"></td>
 </tr>
@@ -109,6 +109,11 @@ title: Beyond birth-death models
 <p>We see from these results that there is good reason to think that there is a difference in diversification rates in these &quot;oddball&quot; frogs compared to the rest of the amphibians.</p>
 <p>Of course, more elaborate comparisons are possible. For example, one could compare the fit of four models, as follows: Model 1, constant rates; Model 2, speciation rate in clade A differs from the background; Model 3, extinction rate in clade A differs from the background; and Model 4, both speciation and extinction rates in clade A differ from the background. In this case, some of the pairs of models are nested – for example, Model 1 is a special case of Model 2, which is, in turn, a special case of Model 4 – but all four do not make a nested series. Here we benefit from using a model selection approach based on <span class="math inline"><em>A</em><em>I</em><em>C</em><sub><em>C</em></sub></span>. We can fit all four models and use their relative number of parameters to calculate <span class="math inline"><em>A</em><em>I</em><em>C</em><sub><em>C</em></sub></span> scores. We can then calculate <span class="math inline"><em>A</em><em>I</em><em>C</em><sub><em>C</em></sub></span> weights to evaluate the relative support for each of these four models. (As an aside, it might be difficult to differentiate among these four possibilities without a lot of data!)</p>
 <p>But what if you do not have an a priori reason to predict differential diversification rates across clades? Or, what if the only reason you think one clade might have a different diversification rate than another is that it has more species? (Such reasoning is circular, and will wreak havoc with your analyses!) In such cases, we can use methods that allow us to fit general models where diversification rates are allowed to vary across clades in the tree. Available methods use stepwise AIC <span class="citation">(MEDUSA, Alfaro et al. <a href="#ref-Alfaro2009-hz">2009</a>; but see May and Moore <a href="#ref-May2016-cm">2016</a>)</span>, or reversible-jump Bayesian MCMC <span class="citation">(Rabosky <a href="#ref-Rabosky2014-qo">2014</a>, but see <span class="citation">Moore et al. (<a href="#ref-Moore2016-ei">2016</a>)</span>, <span class="citation">Rabosky (<a href="#ref-Rabosky2017-bl">2017</a>)</span>)</span>.</p>
+<p>For example, running a stepwise-AIC algorithm on the amphibian data <span class="citation">(Alfaro et al. <a href="#ref-Alfaro2009-hz">2009</a>)</span> results in a model with 11 different speciation and extinction regimes (Figure xxx). This is good evidence that diversification rates have varied wildly through the history of amphibians.</p>
+<div class="figure">
+<img src="{{site.baseurl}}/images/figure12-4.png" alt="Figure 12.4. ." />
+<p class="caption">Figure 12.4. .</p>
+</div>
 <p>One note: all current approaches fit a model where birth and death rates change at discrete times in the phylogenetic tree - that is, along certain branches in the tree leading to extant taxa. One might wish for an approach, then, that models such changes - using, for example, a Poisson process - and then locates the changes on the tree. However, we still lack the mathematics to solve for <span class="math inline"><em>E</em>(<em>t</em>)</span> (e.g. equation 11.19) under such a model <span class="citation">(Moore et al. <a href="#ref-Moore2016-ei">2016</a>)</span>. Given that, we can view current implementations of models where rates vary across clades as an approximation to the likelihood, and one that discounts the possibility of shifts in speciation and/or extinction rates among any clades that did not happen to survive until the present day <span class="citation">(Rabosky <a href="#ref-Rabosky2017-bl">2017</a>)</span> - and we are stuck with that until a better alternative is developed!</p>
 <h2 id="section-12.3-variation-in-diversification-rates-through-time">Section 12.3: Variation in diversification rates through time</h2>
 <p>In addition to considering rate variation across clades, we might also wonder whether birth and/or death rates have changed through time. For example, perhaps we think our clade is an adaptive radiation that experienced rapid diversification upon arrival to an island archipelago and slowed as this new adaptive zone got filled <span class="citation">(Schluter <a href="#ref-Schluter2000-ne">2000</a>)</span>. This hypothesis is an example of density-dependent diversification, where diversification rate depends on the number of lineages that are present <span class="citation">(Rabosky <a href="#ref-Rabosky2013-nw">2013</a>)</span>. Alternatively, perhaps our clade has been experiencing extinction rates that have changed through time, perhaps peaking during some time period of unfavorable climactic conditions <span class="citation">(Benton <a href="#ref-Benton2009-wf">2009</a>)</span>. This is another hypothesis that predicts variation in diversification (speciation and extinction) rates through time.</p>
