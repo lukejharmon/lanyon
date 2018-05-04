@@ -154,7 +154,25 @@ $$
 
 We can again calculate likelihoods for this model numerically [@Morlon2011-ci, @Etienne2012-am].
 
-xxx example
+As an example, we can test models of time-varying diversification rates across part of the amphibian tree of life from Pyron and Jetz [-@Jetz2018-mh]. I will focus on one section of the salamanders, the lungless salamanders (Plethodontidae, comprised of the clade that spans Bolitoglossinae, Spelerpinae, Hemidactylinae, and Plethodontinae). This interesting clade was already identified above as including both an increase in diversification rates (at the base of the clade) and a decrease (on the branch leading to Hemidactylinae; Figure 12.4) Tree may be missing a few species; this section of the tree includes 440 species in Pyron and Jetz [-@Jetz2018-mh] but 471 speices are listed on [Amphibiaweb](https://amphibiaweb.org/lists/Plethodontidae.shtml) as of May 2018. I will assume random sampling with $f = 440/471 = 0.934$.
+
+Comparing the fit of a set of models, we obtain the following results:
+
+| Model | Number of parameters | Parameter estimates |	lnLikelihood	| AIC |
+| --- | --- | --- | --- |  --- |
+| Constant rate pure birth | 1 | $\lambda = 0.05111267$ | 497.8 | -993.6 |
+| Constant rate birth-death | 2 | $\lambda = 0.05111267$ | 497.8 | -991.6 |
+| | | $\mu = 0$ | | |
+| Linear change in speciation | 3 | $\lambda_0 = 0.035$ | 513.0 | -1019.9 |
+| | | $\alpha_{\lambda} = 0.001126344$ | | |
+| | | $\mu = 0$ | | |
+| Exponential change in speciation | | | | |
+| Linear change in extinction | | | | |
+| Exponential change in extinction | | | | |
+| Linear change in both | | | | |
+| Exponential change in both | | | | |
+
+
 
 ## Section 12.4: Diversity-dependent models
 

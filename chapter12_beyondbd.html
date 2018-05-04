@@ -167,7 +167,98 @@ $$</span><br /></p>
 <p><br /><span class="math display"><em>μ</em>(<em>t</em>)=<em>μ</em><sub>0</sub><em>e</em><em>x</em><em>p</em>(<em>β</em><sub><em>μ</em></sub><em>t</em>)</span><br /></p>
 </div>
 <p>We can again calculate likelihoods for this model numerically <span class="citation">(Morlon et al. <a href="#ref-Morlon2011-ci">2011</a>, <span class="citation">Etienne et al. (<a href="#ref-Etienne2012-am">2012</a>)</span>)</span>.</p>
-<p>xxx example</p>
+<p>As an example, we can test models of time-varying diversification rates across part of the amphibian tree of life from Pyron and Jetz <span class="citation">(<span class="citeproc-not-found" data-reference-id="Jetz2018-mh"><strong>???</strong></span>)</span>. I will focus on one section of the salamanders, the lungless salamanders (Plethodontidae, comprised of the clade that spans Bolitoglossinae, Spelerpinae, Hemidactylinae, and Plethodontinae). This interesting clade was already identified above as including both an increase in diversification rates (at the base of the clade) and a decrease (on the branch leading to Hemidactylinae; Figure 12.4) Tree may be missing a few species; this section of the tree includes 440 species in Pyron and Jetz <span class="citation">(<span class="citeproc-not-found" data-reference-id="Jetz2018-mh"><strong>???</strong></span>)</span> but 471 speices are listed on <a href="https://amphibiaweb.org/lists/Plethodontidae.shtml">Amphibiaweb</a> as of May 2018. I will assume random sampling with <span class="math inline"><em>f</em> = 440/471 = 0.934</span>.</p>
+<p>Comparing the fit of a set of models, we obtain the following results:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Model</th>
+<th>Number of parameters</th>
+<th>Parameter estimates</th>
+<th>lnLikelihood</th>
+<th>AIC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Constant rate pure birth</td>
+<td>1</td>
+<td><span class="math inline"><em>λ</em> = 0.05111267</span></td>
+<td>497.8</td>
+<td>-993.6</td>
+</tr>
+<tr class="even">
+<td>Constant rate birth-death</td>
+<td>2</td>
+<td><span class="math inline"><em>λ</em> = 0.05111267</span></td>
+<td>497.8</td>
+<td>-991.6</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td><span class="math inline"><em>μ</em> = 0</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Linear change in speciation</td>
+<td>3</td>
+<td><span class="math inline"><em>λ</em><sub>0</sub> = 0.035</span></td>
+<td>513.0</td>
+<td>-1019.9</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td><span class="math inline"><em>α</em><sub><em>λ</em></sub> = 0.001126344</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td><span class="math inline"><em>μ</em> = 0</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Exponential change in speciation</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Linear change in extinction</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Exponential change in extinction</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Linear change in both</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Exponential change in both</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <h2 id="section-12.4-diversity-dependent-models">Section 12.4: Diversity-dependent models</h2>
 <p>Time-dependent models in the previous section are often used as a proxy to capture processes like key innovations or adaptive radiations <span class="citation">(Rabosky <a href="#ref-Rabosky2014-qo">2014</a>)</span>. Many of these theories suggest that diversification rates should depend on the number of species alive in a certain time or place, rather than time <span class="citation">(Moen and Morlon <a href="#ref-Moen2014-wh">2014</a>, <span class="citation">Etienne and Haegeman (<a href="#ref-Etienne2012-gk">2012</a>)</span>, <span class="citation">Etienne et al. (<a href="#ref-Etienne2012-am">2012</a>)</span>, <span class="citation">Phillimore and Price (<a href="#ref-Phillimore2008-oo">2008</a>)</span>, <span class="citation">Rabosky (<a href="#ref-Rabosky2013-nw">2013</a>)</span>)</span>. Therefore, we might want to define speciation rate in a truly diversity dependent manner rather than using time as a proxy:</p>
 <p>(eq. 12.5)</p>
