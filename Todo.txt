@@ -1,8 +1,5 @@
 To-do list:
-Chapter 12 examples
 Chapter 12 Proofread
-
-Enter chapter 13
 
 Chapter 13 figures
 Chapter 13 equations
