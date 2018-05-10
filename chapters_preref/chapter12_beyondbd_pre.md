@@ -56,7 +56,6 @@ For example, running a stepwise-AIC algorithm on the amphibian data [@Alfaro2009
 
 ![Figure 12.4. Analysis of diversification rate shifts among amphibian clades using MEDUSA [@Alfaro2009-hz]. Arrows highlight places where speciation, extinction, or both are inferred to have shifted; green arrows indicate an inferred increase in $r = \lambda - \mu$, while red arrows indicate decreased $r$.]({{ site.baseurl }}/images/figure12-4.png)
 
-
 One note: all current approaches fit a model where birth and death rates change at discrete times in the phylogenetic tree - that is, along certain branches in the tree leading to extant taxa. One might wish for an approach, then, that models such changes - using, for example, a Poisson process - and then locates the changes on the tree. However, we still lack the mathematics to solve for $E(t)$ (e.g. equation 11.19) under such a model [@Moore2016-ei]. Given that, we can view current implementations of models where rates vary across clades as an approximation to the likelihood, and one that discounts the possibility of shifts in speciation and/or extinction rates among any clades that did not happen to survive until the present day [@Rabosky2017-bl] - and we are stuck with that until a better alternative is developed!
 
 ## Section 12.3: Variation in diversification rates through time
@@ -168,8 +167,8 @@ Comparing the fit of a set of models, we obtain the following results:
 | | | $\beta_{\lambda} = 0.016$ | | |
 | | | $\mu = 0$ | | |
 | Linear change in extinction | 3 | $\lambda = 0.053$ | 497.8 | -989.6 |
-| | | \mu_0 = 0 $ | | |
-| | | $\alpha_{\mu} = 0.000036 $ | | |
+| | | $\mu_0 = 0$ | | |
+| | | $\alpha_{\mu} = 0.000036$ | | |
 | Exponential change in extinction | 3 | $\lambda = 0.069$ | 510.6 | -1015.3 |
 | | | $\mu_0 = 61.9$| | |
 | | | $\beta_{\mu} = -111.0$ | | |

@@ -4,7 +4,7 @@
 
 NOTE THIS CHAPTER IS IN PROGRESS!
 
-## Section 12.1: The evolution of self-incompatibility
+## Section 13.1: The evolution of self-incompatibility
 
 Most people have not spent a lot of time thinking about the sex lives of plants. The classic mode of sexual reproduction in angiosperms (flowering plants) involves pollen (the male gametophyte stage of the plant life cycle). Pollen lands on the pistil (the female reproductive structure) and produces a pollen tube. Sperm cells move down the pollen tube, and one sperm cell unites with the egg to form a new zygote in the ovule.
 
@@ -20,87 +20,207 @@ In this chapter, we will learn about a family of models where traits can affect 
 
 Key Biological Questions
 
-	How does the behavior of birth-death models change when there are some character states that are associated with different rates of speciation and/or extinction compared to others?
-	How we detect character-dependent diversification using comparative data?
-	When and why might character-dependent approaches lead us astray?
+1. How does the behavior of birth-death models change when there are some character states that are associated with different rates of speciation and/or extinction compared to others?
 
-## Section 12.2: A State-Dependent Model of Diversification
+2. How we detect character-dependent diversification using comparative data? When and why might character-dependent approaches lead us astray?
 
-The models that we will consider in this chapter include both a model of trait evolution and an associated model of lineage diversification. In the simplest case, we can consider a model where the character has two states, 0 and 1. We need to model the transitions among these states, which we can do in an identical way to what we did in chapter xxx using a continuous-time Markov model. We express this model using two rate parameters, a forward rate q01 and a backwards rate q10.
+## Section 13.2: A State-Dependent Model of Diversification
 
-We now consider the idea that diversification rates might depend on the character state. We assume that species with character state 0 have a certain speciation rate (lambda0) and extinction rate (mu0), and that species in 1 have potentially different rates of both speciation (lambda1) and extinction (mu1). Thus, we have a six-parameter model. We assume that parent lineages give birth to daughters with the same character state, that is that character states do not change at speciation.
+The models that we will consider in this chapter include both a model of trait evolution and an associated model of lineage diversification. In the simplest case, we can consider a model where the character has two states, 0 and 1. We need to model the transitions among these states, which we can do in an identical way to what we did in Chapter 7 using a continuous-time Markov model. We express this model using two rate parameters, a forward rate $q_{01}$ and a backwards rate $q_{10}$.
 
-It is straightforward to simulate evolution under our state-dependent model of diversification. We proceed in the same way as we did for birth-death models, by drawing waiting times, but these waiting times can be waiting times to the next character state change, speciation, or extinction event. In particular, imagine that there are n lineages present at time t, and that k of these lineages are in state 0 (and n-k are in state 1). The waiting time to the next event will follow an exponential distribution with a rate parameter of:
+We now consider the idea that diversification rates might depend on the character state. We assume that species with character state 0 have a certain speciation rate ($\lambda_0$) and extinction rate ($\mu_0$), and that species in 1 have potentially different rates of both speciation ($\lambda_1$) and extinction ($\mu_1$). Thus, we have a six-parameter model. We assume that parent lineages give birth to daughters with the same character state, that is that character states do not change at speciation.
 
-ρ=n∙(q_01+λ_0+μ_0 )+(k-n)∙(q_10+λ_1+μ_1 )
+It is straightforward to simulate evolution under our state-dependent model of diversification. We proceed in the same way as we did for birth-death models, by drawing waiting times, but these waiting times can be waiting times to the next character state change, speciation, or extinction event. In particular, imagine that there are $n$ lineages present at time $t$, and that $k$ of these lineages are in state 0 (and $n-k$ are in state 1). The waiting time to the next event will follow an exponential distribution with a rate parameter of:
+
+(eq. 13.1)
+
+<div>
+$$
+\rho = n (q_{01} + \lambda_0 + \mu_0) + (k-n) (q_{10} + \lambda_1 + \mu_1)
+$$
+</div>
+
 
 Once we have a waiting time, we can assign an event type depending on probabilities. For example, the probability that the event is a character state change from 0 to 1 is:
 
-p_q01=(n∙q_01)/ρ
+(eq. 13.2)
+
+<div>
+$$
+p_{q_{01}}=(n \cdot q_{01}) / \rho
+$$
+</div>
+
 
 And the probability that the event is the extinction of a lineage with character state 1 is:
 
-p_μ1=((n-k)∙μ_1)/ρ
+(eq. 13.3)
 
+<div>
+$$
+p_{\mu_1}=[(n-k) \cdot \mu_1] / \rho
+$$
+</div>
+
+
+And so on for the other four possible events.
 
 Once we have picked an event in this way, we can randomly assign it to one of the lineages in the appropriate set, with each lineage equally likely to be chosen. We then proceed forwards in time until we have a dataset with the desired size or total time depth.
 
-An example simulation is shown in Figure 14.xxx. As you can see, under these model parameters the impact of character states on diversification is readily apparent. In the next section we will figure out how to extract that information from our data.
+An example simulation is shown in Figure 14.1. As you can see, under these model parameters the impact of character states on diversification is readily apparent. In the next section we will figure out how to extract that information from our data.
 
-Calculating Likelihoods for State-dependent diversification models
+![Figure 13.1. Simulation of character-dependent diversification. Data were simulated under a model where diversification rate of state zero (red) is substantially lower than that of state 1 (black; model parameters $q_{01} = 1_{10} = 0.05$, $\lambda_0 = 0.2$, $\lambda_1 = 0.8$, $\mu_0 = \mu_1 = 0.05$). )]({{ site.baseurl }}/images/figure13-1.png)
 
-To calculate likelihoods for state-dependent diversification models we use a pruning algorithm with calculations that progress back through the tree from the tips to the root. The description of this algorithm in Maddison et al. (xxx) represents one of the clearest explanations of calculating likelihoods for comparative methods, and is a general approach that could be applied to a wide range of other models; thus, it is worth describing in some detail.
+## Section 13.3: Calculating Likelihoods for State-dependent diversification models
+
+To calculate likelihoods for state-dependent diversification models we use a pruning algorithm with calculations that progress back through the tree from the tips to the root. We will follow the description of this algorithm in Maddison et al. (xxx). We have already used this paper to derive likelihoods for constant rate birth-death models on trees (Chapter 12), and this derivation is closely related that previous approach.
 
 We consider a phylogenetic tree with data on the character states at the tips. For the purposes of this example, we will assume that the tree is complete and correct – we are not missing any species, and there is no phylogenetic uncertainty. We will come back to these two assumptions later in the chapter.
 
-We need to obtain the probability of obtaining the data given the model (the likelihood). As we have seen before, we will calculate that likelihood going backwards in time using a pruning algorithm. The key principle here is that if we know the probabilities at some point in time on the tree, we can calculate those probabilities at some time point immediately before. By applying this method successively, we can move back towards the root of the tree. We move backwards along each branch in the tree, merging these calculations at nodes.
-When we get to the root, we have the probability of the data given the model and the entire tree – that is, we have the likelihood. The other essential piece is that we have a starting point. When we start at the tips of the tree, we assume that our character states are fixed and known. We use the fact that we know all of the species and their character states at the present day as our starting point, and move backwards from there.For example, for a species with character state 0, the likelihood for state 0 is 1, and for state 1 is zero. In other words, at the tips of the tree we can start our calculations with a probability of 1 for the state that matches the tip state, and 0 otherwise.
+We need to obtain the probability of obtaining the data given the model (the likelihood). As we have seen before, we will calculate that likelihood going backwards in time using a pruning algorithm. The key principle, again, is that if we know the probabilities at some point in time on the tree, we can calculate those probabilities at some time point immediately before. By applying this method successively, we can move back towards the root of the tree. We move backwards along each branch in the tree, merging these calculations at nodes. When we get to the root, we have the probability of the data given the model and the entire tree – that is, we have the likelihood.
+
+The other essential piece is that we have a starting point. When we start at the tips of the tree, we assume that our character states are fixed and known. We use the fact that we know all of the species and their character states at the present day as our starting point, and move backwards from there. For example, for a species with character state 0, the likelihood for state 0 is 1, and for state 1 is zero. In other words, at the tips of the tree we can start our calculations with a probability of 1 for the state that matches the tip state, and 0 otherwise.
 
 This discussion also highlights the fact that incorporating uncertainty and/or variation in tip states for these algorithms is not computationally difficult – we just need to start from a different point at the tips. For example, if we are completely unsure about the tip state for a certain taxa, we can begin with likelihoods of 0.5 for starting in state 0 and 0.5 for starting in state 1. However, such calculations are not commonly implemented in comparative methods software.
 
-We now need to consider the change in the likelihood as we step backwards through time in the tree. Instead of moving in discrete steps, as described in the toy example previously, we will consider some very small time interval ∆t, and use differential equations to find out what happens in the limit as this interval goes to zero (Figure 14.1). We will assume that the time interval ∆t is so small that, at most, one event (speciation or character change) has happened in that interval, but never more than one. We will consider the probability of the observed data given that the character is in each state at time t: p_0 (t) and p_1 (t). Assuming we know these probabilities, we calculate updated probabilities at some earlier time t+∆t: p_0 (t+∆t) and p_1 (t+∆t).
+We now need to consider the change in the likelihood as we step backwards through time in the tree. We will consider some very small time interval $\Delta t$, and later use differential equations to find out what happens in the limit as this interval goes to zero (Figure 13.2). Since we will eventually take the limit as $\Delta t \to 0$, we can assume that the time interval is so small that, at most, one event (speciation, extinction, or character change) has happened in that interval, but never more than one. We will calculate the probability of the observed data given that the character is in each state at time $t$, again measuring time backwards from the present day. In other words, we are considering the probability of the observed data if, at time t, the character state were in state 0 [$p_0 (t)$] or state 1 [$p_1 (t)$]. For now, we can assume we know these probabilities, and try to calculate updated probabilities at some earlier time $t+\Delta t$: $p_0 (t+\Delta t)$ and $p_1 (t+\Delta t)$.
+
+![Figure 13.2. Taken from Maddison - to be redrawn.]({{ site.baseurl }}/images/figure13-2.png)
 
 
+To calculate $p_0 (t+\Delta t)$ and $p_1 (t+\Delta t)$, we consider all of the possible things that could happen in a time interval $\Delta t$ along a branch in a phylogenetic tree that are compatible with our dataset (Figure 13.2). First, nothing at all could have happened; second, our character state could have changed; and third, there could have been a speciation event. This last event might seem incorrect, as we are only considering changes along branches in the tree and not at nodes. If we did not reconstruct any speciation events at some point along a branch, then how could one have taken place? The answer is that a speciation event could have occurred but all taxa descended from that branch have since gone extinct. We must also consider the possibility that either the right or the left lineage went extinct following the speciation event; that is why the speciation event probabilities appear twice in Figure 13.2.
 
-To calculate p_0 (t+∆t) and p_1 (t+∆t), we consider all of the possible things that could happen in a time interval ∆t along a branch in a phylogenetic tree that are compatible with our dataset (figure 14.2). First, nothing at all could have happened; second, our character state could have changed; and third, there could have been a speciation event. This last event might seem incorrect, as we are only considering changes along branches in the tree and not at nodes. If we did not reconstruct any speciation events at some point along a branch, then how could one have taken place? The answer is that a speciation event could have occurred but all taxa descended from that branch have since gone extinct. We must also consider the possibility that either the right or the left lineage went extinct following the speciation event; that is why the speciation event probabilities appear twice in Figure 14.2.
-
-
-
-We can write an equation for these updated probabilities. We will consider the probability that the character is in state 0 at time t+∆t; the equation for state 1 is similar.
-
-p_0 (t+∆t)=(1-μ_0 )∆t∙[(1-q_01 ∆t)(1-λ_0 ∆t) p_0 (t)+q_01 ∆t(1-λ_0 ∆t) p_1 (t)+2∙(1-q_01 ∆t) λ_0 ∆t∙E_0 (t)p_0 (t)]
-
-We can multiply through and simplify. We will also drop any terms that include 〖∆t〗^2, which become vanishingly small as ∆t decreases. Doing that, we obtain:
-
-p_0 (t+∆t)=[1-(λ_0+μ_0+q_01 )∆t] p_0 (t)+(q_01 ∆t) p_1 (t)+2(λ_0 ∆t) E_0 (t)p_0 (t)
-
-p_1 (t+∆t)=[1-(λ_1+μ_1+q_10 )∆t] p_1 (t)+(q_10 ∆t) p_0 (t)+2(λ_1 ∆t) E_1 (t)p_1 (t)
-
-We can then find the rate of change for these two equations by taking
+![Figure 13.3. Taken from Maddison - to be redrawn.]({{ site.baseurl }}/images/figure13-3.png)
 
 
-We also need to know E_0 (t) and E_1 (t). These represent the probability that a lineage with state 0 or 1, respectively, and alive at time t will go extinct before the present day. Neglecting the derivation of these formulas, which can be found in Maddison et al. 2007, we have:
-
-(dE_0)/dt=μ_0-(λ_0+μ_0+q_01 ) E_0 (t)+q_01 E_1 (t)+λ_0 〖E_0 (t)〗^2
-
-(dE_1)/dt=μ_1-(λ_1+μ_1+q_10 ) E_1 (t)+q_10 E_0 (t)+λ_1 〖E_1 (t)〗^2
+We can write an equation for these updated probabilities. We will consider the probability that the character is in state 0 at time $t+\Delta t$; the equation for state 1 is similar.
 
 
+(eq. 13.4)
 
+<div>
+$$
+p_0 (t+\Delta t)=(1-\mu_0 )\Delta t \cdot [(1-q_{01} \Delta t)(1-\lambda_0 \Delta t) p_0 (t)+q_{01} \Delta t(1-\lambda_0 \Delta t) p_1 (t)+2 \cdot (1-q_{01} \Delta t) \lambda_0 \Delta t \cdot E_0 (t) p_0 (t)]
+$$
+</div>
+
+
+We can multiply through and simplify. We will also drop any terms that include $[\Delta t]^2$, which become vanishingly small as $\Delta t$ decreases. Doing that, we obtain:
+
+(eq. 13.5)
+
+<div>
+$$
+p_0 (t+\Delta t)=[1-(\lambda_0+μ_0+q_{01} )\Delta t] p_0 (t)+(q_{01} \Delta t) p_1 (t)+2(\lambda_0 \Delta t) E_0 (t)p_0 (t)
+$$
+</div>
+
+Similarly,
+
+(eq. 13.6)
+
+<div>
+$$
+p_1 (t+\Delta t)=[1-(\lambda_1+μ_1+q_{10} )\Delta t] p_1 (t)+(q_{10} \Delta t) p_0 (t)+2(\lambda_1 \Delta t) E_1 (t)p_1 (t)
+$$
+</div>
+
+We can then find the rate of change for these two equations by solving for $p_1 (t+\Delta t) / [\Delta t]$, then taking the limit as $\Delta t \to 0$. This gives:
+
+(eq. 13.7)
+
+<div>
+$$
+\frac{dp_0}{dt} = -(\lambda_0 + \mu_0 + q_{01}) p_0(t) + q{01}p_1(t) + 2 \lambda_0 E_0(t) p_0(t)
+$$
+</div>
+
+and:
+
+(eq. 13.8)
+
+<div>
+$$
+\frac{dp_1}{dt} = -(\lambda_1 + \mu_1 + q_{10}) p_1(t) + q{10}p_1(t) + 2 \lambda_1 E_1(t) p_1(t)
+$$
+</div>
+
+We also need to consider $E_0 (t)$ and $E_1 (t)$. These represent the probability that a lineage with state 0 or 1, respectively, and alive at time $t$ will go extinct before the present day. Neglecting the derivation of these formulas, which can be found in Maddison et al. 2007 and is closely related to similar terms in Chapters 11 and 12, we have:
+
+(eq. 13.7)
+
+<div>
+$$
+\frac{dE_0}{dt} = \mu_0-(\lambda_0+\mu_0+q_{01} ) E_0 (t)+q_{01} E_1 (t)+\lambda_0 [E_0 (t)]^2
+$$
+</div>
+
+and:
+
+(eq. 13.8)
+
+<div>
+$$
+\frac{dE_1}{dt} = \mu_1-(\lambda_1+\mu_1+q_{10} ) E_1 (t)+q_{10} E_0 (t)+\lambda_1 [E_1 (t)]^2
+$$
+</div>
 
 Along a single branch in a tree, we can sum together many such small time intervals. But what happens when we get to a node? Well, if we consider the time interval that countains the node, then we already know what happened – a speciation event. We also know that the two daughters immediately after the speciation event were identical in their traits (this is an assumption of the model). So we can calculate the likelihood for their ancestor for each state as the product of the likelihoods of the two daughter branches coming into that node. In this way, we merge our likelihood calculations along each branch when we get to tree nodes.
 
 When we get to the root of the tree, we are almost done – but not quite! We have partial likelihood calculations for each character state – so we know, for example, the likelihood of the data if we had started with a root state of 0, and also if we had started at 1. To merge these we need to use probabilities of each character state at the root of the tree. For example, if we do not know the root state from any outside information, we might consider root probabilities for each state to be equal, 0.5 for state 0 and 0.5 for state 1. We then multiply the likelihood associated with each state with the root probability for that state. Finally, we add these likelihoods together to obtain the full likelihood of the data given the model.
 
-The question of which root probabilities to use for this calculation has been discussed in the literature, and does matter in some applications. Other options include…
+The question of which root probabilities to use for this calculation has been discussed in the literature, and does matter in some applications. Aside from equal probabilities of each state, other options include using outside information to inform prior probabilities on each state [e.g. hagey], finding the calculated equilibrium frequency of each state under the model [xxx madison], or weighting each root state by its likelihood of generating the data, effectively treating the root as a nuisance parameter [xxx fitzJohn].
 
-I have described the situation where we have two character states, but this method generalizes well to multi-state characters. We can describe the evolution of the character in the same way as described for multi-state discrete characters in chapter xxx. We then can assign unique diversification rate parameters to each of the k character states:. It is worth keeping in mind, though, that it is not too hard to construct a model where parameters are not identifiable and model fitting and estimation become very difficult.
+xxx example
 
-## Section 12.3: ML and Bayesian Tests for State-Dependent Diversification
+I have described the situation where we have two character states, but this method generalizes well to multi-state characters. We can describe the evolution of the character in the same way as described for multi-state discrete characters in chapter 9. We then can assign unique diversification rate parameters to each of the $k$ character states: $\lambda_0, \lambda_1, \dots, \lambda_k$ and $\mu_0, \mu_1, \dots, \mu_k$. It is worth keeping in mind, though, that it is not too hard to construct a model where parameters are not identifiable and model fitting and estimation become very difficult.
 
-Now that we can calculate the likelihood for state-dependent diversification models, formulating ML and Bayesian tests follows the same pattern we have encounted before. For ML, some comparisons are nested and so you can use likelihood ratio tests. For example,
+## Section 13.4: ML and Bayesian Tests for State-Dependent Diversification
 
-Potential Pitfalls and How to Avoid Them
+Now that we can calculate the likelihood for state-dependent diversification models, formulating ML and Bayesian tests follows the same pattern we have encountered before. For ML, some comparisons are nested and so you can use likelihood ratio tests. For example, we can compare the full BiSSe model, with parameters $q_{01}, q_{10}, \lambda_0, \lambda_1, \mu_0, \mu_1$ with a restricted model with parameters $q_{01}, q_{10}, \lambda_{all}, \mu_{all}$. Since the restricted model is a special case of the full model where $\lambda_0 = \lambda_1 = \lambda_{all}$ and $\mu_0 = \mu_1 = \mu_{all}$, we can compare the two using a likliehood ratio test, as described earlier in the book. Alternatively, we can compare a series of BiSSe-type models by comparing their $AIC_c$ scores.
+
+For example, I will apply this approach to the example of self-incompatability. Xxx
+
+Alternatively, we can carry out a Bayesian test for state-dependent diversification. Like other models in the book, this requires setting up an MCMC algorithm that generates posterior distributions for our model parameters. In this case:
+
+
+1.  Sample a set of starting parameter values, $q_{01}, q_{10}, \lambda_0, \lambda_1, \mu_0, \mu_1$, from their prior distributions. For example, one could set prior distribution for all parameters as exponential with a mean and variance of $\lambda_{prior_i}$ (note that, as usual, the choice for this parameter should depend on the units of tree branch lengths you are using). We then select starting values for all parameters from the prior.
+
+2.  Given the current parameter values, select new proposed parameter values using the proposal density $Q(p'|p)$. For all parameter values, we can use a uniform proposal density with width $w_p$, so that $Q(p'|p) ~ U(p-w_p/2,p+w_p/2)$. We can either choose all parameter values simultaneously, or one at a time (the latter is typically more effective).
+
+3. Calculate three ratios:
+
+a. The prior odds ratio. This is the ratio of the probability of drawing the parameter values $p$ and $p'$ from the prior. Since we have exponential priors for all parameters, we can calculate this ratio as:
+
+(eq. 11.5)
+
+<div>
+$$
+R_{prior} = \frac{\lambda_{prior_i} e^{-\lambda_{prior_i} p'}}{\lambda_{prior_i} e^{-\lambda_{prior_i} p}}=e^{\lambda_{prior_i} (p-p')}
+$$
+</div>
+
+b. The proposal density ratio. This is the ratio of probability of proposals going from $p$ to $p'$ and the reverse. We have already declared a symmetrical proposal density, so that $Q(p'|p) = Q(p|p')$ and $R_{proposal} = 1$.
+
+c. The likelihood ratio. This is the ratio of probabilities of the data given the two different parameter values. We can calculate these probabilities from the approach described in the previous section.
+
+4. Find $R_{accept}$ as the product of the prior odds, proposal density ratio, and the likelihood ratio. In this case, the proposal density ratio is 1, so:
+
+(eq. 11.6)
+
+<div>
+$$
+R_{accept} = R_{prior} \cdot R_{likelihood}
+$$
+</div>
+
+5.	Draw a random number $u$ from a uniform distribution between 0 and 1. If $u < R_{accept}$, accept the proposed value of the parameter(s); otherwise reject, and retain the current value of the two parameters.
+
+6.	Repeat steps 2-5 a large number of times.
+
+Applying this method to the self-incompatability data, we find that...
+
+## Section 13.5:Potential Pitfalls and How to Avoid Them
 
 Recently, a few papers have been published that are deeply critical of state-dependent diversification models. These papers raise substantive critiques that are critical to address when applying the methods described in this chapter to empirical data. In this section I will attempt to describe the critiques and their potential remedies.
 
@@ -110,7 +230,7 @@ This issue is a normal one for statistical analyses – after all, there are alw
 
 Fortunately, there are a number of ways to deal with this problem. First, one can compare the statistical support for the state-dependent model with the support that one obtains for random data. The random data could be simulated on the tree, or one could permute the tips or draw random data from a multinomial distribution. One can then compare, for example, the distribution of dAICc scores obtained from these permutations to the dAICc for the original data. Alternatively, we could explicitly consider the possibility that some unmeasured character is actually the thing that is influencing diversification rates. This latter approach is the most elegant as we can directly add the model described in this section to our list of candidates (see HISSE paper for more details).
 
-A more general critique of state-dependent models of diversification was raised by Maddison and Fitzjohn (Xxx). This paper pointed out that statistically significant results for these tests can be driven by an event on a single branch of a tree, and therefore be unreplicated. This is a good criticism that applies equally well to a range of comparative methods. I will address this criticism later in the book when I discuss model adequacy for comparative methods.
+A more general critique of state-dependent models of diversification was raised by Maddison and Fitzjohn (Xxx). This paper pointed out that statistically significant results for these tests can be driven by an event on a single branch of a tree, and therefore be unreplicated. This is a good criticism that applies equally well to a range of comparative methods. Together, both of these critiques argue for a stronger set of model adequacy approaches in comparative methods.
 
 ## Section 12.4: Summary
 

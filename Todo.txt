@@ -1,13 +1,10 @@
 To-do list:
 Chapter 12 Proofread
 
-Chapter 13 figures
-Chapter 13 equations
 Chapter 13 References
 Chapter 13 examples
 Chapter 13 Proofread
 
-Enter chapter 14
 
 Chapter 14 figures
 Chapter 14 equations

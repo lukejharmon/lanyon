@@ -1,0 +1,398 @@
+<h1 id="chapter-12-beyond-birth-death-models">Chapter 12: Beyond birth-death models</h1>
+<p><a href="%7B%7B%20site.baseurl%20%7D%7D/pdf/chapter12_beyondbd.pdf">pdf version</a></p>
+<h2 id="section-12.1-capturing-variable-evolution">Section 12.1: Capturing variable evolution</h2>
+<p>As we discovered in Chapter 11, there are times and places where the tree of life has grown more rapidly than others. For example, islands and island-like habitats are sometimes described as hotspots of speciation <span class="citation">(Hughes and Eastwood <a href="#ref-Hughes2006-nr">2006</a>, <span class="citation">Losos and Schluter (<a href="#ref-Losos2000-rr">2000</a>)</span>)</span>, and diversification rates in such habitats can proceed at an extremely rapid pace. On a broader scale, many studies have shown that speciation rates are elevated and/or extinction rates depressed following mass extinctions <span class="citation">(e.g. Sepkoski <a href="#ref-Sepkoski1984-vz">1984</a>)</span>. Finally, some clades seem to diversity much more rapidly than others. In my corner of the world, the Pacific Northwest of the United States, this variation is best seen in our local amphibians. We have species like the spotted frog and the Pacific tree frog, which represent two very diverse frog lineages (Ranidae and Hylidae, respectively). At the same time, if one drives a bit to the high mountain streams, you can find frogs with tiny tails. These Inland Tailed Frogs are members of <em>Ascaphidae</em>, a genus with only two species, one coastal and one inland. (As an aside, the tail, found only in males, is an intromittent organ used for internal fertilization - analogous to a penis, but different!) These two tailed frog species are the sister group to a small radiation of four species frogs in New Zealand (Leopelmatidae, which have no tails). These two clades together - just six species - make up the sister clade to all other frogs, nearly 7000 species. We seek to explain patterns like this contrast in the diversity of two groups which decend from a common ancestor and are, thus, the same age.</p>
+<div class="figure">
+<img src="%7B%7B%20site.baseurl%20%7D%7D/images/figure12-1.png" alt="Figure 12.1. Contrasts in frog diversity. Spotted frogs (A) and Pacific tree frogs (B) come from diverse clades, while tailed frogs (C) and New Zealand frogs (D) are from depauperate clades. Photo sources 1" />
+<p class="caption">Figure 12.1. Contrasts in frog diversity. Spotted frogs (A) and Pacific tree frogs (B) come from diverse clades, while tailed frogs (C) and New Zealand frogs (D) are from depauperate clades. Photo sources <sup><a name="footnote12.1_back"><a href="#footnote12.1">1</a></a></sup></p>
+</div>
+<p>All of these facts lead to the idea that simple, constant-rate birth-death models are not adequate to capture the complexity and dynamics of speciation and extinction across the tree of life. Speciation and extinction rates vary through time, across clades, and among geographic regions. We can sometimes predict this variation based on what we know about the mechanisms that lead to speciation and/or extinction.</p>
+<p>In this chapter, I will explore some extensions to birth-death models that allow us to explore diversification in more detail. This chapter also leads naturally to the next, chapter 13, which will consider the case where diversification rates depend on species’ traits.</p>
+<p>Key questions:</p>
+<ol style="list-style-type: decimal">
+<li>Do some clades diversity (or go extinct) at a higher rate than others?</li>
+<li>Do diversification rates vary through time?</li>
+<li>Are speciation rates diversity-dependent?</li>
+<li>Do models of protracted speciation explain phylogenetic tree shapes?</li>
+</ol>
+<h2 id="section-12.2-variation-in-diversification-rates-across-clades">Section 12.2: Variation in diversification rates across clades</h2>
+<p>We know from analyses of tree balance that the tree of life is more imbalanced than birth-death models predict. We can explore this variation in diversification rates by allowing birth and death models to vary along branches in phylogenetic trees. The simplest scenario is when one has a particular prediction about diversification rates to test. For example, we might wonder if diversification rates in one clade (clade A in Figure 12.2) is higher than in the rest of the phylogenetic tree. We can test this hypothesis by fitting a multiple-rate birth-death model.</p>
+<p>The simplest method to carry out this test is by using model selection in a ML framework <span class="citation">(Rabosky et al. <a href="#ref-Rabosky2007-ou">2007</a>)</span>. To do this, we first fit a constant-rates birth-death model to the entire tree, and calculate a likelihood. We can then fit variable-rates birth-death models to the data, comparing the fit of these models using either likelihood ratio tests or <span class="math inline"><em>A</em><em>I</em><em>C</em><sub><em>C</em></sub></span>. The simplest way to fit a variable-rates model is to adapt the likelihood formula in equation 11.18 (or eq. 11.24 if species are unsampled). We calculate the likelihood in two parts, one for the background part of the tree (with rates <span class="math inline"><em>λ</em><sub><em>B</em></sub></span> and <span class="math inline"><em>μ</em><sub><em>B</em></sub></span>) and one for the focal clade that may have different diversification dynamics (with rates <span class="math inline"><em>λ</em><sub><em>A</em></sub></span> and <span class="math inline"><em>μ</em><sub><em>A</em></sub></span>). We can then compare this model to one where speciation and extinction rates are constant through time.</p>
+<div class="figure">
+<img src="%7B%7B%20site.baseurl%20%7D%7D/images/figure12-2.png" alt="Figure 12.2. A phylogenetic tree including three clades, illustrating two possible models for diversification: a constant rates model, where all three clades have the same diversification parameters \lambda and \mu, and a variable rates model, where clade A has parameters that differ from those of the other two clades." />
+<p class="caption">Figure 12.2. A phylogenetic tree including three clades, illustrating two possible models for diversification: a constant rates model, where all three clades have the same diversification parameters <span class="math inline"><em>λ</em></span> and <span class="math inline"><em>μ</em></span>, and a variable rates model, where clade A has parameters that differ from those of the other two clades.</p>
+</div>
+<p>Consider the example in Figure 12.2. We would like to know whether clade A has speciation and extinction rates, <span class="math inline"><em>λ</em><sub><em>A</em></sub></span> and <span class="math inline"><em>μ</em><sub><em>A</em></sub></span>, that differ from the background rates, <span class="math inline"><em>λ</em><sub><em>B</em></sub></span> and <span class="math inline"><em>μ</em><sub><em>B</em></sub></span> – we will call this a “variable rates” model. The alternative is a “constant rates” model where the entire clade has constant rate parameters <span class="math inline"><em>λ</em><sub><em>T</em></sub></span> and <span class="math inline"><em>μ</em><sub><em>T</em></sub></span>. These two models are nested, since the constant-rates model is a special case of the variable rates model where <span class="math inline"><em>λ</em><sub><em>T</em></sub> = <em>λ</em><sub><em>A</em></sub> = <em>λ</em><sub><em>B</em></sub></span> and <span class="math inline"><em>μ</em><sub><em>T</em></sub> = <em>μ</em><sub><em>A</em></sub> = <em>μ</em><sub><em>B</em></sub></span>. Calculating the likelihood for these two models is reasonably straightforward - we simply calculate the likelihood for each section of the tree using the relevant equation from Chapter 11, and then multiply the likelihoods from the two parts of the tree (or add the log-likelihoods) to get the overall likelihood.</p>
+<p>For a real example, let’s look at the phylogenetic tree of amphibians and evaluate the hypothesis that the tailed and New Zealand frogs, sister clade to the rest of frogs, diversified at a slower rate than other amphibians (Figure 12.3). We can use the phylogenetic &quot;backbone&quot; tree from Pyron and Jetz <span class="citation">(Jetz and Pyron <a href="#ref-Jetz2018-mh">2018</a>)</span>, assigning diversities based on the classification associated with that publication. We can then calculate likelihoods based on equation 11.24.</p>
+<div class="figure">
+<img src="%7B%7B%20site.baseurl%20%7D%7D/images/figure12-3.png" alt="Figure 12.3. Phylogenetic tree of amphibians with divergence times and diversities of major clades." />
+<p class="caption">Figure 12.3. Phylogenetic tree of amphibians with divergence times and diversities of major clades.</p>
+</div>
+<p>We can calculate the likelihood of the constant rates model, with two parameters <span class="math inline"><em>λ</em><sub><em>T</em></sub></span> and <span class="math inline"><em>μ</em><sub><em>T</em></sub></span>, to a variable rates model with four parameters <span class="math inline"><em>λ</em><sub><em>l</em><em>i</em><em>o</em><em>p</em></sub></span>, <span class="math inline"><em>μ</em><sub><em>l</em><em>i</em><em>o</em><em>p</em></sub></span>, <span class="math inline"><em>λ</em><sub><em>o</em><em>t</em><em>h</em><em>e</em><em>r</em></sub></span>, and <span class="math inline"><em>μ</em><sub><em>o</em><em>t</em><em>h</em><em>e</em><em>r</em></sub></span>. For this example, we obtain the following results.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Model</th>
+<th align="right">Parameter estimates</th>
+<th align="right">ln-Likelihood</th>
+<th align="right">AIC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Constant rates</td>
+<td align="right"><span class="math inline"><em>λ</em><sub><em>T</em></sub> = 0.30</span></td>
+<td align="right">-1053.9</td>
+<td align="right">2111.8</td>
+</tr>
+<tr class="even">
+<td></td>
+<td align="right"><span class="math inline"><em>μ</em><sub><em>T</em></sub> = 0.28</span></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+<tr class="odd">
+<td>Variable rates</td>
+<td align="right"><span class="math inline"><em>l</em><em>a</em><em>m</em><em>b</em><em>d</em><em>a</em><sub><em>l</em><em>i</em><em>o</em><em>p</em></sub> = 0.010</span></td>
+<td align="right">-1045.4</td>
+<td align="right">2101.1</td>
+</tr>
+<tr class="even">
+<td></td>
+<td align="right"><span class="math inline"><em>μ</em><sub><em>l</em><em>i</em><em>o</em><em>p</em></sub> = 0.007</span></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td align="right"><span class="math inline"><em>l</em><em>a</em><em>m</em><em>b</em><em>d</em><em>a</em><sub><em>o</em><em>t</em><em>h</em><em>e</em><em>r</em></sub> = 0.29</span></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+<tr class="even">
+<td></td>
+<td align="right"><span class="math inline"><em>μ</em><sub><em>o</em><em>t</em><em>h</em><em>e</em><em>r</em></sub> = 0.27</span></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+<p>We see from these results that there is good reason to think that there is a difference in diversification rates in these &quot;oddball&quot; frogs compared to the rest of the amphibians.</p>
+<p>Of course, more elaborate comparisons are possible. For example, one could compare the fit of four models, as follows: Model 1, constant rates; Model 2, speciation rate in clade A differs from the background; Model 3, extinction rate in clade A differs from the background; and Model 4, both speciation and extinction rates in clade A differ from the background. In this case, some of the pairs of models are nested – for example, Model 1 is a special case of Model 2, which is, in turn, a special case of Model 4 – but all four do not make a nested series. Here we benefit from using a model selection approach based on <span class="math inline"><em>A</em><em>I</em><em>C</em><sub><em>C</em></sub></span>. We can fit all four models and use their relative number of parameters to calculate <span class="math inline"><em>A</em><em>I</em><em>C</em><sub><em>C</em></sub></span> scores. We can then calculate <span class="math inline"><em>A</em><em>I</em><em>C</em><sub><em>C</em></sub></span> weights to evaluate the relative support for each of these four models. (As an aside, it might be difficult to differentiate among these four possibilities without a lot of data!)</p>
+<p>But what if you do not have an a priori reason to predict differential diversification rates across clades? Or, what if the only reason you think one clade might have a different diversification rate than another is that it has more species? (Such reasoning is circular, and will wreak havoc with your analyses!) In such cases, we can use methods that allow us to fit general models where diversification rates are allowed to vary across clades in the tree. Available methods use stepwise AIC <span class="citation">(MEDUSA, Alfaro et al. <a href="#ref-Alfaro2009-hz">2009</a>; but see May and Moore <a href="#ref-May2016-cm">2016</a>)</span>, or reversible-jump Bayesian MCMC <span class="citation">(Rabosky <a href="#ref-Rabosky2014-qo">2014</a>, but see <span class="citation">Moore et al. (<a href="#ref-Moore2016-ei">2016</a>)</span>, <span class="citation">Rabosky (<a href="#ref-Rabosky2017-bl">2017</a>)</span>)</span>.</p>
+<p>For example, running a stepwise-AIC algorithm on the amphibian data <span class="citation">(Alfaro et al. <a href="#ref-Alfaro2009-hz">2009</a>)</span> results in a model with 11 different speciation and extinction regimes (Figure 12.4). This is good evidence that diversification rates have varied wildly through the history of amphibians.</p>
+<div class="figure">
+<img src="%7B%7B%20site.baseurl%20%7D%7D/images/figure12-4.png" alt="Figure 12.4. Analysis of diversification rate shifts among amphibian clades using MEDUSA (Alfaro et al. 2009). Arrows highlight places where speciation, extinction, or both are inferred to have shifted; green arrows indicate an inferred increase in r = \lambda - \mu, while red arrows indicate decreased r." />
+<p class="caption">Figure 12.4. Analysis of diversification rate shifts among amphibian clades using MEDUSA <span class="citation">(Alfaro et al. <a href="#ref-Alfaro2009-hz">2009</a>)</span>. Arrows highlight places where speciation, extinction, or both are inferred to have shifted; green arrows indicate an inferred increase in <span class="math inline"><em>r</em> = <em>λ</em> − <em>μ</em></span>, while red arrows indicate decreased <span class="math inline"><em>r</em></span>.</p>
+</div>
+<p>One note: all current approaches fit a model where birth and death rates change at discrete times in the phylogenetic tree - that is, along certain branches in the tree leading to extant taxa. One might wish for an approach, then, that models such changes - using, for example, a Poisson process - and then locates the changes on the tree. However, we still lack the mathematics to solve for <span class="math inline"><em>E</em>(<em>t</em>)</span> (e.g. equation 11.19) under such a model <span class="citation">(Moore et al. <a href="#ref-Moore2016-ei">2016</a>)</span>. Given that, we can view current implementations of models where rates vary across clades as an approximation to the likelihood, and one that discounts the possibility of shifts in speciation and/or extinction rates among any clades that did not happen to survive until the present day <span class="citation">(Rabosky <a href="#ref-Rabosky2017-bl">2017</a>)</span> - and we are stuck with that until a better alternative is developed!</p>
+<h2 id="section-12.3-variation-in-diversification-rates-through-time">Section 12.3: Variation in diversification rates through time</h2>
+<p>In addition to considering rate variation across clades, we might also wonder whether birth and/or death rates have changed through time. For example, perhaps we think our clade is an adaptive radiation that experienced rapid diversification upon arrival to an island archipelago and slowed as this new adaptive zone got filled <span class="citation">(Schluter <a href="#ref-Schluter2000-ne">2000</a>)</span>. This hypothesis is an example of density-dependent diversification, where diversification rate depends on the number of lineages that are present <span class="citation">(Rabosky <a href="#ref-Rabosky2013-nw">2013</a>)</span>. Alternatively, perhaps our clade has been experiencing extinction rates that have changed through time, perhaps peaking during some time period of unfavorable climactic conditions <span class="citation">(Benton <a href="#ref-Benton2009-wf">2009</a>)</span>. This is another hypothesis that predicts variation in diversification (speciation and extinction) rates through time.</p>
+<p>We can fit time-dependent diversification models using likelihood equations that allow arbitrary variation in speciation and/or extinction rates, either as a function of time or depending on the number of other lineages in the clade. To figure out the likelihood we can first make a simplifying assumption: though diversification rates might change, they are constant across all lineages at any particular time point. In particular, this means that speciation (and/or extinction) rates slow down (or speed up) in exactly the same way across all lineages in an evolving clade.</p>
+<p>Our assumption about equal rates across lineages at any time means that we can consider time-slices through the tree rather than individual branches, i.e. we can get all the information that we need to fit these models from lineage through time plots. This type of a model is called “Equal-Rates Markov” in the literature and predicts exactly the same distribution of tree balance statistics as constant-rate birth death models (see chapter 10).</p>
+<p>The most general way to fit time-varying birth-death models to phylogenetic trees is described in Morlon et al. <span class="citation">(<a href="#ref-Morlon2011-ci">2011</a>)</span>. Consider the case where both speciation and extinction rates vary as a function of time, <span class="math inline"><em>λ</em>(<em>t</em>)</span> and <span class="math inline"><em>μ</em>(<em>t</em>)</span>. Morlon et al. <span class="citation">(<a href="#ref-Morlon2011-ci">2011</a>)</span> derive the likelihood for such a model as:</p>
+<p>(eq. 12.1)</p>
+<div>
+<p><br /><span class="math display">$$
+L(t_1, t_2, \dots, t_{n-1}) = (n+1)! \frac{f^n \sum_{i=1}^{n-1} \lambda(t_i) \Psi(s_{i,1}, t_i) \Psi(s_{i,2}, t_i)}{\lambda [1-E(t_1)]^2}
+$$</span><br /></p>
+</div>
+<p>Where:</p>
+<p>(eq. 12.2)</p>
+<div>
+<p><br /><span class="math display">$$
+E(t) = 1 - \frac{e^{\int_0^t [\lambda(u) - \mu(u)]du}}{\frac{1}{f} + \int_0^t e^{\int_0^s [\lambda(u) - \mu(u)]du} \lambda(s) ds}
+$$</span><br /></p>
+</div>
+<p>and:</p>
+<p>(eq. 12.3)</p>
+<div>
+<p><br /><span class="math display">$$
+\Psi(s, t) = e^{\int_s^t [\lambda(u) - \mu(u)]du} \Big[  1 + \frac{\int_s^t e^{\int_0^\tau [\lambda(\sigma) - \mu(\sigma)]d\sigma}\lambda(\tau)d\tau}{\frac{1}{f} + \int_0^s e^{\int_0^\tau [\lambda(\sigma) - \mu(\sigma)]d\sigma} \lambda(\tau) d\tau} \Big]^{-2}
+$$</span><br /></p>
+</div>
+<p>Following chapter 11, <span class="math inline"><em>n</em></span> is the number of tips in the tree, and divergence times <span class="math inline"><em>t</em><sub>1</sub>, <em>t</em><sub>2</sub>, …, <em>t</em><sub><em>n</em> − 1</sub></span> are defined measured from the present (e.g. decreasing towards the present day). <span class="math inline"><em>λ</em>(<em>t</em>)</span> and <span class="math inline"><em>μ</em>(<em>t</em>)</span> are speciation and extinction rates expressed as an arbitrary function of time, <span class="math inline"><em>f</em></span> is the sampling fraction (under a uniform sampling model). For a node starting at time <span class="math inline"><em>t</em><sub><em>i</em></sub></span>, <span class="math inline"><em>s</em><sub><em>i</em>, 1</sub></span> and <span class="math inline"><em>s</em><sub><em>i</em>, 2</sub></span> are the times when the two daughter lineages encounter a speciation event in the reconstructed tree<sup><a name="footnote12.2_back"><a href="#footnote12.2">2</a></a></sup>. <span class="math inline"><em>E</em>(<em>t</em>)</span>, as before, is the probability that a lineage alive at time <span class="math inline"><em>t</em></span> leaves no descendants in the sample. Finally, <span class="math inline"><em>Ψ</em>(<em>s</em>, <em>t</em>)</span> is the probability that a lineage alive at time <span class="math inline"><em>s</em></span> leaves exactly one descent at time <span class="math inline"><em>t</em> &lt; <em>s</em></span> in the reconstructed tree,</p>
+<p>Note that my equations here differ from the originals in Morlon et al. <span class="citation">(<a href="#ref-Morlon2011-ci">2011</a>)</span>, which assumed that we have information about the stem lineage (and, thus, uses an index on <span class="math inline"><em>t</em><sub><em>i</em></sub></span> that goes up to <span class="math inline"><em>n</em></span> instead of <span class="math inline"><em>n</em> − 1</span>, and a different denominator conditioning on survival of the descendants of the single stem lineage; see also the online supplement for Morlon et al. <span class="citation">(<a href="#ref-Morlon2011-ci">2011</a>)</span>). I also multiply by the total number of topological arrangements of n taxa, <span class="math inline">(<em>n</em> + 1)!</span>.</p>
+<p>If one substitutes constants for speciation and extinction (<span class="math inline"><em>λ</em>(<em>t</em>)=<em>λ</em><sub><em>c</em></sub></span>, <span class="math inline"><em>μ</em>(<em>t</em>)=<em>μ</em><sub><em>c</em></sub></span>) in equation 12.1, then one obtains equation 11.24; if one additionally considers the case of complete sampling and substitutes <span class="math inline"><em>f</em> = 1</span> then we obtain equation 11.18. This provides a single unified framework for time-varying phylogenetic trees with uniform incomplete sampling <span class="citation">(see also Höhna <a href="#ref-Hohna2014-ba">2014</a> for independent but equivalent derivations that also extend to the case of representative sampling)</span>.</p>
+<p>Equation 12.1 requires that we define speciation rate as a function of time. Two types of time-varying models are currently common in the comparative literature: linear and expoential. If speciation rates change linearly through time <span class="citation">(see Rabosky and Lovette <a href="#ref-Rabosky2008-vp">2008</a> for an early version of this model)</span>:</p>
+<p>(eq. 12.4)</p>
+<div>
+<p><br /><span class="math display"><em>λ</em>(<em>t</em>)=<em>λ</em><sub>0</sub> + <em>α</em><sub><em>λ</em></sub><em>t</em></span><br /></p>
+</div>
+<p>Where <span class="math inline"><em>λ</em><sub>0</sub></span> is the initial speciation rate at the present and alpha the slope of speciation rate change as we go back through time. <span class="math inline"><em>α</em><sub><em>λ</em></sub></span> must be chosen so that speciation rates do not become negative as we move back through the tree: <span class="math inline"><em>α</em><sub><em>λ</em></sub> &gt; −<em>λ</em><sub>0</sub>/<em>t</em><sub>1</sub></span>. Note that the interpretation of <span class="math inline"><em>α</em><sub><em>λ</em></sub></span> is a bit strange since we measure time backwards: a positive <span class="math inline"><em>α</em><sub><em>λ</em></sub></span>, for example, would mean that speciation rates have declined from the past to the present. Other time-dependent models published earlier [e.g. <span class="citation">Rabosky and Lovette (<a href="#ref-Rabosky2008-vp">2008</a>)</span>, which considered a linearly declining pure-birth model) do not have this property.</p>
+<p>We could also consider a linear change in extinction through time:</p>
+<p>(eq. 12.5)</p>
+<div>
+<p><br /><span class="math display"><em>μ</em>(<em>t</em>)=<em>μ</em><sub>0</sub> + <em>α</em><sub><em>μ</em></sub><em>t</em></span><br /></p>
+</div>
+<p>Again, <span class="math inline"><em>α</em><sub><em>μ</em></sub></span> is the change in extinction rate through time, and must be interpreted in the same &quot;backwards&quot; way as <span class="math inline"><em>α</em><sub><em>λ</em></sub></span>. Again, we must restrict our parameter to avoid a negative rate: <span class="math inline"><em>α</em><sub><em>μ</em></sub> &gt; −<em>μ</em><sub>0</sub>/<em>t</em><sub>1</sub></span></p>
+<p>One can then substitute either of these formulas into equation 12.1 to calculate the likelihood of a model where speciation rate declines through time. Most implementations of this approach use numerical approximations rather than analytic solutions for this model <span class="citation">(see, e.g., Morlon et al. <a href="#ref-Morlon2011-ci">2011</a>, <span class="citation">Etienne et al. (<a href="#ref-Etienne2012-am">2012</a>)</span>)</span>.</p>
+<p>Another common model has speciation and/or extinction rates changing exponentially through time:</p>
+<p>(eq. 12.6)</p>
+<div>
+<p><br /><span class="math display"><em>λ</em>(<em>t</em>)=<em>λ</em><sub>0</sub><em>e</em><em>x</em><em>p</em>(<em>β</em><sub><em>λ</em></sub><em>t</em>)</span><br /></p>
+</div>
+<p>and/or</p>
+<p>(eq. 12.7)</p>
+<div>
+<p><br /><span class="math display"><em>μ</em>(<em>t</em>)=<em>μ</em><sub>0</sub><em>e</em><em>x</em><em>p</em>(<em>β</em><sub><em>μ</em></sub><em>t</em>)</span><br /></p>
+</div>
+<p>We can again calculate likelihoods for this model numerically <span class="citation">(Morlon et al. <a href="#ref-Morlon2011-ci">2011</a>, <span class="citation">Etienne et al. (<a href="#ref-Etienne2012-am">2012</a>)</span>)</span>.</p>
+<p>As an example, we can test models of time-varying diversification rates across part of the amphibian tree of life from Pyron and Jetz <span class="citation">(<a href="#ref-Jetz2018-mh">2018</a>)</span>. I will focus on one section of the salamanders, the lungless salamanders (Plethodontidae, comprised of the clade that spans Bolitoglossinae, Spelerpinae, Hemidactylinae, and Plethodontinae). This interesting clade was already identified above as including both an increase in diversification rates (at the base of the clade) and a decrease (on the branch leading to Hemidactylinae; Figure 12.4) Tree may be missing a few species; this section of the tree includes 440 species in Pyron and Jetz <span class="citation">(<a href="#ref-Jetz2018-mh">2018</a>)</span> but 471 speices are listed on <a href="https://amphibiaweb.org/lists/Plethodontidae.shtml">Amphibiaweb</a> as of May 2018. I will assume random sampling with <span class="math inline"><em>f</em> = 440/471 = 0.934</span>.</p>
+<p>Comparing the fit of a set of models, we obtain the following results:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Model</th>
+<th>Number of parameters</th>
+<th>Parameter estimates</th>
+<th>lnLikelihood</th>
+<th>AIC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Constant rate pure birth</td>
+<td>1</td>
+<td><span class="math inline"><em>λ</em> = 0.05111267</span></td>
+<td>497.8</td>
+<td>-993.6</td>
+</tr>
+<tr class="even">
+<td>Constant rate birth-death</td>
+<td>2</td>
+<td><span class="math inline"><em>λ</em> = 0.05111267</span></td>
+<td>497.8</td>
+<td>-991.6</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td><span class="math inline"><em>μ</em> = 0</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Linear change in speciation</td>
+<td>3</td>
+<td><span class="math inline"><em>λ</em><sub>0</sub> = 0.035</span></td>
+<td>513.0</td>
+<td>-1019.9</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td><span class="math inline"><em>α</em><sub><em>λ</em></sub> = 0.0011</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td><span class="math inline"><em>μ</em> = 0</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Exponential change in speciation</td>
+<td>3</td>
+<td><span class="math inline"><em>λ</em><sub>0</sub> = 0.040</span></td>
+<td>510.7</td>
+<td>-1015.427</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td><span class="math inline"><em>β</em><sub><em>λ</em></sub> = 0.016</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td><span class="math inline"><em>μ</em> = 0</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Linear change in extinction</td>
+<td>3</td>
+<td><span class="math inline"><em>λ</em> = 0.053</span></td>
+<td>497.8</td>
+<td>-989.6</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>$_0 = 0 $</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>$_{} = 0.000036 $</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Exponential change in extinction</td>
+<td>3</td>
+<td><span class="math inline"><em>λ</em> = 0.069</span></td>
+<td>510.6</td>
+<td>-1015.3</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td><span class="math inline"><em>μ</em><sub>0</sub> = 61.9</span></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td><span class="math inline"><em>β</em><sub><em>μ</em></sub> = −111.0</span></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>The model with the lowest AIC score has a linear decline in speciation rates, and moderate support compared to all other models. From this, we support the inference that diversification rates among these salamanders has slowed through time. Of course, there are other models I could have tried, such as models where both speciation and extinction rates are changing through time, or models where there are many more extant species of salamanders than currently recognized. The conclusion we make is only as good as the set of models being considered, and one should carefully consider any plausible models that are not in the candidate set.</p>
+<h2 id="section-12.4-diversity-dependent-models">Section 12.4: Diversity-dependent models</h2>
+<p>Time-dependent models in the previous section are often used as a proxy to capture processes like key innovations or adaptive radiations <span class="citation">(Rabosky <a href="#ref-Rabosky2014-qo">2014</a>)</span>. Many of these theories suggest that diversification rates should depend on the number of species alive in a certain time or place, rather than time <span class="citation">(Moen and Morlon <a href="#ref-Moen2014-wh">2014</a>, <span class="citation">Etienne and Haegeman (<a href="#ref-Etienne2012-gk">2012</a>)</span>, <span class="citation">Etienne et al. (<a href="#ref-Etienne2012-am">2012</a>)</span>, <span class="citation">Phillimore and Price (<a href="#ref-Phillimore2008-oo">2008</a>)</span>, <span class="citation">Rabosky (<a href="#ref-Rabosky2013-nw">2013</a>)</span>)</span>. Therefore, we might want to define speciation rate in a truly diversity dependent manner rather than using time as a proxy:</p>
+<p>(eq. 12.5)</p>
+<div>
+<p><br /><span class="math display">$$
+\lambda(t) = \lambda_0 (1 - \frac{N_t}{K})
+$$</span><br /></p>
+</div>
+<p>Since speciation rate now depends on number of lineages rather than time, we can't plug this expression into our general formula <span class="citation">(Morlon et al. <a href="#ref-Morlon2011-ci">2011</a>)</span>. Instead, we can use the approach outlined by Etienne et al. <span class="citation">(<a href="#ref-Etienne2012-gk">2012</a> and @Etienne2016–pf)</span>. This approach focuses on numerical solutions to differential equations moving forward through time in the tree. The overall idea of the approach is similar to Morlon, but details differ; likelihoods from Etienne et al. <span class="citation">(<a href="#ref-Etienne2012-gk">2012</a>)</span> should be directly comparable to all the likelihoods presented in this book provided that the conditioning is the same and they are multiplied by the total number of topological arrangements <span class="math inline">(<em>n</em> + 1)!</span> to get a likelihood for the tree rather than for the branching times. Etienne's approach can also deal with incomplete sampling under a uniform sampling model.</p>
+<p>As an example, we can fit a basic model of diversity-dependent speciation to our phylogenetic tree of lungless salamanders introduced above. Doing so, we find a ML estimate of <span class="math inline"><em>λ</em><sub>0</sub> = 0.099</span>, <span class="math inline"><em>μ</em> = 0</span>, and <span class="math inline"><em>K</em> = 979.9</span>, with a log-likelihood of 537.3 and an AIC of -1068.7. This is a substantial improvement over any of the time-varying models considered above, and evidence for diversity dependence among lungless salamanders.</p>
+<p>Both density- and time-dependent approaches has become very popular, as time-dependent diversification models are consistent with many ecological models of how multi-species clades might evolve through time. For example, adaptive radiation models based on ecological opportunity predict that, as niches are filled and ecological opportunity “used up,” then we should see a declining rate of diversification through time <span class="citation">(Etienne and Haegeman <a href="#ref-Etienne2012-gk">2012</a>, <span class="citation">Rabosky and Hurlbert (<a href="#ref-Rabosky2015-gq">2015</a>)</span>)</span>. By contrast, some models predict that species create new opportunities for other species, and thus predict accelerating diversification through time <span class="citation">(Emerson and Kolm <a href="#ref-Emerson2005-wm">2005</a>)</span>. These are reasonable hypotheses, but there is a statistical challenge: in each case, there is at least one conceptually different model that predicts the exact same pattern. In the case of decelerating diversification, the predicted pattern of a lineage-through-time plot that bends down towards the present day can also come from a model where lineages accumulate at a constant rate, but then are not fully sampled at the present day <span class="citation">(Pybus and Harvey <a href="#ref-Pybus2000-sf">2000</a>)</span>. In other words, if we are missing some living species from our phylogenetic tree and we don’t account for that, then we would mistake a constant-rates birth death model for a signal of slowing diversification through time. Of course, methods that we have discussed can account for this. Some methods can even account for the fact that the missing taxa might be non-random, as missing taxa tend to be either rare or poorly differentiated from their sister lineages <span class="citation">(e.g. often younger than expected by chance; Cusimano and Renner <a href="#ref-Cusimano2010-fl">2010</a>, <span class="citation">Brock et al. (<a href="#ref-Brock2011-ts">2011</a>)</span>)</span>. However, the actual number of species in a clade is always quite uncertain and, in every case, must be known for the method to work. So, an alternative explanation that is often viable is that we are missing species in our tree, and we don't know how many there are. Since much of the signal for these methods comes from the most recent branching events in the tree, some &quot;missing&quot; nodes may simply be too shallow for taxonomists to call these things &quot;species.&quot;</p>
+<p>Likewise, a pattern of accelerating differentiation mimics the pattern caused by extinction. A phylogenetic tree with high but constant rates of speciation and extinction is nearly impossible to distinguish from a tree with no extinction and speciation rates that accelerate through time.</p>
+<p>Both of the above caveats are certainly worth considering when interpreting the results of tests of diversification from phylogenetic data. In many cases, adding fossil information will allow investigators to reliably distinguish between the stated alternatives, although methods that tie fossils and trees together are still relatively poorly developed <span class="citation">(but see Slater and Harmon <a href="#ref-Slater2013-hl">2013</a>)</span>. And various methods have been developed that will give ambiguous results when multiple models provide equivalent explanations for the data.</p>
+<h2 id="section-12.5-protracted-speciation">Section 12.5: Protracted speciation</h2>
+<p>In all of the diversification models that we have considered so far, speciation happens instantly; one moment we have a single species, and then immediately two. But this is not biologically plausible. Speciation takes time, as evidenced by the increasing numbers of partially distinct populations that biologists have identified in the natural world <span class="citation">(Coyne and Orr <a href="#ref-Coyne2004-vv">2004</a>, <span class="citation">De Queiroz (<a href="#ref-De_Queiroz2005-vo">2005</a>)</span>)</span>. Furthermore, the fact that speciation takes take can have a profound impact on the shapes of phylogenetic trees <span class="citation">(Losos and Adler <a href="#ref-Losos1995-co">1995</a>)</span>. Because of this, it is worth considering diversification models that explicitly account for the fact that the process of speciation has a beginning and an end.</p>
+<p>The most successful models to tackle this question have been models of protracted speciation <span class="citation">(Lambert et al. <a href="#ref-Lambert2015-vb">2015</a>, <span class="citation">Etienne and Rosindell (<a href="#ref-Etienne2012-uh">2012</a>)</span>, <span class="citation">Rosindell et al. (<a href="#ref-Rosindell2010-dk">2010</a>)</span>)</span>. In such models, speciation begins by the formation of an incipient species at some rate <span class="math inline"><em>λ</em><sub>1</sub></span>. This represents a “partial” species; one can imagine, for example, that this is a population that has split off from the main range of the species, but has not yet evolved full reproductive isolation. The incipient species only becomes a “full” species if it completes speciation, which occurs at a rate <span class="math inline"><em>λ</em><sub>2</sub></span>. This represents the time it takes for an incipient species to evolve full reproductive isolation (Figure 12.5).</p>
+<div class="figure">
+<img src="%7B%7B%20site.baseurl%20%7D%7D/images/figure12-5.png" alt="Figure 12.5. An illustration of the protracted model of speciation on a phylogenetic tree. Panel A shows the growing tree including full (solid lines) and incipient species (dotted lines). Incipient species become full after some waiting time, and if that waiting time is not reached before sampling then they are not included in the final species tree (panel B; e.g. lineage 4i). Modified from (Lambert et al. 2015)" />
+<p class="caption">Figure 12.5. An illustration of the protracted model of speciation on a phylogenetic tree. Panel A shows the growing tree including full (solid lines) and incipient species (dotted lines). Incipient species become full after some waiting time, and if that waiting time is not reached before sampling then they are not included in the final species tree (panel B; e.g. lineage 4i). Modified from <span class="citation">(Lambert et al. <a href="#ref-Lambert2015-vb">2015</a>)</span></p>
+</div>
+<p>Because speciation takes time, the main impact of this model is that we predict fewer very young species in our tree – that is, the nodes closest to the tips of the tree are not as young as they would be compared to pure-birth or birth-death models without protracted speciation (Figure 12.6). As a result, protracted speciation models produce lineage through time plots that can mimic the properties often attributed to diversity-dependence, even without any interactions among lineages <span class="citation">(Etienne and Rosindell <a href="#ref-Etienne2012-uh">2012</a>)</span>!</p>
+<div class="figure">
+<img src="%7B%7B%20site.baseurl%20%7D%7D/images/figure12-6.png" alt="Figure 12.6. Lineage-through-time plots under a protracted birth-death model. Modified from (Etienne and Rosindell 2012)" />
+<p class="caption">Figure 12.6. Lineage-through-time plots under a protracted birth-death model. Modified from <span class="citation">(Etienne and Rosindell <a href="#ref-Etienne2012-uh">2012</a>)</span></p>
+</div>
+<p>Likelihood approaches are available for this model of protracted speciation. Again, the likelihood must be calculated using numerical methods <span class="citation">(Lambert et al. <a href="#ref-Lambert2015-vb">2015</a>)</span>. Fitting this model to the salamander tree, we obtain a maximum log-likeihood of 513.8 with parameter values <span class="math inline"><em>λ</em><sub>1</sub> = 0.059</span>, <span class="math inline"><em>λ</em><sub>2</sub> = 0.44</span>, and <span class="math inline"><em>μ</em> = 0.0</span>. This corresponds to an AIC score of -1021.6; this model fits about as well as the best of the time-varying models but not as well as the diversity dependent model considered above. Again, thought, I am not including plausible combinations of models, such as protracted speciation that varies through time.</p>
+<p>So far, models of protracted speciation remain mostly in the realm of ecological neutral theory, and are just beginning to move into phylogenetics and evolutionary biology <span class="citation">(see, e.g., Sukumaran and Lacey Knowles <a href="#ref-Sukumaran2017-wm">2017</a>)</span>. However, I think models that treat speciation as a process that takes time – rather than something instantaneous – will be an important addition to our macroevolutionary toolbox in the future.</p>
+<h2 id="section-12.5-summary">Section 12.5: Summary</h2>
+<p>In this chapter I discussed models that go beyond constant rate birth-death models. We can fit models where speciation rate varies across clades or through time (or both). In some cases, very different models predict the same pattern in phylogenetic trees, warranting some caution until direct fossil data can be incorporated. I also described a model of protracted speciation, where speciation takes some time to complete. This latter model is potentially better connected to microevolutionary models of speciation, and could point towards fruitful directions for the field. We know that simple birth-death models do not capture the richness of speciation and extinction across the tree of life, so these models that range beyond birth and death are critical to the growth of comparative methods.</p>
+<h2 id="footnotes">Footnotes</h2>
+<p><a name="footnote12.1">1</a>: A - photo by Sean Neilsen (NPS) [Public domain], via Wikimedia Commons; B - By The High Fin Sperm Whale [CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0) or GFDL (http://www.gnu.org/copyleft/fdl.html)], from Wikimedia Commons; C - photo by (Raymond)[https://yarpnews.wordpress.com/] [CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)], via Wikimedia Commons; D - By Phil Bishop (http://calphotos.berkeley.edu) [CC BY-SA 2.5 (https://creativecommons.org/licenses/by-sa/2.5) or CC BY-SA 2.5 (https://creativecommons.org/licenses/by-sa/2.5)], via Wikimedia Commons. <a href="#footnote12.1_back"><em>back to main text</em></a></p>
+<p><a name="footnote12.2">2</a>: Even though this approach requires topology, Morlon et al. <span class="citation">(<a href="#ref-Morlon2011-ci">2011</a>)</span> show that their likelihood is equivalent to other approaches, such as Nee and Maddison, that rely only on branching times and ignore topology completely. This is because trees with the same set of branching times but different topologies have identical likelihoods under this model.<a href="#footnote12.2_back"><em>back to main text</em></a></p>
+<h1 id="references" class="unnumbered">References</h1>
+<div id="refs" class="references">
+<div id="ref-Alfaro2009-hz">
+<p>Alfaro, M. E., F. Santini, C. Brock, H. Alamillo, A. Dornburg, D. L. Rabosky, G. Carnevale, and L. J. Harmon. 2009. Nine exceptional radiations plus high turnover explain species diversity in jawed vertebrates. Proceedings of the National Academy of Sciences 106:13410–13414. National Acad Sciences.</p>
+</div>
+<div id="ref-Benton2009-wf">
+<p>Benton, M. J. 2009. The red queen and the court jester: Species diversity and the role of biotic and abiotic factors through time. Science 323:728–732.</p>
+</div>
+<div id="ref-Brock2011-ts">
+<p>Brock, C. D., L. J. Harmon, and M. E. Alfaro. 2011. Testing for temporal variation in diversification rates when sampling is incomplete and nonrandom. Syst. Biol. 60:410–419. Oxford University Press.</p>
+</div>
+<div id="ref-Coyne2004-vv">
+<p>Coyne, J. A., and H. A. Orr. 2004. Speciation. Sinauer, New York.</p>
+</div>
+<div id="ref-Cusimano2010-fl">
+<p>Cusimano, N., and S. S. Renner. 2010. Slowdowns in diversification rates from real phylogenies may not be real. Syst. Biol. 59:458–464.</p>
+</div>
+<div id="ref-De_Queiroz2005-vo">
+<p>De Queiroz, K. 2005. Ernst mayr and the modern concept of species. Proceedings of the National Academy of Sciences 102:6600–6607. National Acad Sciences.</p>
+</div>
+<div id="ref-Emerson2005-wm">
+<p>Emerson, B. C., and N. Kolm. 2005. Species diversity can drive speciation. Nature 434:1015–1017.</p>
+</div>
+<div id="ref-Etienne2012-gk">
+<p>Etienne, R. S., and B. Haegeman. 2012. A conceptual and statistical framework for adaptive radiations with a key role for diversity dependence. Am. Nat. 180:E75–89.</p>
+</div>
+<div id="ref-Etienne2012-uh">
+<p>Etienne, R. S., and J. Rosindell. 2012. Prolonging the past counteracts the pull of the present: Protracted speciation can explain observed slowdowns in diversification. Syst. Biol. 61:204–213.</p>
+</div>
+<div id="ref-Etienne2012-am">
+<p>Etienne, R. S., B. Haegeman, T. Stadler, T. Aze, P. N. Pearson, A. Purvis, and A. B. Phillimore. 2012. Diversity-dependence brings molecular phylogenies closer to agreement with the fossil record. Proc. Biol. Sci. 279:1300–1309.</p>
+</div>
+<div id="ref-Etienne2016-pf">
+<p>Etienne, R. S., A. L. Pigot, and A. B. Phillimore. 2016. How reliably can we infer diversity-dependent diversification from phylogenies? Methods Ecol. Evol. 7:1092–1099.</p>
+</div>
+<div id="ref-Hohna2014-ba">
+<p>Höhna, S. 2014. Likelihood inference of non-constant diversification rates with incomplete taxon sampling. PLoS One 9:e84184.</p>
+</div>
+<div id="ref-Hughes2006-nr">
+<p>Hughes, C., and R. Eastwood. 2006. Island radiation on a continental scale: Exceptional rates of plant diversification after uplift of the andes. Proc. Natl. Acad. Sci. U. S. A. 103:10334–10339.</p>
+</div>
+<div id="ref-Jetz2018-mh">
+<p>Jetz, W., and R. A. Pyron. 2018. The interplay of past diversification and evolutionary isolation with present imperilment across the amphibian tree of life. Nat Ecol Evol 2:850–858.</p>
+</div>
+<div id="ref-Lambert2015-vb">
+<p>Lambert, A., H. Morlon, and R. S. Etienne. 2015. The reconstructed tree in the lineage-based model of protracted speciation. J. Math. Biol. 70:367–397.</p>
+</div>
+<div id="ref-Losos1995-co">
+<p>Losos, J. B., and F. R. Adler. 1995. Stumped by trees? A generalized null model for patterns of organismal diversity. Am. Nat. 145:329–342.</p>
+</div>
+<div id="ref-Losos2000-rr">
+<p>Losos, J. B., and D. Schluter. 2000. Analysis of an evolutionary species–area relationship. Nature 408:847. Macmillian Magazines Ltd.</p>
+</div>
+<div id="ref-May2016-cm">
+<p>May, M. R., and B. R. Moore. 2016. How well can we detect Lineage-Specific Diversification-Rate shifts? A simulation study of sequential AIC methods. Syst. Biol. 65:1076–1084.</p>
+</div>
+<div id="ref-Moen2014-wh">
+<p>Moen, D., and H. Morlon. 2014. Why does diversification slow down? Trends Ecol. Evol. 29:190–197.</p>
+</div>
+<div id="ref-Moore2016-ei">
+<p>Moore, B. R., S. Höhna, M. R. May, B. Rannala, and J. P. Huelsenbeck. 2016. Critically evaluating the theory and performance of bayesian analysis of macroevolutionary mixtures. Proc. Natl. Acad. Sci. U. S. A. 113:9569–9574.</p>
+</div>
+<div id="ref-Morlon2011-ci">
+<p>Morlon, H., T. L. Parsons, and J. B. Plotkin. 2011. Reconciling molecular phylogenies with the fossil record. Proc. Natl. Acad. Sci. U. S. A. 108:16327–16332. National Academy of Sciences.</p>
+</div>
+<div id="ref-Phillimore2008-oo">
+<p>Phillimore, A. B., and T. D. Price. 2008. Density-dependent cladogenesis in birds. PLoS Biol. 6:e71.</p>
+</div>
+<div id="ref-Pybus2000-sf">
+<p>Pybus, O. G., and P. H. Harvey. 2000. Testing macro-evolutionary models using incomplete molecular phylogenies. Proc. Biol. Sci. 267:2267–2272.</p>
+</div>
+<div id="ref-Rabosky2014-qo">
+<p>Rabosky, D. L. 2014. Automatic detection of key innovations, rate shifts, and Diversity-Dependence on phylogenetic trees. PLoS One 9:e89543. Public Library of Science.</p>
+</div>
+<div id="ref-Rabosky2013-nw">
+<p>Rabosky, D. L. 2013. Diversity-Dependence, ecological speciation, and the role of competition in macroevolution. Annu. Rev. Ecol. Evol. Syst. 44:481–502. annualreviews.org.</p>
+</div>
+<div id="ref-Rabosky2017-bl">
+<p>Rabosky, D. L. 2017. How to make any method “fail”: BAMM at the kangaroo court of false equivalency.</p>
+</div>
+<div id="ref-Rabosky2015-gq">
+<p>Rabosky, D. L., and A. H. Hurlbert. 2015. Species richness at continental scales is dominated by ecological limits. Am. Nat. 185:572–583.</p>
+</div>
+<div id="ref-Rabosky2008-vp">
+<p>Rabosky, D. L., and I. J. Lovette. 2008. Density-dependent diversification in north american wood warblers. Proc. Biol. Sci. 275:2363–2371.</p>
+</div>
+<div id="ref-Rabosky2007-ou">
+<p>Rabosky, D. L., S. C. Donnellan, A. L. Talaba, and I. J. Lovette. 2007. Exceptional among-lineage variation in diversification rates during the radiation of australia’s most diverse vertebrate clade. Proc. Biol. Sci. 274:2915–2923.</p>
+</div>
+<div id="ref-Rosindell2010-dk">
+<p>Rosindell, J., S. J. Cornell, S. P. Hubbell, and R. S. Etienne. 2010. Protracted speciation revitalizes the neutral theory of biodiversity. Ecol. Lett. 13:716–727.</p>
+</div>
+<div id="ref-Schluter2000-ne">
+<p>Schluter, D. 2000. The ecology of adaptive radiation. OUP Oxford.</p>
+</div>
+<div id="ref-Sepkoski1984-vz">
+<p>Sepkoski, J. J. 1984. A kinetic model of phanerozoic taxonomic diversity. III. Post-Paleozoic families and mass extinctions. Paleobiology 10:246–267.</p>
+</div>
+<div id="ref-Slater2013-hl">
+<p>Slater, G. J., and L. J. Harmon. 2013. Unifying fossils and phylogenies for comparative analyses of diversification and trait evolution. Methods Ecol. Evol. 4:699–702. Wiley Online Library.</p>
+</div>
+<div id="ref-Sukumaran2017-wm">
+<p>Sukumaran, J., and L. Lacey Knowles. 2017. Multispecies coalescent delimits structure, not species. Proc. Natl. Acad. Sci. U. S. A. 114:1607–1612. National Academy of Sciences.</p>
+</div>
+</div>
