@@ -1,15 +1,11 @@
 To-do list:
 Chapter 12 Proofread
 
-Chapter 13 References
 Chapter 13 examples
 Chapter 13 Proofread
 
 
-Chapter 14 figures
-Chapter 14 equations
 Chapter 14 References
-Chapter 14 examples
 Chapter 14 Proofread
 
 Proofread chapter 1
@@ -28,6 +24,7 @@ Proofread chapter 13
 Proofread chapter 14
 
 Write acknowledgements section
+Write how-to section for book publishing online
 Check copyright on all figures
 
 Add version number and changelog

@@ -5,6 +5,7 @@
 NOTE THIS CHAPTER IS IN PROGRESS!
 
 ## Section 14.1: The Lorax
+
 In Dr. Seuss’s “The Lorax” there is a quote that seems appropriate to begin my final chapter.
 
 ’Mister,’ he said with a sawdusty sneeze,
