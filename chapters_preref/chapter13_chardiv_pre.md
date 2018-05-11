@@ -171,15 +171,33 @@ When we get to the root of the tree, we are almost done – but not quite! We ha
 
 The question of which root probabilities to use for this calculation has been discussed in the literature, and does matter in some applications. Aside from equal probabilities of each state, other options include using outside information to inform prior probabilities on each state [e.g. @Hagey2017-hy], finding the calculated equilibrium frequency of each state under the model [@Maddison2007-vu], or weighting each root state by its likelihood of generating the data, effectively treating the root as a nuisance parameter [@FitzJohn2009-sg].
 
-xxx example
-
 I have described the situation where we have two character states, but this method generalizes well to multi-state characters [the MuSSE method; @FitzJohn2012-tu]. We can describe the evolution of the character in the same way as described for multi-state discrete characters in chapter 9. We then can assign unique diversification rate parameters to each of the $k$ character states: $\lambda_0, \lambda_1, \dots, \lambda_k$ and $\mu_0, \mu_1, \dots, \mu_k$ [@FitzJohn2012-tu]. It is worth keeping in mind, though, that it is not too hard to construct a model where parameters are not identifiable and model fitting and estimation become very difficult.
 
 ## Section 13.4: ML and Bayesian Tests for State-Dependent Diversification
 
-Now that we can calculate the likelihood for state-dependent diversification models, formulating ML and Bayesian tests follows the same pattern we have encountered before. For ML, some comparisons are nested and so you can use likelihood ratio tests. For example, we can compare the full BiSSe model [@Maddison2007-vu], with parameters $q_{01}, q_{10}, \lambda_0, \lambda_1, \mu_0, \mu_1$ with a restricted model with parameters $q_{01}, q_{10}, \lambda_{all}, \mu_{all}$. Since the restricted model is a special case of the full model where $\lambda_0 = \lambda_1 = \lambda_{all}$ and $\mu_0 = \mu_1 = \mu_{all}$, we can compare the two using a likliehood ratio test, as described earlier in the book. Alternatively, we can compare a series of BiSSe-type models by comparing their $AIC_c$ scores.
+Now that we can calculate the likelihood for state-dependent diversification models, formulating ML and Bayesian tests follows the same pattern we have encountered before. For ML, some comparisons are nested and so you can use likelihood ratio tests. For example, we can compare the full BiSSe model [@Maddison2007-vu], with parameters $q_{01}, q_{10}, \lambda_0, \lambda_1, \mu_0, \mu_1$ with a restricted model with parameters $q_{01}, q_{10}, \lambda_{all}, \mu_{all}$. Since the restricted model is a special case of the full model where $\lambda_0 = \lambda_1 = \lambda_{all}$ and $\mu_0 = \mu_1 = \mu_{all}$, we can compare the two using a likelihood ratio test, as described earlier in the book. Alternatively, we can compare a series of BiSSe-type models by comparing their $AIC_c$ scores.
 
-For example, I will apply this approach to the example of self-incompatability. Xxx
+For example, I will apply this approach to the example of self-incompitability. I will use data from Goldberg and Igic [-@Goldberg2012-gs], who provide a phylogenetic tree and data for 356 species of Solanaceae. All species were classified as having any form of self incompatibility, even if the state is variable among populations. The data, along with a stochastic character map of state changes, are shown in Figure 13.4.
+
+![Figure 13.4. Data from Goldberg and Igic [-@Goldberg2012-gs] showing presence (red) and absence (black) of self-incomatibility among Solanaceae. Branches colored using stochastic character mapping under a model with distinct forwards and backwards rates; these reconstructions are biased if characters affect diversification rates.]({{ site.baseurl }}/images/figure13-4.png)
+
+Applying the BiSSe models to these data and assuming that $q_{01} \neq q_{10}$, we obtain the following results:
+
+| Model | Number of parameters | Parameter estimates |	lnLikelihood	| AIC |
+| --- | --- | --- | --- |  --- |
+| Character-independent model | 4 | $\lambda = 0.65$, $\mu = 0.57$ | -945.96 | 1899.9 |
+| | | $q_{01} = 0.16$, $q_{10} = 0.09$ | | |
+| Speciation rate depends on character | 5 | $\mu = 0.57$ | -945.57 | 1901.1 |
+| | | $\lambda_0 = 0.69$, $\lambda_1 = 0.63$ | | |
+| | | $q_{01} = 0.17$, $q_{10} = 0.08$ | | |
+| Extinction rate depends on character | 5 | $\lambda = 0.65$ | -943.93 | 1897.9 |
+| | | $\mu_0 = 0.45$, $\mu_1 = 0.67$ | | |
+| | | $q_{01} = 0.22$, $q_{10} = 0.06$ | | |
+| Full character-dependent model | 6 | $\lambda_0 = 0.49$, $\lambda_1 = 0.79$ | -941.94 | 1895.9 |
+| | | $\mu_0 = 0.20$, $\mu_1 = 0.84$ | | |
+| | | $q_{01} = 0.29$, $q_{10} = 0.05$ | | |
+
+From this, we conclude that models where the character influences diversification fit best, with the full model receiving the most support. We can't discount the possibility that the character only influences extinction and not speciation, since that model is within 2 AIC units of the best model.
 
 Alternatively, we can carry out a Bayesian test for state-dependent diversification. Like other models in the book, this requires setting up an MCMC algorithm that generates posterior distributions for our model parameters [@FitzJohn2012-tu]. In this case:
 
