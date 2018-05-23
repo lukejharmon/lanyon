@@ -2,8 +2,6 @@
 
 [pdf version]({{ site.baseurl }}/pdf/chapter12_beyondbd.pdf)
 
-NOTE THIS CHAPTER IS IN PROGRESS!
-
 ## Section 13.1: The evolution of self-incompatibility
 
 Most people have not spent a lot of time thinking about the sex lives of plants. The classic mode of sexual reproduction in angiosperms (flowering plants) involves pollen (the male gametophyte stage of the plant life cycle). Pollen lands on the pistil (the female reproductive structure) and produces a pollen tube. Sperm cells move down the pollen tube, and one sperm cell unites with the egg to form a new zygote in the ovule.
@@ -69,7 +67,7 @@ Once we have picked an event in this way, we can randomly assign it to one of th
 
 An example simulation is shown in Figure 14.1. As you can see, under these model parameters the impact of character states on diversification is readily apparent. In the next section we will figure out how to extract that information from our data.
 
-![Figure 13.1. Simulation of character-dependent diversification. Data were simulated under a model where diversification rate of state zero (red) is substantially lower than that of state 1 (black; model parameters $q_{01} = 1_{10} = 0.05$, $\lambda_0 = 0.2$, $\lambda_1 = 0.8$, $\mu_0 = \mu_1 = 0.05$). )]({{ site.baseurl }}/images/figure13-1.png)
+![Figure 13.1. Simulation of character-dependent diversification. Data were simulated under a model where diversification rate of state zero (red) is substantially lower than that of state 1 (black; model parameters $q_{01} = 1_{10} = 0.05$, $\lambda_0 = 0.2$, $\lambda_1 = 0.8$, $\mu_0 = \mu_1 = 0.05$).]({{ site.baseurl }}/images/figure13-1.png)
 
 ## Section 13.3: Calculating Likelihoods for State-dependent diversification models
 
@@ -175,7 +173,7 @@ I have described the situation where we have two character states, but this meth
 
 ## Section 13.4: ML and Bayesian Tests for State-Dependent Diversification
 
-Now that we can calculate the likelihood for state-dependent diversification models, formulating ML and Bayesian tests follows the same pattern we have encountered before. For ML, some comparisons are nested and so you can use likelihood ratio tests. For example, we can compare the full BiSSe model [@Maddison2007-vu], with parameters $q_{01}, q_{10}, \lambda_0, \lambda_1, \mu_0, \mu_1$ with a restricted model with parameters $q_{01}, q_{10}, \lambda_{all}, \mu_{all}$. Since the restricted model is a special case of the full model where $\lambda_0 = \lambda_1 = \lambda_{all}$ and $\mu_0 = \mu_1 = \mu_{all}$, we can compare the two using a likelihood ratio test, as described earlier in the book. Alternatively, we can compare a series of BiSSe-type models by comparing their $AIC_c$ scores.
+Now that we can calculate the likelihood for state-dependent diversification models, formulating ML and Bayesian tests follows the same pattern we have encountered before. For ML, some comparisons are nested and so you can use likelihood ratio tests. For example, we can compare the full BiSSe model [@Maddison2007-vu], with parameters $q_{01}$, $q_{10}$, $\lambda_0$, $\lambda_1$, $\mu_0$, $\mu_1$ with a restricted model with parameters $q_{01}$, $q_{10}$, $\lambda_{all}$, $\mu_{all}$. Since the restricted model is a special case of the full model where $\lambda_0 = \lambda_1 = \lambda_{all}$ and $\mu_0 = \mu_1 = \mu_{all}$, we can compare the two using a likelihood ratio test, as described earlier in the book. Alternatively, we can compare a series of BiSSe-type models by comparing their $AIC_c$ scores.
 
 For example, I will apply this approach to the example of self-incompitability. I will use data from Goldberg and Igic [-@Goldberg2012-gs], who provide a phylogenetic tree and data for 356 species of Solanaceae. All species were classified as having any form of self incompatibility, even if the state is variable among populations. The data, along with a stochastic character map of state changes, are shown in Figure 13.4.
 
@@ -236,13 +234,16 @@ $$
 
 6.	Repeat steps 2-5 a large number of times.
 
-Applying this method to the self-incompatability data, we find that...
+Applying this method to the self-incompatability data, we find that again estimates of speciation and extinction differ substantially among the two character states (Figure 13.5). Since the posterior distributions for extinction do not overlap, we again infer that the character likely influences that model parameter; speciation results are again suggestive but not as conclusive as those for extinction.
+
+![Figure 13.5. Bayesian BiSSe analysis of self-incompatibility. Posterior distributions for character-dependent speciation ($\lambda_0$ and $\lambda_1$) and extinction ($\mu_0$ and $\mu_1$).]({{ site.baseurl }}/images/figure13-5.png)
+
 
 ## Section 13.5:Potential Pitfalls and How to Avoid Them
 
 Recently, a few papers have been published that are critical of state-dependent diversification models [@Rabosky2015-ao, @Maddison2015-wy]. These papers raise substantive critiques that are important to address when applying the methods described in this chapter to empirical data. In this section I will attempt to describe the critiques and their potential remedies.
 
-The most serious limitation of state-dependent models as currently implemented is that they consider only a relatively small set of possible models. In particular, the approach we describe above compares two models: first, a model where birth and death rates are constant and do not depend on the state of the character; and second, a model where birth and death rates depend only on the character state [@@Maddison2007-vu]. But there is another possibility that might be (in general) more common than either of the models we consider: birth and death rates vary, but in a way that is not dependent on the particular character we have chosen to analyze. I say that this is probably a common pattern because we know that birth and death rates vary tremendously across lineages in the tree of life [@Alfaro2009-hz], and it seems probable to me that many of our hypotheses about which characters might contribute to that variation are, at this point, stabs in the dark.
+The most serious limitation of state-dependent models as currently implemented is that they consider only a relatively small set of possible models. In particular, the approach we describe above compares two models: first, a model where birth and death rates are constant and do not depend on the state of the character; and second, a model where birth and death rates depend only on the character state [@Maddison2007-vu]. But there is another possibility that might be (in general) more common than either of the models we consider: birth and death rates vary, but in a way that is not dependent on the particular character we have chosen to analyze. I say that this is probably a common pattern because we know that birth and death rates vary tremendously across lineages in the tree of life [@Alfaro2009-hz], and it seems probable to me that many of our hypotheses about which characters might contribute to that variation are, at this point, stabs in the dark.
 
 This issue is a normal one for statistical analyses – after all, there are always other models outside of our set of considered possibilities. However, in this case, the fact that state-dependent diversification models fail to consider the possibility outlined above causes a very particular – and peculiar – problem: if we apply the tests to empirical phylogenetic trees, even with made-up data, we almost always find statistically significant results [@Rabosky2015-ao]. For example, Rabosky and Goldberg [-@Rabosky2015-ao] found that there is very often a statistically significant “signal” that the number of letters in a species name is significantly associated with speciation rates across a range of empirical datasets. This result might seem ridiculous and puzzling, as there is no way that species name length is associated with diversification processes. However, if we return to our alternative model above, then the results make sense. Rabosky and Goldberg [-@Rabosky2015-ao] simulated character evolution on real phylogenetic trees, and their results do not hold when the trees are simulated along with the characters (this is also why Rabosky and Goldberg’s [-@Rabosky2015-ao] results do not represent “type I errors,” *contra* their paper, because the data are not simulated under the null hypothesis). On these real trees, speciation and/or extinction rates have vary across clades. Among the two models that the authors consider, both are wrong; speciation and extinction are independent of the character but not constant through time. Of the two alternatives, the state-dependent model tends to fit better because, from a statistical point of view, it is important for the model to capture some variation in birth and death rates across clades. Even a random character will pick up some of this variation, so that the alternative model tends to fit better than the null – even though, in this case, the character has nothing to do with diversification!
 

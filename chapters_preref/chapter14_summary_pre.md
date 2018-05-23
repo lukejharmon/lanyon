@@ -8,9 +8,12 @@ NOTE THIS CHAPTER IS IN PROGRESS!
 
 In Dr. Seuss’s “The Lorax” there is a quote that seems appropriate to begin my final chapter.
 
+```
 ’Mister,’ he said with a sawdusty sneeze,
 ‘I am the Lorax, I speak for the trees.
 I speak for the trees, for the trees have no tongues.”
+```
+From Seuss [-@Seuss1971-oc].
 
 Comparative methods have been rushing forward at breakneck speed to “speak for the trees” for more than 20 years now. At the same time, we have gained more information about the shape of the tree of life than any time in the history of the planet. So, what have we learned so far? And what can we learn moving forward? Perhaps most importantly, how can we overcome the perceived and actual limits of comparative approaches, and enable new breakthroughs in our understanding of evolutionary biology?
 
@@ -28,17 +31,17 @@ Overall, I think it is easy to see why comparative methods have risen to their c
 
 ## Section 14.3: Where can we go next?
 
-As emphasized by Harvey and Pagel, comparative methods have proven to be an essential tool in identifying and describing adaptations. However, the scope of comparative methods has broadened, and now seeks to address broad and long-standing theories of macroevolution. It is in this area that I think comparative methods has promise, but awaits new developments and ideas to really make progress towards the future.  
+As emphasized by Harvey and Pagel [-@Harvey1991-oj], comparative methods have proven to be an essential tool in identifying and describing adaptations. However, the scope of comparative methods has broadened, and now seeks to address broad and long-standing theories of macroevolution. It is in this area that I think comparative methods has promise, but awaits new developments and ideas to really make progress towards the future.  
 
 The main challenge, I think, is in identifying and testing broad theories of macroevolution. Too many papers focus on “classic” verbal models of macroevolution – many of which have been defined in contradictory ways over the years and can never really be tested. At the same time, new quantitative theories of macroevolution are lacking.
 
 Let me explore this in a bit more detail using the idea of adaptive radiation and the related concept of ecological opportunity. Perhaps, the theory goes, occasionally lineages enter a new adaptive zone full of niches just waiting to be occupied; the lineage then evolves rapidly to fill those niches. Based on this definition, there are several sets of criteria that one might apply to decide whether or not a particular lineage has experienced such an adaptive radiation. There are a few alternatives that are sometimes contrasted to this pattern, like nonadaptive radiation.
 
-The concept of adaptive radiation has been very fruitful for inspiring creative and interesting work on model clades, but (in my opinion) we have mostly failed in terms of really predicting adaptive radiations and separating the phenomenon from ‘normal’ evolution. For example, most studies identify lineages undergoing adaptive radiation a priori. Even when the goal is to identify adaptive radiations, some criteria seem hard to pin down; for example, one can require evidence of adaptation, but surely every lineage on the planet has underwent selection and adapted in at least some way over its history. Likewise, we can require common descent, but there is only one tree of life on Earth (that we know!), so eventually one will find that as well. And authors differ dramatically on whether or not adaptive radiations need to be rapid relative to trait evolution and/or lineage diversification in other lineages. Finally, although a few studies have been able to characterize the unique features of adaptive radiations compared to their close relatives (e.g. xxx), comparisons across broader sections of the tree of life have mostly failed. We still do not know for certain if there is anything that links the “classic” adaptive radiations (e.g. anoles, Darwin’s finches, mammals) and distinguishes them from evolution in normal clades.
+The concept of adaptive radiation has been very fruitful for inspiring creative and interesting work on model clades, but (in my opinion) we have mostly failed in terms of really predicting adaptive radiations and separating the phenomenon from ‘normal’ evolution. For example, most studies identify lineages undergoing adaptive radiation a priori. Even when the goal is to identify adaptive radiations, some criteria seem hard to pin down; for example, one can require evidence of adaptation, but surely every lineage on the planet has underwent selection and adapted in at least some way over its history. Likewise, we can require common descent, but there is only one tree of life on Earth (that we know!), so eventually one will find that as well. And authors differ dramatically on whether or not adaptive radiations need to be rapid relative to trait evolution and/or lineage diversification in other lineages. Finally, although a few studies have been able to characterize the unique features of adaptive radiations compared to their close relatives, comparisons across broader sections of the tree of life have mostly failed. We still do not know for certain if there is anything that links the “classic” adaptive radiations (e.g. anoles, Darwin’s finches, mammals) and distinguishes them from evolution in normal clades.
 
 Comparative methods have cast doubt on another cornerstone of macroevolution, that of punctuated equilibrium. As we have argued, comparative methods have had varying success in tackling each of the parts of PE theory, but we can see little evidence to link them into a cohesive whole. For one thing, there is too much evidence that lineages adapt and evolve along branches of phylogenetic trees, rather than just at speciation. Quantitative tests do tend to find some statistical support for the idea that change depends on both anagenetic rates and speciation, but “pure” punctuated equilibrium is increasingly hard to defend.
 
-As for other major macroevolutionary theories, some have received mixed support (e.g. dollo’s law, escape-and-radiation, cospeciation, key innovations), while others have hardly been tested in a comparative framework, probably due to a lack of methods (the geographic mosaic theory, holey adaptive landscapes).
+As for other major macroevolutionary theories, some have received mixed support (e.g. Dollo’s law, escape-and-radiation, cospeciation, key innovations), while others have hardly been tested in a comparative framework, probably due to a lack of methods (the geographic mosaic theory, holey adaptive landscapes).
 
 ## Section 14.4: A hint at the future of comparative methods
 
