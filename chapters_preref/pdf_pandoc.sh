@@ -1,6 +1,7 @@
 pandoc titlepage.md --latex-engine=xelatex -o ../pdf/titlepage.pdf
 pandoc copyright.md --latex-engine=xelatex -o ../pdf/copyright.pdf
 pandoc acknowledgements.md --latex-engine=xelatex -o ../pdf/acknowledgements.pdf
+pandoc toc.md --latex-engine=xelatex -o ../pdf/toc.pdf
 
 cat chapter1_introduction_pre.md | sed s@\{\{[[:space:]]site.baseurl[[:space:]]\}\}@..@ > temp.md
 pandoc temp.md --from=markdown-markdown_in_html_blocks-native_divs --latex-engine=xelatex --bibliography pcm_paperpile.bib --filter pandoc-citeproc --csl evolution.csl --metadata link-citations=true -o ../pdf/chapter1_introduction.pdf
@@ -59,4 +60,4 @@ cat chapter14_summary_pre.md | sed s@\{\{[[:space:]]site.baseurl[[:space:]]\}\}@
 pandoc temp.md --from=markdown-markdown_in_html_blocks-native_divs --latex-engine=xelatex --bibliography pcm_paperpile.bib --filter pandoc-citeproc --csl evolution.csl --metadata link-citations=true -o ../pdf/chapter14_summary.pdf
 rm temp.md
 
-"/System/Library/Automator/Combine PDF Pages.action/Contents/Resources/join.py" -o ../pdf/phylogeneticComparativeMethods.pdf ../pdf/pdfCover.pdf ../pdf/titlepage.pdf ../pdf/copyright.pdf ../pdf/acknowledgements.pdf ../pdf/chapter1_introduction.pdf ../pdf/chapter2_stats.pdf ../pdf/chapter3_bmintro.pdf ../pdf/chapter4_fitbm.pdf ../pdf/chapter5_mvbm.pdf ../pdf/chapter6_beyondbm.pdf ../pdf/chapter7_introdiscrete.pdf ../pdf/chapter8_fitdiscrete.pdf ../pdf/chapter9_beyondmk.pdf ../pdf/chapter10_birthdeath.pdf ../pdf/chapter11_fitbd.pdf ../pdf/chapter12_beyondbd.pdf ../pdf/chapter13_chardiv.pdf ../pdf/chapter14_summary.pdf
+"/System/Library/Automator/Combine PDF Pages.action/Contents/Resources/join.py" -o ../pdf/phylogeneticComparativeMethods.pdf ../pdf/pdfCover.pdf ../pdf/titlepage.pdf ../pdf/copyright.pdf ../pdf/acknowledgements.pdf ../pdf/toc.pdf ../pdf/chapter1_introduction.pdf ../pdf/chapter2_stats.pdf ../pdf/chapter3_bmintro.pdf ../pdf/chapter4_fitbm.pdf ../pdf/chapter5_mvbm.pdf ../pdf/chapter6_beyondbm.pdf ../pdf/chapter7_introdiscrete.pdf ../pdf/chapter8_fitdiscrete.pdf ../pdf/chapter9_beyondmk.pdf ../pdf/chapter10_birthdeath.pdf ../pdf/chapter11_fitbd.pdf ../pdf/chapter12_beyondbd.pdf ../pdf/chapter13_chardiv.pdf ../pdf/chapter14_summary.pdf
