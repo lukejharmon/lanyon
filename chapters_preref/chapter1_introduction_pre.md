@@ -1,4 +1,6 @@
+<div>
 [pdf version]({{ site.baseurl }}/pdf/chapter1_introduction.pdf)
+</div>
 
 # Chapter 1: A Macroevolutionary Research Program
 

@@ -1,4 +1,6 @@
+<div>
 [pdf version]({{ site.baseurl }}/pdf/chapter2_stats.pdf)
+</div>
 
 # Chapter 2: Fitting Statistical Models to Data
 
