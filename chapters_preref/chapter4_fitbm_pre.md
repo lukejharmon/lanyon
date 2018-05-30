@@ -1,4 +1,6 @@
+<div>
 [pdf version]({{ site.baseurl }}/pdf/chapter4_fitbm.pdf)
+</div>
 
 # Chapter 4: Fitting Brownian Motion Models to Single Characters
 

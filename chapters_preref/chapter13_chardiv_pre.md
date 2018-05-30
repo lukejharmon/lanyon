@@ -1,6 +1,8 @@
-# Chapter 13: Characters and diversification rates
+<div>
+[pdf version]({{ site.baseurl }}/pdf/chapter13_chardiv.pdf)
+</div>
 
-[pdf version]({{ site.baseurl }}/pdf/chapter12_beyondbd.pdf)
+# Chapter 13: Characters and diversification rates
 
 ## Section 13.1: The evolution of self-incompatibility
 

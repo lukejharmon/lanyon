@@ -1,4 +1,6 @@
+<div>
 [pdf version]({{ site.baseurl }}/pdf/chapter6_beyondbm.pdf)
+</div>
 
 # Chapter 6: Beyond Brownian Motion
 

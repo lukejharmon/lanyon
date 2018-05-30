@@ -1,8 +1,10 @@
-# Chapter 7: Models of discrete character evolution
-
+<div>
 [pdf version]({{ site.baseurl }}/pdf/chapter7_introdiscrete.pdf)
 
 R markdown to [recreate analyses]({{ site.baseurl }}/rmarkdown/chapter8_squamatelimbs.html)
+</div>
+
+# Chapter 7: Models of discrete character evolution
 
 ## Biological motivation: Limblessness as a discrete trait
 
@@ -31,7 +33,7 @@ We will consider discrete characters where each species might exhibit one of $k$
 
 
 
-Most work on the evolution of discrete characters on phylogenetic trees has focused on the evolution of gene or protein sequences. Gene sequences are made up of four character states (A, C, T, and G for DNA). Models of sequence evolution allow transitions among all of these states at certain rates, and may allow transition rates to vary across sites, among clades, or through time. There are a huge number of named models that have been applied to this problem [e.g. Jukes-Cantor, JC; General Time-Reversible, GTR; and many more, @Yang2006-md], and a battery of statistical approaches are available to fit these models to data [e.g. @Posada2008-qw]. 
+Most work on the evolution of discrete characters on phylogenetic trees has focused on the evolution of gene or protein sequences. Gene sequences are made up of four character states (A, C, T, and G for DNA). Models of sequence evolution allow transitions among all of these states at certain rates, and may allow transition rates to vary across sites, among clades, or through time. There are a huge number of named models that have been applied to this problem [e.g. Jukes-Cantor, JC; General Time-Reversible, GTR; and many more, @Yang2006-md], and a battery of statistical approaches are available to fit these models to data [e.g. @Posada2008-qw].
 
 Any discrete character can be modeled in a similar way as gene sequences. When considering phenotypic characters, we should keep in mind two main differences from the analysis of DNA sequences. First, arbitrary discrete characters may have any number of states (beyond the four associated with DNA sequence data). Second, characters are typically analyzed independently rather than combining long sets of characters and assuming that they share the same model of change.
 
@@ -43,9 +45,9 @@ The most basic model for discrete character evolution is called the Mk model. Fi
 
 
 
-The basic version of the Mk model assumes that transitions among these states follow a Markov process. This means that the probability of changing from one state to another depends only on the current state, and not on what has come before. For example, it makes no difference if a lineage has just evolved the trait of “feathers,” or whether they have had feathers for millions of years – the probability of evolving a different character state is the same in both cases. The basic Mk model also assumes that every state is equally likely to change to any other states. 
+The basic version of the Mk model assumes that transitions among these states follow a Markov process. This means that the probability of changing from one state to another depends only on the current state, and not on what has come before. For example, it makes no difference if a lineage has just evolved the trait of “feathers,” or whether they have had feathers for millions of years – the probability of evolving a different character state is the same in both cases. The basic Mk model also assumes that every state is equally likely to change to any other states.
 
-For the basic Mk model, we can denote the instantaneous rate of change between states using the parameter $q$. In general, $q_{ij}$ is called the instantaneous rate between character states $i$ and $j$. It is defined as the limit of the rate measured over very short time intervals. Imagine that you calculate a rate of character change by counting the number of changes of state of a character over some time interval, $t$. You can calculate the rate of change as $n_{changes} / t$. The instantaneous rate is the value that this rate approaches as $t$ gets smaller and smaller so that the time interval is nearly zero. Again, for the basic Mk model, instantaneous rates between all pairs of characters are equal; that is, $q_{ij} = q_{mn}$ for all $i \neq j$ and $m \neq n$. We can summarize general Markov models for discrete characters using a transition rate matrix [@Lewis2001-bu]:
+For the basic Mk model, we can denote the instantaneous rate of change between states using the parameter $q$. In general, $q_{ij}$ is called the instantaneous rate between character states $i$ and $j$. It is defined as the limit of the rate measured over very short time intervals. Imagine that you calculate a rate of character change by counting the number of changes of state of a character over some time interval, $t$. You can calculate the rate of change as $n_{changes} / t$. The instantaneous rate is the value that this rate approaches as $t$ gets smaller and smaller so that the time interval is nearly zero. Again, for the basic Mk model, instantaneous rates between all pairs of characters are equal; that is, $q_{ij} = q_{mn}$ for all $i \neq j$ and $m \neq n$.We can summarize general Markov models for discrete characters using a transition rate matrix [@Lewis2001-bu]:
 
 (eq. 7.1)
 <div>
@@ -61,7 +63,7 @@ $$
 </div>
 
 
-Note that the instantaneous rates are only entered into the off-diagonal parts of the matrix. Along the diagonal, these matrices always have a set of negative numbers. For any $\mathbf{Q}$ matrix, the sum of all the elements in each row is zero – a necessary condition for a transition rate matrix. Because of this, each negative number has a value, $d_i$, equal to the sum of all of the other numbers in the row. For example, 
+Note that the instantaneous rates are only entered into the off-diagonal parts of the matrix. Along the diagonal, these matrices always have a set of negative numbers. For any $\mathbf{Q}$ matrix, the sum of all the elements in each row is zero – a necessary condition for a transition rate matrix. Because of this, each negative number has a value, $d_i$, equal to the sum of all of the other numbers in the row. For example,
 
 (eq. 7.2)
 <div>
@@ -87,7 +89,7 @@ $$
 
 Likewise, for $k = 3$,
 
-(eq. 7.4)	
+(eq. 7.4)
 <div>
 $$
 \mathbf{Q} =
@@ -101,7 +103,7 @@ $$
 
 In general,
 
-(eq. 7.5)	
+(eq. 7.5)
 <div>
 $$
 \mathbf{Q} = q
@@ -125,7 +127,7 @@ $$
 
 This equation looks simple, but calculating $P(t)$ involves matrix exponentiation – raising $e$ to a power defined by a matrix. This calculation is substantially different from raising $e$ to the power defined by each element of a matrix. I will not cover the details of matrix exponentiation here – interested readers should see Yang (2006) for details – but the calculations are not trivial. The result is a matrix, $\mathbf{P}$, of transition probabilities. Each element in this matrix ($p_{ij}$) gives the probability that starting in state $i$ you will end up in state $j$ over that time interval $t$. For the standard Mk model, there is a general solution to this equation:
 
-(eq. 7.7)	
+(eq. 7.7)
 <div>
 $$
 \begin{array}{l}
@@ -137,7 +139,7 @@ $$
 
 In particular, when k = 2,
 
-(eq. 7.8)	
+(eq. 7.8)
 <div>
 $$
 \begin{array}{l}
@@ -267,7 +269,7 @@ We can also use the equations above to simulate evolution under an Mk or extende
 
 We first draw a beginning character state at the root of the tree. There are several common ways to do this. For example, we can either draw from the stationary distribution or from one where each character state is equally likely. In the case of the standard Mk model, these are the same. For example, if we are simulating evolution under Mk with $k = 2$, then state 0 and 1 each have a probability of $1/2$ at the root. We can draw the root state from a binomial distribution with $p_{state_0} = 0.5$.
 
-Once we have a character state for the root, we then simulate evolution along each branch in the tree. We start with the (usually two) branches descending from the root. We then proceed up the tree, branch by branch, until we get to the tips. 
+Once we have a character state for the root, we then simulate evolution along each branch in the tree. We start with the (usually two) branches descending from the root. We then proceed up the tree, branch by branch, until we get to the tips.
 
 We can understand this algorithm perfectly well by thinking about what happens on each branch of the tree, and then extending that algorithm to all of the branches (as described above). For each branch, we first calculate $\mathbf{P}(t)$, the transition probability matrix, given the length of the branch and our model of evolution as summarized by $\mathbf{Q}$ and the branch length $t$. We then focus on the row of $\mathbf{P}(t)$ that corresponds to the character state at the beginning of the branch. For example, let’s consider a basic two-state Mk model with $q = 0.5$. We will call the states 0 and 1. We can calculate $\mathbf{P}(t)$ for a branch with length $t = 3$ as:
 
@@ -299,7 +301,7 @@ p_{ii}(t) = \frac{1}{k} + \frac{k-1}{k} e^{-kqt} = \frac{1}{10}+\frac{9}{10}e^{-
 p_{ij}(t) = \frac{1}{k} - \frac{1}{k} e^{-kqt} \frac{1}{10} - \frac{1}{10}e^{-2 \cdot 0.5 \cdot 3} = 0.095\\
 \end{array}
 $$
-</div>	
+</div>
 
 We focus on the first row of $\mathbf{P}(t)$, which has elements:
 
@@ -321,13 +323,13 @@ $$
 $$
 </div>
 
-Now we compare $u$ to the numbers in this cumulative sum vector. We select the smallest element that is still strictly larger than $u$, and assign this character state for the end of the branch. For example, if $u = 0.475$, the 5th element, 0.525, is the smallest number that is still greater than $u$. This corresponds to character state 4, which we assign to the end of the branch. This last procedure is a numerical trick. Imagine that we have a line segment with length 1. The cumulative sum vector breaks the unit line into segments, each of which is exactly as long as the probability of each event in the set. One then just draws a random number between 0 and 1 using a uniform distribution. The segment that contains this random number is our event. 
+Now we compare $u$ to the numbers in this cumulative sum vector. We select the smallest element that is still strictly larger than $u$, and assign this character state for the end of the branch. For example, if $u = 0.475$, the 5th element, 0.525, is the smallest number that is still greater than $u$. This corresponds to character state 4, which we assign to the end of the branch. This last procedure is a numerical trick. Imagine that we have a line segment with length 1. The cumulative sum vector breaks the unit line into segments, each of which is exactly as long as the probability of each event in the set. One then just draws a random number between 0 and 1 using a uniform distribution. The segment that contains this random number is our event.
 
 We can apply this approach to simulate the evolution of limblessness in squamates. Below, I present the results of three such simulations. These simulations are a little different than what I describe above because they consider all changes in the tree, rather than just character states at nodes and tips; but the model (and the principal) is the same. You can see that the model leaves an imprint on the pattern of changes in the tree, and you can imagine that one might be able to reconstruct the model using a phylogenetic comparative approach. Of course, typically we know only the tip states, and have to reconstruct changes along branches in the tree. We will discuss parameter estimation for the Mk and extended-Mk models in the next chapter.
 
 ![Figure 7.4. Simulated character evolution on a phylogenetic tree of squamates [from @Brandley2008-wr] under an equal-rates Mk model with slow, fast, and asymmetric transition rates (from right to left). In all three cases, I assumed that the ancestor of squamates had limbs. ]({{ site.baseurl }}/images/figure7-4.png)
 
- 
+
 
 ## Chapter summary
 
@@ -336,6 +338,6 @@ We can apply this approach to simulate the evolution of limblessness in squamate
 -->
 
 
-In this chapter I have described the Mk model, which can be used to describe the evolution of discrete characters that have a set number of fixed states. We can also elaborate on the Mk model to allow more complex models of discrete character evolution (the extended-Mk model). These models can all be used to simulate the evolution of discrete characters on trees. In summary, the Mk and extended Mk model are general models that one can use for the evolution of discrete characters. In the next chapter, I will show how to fit these models to data and use them to test evolutionary hypotheses.
+In this chapter I have described the Mk model, which can be used to describe the evolution of discrete characters that have a set number of fixed states. We can also elaborate on the Mk model to allow more complex models of discrete character evolution (the extended-Mk model). These models can all be used to simulate the evolution of discrete characters on trees.In summary, the Mk and extended Mk model are general models that one can use for the evolution of discrete characters. In the next chapter, I will show how to fit these models to data and use them to test evolutionary hypotheses.
 
 ## References

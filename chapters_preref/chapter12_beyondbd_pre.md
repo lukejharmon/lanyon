@@ -1,6 +1,8 @@
-# Chapter 12: Beyond birth-death models
-
+<div>
 [pdf version]({{ site.baseurl }}/pdf/chapter12_beyondbd.pdf)
+</div>
+
+# Chapter 12: Beyond birth-death models
 
 ## Section 12.1: Capturing variable evolution
 

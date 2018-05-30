@@ -1,6 +1,8 @@
-# Chapter 11: Fitting birth-death models
-
+<div>
 [pdf version]({{ site.baseurl }}/pdf/chapter11_fitbd.pdf)
+</div>
+
+# Chapter 11: Fitting birth-death models
 
 ## Section 11.1: Introduction, diversity hotspots
 
@@ -216,7 +218,7 @@ As an example, consider the following data, which compares the diversity of many
 | *Davidsonia* | 3 | *Bauera* | 4 |
 | *Mitchella* | 3 | *Pentas* | 34 |
 | *Milligania * | 5 | *Borya* | 10 |
-| *Sambucus* | 9 |  *Viburnum* | 150 |
+| *Sambucus* | 9 | *Viburnum* | 150 |
 | *Pereskia* | 16 | *Mollugo* | 35 |
 | *Decaisnea+Sargentodoxa+ Tinospora+Menispermum +  Nandina+Caulophyllum+Hydrastis+Glaucidium* | 33 | *Euptelea* | 2 |
 | *Tetracera* | 40 | *Dillenia* | 60 |

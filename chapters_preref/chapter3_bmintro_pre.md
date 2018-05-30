@@ -1,4 +1,6 @@
+<div>
 [pdf version]({{ site.baseurl }}/pdf/chapter3_bmintro.pdf)
+</div>
 
 # Chapter 3: Introduction to Brownian Motion
 

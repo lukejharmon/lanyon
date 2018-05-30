@@ -1,6 +1,8 @@
-# Chapter 10: Introduction to birth-death models
-
+<div>
 [pdf version]({{ site.baseurl }}/pdf/chapter10_birthdeath.pdf)
+</div>
+
+# Chapter 10: Introduction to birth-death models
 
 ## Introduction: Plant diversity imbalance
 

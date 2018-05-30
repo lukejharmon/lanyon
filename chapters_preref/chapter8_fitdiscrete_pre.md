@@ -1,6 +1,8 @@
-# Chapter 8: Fitting models of discrete character evolution
-
+<div>
 [pdf version]({{ site.baseurl }}/pdf/chapter8_fitdiscrete.pdf)
+</div>
+
+# Chapter 8: Fitting models of discrete character evolution
 
 R markdown to [recreate analyses]({{ site.baseurl }}/rmarkdown/chapter8_squamatelimbs.html)
 
@@ -190,7 +192,7 @@ $$
 </div>
 
 
-Where $\pi_x$ is the prior probability of that character state at the root of the tree. For this example, we will take these prior probabilities to be uniform, equal for each state ($\pi_x = 1/k = 1/3$). The likelihood for our example, then, is: 
+Where $\pi_x$ is the prior probability of that character state at the root of the tree. For this example, we will take these prior probabilities to be uniform, equal for each state ($\pi_x = 1/k = 1/3$). The likelihood for our example, then, is:
 
 (eq. 8.9)
 <div>
@@ -207,13 +209,13 @@ Note that if you try this example in another software package, like GEIGER or PA
 
 ## Using maximum likelihood to estimate parameters of the Mk model
 
-The algorithm in Box 8.1 gives the likelihood for any particular discrete-state Markov model on a tree, but requires us to specify a value of the rate parameter $q$. In the example given, this rate parameter $q = 1.0$ corresponds to a lnL of -6.5. But is this the best value of $q$ to use for our Mk model? Probably not. We can use maximum likelihood to find a better estimate of this parameter. 
+The algorithm in Box 8.1 gives the likelihood for any particular discrete-state Markov model on a tree, but requires us to specify a value of the rate parameter $q$. In the example given, this rate parameter $q = 1.0$ corresponds to a lnL of -6.5. But is this the best value of $q$ to use for our Mk model? Probably not. We can use maximum likelihood to find a better estimate of this parameter.
 
 If we apply the pruning algorithm across a range of different values of $q$, the likelihood changes. To find the ML estimate of $q$, we can again use numerical optimization methods.
 
 Applying this method to the lizard data, we obtain a maximum liklihood estimate of $q = 0.001850204$ corresponding to $lnL = -80.487176$.
 
-The example above considers maximization of a single parameter, which is a relatively simple problem. When we extend this to a multi-parameter model – for example, the extended Mk model will all rates different (ARD) – maximizing the likelihood becomes much more difficult. R packages solve this problem by using sophisticated algorithms and applying them multiple times to make sure that the value found is actually a maximum. 
+The example above considers maximization of a single parameter, which is a relatively simple problem. When we extend this to a multi-parameter model – for example, the extended Mk model will all rates different (ARD) – maximizing the likelihood becomes much more difficult. R packages solve this problem by using sophisticated algorithms and applying them multiple times to make sure that the value found is actually a maximum.
 
 ## Using Bayesian MCMC to estimate parameters of the Mk model
 
@@ -227,7 +229,7 @@ We can also analyze this model using a Bayesian MCMC framework. We can modify th
 a.	The prior odds ratio, $R_{prior}$. In this case, since our prior is uniform, $R_{prior} = 1$.
 b.	The proposal density ratio, $R_{proposal}$. In this case our proposal density is symmetrical, so $R_{proposal}$ = 1.
 c.	The likelihood ratio, $R_{likelihood}$. We can calculate the likelihoods using Felsenstein’s pruning algorithm (Box 8.1); then calculate this value based on equation 2.26.
-4.	Find $R_{accept}$ as the product of the prior odds, proposal density ratio, and the likelihood ratio. In this case, both the prior odds and proposal density ratios are 1, so $R_{accept} = R_{likelihood}$ 
+4.	Find $R_{accept}$ as the product of the prior odds, proposal density ratio, and the likelihood ratio. In this case, both the prior odds and proposal density ratios are 1, so $R_{accept} = R_{likelihood}$
 5.	Draw a random number $u$ from a uniform distribution between 0 and 1. If $u < R_{accept}$, accept the proposed value of both parameters; otherwise reject, and retain the current value of the two parameters.6.	Repeat steps 2-5 a large number of times.
 
 We can run this analysis on our squamate data, obtaining a posterior with a mean estimate of $q = 0.001980785$ and a 95% credible interval of $0.001174813 - 0.003012715$.
@@ -236,7 +238,7 @@ We can run this analysis on our squamate data, obtaining a posterior with a mean
 
 One problem that arises sometimes in maximum likelihood optimization happens when instead of a peak, the likelihood surface has a long flat “ridge” of equally likely parameter values. In the case of the Mk model, it is common to find that all values of $q$ greater than a certain value have the same likelihood. This is because above a certain rate, evolution has been so rapid that all traces of the history of evolution of that character have been obliterated. After this point, character states of each lineage are random, and have no relationship to the shape of the phylogenetic tree. Our optimization techniques will not work in this case because there is no value of q that has a higher likelihood than other values. Once we get onto the ridge, all values of $q$ have the same likelihood.
 
-For Mk models, there is a simple test that allows us to recognize when the likelihood surface has a long ridge, and $q$ values cannot be estimated. I like to call this test the “total garbage” test because it can tell you if your data are “garbage” with respect to historical inference – that is, your data have no information about historical patterns of trait change. 
+For Mk models, there is a simple test that allows us to recognize when the likelihood surface has a long ridge, and $q$ values cannot be estimated. I like to call this test the “total garbage” test because it can tell you if your data are “garbage” with respect to historical inference – that is, your data have no information about historical patterns of trait change.
 
 To carry out the total garbage test, imagine that you are just drawing trait values out of a hat. That is, each species has some probability $p$ of having character state 0, and some probability ($1 - p$) of having state 1 (one can also generalize this test to multi-state models). This model is easy to write down. For a tree of size $n$, the probability of drawing $n_0$ species with state 0 is:
 

@@ -1,8 +1,10 @@
-# Chapter 9: Beyond the Mk Model
-
+<div>
 [pdf version]({{ site.baseurl }}/pdf/chapter9_beyondmk.pdf)
 
 R markdown to [recreate analyses]({{ site.baseurl }}/rmarkdown/chapter9_frogs.html)
+</div>
+
+# Chapter 9: Beyond the Mk Model
 
 ## Biological motivation: The Evolution of Frog Life History Strategies
 

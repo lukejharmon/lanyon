@@ -1,4 +1,6 @@
+<div>
 [pdf version]({{ site.baseurl }}/pdf/chapter5_mvbm.pdf)
+</div>
 
 # Chapter 5: Fitting Brownian Motion Models to Multiple Characters
 

@@ -1,8 +1,8 @@
-# Chapter 14: What have we learned from the trees?
-
+<div>
 [pdf version]({{ site.baseurl }}/pdf/chapter14_summary.pdf)
+</div>
 
-NOTE THIS CHAPTER IS IN PROGRESS!
+# Chapter 14: What have we learned from the trees?
 
 ## Section 14.1: The Lorax
 
