@@ -2,6 +2,8 @@
 [pdf version]({{ site.baseurl }}/pdf/chapter3_bmintro.pdf)
 </div>
 
+\setcounter{page}{38}
+
 # Chapter 3: Introduction to Brownian Motion
 
 ## Section 3.1: Introduction
