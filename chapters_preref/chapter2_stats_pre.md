@@ -32,7 +32,7 @@ Getting back to our lizard-flipping example, we can use a frequentist approach. 
 
 To carry out the test, we first need to consider how many "successes" we should expect if the null hypothesis were true. We consider the distribution of our test statistic (the number of heads) under our null hypothesis ($p_H = 0.5$). This distribution is a binomial distribution (Figure 2.1).
 
-![Figure 2.1. The unfair lizard. We use the null hypothesis to generate a null distribution for our test statistic, which in this case is a binomial distribution centered around 50. We then look at our test statistic and calculate the probability of obtaining a result at least as extreme as this value.]({{ site.baseurl }}/images/binomial_null.jpg)
+![The unfair lizard. We use the null hypothesis to generate a null distribution for our test statistic, which in this case is a binomial distribution centered around 50. We then look at our test statistic and calculate the probability of obtaining a result at least as extreme as this value.]({{ site.baseurl }}/images/binomial_null.jpg){#fig:unfairLiz}
 
 We can use the known probabilities of the binomial distribution to calculate our P-value. We want to know the probability of obtaining a result at least as extreme as our data when drawing from a binomial distribution with parameters $p = 0.5$ and $n = 100$. We calculate the area of this distribution that lies to the right of 63. This area, $P = 0.003$, can be obtained either from a table, from statistical software, or by using a relatively simple calculation. The value, 0.003, represents the probability of obtaining at least 63 heads out of 100 trials with $p_H = 0.5$. This number is the P-value from our binomial test. Because we only calculated the area of our null distribution in one tail (in this case, the right, where values are greater than or equal to 63), then this is actually a one-tailed test, and we are only considering part of our null hypothesis where $p_H > 0.5$. Such an approach might be suitable in some cases, but more typically we need to multiply this number by 2 to get a two-tailed test; thus, $P = 0.006$. This two-tailed P-value of 0.006 includes the possibility of results as extreme as our test statistic in either direction, either too many or too few heads. Since P < 0.05, our chosen $\alpha$ value, we reject the null hypothesis, and conclude that we have an unfair lizard.
 
@@ -50,7 +50,9 @@ In summary, frequentist statistical methods are common in comparative statistics
 
 ### Section 2.3a: What is a likelihood?
 
-Since all of the approaches described below involve calculating likelihoods, I will first briefly describe this concept. A good general review of likelihood is Edwards [@Edwards1992-wh]. Likelihood is defined as the probability, given a model and a set of parameter values, of obtaining a particular set of data. To calculate a likelihood, we have to consider a particular specific model that may have generated the data. That model might have parameter values that need to be specified. We can refer to this specified model as a hypothesis, H. The likelihood is then:
+Since all of the approaches described in the remainer of this chapter involve calculating likelihoods, I will first briefly describe this concept. A good general review of likelihood is Edwards [-@Edwards1992-wh]. Likelihood is defined as the probability, given a model and a set of parameter values, of obtaining a particular set of data. That is, given a mathematical description of the world, what is the probability that we would see the actual data that we have collected?
+
+To calculate a likelihood, we have to consider a particular model that may have generated the data. That model will almost always have parameter values that need to be specified. We can refer to this specified model (with particular parameter values) as a hypothesis, H. The likelihood is then:
 
 (eq. 2.1)
 <div>
@@ -61,7 +63,7 @@ $$
 
 Here, L and Pr stand for likelihood and probability, D for the data, and H for the hypothesis, which again includes both the model being considered and a set of parameter values. The | symbol stands for “given,” so equation 2.1 can be read as “the likelihood of the hypothesis given the data is equal to the probability of the data given the hypothesis.” In other words, the likelihood represents the probability under a given model and parameter values that we would obtain the data that we actually see.
 
-For any given model, different parameter values will generally affect the likelihood. As you might guess, we favor parameter values that give us the highest probability of obtaining the data that we see. One way to estimate parameters from data, then, is by finding the parameter values that maximize the likelihood; that is, the parameter values that give the highest likelihood, and the highest probability of obtaining the data. These estimates are then referred to as maximum likelihood (ML) estimates. In an ML framework, we suppose that the hypothesis that has the best fit to the data is the one that has the highest probability of having generated that data.  
+For any given model, using different parameter values will generally change the likelihood. As you might guess, we favor parameter values that give us the highest probability of obtaining the data that we see. One way to estimate parameters from data, then, is by finding the parameter values that maximize the likelihood; that is, the parameter values that give the highest likelihood, and the highest probability of obtaining the data. These estimates are then referred to as maximum likelihood (ML) estimates. In an ML framework, we suppose that the hypothesis that has the best fit to the data is the one that has the highest probability of having generated that data.  
 
 For the example above, we need to calculate the likelihood as the probability of obtaining heads 63 out of 100 lizard flips, given some model of lizard flipping. In general, we can write the likelihood for any combination of H “successes” (flips that give heads) out of n trials. We will also have one parameter, $p_H$, which will represent the probability of “success,” that is, the probability that any one flip comes up heads. We can calculate the likelihood of our data using the binomial theorem:
 
@@ -77,11 +79,11 @@ In the example given, n = 100 and H = 63, so:
 (eq. 2.3)
 <div>
 $$
-L(H|D)= {100 \choose 63} p^{63} (1-p)^{37}
+L(H|D)= {100 \choose 63} p_H^{63} (1-p_H)^{37}
 $$
 </div>	 
 
-![Figure 2.2. Likelihood surface for the parameter $p_H$, given a coin that has been flipped as heads 63 times out of 100.]({{ site.baseurl }}/images/flip_likelihood_surface.png)
+![Likelihood surface for the parameter $p_H$, given a coin that has been flipped as heads 63 times out of 100.]({{ site.baseurl }}/images/flip_likelihood_surface.png){#fig:likeSurf}
 
 
 We can make a plot of the likelihood, L, as a function of p (Figure 2.2). When we do this, we see that the maximum likelihood value of p, which we can call $\hat{p}_H$, is at $\hat{p}_H = 0.63$. This is the “brute force” approach to finding the maximum likelihood: try many different values of the parameters and pick the one with the highest likelihood. We can do this much more efficiently using numerical methods as described in later chapters in this book.
