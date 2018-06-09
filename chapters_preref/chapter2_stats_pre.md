@@ -86,7 +86,7 @@ $$
 ![Likelihood surface for the parameter $p_H$, given a coin that has been flipped as heads 63 times out of 100.]({{ site.baseurl }}/images/flip_likelihood_surface.png){#fig:likeSurf}
 
 
-We can make a plot of the likelihood, L, as a function of p (Figure 2.2). When we do this, we see that the maximum likelihood value of p, which we can call $\hat{p}_H$, is at $\hat{p}_H = 0.63$. This is the “brute force” approach to finding the maximum likelihood: try many different values of the parameters and pick the one with the highest likelihood. We can do this much more efficiently using numerical methods as described in later chapters in this book.
+We can make a plot of the likelihood, $L$, as a function of $p_H$ (Figure 2.2). When we do this, we see that the maximum likelihood value of $p_H$, which we can call $\hat{p}_H$, is at $\hat{p}_H = 0.63$. This is the “brute force” approach to finding the maximum likelihood: try many different values of the parameters and pick the one with the highest likelihood. We can do this much more efficiently using numerical methods as described in later chapters in this book.
 
 We could also have obtained the maximum likelihood estimate for $p_H$ through differentiation. This problem is much easier if we work with the ln-likelihood rather than the likelihood itself (note that whatever value of $p_H$ that maximizes the likelihood will also maximize the ln-likelihood, because the log function is strictly increasing). So:
 
@@ -116,20 +116,22 @@ $$
 \frac{H}{\hat{p}_H} & = & \frac{n-H}{1-\hat{p}_H}\\
 H (1-\hat{p}_H) & = & \hat{p}_H (n-H)\\
 H-H\hat{p}_H & = & n\hat{p}_H-H\hat{p}_H\\
-H & = & n\hat{p}\\
+H & = & n\hat{p}_H\\
 \hat{p}_H &=& H / n\\
 \end{array}
 $$
 </div>
 Notice that, for our simple example, $H / n = 63 / 100 = 0.63$, which is exactly equal to the maximum likelihood from figure 2.2.
 
-Maximum likelihood estimates have many desirable statistical properties. It is worth noting, however, that they will not always return accurate parameter estimates, even when the data is generated under the actual model we are considering. In fact, ML parameters can sometimes be biased. To understand what this means, we need to introduce two new concepts: bias and precision. Imagine that we were to simulate datasets under some model A with parameter a. For each simulation, we then used ML to estimate the parameter $\hat{a}$ for the simulated data. The precision of our ML estimate tells us how different, on average, each of our estimated parameters $\hat{a}_i$ are from one another. Precise estimates are estimated with less uncertainty. Bias, on the other hand, measures how close our estimates $\hat{a}_i$ are to the true value $a$. If our ML parameter estimate is biased, then the average of the $\hat{a}_i$ will differ from the true value $a$. It is not uncommon for ML estimates to be biased in a way that depends on sample size, so that the estimates get closer to the truth as sample size increases, but can be quite far off when the number of data points is small compared to the number of parameters being estimated.
+Maximum likelihood estimates have many desirable statistical properties. It is worth noting, however, that they will not always return accurate parameter estimates, even when the data is generated under the actual model we are considering. In fact, ML parameters can sometimes be biased. To understand what this means, we need to formally introduce two new concepts: bias and precision. Imagine that we were to simulate datasets under some model A with parameter a. For each simulation, we then used ML to estimate the parameter $\hat{a}$ for the simulated data. The precision of our ML estimate tells us how different, on average, each of our estimated parameters $\hat{a}_i$ are from one another. Precise estimates are estimated with less uncertainty. Bias, on the other hand, measures how close our estimates $\hat{a}_i$ are to the true value $a$. If our ML parameter estimate is biased, then the average of the $\hat{a}_i$ will differ from the true value $a$. It is not uncommon for ML estimates to be biased in a way that depends on sample size, so that the estimates get closer to the truth as sample size increases, but can be quite far off in a particular direction when the number of data points is small compared to the number of parameters being estimated.
 
-In our example of lizard flipping, we estimated a parameter value of $\hat{p}_H = 0.63$. This is different from 0.5 – which was our expectation under the null hypothesis. So is this lizard fair? Or, alternatively, can we reject the null hypothesis that $p_H = 0.5$? To evaluate this, we need to use model selection.
+In our example of lizard flipping, we estimated a parameter value of $\hat{p}_H = 0.63$. For the particular case of estimating the parameter of a binomial distribution, our ML estimate is known to be unbiased. And this estimate is different from 0.5 – which was our expectation under the null hypothesis. So is this lizard fair? Or, alternatively, can we reject the null hypothesis that $p_H = 0.5$? To evaluate this, we need to use model selection.
 
 ### Section 2.3b: The likelihood ratio test
 
-Model selection involves comparing a set of potential models and using some criterion to select the one that provides the “best” explanation of the data. Different approaches define “best” in different ways. I will first discuss the simplest, but also the most limited, of these techniques, the likelihood ratio test. Likelihood ratio tests can only be used in one particular situation: to compare two models where one of the models is a special case of the other. This means that model A (the simpler model with fewer parameters) is exactly equivalent to the more complex model B with parameters restricted to certain values. For example, perhaps model B has parameters x, y, and z that can take on any values. Model A is the same as model B but with parameter z fixed at 0. That is, A is the special case of B when parameter z = 0. This is sometimes described as model A is nested within model B, since every possible version of model A is equal to a certain case of model B, but model B also includes more possibilities.
+Model selection involves comparing a set of potential models and using some criterion to select the one that provides the “best” explanation of the data. Different approaches define “best” in different ways. I will first discuss the simplest, but also the most limited, of these techniques, the likelihood ratio test. Likelihood ratio tests can only be used in one particular situation: to compare two models where one of the models is a special case of the other. This means that model A is exactly equivalent to the more complex model B with parameters restricted to certain values. We can always identify the simpler model as the model with fewer parameters. For example, perhaps model B has parameters x, y, and z that can take on any values. Model A is the same as model B but with parameter z fixed at 0. That is, A is the special case of B when parameter z = 0. This is sometimes described as model A is nested within model B, since every possible version of model A is equal to a certain case of model B, but model B also includes more possibilities.
+
+For likelihood ratio tests, the null hypothesis is always the simpler of the two models. We  compare the data to what we would expect if the simpler (null) model were correct.
 
 For example, consider again our example of flipping a lizard. One model is that the lizard is “fair:” that is, that the probability of heads is equal to 1/2. A different model might be that the probability of heads is some other value p, which could be 1/2, 1/3, or any other value between 0 and 1. Here, the latter (complex) model has one additional parameter, $p_H$, compared to the former (simple) model; the simple model is a special case of the complex model when $p_H = 1/2$.
 
@@ -142,9 +144,9 @@ $$
 $$
 </div>
 
-Here, $\Delta$ is the likelihood ratio test statistic, $L_2$ the likelihood of the more complex (parameter rich) model, and $L_1$ the likelihood of the simpler model. Since the models are nested, the likelihood of the complex model will always be greater than or equal to the likelihood of the simple model; this means that the test statistic $\Delta$ will never be negative. In fact, if you ever obtain a negative likelihood ratio test statistic, something has gone wrong – either your calculations are wrong, or you have not actually found ML solutions, or the models are not actually nested.
+Here, $\Delta$ is the likelihood ratio test statistic, $L_2$ the likelihood of the more complex (parameter rich) model, and $L_1$ the likelihood of the simpler model. Since the models are nested, the likelihood of the complex model will always be greater than or equal to the likelihood of the simple model. This is a direct consequence of the fact that the models are nested. If we find a particular likelihood for the simpler model, we can always find a likelihood equal to that for the complex model by setting the parameters so that the complex model is equivalent to the simple model. So the maximum likelihood for the complex model will either be that value, or some higher value that we can find through searching the parameter space. This means that the test statistic $\Delta$ will never be negative. In fact, if you ever obtain a negative likelihood ratio test statistic, something has gone wrong – either your calculations are wrong, or you have not actually found ML solutions, or the models are not actually nested.
 
-To carry out a statistical test comparing the two models, we compare the test statistic $\Delta$ to its expectation under the null hypothesis. For likelihood ratio tests, the null hypothesis is always the simpler of the two models. When sample sizes are large, the null distribution of the likelihood ratio test statistic follows a chi-squared ($\chi^2$) distribution with degrees of freedom equal to the difference in the number of parameters between the two models. This means that if the simpler hypothesis were true, and one carried out this test many times on large independent datasets, the test statistic would approximately follow this $\chi^2$ distribution. To reject the simpler model, then, one compares the test statistic with a critical value derived from the appropriate $\chi^2$ distribution. If the test statistic is larger than the critical value, one rejects the null hypothesis. Otherwise, we fail to reject the null hypothesis. In this case, we only need to consider one tail of the $\chi^2$ test, as every deviation from the null model will push us towards higher $\Delta$ values and towards the right tail of the distribution.
+To carry out a statistical test comparing the two models, we compare the test statistic $\Delta$ to its expectation under the null hypothesis. When sample sizes are large, the null distribution of the likelihood ratio test statistic follows a chi-squared ($\chi^2$) distribution with degrees of freedom equal to the difference in the number of parameters between the two models. This means that if the simpler hypothesis were true, and one carried out this test many times on large independent datasets, the test statistic would approximately follow this $\chi^2$ distribution. To reject the simpler (null) model, then, one compares the test statistic with a critical value derived from the appropriate $\chi^2$ distribution. If the test statistic is larger than the critical value, one rejects the null hypothesis. Otherwise, we fail to reject the null hypothesis. In this case, we only need to consider one tail of the $\chi^2$ test, as every deviation from the null model will push us towards higher $\Delta$ values and towards the right tail of the distribution.
 
 For the lizard flip example above, we can calculate the ln-likelihood under a hypothesis of $p_H = 0.5$ as:
 
@@ -183,9 +185,9 @@ $$
 $$ 	 	
 </div>
 
-If we compare this to a $\chi^2$ distribution with one d.f., we find that $P = 0.009$. Because this P-value is less than the threshold of 0.05, we reject the null hypothesis, and support the alternative. We conclude that this is not a fair lizard.
+If we compare this to a $\chi^2$ distribution with one d.f., we find that $P = 0.009$. Because this P-value is less than the threshold of 0.05, we reject the null hypothesis, and support the alternative. We conclude that this is not a fair lizard. As you might expect, this result is consistent with our answer from the binomial test in the previous section. However, the approaches are mathematically different, so the two P-values are not identical.
 
-Although described above in terms of two competing hypotheses, likelihood ratio tests can be applied to more complex situations with more than two competing models. For example, if all of the models form a sequence of increasing complexity, with each model a special case of the next more complex model, one can compare each pair of hypotheses in sequence, stopping the first time the test statistic is non-significant. Alternatively, in some cases, hypotheses can be placed in a bifurcating choice tree, and one can proceed from simple to complex models down a particular path of paired comparisons of nested models. This approach is commonly used to select models of DNA sequence evolution.
+Although described above in terms of two competing hypotheses, likelihood ratio tests can be applied to more complex situations with more than two competing models. For example, if all of the models form a sequence of increasing complexity, with each model a special case of the next more complex model, one can compare each pair of hypotheses in sequence, stopping the first time the test statistic is non-significant. Alternatively, in some cases, hypotheses can be placed in a bifurcating choice tree, and one can proceed from simple to complex models down a particular path of paired comparisons of nested models. This approach is commonly used to select models of DNA sequence evolution [@Posada1998-pj].
 
 ### Section 2.3c: The Akaike information criterion (AIC)
 
@@ -195,12 +197,12 @@ The AIC value for a particular model is a simple function of the likelihood L an
 
 (eq. 2.11)
 <div>
-\\[
+$$
 AIC = 2k - 2 ln{L}
-\\]
+$$
 </div>
 
-This function that balances the likelihood of the model and the number of parameters estimated in the process of fitting the model to the data. One can think of the AIC criterion as identifying the model that provides the most efficient way to describe patterns in the data with few parameters. However, this shorthand description of AIC does not capture the actual mathematical and philosophical justification for equation (2.11). In fact, this equation is not arbitrary; instead, it comes from information theory [for more information, see @Burnham2003-mt].
+This function balances the likelihood of the model and the number of parameters estimated in the process of fitting the model to the data. One can think of the AIC criterion as identifying the model that provides the most efficient way to describe patterns in the data with few parameters. However, this shorthand description of AIC does not capture the actual mathematical and philosophical justification for equation (2.11). In fact, this equation is not arbitrary; instead, its exact trade-off between parameter numbers and log-likelihood difference comes from information theory [for more information, see @Burnham2003-mt, @Akaike1998-rl].
 
 The AIC equation (2.11) above is only valid for quite large sample sizes relative to the number of parameters being estimated (for n samples and k parameters, $n/k > 40$). Most empirical data sets include fewer than 40 independent data points per parameter, so a small sample size correction should be employed:
 
@@ -211,9 +213,9 @@ AIC_C = AIC + \frac{2k(k+1)}{n-k-1}
 $$
 </div>
 
-This correction penalizes models that have small sample sizes relative to the number of values that are too close; that is, models where there are nearly as many parameters as data points. As noted by Burnham and Anderson [-@Burnham2003-mt], this correction has little effect if sample sizes are large, and so provides a robust way to correct for possible bias in data sets of any size. I recommend always using the small sample size correction when calculating AIC values.
+This correction penalizes models that have small sample sizes relative to the number of parameters; that is, models where there are nearly as many parameters as data points. As noted by Burnham and Anderson [-@Burnham2003-mt], this correction has little effect if sample sizes are large, and so provides a robust way to correct for possible bias in data sets of any size. I recommend always using the small sample size correction when calculating AIC values.
 
-To select among models, one can then compare their $AIC_c$ values, and choose the model with the smallest value. It is easier to make comparisons in $AIC_c$ scores between models by calculating the difference, $\Delta AIC_c$. For example, if you are comparing a set of models, you can calculate $\Delta AIC_c$ for model i as:
+To select among models, one can then compare their $AIC_c$ scores, and choose the model with the smallest value. It is easier to make comparisons in $AIC_c$ scores between models by calculating the difference, $\Delta AIC_c$. For example, if you are comparing a set of models, you can calculate $\Delta AIC_c$ for model i as:
 
 (eq. 2.13)
 <div>
@@ -226,7 +228,7 @@ where $AIC_{c_i}$ is the $AIC_c$ score for model i and $AIC_{c_{min}}$ is the mi
 
 As a broad rule of thumb for comparing $AIC$ values, any model with a $\Delta AIC_{c_i}$ of less than four is roughly equivalent to the model with the lowest $AIC_c$ value. Models with $\Delta AIC_{c_i}$ between 4 and 8 have little support in the data, while any model with a $\Delta AIC_{c_i}$ greater than 10 can safely be ignored.
 
-Additionally, one can calculate the relative likelihood for each model using Akaike weights. The weight for model i compared to a set of competing models is calculated as:
+Additionally, one can calculate the relative support for each model using Akaike weights. The weight for model $i$ compared to a set of competing models is calculated as:
 
 (eq. 2.14)	 
 <div>
@@ -290,7 +292,7 @@ $$
 $$
 </div>
 
-Note that the $\Delta AIC_{c_i}$ for model 1 is greater than four, suggesting that this model (the “fair” lizard) has little support in the data.<!--YOU DON'T MENTION 4 BEING A THRESHOLD FOR THE AIC UNTIL HERE--> Finally, we can use the relative AICc scores to calculate Akaike weights:
+Note that the $\Delta AIC_{c_i}$ for model 1 is greater than four, suggesting that this model (the “fair” lizard) has little support in the data. This is again consistent with all of the results that we've obtained so far using both the binomial test and the likelihood ratio test. Finally, we can use the relative AICc scores to calculate Akaike weights:
 
 (eq. 2.18)	 
 <div>
@@ -325,7 +327,7 @@ $$
 
 Our results are again consistent with the results of the likelihood ratio test. The relative likelihood of an unfair lizard is 0.92, and we can be quite confident that our lizard is not a fair flipper.
 
-AIC weights are also useful for another purpose: we can use them to get model-averaged parameter estimates. These are parameter estimates that are combined across different models proportional to the support for those models. As a thought example, imagine that we are considering two models, A and B, for a particular dataset. Both model A and model B have the same parameter p, and this is the parameter we are particularly interested in. In other words, we do not know which model is the best model for our data, but what we really need is a good estimate of p. We can do that using model averaging. If model A has a high AIC weight, then the model-averaged parameter estimate for p will be very close to our estimate of p under model A; however, if both models have about equal support then the parameter estimate will be close to the average of the two different estimates. Model averaging can be very useful in cases where there is a lot of uncertainty in model choice for models that share parameters of interest. Sometimes the models themselves are not of interest, but need to be considered as possibilities; in this case, model averaging lets us estimate parameters in a way that is not as strongly dependent on our choice of models.
+AIC weights are also useful for another purpose: we can use them to get model-averaged parameter estimates. These are parameter estimates that are combined across different models proportional to the support for those models. As a thought example, imagine that we are considering two models, A and B, for a particular dataset. Both model A and model B have the same parameter $p$, and this is the parameter we are particularly interested in. In other words, we do not know which model is the best model for our data, but what we really need is a good estimate of $p$. We can do that using model averaging. If model A has a high AIC weight, then the model-averaged parameter estimate for $p$ will be very close to our estimate of $p$ under model A; however, if both models have about equal support then the parameter estimate will be close to the average of the two different estimates. Model averaging can be very useful in cases where there is a lot of uncertainty in model choice for models that share parameters of interest. Sometimes the models themselves are not of interest, but need to be considered as possibilities; in this case, model averaging lets us estimate parameters in a way that is not as strongly dependent on our choice of models.
 
 ## Section 2.4: Bayesian statistics
 
@@ -340,7 +342,7 @@ Pr(H|D) = \frac{Pr(D|H) \cdot Pr(H)}{Pr(D)}
 $$
 </div>
 
-The benefit of Bayesian approaches is that they allow us to estimate the probability that the hypothesis is true given the observed data, $Pr(H | D)$. This is really the sort of probability that most people have in mind when they are thinking about the goals of their study. However, Bayes theorem also reveals a cost of this approach. Along with the likelihood, $Pr(D | H)$, one must also incorporate prior knowledge about the probability that any given hypothesis is true - $Pr(H)$. In Bayesian statistics one must quantify the prior belief that a hypothesis is true, even before consideration of the data at hand. In practice, scientists often seek to use “uninformative” priors that have little influence on the posterior distribution - although even the term "uninformative" can be confusing, because the prior is an integral part of a Bayesian analysis. The term $Pr(D)$ is also an important part of Bayes theorem, and can be calculated as the probability of obtaining the data integrated over the prior distributions of the parameters:
+The benefit of Bayesian approaches is that they allow us to estimate the probability that the hypothesis is true given the observed data, $Pr(H | D)$. This is really the sort of probability that most people have in mind when they are thinking about the goals of their study. However, Bayes theorem also reveals a cost of this approach. Along with the likelihood, $Pr(D | H)$, one must also incorporate prior knowledge about the probability that any given hypothesis is true - $Pr(H)$. This represents the prior belief that a hypothesis is true, even before consideration of the data at hand. This prior probability must be explicitly quantified in all Bayesian statistical analyses. In practice, scientists often seek to use “uninformative” priors that have little influence on the posterior distribution - although even the term "uninformative" can be confusing, because the prior is an integral part of a Bayesian analysis. The term $Pr(D)$ is also an important part of Bayes theorem, and can be calculated as the probability of obtaining the data integrated over the prior distributions of the parameters:
 
 (eq. 2.20)	 
 <div>
@@ -372,7 +374,7 @@ Pr(H|D) = \frac{\binom{N}{H} p_H^H (1-p_H)^{N-H}}{\int_{0}^{1} \binom{N}{H} p_H^
 $$
 </div>
 
-This ugly equation is actually a beta distribution, which can be expressed more simply as:
+This ugly equation actually simplifies to a beta distribution [wiki](https://en.wikipedia.org/wiki/Beta_distribution), which can be expressed more simply as:
 
 (eq. 2.23)	 
 <div>
@@ -381,7 +383,7 @@ Pr(H|D) = \frac{(N+1)!}{H!(N-H)!} p_H^H (1-p_H)^{N-H}
 $$
 </div>
 
-We can compare this posterior distribution of our parameter estimate, $p_H$, given the data, to our uniform prior (Figure 2.3). If you inspect this plot, you see that the posterior distribution is very different from the prior – that is, the data have changed our view of the values that parameters should take.
+We can compare this posterior distribution of our parameter estimate, $p_H$, given the data, to our uniform prior (Figure 2.3). If you inspect this plot, you see that the posterior distribution is very different from the prior – that is, the data have changed our view of the values that parameters should take. Again, this result is qualitatively consistent with both the frequentist and ML approaches described above. In this case, we can see from the posterior distribution that we can be quite confident that our parameter $p_H$ is not 0.5.
 
 As you can see from this example, Bayes theorem lets us combine our prior belief about parameter values with the information from the data in order to obtain a posterior. These posterior distributions are very easy to interpret, as they express the probability of the model parameters given our data. However, that clarity comes at a cost of requiring an explicit prior. Later in the book we will learn how to use this feature of Bayesian statistics to our advantage when we actually do have some prior knowledge about parameter values.
 
@@ -391,28 +393,22 @@ As you can see from this example, Bayes theorem lets us combine our prior belief
 
 ### Section 2.4b: Bayesian MCMC
 
-The other main tool in the toolbox of Bayesian comparative methods is the use of Markov-chain Monte Carlo (MCMC) tools to calculate posterior probabilities. MCMC techniques use an algorithm that uses a “chain” of calculations to sample the posterior distribution. MCMC requires calculation of likelihoods but not complicated mathematics (e.g. integration of probability distributions), and so represents a more flexible approach to Bayesian computation. Frequently, the integrals in equation 2.21 are intractable, so that the most efficient way to fit Bayesian models is by using MCMC. Also, setting up an MCMC is, in my experience, easier than people expect!
+The other main tool in the toolbox of Bayesian comparative methods is the use of Markov-chain Monte Carlo (MCMC) tools to calculate posterior probabilities. MCMC techniques use an algorithm that uses a “chain” of calculations to sample the posterior distribution. MCMC requires calculation of likelihoods but not complicated mathematics (e.g. integration of probability distributions, as in equation 2.22), and so represents a more flexible approach to Bayesian computation. Frequently, the integrals in equation 2.21 are intractable, so that the most efficient way to fit Bayesian models is by using MCMC. Also, setting up an MCMC is, in my experience, easier than people expect!
 
 An MCMC analysis requires that one constructs and samples from a Markov chain. A Markov chain is a random process that changes from one state to another with certain probabilities that depend only on the current state of the system, and not what has come before. A simple example of a Markov chain is the movement of a playing piece in the game Chutes and Ladders; the position of the piece moves from one square to another following probabilities given by the dice and the layout of the game board. The movement of the piece from any square on the board does not depend on how the piece got to that square.
 
 Some Markov chains have an equilibrium distribution, which is a stable probability distribution of the model’s states after the chain has run for a very long time. For Bayesian analysis, we use a technique called a Metropolis-Hasting algorithm to construct a special Markov chain that has an equilibrium distribution that is the same as the Bayesian posterior distribution of our statistical model. Then, using a random simulation on this chain (this is the Markov-chain Monte Carlo, MCMC), we can sample from the posterior distribution of our model.
 
+In simpler terms: we use a set of well-defined rules. These rules let us walk around parameter space, at each step deciding whether to accept or reject the next proposed move. Because of some mathematical proofs that are beyond the scope of this chapter, these rules guarantee that we will eventually be accepting samples from the Bayesian posterior distribution - which is what we seek.
+
 The following algorithm uses a Metropolis-Hastings algorithm to carry out a Bayesian MCMC analysis with one free parameter:
 
----
-
-<h3> 1\. Get a starting parameter value. </h3>
-
-Sample a starting parameter value, $p$, from the prior distribution.
-
-<h3> 2\. Propose a new parameter.</h3>
-
-Given the current parameter value, $p$, select a new proposed parameter value, $p’$, using the proposal density $Q(p'|p)$.
-
-
-<h3> 3\. Calculate three ratios.</h3>
-
-<h4> a\. The prior odds ratio.</h4>
+1. Get a starting parameter value.
+    - Sample a starting parameter value, $p_0$, from the prior distribution.</li>
+2. Starting with $i = 1$, propose a new parameter for generation i.
+    - Given the current parameter value, $p$, select a new proposed parameter value, $p'$, using the proposal density $Q(p'|p)$.
+3. Calculate three ratios.
+    - a\. The prior odds ratio.</h4>
 
 This is the ratio of the probability of drawing the parameter values $p$ and $p’$ from the prior.
 
@@ -425,7 +421,7 @@ $$
 
 <h4> b\. The proposal density ratio.</h4>
 
-This is the ratio of probability of proposals going from $p$ to $p’$ and the reverse. Often, one can construct a proposal density that is symmetrical, so that  $Q(p'|p) = Q(p|p')$ and $a_2 = 1$.
+This is the ratio of probability of proposals going from $p$ to $p'$ and the reverse. Often, we purposefully construct a proposal density that is symmetrical. When we do that, $Q(p'|p) = Q(p|p')$ and $a_2 = 1$, simplifying the calculations.
 
 (eq. 2.25)	 
 <div>
@@ -459,7 +455,7 @@ $$
 
 <h3>  5\. Accept or reject. </h3>
 
-Draw a random number $x$ from a uniform distribution between 0 and 1. If $x < R_{accept}$, accept the proposed value of $p’$; otherwise reject, and retain the current value $p$.
+Draw a random number $x$ from a uniform distribution between 0 and 1. If $x < R_{accept}$, accept the proposed value of $p'$ (p_{i}=p'); otherwise reject, and retain the current value $p$ (p_i = p).
 
 <h3>  6\. Repeat. </h3>
 
