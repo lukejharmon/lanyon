@@ -404,72 +404,46 @@ In simpler terms: we use a set of well-defined rules. These rules let us walk ar
 The following algorithm uses a Metropolis-Hastings algorithm to carry out a Bayesian MCMC analysis with one free parameter:
 
 1. Get a starting parameter value.
-    - Sample a starting parameter value, $p_0$, from the prior distribution.</li>
+    - Sample a starting parameter value, $p_0$, from the prior distribution.
 2. Starting with $i = 1$, propose a new parameter for generation i.
     - Given the current parameter value, $p$, select a new proposed parameter value, $p'$, using the proposal density $Q(p'|p)$.
 3. Calculate three ratios.
-    - a\. The prior odds ratio.</h4>
-
-This is the ratio of the probability of drawing the parameter values $p$ and $p’$ from the prior.
-
-(eq. 2.24)
-<div>
-$$
-R_{prior} = \frac{P(p')}{P(p)}
-$$
-</div>	 
-
-<h4> b\. The proposal density ratio.</h4>
-
-This is the ratio of probability of proposals going from $p$ to $p'$ and the reverse. Often, we purposefully construct a proposal density that is symmetrical. When we do that, $Q(p'|p) = Q(p|p')$ and $a_2 = 1$, simplifying the calculations.
-
-(eq. 2.25)	 
-<div>
-$$
-R_{proposal} = \frac{Q(p'|p)}{Q(p|p')}
-$$
-</div>	 
-
-<h4> c\. The likelihood ratio.</h4>
-
-This is the ratio of probabilities of the data given the two different parameter values.
-
-(eq. 2.26)	 
-<div>
-$$
-R_{likelihood} = \frac{L(p'|D)}{L(p|D)} = \frac{P(D|p')}{P(D|p)}
-$$
-</div>	 
-
-
-<h3> 4\. Multiply.</h3>
-
-Find the product of the prior odds, proposal density ratio, and the likelihood ratio:
-
-(eq. 2.27)
-<div>
-$$
-R_{accept} = R_{prior} \cdot R_{proposal} \cdot R_{likelihood}
-$$
-</div>
-
-<h3>  5\. Accept or reject. </h3>
-
-Draw a random number $x$ from a uniform distribution between 0 and 1. If $x < R_{accept}$, accept the proposed value of $p'$ (p_{i}=p'); otherwise reject, and retain the current value $p$ (p_i = p).
-
-<h3>  6\. Repeat. </h3>
-
-Repeat steps 2-5 a large number of times.
+    - a\. The prior odds ratio. This is the ratio of the probability of drawing the parameter values $p$ and $p\prime$ from the prior (eq. 2.24).
+    <div>
+    $$
+    R_{prior} = \frac{P(p')}{P(p)}
+    $$
+    </div>	 
+    - b\. The proposal density ratio. This is the ratio of probability of proposals going from $p$ to $p'$ and the reverse. Often, we purposefully construct a proposal density that is symmetrical. When we do that, $Q(p'|p) = Q(p|p')$ and $a_2 = 1$, simplifying the calculations (eq. 2.25).	 
+    <div>
+    $$
+    R_{proposal} = \frac{Q(p'|p)}{Q(p|p')}
+    $$
+    </div>	 
+    - c\. The likelihood ratio. This is the ratio of probabilities of the data given the two different parameter values (eq. 2.26).	 
+    <div>
+    $$
+    R_{likelihood} = \frac{L(p'|D)}{L(p|D)} = \frac{P(D|p')}{P(D|p)}
+    $$
+    </div>	 
+4. Multiply. Find the product of the prior odds, proposal density ratio, and the likelihood ratio (eq. 2.27).
+    <div>
+    $$
+    R_{accept} = R_{prior} \cdot R_{proposal} \cdot R_{likelihood}
+    $$
+    </div>
+5. Accept or reject. Draw a random number $x$ from a uniform distribution between 0 and 1. If $x < R_{accept}$, accept the proposed value of $p'$ ($p_{i}=p'$); otherwise reject, and retain the current value $p$ ($p_{i} = p$).
+6. Repeat. Repeat steps 2-5 a large number of times.
 
 ---
 
-Carrying out these steps, one obtains a set of parameter values, $p_i$, where $i$ is from 1 to the total number of generations in the MCMC. Typically, the chain has a “burn-in” period at the beginning. This is the time before the chain has reached a stationary distribution, and can be observed when parameter values show trends through time and the likelihood for models has yet to plateau. If you eliminate this “burn-in” period, then you can treat the rest of the chain as a sample from the posterior distribution, and summarize it in a variety of ways; for example, by calculating a mean, 95% confidence interval, or plotting a histogram.
+Carrying out these steps, one obtains a set of parameter values, $p_i$, where $i$ is from 1 to the total number of generations in the MCMC. Typically, the chain has a “burn-in” period at the beginning. This is the time before the chain has reached a stationary distribution, and can be observed when parameter values show trends through time and the likelihood for models has yet to plateau. If you eliminate this “burn-in” period, then, as discussed above, each step in the chain is a sample from the posterior distribution. We can summarize the posterior distributions of the model parameters in a variety of ways; for example, by calculating means, 95% confidence intervals, or histograms.
 
-We can apply this algorithm to our coin-flipping example. We will consider the same prior distribution, $U(0,1)$, for the parameter $p$. We will also define a proposal density, $Q(p'|p) ~ U(p-\epsilon, p+\epsilon)$. That is, we will add or subtract a small number ($\epsilon \leq 0.01$) to generate proposed values of $p’$ given $p$.
+We can apply this algorithm to our coin-flipping example. We will consider the same prior distribution, $U(0,1)$, for the parameter $p$. We will also define a proposal density, $Q(p'|p) ~ U(p-\epsilon, p+\epsilon)$. That is, we will add or subtract a small number ($\epsilon \leq 0.01$) to generate proposed values of $p\prime$ given $p$.
 
-To start the algorithm, we draw a value of $p$ from the prior. Let’s say for illustrative purposes that the value we draw is 0.60. This becomes our current parameter estimate. For step two, we propose a new value, $p’$, by drawing from our proposal distribution. We can use $\epsilon = 0.01$ so the proposal distribution becomes $U(0.59, 0.61)$. Let’s suppose that our new proposed value $p’ = 0.595$.
+To start the algorithm, we draw a value of $p$ from the prior. Let’s say for illustrative purposes that the value we draw is 0.60. This becomes our current parameter estimate. For step two, we propose a new value, $p\prime$, by drawing from our proposal distribution. We can use $\epsilon = 0.01$ so the proposal distribution becomes $U(0.59, 0.61)$. Let’s suppose that our new proposed value $p\prime = 0.595$.
 
-We then calculate our three ratios. Here things are simpler than you might have expected for two reasons. First, recall that our prior probability distribution is $U(0,1)$. The density of this distribution is a constant (1.0) for all values of $p$ and $p’$. Because of this, the prior odds ratio is always:
+We then calculate our three ratios. Here things are simpler than you might have expected for two reasons. First, recall that our prior probability distribution is $U(0,1)$. The density of this distribution is a constant (1.0) for all values of $p$ and $p\prime$. Because of this, the prior odds ratio for this example is always:
 
 (eq. 2.28)
 <div>
@@ -478,7 +452,7 @@ R_{prior} = \frac{P(p')}{P(p)} = \frac{1}{1} = 1
 $$
 </div>	 
 
-Similarly, because our proposal distribution is symmetrical, $Q(p'|p) = Q(p|p')$ and $R_{proposal} = 1$. That means that we only need to calculate the likelihood ratio, $R_{likelihood}$ for $p$ and $p’$. We can do this by plugging our values for $p$ (or $p’$) into equation 2.2:
+Similarly, because our proposal distribution is symmetrical, $Q(p'|p) = Q(p|p')$ and $R_{proposal} = 1$. That means that we only need to calculate the likelihood ratio, $R_{likelihood}$ for $p$ and $p\prime$. We can do this by plugging our values for $p$ (or $p\prime$) into equation 2.2:
 
 (eq. 2.29)
 <div>
@@ -504,9 +478,9 @@ R_{likelihood} = \frac{P(D|p')}{P(D|p)} = \frac{0.064}{0.068} = 0.94
 $$
 </div>
 
-We can now calculate $R_{accept} = R_{prior} \cdot R_{proposal} \cdot R_{likelihood} = 1 \cdot 1 \cdot 0.94 = 0.94$. We next choose a random number between 0 and 1 – say that we draw $x = 0.34$. We then notice that our random number $x$ is less than or equal to $R_{accept}$, so we accept the proposed value of $p’$. If the random number that we drew were greater than 0.94, we would reject the proposed value, and keep our original parameter value $p = 0.60$ going into the next generation.
+We can now calculate $R_{accept} = R_{prior} \cdot R_{proposal} \cdot R_{likelihood} = 1 \cdot 1 \cdot 0.94 = 0.94$. We next choose a random number between 0 and 1 – say that we draw $x = 0.34$. We then notice that our random number $x$ is less than or equal to $R_{accept}$, so we accept the proposed value of $p\prime$. If the random number that we drew were greater than 0.94, we would reject the proposed value, and keep our original parameter value $p = 0.60$ going into the next generation.
 
-If we repeat this procedure a large number of times, we will obtain a long chain of values of $p$. You can see the results of such a run in Figure 2.4. In panel A, I have plotted the likelihoods for each successive value of p. You can see that the likelihoods increase for the first ~1000 or so generations, then reach a plateau around $lnL = -3$. Panel B shows a plot of the values of $p$, which rapidly converge to a stable distribution around $p = 0.63$. We can also plot a histogram of these posterior estimates of $p$. In panel C, I have done that – but with a twist. Because the MCMC algorithm creates a series of parameter estimates, these numbers show autocorrelation – that is, each estimate is similar to estimates that come just before and just after. This autocorrelation can cause problems for data analysis. The simplest solution is to subsample these values, picking only, say, one value every 100 generations. That is what I have done in the histogram in panel C. This panel also includes the analytic posterior distribution that we calculated above – notice how well our Metropolis-Hastings algorithm did in reconstructing this distribution!
+If we repeat this procedure a large number of times, we will obtain a long chain of values of $p$. You can see the results of such a run in Figure 2.4. In panel A, I have plotted the likelihoods for each successive value of p. You can see that the likelihoods increase for the first ~1000 or so generations, then reach a plateau around $lnL = -3$. Panel B shows a plot of the values of $p$, which rapidly converge to a stable distribution around $p = 0.63$. We can also plot a histogram of these posterior estimates of $p$. In panel C, I have done that – but with a twist. Because the MCMC algorithm creates a series of parameter estimates, these numbers show autocorrelation – that is, each estimate is similar to estimates that come just before and just after. This autocorrelation can cause problems for data analysis. The simplest solution is to subsample these values, picking only, say, one value every 100 generations. That is what I have done in the histogram in panel C. This panel also includes the analytic posterior distribution that we calculated above – notice how well our Metropolis-Hastings algorithm did in reconstructing this distribution! For comparative methods in general, analytic posterior distributions are difficult or impossible to construct, so approximation using MCMC is very common.
 
 ![Figure 2.4. Bayesian MCMC from lizard flipping example.]({{ site.baseurl }}/images/figure2-4.png)
 
@@ -516,7 +490,7 @@ This simple example glosses over some of the details of MCMC algorithms, but we 
 
 ### Section 2.4c: Bayes factors
 
-Now that we know how to use data and a prior to calculate a posterior distribution, we can move to the topic of model selection. We already learned one general method for model selection using AIC. We can also do model selection in a Bayesian framework. The simplest way is to calculate and then compare the posterior probabilities for a set of models under consideration. One can do this by calculating Bayes factors:
+Now that we know how to use data and a prior to calculate a posterior distribution, we can move to the topic of Bayesian model selection. We already learned one general method for model selection using AIC. We can also do model selection in a Bayesian framework. The simplest way is to calculate and then compare the posterior probabilities for a set of models under consideration. One can do this by calculating Bayes factors:
 
 (eq. 2.32)
 <div>
@@ -536,9 +510,9 @@ Calculation of Bayes factors can be quite complicated, requiring integration acr
 <div>
 $$
 \begin{array}{lcl}
-Pr(D|H_1) &=& \binom{100}{63} 0.5^0.63 (1-0.5)^{100-63} \\\
+Pr(D|H_1) &=& \binom{100}{63} 0.5^{0.63} (1-0.5)^{100-63} \\\
 &=& 0.00270 \\\
-Pr(D|H_2) &=& \int_{p=0}^{1} \binom{100}{63} p^63 (1-p)^{100-63} \\\
+Pr(D|H_2) &=& \int_{p=0}^{1} \binom{100}{63} p^{63} (1-p)^{100-63} \\\
 &=& \binom{100}{63} \beta (38,64) \\\
 &=& 0.0099 \\\
 B_{12} &=& \frac{0.0099}{0.00270} \\\
@@ -551,7 +525,7 @@ $$
 
 In the above example, $\beta (x,y)$ is the Beta function. Our calculations show that the Bayes factor is 3.67 in favor of model 2 compared to model 1. This is typically interpreted as substantial (but not decisive) evidence in favor of model 2. Again, we can be reasonably confident that our lizard is not a fair flipper.
 
-In the lizard flipping example we can calculate Bayes factors exactly because we know the solution to the integral in equation 2.33. However, if we don’t know how to solve this equation (a typical situation in comparative methods), we can still approximate Bayes factors from our MCMC runs. Methods to do this, including arrogance sampling and stepping stone models, are complex and beyond the scope of this book. However, one common method for approximating Bayes Factors involves calculating the harmonic mean of the likelihoods over the MCMC chain for each model. The ratio of these two likelihoods is then used as an approximation of the Bayes factor [@Newton1994-cs]. Unfortunately, this method is extremely unreliable, and probably should never be used (see [this blog post](https://radfordneal.wordpress.com/2008/08/17/the-harmonic-mean-of-the-likelihood-worst-monte-carlo-method-ever/) for more details).
+In the lizard flipping example we can calculate Bayes factors exactly because we know the solution to the integral in equation 2.33. However, if we don’t know how to solve this equation (a typical situation in comparative methods), we can still approximate Bayes factors from our MCMC runs. Methods to do this, including arrogance sampling and stepping stone models [@Xie2011-zg, @Perrakis2014-bi], are complex and beyond the scope of this book. However, one common method for approximating Bayes Factors involves calculating the harmonic mean of the likelihoods over the MCMC chain for each model. The ratio of these two likelihoods is then used as an approximation of the Bayes factor [@Newton1994-cs]. Unfortunately, this method is extremely unreliable, and probably should never be used [see @Neal2008-di for more details].
 
 ## Section 2.5: AIC versus Bayes
 
@@ -580,4 +554,5 @@ And, often, concludes that we just "need more data" to get the answer that we wa
 <a name="footnote2.3">3</a>:
 Especially in fields like genomics where multiple testing and massive Bonferroni corrections are common; one can only wonder at the legions of type II errors that are made under such circumstances.
 [*back to main text*](#footnote2.3_back)
+
 ## References
