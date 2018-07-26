@@ -2,6 +2,8 @@
 [pdf version]({{ site.baseurl }}/pdf/chapter6_beyondbm.pdf)
 </div>
 
+\setcounter{page}{87}
+
 # Chapter 6: Beyond Brownian Motion
 
 ## Section 6.1: Introduction
