@@ -29,7 +29,7 @@ pandoc temp.md --from=markdown-markdown_in_html_blocks-native_divs --latex-engin
 rm temp.md
 
 cat chapter7_introdiscrete_pre.md | sed s@\{\{[[:space:]]site.baseurl[[:space:]]\}\}@..@ > temp.md
-pandoc temp.md --from=markdown-markdown_in_html_blocks-native_divs --latex-engine=xelatex --bibliography pcm_paperpile.bib --filter pandoc-citeproc --csl evolution.csl --metadata link-citations=true -o ../pdf/chapter7_introdiscrete.pdf
+pandoc temp.md --from=markdown-markdown_in_html_blocks-native_divs --latex-engine=xelatex --filter pandoc-fignos -M fignos-caption-name="Figure 7." --bibliography pcm_paperpile.bib --filter pandoc-citeproc --csl evolution.csl --metadata link-citations=true -o ../pdf/chapter7_introdiscrete.pdf
 rm temp.md
 
 cat chapter8_fitdiscrete_pre.md | sed s@\{\{[[:space:]]site.baseurl[[:space:]]\}\}@..@ > temp.md
