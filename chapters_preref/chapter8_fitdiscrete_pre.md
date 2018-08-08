@@ -53,9 +53,9 @@ Felsenstein’s pruning algorithm proceeds backwards in time from the tips to th
 
 ## Section 8.3: Using maximum likelihood to estimate parameters of the Mk model
 
-The algorithm in Box 8.1 gives the likelihood for any particular discrete-state Markov model on a tree, but requires us to specify a value of the rate parameter $q$. In the example given, this rate parameter $q = 1.0$ corresponds to a lnL of -6.5. But is this the best value of $q$ to use for our Mk model? Probably not. We can use maximum likelihood to find a better estimate of this parameter.
+The algorithm in the appendix below gives the likelihood for any particular discrete-state Markov model on a tree, but requires us to specify a value of the rate parameter $q$. In the example given, this rate parameter $q = 1.0$ corresponds to a lnL of -6.5. But is this the best value of $q$ to use for our Mk model? Probably not. We can use maximum likelihood to find a better estimate of this parameter.
 
-If we apply the pruning algorithm across a range of different values of $q$, the likelihood changes. To find the ML estimate of $q$, we can again use numerical optimization methods.
+If we apply the pruning algorithm across a range of different values of $q$, the likelihood changes. To find the ML estimate of $q$, we can again use numerical optimization methods, calculating the likelihood by pruning for many values of $q$ and finding the maximum.
 
 Applying this method to the lizard data, we obtain a maximum liklihood estimate of $q = 0.001850204$ corresponding to $lnL = -80.487176$.
 
@@ -65,16 +65,20 @@ The example above considers maximization of a single parameter, which is a relat
 
 We can also analyze this model using a Bayesian MCMC framework. We can modify the standard approach to Bayesian MCMC (see chapter 2):
 
-1.	Sample a starting parameter value, $q$, from its prior distributions. For this example, we can set our prior distribution as uniform between 0 and 1. (Note that one can also treat probabilities of states at the root as a parameter to be estimated from the data).
+1.	Sample a starting parameter value, $q$, from its prior distributions. For this example, we can set our prior distribution as uniform between 0 and 1. (Note that one could also treat probabilities of states at the root as a parameter to be estimated from the data; in this case we will assign equal probabilities to each state).
 
 2.	Given the current parameter value, select new proposed parameter values using the proposal density $Q(q'|q)$. For example, we might use a uniform proposal density with width 0.2, so that $Q(q'|q) ~ U(q - 0.1, q + 0.1)$.
 
 3.	Calculate three ratios:
-a.	The prior odds ratio, $R_{prior}$. In this case, since our prior is uniform, $R_{prior} = 1$.
-b.	The proposal density ratio, $R_{proposal}$. In this case our proposal density is symmetrical, so $R_{proposal}$ = 1.
-c.	The likelihood ratio, $R_{likelihood}$. We can calculate the likelihoods using Felsenstein’s pruning algorithm (Box 8.1); then calculate this value based on equation 2.26.
+    - a\.	The prior odds ratio, $R_{prior}$. In this case, since our prior is uniform, $R_{prior} = 1$.
+    - b\.	The proposal density ratio, $R_{proposal}$. In this case our proposal density is symmetrical, so $R_{proposal}$ = 1.
+    - c\. The likelihood ratio, $R_{likelihood}$. We can calculate the likelihoods using Felsenstein’s pruning algorithm (Box 8.1); then calculate this value based on equation 2.26.
+
 4.	Find $R_{accept}$ as the product of the prior odds, proposal density ratio, and the likelihood ratio. In this case, both the prior odds and proposal density ratios are 1, so $R_{accept} = R_{likelihood}$
-5.	Draw a random number $u$ from a uniform distribution between 0 and 1. If $u < R_{accept}$, accept the proposed value of both parameters; otherwise reject, and retain the current value of the two parameters.6.	Repeat steps 2-5 a large number of times.
+
+5.	Draw a random number $u$ from a uniform distribution between 0 and 1. If $u < R_{accept}$, accept the proposed value of both parameters; otherwise reject, and retain the current value of the two parameters.
+
+6.	Repeat steps 2-5 a large number of times.
 
 We can run this analysis on our squamate data, obtaining a posterior with a mean estimate of $q = 0.001980785$ and a 95% credible interval of $0.001174813 - 0.003012715$.
 
@@ -82,9 +86,9 @@ We can run this analysis on our squamate data, obtaining a posterior with a mean
 
 One problem that arises sometimes in maximum likelihood optimization happens when instead of a peak, the likelihood surface has a long flat “ridge” of equally likely parameter values. In the case of the Mk model, it is common to find that all values of $q$ greater than a certain value have the same likelihood. This is because above a certain rate, evolution has been so rapid that all traces of the history of evolution of that character have been obliterated. After this point, character states of each lineage are random, and have no relationship to the shape of the phylogenetic tree. Our optimization techniques will not work in this case because there is no value of q that has a higher likelihood than other values. Once we get onto the ridge, all values of $q$ have the same likelihood.
 
-For Mk models, there is a simple test that allows us to recognize when the likelihood surface has a long ridge, and $q$ values cannot be estimated. I like to call this test the “total garbage” test because it can tell you if your data are “garbage” with respect to historical inference – that is, your data have no information about historical patterns of trait change.
+For Mk models, there is a simple test that allows us to recognize when the likelihood surface has a long ridge, and $q$ values cannot be estimated. I like to call this test the “total garbage” test because it can tell you if your data are “garbage” with respect to historical inference – that is, your data have no information about historical patterns of trait change. One can predict states just as well by choosing each species at random.
 
-To carry out the total garbage test, imagine that you are just drawing trait values out of a hat. That is, each species has some probability $p$ of having character state 0, and some probability ($1 - p$) of having state 1 (one can also generalize this test to multi-state models). This model is easy to write down. For a tree of size $n$, the probability of drawing $n_0$ species with state 0 is:
+To carry out the total garbage test, imagine that you are just drawing trait values at random. That is, each species has some probability $p$ of having character state 0, and some probability ($1 - p$) of having state 1 (one can also generalize this test to multi-state models). This likelihood is easy to write down. For a tree of size $n$, the probability of drawing $n_0$ species with state 0 is:
 
 (eq. 8.2)
 <div>
@@ -101,7 +105,7 @@ This equation gives the likelihood of the “total garbage” model for any valu
 Thus, one can compare the likelihood of our Mk model to the total garbage model. If the maximum likelihood value of $q$ has the same likelihood as our garbage model, then we know that we are on a ridge of the likelihood surface and $q$ cannot be estimated. We also have no ability to make any statements about the past evolution of our character – in particular, we cannot estimate ancestral character state with any precision. By contrast, if the likelihood of the Mk model is greater than the total garbage model, then our data contains some historical information. We can also make this comparison using AIC, considering the total garbage model as having a single parameter p.
 
 For the squamates, we have $n = 258$ and $n_0 = 207$. We calculate $p = n_0 / n =  207/258 = 0.8023256$. So the likelihood of our garbage model is $L_{garbage} = p^{n_0} (1-p)^{n-n_0} = 0.8023256^207 (1-0.8023256)^51 = 1.968142e-56$. This calculation is both easier and more useful, though, on a natural-log scale: $lnL_{garbage} = n_0 \cdot ln(p) + (n-n_0) \cdot ln(1-p) = 207 \cdot ln(0.8023256) + 51 \cdot ln(1-0.8023256) = -128.2677$. Compare this
-to the log-likelihood of our Mk model, $lnL = -80.487176$, and you will see that the garbage model is a terrible fit to these data.
+to the log-likelihood of our Mk model, $lnL = -80.487176$, and you will see that the garbage model is a terrible fit to these data. There is, in fact, some historical information about species' traits in our data.
 
 ## Section 8.6: Testing for differences in the forwards and backwards rate of character change
 
@@ -158,7 +162,7 @@ One can compare the two nested models using standard methods discussed in previo
 
 We can apply all of the above methods to analyze the evolution of limblessness in squamates. We can use the tree and character state data from Brandley et al. [-@Brandley2008-wr], which is plotted with ancestral state reconstructions as Figure 8.2.
 
-![Figure 8.2. Reconstructed patterns of the evolution of limbs and limblessness across squamates. Tips show states of extant taxa (here, I classified species with neither fore- nor hindlimbs as limbless, which is conservative given the variation across this clade (see chapter 7). Pie charts on internal nodes show proportional marginal likelihoods for ancestral state reconstruction. Data from [@Brandley2008-wr]]({{ site.baseurl }}/images/figure8-2.png)
+![Figure 8.2. Reconstructed patterns of the evolution of limbs and limblessness across squamates. Tips show states of extant taxa (here, I classified species with neither fore- nor hindlimbs as limbless, which is conservative given the variation across this clade (see chapter 7). Pie charts on internal nodes show proportional marginal likelihoods for ancestral state reconstruction. Data from Brandley et al. [-@Brandley2008-wr]]({{ site.baseurl }}/images/figure8-2.png)
 
 If we fit an Mk model to these data assuming equal state frequencies at the root of the tree, we obtain a lnL of -80.5 and an estimate of the $Q_ER$ matrix as:
 
@@ -190,7 +194,7 @@ $$
 
 Note that the ASY model has a higher backwards than forwards rate; as expected, we estimate a rate of losing limbs that is higher than the rate of gaining them (although the difference is surprisingly low). Is this statistically supported? We can compare the AIC scores of the two models. For the ER model, $AIC_c = 163.0$, while for the ASY model $AIC_c = 162.8$. The AICc score is higher for the unequal rates model, but only by about 0.2 – which is not definitive either way. So based on this analysis, we cannot rule out the possibility that forward and backward rates are equal.
 
-A Bayesian analysis of the ASY model gives similar conclusions (Figure 8.3). We can see that the posterior distribution for the backwards rate (q21) is higher than the forwards rate (q12), but that the two distributions are broadly overlapping.
+A Bayesian analysis of the ASY model gives similar conclusions (Figure 8.3). We can see that the posterior distribution for the backwards rate ($q_{21}$) is higher than the forwards rate ($q_{12}$), but that the two distributions are broadly overlapping.
 
 ![Figure 8.3. Bayesian posterior distibutions for the extended-Mk model applied to the evolution of limblessness in squamates.]({{ site.baseurl }}/images/figure8-3.png)
 
@@ -202,7 +206,7 @@ In this chapter I describe how Felsenstein’s pruning algorithm can be used to 
 
 Analyzing our example of lizard limbs shows the power of this approach; we can estimate transition rates for this character over macroevolutionary time, and we can say with some certainty that transitions between limbed and limbless have been asymmetric. In the next chapter, we will build on the Mk model and further develop our comparative toolkit for understanding the evolution of discrete characters.
 
-### Section 8.8: Appendix, Felsenstein's pruning algorithm
+### Section 8.8: Appendix: Felsenstein's pruning algorithm
 
 Felsenstein’s pruning algorithm [-@Felsenstein1973-oj] is an example of dynamic programming, a type of algorithm that has many applications in comparative biology. In dynamic programming, we break down a complex problem into a series of simpler steps that have a nested structure. This allows us to reuse computations in an efficient way and speeds up the time required to make calculations.
 
@@ -337,7 +341,7 @@ Figure 8.4C. Conditional likelihoods entered for node 1.
 
 
 4.	We then repeat the above calculation for every node in the tree. For nodes 3-5, not all of the $L_L(x)$ and $L_R(x)$ terms are zero; their values can be read out of the boxes on the tree. The result of all of these calculations:
- 
+
 ![
 Figure 8.4D. Conditional likelihoods entered for all nodea.
 ]({{ site.baseurl }}/images/figure8-4D.png)

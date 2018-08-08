@@ -433,7 +433,7 @@ There is one general feature of all models that evolve in a Brownian way: they i
 
 In summary, Brownian motion is mathematically tractable, and has convenient statistical properties. There are also some circumstances under which one would expect traits to evolve under a Brownian model. However, as we will see later in the book, one should view Brownian motion as an assumption that might not hold for real data sets.
 
-## footnotes
+## Footnotes
 
 <a name="footnote3.1">1</a>:
 More formally, the ball will move in two-dimensional Brownian motion, which describe movement both across and up and down the stadium rows. But if you consider just the movement in one direction - say, the distance of the ball from the field - then this is a simple single dimensional Brownian motion process as described here. [*back to main text*](#footnote3.1_back)
