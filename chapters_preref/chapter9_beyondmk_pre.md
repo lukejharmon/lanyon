@@ -22,12 +22,6 @@ To explore these questions, I will refer to a dataset of frog reproductive modes
 
 ![Figure 9.2. Ancestral state reconstruction of frog reproductive modes. Data from Gomez-Mestre et al. [-@Gomez-Mestre2012-be]]({{ site.baseurl }}/images/figure9-2.png)
 
-### Key Biological Questions
-
-- Do transition rates among character states vary through time or across clades?
-- Do discrete characters evolve in a correlated fashion?
-- Does a model of underlying quantitative characters with thresholds explain discrete character data?
-
 ##  Section 9.2: Beyond the Mk model
 
 In [Chapter 8]( {{ site.baseurl }}/chapter8_fitdiscrete/), we considered the evolution of discrete characters on phylogenetic trees. These models fall under the general category of continuous-time Markov models, which consider a process that can occupy two or more states. Transitions occur between those states in continuous time. The Markov property means that, at some time $t$, what happens next in the model depends only on the current state of the process and not on anything that came before.

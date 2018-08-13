@@ -22,11 +22,6 @@ Squamates, the clade that includes all living species of lizards, are well known
 
 Limblessness is an example of a discrete trait – a trait that can occupy one of a set of distinct character states. Analyzing the evolution of discrete traits requires a different modeling approach than what we used for continuous traits. In this chapter, I will discuss the Mk model [@Lewis2001-bu], which is a general approach to modeling the evolution of discrete traits on trees. Fitting this model to comparative data will help us understand the evolution of traits like limblessness where species can be placed into one of a number of discrete character states.
 
-Key Questions
--	How can we model the evolution of discrete characters that have a set number of fixed states?
--	How can we change the parameters of the Mk model to construct more elaborate models of discrete character evolution?
--	How do we simulate the evolution of a discrete character?
-
 
 ## Section 7.2: Modeling the evolution of discrete states
 

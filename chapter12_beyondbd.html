@@ -38,13 +38,6 @@ title: Beyond birth-death models
 </div>
 <p>All of these facts lead to the idea that simple, constant-rate birth-death models are not adequate to capture the complexity and dynamics of speciation and extinction across the tree of life. Speciation and extinction rates vary through time, across clades, and among geographic regions. We can sometimes predict this variation based on what we know about the mechanisms that lead to speciation and/or extinction.</p>
 <p>In this chapter, I will explore some extensions to birth-death models that allow us to explore diversification in more detail. This chapter also leads naturally to the next, chapter 13, which will consider the case where diversification rates depend on species’ traits.</p>
-<p>Key questions:</p>
-<ol style="list-style-type: decimal">
-<li>Do some clades diversity (or go extinct) at a higher rate than others?</li>
-<li>Do diversification rates vary through time?</li>
-<li>Are speciation rates diversity-dependent?</li>
-<li>Do models of protracted speciation explain phylogenetic tree shapes?</li>
-</ol>
 <h2 id="section-12.2-variation-in-diversification-rates-across-clades">Section 12.2: Variation in diversification rates across clades</h2>
 <p>We know from analyses of tree balance that the tree of life is more imbalanced than birth-death models predict. We can explore this variation in diversification rates by allowing birth and death models to vary along branches in phylogenetic trees. The simplest scenario is when one has a particular prediction about diversification rates to test. For example, we might wonder if diversification rates in one clade (clade A in Figure 12.2) is higher than in the rest of the phylogenetic tree. We can test this hypothesis by fitting a multiple-rate birth-death model.</p>
 <p>The simplest method to carry out this test is by using model selection in a ML framework <span class="citation">(Rabosky et al. <a href="#ref-Rabosky2007-ou">2007</a>)</span>. To do this, we first fit a constant-rates birth-death model to the entire tree, and calculate a likelihood. We can then fit variable-rates birth-death models to the data, comparing the fit of these models using either likelihood ratio tests or <span class="math inline"><em>A</em><em>I</em><em>C</em><sub><em>C</em></sub></span>. The simplest way to fit a variable-rates model is to adapt the likelihood formula in equation 11.18 (or eq. 11.24 if species are unsampled). We calculate the likelihood in two parts, one for the background part of the tree (with rates <span class="math inline"><em>λ</em><sub><em>B</em></sub></span> and <span class="math inline"><em>μ</em><sub><em>B</em></sub></span>) and one for the focal clade that may have different diversification dynamics (with rates <span class="math inline"><em>λ</em><sub><em>A</em></sub></span> and <span class="math inline"><em>μ</em><sub><em>A</em></sub></span>). We can then compare this model to one where speciation and extinction rates are constant through time.</p>
@@ -360,7 +353,7 @@ $$</span><br /></p>
 <p>Höhna, S. 2014. Likelihood inference of non-constant diversification rates with incomplete taxon sampling. PLoS One 9:e84184.</p>
 </div>
 <div id="ref-Hughes2006-nr">
-<p>Hughes, C., and R. Eastwood. 2006. Island radiation on a continental scale: Exceptional rates of plant diversification after uplift of the andes. Proc. Natl. Acad. Sci. U. S. A. 103:10334–10339.</p>
+<p>Hughes, C., and R. Eastwood. 2006. Island radiation on a continental scale: Exceptional rates of plant diversification after uplift of the Andes. Proc. Natl. Acad. Sci. U. S. A. 103:10334–10339.</p>
 </div>
 <div id="ref-Jetz2018-mh">
 <p>Jetz, W., and R. A. Pyron. 2018. The interplay of past diversification and evolutionary isolation with present imperilment across the amphibian tree of life. Nat Ecol Evol 2:850–858.</p>
@@ -408,7 +401,7 @@ $$</span><br /></p>
 <p>Rabosky, D. L., and I. J. Lovette. 2008. Density-dependent diversification in north american wood warblers. Proc. Biol. Sci. 275:2363–2371.</p>
 </div>
 <div id="ref-Rabosky2007-ou">
-<p>Rabosky, D. L., S. C. Donnellan, A. L. Talaba, and I. J. Lovette. 2007. Exceptional among-lineage variation in diversification rates during the radiation of australia’s most diverse vertebrate clade. Proc. Biol. Sci. 274:2915–2923.</p>
+<p>Rabosky, D. L., S. C. Donnellan, A. L. Talaba, and I. J. Lovette. 2007. Exceptional among-lineage variation in diversification rates during the radiation of Australia’s most diverse vertebrate clade. Proc. Biol. Sci. 274:2915–2923.</p>
 </div>
 <div id="ref-Rosindell2010-dk">
 <p>Rosindell, J., S. J. Cornell, S. P. Hubbell, and R. S. Etienne. 2010. Protracted speciation revitalizes the neutral theory of biodiversity. Ecol. Lett. 13:716–727.</p>

@@ -15,10 +15,6 @@ R markdown to [recreate analyses]({{ site.baseurl }}/rmarkdown/chapter8_squamate
 
 Plotting the pattern of limbed and limbless species on the tree leads to interesting questions about the tempo and mode of this trait in squamates. For example, are there multiple gains as well as losses of limbs? Do gains and losses happen at the same rate, or (as we might expect) are gains more rare than losses? We can test hypothesis such as these using the the Mk and extended-Mk models (see chapter 7). In this chapter we will fit these models to phylogenetic comparative data.
 
-Key Questions
--	How do we calculate the likelihoods of Mk and extended-Mk models on phylogenetic trees?
--	How can we use these approaches to test hypotheses about character evolution?
-
 ## Section 8.2: Fitting Mk models to comparative data
 
 The equations in [Chapter 7]({{ site.baseurl }}/chapter7_introdiscrete) give us enough information to calculate the likelihood for comparative data on a tree. To understand how this is done, we can first consider the simplest case, where we know the beginning state of a character, the branch length, and the end state. We can then apply the method across an entire tree using a pruning algorithm, which will allow calculation of the likelihood of the data given the model and phylogenetic tree.

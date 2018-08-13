@@ -19,14 +19,6 @@ At a global scale, the number of species in a clade can change only via two proc
 
 Comparative methods can be applied to understand patterns of species richness by estimating speciation and extinction rates, both across clades and through time. In this chapter, I will introduce birth-death models, by far the most common model for understanding diversification in a comparative framework. I will discuss the mathematics of birth-death models and how these models relate to the shapes of phylogenetic trees. I will describe how to simulate phylogenetic trees under a birth-death model. Finally, I will discuss tree balance and lineage-through-time plots, two common ways to measure the shapes of phylogenetic trees.
 
-*Key Questions*
-
-- How can we use birth-death models to model diversification?
-- How do we simulate phylogenetic trees under a birth-death model?
-- How do birth-death models predict topology and balance of phylogenetic trees?
-- What is the shape of lineage-through-time plots under birth-death models?
-
-
 ## Section 10.2: The birth-death model
 
 A birth-death model is a continuous-time Markov process that is often used to study how the number of individuals in a population change through time. For macroevolution, these “individuals” are usually species, sometimes called "lineages" in the literature. In a birth-death model, two things can occur: births, where the number of individuals increases by one; and deaths, where the number of individuals decreases by one. We assume that no more than one new individual can form (or die) during any one event. In phylogenetic terms, that means that birth-death trees cannot have “hard polytomies” - each speciation event results in exactly two descendant species.

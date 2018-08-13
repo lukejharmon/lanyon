@@ -18,12 +18,6 @@ The evolution of selfing is a good example of a trait that might have a strong e
 
 In this chapter, we will learn about a family of models where traits can affect diversification rates. I will also address some of the controversial aspects of these models and how we can improve these approaches in the future.
 
-Key Biological Questions
-
-1. How does the behavior of birth-death models change when there are some character states that are associated with different rates of speciation and/or extinction compared to others?
-
-2. How we detect character-dependent diversification using comparative data? When and why might character-dependent approaches lead us astray?
-
 ## Section 13.2: A State-Dependent Model of Diversification
 
 The models that we will consider in this chapter include both a model of trait evolution and an associated model of lineage diversification. In the simplest case, we can consider a model where the character has two states, 0 and 1. We need to model the transitions among these states, which we can do in an identical way to what we did in Chapter 7 using a continuous-time Markov model. We express this model using two rate parameters, a forward rate $q_{01}$ and a backwards rate $q_{10}$.

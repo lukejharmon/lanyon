@@ -40,11 +40,6 @@ title: Fitting models of discrete character evolution
 <p class="caption">Figure 8.1. A view of the squamate tree of life. Data from Bergmann et al. <span class="citation">(<a href="#ref-Bergmann2012-vm">2012</a>)</span>, visualized using OneZoom [<span class="citation">Rosindell and Harmon (<a href="#ref-Rosindell2012-bo">2012</a>)</span>; see <a href="http://www.onezoom.org">www.onezoom.org</a>].</p>
 </div>
 <p>Plotting the pattern of limbed and limbless species on the tree leads to interesting questions about the tempo and mode of this trait in squamates. For example, are there multiple gains as well as losses of limbs? Do gains and losses happen at the same rate, or (as we might expect) are gains more rare than losses? We can test hypothesis such as these using the the Mk and extended-Mk models (see chapter 7). In this chapter we will fit these models to phylogenetic comparative data.</p>
-<p>Key Questions</p>
-<ul>
-<li><p>How do we calculate the likelihoods of Mk and extended-Mk models on phylogenetic trees?</p></li>
-<li><p>How can we use these approaches to test hypotheses about character evolution?</p></li>
-</ul>
 <h2 id="section-8.2-fitting-mk-models-to-comparative-data">Section 8.2: Fitting Mk models to comparative data</h2>
 <p>The equations in <a href="{{site.baseurl}}/chapter7_introdiscrete">Chapter 7</a> give us enough information to calculate the likelihood for comparative data on a tree. To understand how this is done, we can first consider the simplest case, where we know the beginning state of a character, the branch length, and the end state. We can then apply the method across an entire tree using a pruning algorithm, which will allow calculation of the likelihood of the data given the model and phylogenetic tree.</p>
 <p>Imagine that a two-state character changes from a state of 0 to a state of 1 sometime over a time interval of <span class="math inline"><em>t</em> = 3</span>. What is the likelihood of these data under the Mk model? As we did in equation 7.17, we can set a rate parameter <span class="math inline"><em>q</em> = 0.5</span> to calculate a probability matrix:</p>

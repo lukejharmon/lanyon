@@ -15,13 +15,6 @@ All of these facts lead to the idea that simple, constant-rate birth-death model
 
 In this chapter, I will explore some extensions to birth-death models that allow us to explore diversification in more detail. This chapter also leads naturally to the next, chapter 13, which will consider the case where diversification rates depend on species’ traits.
 
-Key questions:
-
-1. Do some clades diversity (or go extinct) at a higher rate than others?
-2. Do diversification rates vary through time?
-3. Are speciation rates diversity-dependent?
-4. Do models of protracted speciation explain phylogenetic tree shapes?
-
 ## Section 12.2: Variation in diversification rates across clades
 
 We know from analyses of tree balance that the tree of life is more imbalanced than birth-death models predict. We can explore this variation in diversification rates by allowing birth and death models to vary along branches in phylogenetic trees. The simplest scenario is when one has a particular prediction about diversification rates to test. For example, we might wonder if diversification rates in one clade (clade A in Figure 12.2) is higher than in the rest of the phylogenetic tree. We can test this hypothesis by fitting a multiple-rate birth-death model.
