@@ -67,7 +67,6 @@ The most general way to fit time-varying birth-death models to phylogenetic tree
 
 
 (eq. 12.1)
-
 <div>
 $$
 L(t_1, t_2, \dots, t_{n-1}) = (n+1)! \frac{f^n \sum_{i=1}^{n-1} \lambda(t_i) \Psi(s_{i,1}, t_i) \Psi(s_{i,2}, t_i)}{\lambda [1-E(t_1)]^2}
@@ -75,7 +74,6 @@ $$
 </div>
 
 Where:
-
 (eq. 12.2)
 
 <div>
@@ -87,7 +85,6 @@ $$
 and:
 
 (eq. 12.3)
-
 <div>
 $$
 \Psi(s, t) = e^{\int_s^t [\lambda(u) - \mu(u)]du} \Big[  1 + \frac{\int_s^t e^{\int_0^\tau [\lambda(\sigma) - \mu(\sigma)]d\sigma}\lambda(\tau)d\tau}{\frac{1}{f} + \int_0^s e^{\int_0^\tau [\lambda(\sigma) - \mu(\sigma)]d\sigma} \lambda(\tau) d\tau} \Big]^{-2}
@@ -103,7 +100,6 @@ If one substitutes constants for speciation and extinction ($\lambda(t) = \lambd
 Equation 12.1 requires that we define speciation rate as a function of time. Two types of time-varying models are currently common in the comparative literature: linear and expoential. If speciation rates change linearly through time [see @Rabosky2008-vp for an early version of this model]:
 
 (eq. 12.4)
-
 <div>
 $$
 \lambda(t) = \lambda_0 + \alpha_{\lambda} t
@@ -115,7 +111,6 @@ Where $\lambda_0$ is the initial speciation rate at the present and alpha the sl
 We could also consider a linear change in extinction through time:
 
 (eq. 12.5)
-
 <div>
 $$
 \mu(t) = \mu_0 + \alpha_{\mu} t
@@ -129,7 +124,6 @@ One can then substitute either of these formulas into equation 12.1 to calculate
 Another common model has speciation and/or extinction rates changing exponentially through time:
 
 (eq. 12.6)
-
 <div>
 $$
 \lambda(t) = \lambda_0 e^{\beta_{\lambda} t}
@@ -139,7 +133,6 @@ $$
 and/or
 
 (eq. 12.7)
-
 <div>
 $$
 \mu(t) = \mu_0 e^{\beta_{\mu} t}
@@ -179,8 +172,7 @@ The model with the lowest AIC score has a linear decline in speciation rates, an
 
 Time-dependent models in the previous section are often used as a proxy to capture processes like key innovations or adaptive radiations [@Rabosky2014-qo]. Many of these theories suggest that diversification rates should depend on the number of species alive in a certain time or place, rather than time [@Moen2014-wh; @Etienne2012-gk; @Etienne2012-am; @Phillimore2008-oo; @Rabosky2013-nw]. Therefore, we might want to define speciation rate in a truly diversity dependent manner rather than using time as a proxy:
 
-(eq. 12.5)
-
+(eq. 12.8)
 <div>
 $$
 \lambda(t) = \lambda_0 (1 - \frac{N_t}{K})

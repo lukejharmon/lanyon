@@ -31,7 +31,6 @@ We now consider the idea that diversification rates might depend on the characte
 It is straightforward to simulate evolution under our state-dependent model of diversification. We proceed in the same way as we did for birth-death models, by drawing waiting times, but these waiting times can be waiting times to the next character state change, speciation, or extinction event. In particular, imagine that there are $n$ lineages present at time $t$, and that $k$ of these lineages are in state 0 (and $n-k$ are in state 1). The waiting time to the next event will follow an exponential distribution with a rate parameter of:
 
 (eq. 13.1)
-
 <div>
 $$
 \rho = k (q_{01} + \lambda_0 + \mu_0) + (n-k) (q_{10} + \lambda_1 + \mu_1)
@@ -42,7 +41,6 @@ $$
 This equation says that the total rate of events is the sum of the events that can happen to lineages with state 0 (state change to 1, speciation, or extinction) and the analogous events that can happen to lineages with state 1. Once we have a waiting time, we can assign an event type depending on probabilities. For example, the probability that the event is a character state change from 0 to 1 is:
 
 (eq. 13.2)
-
 <div>
 $$
 p_{q_{01}}=(n \cdot q_{01}) / \rho
@@ -53,7 +51,6 @@ $$
 And the probability that the event is the extinction of a lineage with character state 1 is:
 
 (eq. 13.3)
-
 <div>
 $$
 p_{\mu_1}=[(n-k) \cdot \mu_1] / \rho
@@ -95,12 +92,9 @@ We can write an equation for these updated probabilities. We will consider the p
 
 
 (eq. 13.4)
-
 <div>
 $$
-p_0 (t+\Delta t)=(1-\mu_0 )\Delta t \cdot [(1-q_{01} \Delta t)(1-\lambda_0 \Delta t) p_0 (t)+q_{01} \Delta t(1-\lambda_0 \Delta t) p_1 (t)
-
-+2 \cdot (1-q_{01} \Delta t) \lambda_0 \Delta t \cdot E_0 (t) p_0 (t)]
+p_0 (t+\Delta t)=(1-\mu_0 )\Delta t \cdot [(1-q_{01} \Delta t)(1-\lambda_0 \Delta t) p_0 (t)+q_{01} \Delta t(1-\lambda_0 \Delta t) p_1 (t)+2 \cdot (1-q_{01} \Delta t) \lambda_0 \Delta t \cdot E_0 (t) p_0 (t)]
 $$
 </div>
 
@@ -108,7 +102,6 @@ $$
 We can multiply through and simplify. We will also drop any terms that include $[\Delta t]^2$, which become vanishingly small as $\Delta t$ decreases. Doing that, we obtain [@Maddison2007-vu]:
 
 (eq. 13.5)
-
 <div>
 $$
 p_0 (t+\Delta t)=[1-(\lambda_0+μ_0+q_{01} )\Delta t] p_0 (t)+(q_{01} \Delta t) p_1 (t)+2(\lambda_0 \Delta t) E_0 (t)p_0 (t)
@@ -118,7 +111,6 @@ $$
 Similarly,
 
 (eq. 13.6)
-
 <div>
 $$
 p_1 (t+\Delta t)=[1-(\lambda_1+μ_1+q_{10} )\Delta t] p_1 (t)+(q_{10} \Delta t) p_0 (t)+2(\lambda_1 \Delta t) E_1 (t)p_1 (t)
@@ -128,7 +120,6 @@ $$
 We can then find the instantaneous rate of change for these two equations by solving for $p_1 (t+\Delta t) / [\Delta t]$, then taking the limit as $\Delta t \to 0$. This gives [@Maddison2007-vu]:
 
 (eq. 13.7)
-
 <div>
 $$
 \frac{dp_0}{dt} = -(\lambda_0 + \mu_0 + q_{01}) p_0(t) + q{01}p_1(t) + 2 \lambda_0 E_0(t) p_0(t)
@@ -138,7 +129,6 @@ $$
 and:
 
 (eq. 13.8)
-
 <div>
 $$
 \frac{dp_1}{dt} = -(\lambda_1 + \mu_1 + q_{10}) p_1(t) + q{10}p_1(t) + 2 \lambda_1 E_1(t) p_1(t)
@@ -147,8 +137,7 @@ $$
 
 We also need to consider $E_0 (t)$ and $E_1 (t)$. These represent the probability that a lineage with state 0 or 1, respectively, and alive at time $t$ will go extinct before the present day. Neglecting the derivation of these formulas, which can be found in Maddison et al. [-@Maddison2007-vu] and is closely related to similar terms in Chapters 11 and 12, we have:
 
-(eq. 13.7)
-
+(eq. 13.9)
 <div>
 $$
 \frac{dE_0}{dt} = \mu_0-(\lambda_0+\mu_0+q_{01} ) E_0 (t)+q_{01} E_1 (t)+\lambda_0 [E_0 (t)]^2
@@ -157,8 +146,7 @@ $$
 
 and:
 
-(eq. 13.8)
-
+(eq. 13.10)
 <div>
 $$
 \frac{dE_1}{dt} = \mu_1-(\lambda_1+\mu_1+q_{10} ) E_1 (t)+q_{10} E_0 (t)+\lambda_1 [E_1 (t)]^2
@@ -183,8 +171,8 @@ For example, I will apply this approach to the example of self-incompitability. 
 
 Applying the BiSSe models to these data and assuming that $q_{01} \neq q_{10}$, we obtain the following results:
 
-| Model | Number of parameters | Parameter estimates |	lnLikelihood	| AIC |
-| --------- | --------- | --- | --- |  --- |
+| Model | Number of parameters | Parameter estimates |	lnL	| AIC |
+| ---------------- | ---------- | ---------------- | -------- |  ---------- |
 | Character-independent model | 4 | $\lambda = 0.65$, $\mu = 0.57$ | -945.96 | 1899.9 |
 | | | $q_{01} = 0.16$, $q_{10} = 0.09$ | | |
 | Speciation rate depends on character | 5 | $\mu = 0.57$ | -945.57 | 1901.1 |
@@ -210,8 +198,7 @@ Alternatively, we can carry out a Bayesian test for state-dependent diversificat
 
 a. The prior odds ratio. This is the ratio of the probability of drawing the parameter values $p$ and $p'$ from the prior. Since we have exponential priors for all parameters, we can calculate this ratio as:
 
-(eq. 11.5)
-
+(eq. 13.11)
 <div>
 $$
 R_{prior} = \frac{\lambda_{prior_i} e^{-\lambda_{prior_i} p'}}{\lambda_{prior_i} e^{-\lambda_{prior_i} p}}=e^{\lambda_{prior_i} (p-p')}
@@ -224,8 +211,7 @@ c. The likelihood ratio. This is the ratio of probabilities of the data given th
 
 4. Find $R_{accept}$ as the product of the prior odds, proposal density ratio, and the likelihood ratio. In this case, the proposal density ratio is 1, so:
 
-(eq. 11.6)
-
+(eq. 13.12)
 <div>
 $$
 R_{accept} = R_{prior} \cdot R_{likelihood}

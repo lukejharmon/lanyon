@@ -27,7 +27,6 @@ If we know the age of a clade and its current diversity, then we can calculate t
 Magallón and Sanderson [-@Magallon2001-xi] give an equation for the estimate of net diversification rate given clade age and diversity:
 
 (eq. 11.1)
-
 <div>
 $$
 \hat{r} = \frac{ln(n)}{t_{stem}}
@@ -39,7 +38,6 @@ where $n$ is the number of species in the clade at the present day and $t_{stem}
 Alternatively, one can use $t_{crown}$, the crown group age:
 
 (eq. 11.2)
-
 <div>
 $$
 \hat{r} = \frac{ln(n)-ln(2)}{t_{crown}}
@@ -53,7 +51,6 @@ Even though these two equations reflect the balance of births and deaths through
 Under a scenario with extinction, one can define $\epsilon= \mu / \lambda$ and use the following method-of-moments estimators from Rohatgi [-@Rohatgi1976-du, following the notation of @Magallon2001-xi]:
 
 (eq. 11.3)
-
 <div>
 $$
 \hat{r} = \frac{log⁡[n(1-\epsilon)+\epsilon]}{t_{stem}}
@@ -63,7 +60,6 @@ $$
 for stem age, and
 
 (eq. 11.4)
-
 <div>
 $$
 \hat{r} = \frac{ln[\frac{n(1-\epsilon^2 )}{2}+2 \epsilon+\frac{(1-\epsilon) \sqrt{n(n \epsilon^2-8\epsilon+2 n \epsilon+n)}}{2}]-ln(2)}{t_{crown}}
@@ -144,7 +140,6 @@ For single nodes, we already know that the distribution of sister taxa species r
  Slowinsky and Guyer [-@Slowinski1993-ks] developed a test based on calculating a P-value for a division at least as extreme as seen in a particular comparisons of sister clades. We consider $N_n$ total species divided into two sister clades of sizes $N_a$ and $N_b$, where $N_a < N_b$ and $N_a + N_b = N_n$. Then:
 
 (eq. 11.7)
-
 If $N_a \neq N_b$:
 <div>
 $$
@@ -157,7 +152,6 @@ If $N_a = N_b$ or $P > 1$ then set $P = 1$
 For example, we can assess diversification in the Andean representatives of the legume genus *Lupinus* [@Hughes2006-nr]. This genus includes one young radiation of 81 Andean species, spanning a wide range of growth forms. The likely sister clade to this spectacular Andean radiation is a clade of *Lupinus* species in Mexico that includes 46 species [@Drummond2012-zs]. In this case $N_a = 81 - 46 = 35$, and we can then calculate a P-value testing the null hypothesis that both of these clades have the same diversification rate:
 
 (eq. 11.8)
-
 <div>
 $$
 P = \frac{2 N_a}{N_n - 1} = \frac{2 \cdot 35}{81 - 1} = 0.875
@@ -171,7 +165,6 @@ Often, we are interested in testing whether a particular trait - say, dispersal 
 To address this problem, many studies have used natural replicates across the tree of life, comparing the species richnesses of many pairs of sister clades that differ in a given trait of interest. Following Slowinsky and Guyer [-@Slowinski1993-ks], we could calculate a p-value for each clade, and then combine those p-values into an overall test. In this case, one clade (with diversity $N_1$) has the trait of interest and the other does not ($N_0$), and our formula is half of equation 11.5 since we will consider this a one-tailed test:
 
 (eq. 11.9)
-
 <div>
 $$
 P = \frac{N_0}{N_n - 1}
@@ -181,7 +174,6 @@ $$
 When analyzing replicate clade comparisons - e.g. many sister clades, where in each case one has the trait of interest and the other does not - Slowinsky and Guyer [-@Slowinski1993-ks] recommended combining these p-values using Fisher's combined probability test, so that:
 
 (eq. 11.10)
-
 <div>
 $$
 {\chi^2}_{combined} = -2 \sum ln(P_i)
@@ -231,7 +223,6 @@ We can assess the overall balance of an entire phylogenetic tree using tree bala
 To calculate Colless' I, we can use equation 10.18. This result will depend strongly on tree size, and so is not comparable across trees of different sizes; to allow comparisons, $I_c$ is usually standardized by subtracting the expected mean for trees of that size under an ERM model, and dividing by the standard deviation. Both of these can be calculated analytically [@Blum2006-xo], and standardized $I_c$ calculated using a small approximation [following @Bortolussi2006-jx] as:
 
 (eq. 11.11)
-
 <div>
 $$
 I^{'}_c = \frac{I_c-n*log(n)-n(\gamma-1-log(2))}{n}
@@ -301,7 +292,6 @@ Next, imagine we move backwards along some section of a tree branch with no node
 Since that section of branch exists in our tree, we know two things: the lineage did not go extinct during that time, and if speciation occurred, the lineage that split off did not survive to the present day. We can capture these two possibilities in a differential equation that considers how our overall likelihood changes over some very small unit of time [@Maddison2007-vu].
 
 (eq. 11.12)
-
 <div>
 $$
 \frac{dD_N(t)}{dt} = -(\lambda + \mu) D_N(t) + 2 \lambda E(t) D_N(t)
@@ -313,7 +303,6 @@ Here, the first part of the equation, $-(\lambda + \mu) D_N(t)$, represents the 
 We also need to calculate our extinction probability going back through the tree [@Maddison2007-vu]:
 
 (eq. 11.13)
-
 <div>
 $$
 \frac{dE(t)}{dt} = \mu - (\mu + \lambda) E(t) + \lambda E(t)^2
@@ -400,7 +389,6 @@ $$
 Given equation 11.19 for the likelihood, we can estimate birth and death rates using both ML and Bayesian approaches. For the ML estimate, we maximize equation 11.19 over $\lambda$ and $\mu$. For a pure-birth model, we can set $\mu$ = 0, and the maximum likelihood estimate of $\lambda$ can be calculated analytically as:
 
 (eq. 11.20)
-
 <div>
 $$
 \lambda=  \frac{n-2}{s_{branch}}
@@ -410,7 +398,6 @@ $$
 where $s_{branch}$ is the sum of branch lengths in the tree,
 
 (eq. 11.21)
-
 <div>
 $$
 s_{branch} = \sum_{i=1}^{n-1} t_i + t_{n-1}
@@ -441,13 +428,11 @@ Fortunately, the mathematics for incomplete sampling of reconstructed phylogenet
 For the uniform sampling approach, we use the framework above of calculating backwards through time, but modify the starting points for each tip in the tree to reflect $f$, the probability of sampling a species (following Fitzjohn et al. [-@FitzJohn2009-sg]):
 
 (eq. 11.22)
-
 <div>
 $$
 D_N(0) = 1-f
 $$
 </div>
-
 <div>
 $$
 E(0) = f
