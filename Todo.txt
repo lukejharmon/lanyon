@@ -1,10 +1,4 @@
 To-do list:
 
-Proofread chapter 12
-Proofread chapter 13
-Proofread chapter 14
-
 Write how-to section for book publishing online
-Check copyright on all figures
-
 Add version number and changelog

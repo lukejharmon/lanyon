@@ -463,7 +463,8 @@ We have a third term to consider, the covariance between species A and B due to 
 $$
 \begin{array}{l}
 V_{ab}' = E[\bar{a}' \bar{b}'] + E[\bar{a}'] E[\bar{b}'] \\
-V_{ab}' = E[(\bar{a} + 2 G \gamma (\theta - \bar{a}) + \delta)(\bar{b} + 2 G \gamma (\theta - \bar{b}) + \delta)] + E[\bar{a} + 2 G \gamma (\theta - \bar{a}) + \delta] E[\bar{a} + 2 G \gamma (\theta - \bar{a}) + \delta] \\
+V_{ab}' = E[(\bar{a} + 2 G \gamma (\theta - \bar{a}) + \delta)(\bar{b} + 2 G \gamma (\theta - \bar{b}) + \delta)] + E[\bar{a} \\
++ 2 G \gamma (\theta - \bar{a}) + \delta] E[\bar{a} + 2 G \gamma (\theta - \bar{a}) + \delta] \\
 V_{ab}' = V_{ab} (1 - 2 G \gamma)^2
 \end{array}
 $$

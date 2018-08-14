@@ -51,7 +51,7 @@ title: Fitting birth-death models
 <p class="caption">Figure 11.2. Crown and stem age of a clade of interest (highlighted in red).</p>
 </div>
 <p>Magallón and Sanderson <span class="citation">(<a href="#ref-Magallon2001-xi">2001</a>)</span> give an equation for the estimate of net diversification rate given clade age and diversity:</p>
-<p>(eq. 11.1)</p>
+(eq. 11.1)
 <div>
 <p><br /><span class="math display">$$
 \hat{r} = \frac{ln(n)}{t_{stem}}
@@ -59,7 +59,7 @@ $$</span><br /></p>
 </div>
 <p>where <span class="math inline"><em>n</em></span> is the number of species in the clade at the present day and <span class="math inline"><em>t</em><sub><em>s</em><em>t</em><em>e</em><em>m</em></sub></span> is the stem group age. In this equation we also see the net diversification rate parameter, <span class="math inline"><em>r</em> = <em>λ</em> − <em>μ</em></span> (see Chapter 10). This is a good reminder that this parameter best predicts how species accumulate through time and reflects the balance between speciation and extinction rates.</p>
 <p>Alternatively, one can use <span class="math inline"><em>t</em><sub><em>c</em><em>r</em><em>o</em><em>w</em><em>n</em></sub></span>, the crown group age:</p>
-<p>(eq. 11.2)</p>
+(eq. 11.2)
 <div>
 <p><br /><span class="math display">$$
 \hat{r} = \frac{ln(n)-ln(2)}{t_{crown}}
@@ -68,14 +68,14 @@ $$</span><br /></p>
 <p>The two equations differ because at the crown group age one is considering the clade's diversification starting with two lineages rather than one (Figure 11.2).</p>
 <p>Even though these two equations reflect the balance of births and deaths through time, they give ML estimates for <span class="math inline"><em>r</em></span> only under a pure birth model where there is no extinction. If there has been extinction in the history of the clade, then our estimates using equations 11.1 and 11.2 will be biased. The bias comes from the fact that we see only clades that survive to the present day, and miss any clades of the same age that died out before they could be observed. By observing only the &quot;winners&quot; of the diversification lottery, we overestimate the net diversification rate. If we know the relative amount of extinction, then we can correct for this bias.</p>
 <p>Under a scenario with extinction, one can define <span class="math inline"><em>ϵ</em> = <em>μ</em>/<em>λ</em></span> and use the following method-of-moments estimators from Rohatgi <span class="citation">(<a href="#ref-Rohatgi1976-du">1976</a>, following the notation of <span class="citation">Magallon and Sanderson (<a href="#ref-Magallon2001-xi">2001</a>)</span>)</span>:</p>
-<p>(eq. 11.3)</p>
+(eq. 11.3)
 <div>
 <p><br /><span class="math display">$$
 \hat{r} = \frac{log⁡[n(1-\epsilon)+\epsilon]}{t_{stem}}
 $$</span><br /></p>
 </div>
 <p>for stem age, and</p>
-<p>(eq. 11.4)</p>
+(eq. 11.4)
 <div>
 <p><br /><span class="math display">$$
 \hat{r} = \frac{ln[\frac{n(1-\epsilon^2 )}{2}+2 \epsilon+\frac{(1-\epsilon) \sqrt{n(n \epsilon^2-8\epsilon+2 n \epsilon+n)}}{2}]-ln(2)}{t_{crown}}
@@ -267,8 +267,7 @@ $$</span><br /></p>
 <h2 id="section-11.3a-sister-clades-and-the-balance-of-individual-nodes">Section 11.3a: Sister clades and the balance of individual nodes</h2>
 <p>For single nodes, we already know that the distribution of sister taxa species richness is uniform over all possible divisions of <span class="math inline"><em>N</em><sub><em>n</em></sub></span> species into two clades of size <span class="math inline"><em>N</em><sub><em>a</em></sub></span> and <span class="math inline"><em>N</em><sub><em>b</em></sub></span> (Chapter 11). This idea idea leads to simple test of whether the distribution of species between two sister clades is unusual compared to the expectation under a birth-death model <span class="citation">(Slowinski and Guyer <a href="#ref-Slowinski1993-ks">1993</a>)</span>. This test can be used, for example, to test whether the diversity of exceptional clades, like passerine birds, is higher than one would expect when compared to their sister clade. This is the simplest measure of tree balance, as it only considers one node in the tree at a time.</p>
 <p>Slowinsky and Guyer <span class="citation">(<a href="#ref-Slowinski1993-ks">1993</a>)</span> developed a test based on calculating a P-value for a division at least as extreme as seen in a particular comparisons of sister clades. We consider <span class="math inline"><em>N</em><sub><em>n</em></sub></span> total species divided into two sister clades of sizes <span class="math inline"><em>N</em><sub><em>a</em></sub></span> and <span class="math inline"><em>N</em><sub><em>b</em></sub></span>, where <span class="math inline"><em>N</em><sub><em>a</em></sub> &lt; <em>N</em><sub><em>b</em></sub></span> and <span class="math inline"><em>N</em><sub><em>a</em></sub> + <em>N</em><sub><em>b</em></sub> = <em>N</em><sub><em>n</em></sub></span>. Then:</p>
-<p>(eq. 11.7)</p>
-If <span class="math inline"><em>N</em><sub><em>a</em></sub> ≠ <em>N</em><sub><em>b</em></sub></span>:
+(eq. 11.7) If <span class="math inline"><em>N</em><sub><em>a</em></sub> ≠ <em>N</em><sub><em>b</em></sub></span>:
 <div>
 <p><br /><span class="math display">$$
 P = \frac{2 N_a}{N_n - 1}
@@ -276,7 +275,7 @@ $$</span><br /></p>
 </div>
 <p>If <span class="math inline"><em>N</em><sub><em>a</em></sub> = <em>N</em><sub><em>b</em></sub></span> or <span class="math inline"><em>P</em> &gt; 1</span> then set <span class="math inline"><em>P</em> = 1</span></p>
 <p>For example, we can assess diversification in the Andean representatives of the legume genus <em>Lupinus</em> <span class="citation">(Hughes and Eastwood <a href="#ref-Hughes2006-nr">2006</a>)</span>. This genus includes one young radiation of 81 Andean species, spanning a wide range of growth forms. The likely sister clade to this spectacular Andean radiation is a clade of <em>Lupinus</em> species in Mexico that includes 46 species <span class="citation">(Drummond et al. <a href="#ref-Drummond2012-zs">2012</a>)</span>. In this case <span class="math inline"><em>N</em><sub><em>a</em></sub> = 81 − 46 = 35</span>, and we can then calculate a P-value testing the null hypothesis that both of these clades have the same diversification rate:</p>
-<p>(eq. 11.8)</p>
+(eq. 11.8)
 <div>
 <p><br /><span class="math display">$$
 P = \frac{2 N_a}{N_n - 1} = \frac{2 \cdot 35}{81 - 1} = 0.875
@@ -285,14 +284,14 @@ $$</span><br /></p>
 <p>We cannot reject the null hypothesis. Indeed, later work suggests that the actual increase in diversification rate for Lupinus occurred deeper in the phylogenetic tree, in the ancestor of a more broadly ranging New World clade <span class="citation">(Hughes and Eastwood <a href="#ref-Hughes2006-nr">2006</a>; Drummond et al. <a href="#ref-Drummond2012-zs">2012</a>)</span>.</p>
 <p>Often, we are interested in testing whether a particular trait - say, dispersal into the Páramo - is responsible for the increase in species richness that we see in some clades. In that case, a single comparison of sister clades may be unsatisfying, as sister clades almost always differ in many characters, beyond just the trait of interest. Even if the clade with our putative &quot;key innovation&quot; is more diverse, we still might not be confidence in inferring a correlation from a single observation. We need replication.</p>
 <p>To address this problem, many studies have used natural replicates across the tree of life, comparing the species richnesses of many pairs of sister clades that differ in a given trait of interest. Following Slowinsky and Guyer <span class="citation">(<a href="#ref-Slowinski1993-ks">1993</a>)</span>, we could calculate a p-value for each clade, and then combine those p-values into an overall test. In this case, one clade (with diversity <span class="math inline"><em>N</em><sub>1</sub></span>) has the trait of interest and the other does not (<span class="math inline"><em>N</em><sub>0</sub></span>), and our formula is half of equation 11.5 since we will consider this a one-tailed test:</p>
-<p>(eq. 11.9)</p>
+(eq. 11.9)
 <div>
 <p><br /><span class="math display">$$
 P = \frac{N_0}{N_n - 1}
 $$</span><br /></p>
 </div>
 <p>When analyzing replicate clade comparisons - e.g. many sister clades, where in each case one has the trait of interest and the other does not - Slowinsky and Guyer <span class="citation">(<a href="#ref-Slowinski1993-ks">1993</a>)</span> recommended combining these p-values using Fisher's combined probability test, so that:</p>
-<p>(eq. 11.10)</p>
+(eq. 11.10)
 <div>
 <p><br /><span class="math display"><em>χ</em><sup>2</sup><sub><em>c</em><em>o</em><em>m</em><em>b</em><em>i</em><em>n</em><em>e</em><em>d</em></sub> = −2∑<em>l</em><em>n</em>(<em>P</em><sub><em>i</em></sub>)</span><br /></p>
 </div>
@@ -424,7 +423,7 @@ $$</span><br /></p>
 </tr>
 </tbody>
 </table>
-<p>The clades in the above table are as follows: A: <em>Pangium</em>, B: <em>Acharia</em>+<em>Kigellaria</em>, C: <em>Cyrilla</em>, D: <em>Clethra</em>, E: <em>Roussea</em>, F: <em>Lobelia</em>, G: <em>Myriophylum+Haloragis+Penthorum</em>, H: <em>Tetracarpaea</em>, I: <em>Austrobaileya</em>, J: <em>Illicium+Schisandra</em>, K: <em>Davidsonia</em>, L: <em>Bauera</em>, M: <em>Mitchella</em>, N: <em>Pentas</em>, O: <em>Milligania </em>, P: <em>Borya</em>, Q: <em>Sambucus</em>, R: <em>Viburnum</em>, S: <em>Pereskia</em>, T: <em>Mollugo</em>, U: <em>Decaisnea + Sargentodoxa + Tinospora + Menispermum +  Nandina Caulophyllum + Hydrastis + Glaucidium</em>, V: <em>Euptelea</em>, W: <em>Tetracera</em>, X: <em>Dillenia</em>, Y: <em>Osbeckia</em>, Z: <em>Mouriri</em>, AA: <em>Hippocratea</em>, BB: <em>Plagiopteron</em>, CC: <em>Cyclanthus+Sphaeradenia+Freycinetia</em>, DD: <em>Petrosavia+Japonlirion</em>, EE: <em>Bixa</em>, FF: <em>Theobroma+Grewia+Tilia+ Sterculia+Durio</em>, GG: <em>Impatiens</em>, HH: <em>Idria</em>, II: <em>Lamium+Clerodendrum+Callicarpa+Phyla +Pedicularis+Paulownia</em>, JJ: <em>Euthystachys</em>, KK: <em>Callicarpa+Phyla+Pedicularis+Paulownia+Solanum</em>, LL: <em>Solanum</em>.</p>
+<p>The clades in the above table are as follows: A: <em>Pangium</em>, B: <em>Acharia</em>+<em>Kigellaria</em>, C: <em>Cyrilla</em>, D: <em>Clethra</em>, E: <em>Roussea</em>, F: <em>Lobelia</em>, G: <em>Myriophylum + Haloragis + Penthorum</em>, H: <em>Tetracarpaea</em>, I: <em>Austrobaileya</em>, J: <em>Illicium+Schisandra</em>, K: <em>Davidsonia</em>, L: <em>Bauera</em>, M: <em>Mitchella</em>, N: <em>Pentas</em>, O: <em>Milligania </em>, P: <em>Borya</em>, Q: <em>Sambucus</em>, R: <em>Viburnum</em>, S: <em>Pereskia</em>, T: <em>Mollugo</em>, U: <em>Decaisnea + Sargentodoxa + Tinospora + Menispermum +  Nandina Caulophyllum + Hydrastis + Glaucidium</em>, V: <em>Euptelea</em>, W: <em>Tetracera</em>, X: <em>Dillenia</em>, Y: <em>Osbeckia</em>, Z: <em>Mouriri</em>, AA: <em>Hippocratea</em>, BB: <em>Plagiopteron</em>, CC: <em>Cyclanthus + Sphaeradenia + Freycinetia</em>, DD: <em>Petrosavia + Japonlirion</em>, EE: <em>Bixa</em>, FF: <em>Theobroma + Grewia + Tilia + Sterculia + Durio</em>, GG: <em>Impatiens</em>, HH: <em>Idria</em>, II: <em>Lamium + Clerodendrum + Callicarpa + Phyla + Pedicularis + Paulownia</em>, JJ: <em>Euthystachys</em>, KK: <em>Callicarpa + Phyla + Pedicularis + Paulownia + Solanum</em>, LL: <em>Solanum</em>.</p>
 <p>The individual clades show mixed support for the hypothesis, with only 7 of the 18 comparisons showing higher diversity in the fleshy clade, but 6 of those 7 comparisons significant at <span class="math inline"><em>P</em> &lt; 0.05</span> using equation 11.9. The combined probability test gives a test statistic of <span class="math inline"><em>χ</em><sup>2</sup><sub><em>c</em><em>o</em><em>m</em><em>b</em><em>i</em><em>n</em><em>e</em><em>d</em></sub> = 72.8</span>. Comparing this to a <span class="math inline"><em>χ</em><sup>2</sup></span> distribution with 36 degrees of freedom, we obtain <span class="math inline"><em>P</em> = 0.00027</span>, a highly significant result. This implies that fleshy fruits do, in fact, result in a higher diversification rate.</p>
 <p>However, if we test the opposite hypothesis, we see a problem with the combined probability test of equation 11.10 <span class="citation">(Vamosi and Vamosi <a href="#ref-Vamosi2005-mn">2005</a>)</span>. First, notice that 11 of 18 comparisons show higher diversity in the non-fleshy clade, with 4 significant at <span class="math inline"><em>P</em> &lt; 0.05</span>. The combined probability test gives <span class="math inline"><em>χ</em><sup>2</sup><sub><em>c</em><em>o</em><em>m</em><em>b</em><em>i</em><em>n</em><em>e</em><em>d</em></sub> = 58.9</span> and <span class="math inline"><em>P</em> = 0.0094</span>. So we reject the null hypothesis and conclude that non-fleshy fruits diversify at a higher rate! In other words, we can reject the null hypothesis in both directions with this example.</p>
 <p>What's going on here? It turns out that this test is very sensitive to outliers - that is, clades with extreme differences in diversity. These clades are very different than what one would expect under the null hypothesis, leading to rejection of the null - and, in some cases with two characters, when there are outliers on both sides <span class="citation">(e.g. the proportion of species in each state has a u-shaped distribution; Paradis <a href="#ref-Paradis2012-vp">2012</a>)</span> we can show that both characters significantly increase diversity <span class="citation">(Vamosi and Vamosi <a href="#ref-Vamosi2005-mn">2005</a>)</span>!</p>
@@ -432,7 +431,7 @@ $$</span><br /></p>
 <h2 id="section-11.3b-balance-of-whole-phylogenetic-tremendous">Section 11.3b: Balance of whole phylogenetic tremendous</h2>
 <p>We can assess the overall balance of an entire phylogenetic tree using tree balance statistics. As discussed, I will describe just one common statistic, Colless' I, since other metrics capture the same pattern in slightly different ways.</p>
 <p>To calculate Colless' I, we can use equation 10.18. This result will depend strongly on tree size, and so is not comparable across trees of different sizes; to allow comparisons, <span class="math inline"><em>I</em><sub><em>c</em></sub></span> is usually standardized by subtracting the expected mean for trees of that size under an ERM model, and dividing by the standard deviation. Both of these can be calculated analytically <span class="citation">(Blum et al. <a href="#ref-Blum2006-xo">2006</a>)</span>, and standardized <span class="math inline"><em>I</em><sub><em>c</em></sub></span> calculated using a small approximation <span class="citation">(following Bortolussi et al. <a href="#ref-Bortolussi2006-jx">2006</a>)</span> as:</p>
-<p>(eq. 11.11)</p>
+(eq. 11.11)
 <div>
 <p><br /><span class="math display">$$
 I^{'}_c = \frac{I_c-n*log(n)-n(\gamma-1-log(2))}{n}
@@ -482,7 +481,7 @@ $$</span><br /></p>
 <p class="caption">Figure 11.6. Updating <span class="math inline"><em>D</em><sub><em>N</em></sub>(<em>t</em>)</span> and calculating <span class="math inline"><em>E</em>(<em>t</em>)</span> along a tree branch <span class="citation">(Maddison et al. <a href="#ref-Maddison2007-vu">2007</a>)</span>.</p>
 </div>
 <p>Since that section of branch exists in our tree, we know two things: the lineage did not go extinct during that time, and if speciation occurred, the lineage that split off did not survive to the present day. We can capture these two possibilities in a differential equation that considers how our overall likelihood changes over some very small unit of time <span class="citation">(Maddison et al. <a href="#ref-Maddison2007-vu">2007</a>)</span>.</p>
-<p>(eq. 11.12)</p>
+(eq. 11.12)
 <div>
 <p><br /><span class="math display">$$
 \frac{dD_N(t)}{dt} = -(\lambda + \mu) D_N(t) + 2 \lambda E(t) D_N(t)
@@ -490,7 +489,7 @@ $$</span><br /></p>
 </div>
 <p>Here, the first part of the equation, <span class="math inline">−(<em>λ</em> + <em>μ</em>)<em>D</em><sub><em>N</em></sub>(<em>t</em>)</span>, represents the probability of not speciating nor going extinct, while the second part, <span class="math inline">2<em>λ</em><em>E</em>(<em>t</em>)<em>D</em><sub><em>N</em></sub>(<em>t</em>)</span>, represents the probability of speciation followed by the ultimate extinction of one of the two daughter lineages. The <span class="math inline">2</span> in this equation appears because we must account for the fact that, following speciation from an ancestor to daughters A and B, we would see the same pattern no matter which of the two descendants survived to the present.</p>
 <p>We also need to calculate our extinction probability going back through the tree <span class="citation">(Maddison et al. <a href="#ref-Maddison2007-vu">2007</a>)</span>:</p>
-<p>(eq. 11.13)</p>
+(eq. 11.13)
 <div>
 <p><br /><span class="math display">$$
 \frac{dE(t)}{dt} = \mu - (\mu + \lambda) E(t) + \lambda E(t)^2
@@ -551,14 +550,14 @@ $$</span><br /></p>
 </div>
 <h3 id="section-11.4b-using-maximum-likelihood-to-fit-a-birth-death-model">Section 11.4b: Using maximum likelihood to fit a birth-death model</h3>
 <p>Given equation 11.19 for the likelihood, we can estimate birth and death rates using both ML and Bayesian approaches. For the ML estimate, we maximize equation 11.19 over <span class="math inline"><em>λ</em></span> and <span class="math inline"><em>μ</em></span>. For a pure-birth model, we can set <span class="math inline"><em>μ</em></span> = 0, and the maximum likelihood estimate of <span class="math inline"><em>λ</em></span> can be calculated analytically as:</p>
-<p>(eq. 11.20)</p>
+(eq. 11.20)
 <div>
 <p><br /><span class="math display">$$
 \lambda=  \frac{n-2}{s_{branch}}
 $$</span><br /></p>
 </div>
 <p>where <span class="math inline"><em>s</em><sub><em>b</em><em>r</em><em>a</em><em>n</em><em>c</em><em>h</em></sub></span> is the sum of branch lengths in the tree,</p>
-<p>(eq. 11.21)</p>
+(eq. 11.21)
 <div>
 <p><br /><span class="math display">$$
 s_{branch} = \sum_{i=1}^{n-1} t_i + t_{n-1}
@@ -578,7 +577,7 @@ $$</span><br /></p>
 <p>It is important to think about sampling when fitting birth-death models to phylogenetic trees. If any species are missing from your phylogenetic tree, they will lead to biased parameter estimates. This is because missing species are disproportionally likely to connect to the tree on short, rather than long, branches. If we randomly sample lineages from a tree, we will end up badly underestimating both speciation and extinction rates (and wrongly inferring slowdowns; see chapter 12).</p>
 <p>Fortunately, the mathematics for incomplete sampling of reconstructed phylogenetic trees has also been worked out. There are two ways to do this, depending on how the tree is actually sampled. If we consider the missing species to be random with respect to the taxa included in the tree, then one can use a uniform sampling fraction to account for them. By contrast, we often are in the situation where we have tips in our tree that are single representatives of diverse clades (e.g. genera). We usually know the diversity of these unsampled clades in our tree of representatives. I will follow <span class="citation">(Höhna et al. <a href="#ref-Hohna2011-tn">2011</a>; Höhna <a href="#ref-Hohna2014-ba">2014</a>)</span> and refer to this approach as <em>representative sampling</em> (and the previous alternative as <em>uniform sampling</em>).</p>
 <p>For the uniform sampling approach, we use the framework above of calculating backwards through time, but modify the starting points for each tip in the tree to reflect <span class="math inline"><em>f</em></span>, the probability of sampling a species (following Fitzjohn et al. <span class="citation">(<a href="#ref-FitzJohn2009-sg">2009</a>)</span>):</p>
-<p>(eq. 11.22)</p>
+(eq. 11.22)
 <div>
 <p><br /><span class="math display"><em>D</em><sub><em>N</em></sub>(0)=1 − <em>f</em></span><br /></p>
 </div>

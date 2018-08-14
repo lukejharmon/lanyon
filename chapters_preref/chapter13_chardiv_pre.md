@@ -94,7 +94,10 @@ We can write an equation for these updated probabilities. We will consider the p
 (eq. 13.4)
 <div>
 $$
-p_0 (t+\Delta t)=(1-\mu_0 )\Delta t \cdot [(1-q_{01} \Delta t)(1-\lambda_0 \Delta t) p_0 (t)+q_{01} \Delta t(1-\lambda_0 \Delta t) p_1 (t)+2 \cdot (1-q_{01} \Delta t) \lambda_0 \Delta t \cdot E_0 (t) p_0 (t)]
+\begin{aligned}
+p_0 (t+\Delta t)=(1-\mu_0 )\Delta t \cdot [(1-q_{01} \Delta t)(1-\lambda_0 \Delta t) p_0 (t)+q_{01} \Delta t(1-\lambda_0 \Delta t) \\
+p_1 (t)+2 \cdot (1-q_{01} \Delta t) \lambda_0 \Delta t \cdot E_0 (t) p_0 (t)]
+\end{aligned}
 $$
 </div>
 
@@ -191,35 +194,23 @@ Alternatively, we can carry out a Bayesian test for state-dependent diversificat
 
 
 1.  Sample a set of starting parameter values, $q_{01}, q_{10}, \lambda_0, \lambda_1, \mu_0, \mu_1$, from their prior distributions. For example, one could set prior distribution for all parameters as exponential with a mean and variance of $\lambda_{prior_i}$ (note that, as usual, the choice for this parameter should depend on the units of tree branch lengths you are using). We then select starting values for all parameters from the prior.
-
 2.  Given the current parameter values, select new proposed parameter values using the proposal density $Q(p'|p)$. For all parameter values, we can use a uniform proposal density with width $w_p$, so that $Q(p'|p) ~ U(p-w_p/2,p+w_p/2)$. We can either choose all parameter values simultaneously, or one at a time (the latter is typically more effective).
-
 3. Calculate three ratios:
-
-a. The prior odds ratio. This is the ratio of the probability of drawing the parameter values $p$ and $p'$ from the prior. Since we have exponential priors for all parameters, we can calculate this ratio as:
-
-(eq. 13.11)
+    - a\.	The prior odds ratio. This is the ratio of the probability of drawing the parameter values $p$ and $p'$ from the prior. Since we have exponential priors for all parameters, we can calculate this ratio as (eq. 13.11):
 <div>
 $$
 R_{prior} = \frac{\lambda_{prior_i} e^{-\lambda_{prior_i} p'}}{\lambda_{prior_i} e^{-\lambda_{prior_i} p}}=e^{\lambda_{prior_i} (p-p')}
 $$
 </div>
-
-b. The proposal density ratio. This is the ratio of probability of proposals going from $p$ to $p'$ and the reverse. We have already declared a symmetrical proposal density, so that $Q(p'|p) = Q(p|p')$ and $R_{proposal} = 1$.
-
-c. The likelihood ratio. This is the ratio of probabilities of the data given the two different parameter values. We can calculate these probabilities from the approach described in the previous section.
-
-4. Find $R_{accept}$ as the product of the prior odds, proposal density ratio, and the likelihood ratio. In this case, the proposal density ratio is 1, so:
-
-(eq. 13.12)
+    - b\.	The proposal density ratio. This is the ratio of probability of proposals going from $p$ to $p'$ and the reverse. We have already declared a symmetrical proposal density, so that $Q(p'|p) = Q(p|p')$ and $R_{proposal} = 1$.
+    - c\.	 The likelihood ratio. This is the ratio of probabilities of the data given the two different parameter values. We can calculate these probabilities from the approach described in the previous section.
+4. Find $R_{accept}$ as the product of the prior odds, proposal density ratio, and the likelihood ratio. In this case, the proposal density ratio is 1, so (eq. 13.12):
 <div>
 $$
 R_{accept} = R_{prior} \cdot R_{likelihood}
 $$
 </div>
-
 5.	Draw a random number $u$ from a uniform distribution between 0 and 1. If $u < R_{accept}$, accept the proposed value of the parameter(s); otherwise reject, and retain the current value of the two parameters.
-
 6.	Repeat steps 2-5 a large number of times.
 
 Applying this method to the self-incompatability data, we find that again estimates of speciation and extinction differ substantially among the two character states (Figure 13.5). Since the posterior distributions for extinction do not overlap, we again infer that the character likely influences that model parameter; speciation results are again suggestive but not as conclusive as those for extinction.
@@ -237,7 +228,7 @@ This issue is a normal one for statistical analyses – after all, there are alw
 
 Fortunately, there are a number of ways to deal with this problem. First, one can compare the statistical support for the state-dependent model with the support that one obtains for random data. The random data could be simulated on the tree, or one could permute the tips or draw random data from a multinomial distribution [@Rabosky2015-ao]. One can then compare, for example, the distribution of dAICc scores obtained from these permutations to the dAICc for the original data. There are also semi-parametric methods based on permutations that have similar statistical properties [@Rabosky2017-aw]. Alternatively, we could explicitly consider the possibility that some unmeasured character is actually the thing that is influencing diversification rates [@Beaulieu2016-ww]. This latter approach is the most elegant as we can directly add the model described in this section to our list of candidates [see @Beaulieu2016-ww].
 
-A more general critique of state-dependent models of diversification was raised by Maddison and Fitzjohn [@Maddison2015-wy]. This paper pointed out that statistically significant results for these tests can be driven by an event on a single branch of a tree, and therefore be unreplicated. This is a good criticism that applies equally well to a range of comparative methods. Together, both of these critiques argue for a stronger set of model adequacy approaches in comparative methods.
+A more general critique of state-dependent models of diversification was raised by Maddison and Fitzjohn [@Maddison2015-wy]. This paper pointed out that statistically significant results for these tests can be driven by an event on a single branch of a tree, and therefore be unreplicated. This is a good criticism that applies equally well to a range of comparative methods. We can deal with this critique, in part, by making sure the events we test are replicated in our data. Together, both of these critiques argue for a stronger set of model adequacy approaches in comparative methods.
 
 ## Section 13.4: Summary
 

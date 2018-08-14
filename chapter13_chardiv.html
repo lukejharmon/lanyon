@@ -43,17 +43,17 @@ title: Characters and diversification rates
 <p>We need to model the transitions among these states, which we can do in an identical way to what we did in Chapter 7 using a continuous-time Markov model. We express this model using two rate parameters, a forward rate <span class="math inline"><em>q</em><sub>01</sub></span> and a backwards rate <span class="math inline"><em>q</em><sub>10</sub></span>.</p>
 <p>We now consider the idea that diversification rates might depend on the character state. We assume that species with character state 0 have a certain speciation rate (<span class="math inline"><em>λ</em><sub>0</sub></span>) and extinction rate (<span class="math inline"><em>μ</em><sub>0</sub></span>), and that species in 1 have potentially different rates of both speciation (<span class="math inline"><em>λ</em><sub>1</sub></span>) and extinction (<span class="math inline"><em>μ</em><sub>1</sub></span>). That is, when the character evolves, it affects the rate of speciation and/or extinction of the lineages. Thus, we have a six-parameter model <span class="citation">(Maddison et al. <a href="#ref-Maddison2007-vu">2007</a>)</span>. We assume that parent lineages give birth to daughters with the same character state, that is that character states do not change at speciation.</p>
 <p>It is straightforward to simulate evolution under our state-dependent model of diversification. We proceed in the same way as we did for birth-death models, by drawing waiting times, but these waiting times can be waiting times to the next character state change, speciation, or extinction event. In particular, imagine that there are <span class="math inline"><em>n</em></span> lineages present at time <span class="math inline"><em>t</em></span>, and that <span class="math inline"><em>k</em></span> of these lineages are in state 0 (and <span class="math inline"><em>n</em> − <em>k</em></span> are in state 1). The waiting time to the next event will follow an exponential distribution with a rate parameter of:</p>
-<p>(eq. 13.1)</p>
+(eq. 13.1)
 <div>
 <p><br /><span class="math display"><em>ρ</em> = <em>k</em>(<em>q</em><sub>01</sub> + <em>λ</em><sub>0</sub> + <em>μ</em><sub>0</sub>)+(<em>n</em> − <em>k</em>)(<em>q</em><sub>10</sub> + <em>λ</em><sub>1</sub> + <em>μ</em><sub>1</sub>)</span><br /></p>
 </div>
 <p>This equation says that the total rate of events is the sum of the events that can happen to lineages with state 0 (state change to 1, speciation, or extinction) and the analogous events that can happen to lineages with state 1. Once we have a waiting time, we can assign an event type depending on probabilities. For example, the probability that the event is a character state change from 0 to 1 is:</p>
-<p>(eq. 13.2)</p>
+(eq. 13.2)
 <div>
 <p><br /><span class="math display"><em>p</em><sub><em>q</em><sub>01</sub></sub> = (<em>n</em> ⋅ <em>q</em><sub>01</sub>)/<em>ρ</em></span><br /></p>
 </div>
 <p>And the probability that the event is the extinction of a lineage with character state 1 is:</p>
-<p>(eq. 13.3)</p>
+(eq. 13.3)
 <div>
 <p><br /><span class="math display"><em>p</em><sub><em>μ</em><sub>1</sub></sub> = [(<em>n</em> − <em>k</em>)⋅<em>μ</em><sub>1</sub>]/<em>ρ</em></span><br /></p>
 </div>
@@ -81,43 +81,48 @@ title: Characters and diversification rates
 <p class="caption">Figure 13.3. The four scenarios under which a lineage with state 0 at time <span class="math inline"><em>t</em> + <em>Δ</em><em>t</em></span> can yield the data descended from node N. From Maddison et al. <span class="citation">(<a href="#ref-Maddison2007-vu">2007</a>)</span>.</p>
 </div>
 <p>We can write an equation for these updated probabilities. We will consider the probability that the character is in state 0 at time <span class="math inline"><em>t</em> + <em>Δ</em><em>t</em></span>; the equation for state 1 is similar <span class="citation">(Maddison et al. <a href="#ref-Maddison2007-vu">2007</a>)</span>.</p>
-<p>(eq. 13.4)</p>
+(eq. 13.4)
 <div>
-<p>$$ p_0 (t+t)=(1-_0 )t $$</p>
+<p><br /><span class="math display">$$
+\begin{aligned}
+p_0 (t+\Delta t)=(1-\mu_0 )\Delta t \cdot [(1-q_{01} \Delta t)(1-\lambda_0 \Delta t) p_0 (t)+q_{01} \Delta t(1-\lambda_0 \Delta t) \\
+p_1 (t)+2 \cdot (1-q_{01} \Delta t) \lambda_0 \Delta t \cdot E_0 (t) p_0 (t)]
+\end{aligned}
+$$</span><br /></p>
 </div>
 <p>We can multiply through and simplify. We will also drop any terms that include <span class="math inline">[<em>Δ</em><em>t</em>]<sup>2</sup></span>, which become vanishingly small as <span class="math inline"><em>Δ</em><em>t</em></span> decreases. Doing that, we obtain <span class="citation">(Maddison et al. <a href="#ref-Maddison2007-vu">2007</a>)</span>:</p>
-<p>(eq. 13.5)</p>
+(eq. 13.5)
 <div>
 <p><br /><span class="math display"><em>p</em><sub>0</sub>(<em>t</em> + <em>Δ</em><em>t</em>)=[1 − (<em>λ</em><sub>0</sub> + <em>μ</em><sub>0</sub> + <em>q</em><sub>01</sub>)<em>Δ</em><em>t</em>]<em>p</em><sub>0</sub>(<em>t</em>)+(<em>q</em><sub>01</sub><em>Δ</em><em>t</em>)<em>p</em><sub>1</sub>(<em>t</em>)+2(<em>λ</em><sub>0</sub><em>Δ</em><em>t</em>)<em>E</em><sub>0</sub>(<em>t</em>)<em>p</em><sub>0</sub>(<em>t</em>)</span><br /></p>
 </div>
 <p>Similarly,</p>
-<p>(eq. 13.6)</p>
+(eq. 13.6)
 <div>
 <p><br /><span class="math display"><em>p</em><sub>1</sub>(<em>t</em> + <em>Δ</em><em>t</em>)=[1 − (<em>λ</em><sub>1</sub> + <em>μ</em><sub>1</sub> + <em>q</em><sub>10</sub>)<em>Δ</em><em>t</em>]<em>p</em><sub>1</sub>(<em>t</em>)+(<em>q</em><sub>10</sub><em>Δ</em><em>t</em>)<em>p</em><sub>0</sub>(<em>t</em>)+2(<em>λ</em><sub>1</sub><em>Δ</em><em>t</em>)<em>E</em><sub>1</sub>(<em>t</em>)<em>p</em><sub>1</sub>(<em>t</em>)</span><br /></p>
 </div>
 <p>We can then find the instantaneous rate of change for these two equations by solving for <span class="math inline"><em>p</em><sub>1</sub>(<em>t</em> + <em>Δ</em><em>t</em>)/[<em>Δ</em><em>t</em>]</span>, then taking the limit as <span class="math inline"><em>Δ</em><em>t</em> → 0</span>. This gives <span class="citation">(Maddison et al. <a href="#ref-Maddison2007-vu">2007</a>)</span>:</p>
-<p>(eq. 13.7)</p>
+(eq. 13.7)
 <div>
 <p><br /><span class="math display">$$
 \frac{dp_0}{dt} = -(\lambda_0 + \mu_0 + q_{01}) p_0(t) + q{01}p_1(t) + 2 \lambda_0 E_0(t) p_0(t)
 $$</span><br /></p>
 </div>
 <p>and:</p>
-<p>(eq. 13.8)</p>
+(eq. 13.8)
 <div>
 <p><br /><span class="math display">$$
 \frac{dp_1}{dt} = -(\lambda_1 + \mu_1 + q_{10}) p_1(t) + q{10}p_1(t) + 2 \lambda_1 E_1(t) p_1(t)
 $$</span><br /></p>
 </div>
 <p>We also need to consider <span class="math inline"><em>E</em><sub>0</sub>(<em>t</em>)</span> and <span class="math inline"><em>E</em><sub>1</sub>(<em>t</em>)</span>. These represent the probability that a lineage with state 0 or 1, respectively, and alive at time <span class="math inline"><em>t</em></span> will go extinct before the present day. Neglecting the derivation of these formulas, which can be found in Maddison et al. <span class="citation">(<a href="#ref-Maddison2007-vu">2007</a>)</span> and is closely related to similar terms in Chapters 11 and 12, we have:</p>
-<p>(eq. 13.7)</p>
+(eq. 13.9)
 <div>
 <p><br /><span class="math display">$$
 \frac{dE_0}{dt} = \mu_0-(\lambda_0+\mu_0+q_{01} ) E_0 (t)+q_{01} E_1 (t)+\lambda_0 [E_0 (t)]^2
 $$</span><br /></p>
 </div>
 <p>and:</p>
-<p>(eq. 13.8)</p>
+(eq. 13.10)
 <div>
 <p><br /><span class="math display">$$
 \frac{dE_1}{dt} = \mu_1-(\lambda_1+\mu_1+q_{10} ) E_1 (t)+q_{10} E_0 (t)+\lambda_1 [E_1 (t)]^2
@@ -135,20 +140,20 @@ $$</span><br /></p>
 <p class="caption">Figure 13.4. Data from Goldberg and Igic <span class="citation">(<a href="#ref-Goldberg2012-gs">2012</a>)</span> showing presence (red) and absence (black) of self-incomatibility among Solanaceae. Branches colored using stochastic character mapping under a model with distinct forwards and backwards rates; these reconstructions are biased if characters affect diversification rates.</p>
 </div>
 <p>Applying the BiSSe models to these data and assuming that <span class="math inline"><em>q</em><sub>01</sub> ≠ <em>q</em><sub>10</sub></span>, we obtain the following results:</p>
-<table style="width:44%;">
+<table style="width:90%;">
 <colgroup>
-<col width="13%" />
-<col width="13%" />
-<col width="5%" />
-<col width="5%" />
-<col width="5%" />
+<col width="23%" />
+<col width="15%" />
+<col width="23%" />
+<col width="12%" />
+<col width="15%" />
 </colgroup>
 <thead>
 <tr class="header">
 <th>Model</th>
 <th>Number of parameters</th>
 <th>Parameter estimates</th>
-<th>lnLikelihood</th>
+<th>lnL</th>
 <th>AIC</th>
 </tr>
 </thead>
@@ -235,33 +240,25 @@ $$</span><br /></p>
 <p>From this, we conclude that models where the character influences diversification fit best, with the full model receiving the most support. We can't discount the possibility that the character only influences extinction and not speciation, since that model is within 2 AIC units of the best model.</p>
 <p>Alternatively, we can carry out a Bayesian test for state-dependent diversification. Like other models in the book, this requires setting up an MCMC algorithm that generates posterior distributions for our model parameters <span class="citation">(FitzJohn <a href="#ref-FitzJohn2012-tu">2012</a>)</span>. In this case:</p>
 <ol style="list-style-type: decimal">
-<li><p>Sample a set of starting parameter values, <span class="math inline"><em>q</em><sub>01</sub>, <em>q</em><sub>10</sub>, <em>λ</em><sub>0</sub>, <em>λ</em><sub>1</sub>, <em>μ</em><sub>0</sub>, <em>μ</em><sub>1</sub></span>, from their prior distributions. For example, one could set prior distribution for all parameters as exponential with a mean and variance of <span class="math inline"><em>λ</em><sub><em>p</em><em>r</em><em>i</em><em>o</em><em>r</em><sub><em>i</em></sub></sub></span> (note that, as usual, the choice for this parameter should depend on the units of tree branch lengths you are using). We then select starting values for all parameters from the prior.</p></li>
-<li><p>Given the current parameter values, select new proposed parameter values using the proposal density <span class="math inline"><em>Q</em>(<em>p</em>′|<em>p</em>)</span>. For all parameter values, we can use a uniform proposal density with width <span class="math inline"><em>w</em><sub><em>p</em></sub></span>, so that <span class="math inline"><em>Q</em>(<em>p</em>′|<em>p</em>) <em>U</em>(<em>p</em> − <em>w</em><sub><em>p</em></sub>/2, <em>p</em> + <em>w</em><sub><em>p</em></sub>/2)</span>. We can either choose all parameter values simultaneously, or one at a time (the latter is typically more effective).</p></li>
-<li><p>Calculate three ratios:</p></li>
-</ol>
-<ol style="list-style-type: lower-alpha">
-<li>The prior odds ratio. This is the ratio of the probability of drawing the parameter values <span class="math inline"><em>p</em></span> and <span class="math inline"><em>p</em>′</span> from the prior. Since we have exponential priors for all parameters, we can calculate this ratio as:</li>
-</ol>
-<p>(eq. 11.5)</p>
+<li>Sample a set of starting parameter values, <span class="math inline"><em>q</em><sub>01</sub>, <em>q</em><sub>10</sub>, <em>λ</em><sub>0</sub>, <em>λ</em><sub>1</sub>, <em>μ</em><sub>0</sub>, <em>μ</em><sub>1</sub></span>, from their prior distributions. For example, one could set prior distribution for all parameters as exponential with a mean and variance of <span class="math inline"><em>λ</em><sub><em>p</em><em>r</em><em>i</em><em>o</em><em>r</em><sub><em>i</em></sub></sub></span> (note that, as usual, the choice for this parameter should depend on the units of tree branch lengths you are using). We then select starting values for all parameters from the prior.</li>
+<li>Given the current parameter values, select new proposed parameter values using the proposal density <span class="math inline"><em>Q</em>(<em>p</em>′|<em>p</em>)</span>. For all parameter values, we can use a uniform proposal density with width <span class="math inline"><em>w</em><sub><em>p</em></sub></span>, so that <span class="math inline"><em>Q</em>(<em>p</em>′|<em>p</em>) <em>U</em>(<em>p</em> − <em>w</em><sub><em>p</em></sub>/2, <em>p</em> + <em>w</em><sub><em>p</em></sub>/2)</span>. We can either choose all parameter values simultaneously, or one at a time (the latter is typically more effective).</li>
+<li>Calculate three ratios:
+<ul>
+<li>a. The prior odds ratio. This is the ratio of the probability of drawing the parameter values <span class="math inline"><em>p</em></span> and <span class="math inline"><em>p</em>′</span> from the prior. Since we have exponential priors for all parameters, we can calculate this ratio as (eq. 13.11):
 <div>
 <p><br /><span class="math display">$$
 R_{prior} = \frac{\lambda_{prior_i} e^{-\lambda_{prior_i} p'}}{\lambda_{prior_i} e^{-\lambda_{prior_i} p}}=e^{\lambda_{prior_i} (p-p')}
 $$</span><br /></p>
-</div>
-<ol start="2" style="list-style-type: lower-alpha">
-<li><p>The proposal density ratio. This is the ratio of probability of proposals going from <span class="math inline"><em>p</em></span> to <span class="math inline"><em>p</em>′</span> and the reverse. We have already declared a symmetrical proposal density, so that <span class="math inline"><em>Q</em>(<em>p</em>′|<em>p</em>)=<em>Q</em>(<em>p</em>|<em>p</em>′)</span> and <span class="math inline"><em>R</em><sub><em>p</em><em>r</em><em>o</em><em>p</em><em>o</em><em>s</em><em>a</em><em>l</em></sub> = 1</span>.</p></li>
-<li><p>The likelihood ratio. This is the ratio of probabilities of the data given the two different parameter values. We can calculate these probabilities from the approach described in the previous section.</p></li>
-</ol>
-<ol start="4" style="list-style-type: decimal">
-<li>Find <span class="math inline"><em>R</em><sub><em>a</em><em>c</em><em>c</em><em>e</em><em>p</em><em>t</em></sub></span> as the product of the prior odds, proposal density ratio, and the likelihood ratio. In this case, the proposal density ratio is 1, so:</li>
-</ol>
-<p>(eq. 11.6)</p>
+</div></li>
+<li>b. The proposal density ratio. This is the ratio of probability of proposals going from <span class="math inline"><em>p</em></span> to <span class="math inline"><em>p</em>′</span> and the reverse. We have already declared a symmetrical proposal density, so that <span class="math inline"><em>Q</em>(<em>p</em>′|<em>p</em>)=<em>Q</em>(<em>p</em>|<em>p</em>′)</span> and <span class="math inline"><em>R</em><sub><em>p</em><em>r</em><em>o</em><em>p</em><em>o</em><em>s</em><em>a</em><em>l</em></sub> = 1</span>.</li>
+<li>c. The likelihood ratio. This is the ratio of probabilities of the data given the two different parameter values. We can calculate these probabilities from the approach described in the previous section.</li>
+</ul></li>
+<li>Find <span class="math inline"><em>R</em><sub><em>a</em><em>c</em><em>c</em><em>e</em><em>p</em><em>t</em></sub></span> as the product of the prior odds, proposal density ratio, and the likelihood ratio. In this case, the proposal density ratio is 1, so (eq. 13.12):
 <div>
 <p><br /><span class="math display"><em>R</em><sub><em>a</em><em>c</em><em>c</em><em>e</em><em>p</em><em>t</em></sub> = <em>R</em><sub><em>p</em><em>r</em><em>i</em><em>o</em><em>r</em></sub> ⋅ <em>R</em><sub><em>l</em><em>i</em><em>k</em><em>e</em><em>l</em><em>i</em><em>h</em><em>o</em><em>o</em><em>d</em></sub></span><br /></p>
-</div>
-<ol start="5" style="list-style-type: decimal">
-<li><p>Draw a random number <span class="math inline"><em>u</em></span> from a uniform distribution between 0 and 1. If <span class="math inline"><em>u</em> &lt; <em>R</em><sub><em>a</em><em>c</em><em>c</em><em>e</em><em>p</em><em>t</em></sub></span>, accept the proposed value of the parameter(s); otherwise reject, and retain the current value of the two parameters.</p></li>
-<li><p>Repeat steps 2-5 a large number of times.</p></li>
+</div></li>
+<li>Draw a random number <span class="math inline"><em>u</em></span> from a uniform distribution between 0 and 1. If <span class="math inline"><em>u</em> &lt; <em>R</em><sub><em>a</em><em>c</em><em>c</em><em>e</em><em>p</em><em>t</em></sub></span>, accept the proposed value of the parameter(s); otherwise reject, and retain the current value of the two parameters.</li>
+<li>Repeat steps 2-5 a large number of times.</li>
 </ol>
 <p>Applying this method to the self-incompatability data, we find that again estimates of speciation and extinction differ substantially among the two character states (Figure 13.5). Since the posterior distributions for extinction do not overlap, we again infer that the character likely influences that model parameter; speciation results are again suggestive but not as conclusive as those for extinction.</p>
 <div class="figure">
@@ -273,7 +270,7 @@ $$</span><br /></p>
 <p>The most serious limitation of state-dependent models as currently implemented is that they consider only a relatively small set of possible models. In particular, the approach we describe above compares two models: first, a model where birth and death rates are constant and do not depend on the state of the character; and second, a model where birth and death rates depend only on the character state <span class="citation">(Maddison et al. <a href="#ref-Maddison2007-vu">2007</a>)</span>. But there is another possibility that might be (in general) more common than either of the models we consider: birth and death rates vary, but in a way that is not dependent on the particular character we have chosen to analyze. I say that this is probably a common pattern because we know that birth and death rates vary tremendously across lineages in the tree of life <span class="citation">(Alfaro et al. <a href="#ref-Alfaro2009-hz">2009</a>)</span>, and it seems probable to me that many of our hypotheses about which characters might contribute to that variation are, at this point, stabs in the dark.</p>
 <p>This issue is a normal one for statistical analyses – after all, there are always other models outside of our set of considered possibilities. However, in this case, the fact that state-dependent diversification models fail to consider the possibility outlined above causes a very particular – and peculiar – problem: if we apply the tests to empirical phylogenetic trees, even with made-up data, we almost always find statistically significant results <span class="citation">(Rabosky and Goldberg <a href="#ref-Rabosky2015-ao">2015</a>)</span>. For example, Rabosky and Goldberg <span class="citation">(<a href="#ref-Rabosky2015-ao">2015</a>)</span> found that there is very often a statistically significant “signal” that the number of letters in a species name is significantly associated with speciation rates across a range of empirical datasets. This result might seem ridiculous and puzzling, as there is no way that species name length is associated with diversification processes. However, if we return to our alternative model above, then the results make sense. Rabosky and Goldberg <span class="citation">(<a href="#ref-Rabosky2015-ao">2015</a>)</span> simulated character evolution on real phylogenetic trees, and their results do not hold when the trees are simulated along with the characters (this is also why Rabosky and Goldberg’s <span class="citation">(<a href="#ref-Rabosky2015-ao">2015</a>)</span> results do not represent “type I errors,” <em>contra</em> their paper, because the data are not simulated under the null hypothesis). On these real trees, speciation and/or extinction rates have vary across clades. Among the two models that the authors consider, both are wrong; speciation and extinction are independent of the character but not constant through time. Of the two alternatives, the state-dependent model tends to fit better because, from a statistical point of view, it is important for the model to capture some variation in birth and death rates across clades. Even a random character will pick up some of this variation, so that the alternative model tends to fit better than the null – even though, in this case, the character has nothing to do with diversification!</p>
 <p>Fortunately, there are a number of ways to deal with this problem. First, one can compare the statistical support for the state-dependent model with the support that one obtains for random data. The random data could be simulated on the tree, or one could permute the tips or draw random data from a multinomial distribution <span class="citation">(Rabosky and Goldberg <a href="#ref-Rabosky2015-ao">2015</a>)</span>. One can then compare, for example, the distribution of dAICc scores obtained from these permutations to the dAICc for the original data. There are also semi-parametric methods based on permutations that have similar statistical properties <span class="citation">(Rabosky and Goldberg <a href="#ref-Rabosky2017-aw">2017</a>)</span>. Alternatively, we could explicitly consider the possibility that some unmeasured character is actually the thing that is influencing diversification rates <span class="citation">(Beaulieu and O’Meara <a href="#ref-Beaulieu2016-ww">2016</a>)</span>. This latter approach is the most elegant as we can directly add the model described in this section to our list of candidates <span class="citation">(see Beaulieu and O’Meara <a href="#ref-Beaulieu2016-ww">2016</a>)</span>.</p>
-<p>A more general critique of state-dependent models of diversification was raised by Maddison and Fitzjohn <span class="citation">(Maddison and FitzJohn <a href="#ref-Maddison2015-wy">2015</a>)</span>. This paper pointed out that statistically significant results for these tests can be driven by an event on a single branch of a tree, and therefore be unreplicated. This is a good criticism that applies equally well to a range of comparative methods. Together, both of these critiques argue for a stronger set of model adequacy approaches in comparative methods.</p>
+<p>A more general critique of state-dependent models of diversification was raised by Maddison and Fitzjohn <span class="citation">(Maddison and FitzJohn <a href="#ref-Maddison2015-wy">2015</a>)</span>. This paper pointed out that statistically significant results for these tests can be driven by an event on a single branch of a tree, and therefore be unreplicated. This is a good criticism that applies equally well to a range of comparative methods. We can deal with this critique, in part, by making sure the events we test are replicated in our data. Together, both of these critiques argue for a stronger set of model adequacy approaches in comparative methods.</p>
 <h2 id="section-13.4-summary">Section 13.4: Summary</h2>
 <p>Many evolutionary models postulate a link between species characteristics and speciation, extinction, or both. These hypotheses can be tested using state-dependent diversification models, which explicitly consider the possibility that species’ characters affect their diversification rates. State-dependent models as currently implemented have some potential problems, but there are methods to deal with these critiques. The overall ability of state-dependent models to explain broad patterns of evolutionary change remains to be determined, but represents a promising avenue for future research.</p>
 <h2 id="footnotes">Footnotes</h2>
@@ -286,7 +283,7 @@ $$</span><br /></p>
 <p>Anders Nilsson, L. 1992. Orchid pollination biology. Trends Ecol. Evol. 7:255–259.</p>
 </div>
 <div id="ref-Bateman1952-iy">
-<p>Bateman, A. J. 1952. Self-incompatibility systems in angiosperms. Heredity 6:285. The Genetical Society of Great Britain.</p>
+<p>Bateman, A. J. 1952. Self-incompatibility systems in Angiosperms. Heredity 6:285. The Genetical Society of Great Britain.</p>
 </div>
 <div id="ref-Beaulieu2016-ww">
 <p>Beaulieu, J. M., and B. C. O’Meara. 2016. Detecting hidden diversification shifts in models of Trait-Dependent speciation and extinction. Syst. Biol. 65:583–601.</p>
@@ -307,7 +304,7 @@ $$</span><br /></p>
 <p>Hagey, T. J., J. C. Uyeda, K. E. Crandell, J. A. Cheney, K. Autumn, and L. J. Harmon. 2017. Tempo and mode of performance evolution across multiple independent origins of adhesive toe pads in lizards. Evolution 71:2344–2358.</p>
 </div>
 <div id="ref-Holsinger1984-ts">
-<p>Holsinger, K. E., M. W. Feldman, and F. B. Christiansen. 1984. The evolution of Self-Fertilization in plants: A population genetic model. Am. Nat. 124:446–453. [University of Chicago Press, American Society of Naturalists].</p>
+<p>Holsinger, K. E., M. W. Feldman, and F. B. Christiansen. 1984. The evolution of self-fertilization in plants: A population genetic model. Am. Nat. 124:446–453.</p>
 </div>
 <div id="ref-Igic2006-zg">
 <p>Igic, B., and J. R. Kohn. 2006. Bias in the studies of outcrossing rate distributions. Evolution 60:1098–1103.</p>
@@ -325,7 +322,7 @@ $$</span><br /></p>
 <p>Rabosky, D. L., and E. E. Goldberg. 2015. Model inadequacy and mistaken inferences of trait-dependent speciation. Syst. Biol. 64:340–355.</p>
 </div>
 <div id="ref-Schopfer1999-cm">
-<p>Schopfer, C. R., M. E. Nasrallah, and J. B. Nasrallah. 1999. The male determinant of self-incompatibility in brassica. Science 286:1697–1700.</p>
+<p>Schopfer, C. R., M. E. Nasrallah, and J. B. Nasrallah. 1999. The male determinant of self-incompatibility in Brassica. Science 286:1697–1700.</p>
 </div>
 <div id="ref-Stebbins1950-aj">
 <p>Stebbins, G. L. 1950. Variation and evolution in plants. Geoffrey Cumberlege.; London.</p>
