@@ -2,27 +2,31 @@
 [pdf version]({{ site.baseurl }}/pdf/chapter13_chardiv.pdf)
 </div>
 
+\setcounter{page}{212}
+
 # Chapter 13: Characters and diversification rates
 
 ## Section 13.1: The evolution of self-incompatibility
 
 Most people have not spent a lot of time thinking about the sex lives of plants. The classic mode of sexual reproduction in angiosperms (flowering plants) involves pollen (the male gametophyte stage of the plant life cycle). Pollen lands on the pistil (the female reproductive structure) and produces a pollen tube. Sperm cells move down the pollen tube, and one sperm cell unites with the egg to form a new zygote in the ovule.
 
-As you might imagine, plants have little control over what pollen grains land on their pistil [although plant species do have some remarkable adaptations to control pollination by animals; see @Anders_Nilsson1992-af]. In particular, this mode of reproduction leaves open the possibility of self-pollination, where pollen from a plant fertilizes eggs from the same plant [@Stebbins1950-aj]. Self-fertilization (sometimes called selfing) is a form of asexual reproduction, but one that involves meiosis; as such, there are costs to self-fertilization. The main cost is inbreeding depression, a reduction in offspring fitness associated with recessive deleterious alleles across the genome [@Holsinger1984-ts].
+As you might imagine, plants have little control over what pollen grains land on their pistil [although plant species do have some remarkable adaptations to control pollination by animals; see @Anders_Nilsson1992-af]. In particular, this "standard" mode of reproduction leaves open the possibility of self-pollination, where pollen from a plant fertilizes eggs from the same plant [@Stebbins1950-aj]. Self-fertilization (sometimes called selfing) is a form of asexual reproduction, but one that involves meiosis; as such, there are costs to self-fertilization. The main cost is inbreeding depression, a reduction in offspring fitness associated with recessive deleterious alleles across the genome [@Holsinger1984-ts].
 
 Some species of angiosperms can avoid self-fertilization through self-incompatibility [@Bateman1952-iy]. In plants with self-incompatibility, the process by which the sperm meets the egg is interrupted at some stage if pollen grains have a genotype that is the same as the parent [e.g. @Schopfer1999-cm]. This prevents selfing – and also prevents sexual reproduction with plants that have the same genotype(s) at loci involved in the process.
 
 Species of angiosperms are about evenly divided between these two states of self-compatibility and self-incompatibility [@Igic2006-zg]. Furthermore, self-incompatible species are scattered throughout the phylogenetic tree of angiosperms [@Igic2006-zg].
 
-The evolution of selfing is a good example of a trait that might have a strong effect on diversification rates. One can easily imagine, for example, how incompatibility loci might facilitate the evolution of reproductive isolation among populations, and how lineages with such loci might diversity at a very different tempo than those without [@Goldberg2010-ua].
+The evolution of selfing is a good example of a trait that might have a strong effect on diversification rates by altering speciation, extinction, or both. One can easily imagine, for example, how incompatibility loci might facilitate the evolution of reproductive isolation among populations, and how lineages with such loci might diversity at a very different tempo than those without [@Goldberg2010-ua].
 
 In this chapter, we will learn about a family of models where traits can affect diversification rates. I will also address some of the controversial aspects of these models and how we can improve these approaches in the future.
 
 ## Section 13.2: A State-Dependent Model of Diversification
 
-The models that we will consider in this chapter include both a model of trait evolution and an associated model of lineage diversification. In the simplest case, we can consider a model where the character has two states, 0 and 1. We need to model the transitions among these states, which we can do in an identical way to what we did in Chapter 7 using a continuous-time Markov model. We express this model using two rate parameters, a forward rate $q_{01}$ and a backwards rate $q_{10}$.
+The models that we will consider in this chapter include trait evolution and  associated lineage diversification. In the simplest case, we can consider a model where the character has two states, 0 and 1, and diversification rates depend on those states.
 
-We now consider the idea that diversification rates might depend on the character state. We assume that species with character state 0 have a certain speciation rate ($\lambda_0$) and extinction rate ($\mu_0$), and that species in 1 have potentially different rates of both speciation ($\lambda_1$) and extinction ($\mu_1$). Thus, we have a six-parameter model [@Maddison2007-vu]. We assume that parent lineages give birth to daughters with the same character state, that is that character states do not change at speciation.
+We need to model the transitions among these states, which we can do in an identical way to what we did in Chapter 7 using a continuous-time Markov model. We express this model using two rate parameters, a forward rate $q_{01}$ and a backwards rate $q_{10}$.
+
+We now consider the idea that diversification rates might depend on the character state. We assume that species with character state 0 have a certain speciation rate ($\lambda_0$) and extinction rate ($\mu_0$), and that species in 1 have potentially different rates of both speciation ($\lambda_1$) and extinction ($\mu_1$). That is, when the character evolves, it affects the rate of speciation and/or extinction of the lineages. Thus, we have a six-parameter model [@Maddison2007-vu]. We assume that parent lineages give birth to daughters with the same character state, that is that character states do not change at speciation.
 
 It is straightforward to simulate evolution under our state-dependent model of diversification. We proceed in the same way as we did for birth-death models, by drawing waiting times, but these waiting times can be waiting times to the next character state change, speciation, or extinction event. In particular, imagine that there are $n$ lineages present at time $t$, and that $k$ of these lineages are in state 0 (and $n-k$ are in state 1). The waiting time to the next event will follow an exponential distribution with a rate parameter of:
 
@@ -30,12 +34,12 @@ It is straightforward to simulate evolution under our state-dependent model of d
 
 <div>
 $$
-\rho = n (q_{01} + \lambda_0 + \mu_0) + (k-n) (q_{10} + \lambda_1 + \mu_1)
+\rho = k (q_{01} + \lambda_0 + \mu_0) + (n-k) (q_{10} + \lambda_1 + \mu_1)
 $$
 </div>
 
 
-Once we have a waiting time, we can assign an event type depending on probabilities. For example, the probability that the event is a character state change from 0 to 1 is:
+This equation says that the total rate of events is the sum of the events that can happen to lineages with state 0 (state change to 1, speciation, or extinction) and the analogous events that can happen to lineages with state 1. Once we have a waiting time, we can assign an event type depending on probabilities. For example, the probability that the event is a character state change from 0 to 1 is:
 
 (eq. 13.2)
 
@@ -59,7 +63,7 @@ $$
 
 And so on for the other four possible events.
 
-Once we have picked an event in this way, we can randomly assign it to one of the lineages in the appropriate set, with each lineage equally likely to be chosen. We then proceed forwards in time until we have a dataset with the desired size or total time depth.
+Once we have picked an event in this way, we can randomly assign it to one of the lineages in the appropriate state, with each lineage equally likely to be chosen. We then proceed forwards in time until we have a dataset with the desired size or total time depth.
 
 An example simulation is shown in Figure 14.1. As you can see, under these model parameters the impact of character states on diversification is readily apparent. In the next section we will figure out how to extract that information from our data.
 
@@ -67,7 +71,7 @@ An example simulation is shown in Figure 14.1. As you can see, under these model
 
 ## Section 13.3: Calculating Likelihoods for State-dependent diversification models
 
-To calculate likelihoods for state-dependent diversification models we use a pruning algorithm with calculations that progress back through the tree from the tips to the root. We will follow the description of this algorithm in Maddison et al. [-@Maddison2007-vu]. We have already used this paper to derive likelihoods for constant rate birth-death models on trees (Chapter 12), and this derivation is closely related that previous approach.
+To calculate likelihoods for state-dependent diversification models we use a pruning algorithm with calculations that progress back through the tree from the tips to the root. We will follow the description of this algorithm in Maddison et al. [-@Maddison2007-vu]. We have already used this approach to derive likelihoods for constant rate birth-death models on trees (Chapter 12), and this derivation is similar.
 
 We consider a phylogenetic tree with data on the character states at the tips. For the purposes of this example, we will assume that the tree is complete and correct – we are not missing any species, and there is no phylogenetic uncertainty. We will come back to these two assumptions later in the chapter.
 
@@ -79,12 +83,12 @@ This discussion also highlights the fact that incorporating uncertainty and/or v
 
 We now need to consider the change in the likelihood as we step backwards through time in the tree [@Maddison2007-vu]. We will consider some very small time interval $\Delta t$, and later use differential equations to find out what happens in the limit as this interval goes to zero (Figure 13.2). Since we will eventually take the limit as $\Delta t \to 0$, we can assume that the time interval is so small that, at most, one event (speciation, extinction, or character change) has happened in that interval, but never more than one. We will calculate the probability of the observed data given that the character is in each state at time $t$, again measuring time backwards from the present day. In other words, we are considering the probability of the observed data if, at time t, the character state were in state 0 [$p_0 (t)$] or state 1 [$p_1 (t)$]. For now, we can assume we know these probabilities, and try to calculate updated probabilities at some earlier time $t+\Delta t$: $p_0 (t+\Delta t)$ and $p_1 (t+\Delta t)$.
 
-![Figure 13.2. Taken from Maddison - to be redrawn.]({{ site.baseurl }}/images/figure13-2.png)
+![Figure 13.2. Illustration of calculations of probabilities of part of the data descended from node N (red) moving along a branch in the tree. Starting with values for the probability at time $t$, we calculate the probability at time $t + \Delta t$, moving towards the root of the tree. From Maddison et al. [-@Maddison2007-vu].]({{ site.baseurl }}/images/figure13-2.png)
 
 
 To calculate $p_0 (t+\Delta t)$ and $p_1 (t+\Delta t)$, we consider all of the possible things that could happen in a time interval $\Delta t$ along a branch in a phylogenetic tree that are compatible with our dataset [Figure 13.2; @Maddison2007-vu]. First, nothing at all could have happened; second, our character state could have changed; and third, there could have been a speciation event. This last event might seem incorrect, as we are only considering changes along branches in the tree and not at nodes. If we did not reconstruct any speciation events at some point along a branch, then how could one have taken place? The answer is that a speciation event could have occurred but all taxa descended from that branch have since gone extinct. We must also consider the possibility that either the right or the left lineage went extinct following the speciation event; that is why the speciation event probabilities appear twice in Figure 13.2 [@Maddison2007-vu].
 
-![Figure 13.3. Taken from Maddison - to be redrawn.]({{ site.baseurl }}/images/figure13-3.png)
+![Figure 13.3. The four scenarios under which a lineage with state 0 at time $t + \Delta t$ can yield the data descended from node N. From Maddison et al. [-@Maddison2007-vu].]({{ site.baseurl }}/images/figure13-3.png)
 
 
 We can write an equation for these updated probabilities. We will consider the probability that the character is in state 0 at time $t+\Delta t$; the equation for state 1 is similar [@Maddison2007-vu].
@@ -94,7 +98,9 @@ We can write an equation for these updated probabilities. We will consider the p
 
 <div>
 $$
-p_0 (t+\Delta t)=(1-\mu_0 )\Delta t \cdot [(1-q_{01} \Delta t)(1-\lambda_0 \Delta t) p_0 (t)+q_{01} \Delta t(1-\lambda_0 \Delta t) p_1 (t)+2 \cdot (1-q_{01} \Delta t) \lambda_0 \Delta t \cdot E_0 (t) p_0 (t)]
+p_0 (t+\Delta t)=(1-\mu_0 )\Delta t \cdot [(1-q_{01} \Delta t)(1-\lambda_0 \Delta t) p_0 (t)+q_{01} \Delta t(1-\lambda_0 \Delta t) p_1 (t)
+
++2 \cdot (1-q_{01} \Delta t) \lambda_0 \Delta t \cdot E_0 (t) p_0 (t)]
 $$
 </div>
 
@@ -119,7 +125,7 @@ p_1 (t+\Delta t)=[1-(\lambda_1+μ_1+q_{10} )\Delta t] p_1 (t)+(q_{10} \Delta t) 
 $$
 </div>
 
-We can then find the rate of change for these two equations by solving for $p_1 (t+\Delta t) / [\Delta t]$, then taking the limit as $\Delta t \to 0$. This gives [@Maddison2007-vu]:
+We can then find the instantaneous rate of change for these two equations by solving for $p_1 (t+\Delta t) / [\Delta t]$, then taking the limit as $\Delta t \to 0$. This gives [@Maddison2007-vu]:
 
 (eq. 13.7)
 
@@ -159,7 +165,7 @@ $$
 $$
 </div>
 
-Along a single branch in a tree, we can sum together many such small time intervals. But what happens when we get to a node? Well, if we consider the time interval that contains the node, then we already know what happened – a speciation event. We also know that the two daughters immediately after the speciation event were identical in their traits (this is an assumption of the model). So we can calculate the likelihood for their ancestor for each state as the product of the likelihoods of the two daughter branches coming into that node [@Maddison2007-vu]. In this way, we merge our likelihood calculations along each branch when we get to nodes in the tree.
+Along a single branch in a tree, we can sum together many such small time intervals. But what happens when we get to a node? Well, if we consider the time interval that contains the node, then we already know what happened – a speciation event. We also know that the two daughters immediately after the speciation event were identical in their traits (this is an assumption of the model). So we can calculate the likelihood for their ancestor for each state as the product of the likelihoods of the two daughter branches coming into that node and the speciation rate [@Maddison2007-vu]. In this way, we merge our likelihood calculations along each branch when we get to nodes in the tree.
 
 When we get to the root of the tree, we are almost done – but not quite! We have partial likelihood calculations for each character state – so we know, for example, the likelihood of the data if we had started with a root state of 0, and also if we had started at 1. To merge these we need to use probabilities of each character state at the root of the tree [@Maddison2007-vu]. For example, if we do not know the root state from any outside information, we might consider root probabilities for each state to be equal, 0.5 for state 0 and 0.5 for state 1. We then multiply the likelihood associated with each state with the root probability for that state. Finally, we add these likelihoods together to obtain the full likelihood of the data given the model.
 
@@ -178,7 +184,7 @@ For example, I will apply this approach to the example of self-incompitability. 
 Applying the BiSSe models to these data and assuming that $q_{01} \neq q_{10}$, we obtain the following results:
 
 | Model | Number of parameters | Parameter estimates |	lnLikelihood	| AIC |
-| --- | --- | --- | --- |  --- |
+| --------- | --------- | --- | --- |  --- |
 | Character-independent model | 4 | $\lambda = 0.65$, $\mu = 0.57$ | -945.96 | 1899.9 |
 | | | $q_{01} = 0.16$, $q_{10} = 0.09$ | | |
 | Speciation rate depends on character | 5 | $\mu = 0.57$ | -945.57 | 1901.1 |
