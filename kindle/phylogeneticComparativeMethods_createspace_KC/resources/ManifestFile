@@ -1,0 +1,6 @@
+AmazonYJManifest
+digital_content_manifest::{
+  version:1,
+  storage_type:"localSqlLiteDB",
+  digital_content_name:"book.kdf"
+}
