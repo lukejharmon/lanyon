@@ -2,8 +2,6 @@
 [pdf version]({{ site.baseurl }}/pdf/chapter11_fitbd.pdf)
 </div>
 
-\setcounter{page}{170}
-
 # Chapter 11: Fitting birth-death models
 
 ## Section 11.1: Hotspots of diversity
@@ -444,7 +442,10 @@ Repeating the calculations above along branches and at nodes, but with the start
 (eq. 11.23)
 <div>
 $$
-L(t_1, t_2, \dots, t_n) = \lambda^{n-1} \big[ \prod_{k = 1}^{2n-2} e^{(\lambda-\mu)(t_{k,b} - t_{k,t})} \cdot \frac{(f \lambda - (\mu - \lambda(1-f))e^{(\lambda - \mu)t_{k,t}})^2}{(f \lambda - (\mu - \lambda(1-f))e^{(\lambda - \mu)t_{k,b}})^2} \big]
+\begin{aligned}
+L(t_1, t_2, \dots, t_n) = \lambda^{n-1} \big[ \prod_{k = 1}^{2n-2} e^{(\lambda-\mu)(t_{k,b} - t_{k,t})} \cdot \\
+\frac{(f \lambda - (\mu - \lambda(1-f))e^{(\lambda - \mu)t_{k,t}})^2}{(f \lambda - (\mu - \lambda(1-f))e^{(\lambda - \mu)t_{k,b}})^2} \big]
+\end{aligned}
 $$
 </div>
 
@@ -483,4 +484,8 @@ There are two extensions to this approach that are worth mentioning. One is Hohn
 
 In this chapter, I described how to estimate parameters from birth-death models using data on species diversity and ages, and how to use patterns of tree balance to test hypotheses about changing birth and death rates. I also described how to calculate the likelihood for birth-death models on trees, which leads directly to both ML and Bayesian methods for estimating birth and death rates. In the next chapter, we will explore elaborations on birth-death models, and discuss models that go beyond constant-rates birth-death models to analyze the diversity of life on Earth.
 
+<div>
 ## References
+</div>
+
+\pagebreak

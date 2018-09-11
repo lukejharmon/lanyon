@@ -2,8 +2,6 @@
 [pdf version]({{ site.baseurl }}/pdf/chapter14_summary.pdf)
 </div>
 
-\setcounter{page}{227}
-
 # Chapter 14: What have we learned from the trees?
 
 ## Section 14.1: The Lorax
@@ -57,3 +55,7 @@ Third, comparative methods require a more diverse set of models that connect bet
 # Section 14.5: Summary
 
 Comparative methods occupy a central place in evolutionary biology. This is because phylogenies provide an accounting of the historical patterns of evolution and, in turn, provide a natural way to measure long-term evolutionary dynamics. The first phase of comparative methods was focused strongly on adaptation. As discussed in this book, we have now branched out into a wide number of new areas, including diversification, community ecology, quantitative genetics, and more.  This expansion has involved new statistical approaches that increase the flexibility of comparative methods and their connection to biological processes. I expect this trend to continue, fueled by the creativity and energy of the next crop of young scientists.
+
+\pagebreak
+
+## References

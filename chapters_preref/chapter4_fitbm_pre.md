@@ -2,8 +2,6 @@
 [pdf version]({{ site.baseurl }}/pdf/chapter4_fitbm.pdf)
 </div>
 
-\setcounter{page}{58}
-
 # Chapter 4: Fitting Brownian Motion Models to Single Characters
 
 ## Section 4.1: Introduction
@@ -231,4 +229,8 @@ By fitting a Brownian motion model to phylogenetic comparative data, one can est
 
 <a name="footnote4.3">3</a>:PICs are a transformation of the original data in which all information about the root state has been removed; our idea of what that root state might be has no effect on calculations using PICs. One can calculate the likelihood for the PIC REML method by assuming all of the standardized PICs are drawn from a normal distribution (eq. 4.5) with mean 0 and variance $\hat{\sigma}_{REML}^2$ (eq. 4.8). Alternatively, one can estimate the variance of the PICs directly, keeping in mind that one must use a mean of zero (eq. 4.4). These two methods give exactly the same results. [*back to main text*](#footnote4.3_back)
 
+<div>
 ## References
+</div>
+
+\pagebreak

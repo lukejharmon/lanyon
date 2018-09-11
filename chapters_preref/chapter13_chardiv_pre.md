@@ -2,8 +2,6 @@
 [pdf version]({{ site.baseurl }}/pdf/chapter13_chardiv.pdf)
 </div>
 
-\setcounter{page}{212}
-
 # Chapter 13: Characters and diversification rates
 
 ## Section 13.1: The evolution of self-incompatibility
@@ -238,4 +236,8 @@ Many evolutionary models postulate a link between species characteristics and sp
 ## Footnotes
 
 
-# References
+<div>
+## References
+</div>
+
+\pagebreak

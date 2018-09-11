@@ -3,8 +3,6 @@
 R markdown to [recreate analyses]({{ site.baseurl }}/rmarkdown/chapter8_squamatelimbs.html)
 </div>
 
-\setcounter{page}{121}
-
 # Chapter 8: Fitting models of discrete character evolution
 
 ## Section 8.1: The evolution of limbs and limblessness
@@ -368,4 +366,8 @@ $$
 
 Note that if you try this example in another software package, like GEIGER or PAUP*, the software will calculate a ln-likelihood of -6.5, which is exactly the natural log of the value calculated here.
 
+<div>
 ## References
+</div>
+
+\pagebreak

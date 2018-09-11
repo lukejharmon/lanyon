@@ -4,8 +4,6 @@
 R markdown to [recreate analyses]({{ site.baseurl }}/rmarkdown/chapter8_squamatelimbs.html)
 </div>
 
-\setcounter{page}{108}
-
 # Chapter 7: Models of discrete character evolution
 
 ## Section 7.1: Limblessness as a discrete trait
@@ -351,4 +349,8 @@ Now we compare $u$ to the numbers in this cumulative sum vector. We select the s
 
 
 
+<div>
 ## References
+</div>
+
+\pagebreak

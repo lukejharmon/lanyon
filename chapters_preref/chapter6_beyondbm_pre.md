@@ -2,8 +2,6 @@
 [pdf version]({{ site.baseurl }}/pdf/chapter6_beyondbm.pdf)
 </div>
 
-\setcounter{page}{87}
-
 # Chapter 6: Beyond Brownian Motion
 
 ## Section 6.1: Introduction
@@ -81,10 +79,12 @@ Since these elements represent the heights of nodes in the phylogenetic tree, th
 
 Finally, the $\kappa$ transformation is sometimes used to capture patterns of “speciational” change in trees. In the $\kappa$ model, one raises all of the branch lengths in the tree by the power $\kappa$ (we require that $\kappa \geq 0$). This has a complicated effect on the phylogenetic variance-covariance matrix, as the effect that this transformation has on each covariance element depends on both the value of $\kappa$ and the number of branches that extend from the root of the tree to the most recent common ancestor of each pair of species. So, if our original $\mathbf{C}$ matrix is given by equation 6.1, the transformed version will be:
 
+
 (Equation 6.4)
 <div>
 $$
-\mathbf{C_o} =
+\begin{array}{l}
+\mathbf{C_o} = \\
 \left(\begin{smallmatrix}
 b_{1,1}^k + b_{1,2}^k \dots + b_{1,d_1}^k &
 b_{1-2,1}^k + b_{1-2,2}^k \dots + b_{1-2,d_{1-2}}^k &
@@ -99,7 +99,8 @@ b_{r-1,1}^k + b_{r-1,2}^k \dots + b_{r-1,d_{1-r}}^k &
 b_{r-2,1}^k + b_{r-2,2}^k \dots + b_{r-2,d_{1-2}}^k &
 \dots &
 b_{r,1}^k + b_{r,2}^k \dots + b_{r,d_{r}}^k \\
-\end{smallmatrix}\right)
+\end{smallmatrix}\right) \\
+\end{array}
 $$
 </div>
 
@@ -111,7 +112,7 @@ There are two main ways to assess the fit of the three Pagel-style models to dat
 
 We can apply these three Pagel models to the mammal body size data discussed in chapter 5, comparing the $AIC_c$ scores for Brownian motion to that from the three transformations. We obtain the following results:
 
-| Model | Parameter estimates | ln-Likelihood | $AIC_c$ |
+| Model | Parameter estimates | lnL | $AIC_c$ |
 | --- | --- | --- | --- |
 | Brownian motion | $\sigma^2 = 0.088$, $\theta = 4.64$ | -78.0 | 160.4 |
 | lambda | $\sigma^2 = 0.085$, $\theta = 4.64$, $\lambda = 1.0$ | -78.0 | 162.6 |
@@ -573,4 +574,8 @@ V_{ij}(t) = \frac{\sigma^2}{2 \alpha} (e^{-2 \alpha (T_i - s_{ij})}-e^{-2 \alpha
 $$
 </div>
 
+<div>
 ## References
+</div>
+
+\pagebreak

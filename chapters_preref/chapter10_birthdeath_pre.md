@@ -2,8 +2,6 @@
 [pdf version]({{ site.baseurl }}/pdf/chapter10_birthdeath.pdf)
 </div>
 
-\setcounter{page}{152}
-
 # Chapter 10: Introduction to birth-death models
 
 ## Section 10.1: Plant diversity imbalance
@@ -298,4 +296,8 @@ Lineage-through-time plots are effective ways to visualize patterns of lineage d
 
 In this chapter, I introduced birth-death models and summarized their basic mathematical properties. Birth-death models predict patterns of species diversity over time intervals, and can also be used to model the growth of phylogenetic trees. We can visualize these patterns by measuring tree balance and creating lineage-through-time (LTT) plots.
 
+<div>
 ## References
+</div>
+
+\pagebreak

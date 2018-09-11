@@ -2,8 +2,6 @@
 [pdf version]({{ site.baseurl }}/pdf/chapter12_beyondbd.pdf)
 </div>
 
-\setcounter{page}{195}
-
 # Chapter 12: Beyond birth-death models
 
 ## Section 12.1: Capturing variable evolution
@@ -145,7 +143,7 @@ As an example, we can test models of time-varying diversification rates across p
 
 Comparing the fit of a set of models, we obtain the following results:
 
-| Model | Number of parameters | Parameter estimates |	lnLikelihood	| AIC |
+| Model | Number of params. | Param. estimates |	lnL	| AIC |
 | --- | --- | --- | --- |  --- |
 | CRPB | 1 | $\lambda = 0.05111267$ | 497.8 | -993.6 |
 | CRBD | 2 | $\lambda = 0.05111267$ | 497.8 | -991.6 |
@@ -153,7 +151,7 @@ Comparing the fit of a set of models, we obtain the following results:
 |  | 3 | $\lambda_0 = 0.035$ | 513.0 | -1019.9 |
 | | | $\alpha_{\lambda} = 0.0011$ | | |
 | | | $\mu = 0$ | | |
-| SP-E | 3 | $\lambda_0 = 0.040$ | 510.7 | -1015.427 |
+| SP-E | 3 | $\lambda_0 = 0.040$ | 510.7 | -1015.4 |
 | | | $\beta_{\lambda} = 0.016$ | | |
 | | | $\mu = 0$ | | |
 | EX-L | 3 | $\lambda = 0.053$ | 497.8 | -989.6 |
@@ -214,4 +212,8 @@ In this chapter I discussed models that go beyond constant rate birth-death mode
 
 <a name="footnote12.1">1</a>: Even though this approach requires topology, Morlon et al. [-@Morlon2011-ci] show that their likelihood is equivalent to other approaches, such as Nee and Maddison, that rely only on branching times and ignore topology completely. This is because trees with the same set of branching times but different topologies have identical likelihoods under this model.[*back to main text*](#footnote12.1_back)
 
-# References
+<div>
+## References
+</div>
+
+\pagebreak

@@ -84,4 +84,8 @@ This calculation gives the number of distinct tree shapes (ignoring branch lengt
 <a name="footnote1.2">2</a>: Another difficulty is that the "tree" of life may not look much like a tree due to hybridization, introgression, and other non-branching processes. These issues are currently barely addressed by comparative methods [but see @Bastide2018-pf], and rarely in this book as well! We leave that as a pressing future problem that has only begun to be solved.
 [*back to main text*](#footnote1.2_back)
 
+<div>
 ## References
+</div>
+
+\pagebreak

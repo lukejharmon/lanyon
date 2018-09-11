@@ -2,8 +2,6 @@
 [pdf version]({{ site.baseurl }}/pdf/chapter5_mvbm.pdf)
 </div>
 
-\setcounter{page}{74}
-
 # Chapter 5: Fitting Brownian Motion Models to Multiple Characters
 
 ## Section 5.1: Introduction
@@ -306,4 +304,8 @@ There are at least four methods for testing for an evolutionary correlation betw
 <a name="footnote5.3">3</a>:  Another way to think about regression through the origin is to think of pairs of contrasts across any node in the tree as two-dimensional vectors. Calculating a vector correlation is equivalent to calculating a regression forced through the origin. [*back to main text*](#footnote5.3_back)
 
 
-## Section 5.8: References
+<div>
+## References
+</div>
+
+\pagebreak

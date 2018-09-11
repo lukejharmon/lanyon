@@ -2,8 +2,6 @@
 [pdf version]({{ site.baseurl }}/pdf/chapter3_bmintro.pdf)
 </div>
 
-\setcounter{page}{38}
-
 # Chapter 3: Introduction to Brownian Motion
 
 ## Section 3.1: Introduction
@@ -448,4 +446,8 @@ In this book, we will typically consider variation among species rather than pop
 In some cases in the literature, the magnitude of trait change is expressed in within-population phenotypic standard deviations, $\sqrt{\sigma_w^2}$, per generation [e.g. @Harmon2010-wg; @Estes2007-mi]. In that case, since dividing a random normal deviate by $x$ is equivalent to dividing its variance by $x^2$, we have $\sigma^2 = h^2 / N_e$.[*back to main text*](#footnote3.4_back)
 
 
+<div>
 ## References
+</div>
+
+\pagebreak

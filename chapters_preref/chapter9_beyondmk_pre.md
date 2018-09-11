@@ -4,8 +4,6 @@
 R markdown to [recreate analyses]({{ site.baseurl }}/rmarkdown/chapter9_frogs.html)
 </div>
 
-\setcounter{page}{136}
-
 # Chapter 9: Beyond the Mk Model
 
 ## Section 9.1: The Evolution of Frog Life History Strategies
@@ -191,4 +189,8 @@ The simple Mk model provides a useful foundation for a number of innovative meth
 
 Taken as a whole, chapters 7 through 9 provide a basis for the analysis of discrete characters on trees. One can test a variety of biologically relevant hypotheses about how these characters have changed along the branches of the tree of life.
 
+<div>
 ## References
+</div>
+
+\pagebreak
