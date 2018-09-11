@@ -237,7 +237,11 @@ In this chapter, I have described a few models that represent alternatives to Br
 
 ## Section 6.9: Footnotes
 
-<a name="footnote6.1">1</a>: Pagel's original models were initially focused on discrete characters, but - as he later pointed out - apply equally well to continuous characters.[*back to main text*](#footnote6.1_back)
+<a name="footnote6.1">1</a>: Pagel's original models were initially focused on discrete characters, but - as he later pointed out - apply equally well to continuous characters.
+
+<div>
+[*back to main text*](#footnote6.1_back)
+</div>
 
 
 ## Section 6.10: Appendix: Deriving an OU model under stabilizing selection

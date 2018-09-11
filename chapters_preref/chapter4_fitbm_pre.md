@@ -223,11 +223,23 @@ By fitting a Brownian motion model to phylogenetic comparative data, one can est
 
 ## Footnotes
 
-<a name="footnote4.1">1</a>: Throughout this chapter, when I say "rate" I will mean the Brownian motion parameter $\sigma^2$. This is a little different from “traditional” estimates of evolutionary rate, like those estimated by paleontologists. For example, one might have measurements of trait in a series of fossils representing an evolutionary lineage sampled at different time periods. By calculating the amount of change over a given time interval, one can estimate an evolutionary rate. These rates can be expressed as Darwins (defined as the log-difference in trait values divided by time in years) or Haldanes (defined as the difference in trait values scaled by their standard deviations divided by time in generations). Both types of rates have been calculated from both fossil data and contemporary time-series data on evolution from both islands and lab experiments. Such rates best capture evolutionary trends, where the mean value of a trait is changing in a consistent way through time [for more information see review in @Harmon2014-ry]. Rates estimated by Brownian motion are a different type of “rate”, and some care must be taken to compare the two [see, e.g., @Gingerich1983-fe]. [*back to main text*](#footnote4.1_back)
+<a name="footnote4.1">1</a>: Throughout this chapter, when I say "rate" I will mean the Brownian motion parameter $\sigma^2$. This is a little different from “traditional” estimates of evolutionary rate, like those estimated by paleontologists. For example, one might have measurements of trait in a series of fossils representing an evolutionary lineage sampled at different time periods. By calculating the amount of change over a given time interval, one can estimate an evolutionary rate. These rates can be expressed as Darwins (defined as the log-difference in trait values divided by time in years) or Haldanes (defined as the difference in trait values scaled by their standard deviations divided by time in generations). Both types of rates have been calculated from both fossil data and contemporary time-series data on evolution from both islands and lab experiments. Such rates best capture evolutionary trends, where the mean value of a trait is changing in a consistent way through time [for more information see review in @Harmon2014-ry]. Rates estimated by Brownian motion are a different type of “rate”, and some care must be taken to compare the two [see, e.g., @Gingerich1983-fe].
 
-<a name="footnote4.2">2</a>:  Note that there are more complicated optimization algorithms that are useful for more difficult problems in comparative methods. In the case presented here, where the surface is smooth and has a single peak, almost any algorithm will work. [*back to main text*](#footnote4.2_back)
+<div>
+[*back to main text*](#footnote4.1_back)
+</div>
 
-<a name="footnote4.3">3</a>:PICs are a transformation of the original data in which all information about the root state has been removed; our idea of what that root state might be has no effect on calculations using PICs. One can calculate the likelihood for the PIC REML method by assuming all of the standardized PICs are drawn from a normal distribution (eq. 4.5) with mean 0 and variance $\hat{\sigma}_{REML}^2$ (eq. 4.8). Alternatively, one can estimate the variance of the PICs directly, keeping in mind that one must use a mean of zero (eq. 4.4). These two methods give exactly the same results. [*back to main text*](#footnote4.3_back)
+<a name="footnote4.2">2</a>:  Note that there are more complicated optimization algorithms that are useful for more difficult problems in comparative methods. In the case presented here, where the surface is smooth and has a single peak, almost any algorithm will work.
+
+<div>
+[*back to main text*](#footnote4.2_back)
+</div>
+
+<a name="footnote4.3">3</a>:PICs are a transformation of the original data in which all information about the root state has been removed; our idea of what that root state might be has no effect on calculations using PICs. One can calculate the likelihood for the PIC REML method by assuming all of the standardized PICs are drawn from a normal distribution (eq. 4.5) with mean 0 and variance $\hat{\sigma}_{REML}^2$ (eq. 4.8). Alternatively, one can estimate the variance of the PICs directly, keeping in mind that one must use a mean of zero (eq. 4.4). These two methods give exactly the same results.
+
+<div>
+[*back to main text*](#footnote4.3_back)
+</div>
 
 <div>
 ## References

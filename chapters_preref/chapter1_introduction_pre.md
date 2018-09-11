@@ -79,10 +79,16 @@ Statistical comparative methods represent a promising future for evolutionary st
 
 <a name="footnote1.1">1</a>:
 This calculation gives the number of distinct tree shapes (ignoring branch lengths) that are fully bifurcating – that is, each species has two descendants - and rooted.
+
+<div>
 [*back to main text*](#footnote1.1_back)
+</div>
 
 <a name="footnote1.2">2</a>: Another difficulty is that the "tree" of life may not look much like a tree due to hybridization, introgression, and other non-branching processes. These issues are currently barely addressed by comparative methods [but see @Bastide2018-pf], and rarely in this book as well! We leave that as a pressing future problem that has only begun to be solved.
+
+<div>
 [*back to main text*](#footnote1.2_back)
+</div>
 
 <div>
 ## References

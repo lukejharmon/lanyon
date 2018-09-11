@@ -434,16 +434,32 @@ In summary, Brownian motion is mathematically tractable, and has convenient stat
 ## Footnotes
 
 <a name="footnote3.1">1</a>:
-More formally, the ball will move in two-dimensional Brownian motion, which describe movement both across and up and down the stadium rows. But if you consider just the movement in one direction - say, the distance of the ball from the field - then this is a simple single dimensional Brownian motion process as described here. [*back to main text*](#footnote3.1_back)
+More formally, the ball will move in two-dimensional Brownian motion, which describe movement both across and up and down the stadium rows. But if you consider just the movement in one direction - say, the distance of the ball from the field - then this is a simple single dimensional Brownian motion process as described here.
+
+<div>
+[*back to main text*](#footnote3.1_back)
+</div>
 
 <a name="footnote3.2">2</a>:
-Variance effective population size is the effective population size of a model population with random mating, no substructure, and constant population size that would have quantitative genetic properties equal to our actual population. All of this is a bit beyond the scope of this book [but see @Templeton2006-ra]. But writing $N_e$ instead of $N$ allows us to develop the model without worrying about all of the extra assumptions we would have to make about how individuals mate and how populations are distributed over time and space.[*back to main text*](#footnote3.2_back)
+Variance effective population size is the effective population size of a model population with random mating, no substructure, and constant population size that would have quantitative genetic properties equal to our actual population. All of this is a bit beyond the scope of this book [but see @Templeton2006-ra]. But writing $N_e$ instead of $N$ allows us to develop the model without worrying about all of the extra assumptions we would have to make about how individuals mate and how populations are distributed over time and space.
+
+<div>
+[*back to main text*](#footnote3.2_back)
+</div>
 
 <a name="footnote3.3">3</a>:
-In this book, we will typically consider variation among species rather than populations. However, we will also always assume that species are made up of one population, and so we can apply the same mathematical equations across species in a phylogenetic tree.[*back to main text*](#footnote3.3_back)
+In this book, we will typically consider variation among species rather than populations. However, we will also always assume that species are made up of one population, and so we can apply the same mathematical equations across species in a phylogenetic tree.
+
+<div>
+[*back to main text*](#footnote3.3_back)
+</div>
 
 <a name="footnote3.4">4</a>:
-In some cases in the literature, the magnitude of trait change is expressed in within-population phenotypic standard deviations, $\sqrt{\sigma_w^2}$, per generation [e.g. @Harmon2010-wg; @Estes2007-mi]. In that case, since dividing a random normal deviate by $x$ is equivalent to dividing its variance by $x^2$, we have $\sigma^2 = h^2 / N_e$.[*back to main text*](#footnote3.4_back)
+In some cases in the literature, the magnitude of trait change is expressed in within-population phenotypic standard deviations, $\sqrt{\sigma_w^2}$, per generation [e.g. @Harmon2010-wg; @Estes2007-mi]. In that case, since dividing a random normal deviate by $x$ is equivalent to dividing its variance by $x^2$, we have $\sigma^2 = h^2 / N_e$.
+
+<div>
+[*back to main text*](#footnote3.4_back)
+</div>
 
 
 <div>

@@ -28,14 +28,12 @@ title: Beyond Brownian motion
 <li><a href="#section-6.8-summary">Section 6.8: Summary</a></li>
 <li><a href="#section-6.9-footnotes">Section 6.9: Footnotes</a></li>
 <li><a href="#section-6.10-appendix-deriving-an-ou-model-under-stabilizing-selection">Section 6.10: Appendix: Deriving an OU model under stabilizing selection</a></li>
-<li><a href="#references">References</a></li>
 </ul></li>
 </ul>
 </div>
 <div>
 <p><a href="{{site.baseurl}}/pdf/chapter6_beyondbm.pdf">pdf version</a></p>
 </div>
-
 <h1 id="chapter-6-beyond-brownian-motion">Chapter 6: Beyond Brownian Motion</h1>
 <h2 id="section-6.1-introduction">Section 6.1: Introduction</h2>
 <p>Detailed studies of contemporary evolution have revealed a rich variety of processes that influence how traits evolve through time. Consider the famous studies of Darwin’s finches, <em>Geospiza</em>, in the Galapagos islands carried out by Peter and Rosemary Grant, among others <span class="citation">(e.g. Grant and Grant <a href="#ref-Grant2011-vt">2011</a>)</span>. These studies have documented the action of natural selection on traits from one generation to the next. One can see very clearly how changes in climate – especially the amount of rainfall – affect the availability of different types of seeds <span class="citation">(Grant and Grant <a href="#ref-Grant2002-jx">2002</a>)</span>. These changing resources in turn affect which individuals survive within the population. When natural selection acts on traits that can be inherited from parents to offspring, those traits evolve.</p>
@@ -95,7 +93,8 @@ $$</span><br /></p>
 (Equation 6.4)
 <div>
 <p><br /><span class="math display">$$
-\mathbf{C_o} =
+\begin{array}{l}
+\mathbf{C_o} = \\
 \left(\begin{smallmatrix}
 b_{1,1}^k + b_{1,2}^k \dots + b_{1,d_1}^k &amp;
 b_{1-2,1}^k + b_{1-2,2}^k \dots + b_{1-2,d_{1-2}}^k &amp;
@@ -110,7 +109,8 @@ b_{r-1,1}^k + b_{r-1,2}^k \dots + b_{r-1,d_{1-r}}^k &amp;
 b_{r-2,1}^k + b_{r-2,2}^k \dots + b_{r-2,d_{1-2}}^k &amp;
 \dots &amp;
 b_{r,1}^k + b_{r,2}^k \dots + b_{r,d_{r}}^k \\
-\end{smallmatrix}\right)
+\end{smallmatrix}\right) \\
+\end{array}
 $$</span><br /></p>
 </div>
 <p>where <span class="math inline"><em>b</em><sub><em>x</em>, <em>y</em></sub></span> is the branch length of the branch that is the most recent common ancestor of taxa <span class="math inline"><em>x</em></span> and <span class="math inline"><em>y</em></span>, while <span class="math inline"><em>d</em><sub><em>x</em>, <em>y</em></sub></span> is the total number of branches that one encounters traversing the path from the root to the most recent common ancestor of the species pair specified by <span class="math inline"><em>x</em>, <em>y</em></span> (or to the tip <span class="math inline"><em>x</em></span> if just one taxon is specified). Needless to say, this transformation is easier to understand as a transformation of the tree branches themselves rather than of the associated variance-covariance matrix.</p>
@@ -122,7 +122,7 @@ $$</span><br /></p>
 <tr class="header">
 <th>Model</th>
 <th>Parameter estimates</th>
-<th>ln-Likelihood</th>
+<th>lnL</th>
 <th><span class="math inline"><em>A</em><em>I</em><em>C</em><sub><em>c</em></sub></span></th>
 </tr>
 </thead>
@@ -487,7 +487,10 @@ V_{ij}(t) = \frac{\sigma^2}{2 \alpha} (e^{-2 \alpha (T_i - s_{ij})}-e^{-2 \alpha
 \end{array}
 $$</span><br /></p>
 </div>
-<h2 id="references" class="unnumbered">References</h2>
+<div>
+<h2 id="references">References</h2>
+</div>
+
 <div id="refs" class="references">
 <div id="ref-Alfaro2013-pl">
 <p>Alfaro, M. E. 2013. Key evolutionary innovations. <em>in</em> J. B. Losos, D. A. Baum, D. J. Futuyma, H. E. Hoekstra, R. E. Lenski, A. J. Moore, C. L. Peichel, D. Schluter, and M. C. Whitlock, eds. The Princeton guide to evolution. Princeton University Press, Princeton.</p>

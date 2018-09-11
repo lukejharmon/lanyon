@@ -233,9 +233,6 @@ A more general critique of state-dependent models of diversification was raised 
 Many evolutionary models postulate a link between species characteristics and speciation, extinction, or both. These hypotheses can be tested using state-dependent diversification models, which explicitly consider the possibility that species’ characters affect their diversification rates. State-dependent models as currently implemented have some potential problems, but there are methods to deal with these critiques. The overall ability of state-dependent models to explain broad patterns of evolutionary change remains to be determined, but represents a promising avenue for future research.
 
 
-## Footnotes
-
-
 <div>
 ## References
 </div>

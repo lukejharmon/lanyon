@@ -210,7 +210,11 @@ In this chapter I discussed models that go beyond constant rate birth-death mode
 
 ## Footnotes
 
-<a name="footnote12.1">1</a>: Even though this approach requires topology, Morlon et al. [-@Morlon2011-ci] show that their likelihood is equivalent to other approaches, such as Nee and Maddison, that rely only on branching times and ignore topology completely. This is because trees with the same set of branching times but different topologies have identical likelihoods under this model.[*back to main text*](#footnote12.1_back)
+<a name="footnote12.1">1</a>: Even though this approach requires topology, Morlon et al. [-@Morlon2011-ci] show that their likelihood is equivalent to other approaches, such as Nee and Maddison, that rely only on branching times and ignore topology completely. This is because trees with the same set of branching times but different topologies have identical likelihoods under this model.
+
+<div>
+[*back to main text*](#footnote12.1_back)
+</div>
 
 <div>
 ## References

@@ -543,15 +543,24 @@ One theme in the book is that I emphasize fitting models to data and estimating 
 
 <a name="footnote2.1">1</a>:
 I assume here that you have little interest in organisms other than lizards.
+
+<div>
 [*back to main text*](#footnote2.1_back)
+</div>
 
 <a name="footnote2.2">2</a>:
 And, often, concludes that we just "need more data" to get the answer that we want.
+
+<div>
 [*back to main text*](#footnote2.2_back)
+</div>
 
 <a name="footnote2.3">3</a>:
 Especially in fields like genomics where multiple testing and massive Bonferroni corrections are common; one can only wonder at the legions of type II errors that are made under such circumstances.
+
+<div>
 [*back to main text*](#footnote2.3_back)
+</div>
 
 <div>
 ## References

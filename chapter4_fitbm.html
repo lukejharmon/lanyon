@@ -25,14 +25,12 @@ title: Fitting Brownian motion
 <li><a href="#section-4.4-bayesian-approach-to-evolutionary-rates">Section 4.4: Bayesian approach to evolutionary rates</a></li>
 <li><a href="#section-4.5-summary">Section 4.5: Summary</a></li>
 <li><a href="#footnotes">Footnotes</a></li>
-<li><a href="#references">References</a></li>
 </ul></li>
 </ul>
 </div>
 <div>
 <p><a href="{{site.baseurl}}/pdf/chapter4_fitbm.pdf">pdf version</a></p>
 </div>
-
 <h1 id="chapter-4-fitting-brownian-motion-models-to-single-characters">Chapter 4: Fitting Brownian Motion Models to Single Characters</h1>
 <h2 id="section-4.1-introduction">Section 4.1: Introduction</h2>
 <p>Mammals come in a wide variety of shapes and sizes. Some species are incredibly tiny. For example, the bumblebee bat, weighing in at 2 g, competes for the title of smallest mammal with the slightly lighter (but also slightly longer) Etruscan shrew <span class="citation">(Hill <a href="#ref-Hill1974-jf">1974</a>)</span>. Other species are huge, as anyone who has encountered a blue whale knows. Body size is important as a biological variable because it predicts so many other aspect of an animal’s life, from the physiology of heat exchange to the biomechanics of locomotion. Thus, the rate at which body size evolves is of great interest among mammalian biologists. Throughout this chapter, I will discuss the evolution of body size (and, eventually, territory size) across different species of mammals. The data I will analyze is taken from Garland <span class="citation">(<a href="#ref-Garland1992-kv">1992</a>)</span>.</p>
@@ -206,7 +204,10 @@ $$</span><br /></p>
 <p><a name="footnote4.1">1</a>: Throughout this chapter, when I say &quot;rate&quot; I will mean the Brownian motion parameter <span class="math inline"><em>σ</em><sup>2</sup></span>. This is a little different from “traditional” estimates of evolutionary rate, like those estimated by paleontologists. For example, one might have measurements of trait in a series of fossils representing an evolutionary lineage sampled at different time periods. By calculating the amount of change over a given time interval, one can estimate an evolutionary rate. These rates can be expressed as Darwins (defined as the log-difference in trait values divided by time in years) or Haldanes (defined as the difference in trait values scaled by their standard deviations divided by time in generations). Both types of rates have been calculated from both fossil data and contemporary time-series data on evolution from both islands and lab experiments. Such rates best capture evolutionary trends, where the mean value of a trait is changing in a consistent way through time <span class="citation">(for more information see review in Harmon <a href="#ref-Harmon2014-ry">2014</a>)</span>. Rates estimated by Brownian motion are a different type of “rate”, and some care must be taken to compare the two <span class="citation">(see, e.g., Gingerich <a href="#ref-Gingerich1983-fe">1983</a>)</span>. <a href="#footnote4.1_back"><em>back to main text</em></a></p>
 <p><a name="footnote4.2">2</a>: Note that there are more complicated optimization algorithms that are useful for more difficult problems in comparative methods. In the case presented here, where the surface is smooth and has a single peak, almost any algorithm will work. <a href="#footnote4.2_back"><em>back to main text</em></a></p>
 <p><a name="footnote4.3">3</a>:PICs are a transformation of the original data in which all information about the root state has been removed; our idea of what that root state might be has no effect on calculations using PICs. One can calculate the likelihood for the PIC REML method by assuming all of the standardized PICs are drawn from a normal distribution (eq. 4.5) with mean 0 and variance <span class="math inline">$\hat{\sigma}_{REML}^2$</span> (eq. 4.8). Alternatively, one can estimate the variance of the PICs directly, keeping in mind that one must use a mean of zero (eq. 4.4). These two methods give exactly the same results. <a href="#footnote4.3_back"><em>back to main text</em></a></p>
-<h2 id="references" class="unnumbered">References</h2>
+<div>
+<h2 id="references">References</h2>
+</div>
+
 <div id="refs" class="references">
 <div id="ref-Burnham2003-mt">
 <p>Burnham, K. P., and D. R. Anderson. 2003. Model selection and multimodel inference: A practical information theoretic approach. Springer Science &amp; Business Media.</p>

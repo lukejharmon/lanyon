@@ -307,10 +307,16 @@ In this chapter I have described the Mk model, which can be used to describe the
 ## Section 7.7: Footnotes
 
 <a name="footnote7.1">1</a>: Imagine that you calculate a rate of character change by counting the number of changes of state of a character over some time interval, $t$. You can calculate the rate of change as $n_{changes} / t$. The instantaneous rate is the value that this rate approaches as $t$ gets smaller and smaller so that the time interval is nearly zero.
+
+<div>
 [*back to main text*](#footnote7.1_back)
+</div>
 
 <a name="footnote7.2">1</a>: I will not cover the details of matrix exponentiation here – interested readers should see Yang (2006) for details – but the calculations are not trivial.
+
+<div>
 [*back to main text*](#footnote7.2_back)
+</div>
 
 <a name="footnote7.3">3</a>:One still obtains the relevant row from $\mathbf{P}(t)$ and draws a uniform random deviate $u$. Imagine that we have a ten-state character with states 0 - 9. We start at state 0 at the beginning of the simulation. Again using $q = 0.5$ and $t = 3$, we find that:
 
@@ -345,7 +351,10 @@ $$
 </div>
 
 Now we compare $u$ to the numbers in this cumulative sum vector. We select the smallest element that is still strictly larger than $u$, and assign this character state for the end of the branch. For example, if $u = 0.475$, the 5th element, 0.525, is the smallest number that is still greater than $u$. This corresponds to character state 4, which we assign to the end of the branch. This last procedure is a numerical trick. Imagine that we have a line segment with length 1. The cumulative sum vector breaks the unit line into segments, each of which is exactly as long as the probability of each event in the set. One then just draws a random number between 0 and 1 using a uniform distribution. The segment that contains this random number is our event.
+
+<div>
 [*back to main text*](#footnote7.3_back)
+</div>
 
 
 

@@ -297,11 +297,23 @@ There are at least four methods for testing for an evolutionary correlation betw
 
 ## Section 5.7: Footnotes
 
-<a name="footnote5.1">1</a>: We might also want to carry out linear regression, which is related to correlation analysis but distinct. We will show examples of phylogenetic regression at the end of this chapter.[*back to main text*](#footnote5.1_back)
+<a name="footnote5.1">1</a>: We might also want to carry out linear regression, which is related to correlation analysis but distinct. We will show examples of phylogenetic regression at the end of this chapter.
 
-<a name="footnote5.2">2</a>: Although the joint distribution of all species for a single trait is multivariate normal (see previous chapters), individual changes along a particular branch of a tree are univariate. [*back to main text*](#footnote5.2_back)
+<div>
+[*back to main text*](#footnote5.1_back)
+</div>
 
-<a name="footnote5.3">3</a>:  Another way to think about regression through the origin is to think of pairs of contrasts across any node in the tree as two-dimensional vectors. Calculating a vector correlation is equivalent to calculating a regression forced through the origin. [*back to main text*](#footnote5.3_back)
+<a name="footnote5.2">2</a>: Although the joint distribution of all species for a single trait is multivariate normal (see previous chapters), individual changes along a particular branch of a tree are univariate.
+
+<div>
+[*back to main text*](#footnote5.2_back)
+</div>
+
+<a name="footnote5.3">3</a>:  Another way to think about regression through the origin is to think of pairs of contrasts across any node in the tree as two-dimensional vectors. Calculating a vector correlation is equivalent to calculating a regression forced through the origin.
+
+<div>
+[*back to main text*](#footnote5.3_back)
+</div>
 
 
 <div>

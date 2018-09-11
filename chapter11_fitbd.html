@@ -27,14 +27,12 @@ title: Fitting birth-death models
 </ul></li>
 <li><a href="#section-11.5-sampling-and-birth-death-models">Section 11.5: Sampling and birth-death models</a></li>
 <li><a href="#section-11.6-summary">Section 11.6: Summary</a></li>
-<li><a href="#references">References</a></li>
 </ul></li>
 </ul>
 </div>
 <div>
 <p><a href="{{site.baseurl}}/pdf/chapter11_fitbd.pdf">pdf version</a></p>
 </div>
-
 <h1 id="chapter-11-fitting-birth-death-models">Chapter 11: Fitting birth-death models</h1>
 <h2 id="section-11.1-hotspots-of-diversity">Section 11.1: Hotspots of diversity</h2>
 <p>The number of species on the Earth remains highly uncertain, but our best estimates are around 10 million <span class="citation">(Mora et al. <a href="#ref-Mora2011-jh">2011</a>)</span>. This is a mind-boggling number, and far more than have been described. As far as we know, all of those species are descended from a single common ancestor that lived some 4.2 billion years ago <span class="citation">(Hedges and Kumar <a href="#ref-Hedges2009-lj">2009</a>)</span>. All of these species formed by the process of speciation, the process by which one species splits into two (or more) descendants <span class="citation">(Coyne and Orr <a href="#ref-Coyne2004-vv">2004</a>)</span>.</p>
@@ -588,7 +586,10 @@ $$</span><br /></p>
 (eq. 11.23)
 <div>
 <p><br /><span class="math display">$$
-L(t_1, t_2, \dots, t_n) = \lambda^{n-1} \big[ \prod_{k = 1}^{2n-2} e^{(\lambda-\mu)(t_{k,b} - t_{k,t})} \cdot \frac{(f \lambda - (\mu - \lambda(1-f))e^{(\lambda - \mu)t_{k,t}})^2}{(f \lambda - (\mu - \lambda(1-f))e^{(\lambda - \mu)t_{k,b}})^2} \big]
+\begin{aligned}
+L(t_1, t_2, \dots, t_n) = \lambda^{n-1} \big[ \prod_{k = 1}^{2n-2} e^{(\lambda-\mu)(t_{k,b} - t_{k,t})} \cdot \\
+\frac{(f \lambda - (\mu - \lambda(1-f))e^{(\lambda - \mu)t_{k,t}})^2}{(f \lambda - (\mu - \lambda(1-f))e^{(\lambda - \mu)t_{k,b}})^2} \big]
+\end{aligned}
 $$</span><br /></p>
 </div>
 <p>Again, the above formula is proportional to the full likelihood, which is:</p>
@@ -614,7 +615,10 @@ $$</span><br /></p>
 <p>There are two extensions to this approach that are worth mentioning. One is Hohna's <span class="citation">(<a href="#ref-Hohna2011-tn">2011</a>)</span> diversified sampling (&quot;DS&quot;) model. This model makes a different assumption: when sampling n taxa from an overall set of m, the deepest <span class="math inline"><em>n</em> − 1</span> nodes have been included. Hohna's approach allows users to fit a model with representative sampling but without requiring assignment of extant diversity to each clade. Another approach, by Stadler and Smrckova <span class="citation">(<a href="#ref-Stadler2016-zl">2016</a>)</span>, calculates likelihoods for representatively sampled trees and can fit models of time-varying speciation and extinction rates (see chapter 12).</p>
 <h2 id="section-11.6-summary">Section 11.6: Summary</h2>
 <p>In this chapter, I described how to estimate parameters from birth-death models using data on species diversity and ages, and how to use patterns of tree balance to test hypotheses about changing birth and death rates. I also described how to calculate the likelihood for birth-death models on trees, which leads directly to both ML and Bayesian methods for estimating birth and death rates. In the next chapter, we will explore elaborations on birth-death models, and discuss models that go beyond constant-rates birth-death models to analyze the diversity of life on Earth.</p>
-<h2 id="references" class="unnumbered">References</h2>
+<div>
+<h2 id="references">References</h2>
+</div>
+
 <div id="refs" class="references">
 <div id="ref-Blum2006-jo">
 <p>Blum, M. G. B., and O. François. 2006. Which random processes describe the tree of life? A large-scale study of phylogenetic tree imbalance. Syst. Biol. 55:685–691.</p>

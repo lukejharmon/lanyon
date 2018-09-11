@@ -22,7 +22,6 @@ title: Models of discrete character evolution
 <li><a href="#section-7.5-simulating-the-mk-model-on-a-tree">Section 7.5: Simulating the Mk model on a tree</a></li>
 <li><a href="#section-7.6-chapter-summary">Section 7.6: Chapter summary</a></li>
 <li><a href="#section-7.7-footnotes">Section 7.7: Footnotes</a></li>
-<li><a href="#references">References</a></li>
 </ul></li>
 </ul>
 </div>
@@ -30,7 +29,6 @@ title: Models of discrete character evolution
 <p><a href="{{site.baseurl}}/pdf/chapter7_introdiscrete.pdf">pdf version</a></p>
 <p>R markdown to <a href="{{site.baseurl}}/rmarkdown/chapter8_squamatelimbs.html">recreate analyses</a></p>
 </div>
-
 <h1 id="chapter-7-models-of-discrete-character-evolution">Chapter 7: Models of discrete character evolution</h1>
 <h2 id="section-7.1-limblessness-as-a-discrete-trait">Section 7.1: Limblessness as a discrete trait</h2>
 <p>Squamates, the clade that includes all living species of lizards, are well known for their diversity. From the gigantic Komodo dragon of Indonesia (Figure 7.1A, <em>Varanus komodoensis</em>) to tiny leaf chameleons of Madagascar (Figure 7.1B, <em>Brookesia</em>), squamates span an impressive range of form and ecological niche use <span class="citation">(Vitt et al. <a href="#ref-Vitt2003-bl">2003</a>; Pianka et al. <a href="#ref-Pianka2017-aw">2017</a>)</span>. Even the snakes (Figure 7.1C and D), extraordinarily diverse in their own right (~3,500 species), are actually a clade that is nested within squamates <span class="citation">(Streicher and Wiens <a href="#ref-Streicher2017-wb">2017</a>)</span>. The squamate lineage that is ancestral to snakes became limbless about 170 million years ago <span class="citation">(see Hedges et al. <a href="#ref-Hedges2006-ta">2006</a>)</span> – and also underwent a suite of changes to their head shape, digestive tract, and other traits associated with their limbless lifestyle. In other words, snakes are lizards – highly modified lizards, but lizards nonetheless. And snakes are not the only limbless lineage of squamates. In fact, lineages within squamates have lost their limbs over and over again through their history (e.g. Figure 7.1E and F), with some estimates that squamates have lost their limbs at least 26 times in the past 240 million years <span class="citation">(Brandley et al. <a href="#ref-Brandley2008-wr">2008</a>)</span>.</p>
@@ -298,7 +296,10 @@ $$</span><br /></p>
 $$</span><br /></p>
 </div>
 <p>Now we compare <span class="math inline"><em>u</em></span> to the numbers in this cumulative sum vector. We select the smallest element that is still strictly larger than <span class="math inline"><em>u</em></span>, and assign this character state for the end of the branch. For example, if <span class="math inline"><em>u</em> = 0.475</span>, the 5th element, 0.525, is the smallest number that is still greater than <span class="math inline"><em>u</em></span>. This corresponds to character state 4, which we assign to the end of the branch. This last procedure is a numerical trick. Imagine that we have a line segment with length 1. The cumulative sum vector breaks the unit line into segments, each of which is exactly as long as the probability of each event in the set. One then just draws a random number between 0 and 1 using a uniform distribution. The segment that contains this random number is our event. <a href="#footnote7.3_back"><em>back to main text</em></a></p>
-<h2 id="references" class="unnumbered">References</h2>
+<div>
+<h2 id="references">References</h2>
+</div>
+
 <div id="refs" class="references">
 <div id="ref-Brandley2008-wr">
 <p>Brandley, M. C., J. P. Huelsenbeck, and J. J. Wiens. 2008. Rates and patterns in the evolution of snake-like body form in squamate reptiles: Evidence for repeated re-evolution of lost digits and long-term persistence of intermediate body forms. Evolution. Wiley Online Library.</p>
