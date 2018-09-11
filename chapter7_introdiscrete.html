@@ -267,8 +267,14 @@ $$</span><br /></p>
 <p>In this chapter I have described the Mk model, which can be used to describe the evolution of discrete characters that have a set number of fixed states. We can also elaborate on the Mk model to allow more complex models of discrete character evolution (the extended-Mk model). These models can all be used to simulate the evolution of discrete characters on trees.</p>
 <p>In summary, the Mk and extended Mk model are general models that one can use for the evolution of discrete characters. In the next chapter, I will show how to fit these models to data and use them to test evolutionary hypotheses.</p>
 <h2 id="section-7.7-footnotes">Section 7.7: Footnotes</h2>
-<p><a name="footnote7.1">1</a>: Imagine that you calculate a rate of character change by counting the number of changes of state of a character over some time interval, <span class="math inline"><em>t</em></span>. You can calculate the rate of change as <span class="math inline"><em>n</em><sub><em>c</em><em>h</em><em>a</em><em>n</em><em>g</em><em>e</em><em>s</em></sub>/<em>t</em></span>. The instantaneous rate is the value that this rate approaches as <span class="math inline"><em>t</em></span> gets smaller and smaller so that the time interval is nearly zero. <a href="#footnote7.1_back"><em>back to main text</em></a></p>
-<p><a name="footnote7.2">1</a>: I will not cover the details of matrix exponentiation here – interested readers should see Yang (2006) for details – but the calculations are not trivial. <a href="#footnote7.2_back"><em>back to main text</em></a></p>
+<p><a name="footnote7.1">1</a>: Imagine that you calculate a rate of character change by counting the number of changes of state of a character over some time interval, <span class="math inline"><em>t</em></span>. You can calculate the rate of change as <span class="math inline"><em>n</em><sub><em>c</em><em>h</em><em>a</em><em>n</em><em>g</em><em>e</em><em>s</em></sub>/<em>t</em></span>. The instantaneous rate is the value that this rate approaches as <span class="math inline"><em>t</em></span> gets smaller and smaller so that the time interval is nearly zero.</p>
+<div>
+<p><a href="#footnote7.1_back"><em>back to main text</em></a></p>
+</div>
+<p><a name="footnote7.2">1</a>: I will not cover the details of matrix exponentiation here – interested readers should see Yang (2006) for details – but the calculations are not trivial.</p>
+<div>
+<p><a href="#footnote7.2_back"><em>back to main text</em></a></p>
+</div>
 <p><a name="footnote7.3">3</a>:One still obtains the relevant row from <span class="math inline"><strong>P</strong>(<em>t</em>)</span> and draws a uniform random deviate <span class="math inline"><em>u</em></span>. Imagine that we have a ten-state character with states 0 - 9. We start at state 0 at the beginning of the simulation. Again using <span class="math inline"><em>q</em> = 0.5</span> and <span class="math inline"><em>t</em> = 3</span>, we find that:</p>
 (eq. 7.17)
 <div>
@@ -295,7 +301,10 @@ $$</span><br /></p>
 \end{bmatrix}
 $$</span><br /></p>
 </div>
-<p>Now we compare <span class="math inline"><em>u</em></span> to the numbers in this cumulative sum vector. We select the smallest element that is still strictly larger than <span class="math inline"><em>u</em></span>, and assign this character state for the end of the branch. For example, if <span class="math inline"><em>u</em> = 0.475</span>, the 5th element, 0.525, is the smallest number that is still greater than <span class="math inline"><em>u</em></span>. This corresponds to character state 4, which we assign to the end of the branch. This last procedure is a numerical trick. Imagine that we have a line segment with length 1. The cumulative sum vector breaks the unit line into segments, each of which is exactly as long as the probability of each event in the set. One then just draws a random number between 0 and 1 using a uniform distribution. The segment that contains this random number is our event. <a href="#footnote7.3_back"><em>back to main text</em></a></p>
+<p>Now we compare <span class="math inline"><em>u</em></span> to the numbers in this cumulative sum vector. We select the smallest element that is still strictly larger than <span class="math inline"><em>u</em></span>, and assign this character state for the end of the branch. For example, if <span class="math inline"><em>u</em> = 0.475</span>, the 5th element, 0.525, is the smallest number that is still greater than <span class="math inline"><em>u</em></span>. This corresponds to character state 4, which we assign to the end of the branch. This last procedure is a numerical trick. Imagine that we have a line segment with length 1. The cumulative sum vector breaks the unit line into segments, each of which is exactly as long as the probability of each event in the set. One then just draws a random number between 0 and 1 using a uniform distribution. The segment that contains this random number is our event.</p>
+<div>
+<p><a href="#footnote7.3_back"><em>back to main text</em></a></p>
+</div>
 <div>
 <h2 id="references">References</h2>
 </div>
