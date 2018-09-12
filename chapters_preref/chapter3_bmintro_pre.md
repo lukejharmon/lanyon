@@ -258,9 +258,7 @@ E[\bar{z}(t)] \sim N(\bar{z}(0), \sigma_B^2 t_1)
 $$
 </div>
 
-![]({{ site.baseurl }}/images/figure3-4.png)
-
-Figure 3.4. Brownian motion on a simple tree. A. Evolution in a single lineage over time period $t_1$. B. Evolution on a phylogenetic tree relating species a and b, with branch lengths as given by $t_1$, $t_2$, and $t_3$.
+![Figure 3.4. Brownian motion on a simple tree. A. Evolution in a single lineage over time period $t_1$. B. Evolution on a phylogenetic tree relating species a and b, with branch lengths as given by $t_1$, $t_2$, and $t_3$.]({{ site.baseurl }}/images/figure3-4.png)
 
 Now consider a small section of a phylogenetic tree including two species and an ancestral stem branch (Figure 3.4B). Assume a character evolves on that tree under Brownian motion, again with starting value $\bar{z}(0)$ and rate parameter $\sigma_B^2$. First consider species a. The mean trait in that species $\bar{x}_a$ evolves under Brownian motion from the ancestor to species a over a total time of $t_1+t_2$. Thus,
 

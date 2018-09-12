@@ -216,7 +216,7 @@ Applying this method to the self-incompatability data, we find that again estima
 ![Figure 13.5. Bayesian BiSSe analysis of self-incompatibility. Posterior distributions for character-dependent speciation ($\lambda_0$ and $\lambda_1$) and extinction ($\mu_0$ and $\mu_1$).]({{ site.baseurl }}/images/figure13-5.png)
 
 
-## Section 13.5:Potential Pitfalls and How to Avoid Them
+## Section 13.5: Potential Pitfalls and How to Avoid Them
 
 Recently, a few papers have been published that are critical of state-dependent diversification models [@Rabosky2015-ao, @Maddison2015-wy]. These papers raise substantive critiques that are important to address when applying the methods described in this chapter to empirical data. In this section I will attempt to describe the critiques and their potential remedies.
 
@@ -228,7 +228,7 @@ Fortunately, there are a number of ways to deal with this problem. First, one ca
 
 A more general critique of state-dependent models of diversification was raised by Maddison and Fitzjohn [@Maddison2015-wy]. This paper pointed out that statistically significant results for these tests can be driven by an event on a single branch of a tree, and therefore be unreplicated. This is a good criticism that applies equally well to a range of comparative methods. We can deal with this critique, in part, by making sure the events we test are replicated in our data. Together, both of these critiques argue for a stronger set of model adequacy approaches in comparative methods.
 
-## Section 13.4: Summary
+## Section 13.6: Summary
 
 Many evolutionary models postulate a link between species characteristics and speciation, extinction, or both. These hypotheses can be tested using state-dependent diversification models, which explicitly consider the possibility that species’ characters affect their diversification rates. State-dependent models as currently implemented have some potential problems, but there are methods to deal with these critiques. The overall ability of state-dependent models to explain broad patterns of evolutionary change remains to be determined, but represents a promising avenue for future research.
 

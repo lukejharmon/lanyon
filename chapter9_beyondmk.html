@@ -178,14 +178,14 @@ title: Beyond the Mk Model
 <h2 id="section-9.5-threshold-models">Section 9.5: Threshold models</h2>
 <p>Recently, Joe Felsenstein <span class="citation">(<a href="#ref-Felsenstein2005-am">2005</a>, <a href="#ref-Felsenstein2012-mi">2012</a>)</span> introduced a model from quantitative genetics, the threshold model, to comparative methods. Threshold models work by modeling a discrete character as underlain by some other, unobserved, continuous trait (called the liability). If the liability crosses a certain threshold value, then the discrete state changes. More specifically, we can consider a single trait, <span class="math inline"><em>y</em></span>, with two states, 0 and 1, which is in turn determined by some underlying continuous variable, <span class="math inline"><em>x</em></span>, called the liability. If <span class="math inline"><em>x</em></span> is greater than the threshold, <span class="math inline"><em>t</em></span>, then <span class="math inline"><em>y</em></span> is 1; otherwise, <span class="math inline"><em>y</em></span> is 0. Felsenstein <span class="citation">(<a href="#ref-Felsenstein2005-am">2005</a>)</span> assumes that <span class="math inline"><em>x</em></span> evolves under a Brownian motion model, although other models like OU are, in principle, possible.</p>
 <p>We can find the likelihood to this model by considering the observations of character states at the tips of the tree. We observe the state of each species, <span class="math inline"><em>y</em><sub><em>i</em></sub></span>. We do not know the liability values for these species. However, we treat these liabilities as unobserved and consider their distributions. Under a Brownian motion model, we know that the liabilities will follow a multivariate normal distribution (see <a href="{{site.baseurl}}/chapter3_bmintro/">chapter 3</a>). We can calculate the probability of observing the data (<span class="math inline"><em>y</em><sub><em>i</em></sub></span>) by finding the integral of the distributions of liabilities on the side of the threshold that matches the data. So if the distribution of the liability for species <span class="math inline"><em>i</em></span> is <span class="math inline"><em>p</em><sub><em>i</em></sub>(<em>x</em>)</span>, then:</p>
-<p>(eq 9.1)</p>
+(eq 9.1)
 <div>
 <p><br /><span class="math display">$$
 p(y_i = 0) =
 {\int\limits_{-\infty}^{t} p_i (x) dx}
 $$</span><br /></p>
 </div>
-<p>and</p>
+and
 <div>
 <p><br /><span class="math display">$$
 p(y_i = 1) =

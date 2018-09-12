@@ -312,7 +312,7 @@ In this chapter I have described the Mk model, which can be used to describe the
 [*back to main text*](#footnote7.1_back)
 </div>
 
-<a name="footnote7.2">1</a>: I will not cover the details of matrix exponentiation here – interested readers should see Yang (2006) for details – but the calculations are not trivial.
+<a name="footnote7.2">2</a>: I will not cover the details of matrix exponentiation here – interested readers should see Yang (2006) for details – but the calculations are not trivial.
 
 <div>
 [*back to main text*](#footnote7.2_back)

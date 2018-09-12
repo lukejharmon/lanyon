@@ -82,7 +82,6 @@ Recently, Joe Felsenstein [-@Felsenstein2012-mi; -@Felsenstein2005-am] introduce
 We can find the likelihood to this model by considering the observations of character states at the tips of the tree. We observe the state of each species, $y_i$. We do not know the liability values for these species. However, we treat these liabilities as unobserved and consider their distributions. Under a Brownian motion model, we know that the liabilities will follow a multivariate normal distribution (see [chapter 3]( {{ site.baseurl }}/chapter3_bmintro/)). We can calculate the probability of observing the data ($y_i$) by finding the integral of the distributions of liabilities on the side of the threshold that matches the data. So if the distribution of the liability for species $i$ is $p_i(x)$, then:
 
 (eq 9.1)
-
 <div>
 $$
 p(y_i = 0) =
@@ -91,7 +90,6 @@ $$
 </div>
 
 and
-
 <div>
 $$
 p(y_i = 1) =
