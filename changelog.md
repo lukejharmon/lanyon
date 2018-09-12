@@ -8,3 +8,7 @@
 all references to the end rather than after each chapter.
 
 - Fix footnotes so "back to main text" is not displayed in the pdf version.
+
+- Fixed missing equations in chapter 11
+
+- Corrected various typos
