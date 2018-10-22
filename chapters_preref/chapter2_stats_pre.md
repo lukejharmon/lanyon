@@ -79,7 +79,7 @@ In the example given, n = 100 and H = 63, so:
 $$
 L(H|D)= {100 \choose 63} p_H^{63} (1-p_H)^{37}
 $$
-</div>	 
+</div>
 
 ![Figure 2.2. Likelihood surface for the parameter $p_H$, given a coin that has been flipped as heads 63 times out of 100.]({{ site.baseurl }}/images/flip_likelihood_surface.png)
 

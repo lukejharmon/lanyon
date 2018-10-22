@@ -87,28 +87,26 @@ q &amp; -q \\
 \end{bmatrix}
 $$</span><br /></p>
 </div>
-<p>Likewise, for <span class="math inline"><em>k</em> = 3</span>,</p>
-<p>the transition rate matrix is:</p>
-<p>(eq. 7.4)</p>
+<p>Likewise, for <span class="math inline"><em>k</em> = 3</span>, the transition rate matrix is:</p>
+(eq. 7.4)
 <div>
 <p><br /><span class="math display">$$
 \mathbf{Q} =
 \begin{bmatrix}
--2 q &amp; q &amp; q \\
-q &amp; -2 q &amp; q \\
-q &amp; q &amp; -2 q \\
+-2 q &amp; q &amp; q\\
+q &amp; -2 q &amp; q\\
+q &amp; q &amp; -2 q\\
 \end{bmatrix}
 $$</span><br /></p>
 </div>
-<p>In general,</p>
-<p>the k-state transition matrix for a basic Mk model is:</p>
-<p>(eq. 7.5)</p>
+<p>In general, the k-state transition matrix for a basic Mk model is:</p>
+(eq. 7.5)
 <div>
 <p><br /><span class="math display">$$
-\mathbf{Q} = q
+\mathbf{Q} =
 \begin{bmatrix}
-1-k &amp; 1 &amp; \dots &amp; 1 \\
-1 &amp; 1-k &amp; \dots &amp; 1 \\
+1-k &amp; 1 &amp; \dots &amp; 1\\
+1 &amp; 1-k &amp; \dots &amp; 1\\
 \vdots &amp; \vdots &amp; \ddots &amp; \vdots\\
 1 &amp; 1 &amp; \dots &amp; 1\\
 \end{bmatrix}
@@ -120,7 +118,7 @@ $$</span><br /></p>
 <p><br /><span class="math display"><strong>P</strong>(<em>t</em>)=<em>e</em><sup><strong>Q</strong><em>t</em></sup></span><br /></p>
 </div>
 <p>This equation looks simple, but calculating <span class="math inline"><em>P</em>(<em>t</em>)</span> involves matrix exponentiation – raising <span class="math inline"><em>e</em></span> to a power defined by a matrix. This calculation is substantially different from raising <span class="math inline"><em>e</em></span> to the power defined by each element of a matrix<sup><a name="footnote7.2_back"><a href="#footnote7.2"><span class="math inline"><em></em><sup>2</sup></span></a></a></sup>. The result is a matrix, <span class="math inline"><strong>P</strong></span>, of transition probabilities. Each element in this matrix (<span class="math inline"><em>p</em><sub><em>i</em><em>j</em></sub></span>) gives the probability that starting in state <span class="math inline"><em>i</em></span> you will end up in state <span class="math inline"><em>j</em></span> over that time interval <span class="math inline"><em>t</em></span>. For the standard Mk model, there is a general solution to this equation:</p>
-<p>(eq. 7.7)</p>
+(eq. 7.7)
 <div>
 <p><br /><span class="math display">$$
 \begin{array}{l}
@@ -130,11 +128,11 @@ p_{ij}(t) = \frac{1}{k} - \frac{1}{k} e^{-kqt} \\
 $$</span><br /></p>
 </div>
 <p>In particular, when k = 2,</p>
-<p>(eq. 7.8)</p>
+(eq. 7.8)
 <div>
 <p><br /><span class="math display">$$
 \begin{array}{l}
-p_{ii}(t) = \frac{1}{k} + \frac{k-1}{k} e^{-kqt} = \frac{1}{2} + \frac{2-1}{2}e^{-2qt}=\frac{1+e^{-2qt}}{2} \\
+p_{ii}(t) = \frac{1}{k} + \frac{k-1}{k} e^{-kqt} =  \frac{1}{2} + \frac{2-1}{2}e^{-2qt}=\frac{1+e^{-2qt}}{2} \\
 p_{ij}(t) = \frac{1}{k} - \frac{1}{k} e^{-kqt} = \frac{1}{2} - \frac{1}{2}e^{-2qt}=\frac{1-e^{-2qt}}{2} \\
 \end{array}
 $$</span><br /></p>

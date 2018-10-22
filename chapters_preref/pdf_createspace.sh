@@ -13,6 +13,6 @@ cat chapter12_beyondbd_pre.md | sed s@\{\{[[:space:]]site.baseurl[[:space:]]\}\}
 cat chapter13_chardiv_pre.md | sed s@\{\{[[:space:]]site.baseurl[[:space:]]\}\}@..@ > t13.md
 cat chapter14_summary_pre.md | sed s@\{\{[[:space:]]site.baseurl[[:space:]]\}\}@..@ > t14.md
 
-pandoc titlepage.md copyright.md acknowledgements.md toc.md t1.md t2.md t3.md t4.md t5.md t6.md t7.md t8.md t9.md t10.md t11.md t12.md t13.md t14.md --from=markdown-markdown_in_html_blocks-native_divs --latex-engine=xelatex --filter pandoc-fignos -M fignos-caption-name="Figure 2." --bibliography pcm_paperpile.bib --filter pandoc-citeproc --csl evolution.csl --metadata link-citations=true -V geometry:margin=0.7in -V fontsize=12pt -V geometry:c5paper -o ../pdf/phylogeneticComparativeMethods_createspace.pdf
+pandoc titlepage.md copyright.md acknowledgements.md toc.md t1.md t2.md t3.md t4.md t5.md t6.md t7.md t8.md t9.md t10.md t11.md t12.md t13.md t14.md --from=markdown-markdown_in_html_blocks-native_divs --latex-engine=xelatex --filter pandoc-fignos --bibliography pcm_paperpile.bib --filter pandoc-citeproc --csl evolution.csl --metadata link-citations=true -V geometry:margin=0.7in -V fontsize=12pt -V geometry:c5paper -o ../pdf/phylogeneticComparativeMethods_createspace.pdf
 
 rm t1.md t2.md t3.md t4.md t5.md t6.md t7.md t8.md t9.md t10.md t11.md t12.md t13.md t14.md

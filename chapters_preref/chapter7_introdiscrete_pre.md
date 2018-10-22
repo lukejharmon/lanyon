@@ -83,29 +83,31 @@ q & -q \\
 $$
 </div>
 
-Likewise, for $k = 3$, the transition rate matrix is:
+Likewise, for $k = 3$, the transition rate matrix is:
 
-(eq. 7.4)
+(eq. 7.4)
 <div>
 $$
 \mathbf{Q} =
 \begin{bmatrix}
--2 q & q & q \\
-q & -2 q & q \\
-q & q & -2 q \\
+-2 q & q & q\\
+q & -2 q & q\\
+q & q & -2 q\\
 \end{bmatrix}
 $$
 </div>
 
-In general, the k-state transition matrix for a basic Mk model is:
 
-(eq. 7.5)
+In general, the k-state transition matrix for a basic Mk model is:
+
+
+(eq. 7.5)
 <div>
 $$
-\mathbf{Q} = q
+\mathbf{Q} =
 \begin{bmatrix}
-1-k & 1 & \dots & 1 \\
-1 & 1-k & \dots & 1 \\
+1-k & 1 & \dots & 1\\
+1 & 1-k & \dots & 1\\
 \vdots & \vdots & \ddots & \vdots\\
 1 & 1 & \dots & 1\\
 \end{bmatrix}
@@ -123,7 +125,7 @@ $$
 
 This equation looks simple, but calculating $P(t)$ involves matrix exponentiation – raising $e$ to a power defined by a matrix. This calculation is substantially different from raising $e$ to the power defined by each element of a matrix<sup><a name="footnote7.2_back">[$^2$](#footnote7.2)</a></sup>. The result is a matrix, $\mathbf{P}$, of transition probabilities. Each element in this matrix ($p_{ij}$) gives the probability that starting in state $i$ you will end up in state $j$ over that time interval $t$. For the standard Mk model, there is a general solution to this equation:
 
-(eq. 7.7)
+(eq. 7.7)
 <div>
 $$
 \begin{array}{l}
@@ -135,15 +137,17 @@ $$
 
 In particular, when k = 2,
 
-(eq. 7.8)
+
+(eq. 7.8)
 <div>
 $$
 \begin{array}{l}
-p_{ii}(t) = \frac{1}{k} + \frac{k-1}{k} e^{-kqt} = \frac{1}{2} + \frac{2-1}{2}e^{-2qt}=\frac{1+e^{-2qt}}{2} \\
+p_{ii}(t) = \frac{1}{k} + \frac{k-1}{k} e^{-kqt} =  \frac{1}{2} + \frac{2-1}{2}e^{-2qt}=\frac{1+e^{-2qt}}{2} \\
 p_{ij}(t) = \frac{1}{k} - \frac{1}{k} e^{-kqt} = \frac{1}{2} - \frac{1}{2}e^{-2qt}=\frac{1-e^{-2qt}}{2} \\
 \end{array}
 $$
 </div>
+
 
 If we consider what happens when time gets very large in these equations, we see an interesting pattern. Any term that has $e^{-t}$ in it gets closer and closer to zero as t increases. Because of this, for all values of $k$, each $p_{ij}(t)$ converges to a constant value, $1/k$. This is the stationary distribution of character states, $\pi$, defined as the equilibrium frequency of character states if the process is run many times for a long enough time period. In general, the stationary distribution of an Mk model is:
 

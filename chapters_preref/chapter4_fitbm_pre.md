@@ -166,8 +166,7 @@ Equation (4.8) is biased, and will consistently estimate rates of evolution that
 (eq. 4.9)
 $$
 \hat{\sigma}_{REML}^2 = \frac
-{(\mathbf{x} - \hat{\bar{z}}(0) \mathbf{1}) \mathbf{C}^{-1} (\mathbf{x} - \hat{\bar{z}}(0) \mathbf{1})}
-{n-1}
+{(\mathbf{x} - \hat{\bar{z}}(0) \mathbf{1}) \mathbf{C}^{-1} (\mathbf{x} - \hat{\bar{z}}(0) \mathbf{1})}{n-1}
 $$
 </div>
 
