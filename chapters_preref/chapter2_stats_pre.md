@@ -30,7 +30,7 @@ Getting back to our lizard-flipping example, we can use a frequentist approach. 
 
 To carry out the test, we first need to consider how many "successes" we should expect if the null hypothesis were true. We consider the distribution of our test statistic (the number of heads) under our null hypothesis ($p_H = 0.5$). This distribution is a binomial distribution (Figure 2.1).
 
-![Figure 2.1. The unfair lizard. We use the null hypothesis to generate a null distribution for our test statistic, which in this case is a binomial distribution centered around 50. We then look at our test statistic and calculate the probability of obtaining a result at least as extreme as this value.]({{ site.baseurl }}/images/binomial_null.jpg)
+![Figure 2.1. The unfair lizard. We use the null hypothesis to generate a null distribution for our test statistic, which in this case is a binomial distribution centered around 50. We then look at our test statistic and calculate the probability of obtaining a result at least as extreme as this value. Image by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.]({{ site.baseurl }}/images/binomial_null.jpg)
 
 We can use the known probabilities of the binomial distribution to calculate our P-value. We want to know the probability of obtaining a result at least as extreme as our data when drawing from a binomial distribution with parameters $p = 0.5$ and $n = 100$. We calculate the area of this distribution that lies to the right of 63. This area, $P = 0.003$, can be obtained either from a table, from statistical software, or by using a relatively simple calculation. The value, 0.003, represents the probability of obtaining at least 63 heads out of 100 trials with $p_H = 0.5$. This number is the P-value from our binomial test. Because we only calculated the area of our null distribution in one tail (in this case, the right, where values are greater than or equal to 63), then this is actually a one-tailed test, and we are only considering part of our null hypothesis where $p_H > 0.5$. Such an approach might be suitable in some cases, but more typically we need to multiply this number by 2 to get a two-tailed test; thus, $P = 0.006$. This two-tailed P-value of 0.006 includes the possibility of results as extreme as our test statistic in either direction, either too many or too few heads. Since P < 0.05, our chosen $\alpha$ value, we reject the null hypothesis, and conclude that we have an unfair lizard.
 
@@ -81,7 +81,7 @@ L(H|D)= {100 \choose 63} p_H^{63} (1-p_H)^{37}
 $$
 </div>
 
-![Figure 2.2. Likelihood surface for the parameter $p_H$, given a coin that has been flipped as heads 63 times out of 100.]({{ site.baseurl }}/images/flip_likelihood_surface.png)
+![Figure 2.2. Likelihood surface for the parameter $p_H$, given a coin that has been flipped as heads 63 times out of 100. Image by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.]({{ site.baseurl }}/images/flip_likelihood_surface.png)
 
 
 We can make a plot of the likelihood, $L$, as a function of $p_H$ (Figure 2.2). When we do this, we see that the maximum likelihood value of $p_H$, which we can call $\hat{p}_H$, is at $\hat{p}_H = 0.63$. This is the “brute force” approach to finding the maximum likelihood: try many different values of the parameters and pick the one with the highest likelihood. We can do this much more efficiently using numerical methods as described in later chapters in this book.
@@ -385,7 +385,7 @@ We can compare this posterior distribution of our parameter estimate, $p_H$, giv
 
 As you can see from this example, Bayes theorem lets us combine our prior belief about parameter values with the information from the data in order to obtain a posterior. These posterior distributions are very easy to interpret, as they express the probability of the model parameters given our data. However, that clarity comes at a cost of requiring an explicit prior. Later in the book we will learn how to use this feature of Bayesian statistics to our advantage when we actually do have some prior knowledge about parameter values.
 
-![Figure 2.3. Bayesian prior (dotted line) and posterior (solid line) distributions for lizard flipping.]({{ site.baseurl }}/images/figure2-3.png)
+![Figure 2.3. Bayesian prior (dotted line) and posterior (solid line) distributions for lizard flipping. Image by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.]({{ site.baseurl }}/images/figure2-3.png)
 
 
 
@@ -480,7 +480,7 @@ We can now calculate $R_{accept} = R_{prior} \cdot R_{proposal} \cdot R_{likelih
 
 If we repeat this procedure a large number of times, we will obtain a long chain of values of $p$. You can see the results of such a run in Figure 2.4. In panel A, I have plotted the likelihoods for each successive value of p. You can see that the likelihoods increase for the first ~1000 or so generations, then reach a plateau around $lnL = -3$. Panel B shows a plot of the values of $p$, which rapidly converge to a stable distribution around $p = 0.63$. We can also plot a histogram of these posterior estimates of $p$. In panel C, I have done that – but with a twist. Because the MCMC algorithm creates a series of parameter estimates, these numbers show autocorrelation – that is, each estimate is similar to estimates that come just before and just after. This autocorrelation can cause problems for data analysis. The simplest solution is to subsample these values, picking only, say, one value every 100 generations. That is what I have done in the histogram in panel C. This panel also includes the analytic posterior distribution that we calculated above – notice how well our Metropolis-Hastings algorithm did in reconstructing this distribution! For comparative methods in general, analytic posterior distributions are difficult or impossible to construct, so approximation using MCMC is very common.
 
-![Figure 2.4. Bayesian MCMC from lizard flipping example.]({{ site.baseurl }}/images/figure2-4.png)
+![Figure 2.4. Bayesian MCMC from lizard flipping example. Image by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.]({{ site.baseurl }}/images/figure2-4.png)
 
 
 

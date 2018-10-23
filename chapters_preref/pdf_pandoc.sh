@@ -14,7 +14,7 @@ cat chapter12_beyondbd_pre.md | sed s@\{\{[[:space:]]site.baseurl[[:space:]]\}\}
 cat chapter13_chardiv_pre.md | sed s@\{\{[[:space:]]site.baseurl[[:space:]]\}\}@..@ > t13.md
 cat chapter14_summary_pre.md | sed s@\{\{[[:space:]]site.baseurl[[:space:]]\}\}@..@ > t14.md
 
-pandoc t1.md --from=markdown-markdown_in_html_blocks-native_divs --latex-engine=xelatex --bibliography pcm_paperpile.bib --filter pandoc-citeproc --csl evolution.csl --metadata link-citations=true -o ../pdf/chapter1_introduction.pdf
+pandoc t1.md --from=markdown-markdown_in_html_blocks-native_divs --latex-engine=xelatex --filter pandoc-fignos -M fignos-caption-name="Figure 1." --bibliography pcm_paperpile.bib --filter pandoc-citeproc --csl evolution.csl --metadata link-citations=true -o ../pdf/chapter1_introduction.pdf
 pandoc t2.md --from=markdown-markdown_in_html_blocks-native_divs --latex-engine=xelatex --filter pandoc-fignos -M fignos-caption-name="Figure 2." --bibliography pcm_paperpile.bib --filter pandoc-citeproc --csl evolution.csl --metadata link-citations=true -o ../pdf/chapter2_stats.pdf
 pandoc t3.md --from=markdown-markdown_in_html_blocks-native_divs --latex-engine=xelatex --filter pandoc-fignos -M fignos-caption-name="Figure 3." --bibliography pcm_paperpile.bib --filter pandoc-citeproc --csl evolution.csl --metadata link-citations=true -o ../pdf/chapter3_bmintro.pdf
 pandoc t4.md --from=markdown-markdown_in_html_blocks-native_divs --latex-engine=xelatex --filter pandoc-fignos -M fignos-caption-name="Figure 4." --bibliography pcm_paperpile.bib --filter pandoc-citeproc --csl evolution.csl --metadata link-citations=true -o ../pdf/chapter4_fitbm.pdf
