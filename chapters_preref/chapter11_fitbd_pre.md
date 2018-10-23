@@ -11,7 +11,7 @@ The number of species on the Earth remains highly uncertain, but our best estima
 Some parts of the tree of life have more species than others. This imbalance in diversity tells us that speciation is much more common in some lineages than others [@Mooers1997-ow]. Likewise, numerous studies have argued that certain habitats are "hotbeds" of speciation [e.g. @Hutter2017-tf; @Miller2017-ja]. For example, the high Andes ecosystem called the Páromo - a peculiar landscape of alien-looking plants and spectacled bears - might harbor the highest speciation rates on the planet [@Madrinan2013-oi].
 
 
-![Figure 11.1 Páromo ecosystem, Chingaza Natural National Park, Colombia. Photo taken by the author.]({{ site.baseurl }}/images/figure11-1.png)
+![Figure 11.1 Páromo ecosystem, Chingaza Natural National Park, Colombia. Photo taken by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.]({{ site.baseurl }}/images/figure11-1.png)
 
 In this chapter we will explore how we can learn about speciation and extinction rates from the tree of life. We will use birth-death models, simple models of how species form and go extinct through time. Birth-death models can be applied to data on clade ages and diversities, or fit to the branching times in phylogenetic trees. We will explore both maximum likelihood and Bayesian methods to do both of these things.
 
@@ -19,7 +19,7 @@ In this chapter we will explore how we can learn about speciation and extinction
 
 If we know the age of a clade and its current diversity, then we can calculate the net diversification rate for that clade. Before presenting equations, I want to make a distinction between two different ways that one can measure the age of a clade: the stem age and the crown age. A clade's crown age is the age of the common ancestor of all species in the clade. By contrast, a clade's stem age measures the time that that clade descended from a common ancestor with its sister clade. The stem age of a clade is always at least as old, and usually older, than the crown age.
 
-![Figure 11.2. Crown and stem age of a clade of interest (highlighted in red).]({{ site.baseurl }}/images/figure11-2.png)
+![Figure 11.2. Crown and stem age of a clade of interest (highlighted in red). Image by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.]({{ site.baseurl }}/images/figure11-2.png)
 
 
 Magallón and Sanderson [-@Magallon2001-xi] give an equation for the estimate of net diversification rate given clade age and diversity:
@@ -121,7 +121,7 @@ $$
 
 When we apply this technique to the Páromo [from @Madrinan2013-oi] and priors with $\lambda_{prior} = 1$ for both $r$ and $\epsilon$, we obtain posterior distributions: $r$ (mean = 0.497, 95% CI = 0.08-1.77) and $\epsilon$ (mean = 0.36, 95% CI = 0.02-0.84; Figure 11.3). Note that these results are substantially different than the ML estimates. This is because in our Bayesian analysis our prior on extinction rates is exponential, giving a high probability for relatively strong levels of extinction relative to speciation.
 
-![Figure 11.3. Posterior distribution for $r$ and $\epsilon$ for Páromo clades [@Madrinan2013-oi].]({{ site.baseurl }}/images/figure11-3.png)
+![Figure 11.3. Posterior distribution for $r$ and $\epsilon$ for Páromo clades. Data from Madriñán et al. [-@Madrinan2013-oi], image by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.]({{ site.baseurl }}/images/figure11-3.png)
 
 Thus, we can estimate diversification rates from data on clade ages and diversities. If we have a whole set of such clades, we can (in principal) estimate both speciation and extinction rates, so long as we are willing to assume that all of the clades share equal diversification rates. However, as we will see in the next section, this assumption is almost always dubious!
 
@@ -263,7 +263,7 @@ The general idea is that we will assign values to these probabilities at the tip
 
 To begin with, we need to keep track of two probabilities: $D_N(t)$, the probability that a lineage at some time t in the past will evolve into the extant clade N as observed today; and $E(t)$, the probability that a lineage at some time t will go completely extinct and leave no descendants at the present day. (Later, we will redefine $E(t)$ so that it includes the possibility that the lineages has descendants but none have been sampled in our data). We then apply these probabilities to the tree using three main ideas (Figure 11.4)
 
-![Figure 11.4. General outline of steps for calculating likelihood of a tree under a birth-death model [@Maddison2007-vu]]({{ site.baseurl }}/images/figure11-4.png)
+![Figure 11.4. General outline of steps for calculating likelihood of a tree under a birth-death model. Image inspired by Maddison et al. [-@Maddison2007-vu] and created by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.]({{ site.baseurl }}/images/figure11-4.png)
 
 1. We  define our starting points at the tips of the tree.
 
@@ -279,12 +279,12 @@ You might wonder why we need to calculate both $D_N(t)$ and $E(t)$ if the likeli
 
 First, the starting point. Since every tip $i$ represents a living lineage, we know it is alive at the present day - so we can define $D_N(t) = 1$. We also know that it will not go extinct before being included in the tree, so $E(t) = 0$. This gives our starting values for the two probabilities at each tip in the tree (Figure 11.5).
 
-![Figure 11.5. Starting points at tree tips for likelihood probability calculations [@Maddison2007-vu].]({{ site.baseurl }}/images/figure11-5.png)
+![Figure 11.5. Starting points at tree tips for likelihood probability calculations. Image inspired by Maddison et al. [-@Maddison2007-vu] and created by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.]({{ site.baseurl }}/images/figure11-5.png)
 
 
 Next, imagine we move backwards along some section of a tree branch with no nodes. We will consider an arbitrary branch of the tree. Since we are going back in time, we will start at some node in the tree N, which occurs at a time $t_N$, and denote the time going back into the past as t (Figure 11.6).
 
-![Figure 11.6. Updating $D_N(t)$ and calculating $E(t)$ along a tree branch [@Maddison2007-vu].]({{ site.baseurl }}/images/figure11-6.png)
+![Figure 11.6. Updating $D_N(t)$ and calculating $E(t)$ along a tree branch. Image inspired by Maddison et al. [-@Maddison2007-vu] and created by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.]({{ site.baseurl }}/images/figure11-6.png)
 
 
 Since that section of branch exists in our tree, we know two things: the lineage did not go extinct during that time, and if speciation occurred, the lineage that split off did not survive to the present day. We can capture these two possibilities in a differential equation that considers how our overall likelihood changes over some very small unit of time [@Maddison2007-vu].
@@ -334,7 +334,7 @@ Remember that $t_N$ is the depth (measured from the present day) of node N (Figu
 
 Finally, we need to consider what happens when two branches come together at a node. Since there is a node, we know there has been a speciation event. We multiply the probability calculations flowing down each branch by the probability of a speciation event [@Maddison2007-vu; Figure 11.7].
 
-![Figure 11.7. Updating $D_N(t)$ and $E(t)$ along a tree branch [@Maddison2007-vu].]({{ site.baseurl }}/images/figure11-7.png)
+![Figure 11.7. Updating $D_N(t)$ and $E(t)$ along a tree branch. Image inspired by Maddison et al. [-@Maddison2007-vu] and created by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.]({{ site.baseurl }}/images/figure11-7.png)
 
 So:
 
@@ -415,7 +415,7 @@ We can also estimate birth and death rates using a Bayesian MCMC. We can use exa
 
 Applying this to Lupines with the same priors as before, we obtain the posterior distributions shown in figure 11.5. The mean of the posterior for each parameter is $\lambda = 0.48$ and $\mu = 0.23$, quite close to the ML estimates for these parameters.
 
-![Figure 11.8. Posterior distribution for $b$ and $d$ for *Lupinus*  [@Drummond2012-zs].]({{ site.baseurl }}/images/figure11-8.png)
+![Figure 11.8. Posterior distribution for $b$ and $d$ for *Lupinus*. Data from   [@Drummond2012-zs], image inspired by Maddison et al. [-@Maddison2007-vu] and created by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.]({{ site.baseurl }}/images/figure11-8.png)
 
 ## Section 11.5: Sampling and birth-death models
 

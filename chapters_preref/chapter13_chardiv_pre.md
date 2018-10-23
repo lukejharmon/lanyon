@@ -60,9 +60,9 @@ And so on for the other four possible events.
 
 Once we have picked an event in this way, we can randomly assign it to one of the lineages in the appropriate state, with each lineage equally likely to be chosen. We then proceed forwards in time until we have a dataset with the desired size or total time depth.
 
-An example simulation is shown in Figure 14.1. As you can see, under these model parameters the impact of character states on diversification is readily apparent. In the next section we will figure out how to extract that information from our data.
+An example simulation is shown in Figure 13.1. As you can see, under these model parameters the impact of character states on diversification is readily apparent. In the next section we will figure out how to extract that information from our data.
 
-![Figure 13.1. Simulation of character-dependent diversification. Data were simulated under a model where diversification rate of state zero (red) is substantially lower than that of state 1 (black; model parameters $q_{01} = 1_{10} = 0.05$, $\lambda_0 = 0.2$, $\lambda_1 = 0.8$, $\mu_0 = \mu_1 = 0.05$).]({{ site.baseurl }}/images/figure13-1.png)
+![Figure 13.1. Simulation of character-dependent diversification. Data were simulated under a model where diversification rate of state zero (red) is substantially lower than that of state 1 (black; model parameters $q_{01} = 1_{10} = 0.05$, $\lambda_0 = 0.2$, $\lambda_1 = 0.8$, $\mu_0 = \mu_1 = 0.05$). Image by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.]({{ site.baseurl }}/images/figure13-1.png)
 
 ## Section 13.3: Calculating Likelihoods for State-dependent diversification models
 
@@ -78,12 +78,12 @@ This discussion also highlights the fact that incorporating uncertainty and/or v
 
 We now need to consider the change in the likelihood as we step backwards through time in the tree [@Maddison2007-vu]. We will consider some very small time interval $\Delta t$, and later use differential equations to find out what happens in the limit as this interval goes to zero (Figure 13.2). Since we will eventually take the limit as $\Delta t \to 0$, we can assume that the time interval is so small that, at most, one event (speciation, extinction, or character change) has happened in that interval, but never more than one. We will calculate the probability of the observed data given that the character is in each state at time $t$, again measuring time backwards from the present day. In other words, we are considering the probability of the observed data if, at time t, the character state were in state 0 [$p_0 (t)$] or state 1 [$p_1 (t)$]. For now, we can assume we know these probabilities, and try to calculate updated probabilities at some earlier time $t+\Delta t$: $p_0 (t+\Delta t)$ and $p_1 (t+\Delta t)$.
 
-![Figure 13.2. Illustration of calculations of probabilities of part of the data descended from node N (red) moving along a branch in the tree. Starting with values for the probability at time $t$, we calculate the probability at time $t + \Delta t$, moving towards the root of the tree. From Maddison et al. [-@Maddison2007-vu].]({{ site.baseurl }}/images/figure13-2.png)
+![Figure 13.2. Illustration of calculations of probabilities of part of the data descended from node N (red) moving along a branch in the tree. Starting with values for the probability at time $t$, we calculate the probability at time $t + \Delta t$, moving towards the root of the tree. Redrawn from Maddison et al. [-@Maddison2007-vu]. Image by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.]({{ site.baseurl }}/images/figure13-2.png)
 
 
 To calculate $p_0 (t+\Delta t)$ and $p_1 (t+\Delta t)$, we consider all of the possible things that could happen in a time interval $\Delta t$ along a branch in a phylogenetic tree that are compatible with our dataset [Figure 13.2; @Maddison2007-vu]. First, nothing at all could have happened; second, our character state could have changed; and third, there could have been a speciation event. This last event might seem incorrect, as we are only considering changes along branches in the tree and not at nodes. If we did not reconstruct any speciation events at some point along a branch, then how could one have taken place? The answer is that a speciation event could have occurred but all taxa descended from that branch have since gone extinct. We must also consider the possibility that either the right or the left lineage went extinct following the speciation event; that is why the speciation event probabilities appear twice in Figure 13.2 [@Maddison2007-vu].
 
-![Figure 13.3. The four scenarios under which a lineage with state 0 at time $t + \Delta t$ can yield the data descended from node N. From Maddison et al. [-@Maddison2007-vu].]({{ site.baseurl }}/images/figure13-3.png)
+![Figure 13.3. The four scenarios under which a lineage with state 0 at time $t + \Delta t$ can yield the data descended from node N. Redrawn from Maddison et al. [-@Maddison2007-vu]. Image by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.]({{ site.baseurl }}/images/figure13-3.png)
 
 
 We can write an equation for these updated probabilities. We will consider the probability that the character is in state 0 at time $t+\Delta t$; the equation for state 1 is similar [@Maddison2007-vu].
@@ -168,7 +168,7 @@ Now that we can calculate the likelihood for state-dependent diversification mod
 
 For example, I will apply this approach to the example of self-incompitability. I will use data from Goldberg and Igic [-@Goldberg2012-gs], who provide a phylogenetic tree and data for 356 species of Solanaceae. All species were classified as having any form of self incompatibility, even if the state is variable among populations. The data, along with a stochastic character map of state changes, are shown in Figure 13.4.
 
-![Figure 13.4. Data from Goldberg and Igic [-@Goldberg2012-gs] showing presence (red) and absence (black) of self-incomatibility among Solanaceae. Branches colored using stochastic character mapping under a model with distinct forwards and backwards rates; these reconstructions are biased if characters affect diversification rates.]({{ site.baseurl }}/images/figure13-4.png)
+![Figure 13.4. Data from Goldberg and Igic [-@Goldberg2012-gs] showing presence (red) and absence (black) of self-incomatibility among Solanaceae. Branches colored using stochastic character mapping under a model with distinct forwards and backwards rates; these reconstructions are biased if characters affect diversification rates. Image by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.]({{ site.baseurl }}/images/figure13-4.png)
 
 Applying the BiSSe models to these data and assuming that $q_{01} \neq q_{10}$, we obtain the following results:
 
@@ -213,7 +213,7 @@ $$
 
 Applying this method to the self-incompatability data, we find that again estimates of speciation and extinction differ substantially among the two character states (Figure 13.5). Since the posterior distributions for extinction do not overlap, we again infer that the character likely influences that model parameter; speciation results are again suggestive but not as conclusive as those for extinction.
 
-![Figure 13.5. Bayesian BiSSe analysis of self-incompatibility. Posterior distributions for character-dependent speciation ($\lambda_0$ and $\lambda_1$) and extinction ($\mu_0$ and $\mu_1$).]({{ site.baseurl }}/images/figure13-5.png)
+![Figure 13.5. Bayesian BiSSe analysis of self-incompatibility. Posterior distributions for character-dependent speciation ($\lambda_0$ and $\lambda_1$) and extinction ($\mu_0$ and $\mu_1$). Image by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.]({{ site.baseurl }}/images/figure13-5.png)
 
 
 ## Section 13.5: Potential Pitfalls and How to Avoid Them
