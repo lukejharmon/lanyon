@@ -9,7 +9,7 @@ R markdown to [recreate analyses]({{ site.baseurl }}/rmarkdown/chapter8_squamate
 
 In the introduction to Chapter 7, I mentioned that squamates had lost their limbs repeatedly over their evolutionary history. This is a pattern that has been known for decades, but analyses have been limited by the lack of a large, well-supported species-level phylogenetic tree of squamates [but see @Brandley2008-wr]. Only in the past few years have phylogenetic trees been produced at a scale broad enough to take a comprehensive look at this question [e.g. @Bergmann2012-vm; @Pyron2013-pk; see Figure 8.1]. Such efforts to reconstruct this section of the tree of life provide exciting potential to revisit old questions with new data.
 
-![Figure 8.1. A view of the squamate tree of life. Data from Bergmann et al. [-@Bergmann2012-vm], visualized using OneZoom [@Rosindell2012-bo; see [www.onezoom.org](http://www.onezoom.org)].]({{ site.baseurl }}/images/figure8-1.png)
+![Figure 8.1. A view of the squamate tree of life. Data from Bergmann et al. [-@Bergmann2012-vm], visualized using OneZoom [@Rosindell2012-bo; see [www.onezoom.org](http://www.onezoom.org)]. This image can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.]({{ site.baseurl }}/images/figure8-1.png)
 
 Plotting the pattern of limbed and limbless species on the tree leads to interesting questions about the tempo and mode of this trait in squamates. For example, are there multiple gains as well as losses of limbs? Do gains and losses happen at the same rate, or (as we might expect) are gains more rare than losses? We can test hypothesis such as these using the the Mk and extended-Mk models (see chapter 7). In this chapter we will fit these models to phylogenetic comparative data.
 
@@ -156,7 +156,7 @@ One can compare the two nested models using standard methods discussed in previo
 
 We can apply all of the above methods to analyze the evolution of limblessness in squamates. We can use the tree and character state data from Brandley et al. [-@Brandley2008-wr], which is plotted with ancestral state reconstructions as Figure 8.2.
 
-![Figure 8.2. Reconstructed patterns of the evolution of limbs and limblessness across squamates. Tips show states of extant taxa (here, I classified species with neither fore- nor hindlimbs as limbless, which is conservative given the variation across this clade (see chapter 7). Pie charts on internal nodes show proportional marginal likelihoods for ancestral state reconstruction. Data from Brandley et al. [-@Brandley2008-wr]]({{ site.baseurl }}/images/figure8-2.png)
+![Figure 8.2. Reconstructed patterns of the evolution of limbs and limblessness across squamates. Tips show states of extant taxa (here, I classified species with neither fore- nor hindlimbs as limbless, which is conservative given the variation across this clade (see chapter 7). Pie charts on internal nodes show proportional marginal likelihoods for ancestral state reconstruction. Data from Brandley et al. [-@Brandley2008-wr]. Image by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.]({{ site.baseurl }}/images/figure8-2.png)
 
 If we fit an Mk model to these data assuming equal state frequencies at the root of the tree, we obtain a lnL of -80.5 and an estimate of the $Q_ER$ matrix as:
 
@@ -190,7 +190,7 @@ $$
 
 A Bayesian analysis of the ASY model gives similar conclusions (Figure 8.3). We can see that the posterior distribution for the backwards rate ($q_{21}$) is higher than the forwards rate ($q_{12}$), but that the two distributions are broadly overlapping.
 
-![Figure 8.3. Bayesian posterior distibutions for the extended-Mk model applied to the evolution of limblessness in squamates.]({{ site.baseurl }}/images/figure8-3.png)
+![Figure 8.3. Bayesian posterior distibutions for the extended-Mk model applied to the evolution of limblessness in squamates. Image by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.]({{ site.baseurl }}/images/figure8-3.png)
 
 You might wonder about how we can reconcile these results, which suggest that squamates gain limbs at least as frequently as they lose them, with our biological intuition that limbs should be much more difficult to gain than they are to lose. But keep in mind that our comparative analysis is not using any information other than the states of extant species to reconstruct these rates. In particular, identifying irreversible evolution using comparative methods is a problem that is known to be quite difficult, and might require outside information in order to resolve conclusively. For example, if we had some information about the relative number of mutational steps required to gain and lose limbs, we could use an informative prior – which would, I suspect, suggest that limbs are more difficult to gain than they are to lose. Such a prior could dramatically alter the results presented in Figure 8.3. We will return to the problem of irreversible evolution later in the book (Chapter 13).
 
@@ -209,7 +209,7 @@ Felsenstein’s pruning algorithm [-@Felsenstein1973-oj] is an example of dynami
 The best way to illustrate Felsenstein’s algorithm is through an example, which is presented in the panels below. We are trying to calculate the likelihood for a three-state character on a phylogenetic tree that includes six species.
 
 ![
-Figure 8.4A. Each tip and internal node in the tree has three boxes, which will contain the probabilities for the three character states at that point in the tree. The first box represents a state of 0, the second state 1, and the third state 2.
+Figure 8.4A. Each tip and internal node in the tree has three boxes, which will contain the probabilities for the three character states at that point in the tree. The first box represents a state of 0, the second state 1, and the third state 2. Image by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.
 ]({{ site.baseurl }}/images/figure8-4A.png)
 
 
@@ -218,7 +218,7 @@ Figure 8.4A. Each tip and internal node in the tree has three boxes, which will 
 
 
 ![
-Figure 8.4B. We put a one in the box that corresponds to the actual character state and zeros in all others.
+Figure 8.4B. We put a one in the box that corresponds to the actual character state and zeros in all others. Image by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.
 ]({{ site.baseurl }}/images/figure8-4B.png)
 
 
@@ -329,7 +329,7 @@ $$
 Now we have the likelihood for all three possible ancestral states. These numbers can be entered into the appropriate boxes:
 
 ![
-Figure 8.4C. Conditional likelihoods entered for node 1.
+Figure 8.4C. Conditional likelihoods entered for node 1. Image by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.
 ]({{ site.baseurl }}/images/figure8-4C.png)
 
 
@@ -337,7 +337,7 @@ Figure 8.4C. Conditional likelihoods entered for node 1.
 4.	We then repeat the above calculation for every node in the tree. For nodes 3-5, not all of the $L_L(x)$ and $L_R(x)$ terms are zero; their values can be read out of the boxes on the tree. The result of all of these calculations:
 
 ![
-Figure 8.4D. Conditional likelihoods entered for all nodea.
+Figure 8.4D. Conditional likelihoods entered for all nodes. Image by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.
 ]({{ site.baseurl }}/images/figure8-4D.png)
 
 

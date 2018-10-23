@@ -13,7 +13,7 @@ Squamates, the clade that includes all living species of lizards, are well known
 
 Squamates, the clade that includes all living species of lizards, are well known for their diversity. From the gigantic Komodo dragon of Indonesia (Figure 7.1A, *Varanus komodoensis*) to tiny leaf chameleons of Madagascar (Figure 7.1B, *Brookesia*), squamates span an impressive range of form and ecological niche use [@Vitt2003-bl; @Pianka2017-aw]. Even the snakes (Figure 7.1C and D), extraordinarily diverse in their own right (~3,500 species), are actually a clade that is nested within squamates [@Streicher2017-wb]. The squamate lineage that is ancestral to snakes became limbless about 170 million years ago (see [@]) – and also underwent a suite of changes to their head shape, digestive tract, and other traits associated with their limbless lifestyle. In other words, snakes are lizards – highly modified lizards, but lizards nonetheless. And snakes are not the only limbless lineage of squamates. In fact, lineages within squamates have lost their limbs over and over again through their history (e.g. Figure 7.1E and F), with some estimates that squamates have lost their limbs at least 26 times in the past 240 million years [@Brandley2008-wr].
 
-![Figure 7.1. Squamates, legged and legless. A. Komodo dragon, B. Brookesia chameleon, C. False coral (*Oxyrhopus guibei*) and D. hognose snakes, E. a pygopodid - a limbless gecko and F. an anguid, another legless lizard. Photo credits: all from Wikipedia commons, photos by: A: Raul654, B. Brian Gratwicke, C. Gionorossi, D. Bladerunner8u, E. Smacdonald, F. Marek_bydg.
+![Figure 7.1. Squamates, legged and legless. A. Komodo dragon, B. Brookesia chameleon, C. False coral (*Oxyrhopus guibei*) and D. hognose snakes, E. a pygopodid - a limbless gecko and F. an anguid, another legless lizard. Photo credits: A: User:Raul654 / [Wikimedia Commons](http://commons.wikimedia.org/) / [CC-BY-SA-3.0](https://creativecommons.org/licenses/by-sa/3.0/deed.en), B. Brian Gratwicke / [CC-BY-2.0](https://creativecommons.org/licenses/by/2.0/deed.en), C. User:Gionorossi / [Wikimedia Commons](http://commons.wikimedia.org/) / [CC-BY-SA-4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.en), D. User:Bladerunner8u / [Wikimedia Commons](http://commons.wikimedia.org/) / [CC-BY-SA-3.0](https://creativecommons.org/licenses/by-sa/3.0/deed.en), E. User:Smacdonald / [Wikimedia Commons](http://commons.wikimedia.org/) / [CC-BY-SA-2.5](https://creativecommons.org/licenses/by-sa/2.5/deed.en), F. User:Marek_bydg / [Wikimedia Commons](http://commons.wikimedia.org/) / [CC-BY-SA-3.0](https://creativecommons.org/licenses/by-sa/3.0/deed.en).
 ]({{ site.baseurl }}/images/figure7-1.png)
 
 
@@ -27,7 +27,7 @@ Limblessness is an example of a discrete trait – a trait that can occupy one o
 
 We will consider discrete characters where each species might exhibit one of $k$ states. (In the limbless example above, $k=2$). For characters with more than two states, there is a key distinction between ordered and unordered characters. Ordered characters can be placed in an order so that transitions only occur between adjacent states. For example, I might include “intermediate” species that are somewhere in between limbed and limbless – for example, the “mermaid skinks” (*Sirenoscincus*) from Madagascar, so called because they lack hind limbs [Figure 7.2, @Moch2011-fp]. An ordered model might only allow transitions between limbless and intermediate, and intermediate and limbed; it would be impossible under such a model to go directly from limbed to limbless without first becoming intermediate. For unordered characters, any state can change into any other state. In this chapter, I will focus mainly on unordered characters; we will return to ordered characters later in the book.
 
-![Figure 7.2. Mermaid skink, from Wikipedia commons; photo by Aurélien Miralles.]({{ site.baseurl }}/images/figure7-2.jpg)
+![Figure 7.2. Mermaid skink, Aurélien Miralles / [Wikimedia Commons](http://commons.wikimedia.org/) [CC-BY-SA-3.0](https://creativecommons.org/licenses/by-sa/3.0/deed.en).]({{ site.baseurl }}/images/figure7-2.jpg)
 
 Most work on the evolution of discrete characters on phylogenetic trees has focused on the evolution of gene or protein sequences. Gene sequences are made up of four character states (A, C, T, and G for DNA). Models of sequence evolution allow transitions among all of these states at certain rates, and may allow transition rates to vary across sites, among clades, or through time. There are a huge number of named models that have been applied to this problem [e.g. Jukes-Cantor, JC; General Time-Reversible, GTR; and many more, @Yang2006-md], and a battery of statistical approaches are available to fit these models to data [e.g. @Posada2008-qw].
 
@@ -37,7 +37,7 @@ Any discrete character can be modeled in a similar way as gene sequences. When c
 
 The most basic model for discrete character evolution is called the Mk model. First developed for trait data by Pagel [-@Pagel1994-ui; although the name Mk comes from @Lewis2001-bu]. The Mk model is a direct analogue of the Jukes-Cantor (JC) model for sequence evolution. The model applies to a discrete character having $k$ unordered states. Such a character might have $k = 2$, $k = 3$, or even more states. Evolution involves changing between these $k$ states (Figure 7.3).
 
-![Figure 7.3. Examples of discrete characters with (A) $k = 2$, (B) $k = 3$, and (C) $k = 4$ states.]({{ site.baseurl }}/images/figure7-3.png)
+![Figure 7.3. Examples of discrete characters with (A) $k = 2$, (B) $k = 3$, and (C) $k = 4$ states. Image by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.]({{ site.baseurl }}/images/figure7-3.png)
 
 The basic version of the Mk model assumes that transitions among these states follow a Markov process. This means that the probability of changing from one state to another depends only on the current state, and not on what has come before. For example, it makes no difference if a lineage has just evolved the trait of “feathers,” or whether they have had feathers for millions of years – the probability of evolving a different character state is the same in both cases. The basic Mk model also assumes that every state is equally likely to change to any other states.
 
@@ -295,16 +295,10 @@ $$
 
 We can apply this approach to simulate the evolution of limblessness in squamates. Below, I present the results of three such simulations. These simulations are a little different than what I describe above because they consider all changes in the tree, rather than just character states at nodes and tips; but the model (and the principal) is the same. You can see that the model leaves an imprint on the pattern of changes in the tree, and you can imagine that one might be able to reconstruct the model using a phylogenetic comparative approach. Of course, typically we know only the tip states, and have to reconstruct changes along branches in the tree. We will discuss parameter estimation for the Mk and extended-Mk models in the next chapter.
 
-![Figure 7.4. Simulated character evolution on a phylogenetic tree of squamates [from @Brandley2008-wr] under an equal-rates Mk model with slow, fast, and asymmetric transition rates (from right to left). In all three cases, I assumed that the ancestor of squamates had limbs. ]({{ site.baseurl }}/images/figure7-4.png)
+![Figure 7.4. Simulated character evolution on a phylogenetic tree of squamates [from @Brandley2008-wr] under an equal-rates Mk model with slow, fast, and asymmetric transition rates (from right to left). In all three cases, I assumed that the ancestor of squamates had limbs. Image by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.]({{ site.baseurl }}/images/figure7-4.png)
 
-
-
+
 ## Section 7.6: Chapter summary
-
-<!---
-<img data-gifffer="{{ site.baseurl }}/images/figure7-animated.png" />
--->
-
 
 In this chapter I have described the Mk model, which can be used to describe the evolution of discrete characters that have a set number of fixed states. We can also elaborate on the Mk model to allow more complex models of discrete character evolution (the extended-Mk model). These models can all be used to simulate the evolution of discrete characters on trees.In summary, the Mk and extended Mk model are general models that one can use for the evolution of discrete characters. In the next chapter, I will show how to fit these models to data and use them to test evolutionary hypotheses.
 

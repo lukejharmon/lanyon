@@ -10,7 +10,7 @@ R markdown to [recreate analyses]({{ site.baseurl }}/rmarkdown/chapter9_frogs.ht
 
 Frog reproduction is one of the most bizarrely interesting topics in all of biology. Across the nearly 6,000 species of living frogs, one can observe a bewildering variety of reproductive strategies and modes [@Zamudio2016-il]. As children, we learn of the “classic” frog life history strategy: the female lays jellied eggs in water, which hatch into tadpoles, then later metamorphose into their adult form [e.g. @Rey2007-qg; Figure 9.1A]. But this is really just the tip of the frog reproduction iceberg. Many species have direct development, where the tadpole stage is skipped and tiny froglets hatch from eggs. There are foam-nesting frogs, which hang their eggs from leaves in foamy sacs over streams; when the eggs hatch, they drop into the water [e.g. @Fukuyama1991-sb; Figure 9.1B]. Male midwife toads carry fertilized eggs on their backs until they are ready to hatch, at which point they wade into water and their tadpoles wriggle free [@Marquez1991-yj; Figure 9.1C]. Perhaps most bizarre of all are the gastric-brooding frogs, now thought to be extinct. In this species, female frogs swallow their fertilized eggs, which hatch and undergo early development in their mother’s stomach [@Tyler1981-xg]. The young were then regurgitated to start their independent lives.
 
-![Figure 9.1. Examples of frog reproductive modes. (A) European common frogs lay jellied eggs in water, which hatch as tadpoles and metamorphose; (B) Malabar gliding frogs make nests that, supported by foam created during amplexus, hang from leaves and branches; (C) Male midwife toads carry fertilized eggs on their back. Photo credits: all from Wikipedia commons, photos by: A: Thomas Brown, B: Vikram Gupchup, C: Christian Fischer]({{ site.baseurl }}/images/figure9-1.png)
+![Figure 9.1. Examples of frog reproductive modes. (A) European common frogs lay jellied eggs in water, which hatch as tadpoles and metamorphose; (B) Malabar gliding frogs make nests that, supported by foam created during amplexus, hang from leaves and branches; (C) Male midwife toads carry fertilized eggs on their back. Photo credits: A: Thomas Brown / [Wikimedia Commons](http://commons.wikimedia.org/) / [CC-BY-2.0](https://creativecommons.org/licenses/by/2.0/deed.en), B: Vikram Gupchup / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Rhacophorus_malabaricus_Malabar_gliding_frog_mating_pair_on_foam_nest.jpg) / [CC-BY-SA-4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.en) C: Christian Fischer / [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:AlytesObstetricansMaleWithEggs.jpg) / [CC-BY-SA-3.0](https://creativecommons.org/licenses/by-sa/3.0/deed.en)]({{ site.baseurl }}/images/figure9-1.png)
 
 The great diversity of frog reproductive modes brings up several key questions that can potentially be addressed via comparative methods. How rapidly do these different types of reproductive modes evolve? Do they evolve more than once on the tree? Were “ancient” frogs more flexible in their reproductive mode than more recent species? Do some clades of frog show more flexibility in reproductive mode than others?
 
@@ -18,7 +18,7 @@ Many of the key questions stated above do not fall neatly into the Mk or extende
 
 To explore these questions, I will refer to a dataset of frog reproductive modes from Gomez-Mestre et al. [-@Gomez-Mestre2012-be], specifically data classifying species as those that lay eggs in water, lay eggs on land without direct development (terrestrial), and species with direct development (Figure 9.2).
 
-![Figure 9.2. Ancestral state reconstruction of frog reproductive modes. Data from Gomez-Mestre et al. [-@Gomez-Mestre2012-be]]({{ site.baseurl }}/images/figure9-2.png)
+![Figure 9.2. Ancestral state reconstruction of frog reproductive modes. Data from Gomez-Mestre et al. [-@Gomez-Mestre2012-be]. Image by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.]({{ site.baseurl }}/images/figure9-2.png)
 
 ##  Section 9.2: Beyond the Mk model
 
@@ -100,7 +100,7 @@ $$
 (see Figure 9.3 for an illustration of this calculation, which is easier than it looks since there are standard formulas for finding the area under a normal distribution).
 
 
-![Figure 9.3. Illustration of the integral in equation 9.1. For a trait with observed state zero we calculate the area under the curve from negative infinity to the threshold $t$.]({{ site.baseurl }}/images/figure9-3.png)
+![Figure 9.3. Illustration of the integral in equation 9.1. For a trait with observed state zero we calculate the area under the curve from negative infinity to the threshold $t$. Image by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.]({{ site.baseurl }}/images/figure9-3.png)
 
 One can fit this model using standard ML or Bayesian methods. Current implementations include an expectation-maximization (EM) algorithm [@Felsenstein2012-mi; @Felsenstein2005-am] and a Bayesian MCMC [@Revell2014-ba].
 
@@ -123,14 +123,14 @@ Hypotheses in evolutionary biology often relate to whether two (or more) traits 
 Imagine that we are considering the evolution of two traits, trait 1 and trait 2, on a phylogenetic tree. Both traits have two possible character states, one and zero. We can show these two traits visually as Figure 9.4.
 
 
-![Figure 9.4. Two discrete character traits, each with two states (labeled 0 and 1).]({{ site.baseurl }}/images/figure9-4.png)
+![Figure 9.4. Two discrete character traits, each with two states (labeled 0 and 1). Image by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.]({{ site.baseurl }}/images/figure9-4.png)
 
 
 
 In the figure, each trait has two possible transition rates, from 0 to 1 and from 1 to 0. For now, let’s assume that backwards and forward rates are equal. Any species can have one of four possible combinations of the two traits (00, 01, 10, or 11). We can draw the transitions among these four combinations as Figure 9.5.
 
 
-![Figure 9.5. Transitions among states for two traits with two character states each where characters evolve independently of one another.]({{ site.baseurl }}/images/figure9-5.png)
+![Figure 9.5. Transitions among states for two traits with two character states each where characters evolve independently of one another. Image by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.]({{ site.baseurl }}/images/figure9-5.png)
 
 
 
@@ -138,7 +138,7 @@ In the figure, each trait has two possible transition rates, from 0 to 1 and fro
 In Figure 9.6, I have marked the distinct rates with different rectangles – black represents changes in trait 1, while checkered is changes in trait 2. Notice that, in this figure, we are assuming that the two traits are independent. That is, in this model the transition rates of trait one do not depend on the state of trait 2, and vice-versa. What would happen to our model if we allow the traits to evolve in a dependent manner?
 
 
-![Figure 9.6. Transitions among states for two traits with two character states each where characters evolve at rates that depend on the character state of the other trait.]({{ site.baseurl }}/images/figure9-6.png)
+![Figure 9.6. Transitions among states for two traits with two character states each where characters evolve at rates that depend on the character state of the other trait. Image by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.]({{ site.baseurl }}/images/figure9-6.png)
 
 Notice that in Figure 9.6, we have four different transition rates. Consider first the solid rectangles. The grey rectangle represents the transition rate for trait 1 when trait 2 has state 0, while the black rectangle represents the transition rate for trait 1 when trait 2 has state 1. If these two rates are different, then the traits are dependent on each other – that is, the rate of evolution of trait 1 depends on the character state of trait 2.
 
