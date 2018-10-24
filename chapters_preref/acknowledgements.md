@@ -6,4 +6,6 @@ Helpful comments on this book came from many sources, including Arne Mooers, Bri
 
 If you like my publishing model try it yourself. The book barons are rich enough, anyway.
 
+Except where otherwise noted, this book is licensed under a Creative Commons Attribution 4.0 International License. To view a copy of this license, visit [https://creativecommons.org/licenses/by/4.0/](https://creativecommons.org/licenses/by/4.0/).
+
 \pagebreak
