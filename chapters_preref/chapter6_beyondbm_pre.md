@@ -352,7 +352,7 @@ If we assume that stabilizing selection is weak, we can simplify the above expre
 (Equation 6.23)
 <div>
 $$
-V_z' = G/n + (1 - 4 G \gamma) V_z \\
+V_z' = G/n + (1 - 4 G \gamma) V_z
 $$
 </div>
 
@@ -504,7 +504,7 @@ We can further specify the starting conditions by noting that both the variance 
 (Equations 6.48)
 <div>
 $$
-V_{a0} = V_{ab0} = V_{ab0} = V_z(t_1) = \frac{e^{-4 G \gamma t_1}-1}{4 n \gamma} \\
+V_{a0} = V_{ab0} = V_{ab0} = V_z(t_1) = \frac{e^{-4 G \gamma t_1}-1}{4 n \gamma}
 $$
 </div>
 
