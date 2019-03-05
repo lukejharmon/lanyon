@@ -193,12 +193,12 @@ Note the positive off-diagonal element in the estimated $\mathbf{R}$ matrix, sug
 <div>
 $$
 \begin{array}{cc}
-\hat{\mathbf{a}}_{H_2} =
+\hat{\mathbf{a}}_{H_1} =
 \begin{bmatrix}
 2.54 \\
 4.64 \\
 \end{bmatrix} &
-\hat{\mathbf{R}}_{H_2} =
+\hat{\mathbf{R}}_{H_1} =
 \begin{bmatrix}
 0.24 & 0 \\
 0 & 0.09 \\
@@ -220,9 +220,9 @@ We can also implement a Bayesian approach to testing for the correlated evolutio
 1.	Sample a set of starting parameter values $\sigma_x^2$, $\sigma_y^2$, $\sigma_{xy}$, $\bar{z}_1(0)$, and $\bar{z}_2 (0)$ from prior distributions. For this example, we can set our prior distribution as uniform between 0 and 1 for $\sigma_x^2$ and $\sigma_y^2$, uniform from -1 to +1 for $\sigma_{xy}$, uniform from 1 to 9 for $\bar{z}_1(0)$ (lnMass), and -3 to 5 for $\bar{z}_1(0)$ (lnHomerange).
 2.	Given the current parameter values, select new proposed parameter values using the proposal density $Q(p'|p)$. Here, for all five parameter values, we will use a uniform proposal density with width 0.2, so that $Q(p'|p) \sim U(p-0.1,p+0.1)$.
 3.	Calculate three ratios:
-  - a\.	The prior odds ratio, $R_{prior}$. This is the ratio of the probability of drawing the parameter values p and p’ from the prior. Since our priors are uniform, $R_{prior} = 1$.
-  - b\.	The proposal density ratio, $R_{proposal}$. This is the ratio of probability of proposals going from p to p’ and the reverse. Our proposal density is symmetrical, so that $Q(p'|p) = Q(p|p')$ and $R_{proposal} = 1$.
-  - c\.	The likelihood ratio, $R_{likelihood}$. This is the ratio of probabilities of the data given the two different parameter values. We can calculate these probabilities from equation 5.6 above (eq. 5.12).
+  - The prior odds ratio, $R_{prior}$. This is the ratio of the probability of drawing the parameter values p and p’ from the prior. Since our priors are uniform, $R_{prior} = 1$.
+  - The proposal density ratio, $R_{proposal}$. This is the ratio of probability of proposals going from p to p’ and the reverse. Our proposal density is symmetrical, so that $Q(p'|p) = Q(p|p')$ and $R_{proposal} = 1$.
+  - The likelihood ratio, $R_{likelihood}$. This is the ratio of probabilities of the data given the two different parameter values. We can calculate these probabilities from equation 5.6 above (eq. 5.12).
   <div>
   $$
   R_{likelihood} = \frac{L(p'|D)}{L(p|D)} = \frac{P(D|p')}{P(D|p)}
@@ -233,7 +233,7 @@ We can also implement a Bayesian approach to testing for the correlated evolutio
 6.	Repeat steps 2-5 a large number of times.
 
 
-We can then inspect the posterior distribution for the parameter  is significantly greater than (or less than) zero. As an example, I ran this MCMC for 100,000 generations, discarding the first 10,000 generations as burn-in. I then sampled the posterior distribution every 100 generations, and obtained the following parameter estimates: $\hat{\sigma}_x^2 = 0.26$ (95% CI: 0.18 - 0.38), $\hat{\sigma}_y^2 = 0.10$ (95% CI: 0.06 -0.15), and $\hat{\sigma}_{xy} = 0.11$ (95% CI: 0.06 - 0.17; see Figure 5.4). These results are comparable to our ML estimates. Furthermore, the 95% CI for $\hat{\sigma}_{xy}$ does not overlap with 0; in fact, none of the 901 posterior estimates of $\hat{\sigma}_{xy}$ are less than zero. Again, we can conclude with confidence that there is an evolutionary correlation between these two characters.
+We can then inspect the posterior distribution for the parameter  is significantly greater than (or less than) zero. As an example, I ran this MCMC for 100,000 generations, discarding the first 10,000 generations as burn-in. I then sampled the posterior distribution every 100 generations, and obtained the following parameter estimates: $\hat{\sigma}_x^2 = 0.26$ [95% credible interval (CI): 0.18 - 0.38], $\hat{\sigma}_y^2 = 0.10$ (95% CI: 0.06 -0.15), and $\hat{\sigma}_{xy} = 0.11$ (95% CI: 0.06 - 0.17; see Figure 5.4). These results are comparable to our ML estimates. Furthermore, the 95% CI for ${\sigma}_{xy}$ does not overlap with 0; in fact, none of the 901 posterior samples of ${\sigma}_{xy}$ are less than zero. Again, we can conclude with confidence that there is an evolutionary correlation between these two characters.
 
 
 ### Section 5.5c: Testing for character correlations using traditional approaches (PIC, PGLS)
@@ -285,15 +285,15 @@ $$
 
 The first term in $\hat{\mathbf{b}}$ is the phylogenetic mean $\bar{z}(0)$. The other term in $\hat{\mathbf{b}}$ will be an estimate for the slope of the relationship between $y$ and $x$, the calculation of which statistically controls for the effect of phylogenetic relationships.
 
-Applying PGLS to mammal body mass and home range results in an identical estimate of the slope and P-value as we obtain using independent contrasts (see Box 4.1). PGLS also returns an estimate of the intercept of this relationship, which cannot be obtained from the PICs.
+Applying PGLS to mammal body mass and home range results in an identical estimate of the slope and P-value as we obtain using independent contrasts. PGLS also returns an estimate of the intercept of this relationship, which cannot be obtained from the PICs.
 
 Of course, another difference is that PICs and PGLS use regression, while the approach outlined above tests for a correlation. These two types of statistical tests are different. Correlation tests for a relationship between $x$ and $y$, while regression tries to find the best way to predict $y$ from $x$. For correlation, it does not matter which variable we call $x$ and which we call $y$. However, in regression we will get a different slope if we predict $y$ given $x$ instead of predicting $x$ given $y$. The model that is assumed by phylogenetic regression models is also different from the model above, where we assumed that the two characters evolve under a correlated Brownian motion model. By contrast, PGLS (and, implicitly, PICs) assume that the deviations of each species from the regression line evolve under a Brownian motion model. We can imagine, for example, that species can freely slide along the regression line, but that evolving around that line can be captured by a normal Brownian model. Another way to think about a PGLS model is that we are treating $x$ as a fixed property of species. The deviation of $y$ from what is predicted by $x$ is what evolves under a Brownian motion model. If this seems strange, that’s because it is! There are other, more complex models for modeling the correlated evolution of two characters that make assumptions that are more evolutionarily realistic [e.g. @Hansen1997-ek]; we will return to this topic later in the book. At the same time, PGLS is a well-used method for evolutionary regression, and is undoubtedly useful despite its somewhat strange assumptions.
 
-PGLS analysis, as described above, assumes that characters are evolving under a Brownian motion model. However, one can change the structure of the error variance-covariance matrix to reflect other models of evolution, such as Ornstein-Uhlenbeck. We return to this topic in a later chapter.
+PGLS analysis, as described above, assumes that we can model the error structure of our linear model as evolving under a Brownian motion model. However, one can change the structure of the error variance-covariance matrix to reflect other models of evolution, such as Ornstein-Uhlenbeck. We return to this topic in a later chapter.
 
 ## Section 5.6: Summary
 
-There are at least four methods for testing for an evolutionary correlation between continuous characters: likelihood ratio test, AIC model selection, PICs, and PGLS. These four methods as presented all make the same assumptions about the data and, therefore, have quite similar statistical properties (even simulating under a multivariate Brownian motion model, which deviates from the model assumptions, both PICs and PGLS have appropriate Type I error rates and very similar power). Any of these are good choices for testing for the presence of an evolutionary correlation in your data.
+There are at least four methods for testing for an evolutionary correlation between continuous characters: likelihood ratio test, AIC model selection, PICs, and PGLS. These four methods as presented all make the same assumptions about the data and, therefore, have quite similar statistical properties. For example, if we simulate data under a multivariate Brownian motion model, both PICs and PGLS have appropriate Type I error rates and very similar power. Any of these are good choices for testing for the presence of an evolutionary correlation in your data.
 
 ## Section 5.7: Footnotes
 

@@ -40,7 +40,6 @@ $$
 r = \lambda - \mu
 $$
 </div>
-
 <div>
 $$
 \epsilon = \frac{\mu}{\lambda}
@@ -92,7 +91,7 @@ N(t)=n_0 e^{\lambda-\mu} t= n_0 e^{r t}
 $$
 </div>
 
-This deterministic equation gives us the expected value for the number of species through time under a birth-death model. Notice that the number of species grows exponentially through time as long as $\lambda > \mu$, e.g. $r>0$, and decays otherwise (Figure 10.3).
+This deterministic equation gives us the expected value for the number of species through time under a birth-death model. Notice that the number of species grows exponentially through time as long as $\lambda > \mu$, i.e. $r>0$, and decays otherwise (Figure 10.3).
 
 
 ![Figure 10.3. Expected number of species under a birth-death model with $r=\lambda-\mu > 0$ (top line), $r = 0$ (middle line), and $r < 0$ (bottom line). In each case the starting number of species was $n_0 = 1000$. Image by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.]({{ site.baseurl }}/images/figure10-3.png)
@@ -222,7 +221,7 @@ The main complication in phylogenetic studies of birth-death models is that we g
 
 ## Section 10.4: Simulating birth-death trees
 
-We can use the statistical properties of birth-death models to simulate phylogenetic trees through time. We could begin with a single lineage at time 0. However, phylogenetic tree often start with the first speciation event in the clade, so one can also begin the simulation with two lineages at time 0 (this distinction relates to our earlier discussion of crown versus stem ages; see also [Chapter 11]({{ site.baseurl }}/chapter11_fitbd/)).
+We can use the statistical properties of birth-death models to simulate phylogenetic trees through time. We could begin with a single lineage at time 0. However, phylogenetic tree often start with the first speciation event in the clade, so one can also begin the simulation with two lineages at time 0 (this difference relates to the distinction between crown and stem ages of clades; see also [Chapter 11]({{ site.baseurl }}/chapter11_fitbd/)).
 
 To simulate our tree, we need to draw waiting times between speciation and extinction events, connect new lineages to the tree, and prune lineages when they go extinct. We also need a stopping criterion, which can have to do with a particular number of taxa or a fixed time interval. We will consider the latter, and leave growing trees to a fixed number of taxa as an exercise for the reader. Our simulation algorithm is as follows. I assume that we have a certain number of “living” lineages in our tree (1 or 2 initially), a current time ($t_c = 0$ initially), and a stopping time $t_{stop}$.
 
@@ -271,7 +270,7 @@ I_C = \frac{\sum\limits_{all nodes} (N_L - N_R)}{(N-1)(N-2)/2}
 $$
 </div>
 
-If the tree is perfectly balanced (only possible when $N$ is some power of 2, e.g. 2, 4, 8, 16, etc.), then $I_C$ = 0 (Figure 10.7C). By contrast, if the tree is completely pectinate, which means that each split in the tree contrasts a clade with 1 species with the rest of the species in the clade, then $I_C = 1$ (Figure 10.7A). Most phylogenetic trees have values of $I_C$ between 0 and 1 (Figure 10.7B).
+If the tree is perfectly balanced (only possible when $N$ is some power of 2, e.g. 2, 4, 8, 16, etc.), then $I_C$ = 0 (Figure 10.7C). By contrast, if the tree is completely pectinate, which means that each split in the tree contrasts a clade with 1 species with the rest of the species in the clade, then $I_C = 1$ (Figure 10.7A). All phylogenetic trees have values of $I_C$ between 0 and 1 (Figure 10.7B).
 
 
 ![Figure 10.8. A. a pectinate tree ($I_C = 1$); B. a random tree ($0 < I_C < 1$); C. A balanced tree ($I_C = 0$). Image by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.]({{ site.baseurl }}/images/figure10-8.png)
@@ -286,7 +285,7 @@ The other main way to quantify phylogenetic tree shape is by making lineage-thro
 ![Figure 10.9. Lineage-through-time plot. Image by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.]({{ site.baseurl }}/images/figure10-9.png)
 
 
-Lineage-through-time plots are effective ways to visualize patterns of lineage diversification through time. Under a pure-birth model, LTT plots follow a straight line on average (Figure 10.9A). By contrast, extinction should leave a clear signal in LTT plots because the probability of a lineage going extinct depends on how long it has been around; old lineages are much more likely to have been hit by extinction than relatively young lineages. We see this reflected in LTT plots as the “pull of the present” – an upturn in the slope of the LTT plot near the present day (Figure 10.9B). Incomplete sampling – that is, not sampling all of the living species in a clade – can also have a huge impact on the shape of LTT plots (Figure 10.9C). We will discuss LTT plots further in chapter 11, where we will use them to make inferences about patterns of lineage diversification through time.
+Lineage-through-time plots are effective ways to visualize patterns of lineage diversification through time. Under a pure-birth model on a semi-log scale, LTT plots follow a straight line on average (Figure 10.9A). By contrast, extinction should leave a clear signal in LTT plots because the probability of a lineage going extinct depends on how long it has been around; old lineages are much more likely to have been hit by extinction than relatively young lineages. We see this reflected in LTT plots as the “pull of the present” – an upturn in the slope of the LTT plot near the present day (Figure 10.9B). Incomplete sampling – that is, not sampling all of the living species in a clade – can also have a huge impact on the shape of LTT plots (Figure 10.9C). We will discuss LTT plots further in chapter 11, where we will use them to make inferences about patterns of lineage diversification through time.
 
 
 ![Figure 10.10. Example lineage-through-time plots. Image by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.]({{ site.baseurl }}/images/figure10-10.png)

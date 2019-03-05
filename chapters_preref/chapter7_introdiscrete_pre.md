@@ -20,7 +20,7 @@ Limblessness is an example of a discrete trait – a trait that can occupy one o
 
 ## Section 7.2: Modeling the evolution of discrete states
 
-So far, we have only dealt with continuously varying characters. However, many characters of interest to biologists can best be described by characters with a set number of fixed states. For limblessness in squamates, each species is either legless (state 0) or not [state 1; actually, there are some species that might be considered “intermediate” @Brandley2008-wr, but we will ignore those for now]. We might have particular questions about the evolution of limblessness in squamates. For example, how many times this character has changed in the evolutionary history of squamates? How often does limblessness evolve? Do limbs ever re-evolve? Is the evolution of limblessness related to some other aspect of the lives of these reptiles?
+So far, we have only dealt with continuously varying characters. However, many characters of interest to biologists are best defined as characters with a set number of fixed states. For limblessness in squamates, each species is either legless (state 0) or not [state 1; actually, there are some species that might be considered “intermediate” @Brandley2008-wr, but we will ignore those for now]. We might have particular questions about the evolution of limblessness in squamates. For example, how many times this character has changed in the evolutionary history of squamates? How often does limblessness evolve? Do limbs ever re-evolve? Is the evolution of limblessness related to some other aspect of the lives of these reptiles?
 
 We will consider discrete characters where each species might exhibit one of $k$ states. (In the limbless example above, $k=2$). For characters with more than two states, there is a key distinction between ordered and unordered characters. Ordered characters can be placed in an order so that transitions only occur between adjacent states. For example, I might include “intermediate” species that are somewhere in between limbed and limbless – for example, the “mermaid skinks” (*Sirenoscincus*) from Madagascar, so called because they lack hind limbs [Figure 7.2, @Moch2011-fp]. An ordered model might only allow transitions between limbless and intermediate, and intermediate and limbed; it would be impossible under such a model to go directly from limbed to limbless without first becoming intermediate. For unordered characters, any state can change into any other state. In this chapter, I will focus mainly on unordered characters; we will return to ordered characters later in the book.
 
@@ -38,7 +38,7 @@ The most basic model for discrete character evolution is called the Mk model. Fi
 
 The basic version of the Mk model assumes that transitions among these states follow a Markov process. This means that the probability of changing from one state to another depends only on the current state, and not on what has come before. For example, it makes no difference if a lineage has just evolved the trait of “feathers,” or whether they have had feathers for millions of years – the probability of evolving a different character state is the same in both cases. The basic Mk model also assumes that every state is equally likely to change to any other state.
 
-For the basic Mk model, we can denote the instantaneous rate of change between states using the parameter $q$. In general, $q_{ij}$ is called the instantaneous rate between character states $i$ and $j$. It is defined as the limit of the rate measured over very short time intervals<sup><a name="footnote7.1_back">[$^1$](#footnote7.1)</a></sup>..
+For the basic Mk model, we can denote the instantaneous rate of change between states using the parameter $q$. In general, $q_{ij}$ is called the instantaneous rate between character states $i$ and $j$. It is defined as the limit of the rate measured over very short time intervals<sup><a name="footnote7.1_back">[$^1$](#footnote7.1)</a></sup>.
 
 Again, for the basic Mk model, instantaneous rates between all pairs of characters are equal; that is, $q_{ij} = q_{mn}$ for all $i \neq j$ and $m \neq n$.We can summarize general Markov models for discrete characters using a transition rate matrix [@Lewis2001-bu]:
 
@@ -313,7 +313,7 @@ In this chapter I have described the Mk model, which can be used to describe the
 [*back to main text*](#footnote7.2_back)
 </div>
 
-<a name="footnote7.3">3</a>:One still obtains the relevant row from $\mathbf{P}(t)$ and draws a uniform random deviate $u$. Imagine that we have a ten-state character with states 0 - 9. We start at state 0 at the beginning of the simulation. Again using $q = 0.5$ and $t = 3$, we find that:
+<a name="footnote7.3">3</a>: One still obtains the relevant row from $\mathbf{P}(t)$ and draws a uniform random deviate $u$. Imagine that we have a ten-state character with states 0 - 9. We start at state 0 at the beginning of the simulation. Again using $q = 0.5$ and $t = 3$, we find that:
 
 (eq. 7.17)
 <div>

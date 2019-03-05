@@ -8,10 +8,10 @@
 
 The number of species on the Earth remains highly uncertain, but our best estimates are around 10 million [@Mora2011-jh]. This is a mind-boggling number, and far more than have been described. As far as we know, all of those species are descended from a single common ancestor that lived some 4.2 billion years ago [@Hedges2009-lj]. All of these species formed by the process of speciation, the process by which one species splits into two (or more) descendants [@Coyne2004-vv].
 
-Some parts of the tree of life have more species than others. This imbalance in diversity tells us that speciation is much more common in some lineages than others [@Mooers1997-ow]. Likewise, numerous studies have argued that certain habitats are "hotbeds" of speciation [e.g. @Hutter2017-tf; @Miller2017-ja]. For example, the high Andes ecosystem called the Páromo - a peculiar landscape of alien-looking plants and spectacled bears - might harbor the highest speciation rates on the planet [@Madrinan2013-oi].
+Some parts of the tree of life have more species than others. This imbalance in diversity tells us that speciation is much more common in some lineages than others [@Mooers1997-ow]. Likewise, numerous studies have argued that certain habitats are "hotbeds" of speciation [e.g. @Hutter2017-tf; @Miller2017-ja]. For example, the high Andes ecosystem called the Páramo - a peculiar landscape of alien-looking plants and spectacled bears - might harbor the highest speciation rates on the planet [@Madrinan2013-oi].
 
 
-![Figure 11.1 Páromo ecosystem, Chingaza Natural National Park, Colombia. Photo taken by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.]({{ site.baseurl }}/images/figure11-1.png)
+![Figure 11.1 Páramo ecosystem, Chingaza Natural National Park, Colombia. Photo taken by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.]({{ site.baseurl }}/images/figure11-1.png)
 
 In this chapter we will explore how we can learn about speciation and extinction rates from the tree of life. We will use birth-death models, simple models of how species form and go extinct through time. Birth-death models can be applied to data on clade ages and diversities, or fit to the branching times in phylogenetic trees. We will explore both maximum likelihood and Bayesian methods to do both of these things.
 
@@ -68,7 +68,7 @@ for crown age. (Note that eq. 11.3 and 11.4 reduce to 11.1 and 11.2, respectivel
 
 Magallón and Sanderson [-@Magallon2001-xi], following Strathmann and Slatkin [-@Strathmann1983-lz], also describe how to use eq. 10.13 and 10.15 to calculate confidence intervals for the number of species at a given time.
 
-As a worked example, let's consider the data in table 11.1, which give the crown ages and diversities of a number of plant lineages in the Páromo [from @Madrinan2013-oi]. For each lineage, I have calculated the pure-birth estimate of speciation rate (from equation 11.2, since these are crown ages), and net diversification rates under three scenarios for extinction ($\epsilon = 0.1$, $\epsilon = 0.5$, and $\epsilon = 0.9$).
+As a worked example, let's consider the data in table 11.1, which give the crown ages and diversities of a number of plant lineages in the Páramo [from @Madrinan2013-oi]. For each lineage, I have calculated the pure-birth estimate of speciation rate (from equation 11.2, since these are crown ages), and net diversification rates under three scenarios for extinction ($\epsilon = 0.1$, $\epsilon = 0.5$, and $\epsilon = 0.9$).
 
 \clearpage
 
@@ -121,9 +121,9 @@ $$
 5.	Draw a random number $u$ from a uniform distribution between 0 and 1. If $u < R_{accept}$, accept the proposed value of both parameters; otherwise reject, and retain the current value of the two parameters.
 6.	Repeat steps 2-5 a large number of times.
 
-When we apply this technique to the Páromo [from @Madrinan2013-oi] and priors with $\lambda_{prior} = 1$ for both $r$ and $\epsilon$, we obtain posterior distributions: $r$ (mean = 0.497, 95% CI = 0.08-1.77) and $\epsilon$ (mean = 0.36, 95% CI = 0.02-0.84; Figure 11.3). Note that these results are substantially different than the ML estimates. This is because in our Bayesian analysis our prior on extinction rates is exponential, giving a high probability for relatively strong levels of extinction relative to speciation.
+When we apply this technique to the Páramo [from @Madrinan2013-oi] and priors with $\lambda_{prior} = 1$ for both $r$ and $\epsilon$, we obtain posterior distributions: $r$ (mean = 0.497, 95% CI = 0.08-1.77) and $\epsilon$ (mean = 0.36, 95% CI = 0.02-0.84; Figure 11.3). Note that these results are substantially different than the ML estimates. This could be because in our Bayesian analysis our prior on extinction rates is exponential, and taking the posterior mean gives a high probability for relatively strong levels of extinction relative to speciation.
 
-![Figure 11.3. Posterior distribution for $r$ and $\epsilon$ for Páromo clades. Data from Madriñán et al. [-@Madrinan2013-oi], image by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.]({{ site.baseurl }}/images/figure11-3.png)
+![Figure 11.3. Posterior distribution for $r$ and $\epsilon$ for Páramo clades. Data from Madriñán et al. [-@Madrinan2013-oi], image by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.]({{ site.baseurl }}/images/figure11-3.png)
 
 Thus, we can estimate diversification rates from data on clade ages and diversities. If we have a whole set of such clades, we can (in principal) estimate both speciation and extinction rates, so long as we are willing to assume that all of the clades share equal diversification rates. However, as we will see in the next section, this assumption is almost always dubious!
 
@@ -160,7 +160,7 @@ $$
 
 We cannot reject the null hypothesis. Indeed, later work suggests that the actual increase in diversification rate for Lupinus occurred deeper in the phylogenetic tree, in the ancestor of a more broadly ranging New World clade [@Drummond2012-zs; @Hughes2006-nr].
 
-Often, we are interested in testing whether a particular trait - say, dispersal into the Páramo - is responsible for the increase in species richness that we see in some clades. In that case, a single comparison of sister clades may be unsatisfying, as sister clades almost always differ in many characters, beyond just the trait of interest. Even if the clade with our putative "key innovation" is more diverse, we still might not be confidence in inferring a correlation from a single observation. We need replication.
+Often, we are interested in testing whether a particular trait - say, dispersal into the Páramo - is responsible for the increase in species richness that we see in some clades. In that case, a single comparison of sister clades may be unsatisfying, as sister clades almost always differ in many characters, beyond just the trait of interest. Even if the clade with our putative "key innovation" is more diverse, we still might not be confident in inferring a correlation from a single observation. We need replication.
 
 To address this problem, many studies have used natural replicates across the tree of life, comparing the species richnesses of many pairs of sister clades that differ in a given trait of interest. Following Slowinsky and Guyer [-@Slowinski1993-ks], we could calculate a p-value for each clade, and then combine those p-values into an overall test. In this case, one clade (with diversity $N_1$) has the trait of interest and the other does not ($N_0$), and our formula is half of equation 11.5 since we will consider this a one-tailed test:
 
