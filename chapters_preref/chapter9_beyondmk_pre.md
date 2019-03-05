@@ -51,9 +51,10 @@ We can interpret this as strong evidence against the ER model, with ARD as the b
 | Model	| Extra parameter	| lnL	| $AIC_c$ |	$\Delta AIC_c$ | AIC weight |
 | --- | --- | --- | --- | --- | --- |
 ER	| |	-316.0	| 633.9	| 38.0	| 0.00 |
+SYM	| | -296.6	| 599.2	| 5.2	| 0.02 |
 ARD	| |	-291.9	| 596.0	| 0	| 0.37 |
-SYM	| $\lambda$ | -296.6	| 601.2	| 5.2	| 0.03 |
-SYM	| $\kappa$ | -296.6	| 601.2	| 5.2	| 0.03 |
+SYM	| $\lambda$ | -296.6	| 601.2	| 5.2	| 0.02 |
+SYM	| $\kappa$ | -296.6	| 601.2	| 5.2	| 0.02 |
 SYM	| $\delta$ | 	-295.6	| 599.2	| 3.2	| 0.07 |
 ARD	| $\lambda$ | -292.1	| 598.3	| 2.3	| 0.11 |
 ARD	| $\kappa$	| -291.3	| 596.9	| 0.9	| 0.24 |
@@ -73,7 +74,7 @@ In even more general terms, we will consider the situation where we can describe
 
 One can also describe a situation where rate parameters in the $\mathbf{Q}$ matrix change through time. This might follow a constant pattern of increase or decrease through time, or might be related to some external driver like temperature. One can mimic models where rates change through time by changing the branch lengths of phylogenetic trees. If deep branches are lengthened relative to shallow branches, as is done by Pagel's $\delta$, then we can fit a model where rates of evolution slow through time; conversely, lengthening shallow branches relative to deep ones creates a model where the overall rate of evolution accelerates through time [see @FitzJohn2012-tu].
 
-More work could certainly be done in the area of time-varying rates of change. The most general approach is to write a set of differential equations that describe the changes in character state along single branches in the tree. Parameters in those equations can be made to vary, either through time or even in a way that is correlated with some external variable hypothesized to influence rates of change, like temperature or rainfall. Given such a model, the reverse-time approach of [@Maddison2007-vu] can then be used to fit general time-varying (or even clade-varying) Mk models to data [see @Uyeda2016-ds].
+More work could certainly be done in the area of time-varying rates of change. The most general approach is to write a set of differential equations that describe the changes in character state along single branches in the tree. Parameters in those equations can be made to vary, either through time or even in a way that is correlated with some external variable hypothesized to influence rates of change, like temperature or rainfall. Given such a model, the reverse-time approach of Maddison et al. [-@Maddison2007-vu] can then be used to fit general time-varying (or even clade-varying) Mk models to data [see @Uyeda2016-ds].
 
 ## Section 9.5: Threshold models
 
@@ -179,7 +180,7 @@ Notice that the simple, 2-parameter independent evolution model is a special cas
 
 It is worth noting that there are other models that one can fit for the evolution of two binary traits that I did not discuss above. For example, one can model the situation where the two traits each have different forwards and backwards rates, but are evolving independently. This is a four-parameter model. Additionally, one can allow both forward and backward rates to differ and to depend on the character state of the other trait: an eight-parameter model. All of these models – and others not described here – can be compared using AIC, BIC, or Bayes Factors. Pagel and Meade [-@Pagel2006-kc] describe a particularly innovative and synthetic method to test hypotheses about correlated evolution of discrete characters in a Bayesian framework using reversible-jump MCMC.
 
-One can also test for correlations among discrete characters using threshold models. Here, one tests whether or not the liabilities for the two characters evolve in a correlated fashion. More specifically, we can model liabilities for the two threshold characters using a bivariate Brownian motion model, with some evolutionary covariance $\sigma_{12}^2$ between the two liabilities. We can then use either ML or Bayesian methods to determine if the evolutionary covariance between the two characters is non-zero (following the methods described in chapter 5, but using likelihoods based on discrete characters as described above.
+One can also test for correlations among discrete characters using threshold models. Here, one tests whether or not the liabilities for the two characters evolve in a correlated fashion. More specifically, we can model liabilities for the two threshold characters using a bivariate Brownian motion model, with some evolutionary covariance $\sigma_{12}^2$ between the two liabilities. We can then use either ML or Bayesian methods to determine if the evolutionary covariance between the two characters is non-zero (following the methods described in chapter 5, but using likelihoods based on discrete characters as described above).
 
 ##  Section 9.8: Chapter summary
 

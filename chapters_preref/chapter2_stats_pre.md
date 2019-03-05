@@ -40,7 +40,7 @@ One key concept in standard hypothesis testing is the idea of statistical error.
 
 I will cover some examples of the frequentist approach in this book, mainly when discussing traditional methods like phylogenetic independent contrasts (PICs). Also, one of the model selection approaches used frequently in this book, likelihood ratio tests, rely on a standard frequentist set-up with null and alternative hypotheses.
 
-However, there are two good reasons to look for better ways to do comparative statistics. First, as stated above, standard methods rely on testing null hypotheses that – for evolutionary questions - are usually very likely, a priori, to be false. For a relevant example, consider a study comparing the rate of speciation between two clades of carnivores. The null hypothesis is that the two clades have exactly equal rates of speciation – which is almost certainly false, although we might question how different the two rates might be. Second, standard frequentist methods place too much emphasis on P-values and not enough on the size of statistical effects.  A small P-value could reflect either a large effect or very large sample sizes or both.
+However, there are two good reasons to look for better ways to do comparative statistics. First, as stated above, standard methods rely on testing null hypotheses that – for evolutionary questions - are usually very likely, a priori, to be false. For a relevant example, consider a study comparing the rate of speciation between two clades of carnivores. The null hypothesis is that the two clades have exactly equal rates of speciation – which is almost certainly false, although we might question how different the two rates might be. Second, in my opinion, standard frequentist methods place too much emphasis on P-values and not enough on the size of statistical effects.  A small P-value could reflect either a large effect or very large sample sizes or both.
 
 In summary, frequentist statistical methods are common in comparative statistics but can be limiting. I will discuss these methods often in this book, mainly due to their prevalent use in the field. At the same time, we will look for alternatives whenever possible.
 
@@ -279,7 +279,6 @@ $$
 \end{array}
 $$
 </div>
-
 <div>
 $$
 \begin{array}{lcl}
@@ -298,11 +297,11 @@ $$
 \begin{array}{lcl}
 \sum_i{e^{-\Delta_i/2}} &=& e^{-\Delta_1/2} + e^{-\Delta_2/2} \\\
 &=& e^{-4.8/2} + e^{-0/2} \\\
+&=& 0.09 + 1 \\\
 &=& 1.09 \\\
 \end{array}
 $$
 </div>
-
 <div>
 $$
 \begin{array}{lcl}
@@ -312,7 +311,6 @@ w_1 &=& \frac{e^{-\Delta AIC_{c_1}/2}}{\sum_i{e^{-\Delta AIC_{c_i}/2}}} \\\
 \end{array}
 $$
 </div>
-
 <div>
 $$
 \begin{array}{lcl}
@@ -372,7 +370,7 @@ Pr(H|D) = \frac{\binom{N}{H} p_H^H (1-p_H)^{N-H}}{\int_{0}^{1} \binom{N}{H} p_H^
 $$
 </div>
 
-This ugly equation actually simplifies to a beta distribution [wiki](https://en.wikipedia.org/wiki/Beta_distribution), which can be expressed more simply as:
+This ugly equation actually simplifies to a [beta distribution](https://en.wikipedia.org/wiki/Beta_distribution), which can be expressed more simply as:
 
 (eq. 2.23)	 
 <div>

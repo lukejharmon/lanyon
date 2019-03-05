@@ -115,7 +115,7 @@ p_1(t+\Delta t)=p_1(t) (1-(\lambda+\mu)) \Delta t+ p_2(t) 2 \mu \Delta t
 $$
 </div>
 
-Finally, any $n > 1$, we can reach the state of $n$ lineages in three ways: from a birth (from $n - 1$ to $n$), a death (from $n + 1$ to $n$), or neither (from $n$ to $n$).
+Finally, any for $n > 1$, we can reach the state of $n$ lineages in three ways: from a birth (from $n - 1$ to $n$), a death (from $n + 1$ to $n$), or neither (from $n$ to $n$).
 
 (eq. 10.8)
 <div>
@@ -209,7 +209,7 @@ In all cases the expected number of lineages in the tree is exactly as stated ab
 
 ![Figure 10.4. Probability distributions of N(t) under A. pure birth, B. birth death after a short time, and C. birth-death after a long time. Image by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.]({{ site.baseurl }}/images/figure10-4.png)
 
-There are quite a few comparative methods that use clade species richness and age along with the distribution defined in 10.14 and 10.15 to make inferences about clade diversification rates (see chapter 11).
+There are quite a few comparative methods that use clade species richness and age along with the distributions defined in 10.14 and 10.15 to make inferences about clade diversification rates (see chapter 11).
 
 ## Section 10.3: Birth-death models and phylogenetic trees
 

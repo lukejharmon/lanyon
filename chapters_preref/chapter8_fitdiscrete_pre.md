@@ -92,7 +92,7 @@ $$
 </div>
 
 
-This equation gives the likelihood of the “total garbage” model for any value of $p$. Equation 8.10 is related to a binomial distribution (lacking only the factorial term). We also know from probability theory that the ML estimate of $p$ is $n_0 / n$, with likelihood given by the above formula.
+This equation gives the likelihood of the “total garbage” model for any value of $p$. Equation 8.1 is related to a binomial distribution (lacking only the factorial term). We also know from probability theory that the ML estimate of $p$ is $n_0 / n$, with likelihood given by the above formula.
 
 Now consider the likelihood surface of the Mk model. When Mk likelihood surfaces have long ridges, they are nearly always for high values of $q$ – and when the transition rate of character changes is high, this model converges to our “drawing from a hat” (or “garbage”) model. The likelihood ridge lies at the value that is exactly taken from equation 8.10 above.
 
@@ -106,22 +106,21 @@ to the log-likelihood of our Mk model, $lnL = -80.487176$, and you will see that
 
 I have been referring to an example of lizard limb evolution throughout this chapter, but we have not yet tested the hypothesis that I stated in the introduction: that transition rates for losing limbs are higher than rates of gaining limbs.
 
-To do this, we can compare our one-rate Mk model with a two-rate model with differences in the rate of forwards and backwards transitions. This is a special case of the “all-rates different” model discussed in chapter two. Q matrices for these two models will be, for model 1 (equal rates):
+To do this, we can compare our one-rate Mk model with a two-rate model with differences in the rate of forwards and backwards transitions. The character states are 1 (no limbs) and 2 (limbs), and the forward transition represents gaining limbs. This is a special case of the “all-rates different” model discussed in chapter two. Q matrices for these two models will be, for model 1 (equal rates):
 
 (eq. 8.3)		
 <div>
 $$
-\mathbf{Q_ER} =
+\mathbf{Q_{ER}} =
 \begin{bmatrix}
 -q & q \\
 q & -q \\
 \end{bmatrix}
 $$
 </div>
-
 <div>
 $$
-\mathbf{\pi_ER} =
+\mathbf{\pi_{ER}} =
 \begin{bmatrix}
 1/2 & 1/2 \\
 \end{bmatrix}
@@ -133,17 +132,16 @@ And for model 2, asymmetric:
 (eq. 8.4)		
 <div>
 $$
-\mathbf{Q_ASY} =
+\mathbf{Q_{ASY}} =
 \begin{bmatrix}
 -q_1 & q_1 \\
 q_2 & -q_2 \\
 \end{bmatrix}
 $$
 </div>
-
 <div>
 $$
-\mathbf{\pi_ASY} =
+\mathbf{\pi_{ASY}} =
 \begin{bmatrix}
 1/2 & 1/2 \\
 \end{bmatrix}
@@ -154,16 +152,16 @@ Notice that the ER model has one parameter, while the ASY model has two. Also we
 
 One can compare the two nested models using standard methods discussed in previous chapters – that is, a likelihood-ratio test, AIC, BIC, or other similar methods.
 
-We can apply all of the above methods to analyze the evolution of limblessness in squamates. We can use the tree and character state data from Brandley et al. [-@Brandley2008-wr], which is plotted with ancestral state reconstructions as Figure 8.2.
+We can apply all of the above methods to analyze the evolution of limblessness in squamates. We can use the tree and character state data from Brandley et al. [-@Brandley2008-wr], which is plotted with ancestral state reconstructions under an ER model in Figure 8.2.
 
-![Figure 8.2. Reconstructed patterns of the evolution of limbs and limblessness across squamates. Tips show states of extant taxa (here, I classified species with neither fore- nor hindlimbs as limbless, which is conservative given the variation across this clade (see chapter 7). Pie charts on internal nodes show proportional marginal likelihoods for ancestral state reconstruction. Data from Brandley et al. [-@Brandley2008-wr]. Image by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.]({{ site.baseurl }}/images/figure8-2.png)
+![Figure 8.2. Reconstructed patterns of the evolution of limbs and limblessness across squamates. Tips show states of extant taxa (here, I classified species with neither fore- nor hindlimbs as limbless, which is conservative given the variation across this clade (see chapter 7). Pie charts on internal nodes show proportional marginal likelihoods for ancestral state reconstruction under an ER model. Data from Brandley et al. [-@Brandley2008-wr]. Image by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.]({{ site.baseurl }}/images/figure8-2.png)
 
 If we fit an Mk model to these data assuming equal state frequencies at the root of the tree, we obtain a lnL of -80.5 and an estimate of the $Q_ER$ matrix as:
 
 (eq. 8.5)		
 <div>
 $$
-\mathbf{Q_ER} =
+\mathbf{Q_{ER}} =
 \begin{bmatrix}
 -0.0019 & 0.0019 \\
 0.0019 & -0.0019 \\
@@ -177,7 +175,7 @@ $$
 (eq. 8.6)		
 <div>
 $$
-\mathbf{Q_ASY} =
+\mathbf{Q_{ASY}} =
 \begin{bmatrix}
 -0.0016 & 0.0016 \\
 0.0038 & -0.0038 \\
@@ -294,8 +292,7 @@ $$
 $$
 </div>
 
-and
-
+and:
 <div>
 $$
 \sum\limits_{x \in k}Pr(x|0,t_R=1.0)L_R(x) = 0.37 \cdot 0 + 0.32 \cdot 1 + 0.32 \cdot 0 = 0.32
@@ -303,7 +300,6 @@ $$
 </div>
 
 So:
-
 (eq. 8.12)
 <div>
 $$

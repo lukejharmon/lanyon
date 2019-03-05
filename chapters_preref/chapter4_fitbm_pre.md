@@ -6,7 +6,7 @@
 
 ## Section 4.1: Introduction
 
-Mammals come in a wide variety of shapes and sizes. Some species are incredibly tiny. For example, the bumblebee bat, weighing in at 2 g, competes for the title of smallest mammal with the slightly lighter (but also slightly longer) Etruscan shrew [@Hill1974-jf]. Other species are huge, as anyone who has encountered a blue whale knows. Body size is important as a biological variable because it predicts so many other aspect of an animal’s life, from the physiology of heat exchange to the biomechanics of locomotion. Thus, the rate at which body size evolves is of great interest among mammalian biologists. Throughout this chapter, I will discuss the evolution of body size (and, eventually, territory size) across different species of mammals. The data I will analyze is taken from Garland [-@Garland1992-kv].
+Mammals come in a wide variety of shapes and sizes. Some species are incredibly tiny. For example, the bumblebee bat, weighing in at 2 g, competes for the title of smallest mammal with the slightly lighter (but also slightly longer) Etruscan shrew [@Hill1974-jf]. Other species are huge, as anyone who has encountered a blue whale knows. Body size is important as a biological variable because it predicts so many other aspect of an animal’s life, from the physiology of heat exchange to the biomechanics of locomotion. Thus, the rate at which body size evolves is of great interest among mammalian biologists. Throughout this chapter, I will discuss the evolution of body size across different species of mammals. The data I will analyze is taken from Garland [-@Garland1992-kv].
 
 Sometimes one might be interested in calculating the rate of evolution of a particular character like body size in a certain clade, say, mammals. You have a phylogenetic tree with branch lengths that are proportional to time, and data on the phenotypes of species on the tips of that tree. It is usually a good idea to log-transform your data if they involve a measurement from a living thing (see Box 4.1, below). If we assume that the character has been evolving under a Brownian motion model, we have two parameters to estimate: $\bar{z}(0)$, the starting value for the Brownian motion model – equivalent to the ancestral state of the character at the root of the tree – and $\sigma^2$, the diffusion rate of the character. It is this latter parameter that is commonly considered as the rate of evolution for comparative approaches<a name="footnote4.1_back">[$^1$](#footnote4.1)</a>.
 
@@ -14,7 +14,7 @@ Sometimes one might be interested in calculating the rate of evolution of a part
 
 ### Box 4.1: Biology under the log
 
-One general rule for continuous traits in biology is to carry out a log-transformation (usually natural log, base $e$, denoted $ln$) of your data before undergoing any analysis. This also applies to comparative data. There are two main reasons for this, one statistical and the other biological. The statistical reason is that many methods assume that variables follow normal distributions. One can observe that, in general, measurements of species' traits have a distribution that is skewed to the right. A log-transformation will often result in trait distributions that are closer to normal. But why is this the case? The answer is related to the biological reason for log-transformation. When you log transform a variable, the new scale for that variable is a ratio scale, so that a certain differences between points reflects a constant ratio of the two numbers represented by the points. So, for example, if any two numbers are separated by 0.693 units on a natural log scale, one will be exactly two times the other. Ratio scales make sense for living things because it is usually percentage changes rather than absolute changes that matter. For example, a change in body size of 1 mm might matter a lot for a termite, but be irrelevant for an elephant; whereas a change in body size of 50% might be expected to matter for them both.
+One general rule for continuous traits in biology is to carry out a log-transformation (usually natural log, base $e$, denoted $ln$) of your data before undertaking any analysis. This also applies to comparative data. There are two main reasons for this, one statistical and the other biological. The statistical reason is that many methods assume that variables follow normal distributions. One can observe that, in general, measurements of species' traits have a distribution that is skewed to the right. A log-transformation will often result in trait distributions that are closer to normal. But why is this the case? The answer is related to the biological reason for log-transformation. When you log transform a variable, the new scale for that variable is a ratio scale, so that a certain differences between points reflects a constant ratio of the two numbers represented by the points. So, for example, if any two numbers are separated by 0.693 units on a natural log scale, one will be exactly two times the other. Ratio scales make sense for living things because it is usually percentage changes rather than absolute changes that matter. For example, a change in body size of 1 mm might matter a lot for a termite, but be irrelevant for an elephant; whereas a change in body size of 50% might be expected to matter for them both.
 
 ***
 
@@ -127,8 +127,8 @@ Using an optimization algorithm also has the added benefit of providing (approxi
 $$
 H =
 \begin{bmatrix}
-    314.6 & -0.0026\\
-    -0.0026 & 0.99 \\
+    -314.6 & -0.0026\\
+    -0.0026 & -0.99 \\
 \end{bmatrix}
 $$
 </div>
@@ -142,7 +142,7 @@ In the particular case of fitting Brownian motion to trees, it turns out that ev
 (eq. 4.7)
 <div>
 $$
-\hat{\bar{z}}(0) = (\mathbf{1} \mathbf{C}^{-1} \mathbf{1})^{-1} (\mathbf{1} \mathbf{C}^{-1} \mathbf{x})
+\hat{\bar{z}}(0) = (\mathbf{1}^\intercal \mathbf{C}^{-1} \mathbf{1})^{-1} (\mathbf{1}^\intercal \mathbf{C}^{-1} \mathbf{x})
 $$
 </div>
 
@@ -152,7 +152,7 @@ and:
 <div>
 $$
 \hat{\sigma}_{ML}^2 = \frac
-{(\mathbf{x} - \hat{\bar{z}}(0) \mathbf{1}) \mathbf{C}^{-1} (\mathbf{x} - \hat{\bar{z}}(0) \mathbf{1})}
+{(\mathbf{x} - \hat{\bar{z}}(0) \mathbf{1})^\intercal \mathbf{C}^{-1} (\mathbf{x} - \hat{\bar{z}}(0) \mathbf{1})}
 {n}
 $$
 </div>
@@ -166,7 +166,7 @@ Equation (4.8) is biased, and will consistently estimate rates of evolution that
 (eq. 4.9)
 $$
 \hat{\sigma}_{REML}^2 = \frac
-{(\mathbf{x} - \hat{\bar{z}}(0) \mathbf{1}) \mathbf{C}^{-1} (\mathbf{x} - \hat{\bar{z}}(0) \mathbf{1})}{n-1}
+{(\mathbf{x} - \hat{\bar{z}}(0) \mathbf{1})^\intercal \mathbf{C}^{-1} (\mathbf{x} - \hat{\bar{z}}(0) \mathbf{1})}{n-1}
 $$
 </div>
 
@@ -174,7 +174,7 @@ This correction changes our estimate of the rate of body size in mammals from $\
 
 For the mammal body size example, we can further explore the difference between REML and ML in terms of statistical confidence intervals using likelihoods based on the contrasts. We assume, again, that the contrasts are all drawn from a normal distribution with mean 0 and unknown variance. If we again use Newton’s method for optimization, we find a maximum REML log-likelihood of -10.3 at $\hat{\sigma}_{REML}^2 = 0.090$. This returns a $1 \times 1$ matrix for the Hessian with a value of 2957.8, corresponding to a SE of 0.018. This slightly larger SE corresponds to 95% CI for $\hat{\sigma}_{REML}^2$ of $0.05 - 0.13$.
 
-In the context of comparative methods, REML has two main advantages. First, PICs treat the root state of the tree as a nuisance parameter. We typically have very little information about this root state, so that can be an advantage of the REML approach. Second, PICs are easy to calculate for very large phylogenetic trees because they do not require the construction (or inversion!) of any large variance-covariance matrices. This is important for big phylogenetic trees. Imagine that we had a phylogenetic tree of all vertebrates (~60,000 species) and wanted to calculate the rate of body size evolution. To use standard maximum likelihood, we have to calculate $\mathbf{C}$, a matrix with $60,000 \times 60,000 = 3.6$ billion entries, and invert it to calculate $\mathbf{C}^{-1}$. To calculate PICs, by contrast, we only have to carry out on the order of 120,000 operations. Thankfully, there are now pruning algorithms to quickly calculate likelihoods for large trees under a variety of different models [see, e.g., @FitzJohn2012-tu, @Freckleton2012-om, and @Ho2014-iv].
+In the context of comparative methods, REML has two main advantages. First, PICs treat the root state of the tree as a nuisance parameter. We typically have very little information about this root state, so that can be an advantage of the REML approach. Second, PICs are easy to calculate for very large phylogenetic trees because they do not require the construction (or inversion!) of any large variance-covariance matrices. This is important for big phylogenetic trees. Imagine that we had a phylogenetic tree of all vertebrates (~60,000 species) and wanted to calculate the rate of body size evolution. To use standard maximum likelihood, we have to calculate $\mathbf{C}$, a matrix with $60,000 \times 60,000 = 3.6$ billion entries, and invert it to calculate $\mathbf{C}^{-1}$. To calculate PICs, by contrast, we only have to carry out on the order of 120,000 operations. Thankfully, there are now pruning algorithms to quickly calculate likelihoods for large trees under a variety of different models [see, e.g., @FitzJohn2012-tu; @Freckleton2012-om; and @Ho2014-iv].
 
 ## Section 4.4: Bayesian approach to evolutionary rates
 
@@ -191,9 +191,9 @@ $$
 </div>
 
 3.	Calculate three ratios:
-    - a\.	The prior odds ratio, $R_{prior}$. This is the ratio of the probability of drawing the parameter values $p$ and $p’$ from the prior. Since our priors are uniform, this is always 1.
-    - b\.	The proposal density ratio, $R_{proposal}$. This is the ratio of probability of proposals going from $p$ to $p’$ and the reverse. We have already declared a symmetrical proposal density, so that $Q(p'|p) = Q(p|p')$ and $R_{proposal} = 1$.
-    - c\.	The likelihood ratio, $R_{likelihood}$. This is the ratio of probabilities of the data given the two different parameter values. We can calculate these probabilities from equation 4.5 above.
+    - The prior odds ratio, $R_{prior}$. This is the ratio of the probability of drawing the parameter values $p$ and $p’$ from the prior. Since our priors are uniform, this is always 1.
+    - The proposal density ratio, $R_{proposal}$. This is the ratio of probability of proposals going from $p$ to $p’$ and the reverse. We have already declared a symmetrical proposal density, so that $Q(p'|p) = Q(p|p')$ and $R_{proposal} = 1$.
+    - The likelihood ratio, $R_{likelihood}$. This is the ratio of probabilities of the data given the two different parameter values. We can calculate these probabilities from equation 4.5 above.
 $\qquad$(eq. 4.11)
 <div>
 $$

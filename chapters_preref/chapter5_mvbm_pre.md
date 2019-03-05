@@ -105,7 +105,7 @@ Alternatively, one can calculate this MLE solution directly. Equations for estim
 (eq. 5.6)
 <div>
 $$
-\hat{\mathbf{a}} = [(\mathbf{1} \mathbf{C}^{-1} \mathbf{1})^{-1}(\mathbf{1} \mathbf{C}^{-1} \mathbf{X})]^\intercal
+\hat{\mathbf{a}} = [(\mathbf{1}^\intercal \mathbf{C}^{-1} \mathbf{1})^{-1}(\mathbf{1}^\intercal \mathbf{C}^{-1} \mathbf{X})]^\intercal
 $$
 </div>
 
@@ -160,7 +160,7 @@ $$
 
 We can calculate an ML estimate of the parameters in $\mathbf{R}_{H_2}$ using equation 5.4. The maximum likelihood estimate of $\mathbf{R}_{H_1}$ can be obtained by noting that, if character evolution is independent across all characters, then both $\sigma_x^2$ and $\sigma_y^2$ can be obtained by treating each character separately and using equations from chapter 3 to solve for each. It turns out that the ML estimates for $\sigma_x^2$ and $\sigma_y^2$ are always exactly the same for $H_1$ and $H_2$.
 
-To compare these two models, we calculate the likelihood of each using equation 5.5. We can then compare these two likelihoods using either a likelihood ratio test or by comparing AICc scores (see [chapter 2]({{site.baseurl}}/chapter2_stats/)).  
+To compare these two models, we calculate the likelihood of each using equation 5.4. We can then compare these two likelihoods using either a likelihood ratio test or by comparing AICc scores (see [chapter 2]({{site.baseurl}}/chapter2_stats/)).  
 
 ![Figure 5.3. The relationship between mammal body mass and home-range size. To illustrate the effect of accounting for a tree, I plot a solid line for the regression line from a standard analysis, and dotted line from PGLS, which uses the phylogenetic tree. These methods are discussed in more detail in the next section. Image by the author, can be reused under a [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/) license.]({{ site.baseurl }}/images/figure5-3.png)
 
