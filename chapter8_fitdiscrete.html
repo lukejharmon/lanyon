@@ -91,18 +91,18 @@ $$</span><br /></p>
 <div>
 <p><br /><span class="math display"><em>L</em><sub><em>g</em><em>a</em><em>r</em><em>b</em><em>a</em><em>g</em><em>e</em></sub> = <em>p</em><sup><em>n</em><sub>0</sub></sup>(1 − <em>p</em>)<sup><em>n</em> − <em>n</em><sub>0</sub></sup></span><br /></p>
 </div>
-<p>This equation gives the likelihood of the “total garbage” model for any value of <span class="math inline"><em>p</em></span>. Equation 8.10 is related to a binomial distribution (lacking only the factorial term). We also know from probability theory that the ML estimate of <span class="math inline"><em>p</em></span> is <span class="math inline"><em>n</em><sub>0</sub>/<em>n</em></span>, with likelihood given by the above formula.</p>
+<p>This equation gives the likelihood of the “total garbage” model for any value of <span class="math inline"><em>p</em></span>. Equation 8.1 is related to a binomial distribution (lacking only the factorial term). We also know from probability theory that the ML estimate of <span class="math inline"><em>p</em></span> is <span class="math inline"><em>n</em><sub>0</sub>/<em>n</em></span>, with likelihood given by the above formula.</p>
 <p>Now consider the likelihood surface of the Mk model. When Mk likelihood surfaces have long ridges, they are nearly always for high values of <span class="math inline"><em>q</em></span> – and when the transition rate of character changes is high, this model converges to our “drawing from a hat” (or “garbage”) model. The likelihood ridge lies at the value that is exactly taken from equation 8.10 above.</p>
 <p>Thus, one can compare the likelihood of our Mk model to the total garbage model. If the maximum likelihood value of <span class="math inline"><em>q</em></span> has the same likelihood as our garbage model, then we know that we are on a ridge of the likelihood surface and <span class="math inline"><em>q</em></span> cannot be estimated. We also have no ability to make any statements about the past evolution of our character – in particular, we cannot estimate ancestral character state with any precision. By contrast, if the likelihood of the Mk model is greater than the total garbage model, then our data contains some historical information. We can also make this comparison using AIC, considering the total garbage model as having a single parameter p.</p>
 <p>For the squamates, we have <span class="math inline"><em>n</em> = 258</span> and <span class="math inline"><em>n</em><sub>0</sub> = 207</span>. We calculate <span class="math inline"><em>p</em> = <em>n</em><sub>0</sub>/<em>n</em> = 207/258 = 0.8023256</span>. So the likelihood of our garbage model is <span class="math inline"><em>L</em><sub><em>g</em><em>a</em><em>r</em><em>b</em><em>a</em><em>g</em><em>e</em></sub> = <em>p</em><sup><em>n</em><sub>0</sub></sup>(1 − <em>p</em>)<sup><em>n</em> − <em>n</em><sub>0</sub></sup> = 0.8023256<sup>207</sup>(1 − 0.8023256)<sup>51</sup> = 1.968142<em>e</em> − 56</span>. This calculation is both easier and more useful, though, on a natural-log scale: <span class="math inline"><em>l</em><em>n</em><em>L</em><sub><em>g</em><em>a</em><em>r</em><em>b</em><em>a</em><em>g</em><em>e</em></sub> = <em>n</em><sub>0</sub> ⋅ <em>l</em><em>n</em>(<em>p</em>)+(<em>n</em> − <em>n</em><sub>0</sub>)⋅<em>l</em><em>n</em>(1 − <em>p</em>)=207 ⋅ <em>l</em><em>n</em>(0.8023256)+51 ⋅ <em>l</em><em>n</em>(1 − 0.8023256)= − 128.2677</span>. Compare this to the log-likelihood of our Mk model, <span class="math inline"><em>l</em><em>n</em><em>L</em> = −80.487176</span>, and you will see that the garbage model is a terrible fit to these data. There is, in fact, some historical information about species' traits in our data.</p>
 <h2 id="section-8.6-testing-for-differences-in-the-forwards-and-backwards-rate-of-character-change">Section 8.6: Testing for differences in the forwards and backwards rate of character change</h2>
 <p>I have been referring to an example of lizard limb evolution throughout this chapter, but we have not yet tested the hypothesis that I stated in the introduction: that transition rates for losing limbs are higher than rates of gaining limbs.</p>
-<p>To do this, we can compare our one-rate Mk model with a two-rate model with differences in the rate of forwards and backwards transitions. This is a special case of the “all-rates different” model discussed in chapter two. Q matrices for these two models will be, for model 1 (equal rates):</p>
+<p>To do this, we can compare our one-rate Mk model with a two-rate model with differences in the rate of forwards and backwards transitions. The character states are 1 (no limbs) and 2 (limbs), and the forward transition represents gaining limbs. This is a special case of the “all-rates different” model discussed in chapter two. Q matrices for these two models will be, for model 1 (equal rates):</p>
 (eq. 8.3)<br />
 
 <div>
 <p><br /><span class="math display">$$
-\mathbf{Q_ER} =
+\mathbf{Q_{ER}} =
 \begin{bmatrix}
 -q &amp; q \\
 q &amp; -q \\
@@ -111,7 +111,7 @@ $$</span><br /></p>
 </div>
 <div>
 <p><br /><span class="math display">$$
-\mathbf{\pi_ER} =
+\mathbf{\pi_{ER}} =
 \begin{bmatrix}
 1/2 &amp; 1/2 \\
 \end{bmatrix}
@@ -122,7 +122,7 @@ $$</span><br /></p>
 
 <div>
 <p><br /><span class="math display">$$
-\mathbf{Q_ASY} =
+\mathbf{Q_{ASY}} =
 \begin{bmatrix}
 -q_1 &amp; q_1 \\
 q_2 &amp; -q_2 \\
@@ -131,7 +131,7 @@ $$</span><br /></p>
 </div>
 <div>
 <p><br /><span class="math display">$$
-\mathbf{\pi_ASY} =
+\mathbf{\pi_{ASY}} =
 \begin{bmatrix}
 1/2 &amp; 1/2 \\
 \end{bmatrix}
@@ -139,17 +139,17 @@ $$</span><br /></p>
 </div>
 <p>Notice that the ER model has one parameter, while the ASY model has two. Also we have specified equal probabilities of each character at the root of the tree, which may not be justified. But this comparison is still useful as a simple example.</p>
 <p>One can compare the two nested models using standard methods discussed in previous chapters – that is, a likelihood-ratio test, AIC, BIC, or other similar methods.</p>
-<p>We can apply all of the above methods to analyze the evolution of limblessness in squamates. We can use the tree and character state data from Brandley et al. <span class="citation">(<a href="#ref-Brandley2008-wr">2008</a>)</span>, which is plotted with ancestral state reconstructions as Figure 8.2.</p>
+<p>We can apply all of the above methods to analyze the evolution of limblessness in squamates. We can use the tree and character state data from Brandley et al. <span class="citation">(<a href="#ref-Brandley2008-wr">2008</a>)</span>, which is plotted with ancestral state reconstructions under an ER model in Figure 8.2.</p>
 <div class="figure">
-<img src="{{site.baseurl}}/images/figure8-2.png" alt="Figure 8.2. Reconstructed patterns of the evolution of limbs and limblessness across squamates. Tips show states of extant taxa (here, I classified species with neither fore- nor hindlimbs as limbless, which is conservative given the variation across this clade (see chapter 7). Pie charts on internal nodes show proportional marginal likelihoods for ancestral state reconstruction. Data from Brandley et al. (2008). Image by the author, can be reused under a CC-BY-4.0 license." />
-<p class="caption">Figure 8.2. Reconstructed patterns of the evolution of limbs and limblessness across squamates. Tips show states of extant taxa (here, I classified species with neither fore- nor hindlimbs as limbless, which is conservative given the variation across this clade (see chapter 7). Pie charts on internal nodes show proportional marginal likelihoods for ancestral state reconstruction. Data from Brandley et al. <span class="citation">(<a href="#ref-Brandley2008-wr">2008</a>)</span>. Image by the author, can be reused under a <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY-4.0</a> license.</p>
+<img src="{{site.baseurl}}/images/figure8-2.png" alt="Figure 8.2. Reconstructed patterns of the evolution of limbs and limblessness across squamates. Tips show states of extant taxa (here, I classified species with neither fore- nor hindlimbs as limbless, which is conservative given the variation across this clade (see chapter 7). Pie charts on internal nodes show proportional marginal likelihoods for ancestral state reconstruction under an ER model. Data from Brandley et al. (2008). Image by the author, can be reused under a CC-BY-4.0 license." />
+<p class="caption">Figure 8.2. Reconstructed patterns of the evolution of limbs and limblessness across squamates. Tips show states of extant taxa (here, I classified species with neither fore- nor hindlimbs as limbless, which is conservative given the variation across this clade (see chapter 7). Pie charts on internal nodes show proportional marginal likelihoods for ancestral state reconstruction under an ER model. Data from Brandley et al. <span class="citation">(<a href="#ref-Brandley2008-wr">2008</a>)</span>. Image by the author, can be reused under a <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY-4.0</a> license.</p>
 </div>
 <p>If we fit an Mk model to these data assuming equal state frequencies at the root of the tree, we obtain a lnL of -80.5 and an estimate of the <span class="math inline"><em>Q</em><sub><em>E</em></sub><em>R</em></span> matrix as:</p>
 (eq. 8.5)<br />
 
 <div>
 <p><br /><span class="math display">$$
-\mathbf{Q_ER} =
+\mathbf{Q_{ER}} =
 \begin{bmatrix}
 -0.0019 &amp; 0.0019 \\
 0.0019 &amp; -0.0019 \\
@@ -161,7 +161,7 @@ $$</span><br /></p>
 
 <div>
 <p><br /><span class="math display">$$
-\mathbf{Q_ASY} =
+\mathbf{Q_{ASY}} =
 \begin{bmatrix}
 -0.0016 &amp; 0.0016 \\
 0.0038 &amp; -0.0038 \\
@@ -247,14 +247,13 @@ $$</span><br /></p>
 \sum\limits_{x \in k}Pr(x|0,t_L=1.0)L_L(x) = 0.37 \cdot 1 + 0.32 \cdot 0 + 0.32 \cdot 0 = 0.37
 $$</span><br /></p>
 </div>
-<p>and</p>
+and:
 <div>
 <p><br /><span class="math display">$$
 \sum\limits_{x \in k}Pr(x|0,t_R=1.0)L_R(x) = 0.37 \cdot 0 + 0.32 \cdot 1 + 0.32 \cdot 0 = 0.32
 $$</span><br /></p>
 </div>
-<p>So:</p>
-(eq. 8.12)
+So: (eq. 8.12)
 <div>
 <p><br /><span class="math display"><em>L</em><sub><em>P</em></sub>(0)=0.37 ⋅ 0.32 = 0.12.</span><br /></p>
 </div>

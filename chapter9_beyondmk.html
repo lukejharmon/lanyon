@@ -21,7 +21,7 @@ title: Beyond the Mk Model
 <li><a href="#section-9.4-mk-models-where-parameters-vary-across-clades-andor-through-time">Section 9.4: Mk models where parameters vary across clades and/or through time</a></li>
 <li><a href="#section-9.5-threshold-models">Section 9.5: Threshold models</a></li>
 <li><a href="#section-9.6-modeling-more-than-one-discrete-character-at-a-time">Section 9.6: Modeling more than one discrete character at a time</a></li>
-<li><a href="#section-9.7-testing-for-correlated-evolution-of-different-characters">Section 9.7: Testing for correlated evolution of different characters</a></li>
+<li><a href="#section-9.7-testing-for-non-independent-evolution-of-different-characters">Section 9.7: Testing for non-independent evolution of different characters</a></li>
 <li><a href="#section-9.8-chapter-summary">Section 9.8: Chapter summary</a></li>
 </ul></li>
 </ul>
@@ -110,6 +110,14 @@ title: Beyond the Mk Model
 <td>0.00</td>
 </tr>
 <tr class="even">
+<td>SYM</td>
+<td></td>
+<td>-296.6</td>
+<td>599.2</td>
+<td>5.2</td>
+<td>0.02</td>
+</tr>
+<tr class="odd">
 <td>ARD</td>
 <td></td>
 <td>-291.9</td>
@@ -117,23 +125,23 @@ title: Beyond the Mk Model
 <td>0</td>
 <td>0.37</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>SYM</td>
 <td><span class="math inline"><em>λ</em></span></td>
 <td>-296.6</td>
 <td>601.2</td>
 <td>5.2</td>
-<td>0.03</td>
+<td>0.02</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>SYM</td>
 <td><span class="math inline"><em>κ</em></span></td>
 <td>-296.6</td>
 <td>601.2</td>
 <td>5.2</td>
-<td>0.03</td>
+<td>0.02</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>SYM</td>
 <td><span class="math inline"><em>δ</em></span></td>
 <td>-295.6</td>
@@ -141,7 +149,7 @@ title: Beyond the Mk Model
 <td>3.2</td>
 <td>0.07</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>ARD</td>
 <td><span class="math inline"><em>λ</em></span></td>
 <td>-292.1</td>
@@ -149,7 +157,7 @@ title: Beyond the Mk Model
 <td>2.3</td>
 <td>0.11</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>ARD</td>
 <td><span class="math inline"><em>κ</em></span></td>
 <td>-291.3</td>
@@ -157,7 +165,7 @@ title: Beyond the Mk Model
 <td>0.9</td>
 <td>0.24</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>ARD</td>
 <td><span class="math inline"><em>δ</em></span></td>
 <td>-292.4</td>
@@ -174,7 +182,7 @@ title: Beyond the Mk Model
 <p>One can, for example, consider a model where the overall rate of evolution varies between clades in a phylogenetic tree. To do this, we can specify the background rate of evolution using some transition matrix <span class="math inline"><strong>Q</strong></span>, and then assume that within our focal clade evolution can be modeled with some scalar value <span class="math inline"><em>r</em></span>, such that the new rate matrix is <span class="math inline"><em>r</em><strong>Q</strong></span>. Given <span class="math inline"><strong>Q</strong></span> and <span class="math inline"><em>r</em></span>, one can calculate the likelihood for this model using the pruning algorithm, modified in such a way that the appropriate transition matrix is used along each branch in the tree; one can then maximize the likelihood of the model for all parameters (those describing <span class="math inline"><strong>Q</strong></span>, as well as <span class="math inline"><em>r</em></span>, which describes the relative rate of evolution in the focal clade compared to the background).</p>
 <p>In even more general terms, we will consider the situation where we can describe the model of evolution using a set of <span class="math inline"><strong>Q</strong></span> matrices: <span class="math inline"><strong>Q</strong><sub><strong>1</strong></sub></span>, <span class="math inline"><strong>Q</strong><sub><strong>2</strong></sub></span>, <span class="math inline">…</span>, <span class="math inline"><strong>Q</strong><sub><strong>n</strong></sub></span>, each of which can be assigned to a particular branch in a phylogenetic tree <span class="citation">(or be assigned to branches depending on some other character that influences the rate of the focal character; Marazzi et al. <a href="#ref-Marazzi2012-ov">2012</a>)</span>. The only limit here is that each <span class="math inline"><strong>Q</strong></span> matrix adds a new set of model parameters that must be estimated from the data, and it is easy to imagine this model becoming overparametized. If we imagine a model where every branch has its own <span class="math inline"><strong>Q</strong></span>-matrix, then we are actually describing the “no common mechanism” model <span class="citation">(Tuffley and Steel <a href="#ref-Tuffley1997-jb">1997</a>; Steel and Penny <a href="#ref-Steel2000-vg">2000</a>)</span>, which is statistically identical to parsimony. It should also be possible to create a method that explores all models connecting simple Mk and the no common mechanism model using the machinery of reversible-jump MCMC, although I do not think such an approach has ever been implemented <span class="citation">(but see Huelsenbeck et al. <a href="#ref-Huelsenbeck2004-lr">2004</a>)</span>.</p>
 <p>One can also describe a situation where rate parameters in the <span class="math inline"><strong>Q</strong></span> matrix change through time. This might follow a constant pattern of increase or decrease through time, or might be related to some external driver like temperature. One can mimic models where rates change through time by changing the branch lengths of phylogenetic trees. If deep branches are lengthened relative to shallow branches, as is done by Pagel's <span class="math inline"><em>δ</em></span>, then we can fit a model where rates of evolution slow through time; conversely, lengthening shallow branches relative to deep ones creates a model where the overall rate of evolution accelerates through time <span class="citation">(see FitzJohn <a href="#ref-FitzJohn2012-tu">2012</a>)</span>.</p>
-<p>More work could certainly be done in the area of time-varying rates of change. The most general approach is to write a set of differential equations that describe the changes in character state along single branches in the tree. Parameters in those equations can be made to vary, either through time or even in a way that is correlated with some external variable hypothesized to influence rates of change, like temperature or rainfall. Given such a model, the reverse-time approach of <span class="citation">(Maddison et al. <a href="#ref-Maddison2007-vu">2007</a>)</span> can then be used to fit general time-varying (or even clade-varying) Mk models to data <span class="citation">(see Uyeda et al. <a href="#ref-Uyeda2016-ds">2016</a>)</span>.</p>
+<p>More work could certainly be done in the area of time-varying rates of change. The most general approach is to write a set of differential equations that describe the changes in character state along single branches in the tree. Parameters in those equations can be made to vary, either through time or even in a way that is correlated with some external variable hypothesized to influence rates of change, like temperature or rainfall. Given such a model, the reverse-time approach of Maddison et al. <span class="citation">(<a href="#ref-Maddison2007-vu">2007</a>)</span> can then be used to fit general time-varying (or even clade-varying) Mk models to data <span class="citation">(see Uyeda et al. <a href="#ref-Uyeda2016-ds">2016</a>)</span>.</p>
 <h2 id="section-9.5-threshold-models">Section 9.5: Threshold models</h2>
 <p>Recently, Joe Felsenstein <span class="citation">(<a href="#ref-Felsenstein2005-am">2005</a>, <a href="#ref-Felsenstein2012-mi">2012</a>)</span> introduced a model from quantitative genetics, the threshold model, to comparative methods. Threshold models work by modeling a discrete character as underlain by some other, unobserved, continuous trait (called the liability). If the liability crosses a certain threshold value, then the discrete state changes. More specifically, we can consider a single trait, <span class="math inline"><em>y</em></span>, with two states, 0 and 1, which is in turn determined by some underlying continuous variable, <span class="math inline"><em>x</em></span>, called the liability. If <span class="math inline"><em>x</em></span> is greater than the threshold, <span class="math inline"><em>t</em></span>, then <span class="math inline"><em>y</em></span> is 1; otherwise, <span class="math inline"><em>y</em></span> is 0. Felsenstein <span class="citation">(<a href="#ref-Felsenstein2005-am">2005</a>)</span> assumes that <span class="math inline"><em>x</em></span> evolves under a Brownian motion model, although other models like OU are, in principle, possible.</p>
 <p>We can find the likelihood to this model by considering the observations of character states at the tips of the tree. We observe the state of each species, <span class="math inline"><em>y</em><sub><em>i</em></sub></span>. We do not know the liability values for these species. However, we treat these liabilities as unobserved and consider their distributions. Under a Brownian motion model, we know that the liabilities will follow a multivariate normal distribution (see <a href="{{site.baseurl}}/chapter3_bmintro/">chapter 3</a>). We can calculate the probability of observing the data (<span class="math inline"><em>y</em><sub><em>i</em></sub></span>) by finding the integral of the distributions of liabilities on the side of the threshold that matches the data. So if the distribution of the liability for species <span class="math inline"><em>i</em></span> is <span class="math inline"><em>p</em><sub><em>i</em></sub>(<em>x</em>)</span>, then:</p>
@@ -200,12 +208,12 @@ $$</span><br /></p>
 <p>One can fit this model using standard ML or Bayesian methods. Current implementations include an expectation-maximization (EM) algorithm <span class="citation">(Felsenstein <a href="#ref-Felsenstein2005-am">2005</a>, <a href="#ref-Felsenstein2012-mi">2012</a>)</span> and a Bayesian MCMC <span class="citation">(Revell <a href="#ref-Revell2014-ba">2014</a>)</span>.</p>
 <p>The threshold model differs in some key ways from standard Mk-type models. First of all, threshold characters evolve differently than non-threshold characters because of their underlying liability. In particular, the effective rate of change of the discrete character depends on the amount of time that a lineage has been in that character state. Characters that have just changed (say, from 0 to 1) are likely to change back (from 1 to 0), since the liability is likely to be near the threshold. By contrast, characters that have been in one state or the other for a long time tend to be more unlikely to change (since the liability is likely very far from the threshold). This difference matches biological intuition for some characters, where millions of years in one state means that change to a different state might be unlikely. This behavior of the threshold model can potentially account for variation in transition rates across clades without adding additional model parameters. Second, the threshold model scales to cover more than one character more readily than Mk models. Finally, in a threshold framework, it is straightforward to extend the model to include a mixture of both discrete and continuous characters – basically, one assumes that the continuous characters are like “observed liabilities,” and can be modeled together with the discrete characters.</p>
 <h2 id="section-9.6-modeling-more-than-one-discrete-character-at-a-time">Section 9.6: Modeling more than one discrete character at a time</h2>
-<p>It is extremely common to have datasets with more than one discrete character – in fact, one could argue that multivariate discrete datasets are the cornerstone of systematics. Nowadays, the most common multivariate discrete datasets are composed of genetic/genomic data. However, the foundations of modern phylogenetic comparative biology were laid out by Hennig <span class="citation">(<a href="#ref-Hennig1999-rg">1999</a>)</span> and the other early cladists, who worked out methods for using discrete character data to obtain phylogenetic trees that show the evolutionary history of clades.</p>
+<p>It is extremely common to have datasets with more than one discrete character – in fact, one could argue that multivariate discrete datasets are the cornerstone of systematics. Nowadays, the most common multivariate discrete datasets are composed of genetic/genomic data. However, the foundations of modern phylogenetic comparative biology were laid out by Hennig <span class="citation">(<a href="#ref-Hennig1966-rg">1966</a>)</span> and the other early cladists, who worked out methods for using discrete character data to obtain phylogenetic trees that show the evolutionary history of clades.</p>
 <p>Almost all phylogenetic reconstruction methods that use discrete characters as data make a key assumption: that each of these characters evolves independently from one another. Mathematically, one calculates the likelihood for each single character, then multiplies this likelihood (or, equivalently, adds the log-likelihood) across all characters to obtain the likelihood of the data.</p>
 <p>The assumption of character independence is clearly not true in general. In the case of morphological characters, structures often interact with one another to determine the fitness of an individual, and it seems very likely that those structures are not independent. In fact, some times we are specifically interested in whether or not particular sets of characters evolve independently or not. Methods that assume character independence <em>a priori</em> are not useful for that sort of framework.</p>
 <p>Felsenstein <span class="citation">(<a href="#ref-Felsenstein1985-bt">1985</a>)</span> made a huge impact on the field of evolutionary biology with a statistical argument about species: species can not be considered independent data points because they share an evolutionary history. Species that are most closely related to one another will covary, simply due to that shared history. Nowadays, one cannot publish a paper in comparative biology without accounting directly for the non-independence of species that evolve on a tree. However, it is still very common to ignore the non-independence of characters, even when they occur together in the same organism! Surely the shared developmental history of two characters within one body commonly leads to correlations across these characters.</p>
-<h2 id="section-9.7-testing-for-correlated-evolution-of-different-characters">Section 9.7: Testing for correlated evolution of different characters</h2>
-<p>Hypotheses in evolutionary biology often relate to whether two (or more) traits evolve in a correlated manner (see <a href="{{site.baseurl}}/chapter5_mvbm">Chapter 5</a>). One can have a standard correlation between two discrete traits if knowing the state of one trait allows you to predict the state of the other. However, in evolution, these correlations will arise due to the shared patterns of relatedness across species. We are typically more interested in evolutionary correlations (see <a href="%7B%7B%20site.baseurl%20%7D%7D/chapter5_mvbm">Chapter 5</a>). With discrete traits, we can define evolutionary correlations in a specific way: two discrete traits share an evolutionary correlation if the state of one character affects the transition rates of a second.</p>
+<h2 id="section-9.7-testing-for-non-independent-evolution-of-different-characters">Section 9.7: Testing for non-independent evolution of different characters</h2>
+<p>Hypotheses in evolutionary biology often relate to whether two (or more) traits affect the evolution of one another (see <a href="{{site.baseurl}}/chapter5_mvbm">Chapter 5</a>). One can have a standard correlation between two discrete traits if knowing the state of one trait allows you to predict the state of the other. However, in evolution, these correlations will arise due to the shared patterns of relatedness across species. We are typically more interested in evolutionary correlations (see <a href="%7B%7B%20site.baseurl%20%7D%7D/chapter5_mvbm">Chapter 5</a>). With discrete traits, we can define evolutionary correlations in a specific way: two discrete traits share an evolutionary correlation if the state of one character affects the relative transition rates of a second.</p>
 <p>Imagine that we are considering the evolution of two traits, trait 1 and trait 2, on a phylogenetic tree. Both traits have two possible character states, one and zero. We can show these two traits visually as Figure 9.4.</p>
 <div class="figure">
 <img src="{{site.baseurl}}/images/figure9-4.png" alt="Figure 9.4. Two discrete character traits, each with two states (labeled 0 and 1). Image by the author, can be reused under a CC-BY-4.0 license." />
@@ -249,9 +257,9 @@ q_2 &amp; 0 &amp; -q_2 - q_4 &amp; q_4\\
 \end{bmatrix}
 $$</span><br /></p>
 </div>
-<p>Notice that the simple, 2-parameter independent evolution model is a special case of the more complex, 4-parameter dependent model. Because of this, we can compare the two with a likelihood ratio test. Alternatively, AIC or Bayes factors can be used. If we find support for the 4-parameter model, we can conclude that the two characters have an evolutionary correlation.</p>
-<p>It is worth noting that there are other models that one can fit for the evolution of two binary traits that I did not discuss above. For example, one can model the situation where the two traits each have different forwards and backwards rates, but are evolving independently. This is a four-parameter model. Additionally, one can allow both forward and backward rates to differ and to depend on the character state of the other trait: an eight-parameter model. All of these models – and others not described here – can be compared using AIC, BIC, or Bayes Factors. Pagel and Meade <span class="citation">(<a href="#ref-Pagel2006-kc">2006</a>)</span> describe a particularly innovative and synthetic method to test hypotheses about correlated evolution of discrete characters in a Bayesian framework using reversible-jump MCMC.</p>
-<p>One can also test for correlations among discrete characters using threshold models. Here, one tests whether or not the liabilities for the two characters evolve in a correlated fashion. More specifically, we can model liabilities for the two threshold characters using a bivariate Brownian motion model, with some evolutionary covariance <span class="math inline"><em>σ</em><sub>12</sub><sup>2</sup></span> between the two liabilities. We can then use either ML or Bayesian methods to determine if the evolutionary covariance between the two characters is non-zero (following the methods described in chapter 5, but using likelihoods based on discrete characters as described above.</p>
+<p>Notice that the simple, 2-parameter independent evolution model is a special case of the more complex, 4-parameter dependent model. Because of this, we can compare the two with a likelihood ratio test. Alternatively, AIC or Bayes factors can be used. If we find support for the 4-parameter model, we can conclude that the evolution of at least one of the two characters depends on the state of the other.</p>
+<p>It is worth noting that there are other models that one can fit for the evolution of two binary traits that I did not discuss above. For example, one can model the situation where the two traits each have different forwards and backwards rates, but are evolving independently. This is a four-parameter model. Additionally, one can allow both forward and backward rates to differ and to depend on the character state of the other trait: an eight-parameter model. This is the model one needs to truly see a correlation between the two characters, one where certain combinations tend to accumulate in the tree. All of these models – and others not described here – can be compared using AIC, BIC, or Bayes Factors. Pagel and Meade <span class="citation">(<a href="#ref-Pagel2006-kc">2006</a>)</span> describe a particularly innovative and synthetic method to test hypotheses about correlated evolution of discrete characters in a Bayesian framework using reversible-jump MCMC.</p>
+<p>One can also test for correlations among discrete characters using threshold models. Here, one tests whether or not the liabilities for the two characters evolve in a correlated fashion. More specifically, we can model liabilities for the two threshold characters using a bivariate Brownian motion model, with some evolutionary covariance <span class="math inline"><em>σ</em><sub>12</sub><sup>2</sup></span> between the two liabilities. We can then use either ML or Bayesian methods to determine if the evolutionary covariance between the two characters is non-zero (following the methods described in chapter 5, but using likelihoods based on discrete characters as described above).</p>
 <h2 id="section-9.8-chapter-summary">Section 9.8: Chapter summary</h2>
 <p>The simple Mk model provides a useful foundation for a number of innovative methods. These methods capture evolutionary processes that are more complicated than the original model, including models that vary through time or across clades. Modeling more than one discrete character at a time allows us to test for the correlated evolution of discrete characters.</p>
 <p>Taken as a whole, chapters 7 through 9 provide a basis for the analysis of discrete characters on trees. One can test a variety of biologically relevant hypotheses about how these characters have changed along the branches of the tree of life.</p>
@@ -281,8 +289,8 @@ $$</span><br /></p>
 <div id="ref-Gomez-Mestre2012-be">
 <p>Gomez-Mestre, I., R. A. Pyron, and J. J. Wiens. 2012. Phylogenetic analyses reveal unexpected patterns in the evolution of reproductive modes in frogs. Evolution 66:3687–3700.</p>
 </div>
-<div id="ref-Hennig1999-rg">
-<p>Hennig, W. 1999. Phylogenetic systematics. University of Illinois Press.</p>
+<div id="ref-Hennig1966-rg">
+<p>Hennig, W. 1966. Phylogenetic systematics. University of Illinois Press.</p>
 </div>
 <div id="ref-Huelsenbeck2004-lr">
 <p>Huelsenbeck, J. P., B. Larget, and M. E. Alfaro. 2004. Bayesian phylogenetic model selection using reversible jump markov chain monte carlo. Mol. Biol. Evol. 21:1123–1133.</p>

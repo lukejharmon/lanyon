@@ -65,7 +65,7 @@ pdf: true
 <p>In biology, null hypotheses play a critical role in many statistical analyses. So why not end this chapter now? One issue is that biological null hypotheses are almost always uninteresting. They often describe the situation where patterns in the data occur only by chance. However, if you are comparing living species to each other, there are almost always some differences between them. In fact, for biology, null hypotheses are quite often obviously false. For example, two different species living in different habitats are not identical, and if we measure them enough we will discover this fact. From this point of view, both outcomes of a standard hypothesis test are unenlightening. One either rejects a silly hypothesis that was probably known to be false from the start, or one “fails to reject” this null hypothesis<a name="footnote2.2_back"><a href="#footnote2.2"><span class="math inline"><em></em><sup>2</sup></span></a></a>. There is much more information to be gained by estimating parameter values and carrying out model selection in a likelihood or Bayesian framework, as we will see below. Still, frequentist statistical approaches are common, have their place in our toolbox, and will come up in several sections of this book.</p>
 <p>One key concept in standard hypothesis testing is the idea of statistical error. Statistical errors come in two flavors: type I and type II errors. Type I errors occur when the null hypothesis is true but the investigator mistakenly rejects it. Standard hypothesis testing controls type I errors using a parameter, <span class="math inline"><em>α</em></span>, which defines the accepted rate of type I errors. For example, if <span class="math inline"><em>α</em> = 0.05</span>, one should expect to commit a type I error about 5% of the time. When multiple standard hypothesis tests are carried out, investigators often “correct” their P-values using Bonferroni correction. If you do this, then there is only a 5% chance of a single type I error across all of the tests being considered. This singular focus on type I errors, however, has a cost. One can also commit type II errors, when the null hypothesis is false but one fails to reject it. The rate of type II errors in statistical tests can be extremely high. While statisticians do take care to create approaches that have high power, traditional hypothesis testing usually fixes type I errors at 5% while type II error rates remain unknown. There are simple ways to calculate type II error rates (e.g. power analyses) but these are only rarely carried out. Furthermore, Bonferroni correction dramatically increases the type II error rate. This is important because – as stated by Perneger <span class="citation">(<a href="#ref-Perneger1998-qd">1998</a>)</span> – “… type II errors are no less false than type I errors.” This extreme emphasis on controlling type I errors at the expense of type II errors is, to me, the main weakness of the frequentist approach<a name="footnote2.3_back"><a href="#footnote2.3"><span class="math inline"><em></em><sup>3</sup></span></a></a>.</p>
 <p>I will cover some examples of the frequentist approach in this book, mainly when discussing traditional methods like phylogenetic independent contrasts (PICs). Also, one of the model selection approaches used frequently in this book, likelihood ratio tests, rely on a standard frequentist set-up with null and alternative hypotheses.</p>
-<p>However, there are two good reasons to look for better ways to do comparative statistics. First, as stated above, standard methods rely on testing null hypotheses that – for evolutionary questions - are usually very likely, a priori, to be false. For a relevant example, consider a study comparing the rate of speciation between two clades of carnivores. The null hypothesis is that the two clades have exactly equal rates of speciation – which is almost certainly false, although we might question how different the two rates might be. Second, standard frequentist methods place too much emphasis on P-values and not enough on the size of statistical effects. A small P-value could reflect either a large effect or very large sample sizes or both.</p>
+<p>However, there are two good reasons to look for better ways to do comparative statistics. First, as stated above, standard methods rely on testing null hypotheses that – for evolutionary questions - are usually very likely, a priori, to be false. For a relevant example, consider a study comparing the rate of speciation between two clades of carnivores. The null hypothesis is that the two clades have exactly equal rates of speciation – which is almost certainly false, although we might question how different the two rates might be. Second, in my opinion, standard frequentist methods place too much emphasis on P-values and not enough on the size of statistical effects. A small P-value could reflect either a large effect or very large sample sizes or both.</p>
 <p>In summary, frequentist statistical methods are common in comparative statistics but can be limiting. I will discuss these methods often in this book, mainly due to their prevalent use in the field. At the same time, we will look for alternatives whenever possible.</p>
 <h2 id="section-2.3-maximum-likelihood">Section 2.3: Maximum likelihood</h2>
 <h3 id="section-2.3a-what-is-a-likelihood">Section 2.3a: What is a likelihood?</h3>
@@ -258,10 +258,14 @@ $$</span><br /></p>
 (eq. 2.18)<br />
 
 <div>
-$$
-
-
-<p>$$</p>
+<p><br /><span class="math display">$$
+\begin{array}{lcl}
+\sum_i{e^{-\Delta_i/2}} &amp;=&amp; e^{-\Delta_1/2} + e^{-\Delta_2/2} \\\
+&amp;=&amp; e^{-4.8/2} + e^{-0/2} \\\
+&amp;=&amp; 0.09 + 1 \\\
+&amp;=&amp; 1.09 \\\
+\end{array}
+$$</span><br /></p>
 </div>
 <div>
 <p><br /><span class="math display">$$
@@ -317,7 +321,7 @@ $$</span><br /></p>
 Pr(H|D) = \frac{\binom{N}{H} p_H^H (1-p_H)^{N-H}}{\int_{0}^{1} \binom{N}{H} p_H^H (1-p_H)^{N-H} dp_H}
 $$</span><br /></p>
 </div>
-<p>This ugly equation actually simplifies to a beta distribution <a href="https://en.wikipedia.org/wiki/Beta_distribution">wiki</a>, which can be expressed more simply as:</p>
+<p>This ugly equation actually simplifies to a <a href="https://en.wikipedia.org/wiki/Beta_distribution">beta distribution</a>, which can be expressed more simply as:</p>
 (eq. 2.23)<br />
 
 <div>
