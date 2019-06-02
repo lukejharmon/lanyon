@@ -59,7 +59,7 @@ $$
 $\qquad$(eq. 4.3)
 <div>
 $$
-x_k = \frac{(1/v_i)x_i+(1/v_j)x_j}{1/v_1+1/v_j}
+x_k = \frac{(1/v_i)x_i+(1/v_j)x_j}{1/v_i+1/v_j}
 $$
 </div>
 - It is worth noting that $x_k$ is a weighted average of $x_i$ and $x_j$, but does not represent an ancestral state reconstruction, since the value is only influenced by species that descend directly from that node and not other relatives.
