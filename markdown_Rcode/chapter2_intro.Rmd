@@ -1,0 +1,40 @@
+---
+title: "Chapter 2 Lizard Flipping Example"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+https://en.wikipedia.org/wiki/Beta-binomial_distribution
+
+## Likelihood for lizard flipping example
+
+
+## Posterior distribution for lizard flipping example
+
+We can calculate the Bayesian posterior distribution for our model parameter p. To do this, we use the fact that this posterior follows a [beta distribution](https://en.wikipedia.org/wiki/Beta_distribution) (see equation 2.23).
+
+```{r}
+betaDist<-function(p,N,k) {
+	t1<-factorial(N+1)/(factorial(k)*factorial(N-k))
+	t2<-p^k * (1-p)^(N-k)
+	res<-t1*t2
+	return(res)
+	}
+	
+pp<-1:1000/1000
+ppost<-numeric(1000)	
+for(i in 1:1000) {
+	ppost[i]<-betaDist(pp[i],N=100,k=63)
+	}	
+pprior<-rep(1, 1000)
+
+plot(pp, pprior, type="l", ylim=c(0,9), lwd=3, lty=2, xlab="p", ylab="f")	
+lines(pp, ppost, lwd=3)
+```
+
+
+	

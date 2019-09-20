@@ -5,6 +5,9 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+require(geiger)
+require(phytools)
+require(RCurl)
 ```
 
 ## Examples from Chapter 9, Beyond Mk
@@ -16,19 +19,15 @@ Read in data from Gomez-Mestre et al. 2012 Evolution.
 ```{r}
 
 
-sqTree<-read.tree(text=getURL("https://raw.githubusercontent.com/lukejharmon/pcm/master/datafiles/squamate.phy"))
-plot(sqTree)
-
-sqData<-read.csv(text=getURL("https://raw.githubusercontent.com/lukejharmon/pcm/master/datafiles/brandley_table.csv"))
 
 
-fData<-read.table(text=getURL("https://raw.githubusercontent.com/lukejharmon/pcm/master/datafiles/frogDISCRETE.txt", header=T)
+
+fData<-read.table(text=getURL("https://raw.githubusercontent.com/lukejharmon/pcm/master/datafiles/frogDISCRETE.txt"), header=T)
 
 fDiscrete<-fData[,-1]
 rownames(fDiscrete)<-fData[,1]
 
-
-fTree<-read.nexus("frog720jjw.tree")
+fTree<-read.tree(text=getURL("https://raw.githubusercontent.com/lukejharmon/pcm/master/datafiles/frog720jjw.phy"))
 fTree <-read.tree(text=write.tree(fTree))
 plot(fTree)
 
@@ -41,8 +40,6 @@ Make and plot an ancestral state reconstruction.
 
 ```{r}
 
-
-# to get an idea of overall patterns, let's use ancestral state reconstruction
 h1Data<-fDiscrete[,1]
 names(h1Data)<-rownames(fDiscrete)
 
